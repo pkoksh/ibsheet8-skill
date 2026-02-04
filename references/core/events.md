@@ -29,7 +29,7 @@ sheet.bind("onClick", function(evt) { });
 
 ## 라이프사이클 이벤트
 
-### onRenderFirstFinish
+### [onRenderFirstFinish](../ibsheet-official-manual/events/on-render-first-finish.md)
 
 시트 최초 렌더링 완료.
 
@@ -39,9 +39,9 @@ onRenderFirstFinish: function(evt) {
 }
 ```
 
-### onSearchFinish
+### [onSearchFinish](../ibsheet-official-manual/events/on-search-finish.md)
 
-데이터 로드 완료. (모든 데이터에 대한 렌더링 종료 후에 발생)
+데이터 로드 완료. (xlsx import 후에도 발생)
 
 ```javascript
 onSearchFinish: function(evt) {
@@ -53,9 +53,9 @@ onSearchFinish: function(evt) {
 
 ## 클릭/선택 이벤트
 
-### onClick, onAfterClick 
+### [onClick](../ibsheet-official-manual/events/on-click.md)
 
-- onClick은 마우스로 클릭 직후에 발생하고 이후 포커스 이동 이나 체크/언체크(Bool타입) 등이 일어난 이후에 onAfterClick 이벤트가 발생함.
+- 마우스로 클릭시 발생. (포커스 이동 전에 발생)
 - (Col)Type:Button 을 사용시에는 onClick 에 핸들러를 연결할 것.
 - 클릭한 셀의 값을 얻고자 할때는 `evt.row[evt.col]`로 확인 가능.
 
@@ -64,6 +64,16 @@ onClick: function(evt) {
   console.log(`포커스 된 셀을 다시 클릭했는지 여부 : ${evt.row == evt.sheet.getFocusedRow() }`);
 }
 ```
+
+### [onAfterClick](../ibsheet-official-manual/events/on-after-click.md)
+- 마우스 클릭 시 포커스 이동, 체크/언체크(Bool,Radio) 후 발생
+
+```javascript
+onAfterClick: function(evt) {
+  console.log(`${evt.sheet.getRowIndex(evt.row)}행 클릭!`);
+}
+```
+
 onClick, onAfterClick 이벤트 파라미터 (두 이벤트 동일)
 
 | 속성 | 설명 |
@@ -74,11 +84,21 @@ onClick, onAfterClick 이벤트 파라미터 (두 이벤트 동일)
 | evt.y | 마우스 커서 y 좌표 |
 | evt.event | javascript 마우스 이벤트 객체 |
 
-### onIconClick, onButtonClick
 
-- 셀의 텍스트 좌측에 [Icon](../ibsheet-official-manual/props/col/icon.md)를 클릭시 onIconClick 이 발생하고 우측의 [Button](../ibsheet-official-manual/props/col/button.md)를 클릭시 onButtonClick 이벤트가 발생
+### [onIconClick](../ibsheet-official-manual/events/on-icon-click.md)
+
+- 셀 텍스트 좌측에 [Icon](../ibsheet-official-manual/props/col/icon.md)를 클릭시 onIconClick 이벤트 발생
 - 두 이벤트 모두 CanEdit나 Disable 여부와 무관하게 발생함.
 
+```javascript
+onIconClick: function(evt) {
+  if(evt.col == "employee") showEmployeePopup(evt.sheet.getRowValue(evt.row));
+}
+```
+
+
+### [onButtonClick](../ibsheet-official-manual/events/on-button-click.md)
+- 셀 텍스트 우측의 [Button](../ibsheet-official-manual/props/col/button.md)를 클릭시 onButtonClick 이벤트 발생
 ```javascript
 onButtonClick: function(evt) {
   console.log(`${evt.sheet.getRowIndex(evt.row)}행의 팝업버튼이 클릭되었습니다.`);
@@ -91,7 +111,7 @@ onButtonClick: function(evt) {
 
 ### [onStartEdit](../ibsheet-official-manual/events/on-start-edit.md)
 
-편집 시작시 발생하는 이벤트로 Bool,Radio 타입에서는 호출되지 않음
+- 편집 시작시 발생하는 이벤트로 Bool,Radio 타입에서는 호출되지 않음
 
 ```javascript
 onStartEdit: function(evt) {
@@ -103,7 +123,7 @@ onStartEdit: function(evt) {
 
 ### [onEditEnd](../ibsheet-official-manual/events/on-end-edit.md)
 
-편집 모드 종료시 발생하는 이벤트
+- 편집 모드 종료시 발생하는 이벤트
 
 ```javascript
 onEndEdit: function(evt) {
@@ -117,7 +137,7 @@ onEndEdit: function(evt) {
 
 ### [onBeforeChange](../ibsheet-official-manual/events/on-before-change.md)
 
-값 변경 전 이벤트. **return '값' 으로 저장될 데이터 변경 가능.**
+- 값 변경 전 이벤트. **return '값' 으로 저장될 데이터 변경 가능.**
 
 ```javascript
 onBeforeChange: function(evt) {
@@ -134,10 +154,12 @@ onBeforeChange: function(evt) {
 
 | 속성 | 설명 |
 |------|------|
-| evt.oldValue | 변경 전 값 |
-| evt.newValue | 변경 후 값 (수정 가능) |
+| evt.row | 행 객체 |
+| evt.col | 열 이름 |
+| evt.val | 수정된 값 |
+| evt.oldval | 변경 전 값 |
 
-### onAfterChange
+### [onAfterChange](../ibsheet-official-manual/events/on-after-change.md)
 
 값 변경 후. 연관 필드 계산에 사용.
 
