@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>트리 그리드</title>
+  <script src="ibsheet/ibsheet.js"></script>
+  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .header { padding: 20px; border-bottom: 1px solid #eee; }
+    .header h1 { font-size: 1.5rem; color: #333; margin-bottom: 5px; }
+    .header p { color: #666; font-size: 14px; }
+    .toolbar { padding: 15px 20px; display: flex; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid #eee; }
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #1976d2; color: white; }
+    .btn-success { background: #388e3c; color: white; }
+    .btn-danger { background: #d32f2f; color: white; }
+    .btn-secondary { background: #757575; color: white; }
+    .btn:hover { opacity: 0.9; }
+    .grid-container { padding: 20px; }
+    .footer { padding: 15px 20px; border-top: 1px solid #eee; color: #666; font-size: 14px; }
+    .shortcut { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🌲 조직도 관리</h1>
+      <p>드래그 앤 드롭으로 조직 구조를 변경할 수 있습니다</p>
+    </div>
+    
+    <div class="toolbar">
+      <button class="btn btn-primary" id="btnExpandAll">전체 펼치기</button>
+      <button class="btn btn-primary" id="btnCollapseAll">전체 접기</button>
+      <button class="btn btn-secondary" id="btnExpandLevel2">2단계까지</button>
+      <span style="border-left: 1px solid #ddd; margin: 0 10px;"></span>
+      <button class="btn btn-primary" id="btnAddRoot">최상위 추가</button>
+      <button class="btn btn-primary" id="btnAddChild">하위 추가</button>
+      <button class="btn btn-danger" id="btnDelete">삭제</button>
+      <button class="btn btn-success" id="btnSave" style="margin-left: auto;">저장</button>
+    </div>
+    
+    <div class="grid-container">
+      <div id="sheetContainer" style="width:100%; height:500px;"></div>
+    </div>
+    
+    <div class="footer">
+      <strong>단축키:</strong>
+      <span class="shortcut">Enter</span> 편집 완료 · 
+      <span class="shortcut">Insert</span> 하위 노드 추가 · 
+      <span class="shortcut">Delete</span> 노드 삭제 · 
+      <span class="shortcut">←→</span> 펼치기/접기
+    </div>
+  </div>
+
+  <script>
+    let sheet;
+    
+    // 샘플 조직도 데이터
+    const treeData = [
+      { id: 1, parentId: null, name: "대표이사", code: "CEO", headcount: 1, budget: 0 },
+      { id: 2, parentId: 1, name: "경영지원본부", code: "MGT", headcount: 15, budget: 500000000 },
+      { id: 3, parentId: 2, name: "인사팀", code: "HR", headcount: 5, budget: 100000000 },
+      { id: 4, parentId: 2, name: "재무팀", code: "FIN", headcount: 6, budget: 150000000 },
+      { id: 5, parentId: 2, name: "총무팀", code: "GA", headcount: 4, budget: 80000000 },
+      { id: 6, parentId: 1, name: "개발본부", code: "DEV", headcount: 45, budget: 2000000000 },
+      { id: 7, parentId: 6, name: "개발1팀", code: "DEV1", headcount: 15, budget: 600000000 },
+      { id: 8, parentId: 6, name: "개발2팀", code: "DEV2", headcount: 15, budget: 600000000 },
+      { id: 9, parentId: 6, name: "개발3팀", code: "DEV3", headcount: 10, budget: 400000000 },
+      { id: 10, parentId: 6, name: "QA팀", code: "QA", headcount: 5, budget: 200000000 },
+      { id: 11, parentId: 1, name: "영업본부", code: "SALES", headcount: 25, budget: 800000000 },
+      { id: 12, parentId: 11, name: "국내영업팀", code: "DOM", headcount: 15, budget: 500000000 },
+      { id: 13, parentId: 11, name: "해외영업팀", code: "INT", headcount: 10, budget: 300000000 },
+      { id: 14, parentId: 1, name: "마케팅본부", code: "MKT", headcount: 12, budget: 600000000 },
+      { id: 15, parentId: 14, name: "브랜드팀", code: "BRAND", headcount: 5, budget: 300000000 },
+      { id: 16, parentId: 14, name: "디지털마케팅팀", code: "DMKT", headcount: 7, budget: 300000000 }
+    ];
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      initSheet();
+      bindEvents();
+    });
+    
+    function initSheet() {
+      IBSheet.create({
+        id: "sheet",
+        el: "sheetContainer",
+        options: {
+          Cfg: {
+            SearchMode: 0,
+            CanEdit: true,
+            TreeMode: true,
+            TreeCol: "name",
+            TreeIdCol: "id",
+            TreeParentCol: "parentId",
+            CanDrag: true,
+            CanDrop: true
+          },
+          Cols: [
+            { Header: "ID", Name: "id", Type: "Int", Width: 60, CanEdit: false, Hidden: true },
+            { Header: "상위ID", Name: "parentId", Type: "Int", Width: 60, Hidden: true },
+            { 
+              Header: "조직명", 
+              Name: "name", 
+              Type: "Text", 
+              Width: 250,
+              Required: true,
+              OnCellStyle: function(row, col, value) {
+                const level = this.getLevel ? this.getLevel(row) : 0;
+                if (level === 0) {
+                  return { FontWeight: "bold", Color: "#1565c0" };
+                } else if (level === 1) {
+                  return { FontWeight: "bold" };
+                }
+                return null;
+              }
+            },
+            { Header: "코드", Name: "code", Type: "Text", Width: 80, Align: "Center" },
+            { Header: "인원", Name: "headcount", Type: "Int", Width: 70, Align: "Right" },
+            { Header: "예산", Name: "budget", Type: "Int", Width: 130, Align: "Right", Format: "#,##0원" },
+            { 
+              Header: "상태", 
+              Name: "_STATUS", 
+              Type: "Text", 
+              Width: 50, 
+              Align: "Center",
+              CanEdit: false,
+              OnCellStyle: function(row, col, value) {
+                const styles = {
+                  "I": { Background: "#E3F2FD", Color: "#1976D2" },
+                  "U": { Background: "#FFF3E0", Color: "#F57C00" },
+                  "D": { Background: "#FFEBEE", Color: "#D32F2F" }
+                };
+                return styles[value] || null;
+              }
+            }
+          ],
+          Events: {
+            onRenderFirstFinish: function(evt) {
+              sheet = IBSheet.getSheetById("sheet");
+              sheet.loadSearchData({ data: treeData });
+              sheet.expandAll();
+            },
+            onBeforeDrop: function(evt) {
+              // 드롭 전 검증
+              const dragRow = evt.row;
+              const targetRow = evt.targetRow;
+              
+              // 자기 자신의 하위로 이동 방지
+              if (targetRow && isDescendant(targetRow, dragRow)) {
+                alert("자기 자신의 하위로 이동할 수 없습니다.");
+                return false;
+              }
+              
+              return true;
+            },
+            onAfterDrop: function(evt) {
+              // 드롭 후 parentId 업데이트
+              const row = evt.row;
+              const parent = this.getParentRow ? this.getParentRow(row) : null;
+              const newParentId = parent ? this.getValue(parent, "id") : null;
+              this.setValue(row, "parentId", newParentId);
+            },
+            onKeyDown: function(evt) {
+              // Insert: 하위 노드 추가
+              if (evt.keyCode === 45) {
+                addChildNode();
+                return false;
+              }
+              // Delete: 노드 삭제
+              if (evt.keyCode === 46 && !this.isEditing()) {
+                deleteNode();
+                return false;
+              }
+            }
+          }
+        },
+        data: []
+      });
+    }
+    
+    function isDescendant(row, potentialAncestor) {
+      // 순환 참조 체크
+      let current = row;
+      while (current) {
+        if (current === potentialAncestor) return true;
+        current = sheet.getParentRow ? sheet.getParentRow(current) : null;
+      }
+      return false;
+    }
+    
+    function bindEvents() {
+      document.getElementById("btnExpandAll").onclick = function() {
+        sheet.expandAll();
+      };
+      
+      document.getElementById("btnCollapseAll").onclick = function() {
+        sheet.collapseAll();
+      };
+      
+      document.getElementById("btnExpandLevel2").onclick = function() {
+        sheet.collapseAll();
+        sheet.expandToLevel(2);
+      };
+      
+      document.getElementById("btnAddRoot").onclick = function() {
+        const newId = getNextId();
+        sheet.addRow({
+          init: {
+            id: newId,
+            parentId: null,
+            name: "새 조직",
+            code: "NEW",
+            headcount: 0,
+            budget: 0
+          },
+          focus: true,
+          focusCol: "name"
+        });
+      };
+      
+      document.getElementById("btnAddChild").onclick = addChildNode;
+      
+      document.getElementById("btnDelete").onclick = deleteNode;
+      
+      document.getElementById("btnSave").onclick = function() {
+        const saveData = sheet.getSaveJson({ check: 1 });
+        
+        if (saveData.data.length === 0) {
+          alert("변경된 데이터가 없습니다.");
+          return;
+        }
+        
+        // parentId 포함하여 저장
+        saveData.data.forEach(item => {
+          const row = sheet.findRow("id", item.id);
+          if (row) {
+            const parent = sheet.getParentRow ? sheet.getParentRow(row) : null;
+            item.parentId = parent ? sheet.getValue(parent, "id") : null;
+          }
+        });
+        
+        console.log("저장 데이터:", saveData);
+        
+        // 서버 저장 후
+        sheet.acceptChanges();
+        alert("저장되었습니다.");
+      };
+    }
+    
+    function addChildNode() {
+      const parentRow = sheet.getFocusedRow();
+      if (!parentRow) {
+        alert("상위 노드를 선택하세요.");
+        return;
+      }
+      
+      const parentId = sheet.getValue(parentRow, "id");
+      const newId = getNextId();
+      
+      // addChildRow가 있으면 사용, 없으면 일반 addRow
+      if (sheet.addChildRow) {
+        sheet.addChildRow(parentRow, {
+          init: {
+            id: newId,
+            parentId: parentId,
+            name: "새 하위 조직",
+            code: "NEW",
+            headcount: 0,
+            budget: 0
+          }
+        });
+      } else {
+        sheet.addRow({
+          init: {
+            id: newId,
+            parentId: parentId,
+            name: "새 하위 조직",
+            code: "NEW",
+            headcount: 0,
+            budget: 0
+          },
+          focus: true,
+          focusCol: "name"
+        });
+      }
+      
+      // 부모 노드 펼치기
+      if (sheet.expand) {
+        sheet.expand(parentRow);
+      }
+    }
+    
+    function deleteNode() {
+      const row = sheet.getFocusedRow();
+      if (!row) {
+        alert("삭제할 노드를 선택하세요.");
+        return;
+      }
+      
+      // 하위 노드가 있는지 확인
+      const children = sheet.getChildRows ? sheet.getChildRows(row) : [];
+      if (children.length > 0) {
+        if (!confirm("하위 조직이 있습니다. 함께 삭제하시겠습니까?")) {
+          return;
+        }
+        // 하위 노드도 삭제
+        children.forEach(child => sheet.deleteRow(child));
+      }
+      
+      const name = sheet.getValue(row, "name");
+      if (confirm(`'${name}'을(를) 삭제하시겠습니까?`)) {
+        sheet.deleteRow(row);
+      }
+    }
+    
+    function getNextId() {
+      let maxId = 0;
+      const rows = sheet.getAllRows();
+      rows.forEach(row => {
+        const id = sheet.getValue(row, "id") || 0;
+        if (id > maxId) maxId = id;
+      });
+      return maxId + 1;
+    }
+  </script>
+</body>
+</html>

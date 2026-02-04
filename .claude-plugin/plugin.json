@@ -1,0 +1,6 @@
+{
+  "name": "ibsheet-plugin",
+  "description": "IBSheet 그리드 라이브러리를 활용한 웹 개발 지원. 그리드 생성, 데이터 CRUD, 트리/피벗/그룹핑 등 고급 기능, React/Vue 프레임워크 연동",
+  "version": "1.0.0",
+  "keywords": ["ibsheet", "grid", "spreadsheet", "data-table", "웹그리드"]
+}

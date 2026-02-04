@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일괄 저장 CRUD 그리드</title>
+  <script src="ibsheet/ibsheet.js"></script>
+  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 1.5rem; color: #333; }
+    .header .info { color: #666; font-size: 14px; }
+    .toolbar { padding: 15px 20px; display: flex; gap: 10px; border-bottom: 1px solid #eee; }
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #1976d2; color: white; }
+    .btn-success { background: #388e3c; color: white; }
+    .btn-danger { background: #d32f2f; color: white; }
+    .btn-warning { background: #f57c00; color: white; }
+    .btn-secondary { background: #757575; color: white; }
+    .btn:hover { opacity: 0.9; }
+    .btn:disabled { background: #ccc; cursor: not-allowed; }
+    .grid-container { padding: 20px; }
+    .footer { padding: 15px 20px; border-top: 1px solid #eee; display: flex; justify-content: space-between; }
+    .change-indicator { display: flex; gap: 15px; }
+    .indicator { display: flex; align-items: center; gap: 5px; font-size: 13px; }
+    .indicator-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .indicator-dot.add { background: #1976D2; }
+    .indicator-dot.update { background: #F57C00; }
+    .indicator-dot.delete { background: #D32F2F; }
+    .unsaved-warning { background: #fff3e0; color: #e65100; padding: 10px 20px; display: none; align-items: center; gap: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>주문 일괄 등록</h1>
+      <div class="info">여러 건을 한 번에 입력 후 일괄 저장</div>
+    </div>
+    
+    <div class="unsaved-warning" id="unsavedWarning">
+      ⚠️ 저장되지 않은 변경사항이 있습니다.
+    </div>
+    
+    <div class="toolbar">
+      <button class="btn btn-primary" id="btnAddRow">+ 행 추가</button>
+      <button class="btn btn-primary" id="btnAddMultiple">+ 10행 추가</button>
+      <button class="btn btn-danger" id="btnDeleteChecked">선택 삭제</button>
+      <button class="btn btn-warning" id="btnCancelChanges">변경 취소</button>
+      <button class="btn btn-success" id="btnSaveAll" style="margin-left:auto;">일괄 저장</button>
+    </div>
+    
+    <div class="grid-container">
+      <div id="sheetContainer" style="width:100%; height:450px;"></div>
+    </div>
+    
+    <div class="footer">
+      <div class="change-indicator">
+        <div class="indicator">
+          <span class="indicator-dot add"></span>
+          <span>추가: <strong id="addCount">0</strong></span>
+        </div>
+        <div class="indicator">
+          <span class="indicator-dot update"></span>
+          <span>수정: <strong id="updateCount">0</strong></span>
+        </div>
+        <div class="indicator">
+          <span class="indicator-dot delete"></span>
+          <span>삭제: <strong id="deleteCount">0</strong></span>
+        </div>
+      </div>
+      <div>
+        <span>총 <strong id="totalCount">0</strong>건</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let sheet;
+    let hasChanges = false;
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      initSheet();
+      bindEvents();
+      // 초기 빈 행 추가
+      for (let i = 0; i < 5; i++) {
+        addNewRow();
+      }
+    });
+    
+    // 페이지 이탈 경고
+    window.onbeforeunload = function(e) {
+      if (hasChanges) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+    
+    function initSheet() {
+      IBSheet.create({
+        id: "sheet",
+        el: "sheetContainer",
+        options: {
+          Cfg: {
+            SearchMode: 0,
+            CanEdit: true,
+            HeaderCheck: true
+          },
+          Cols: [
+            { Header: "선택", Name: "chk", Type: "CheckBox", Width: 50 },
+            { Header: "No", Name: "_rowNum", Type: "RowNum", Width: 50, Align: "Center" },
+            { 
+              Header: "상태", 
+              Name: "_STATUS", 
+              Type: "Text", 
+              Width: 50, 
+              Align: "Center",
+              CanEdit: false,
+              OnCellStyle: function(row, col, value) {
+                const styles = {
+                  "I": { Background: "#E3F2FD", Color: "#1976D2" },
+                  "U": { Background: "#FFF3E0", Color: "#F57C00" },
+                  "D": { Background: "#FFEBEE", Color: "#D32F2F", TextDecoration: "line-through" }
+                };
+                return styles[value] || null;
+              }
+            },
+            { 
+              Header: "주문일", 
+              Name: "orderDate", 
+              Type: "Date", 
+              Width: 110, 
+              Align: "Center",
+              Format: "yyyy-MM-dd",
+              DatePicker: true,
+              Required: true
+            },
+            { 
+              Header: "고객명", 
+              Name: "customerName", 
+              Type: "Text", 
+              Width: 120,
+              Required: true
+            },
+            { 
+              Header: "연락처", 
+              Name: "phone", 
+              Type: "Text", 
+              Width: 120,
+              EditMask: /^[0-9-]+$/
+            },
+            { 
+              Header: "상품명", 
+              Name: "productName", 
+              Type: "Text", 
+              Width: 150,
+              Required: true
+            },
+            { 
+              Header: "수량", 
+              Name: "quantity", 
+              Type: "Int", 
+              Width: 70, 
+              Align: "Right",
+              Min: 1,
+              DefaultValue: 1
+            },
+            { 
+              Header: "단가", 
+              Name: "unitPrice", 
+              Type: "Int", 
+              Width: 100, 
+              Align: "Right",
+              Format: "#,##0"
+            },
+            { 
+              Header: "금액", 
+              Name: "amount", 
+              Type: "Int", 
+              Width: 120, 
+              Align: "Right",
+              Format: "#,##0원",
+              CanEdit: false
+            },
+            { 
+              Header: "배송지", 
+              Name: "address", 
+              Type: "Text", 
+              Width: 200
+            },
+            { 
+              Header: "비고", 
+              Name: "remark", 
+              Type: "Text", 
+              Width: 150
+            }
+          ],
+          Events: {
+            onRenderFirstFinish: function(evt) {
+              sheet = IBSheet.getSheetById("sheet");
+            },
+            onAfterChange: function(evt) {
+              // 금액 자동 계산
+              if (evt.col === "quantity" || evt.col === "unitPrice") {
+                const qty = this.getValue(evt.row, "quantity") || 0;
+                const price = this.getValue(evt.row, "unitPrice") || 0;
+                this.setValue(evt.row, "amount", qty * price, { noEvent: true });
+              }
+              
+              markAsChanged();
+              updateCounts();
+            },
+            onAfterRowAdd: function(evt) {
+              markAsChanged();
+              updateCounts();
+            },
+            onAfterRowDelete: function(evt) {
+              markAsChanged();
+              updateCounts();
+            },
+            onKeyDown: function(evt) {
+              // Ctrl+S: 저장
+              if (evt.ctrlKey && evt.keyCode === 83) {
+                evt.event.preventDefault();
+                saveAll();
+                return false;
+              }
+              // Ctrl+Enter: 행 추가
+              if (evt.ctrlKey && evt.keyCode === 13) {
+                evt.event.preventDefault();
+                addNewRow();
+                return false;
+              }
+            }
+          }
+        },
+        data: []
+      });
+    }
+    
+    function bindEvents() {
+      document.getElementById("btnAddRow").onclick = addNewRow;
+      
+      document.getElementById("btnAddMultiple").onclick = function() {
+        for (let i = 0; i < 10; i++) {
+          addNewRow(false);
+        }
+        // 첫 번째 추가 행으로 포커스
+        const rows = sheet.getAllRows();
+        if (rows.length > 0) {
+          sheet.setFocus(rows[rows.length - 10] || rows[0], "orderDate");
+        }
+      };
+      
+      document.getElementById("btnDeleteChecked").onclick = function() {
+        const checkedRows = sheet.getCheckedRows();
+        if (checkedRows.length === 0) {
+          alert("삭제할 항목을 선택하세요.");
+          return;
+        }
+        
+        if (!confirm(`${checkedRows.length}건을 삭제하시겠습니까?`)) return;
+        
+        checkedRows.forEach(row => sheet.deleteRow(row));
+      };
+      
+      document.getElementById("btnCancelChanges").onclick = function() {
+        if (!hasChanges) {
+          alert("변경된 내용이 없습니다.");
+          return;
+        }
+        
+        if (!confirm("모든 변경사항을 취소하시겠습니까?")) return;
+        
+        sheet.rejectChanges();
+        markAsSaved();
+        updateCounts();
+      };
+      
+      document.getElementById("btnSaveAll").onclick = saveAll;
+    }
+    
+    function addNewRow(focus = true) {
+      const today = new Date().toISOString().slice(0, 10);
+      sheet.addRow({
+        init: {
+          orderDate: today,
+          quantity: 1
+        },
+        focus: focus,
+        focusCol: "orderDate"
+      });
+    }
+    
+    function saveAll() {
+      // 유효성 검사
+      const result = sheet.validate();
+      if (!result.valid) {
+        alert(result.message);
+        sheet.setFocus(result.row, result.col);
+        return;
+      }
+      
+      const saveData = sheet.getSaveJson({ check: 1 });
+      
+      // 삭제만 있는 경우도 허용
+      if (saveData.data.length === 0) {
+        alert("저장할 데이터가 없습니다.");
+        return;
+      }
+      
+      const addCount = saveData.data.filter(r => r._STATUS === "I").length;
+      const updateCount = saveData.data.filter(r => r._STATUS === "U").length;
+      const deleteCount = saveData.data.filter(r => r._STATUS === "D").length;
+      
+      const message = `추가: ${addCount}건, 수정: ${updateCount}건, 삭제: ${deleteCount}건\n저장하시겠습니까?`;
+      if (!confirm(message)) return;
+      
+      // 서버 저장 (실제로는 API 호출)
+      console.log("저장 데이터:", saveData);
+      
+      // 저장 성공 시
+      setTimeout(function() {
+        sheet.acceptChanges();
+        markAsSaved();
+        updateCounts();
+        alert("저장되었습니다.");
+      }, 300);
+    }
+    
+    function markAsChanged() {
+      hasChanges = true;
+      document.getElementById("unsavedWarning").style.display = "flex";
+      document.getElementById("btnSaveAll").disabled = false;
+    }
+    
+    function markAsSaved() {
+      hasChanges = false;
+      document.getElementById("unsavedWarning").style.display = "none";
+    }
+    
+    function updateCounts() {
+      const total = sheet.getRowCount();
+      const added = sheet.getRowsByStatus("I").length;
+      const updated = sheet.getRowsByStatus("U").length;
+      const deleted = sheet.getRowsByStatus("D").length;
+      
+      document.getElementById("totalCount").textContent = total;
+      document.getElementById("addCount").textContent = added;
+      document.getElementById("updateCount").textContent = updated;
+      document.getElementById("deleteCount").textContent = deleted;
+    }
+  </script>
+</body>
+</html>
