@@ -2,15 +2,15 @@
 KEY: removeMemo
 KIND: method
 PATH: funcs/core/remove-memo
-ALIAS: sheet.removeMemo, removeMemo(), 특정, 헤더, 셀에, 저장된, 메모를
-ALIAS_EN: remove, memo, header
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/remove-memo
+ALIAS: sheet.removeMemo, removeMemo()
+ALIAS_EN: deletes, memo, applied, specific, header, cell, removememo, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/remove-memo
 ---
 # removeMemo ***(method)***
 
-> 특정 헤더 셀에 저장된 메모를 삭제합니다.
+> Deletes a memo applied to a specific header cell.
 
-> [메모 기능](/docs/props/cfg/memo-id)을 통하여 설정된 메모를 삭제합니다.
+> Deletes a memo applied through the [memo feature](/docs/props/cfg/memo-id) setting.
 
 ### Syntax
 ```javascript
@@ -19,17 +19,17 @@ boolean removeMemo( row , col );
 
 ### Parameters
 |Name|Type|Required|Description|
-|----------|-----|---|----|
-|row|`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|필수|열이름
+|----------|-----|---|---|
+|row|`object`|Required|[data row object](/docs/appx/row-object)|
+|col|`string`|Required|column name
 
 
 ### Return Value
-***boolean*** : 메모 삭제 성공여부 (메모가 정상적으로 삭제되었으면 true, 그렇지 않을 경우 false 리턴)
+***boolean*** : Whether the memo was successfully deleted (returns true if the memo was properly deleted, false otherwise)
 
 ### Example
 ```javascript
-// 특정 헤더 셀에 저장된 메모를 삭제한다.
+// Delete a memo applied to a specific header cell.
 sheet.removeMemo(sheet.getHeaderRows()[0], "sCorp");
 ```
 
@@ -42,4 +42,4 @@ sheet.removeMemo(sheet.getHeaderRows()[0], "sCorp");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.19|기능 추가|
+|core|8.0.0.19|Feature added|

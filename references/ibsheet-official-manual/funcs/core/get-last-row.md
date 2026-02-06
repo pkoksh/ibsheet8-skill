@@ -2,15 +2,15 @@
 KEY: getLastRow
 KIND: method
 PATH: funcs/core/get-last-row
-ALIAS: sheet.getLastRow, getLastRow(), 하단행을, 확인합니다
-ALIAS_EN: get, last, row
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-last-row
+ALIAS: sheet.getLastRow, getLastRow()
+ALIAS_EN: checks, bottommost, row, getlastrow, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-last-row
 ---
 # getLastRow ***(method)***
 
-> 최 하단행을 확인합니다.
+> Checks the bottommost row.
 
-> 트리 기능 사용시 row 인자를 설정하면 행이 갖고있는 마지막 자식행이 리턴됩니다.
+> When using the tree feature, if the row argument is set, returns the last child row of that row.
 
 ### Syntax
 ```javascript
@@ -20,15 +20,15 @@ object getLastRow( row );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|선택|[데이터 로우 객체](/docs/appx/row-object)|
+|row|`object`|Optional|[data row object](/docs/appx/row-object)|
 
 
 ### Return Value
-***row object*** : [데이터 로우 객체](/docs/appx/row-object)
+***row object*** : [data row object](/docs/appx/row-object)
 
 ### Example
 ```javascript
-//최 하단행을 얻습니다.
+// Get the bottommost row.
 var lrow = sheet.getLastRow();
 ```
 
@@ -39,4 +39,4 @@ var lrow = sheet.getLastRow();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

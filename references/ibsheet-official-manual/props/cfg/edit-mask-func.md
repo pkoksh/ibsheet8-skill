@@ -2,30 +2,29 @@
 KEY: editMaskFunc
 KIND: config-property
 PATH: props/cfg/edit-mask-func
-ALIAS: 시트, 특정, 열에, 해당하는, 편집시
-ALIAS_EN: edit, mask, func, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/edit-mask-func
+ALIAS_EN: integrates, external, masking, library, editing, cells, specific, columns
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/edit-mask-func
 ---
 # EditMaskFunc ***(cfg)***
 
-> 시트 내 특정 열에 해당하는 셀 편집시 사용될 외부 마스킹 라이브러리를 연동시킵니다.
+> Integrates an external masking library to be used when editing cells in specific columns within the sheet.
 
-> 마스킹을 추가하는 속성과 마스킹을 제거하는 속성(실제 셀에 넣어지는 값은 마스킹이 제거된 값이 필요합니다)을 쌍으로 함께 추가해야합니다.
+> You must add both a property for applying masking and a property for removing masking as a pair (the actual value stored in the cell needs to be the unmasked value).
 
 >
-> 대상 열이름을 키로, 외부 마스킹 라이브러리를 연동시키는 마스킹용 콜백함수(파라미터는 1개)를 값으로 받습니다.
+> It takes the target column name as a key and a masking callback function (with 1 parameter) that integrates the external masking library as the value.
 
-> 대상 열이름과 "Resolve"의 조합을 키로, 마스킹 제거 콜백함수(파라미터는 1개)를 값으로 받습니다. 해당 콜백함수는 <b>반드시 마스킹이 제거된 값을 리턴</b>해야합니다. 
+> It takes a combination of the target column name and "Resolve" as a key and an unmasking callback function (with 1 parameter) as the value. This callback function <b>must return the unmasked value</b>. 
 
-> ex) {"열이름" : func1, "열이름Resolve" : func2, "열이름2" : func3, "열이름2Resolve": func4 }
+> e.g.) {"columnName" : func1, "columnNameResolve" : func2, "columnName2" : func3, "columnName2Resolve": func4 }
 
 
 ###
-![EditMaskFunc사용예](/assets/imgs/editMaskFunc.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - EditMaskFunc사용예 -->
+![EditMaskFunc usage example](/assets/imgs/editMaskFunc.png)
+<!-- IMAGE: Screenshot/Example Image - EditMaskFunc usage example -->
 
 
-아래는 Cleave나 jquery.inputmask 라이브러리를 이용하여 날짜 입력시 마스크를 적용해 본 예제입니다.
+Below is an example of applying a mask for date input using the Cleave or jquery.inputmask library.
 
 ### Type
 `object`
@@ -38,7 +37,7 @@ var cleave;
 options.Cfg = {
     EditMaskFunc: {
         "sDate_yyyyMMdd": function(input) {
-            // 외부 Cleave 라이브러리를 "sDate_yyyyMMdd"에 연동
+            // Integrate external Cleave library with "sDate_yyyyMMdd"
             cleave = new Cleave(input, {
                 date: true,
                 delimiter: '-',
@@ -46,15 +45,15 @@ options.Cfg = {
             });
         },
         "sDate_yyyyMMResolve": function(input) {
-            // "sDate_yyyyMMdd"에 연동된 라이브러리에서 마스킹이 제거된 값을 리턴합니다.
+            // Returns the unmasked value from the library integrated with "sDate_yyyyMMdd".
             return cleave.getRawValue();
         },
         "sDate_yyyyMM": function(input) {
-            // 외부 jquery.inputmask 라이브러리를 "sDate_yyyyMM"에 연동
+            // Integrate external jquery.inputmask library with "sDate_yyyyMM"
             $(input).inputmask("9999/99");
         },
         "sDate_yyyyMMResolve": function(input) {
-            // "sDate_yyyyMM"에 연동된 라이브러리에서 마스킹이 제거된 값을 리턴합니다.
+            // Returns the unmasked value from the library integrated with "sDate_yyyyMM".
             return $(input)[0].inputmask.unmaskedvalue();
         }
     }
@@ -70,4 +69,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

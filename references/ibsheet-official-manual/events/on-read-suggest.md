@@ -2,16 +2,15 @@
 KEY: onReadSuggest
 KIND: event
 PATH: events/on-read-suggest
-ALIAS: 셀이, 편집모드로, 들어갈, 호출되는, 이벤트로
-ALIAS_EN: on, read, suggest
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-read-suggest
+ALIAS_EN: event, called, cell, enters, edit, mode, you, check
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-read-suggest
 ---
 # onReadSuggest ***(event)***
-> 셀이 편집모드로 들어갈 때 호출되는 이벤트로, 편집 시 사용자에게 셀 값을 제안하는 기능인 [Suggest](/docs/props/col/suggest)의 값을 확인할 수 있습니다.
+> Event called when a cell enters edit mode, where you can check the value of [Suggest](/docs/props/col/suggest), a feature that suggests cell values to the user during editing.
 
-> 사용자는 [Suggest](/docs/props/col/suggest)의 형식을 지닌 새로운 값을 리턴하여 [Suggest](/docs/props/col/suggest)에 설정된 값이 아닌 다른 값을 사용자에게 추천할 수 있습니다.
+> You can return a new value in the [Suggest](/docs/props/col/suggest) format to suggest different values to the user instead of the ones set in [Suggest](/docs/props/col/suggest).
 
-> 편집 모드로 들어갈 때 1회만 호출됩니다.
+> Called only once when entering edit mode.
 
 ### Syntax
 
@@ -28,10 +27,10 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|셀의 열이름|
-|suggest|`string`|기존에 설정된 `Suggest`의 값|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell|
+|col|`string`|Column name of the cell|
+|suggest|`string`|Previously configured `Suggest` value|
 
 ### Return
 ***mixed***
@@ -40,11 +39,11 @@ or
 ```javascript
 options.Events = {
     onReadSuggest:function(evtParam){
-        // 행의 sRating 열에 해당하는 셀 값이 50 이상인 경우와 이하인 경우에 대해 다른 Suggest값 적용
+        // Apply different Suggest values depending on whether the sRating column cell value in the row is 50 or above
         if (evtParam.row["sRating"] >= 50) {
-            return "|보통|만족|매우만족";
+            return "|Average|Satisfied|Very Satisfied";
         } else {
-            return "|매우불만족|불만족|보통";
+            return "|Very Dissatisfied|Dissatisfied|Average";
         }
     }
 }
@@ -59,4 +58,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

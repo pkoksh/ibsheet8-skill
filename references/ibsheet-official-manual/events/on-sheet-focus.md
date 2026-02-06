@@ -2,12 +2,11 @@
 KEY: onSheetFocus
 KIND: event
 PATH: events/on-sheet-focus
-ALIAS: 시트에, 포커스, 되었을때, 호출되는, 이벤트입니다
-ALIAS_EN: on, sheet, focus
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-sheet-focus
+ALIAS_EN: event, called, sheet, receives, focus, onsheetfocus
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-sheet-focus
 ---
 # onSheetFocus ***(event)***
-> 시트에 포커스 되었을때 호출되는 이벤트입니다.
+> Event called when the sheet receives focus.
 
 
 ### Syntax
@@ -23,7 +22,7 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|포커스가 된 시트 객체|
+|sheet|`object`|Sheet object that received focus|
 
 ### Return
 ***none***
@@ -33,7 +32,7 @@ or
 ```javascript
 options.Events = {
     onSheetFocus:function(evtParam){
-        alert("현재 포커스된 시트는 "+evtParam.sheet.id+" 입니다.");
+        alert("The currently focused sheet is "+evtParam.sheet.id+".");
     }
 }
 ```
@@ -45,4 +44,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

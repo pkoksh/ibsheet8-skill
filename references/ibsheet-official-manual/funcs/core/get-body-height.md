@@ -2,15 +2,15 @@
 KEY: getBodyHeight
 KIND: method
 PATH: funcs/core/get-body-height
-ALIAS: sheet.getBodyHeight, getBodyHeight(), 시트, 데이터, 영역의, 높이를, 리턴합니다
-ALIAS_EN: get, body, height, sheet, grid, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-body-height
+ALIAS: sheet.getBodyHeight, getBodyHeight()
+ALIAS_EN: sheet, data, areaof, height, return, getbodyheight, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-body-height
 ---
 # getBodyHeight ***(method)***
 
-> 시트 데이터 영역의 높이를 리턴합니다.
+> sheet data areaof height return.
 
-> 헤더나 필터 행의 높이는 포함되지 않습니다.
+> headeror filter Row height includedoes not not.
 
 
 
@@ -21,11 +21,11 @@ number getBodyHeight( );
 
 
 ### Return Value
-***number*** : 데이터 영역의 높이 (pixel 단위)
+***number*** : data areaof height (pixel unit)
 
 ### Example
 ```javascript
-//데이터 영역의 높이를 리턴함. (세로 스크롤과 무관함)
+//Returns the height of the data area. (Unrelated to vertical scroll)
 var h = sheet.getBodyHeight( );
 ```
 
@@ -37,4 +37,4 @@ var h = sheet.getBodyHeight( );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

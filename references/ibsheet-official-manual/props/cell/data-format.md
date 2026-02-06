@@ -2,19 +2,18 @@
 KEY: dataFormat
 KIND: cell-property
 PATH: props/cell/data-format
-ALIAS: 셀에, 로딩할, 데이터의, 포매팅을, 설정합니다
-ALIAS_EN: data, format
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/data-format
+ALIAS_EN: formatting, data, loaded, cells, type, docs, appx, date
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/data-format
 ---
 # DataFormat ***(cell)***
 
-> [Type](/docs/appx/type)이 `Date`인 셀에 로딩할 데이터의 포매팅을 설정합니다.
+> Sets the formatting of data to be loaded for cells with [Type](/docs/appx/type) `Date`.
 
-> 다시 말해 서버에서 가져오거나 서버로 내보낼 데이터의 포맷을 설정합니다.
+> In other words, it sets the format of data fetched from or sent to the server.
 
-> 가령 조회 데이터의 날짜가 "25012017"와 같다면 `DataFormat`에는 "ddMMyyyy"로, 데이터가 "20171225"와 같다면 "yyyyMMdd"로 설정되어야 합니다.
+> For example, if the date in the loaded data is "25012017", then `DataFormat` should be set to "ddMMyyyy", and if the data is "20171225", it should be set to "yyyyMMdd".
 
-> 시트에서 수정한 내용이 서버로 전달 될때에도 이 속성을 통해 변경한 포맷으로 서버에 문자열이 전달됩니다.
+> When modified content from the sheet is sent to the server, the string is transmitted in the format changed through this property.
 
 ### Type
 `string`
@@ -22,23 +21,23 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/data-for
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|yyyyMMdd 등 정해진 문자열|
+|`string`|Predefined strings such as yyyyMMdd|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀의 DataFormat을 변경
+//1. Change the DataFormat of a specific cell via method
 sheet.setAttribute(sheet.getRowById("AR99"), "EDate", "DataFormat", "yyyyMMdd");
-//변경내용 확인(수정한 포맷으로 데이터 추출됨)
+// Verify changes (data extracted in the modified format)
 var json = sheet.getSaveJson();
 
-//2. 객체에 직접 접근해서 DataFormat 변경 (CLS열의 DataFormat을 "yyyyMMddHHmm"로 변경)
+//2. Change DataFormat by directly accessing the object (change CLS column DataFormat to "yyyyMMddHHmm")
 var ROW = sheet.getRowById("AR10");
 ROW["CLSDataFormat"] = "yyyyMMddHHmm";
-//변경내용 확인(수정한 포맷으로 데이터 추출됨)
+// Verify changes (data extracted in the modified format)
 var json = sheet.getSaveJson();
 
 
-//3. 조회 데이터 내에서 DataFormat 변경
+//3. Change DataFormat within loaded data
 {
     data:[
         {... ,"CLS":"12312018" "CLSFormat":"MMddyyyy" , ...}
@@ -55,4 +54,4 @@ var json = sheet.getSaveJson();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

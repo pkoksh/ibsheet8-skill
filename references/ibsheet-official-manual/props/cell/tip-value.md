@@ -2,15 +2,14 @@
 KEY: tipValue
 KIND: cell-property
 PATH: props/cell/tip-value
-ALIAS: 셀의, 내용이, 특정값일때, 풍선도움말로, 보여줄
-ALIAS_EN: tip, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/tip-value
+ALIAS_EN: text, display, tooltip, cell, content, matches, specific, value
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/tip-value
 ---
 # Tip+Value ***(cell)***
 
-> 셀의 내용이 특정값일때 풍선도움말로 보여줄 문자를 설정합니다.
+> Sets the text to display as a tooltip when the cell's content matches a specific value.
 
-> 가령 TipY:"선택하셨습니다", TipN:"취소하셨습니다." 식으로 Tip 과 뒤에 Value를 결합한 속성명으로 보여질 문자를 설정합니다.
+> For example, you can set TipY:"You have selected", TipN:"You have cancelled." by combining Tip with the Value as the property name to configure the displayed text.
 
 ### Type
 `string`
@@ -18,27 +17,27 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/tip-valu
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|풍선도움말에 보여질 문자열|
+|`string`|String to display in the tooltip|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름: CLS)
-sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "TipAA", "심사기준을 확인해 주세요.");
-sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "TipBB", "진행율을 확인해 주세요.");
+//1. Apply property to a specific cell via method (column name: CLS)
+sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "TipAA", "Please check the review criteria.");
+sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "TipBB", "Please check the progress rate.");
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름: CLS)
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
-ROW["CLSY"] = "선택됨";
-ROW["CLSN"] = "취소됨";
-//변경내용 확인
+ROW["CLSY"] = "Selected";
+ROW["CLSN"] = "Cancelled";
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용 (열이름: CLS)
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
-        {... , "CLS0":"반려","CLS1":"확인중","CLS2":"진행중","CLS3":"완료됨", ...}
+        {... , "CLS0":"Rejected","CLS1":"Under Review","CLS2":"In Progress","CLS3":"Completed", ...}
     ]
 }
 ```
@@ -53,4 +52,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

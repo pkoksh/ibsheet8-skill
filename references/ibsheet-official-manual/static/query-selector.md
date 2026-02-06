@@ -2,22 +2,21 @@
 KEY: querySelector
 KIND: static-member
 PATH: static/query-selector
-ALIAS: 선택자에, 따라, 태그를, 반환하는, 함수를
-ALIAS_EN: query, selector
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/query-selector
+ALIAS_EN: function, returns, html, tags, based, css, selectors, queryselector
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/query-selector
 ---
 # QuerySelector ***(static)***
 
-> CSS 선택자에 따라 HTML 태그를 반환하는 함수를 설정합니다. 
-
-> 
-> 시트가 `ShadowDOM` 내부에 들어가 있으면 시트가 `document.getElementById`를 통해 시트 내부의 태그에 접근할 수가 없습니다. 
+> Sets a function that returns HTML tags based on CSS selectors. 
 
 >
-> 이때 `IBSheet.QuerySelector`를 설정하여 시트가 시트 자체 내부의 태그에 접근 가능하도록 해당 옵션을 설정할 필요가 있습니다. 
+> If the sheet is inside a `ShadowDOM`, the sheet cannot access tags inside the sheet through `document.getElementById`. 
 
 >
-> 해당 옵션은 시트를 처음 생성할 때 설정해야 하며, 이후에는 동적으로 변경할 수 없습니다. 
+> In this case, you need to set `IBSheet.QuerySelector` so that the sheet can access tags within itself. 
+
+>
+> This option must be set when the sheet is first created and cannot be dynamically changed afterwards. 
 
 
 ### Type
@@ -26,11 +25,11 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/query-select
 ### Options
 |Value|Description|
 |-----|-----|
-|`object`|CSS 선택자에 따라 HTML 태그를 반환하는 함수|
+|`object`|Function that returns HTML tags based on CSS selectors|
 
 ### Example
 ```javascript
-IBSheet.QuerySelector = shadow.querySelector.bind(shadow); // 시트가 시트 내부의 태그에 접근할 수 있도록 querySelector를 별도로 지정
+IBSheet.QuerySelector = shadow.querySelector.bind(shadow); // Specify a separate querySelector so the sheet can access tags within itself
 ```
 
 ### Read More
@@ -41,4 +40,4 @@ IBSheet.QuerySelector = shadow.querySelector.bind(shadow); // 시트가 시트 �
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.0|기능 추가|
+|core|8.3.0.0|Feature added|

@@ -2,20 +2,19 @@
 KEY: breakPoint
 KIND: column-property
 PATH: props/col/break-point
-ALIAS: 언어팩에, 있는, 수치, 기준보다, 작을시
-ALIAS_EN: break, point
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/break-point
+ALIAS_EN: feature, determines, whether, hide, column, sheet, tag, size
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/break-point
 ---
 # BreakPoint ***(col)***
 
-> 언어팩에 있는 `BreakPoints` 수치 기준보다 더 작을시 hide 할지 말지 정하는 기능입니다. 
+> A feature that determines whether to hide a column when the sheet tag size is smaller than the `BreakPoints` values in the language pack. 
 
-> 설정한 `BreakPoint` 와 시트 태그 사이즈를 비교하여 태그 사이즈 보다 작을시 `hide`, 클시 `show` 되는 기능입니다. 
+> Compares the set `BreakPoint` with the sheet tag size, and hides the column when smaller or shows it when larger. 
 
-> 해당 기능 설정시 설정되는 `Visible` 속성은 무시됩니다. 사이즈 변경이 필요할시에는 언어팩에 수치를 직접 변경하시면 됩니다. 
+> When this feature is set, the `Visible` property is ignored. If you need to change the size thresholds, you can directly modify the values in the language pack. 
 
 
-**아래는 언어팩에서 제공하는 BreakPoints 에 기본 수치입니다.**
+**Below are the default values for BreakPoints provided in the language pack.**
 
 ```js
 "BreakPoints": {
@@ -34,16 +33,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/break-poi
 ### Options
 |Value|Description|
 |-----|-----|
-|`xs`|태그 사이즈가 `xs` 수치보다 작으면 `hide`, 크면 `show`|
-|`sm`|태그 사이즈가 `sm` 수치보다 작으면 `hide`, 크면 `show`|
-|`md`|태그 사이즈가 `md` 수치보다 작으면 `hide`, 크면 `show`|
-|`lg`|태그 사이즈가 `lg` 수치보다 작으면 `hide`, 크면 `show`|
-|`xl`|태그 사이즈가 `xl` 수치보다 작으면 `hide`, 크면 `show`|
-|`xxl`|태그 사이즈가 `xxl` 수치보다 작으면 `hide`, 크면 `show`|
+|`xs`|`hide` when tag size is smaller than `xs` value, `show` when larger|
+|`sm`|`hide` when tag size is smaller than `sm` value, `show` when larger|
+|`md`|`hide` when tag size is smaller than `md` value, `show` when larger|
+|`lg`|`hide` when tag size is smaller than `lg` value, `show` when larger|
+|`xl`|`hide` when tag size is smaller than `xl` value, `show` when larger|
+|`xxl`|`hide` when tag size is smaller than `xxl` value, `show` when larger|
 
 ### Example
 ```javascript
-//html객체로 체크박스 표현
+// Hide column when sheet size is smaller than md breakpoint
 options.Cols = [
     ...
     {Type: "Text", Name: "BreakColA", BreakPoint: "md" ...},
@@ -55,11 +54,11 @@ options.Cols = [
 
 - [HideMobile col](/docs/props/col/hide-mobile)
 <!--!
-- `[비공개]` [ZoomSetSizeMode cfg](/docs/props/cfg/zoom-set-size-mode)
+- `[Private]` [ZoomSetSizeMode cfg](/docs/props/cfg/zoom-set-size-mode)
 !-->
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.24|기능 추가|
+|core|8.0.0.24|Feature added|

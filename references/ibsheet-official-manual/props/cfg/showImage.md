@@ -2,13 +2,12 @@
 KEY: showImage
 KIND: config-property
 PATH: props/cfg/showImage
-ALIAS: 편집이, 가능한, 컬럼에서, 아이콘, 이미지를
-ALIAS_EN: show, image, icon
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/showImage
+ALIAS_EN: feature, displays, icon, image, focus, editable, enum, columns
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/showImage
 ---
 # ShowImage ***(cfg)***
 
-> 편집이 가능한 `Enum`컬럼에서 focus시 아이콘 이미지를 표시하는 기능입니다.
+> A feature that displays the icon image on focus in editable `Enum` columns.
 
 ### Type
 `boolean`
@@ -16,13 +15,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/showImage
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|항상 아이콘을 표시 합니다. (`default`)|
-|`1`|focus시 `Enum` 컬럼의 아이콘을 표시 합니다.|
+|`0`|Always display the icon. (`default`)|
+|`1`|Display the `Enum` column icon only on focus.|
 
 ### Example
 ```javascript
 options.Cfg = {
-    ShowImage: 1              // Enum 컬럼의 아이콘을 focus시에만 표시
+    ShowImage: 1              // Display Enum column icon only on focus
 };
 ```
 
@@ -33,4 +32,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.87|기능 추가|
+|core|8.1.0.87|Feature added|

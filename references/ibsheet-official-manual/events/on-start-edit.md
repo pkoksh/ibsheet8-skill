@@ -2,16 +2,15 @@
 KEY: onStartEdit
 KIND: event
 PATH: events/on-start-edit
-ALIAS: 편집, 호출되는, 이벤트입니다
-ALIAS_EN: on, start, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-start-edit
+ALIAS_EN: event, called, cell, editing, starts, onstartedit
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-start-edit
 ---
 # onStartEdit ***(event)***
-> 셀 편집 시 호출되는 이벤트입니다.
+> Event called when cell editing starts.
 
-> 타입([Type](/docs/props/col/type))이 `Enum`인 경우도 호출되며, 타입이 `Radio, Bool`인 경우 해당 이벤트가 호출되지 않습니다.
+> Also called when the type ([Type](/docs/props/col/type)) is `Enum`. Not called when the type is `Radio` or `Bool`.
 
-> `1(true)`를 리턴 시 편집이 불가능하게 설정할 수 있습니다.
+> Returning `1(true)` prevents the cell from being edited.
 
 ### Syntax
 
@@ -28,9 +27,9 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|편집모드로 들어갈 시트 객체|
-|row |`object`|편집모드로 들어갈 셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|편집모드로 들어갈 셀의 열이름|
+|sheet|`object`|Sheet object that will enter edit mode|
+|row |`object`|[Data row object](/docs/appx/row-object) of the cell that will enter edit mode|
+|col |`string`|Column name of the cell that will enter edit mode|
 
 ### Return
 ***boolean***
@@ -39,8 +38,8 @@ or
 ```javascript
 options.Events = {
     onStartEdit:function(evtParam){
-        // 편집모드로 들어갈 셀이 위치한 열이 수량을 뜻하는 sCount이고, 현재 행의 sSale 열에 해당하는 셀 값이 "판매불가"인 경우 셀 편집을 불가능하게 합니다.
-        if (evtParam.col == "sCount" && evtParam.row["sSale"] == "판매불가") {
+        // If the column of the cell entering edit mode is sCount (quantity) and the sSale column cell value of the current row is "Not for Sale", prevent cell editing.
+        if (evtParam.col == "sCount" && evtParam.row["sSale"] == "Not for Sale") {
             return true;
         }
     }
@@ -58,4 +57,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

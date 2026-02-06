@@ -2,14 +2,14 @@
 KEY: clearCurrentInfo
 KIND: method
 PATH: funcs/core/clear-current-info
-ALIAS: sheet.clearCurrentInfo, clearCurrentInfo(), 저장된, 현재, 시트의, 정보를, 로컬
-ALIAS_EN: clear, current, info
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/clear-current-info
+ALIAS: sheet.clearCurrentInfo, clearCurrentInfo()
+ALIAS_EN: method, removes, current, sheet, information, saved, via, savecurrentinfo
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/clear-current-info
 ---
 # clearCurrentInfo ***(method)***
-> [saveCurrentInfo()](./save-current-info)로 저장된 현재 시트의 정보를 로컬 스토리지 혹은 세션 스토리지에서 제거하는 메소드입니다.
+> A method that removes the current sheet's information saved via [saveCurrentInfo()](./save-current-info) from local storage or session storage.
 > 
- [StorageSession](/docs/props/cfg/storage-session) 값이 0인 경우에는 제거 동작을 하지 않습니다.
+ If [StorageSession](/docs/props/cfg/storage-session) value is 0, the removal operation is not performed.
 
 ### Syntax
 ```javascript
@@ -17,17 +17,17 @@ boolean clearCurrentInfo();
 ```
 
 ### Return Value
-***boolean*** : 함수 정상 동작 여부. (로컬 스토리지 혹은 세션 스트로지에서 시트 정보 제겅 실패했을 때 false 리턴)
+***boolean*** : Whether the function operated normally. (Returns false when removal of sheet information from local storage or session storage fails)
 
 ### Example
 ```javascript
 options.Cfg = {
-    StorageSession: 1        // 로컬 스토리지에 현재 시트 정보를 저장할 수 있고 가져올 수 있도록 설정
+    StorageSession: 1        // Configure to allow saving and retrieving current sheet information in local storage
 };
 
         ...
 
-// 현재 시트의 정보를 로컬 스토리지 혹은 세션 스토리지에서 제거한다.
+// Remove the current sheet's information from local storage or session storage.
 sheet.clearCurrentInfo();
 ```
 
@@ -41,4 +41,4 @@ sheet.clearCurrentInfo();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

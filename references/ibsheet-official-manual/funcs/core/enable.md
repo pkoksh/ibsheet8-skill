@@ -2,12 +2,12 @@
 KEY: enable
 KIND: method
 PATH: funcs/core/enable
-ALIAS: sheet.enable, enable(), 비활성화, 시트를, 다시, 활성화, 시킵니다
-ALIAS_EN: enable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/enable
+ALIAS: sheet.enable, enable()
+ALIAS_EN: enables, disabled, sheet, enable, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/enable
 ---
 # enable ***(method)***
-> 비활성화 된 시트를 다시 활성화 시킵니다.
+> Re-enables a disabled sheet.
 ### Syntax
 ```javascript
 void enable( );
@@ -18,7 +18,7 @@ void enable( );
 
 ### Example
 ```javascript
-//시트를 활성화
+//Enable the sheet
 sheet.enable();
 ```
 
@@ -28,4 +28,4 @@ sheet.enable();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

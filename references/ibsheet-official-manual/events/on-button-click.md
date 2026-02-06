@@ -2,21 +2,20 @@
 KEY: onButtonClick
 KIND: event
 PATH: events/on-button-click
-ALIAS: 속성, 값이, 사이드, 버튼을, 클릭하는
-ALIAS_EN: on, button, click, property, attribute
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-button-click
+ALIAS_EN: event, called, clicking, side, button, within, cell, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-button-click
 ---
 # onButtonClick ***(event)***
-> [Button](/docs/props/col/button)속성 값이 `Button, Html`일 때 셀 내 사이드 버튼을 클릭하는 경우 호출되는 이벤트입니다.
+> Event called when clicking the side button within a cell when the [Button](/docs/props/col/button) property value is `Button, Html`.
 
-> [Button](/docs/props/col/button)이 설정된 셀이 편집 불가능한 경우 버튼 클릭 뿐만 아니라 셀 내부를 클릭 시 이 이벤트가 호출됩니다.
+> If the cell with [Button](/docs/props/col/button) set is not editable, this event is called not only when clicking the button but also when clicking inside the cell.
 
-> 해당 이벤트는 사이드에 위치한 버튼(![타입이 "Button"이 아닌 경우](/assets/imgs/button4.png "타입이 Button이 아닌 경우")
-<!-- IMAGE: 버튼 이미지 - 타입이 "Button"이 아닌 경우 -->)에 한정되며, `Type`을 버튼으로 하는 형태(![타입이 "Button"인경우](/assets/imgs/typeButton.png "타입이 Button인 경우")
-<!-- IMAGE: 버튼 이미지 - 타입이 "Button"인경우 -->)에서는 [onClick](./on-click) 을 통해 버튼 클릭에 대한 로직을 구성하셔야 합니다.
+> This event is limited to buttons positioned on the side (![When the type is not "Button"](/assets/imgs/button4.png "When the type is not Button")
+<!-- IMAGE: Button Image - When the type is not "Button" -->), and for button-type forms (![When the type is "Button"](/assets/imgs/typeButton.png "When the type is Button")
+<!-- IMAGE: Button Image - When the type is "Button" -->), you should configure the button click logic through [onClick](./on-click).
 
-> `1(true)`를 리턴 시, 버튼에 대한 기본 동작이 무시됩니다.
-  
+> Returning `1(true)` ignores the default action for the button.
+
 ### Syntax
 
 ```
@@ -32,39 +31,39 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|셀의 열이름|
-|x|`number`|버튼 내에서 마우스 클릭 x좌표|
-|y|`number`|버튼 내에서 마우스 클릭 y좌표|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) where the cell is located|
+|col|`string`|Column name of the cell|
+|x|`number`|Mouse click x-coordinate within the button|
+|y|`number`|Mouse click y-coordinate within the button|
 
 <!--!
 ### Return
-`[비공개]` ***number***
+`[Private]` ***number***
 !-->
 
 ### Example
 ```javascript
 options.Cols = [
     {
-        Header : "아이디",
+        Header : "ID",
         Name: "sId",
         Type: "Text",
         Button: "Button",
-        ButtonText: "중복확인",
-        WidthPad: 100       //버튼 너비 설정
+        ButtonText: "Check Duplicate",
+        WidthPad: 100       //Button width setting
     } ...
 ]
 
 options.Events = {
     onButtonClick:function(evtParam){
         if (evtParam.col == "sId") {
-            // sId 열에서 중복되는 값이 있는 경우 alert창을 띄웁니다.
+            // If there is a duplicate value in the sId column, show an alert.
             var value = evtParam.row[evtParam.col];
             var r = evtParam.sheet.getFirstRow();
             while (r) {
                 if (r != evtParam.row && r[evtParam.col] == value) {
-                    alert("같은 아이디가 있습니다. 다른 아이디를 입력하세요");
+                    alert("The same ID exists. Please enter a different ID.");
                     break;
                 }
                 r = r.nextSibling;
@@ -86,4 +85,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

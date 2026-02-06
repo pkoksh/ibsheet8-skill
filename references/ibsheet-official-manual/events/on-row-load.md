@@ -2,18 +2,16 @@
 KEY: onRowLoad
 KIND: event
 PATH: events/on-row-load
-ALIAS: 데이터, 조회, 로우, 객체, 생성된
-ALIAS_EN: on, row, load, data, search, query, fetch, retrieve
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-row-load
+ALIAS_EN: event, called, immediately, data, row, object, docs, appx
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-row-load
 ---
 # onRowLoad ***(event)***
-> 데이터 조회 시 [데이터 로우 객체](/docs/appx/row-object)가 생성된 직후 호출되는 이벤트입니다.
+> Event called immediately after a [data row object](/docs/appx/row-object) is created during data retrieval.
 
-> 시트의 렌더링이 완료되기전 시트에 생성되는 각 행마다 호출되며, 해당 이벤트에서 행의 속성 또는 행에 있는 셀의 데이터를 변경할 수 있습니다.
+> Called for each row created in the sheet before the sheet rendering is complete. In this event, you can change row attributes or cell data within the row.
 
-> 해당 이벤트 내에서 **[addRow](/docs/funcs/core/add-row) 메소드를 통해 시트에 새로운 행을 추가 할 수 없습니다.** 
+> **You cannot add new rows to the sheet using the [addRow](/docs/funcs/core/add-row) method within this event.** 
 
-> `1(true)` 를 리턴 시 렌더링이 취소 됩니다.
 
 ### Syntax
 
@@ -30,9 +28,9 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|렌더링을 진행할 시트 객체|
-|row|`object`|시트에 추가될 [데이터 로우 객체](/docs/appx/row-object)|
-|eventName|`string`|이벤트 이름|
+|sheet|`object`|Sheet object that will be rendered|
+|row|`object`|[Data row object](/docs/appx/row-object) to be added to the sheet|
+|eventName|`string`|Event name|
 
 ### Return
 ***boolean***
@@ -41,7 +39,7 @@ or
 ```javascript
 options.Events = {
     onRowLoad:function(evtParam){
-        // 행의 CUST_CD 열이름에 해당하는 셀 값이 500이상인 경우 셀 내 텍스트 컬러를 빨간색으로 변경합니다.
+        // If the cell value in the CUST_CD column of the row is 500 or greater, change the text color to red.
         if (evtParam.row["CUST_CD"] >= 500) {
             evtParam.row["CUST_CD"+"TextColor"] = "#FF0000";
         }
@@ -56,4 +54,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

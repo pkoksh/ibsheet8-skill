@@ -2,15 +2,14 @@
 KEY: textStyle
 KIND: column-property
 PATH: props/col/text-style
-ALIAS: 지정한, 열의, 글자에, 숫자로, 설정합니다
-ALIAS_EN: text, style
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/text-style
+ALIAS_EN: font, weight, style, variant, text, decoration, specified, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/text-style
 ---
 # TextStyle ***(col)***
 
-> 지정한 열의 글자에 대한 `font-weight, font-style, font-variant, text-decoration`를 숫자로 설정합니다.
+> Sets `font-weight, font-style, font-variant, text-decoration` for the text of the specified column as a number.
 
-> 숫자를 서로 더해서 여러 속성을 동시에 적용하 실 수 있습니다.
+> Numbers can be added together to apply multiple properties simultaneously.
 
 
 ### Type
@@ -19,20 +18,20 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/text-styl
 ### Options
 |Value|Description|
 |-----|-----|
-|`1`| 굵게 Bold|
-|`2`| 기울임 Italic|
-|`4`| 밑줄 Underline|
-|`8`| 취소선 Strike|
-|`16`| 윗줄 Overline|
-|`32`| 작은 대문자 Small Caps|
+|`1`| Bold|
+|`2`| Italic|
+|`4`| Underline|
+|`8`| Strike|
+|`16`| Overline|
+|`32`| Small Caps|
 
 
 ### Example
 ```javascript
-//특정 열의 글자를 기울임이면서 밑줄로 표시한다.
+// Display text of a specific column as italic with underline.
 options.Cols = [
     ...
-    {TextStyle: 6, Header: "부서", Type: "Text", Name: "Dept" ...},
+    {TextStyle: 6, Header: "Department", Type: "Text", Name: "Dept" ...},
     ...
 ];
 ```
@@ -47,4 +46,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

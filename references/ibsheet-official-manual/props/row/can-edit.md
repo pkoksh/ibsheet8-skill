@@ -2,23 +2,22 @@
 KEY: canEdit
 KIND: row-property
 PATH: props/row/can-edit
-ALIAS: 행에, 편집, 가능, 여부를, 설정합니다
-ALIAS_EN: can, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-edit
+ALIAS_EN: whether, editing, allowed, row, canedit
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/can-edit
 ---
 # CanEdit ***(row)***
 
-> 행에 대한 편집 가능 여부를 설정합니다.
+> Sets whether editing is allowed for a row.
 
-> 이 속성은 기본값은 `1`인데, `0` 설정시 `Cell, Row, Col`순으로 우선 순위를 갖습니다.
+> The default value of this property is `1`. When set to `0`, it takes priority in the order of `Cell, Row, Col`.
 
-> 가령 `Cell`에서 `0`으로 설정시 `Row`나 `Col`에서 `1`을 설정해도 해당 셀은 편집이 불가능해 집니다. 
+> For example, if set to `0` in `Cell`, the cell cannot be edited even if `1` is set in `Row` or `Col`. 
 
-> `CanEdit: 4`를 제외하고는 편집불가 모드 사용시 `Enum` 컬럼의 아이콘과 `Date` 타입 컬럼의 달력 아이콘을 표현하지 않습니다. 
+> Except for `CanEdit: 4`, when using read-only mode, the icon for `Enum` columns and the calendar icon for `Date` type columns are not displayed. 
 
-> `Cfg`를 이용하여 편집불가 사용시에는 우선순위가 가장 높아짐으로, `Cell, Row, Col`에 `CanEdit: 0`은 먹히지 않습니다. 
+> When using read-only mode through `Cfg`, it has the highest priority, so `CanEdit: 0` in `Cell, Row, Col` will not take effect. 
 
-> `Button` 타입의 버튼 클릭 시 동작, `File` 타입의 아이콘 표시 여부에 대해서는 해당 속성의 영향을 **`받지 않습니다`**. ([Disabled col](/docs/props/col/disabled) 통하여 제어 가능.) 
+> The button click behavior for `Button` type and icon display for `File` type are **`not affected`** by this property. (Can be controlled through [Disabled col](/docs/props/col/disabled).)
 
 ### Type
 `number`
@@ -26,28 +25,28 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-edit
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|행을 편집 불가(읽기 전용)으로 설정합니다.
+|`0`|Sets the row to non-editable (read-only).
 ![CanEdit](/assets/imgs/canEdit0.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`1`|행을 편집 가능으로 설정합니다.
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`1`|Sets the row to editable.
 ![CanEdit](/assets/imgs/canEdit1.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`2`|행의 내용은 편집 불가하지만, 편집 미리보기를 제공하여 셀의 모든 내용을 확인할 수 있습니다.
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`2`|The row content is non-editable, but provides an edit preview to view all cell content.
 ![CanEdit](/assets/imgs/canEdit2.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`3`|행 편집 불가능(편집 가능 불가능에 대한 배경색을 표시하지 않음)
-[ColorState (cfg)](/docs/props/cfg/color-state)와 관계없이 배경색을 표현하지 않음.|
-|`4`|행 편집 불가능 + 배경색 표현안함 + 아이콘표시|
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`3`|Row non-editable (does not display background color for editable/non-editable status)
+Does not display background color regardless of [ColorState (cfg)](/docs/props/cfg/color-state).|
+|`4`|Row non-editable + no background color + icons displayed|
 
 
 ### Example
 ```javascript
-//특정 행의 Edit를 막는다.
+//Prevent editing on a specific row.
 var row = sheet.getRowById("AR55");
 row["CanEdit"] = 0;
 sheet.refreshRow(row);
 
-//조회 데이터에서 특정행에 편집을 막는다.
+//Prevent editing on a specific row in the loaded data.
 {"data":[
     {"CanEdit":0,"ColName1":"Value1","ColName2":"Value2", ...},
     ...
@@ -64,5 +63,5 @@ sheet.refreshRow(row);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.12|`CanEdit: 3, 4` 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.12|`CanEdit: 3, 4` added|

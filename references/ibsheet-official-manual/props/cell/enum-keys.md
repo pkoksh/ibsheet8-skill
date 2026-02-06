@@ -2,21 +2,20 @@
 KEY: enumKeys
 KIND: cell-property
 PATH: props/cell/enum-keys
-ALIAS: 속성을, 설정한, 아이템들의, 값을, 설정합니다
-ALIAS_EN: enum, keys
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/enum-keys
+ALIAS_EN: values, items, configured, enum, property, enumkeys, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/enum-keys
 ---
 # EnumKeys ***(cell)***
-> [Enum](./enum) 속성을 통해 설정한 아이템들의 값을 설정합니다.
+> Sets the values for items configured through the [Enum](./enum) property.
 
-> 첫번째 글자를 구분자로 설정하게 됩니다.
+> The first character is set as the delimiter.
 
-> 이 속성을 설정하면, 실제 조회나 저장시 `EnumKey`로 설정한 값이 서버로 전송됩니다.
+> When this property is set, the values set in `EnumKey` are transmitted to the server during actual loading and saving.
 
 
-> **<mark>주의</mark> : EnumKeys는 [Enum](./enum) 당 유일한 하나의 Key로 동일한 값을 중복해서 사용하면 안됩니다.** 
+> **<mark>Note</mark> : EnumKeys must have a unique key per [Enum](./enum); duplicate values must not be used.** 
 
-> **<mark>주의</mark> : [Type](/docs/appx/type)이 `Radio`인 컬럼에서는 [Enum](./enum)과 `EnumKeys`의 길이를 동일하게 사용해야 체크 동작이 정상적으로 이뤄집니다.** 
+> **<mark>Note</mark> : In columns with [Type](/docs/appx/type) `Radio`, the lengths of [Enum](./enum) and `EnumKeys` must be the same for check behavior to work correctly.** 
 
 
 
@@ -26,22 +25,22 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/enum-key
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|첫번째 글자를 구분자로 하는 문자열 (ex:"#01#02#03#04")|
+|`string`|A string with the first character as the delimiter (e.g., "#01#02#03#04")|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름 :CLS )
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute( sheet.getRowById("AR99") , "CLS" , "EnumKeys" ,"|01|02|03|04");
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름 :CLS )
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSEnumKeys"] = "@A1@B0@B1@C1";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용  (열이름 :CLS )
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSEnumKeys":"#AA#ED#K9" , ...}
@@ -57,4 +56,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

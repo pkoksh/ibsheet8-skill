@@ -1,6 +1,6 @@
 ---
-name: ibsheet
-description: IBSheet 그리드 라이브러리를 활용한 웹 개발 지원. 다음 상황에서 이 스킬을 사용: (1) IBSheet8 그리드 생성 및 초기화, (2) 데이터 바인딩 및 CRUD 구현, (3) 컬럼 설정 및 셀 편집기 구성, (4) 이벤트 핸들링, (5) 서버 통신 구현, (6) 트리 그리드, 피벗, 그룹핑 등 고급 기능, (7) React/Vue 프레임워크 연동, (8) 성능 최적화. 트리거 키워드: ibsheet, IBSheet8, ibsheet8, 그리드, grid, 시트
+name: ibsheet8
+description: IBSheet8(버전8) 그리드 라이브러리 개발 지원. IBSheet.create()로 시트를 생성하고 Cfg/Cols/Events 옵션 구조를 사용하는 프로젝트에서 활성화. 다음 상황에서 이 스킬을 사용: (1) IBSheet8 그리드 생성 및 초기화, (2) 데이터 바인딩 및 CRUD 구현, (3) 컬럼 설정 및 셀 편집기 구성, (4) 이벤트 핸들링, (5) 서버 통신 구현, (6) 트리 그리드, 피벗, 그룹핑 등 고급 기능, (7) React/Vue 프레임워크 연동, (8) 성능 최적화. 프로젝트에 IBSheet.create, ibsheetloader, ibsheet8 키워드가 있으면 이 스킬 사용. 트리거 키워드: ibsheet8, IBSheet.create, ibsheetloader, IBSheet8, 그리드, grid, 시트
 ---
 
 # IBSheet 개발 가이드
@@ -14,7 +14,8 @@ description: IBSheet 그리드 라이브러리를 활용한 웹 개발 지원. �
 <html>
 <head>
   <script src="ibsheet/ibsheet.js"></script>
-  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
+  <script src="ibsheet/locale/ko.js"></script>
+  <link rel="stylesheet" href="ibsheet/css/default/ibsheet.css">
 </head>
 <body>
   <div id="sheetContainer" style="width:100%; height:500px;"></div>
@@ -80,37 +81,49 @@ mySheet.acceptChanges();
 | Bool | 체크박스 | `{ Type: "Bool", TrueValue: "Y", FalseValue: "N" }` |
 | Button | 버튼 | `{ Type: "Button", ButtonText: "클릭" }` |
 
-상세 정보 → [references/core/column-types.md](references/core/column-types.md)
+[상세 정보](references/core/column-type-property.md)
+
+> **합계행**: 숫자 컬럼에 `FormulaRow: "Sum"` 속성만 추가하면 Foot 영역에 자동 합계행이 생성됩니다. Foot 배열을 직접 만들 필요 없습니다. ([상세](references/features/summary.md))
 
 ## 주요 이벤트
 
 ```javascript
 Events: {
   onRenderFirstFinish: function(evt) { },  // 초기화 완료
-  onClick: function(evt) { },               // 셀 클릭
+  onSearchFinish: function(evt) { },      //데이터 로드 완료
+  onAfterClick: function(evt) { },          // 셀 클릭
   onBeforeChange: function(evt) { },        // 값 변경 전 (return false로 취소)
   onAfterChange: function(evt) { },         // 값 변경 후
-  onAfterRowAdd: function(evt) { },         // 행 추가 후
-  onBeforeRowDelete: function(evt) { }      // 행 삭제 전
 }
 ```
 
-상세 정보 → [references/core/events.md](references/core/events.md)
+> **주의: 이벤트 네이밍 규칙**
+> IBSheet8 이벤트는 `Start↔Finish`, `Before↔After` 패턴을 사용합니다. **`Start↔End` 패턴은 사용하지 않습니다.**
+> - `onSearchStart` ↔ `onSearchFinish` (O) — `onSearchEnd`는 존재하지 않음 (X)
+
+[상세 정보](references/core/events.md)
 
 ## 레퍼런스 가이드
 
 ### 핵심 레퍼런스
 | 주제 | 파일 | 설명 |
 |------|------|------|
-| 컬럼 타입 | [references/core/column-types.md](references/core/column-types.md) | 모든 컬럼 타입과 속성 |
+| 시트 생성 | [references/core/initialize-basic.md](references/core/initialize-basic.md) | 기본 시트 생성 방법 |
+| Cfg 속성 | [references/core/initialize-cfg-properties.md](references/core/initialize-cfg-properties.md) | 시트 전역 설정 속성 |
+| Col 속성 | [references/core/initialize-column-properties.md](references/core/initialize-column-properties.md) | 컬럼 초기화 속성 |
+| 컬럼 타입 | [references/core/column-type-property.md](references/core/column-type-property.md) | 모든 컬럼 타입과 속성 |
+| 컬럼 포맷 | [references/core/column-format-property.md](references/core/column-format-property.md) | 셀 표시 형식 정의 |
 | 이벤트 | [references/core/events.md](references/core/events.md) | 전체 이벤트 목록과 사용법 |
 | API 메서드 | [references/core/api-methods.md](references/core/api-methods.md) | 시트 조작 메서드 |
 
 ### 기능별 가이드
 | 주제 | 파일 | 설명 |
 |------|------|------|
-| 필터/정렬 | [references/features/filtering-sorting.md](references/features/filtering-sorting.md) | 데이터 필터링, 정렬 |
-| 그룹핑/합계 | [references/features/grouping-summary.md](references/features/grouping-summary.md) | 행 그룹화, 소계/합계 |
+| 그룹핑 | [references/features/grouping.md](references/features/grouping.md) | 행 그룹화 |
+| 합계/소계 | [references/features/summary.md](references/features/summary.md) | FormulaRow, SubTotal |
+| 피벗 | [references/features/pivot.md](references/features/pivot.md) | 피벗 테이블 |
+| 수식 | [references/features/formula.md](references/features/formula.md) | 열 간 자동 계산 |
+| 속성 수식 | [references/features/attribute-formula.md](references/features/attribute-formula.md) | 속성 동적 설정 |
 | 트리 그리드 | [references/features/tree-grid.md](references/features/tree-grid.md) | 계층 구조 데이터 |
 | 틀고정/병합 | [references/features/frozen-merge.md](references/features/frozen-merge.md) | 행/열 고정, 셀 병합 |
 | 내보내기 | [references/features/export-import.md](references/features/export-import.md) | 엑셀, PDF 변환 |
@@ -121,13 +134,11 @@ Events: {
 |------|------|------|
 | React | [references/integration/react.md](references/integration/react.md) | React 컴포넌트화 |
 | Vue | [references/integration/vue.md](references/integration/vue.md) | Vue 컴포넌트화 |
-| 서버 통신 | [references/integration/server-side.md](references/integration/server-side.md) | REST API 연동 패턴 |
 
 ### 문제 해결
 | 주제 | 파일 | 설명 |
 |------|------|------|
 | 자주 발생하는 오류 | [references/troubleshooting/common-errors.md](references/troubleshooting/common-errors.md) | 오류 원인과 해결법 |
-| 성능 최적화 | [references/troubleshooting/performance.md](references/troubleshooting/performance.md) | 대용량 데이터 처리 |
 
 ## 템플릿
 

@@ -2,15 +2,14 @@
 KEY: filterValue
 KIND: cell-property
 PATH: props/cell/filter-value
-ALIAS: 셀의, 원래, 대신, 필터링시, 사용할
-ALIAS_EN: filter, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/filter-value
+ALIAS_EN: value, filtering, instead, cell, original, filtervalue
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/filter-value
 ---
 # FilterValue ***(cell)***
 
-> 셀의 원래 값 대신 필터링시 사용할 값을 설정합니다.
+> Sets the value to be used for filtering instead of the cell's original value.
 
-> 특히 타입이 `Html`이나 `버튼` 같이 편집이 불가능한 셀에 유용하게 사용하실 수 있습니다.
+> This is particularly useful for cells that are non-editable, such as `Html` or `button` type cells.
 
 
 ### Type
@@ -19,21 +18,21 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/filter-v
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|필터링이 이루어질때 사용될 기준 문자|
+|`string`|Reference text to be used when filtering|
 
 
 ### Example
 ```javascript
-//조회 데이터 내에서 속성 적용  (열이름 :CLS )
-//원래 셀의 값 대신 "00가0000"로 필터링 되게 끔 설정
+// Apply property within loaded data (column name: CLS)
+// Set to filter using "00A0000" instead of the actual cell value
 {
     data:[
-        {... , "CARNOFilterValue":"00가0000" , ...}
+        {... , "CARNOFilterValue":"00A0000" , ...}
     ]
 }
 ```
-![FilterValue](/assets/imgs/filterValue.png "실제 값 대신 00가0000로 필터링")
-<!-- IMAGE: 스크린샷/예시 이미지 - FilterValue -->
+![FilterValue](/assets/imgs/filterValue.png "Filtering by 00A0000 instead of the actual value")
+<!-- IMAGE: Screenshot/Example Image - FilterValue -->
 ### Read More
 - [SortValue cell](./sort-value)
 - [CopyValue cell](./copy-value)
@@ -42,4 +41,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/filter-v
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

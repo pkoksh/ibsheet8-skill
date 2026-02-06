@@ -2,29 +2,28 @@
 KEY: searchExpression
 KIND: config-property
 PATH: props/cfg/search-expression
-ALIAS: 시트에서, 검색할, 문자열을, 설정합니다
-ALIAS_EN: search, expression
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/search-expression
+ALIAS_EN: string, search, sheet, searchexpression, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/search-expression
 ---
 # SearchExpression ***(cfg)***
 
-> 시트에서 검색할 문자열을 설정합니다.
+> Sets the string to search for in the sheet.
 
-> 구글에서 검색하듯이 일반적인 문자열 및 검색 조건을 사용할 수 있습니다.
+> You can use general strings and search conditions just like searching on Google.
 
 ### Type
 `string`
 
-### 검색 조건
+### Search Conditions
 |Name| Description |
 |----------|----|
-|`'-서울'`| `서울`을 제외하고 검색 |
-|`'서울 OR 경기'`| `서울`과 `경기`를 검색 |
-|`'#'`| 셀값이 하나라도 비어있는 데이터 행을 검색 |
+|`'-Seoul'`| Search excluding `Seoul` |
+|`'Seoul OR Gyeonggi'`| Search for `Seoul` and `Gyeonggi` |
+|`'#'`| Search for data rows where at least one cell value is empty |
 
 ### Example
 ```javascript
-// 대/소문자를 구분해서 시트에 'Seoul'을 포함한 데이터 행을 검색
+// Search for data rows containing 'Seoul' in the sheet with case sensitivity
 sheet.SearchCaseSensitive = true;
 sheet.SearchExpression = "Seoul";
 sheet.findRows('Find');
@@ -39,4 +38,4 @@ sheet.findRows('Find');
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

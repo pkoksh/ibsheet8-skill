@@ -2,74 +2,132 @@
 KEY: setValue
 KIND: method
 PATH: funcs/core/set-value
-ALIAS: sheet.setValue, setValue(), 셀의, 값을, 지정한, 값으로, 수정합니다
-ALIAS_EN: set, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-value
+ALIAS: sheet.setValue, setValue()
+ALIAS_EN: changes, cell, value, specified, setvalue, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-value
 ---
 # setValue ***(method)***
-> 셀의 값을 지정한 값으로 수정합니다. 
+> Changes a cell's value to the specified value. 
 
-> 편집상태에서 `setValue`를 할 경우, `onEndEdit` 이벤트가 발생합니다. 
+> By default, calling this function does not trigger edit-related events (`onAfterChange`, `onEndEdit`, etc.).
 
-> `ignoreOnEndEdit` 을 사용하여, 이벤트를 발생을 막을 수 있습니다.
+> However, when `setValue` is called during data edit state, the `onEndEdit` event is triggered. 
+
+> In this case, you can prevent the event from being triggered using the `ignoreEvent` option.
+
+> When Change event processing is required after the value is changed, the [OnChange](/docs/props/event/on-change) event must be used.
 
 ### Syntax
 ```javascript
-boolean setValue( row, col, val, render, ignoreOnEndEdit, noCalc );
+boolean setValue( row, col, val, render, ignoreEvent, noCalc );
 ```
 
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|필수|열이름|
-|val|`number`\|`string`|필수|입력값(셀 타입에 맞는 값)|
-|render|`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
-|ignoreEvent|`object|boolean`|선택|`setValue`시 발생하는 이벤트를 발생시킬지 여부를 제어하는 옵션입니다. 
- Json 형태로 옵션 세팅이 가능하며, 해당 이벤트 이름을 key 값으로 넣고, true를 리턴할시 해당되는 이벤트가 발생하지 않습니다. 
- 해당 옵션을 true/false로 설정할 경우 기존의 `ignoreOnEndEdit`으로 동작합니다.|
-|calc|`boolean`|선택|포뮬러 계산 여부 
- 해당 기능을 `0(false)`로 설정할 경우 `setValue`시 포뮬러 계산이 이뤄지지 않습니다. 포뮬러를 반영하려면 이후 반드시 `calculate()`를 호출해줘야 됩니다.(`default:1`) |
+|row|`object`|Required|[data row object](/docs/appx/row-object)|
+|col|`string`|Required|column name|
+|val|`number` \| `string`|Required|Input value (value matching the cell type)|
+|render|`boolean`|Optional|Whether to immediately reflect the changed value on screen. 
+When set to `false(0)`, the change is not immediately reflected on screen, and after the operation is complete, you must call a rendering function such as `rerender()` or `refreshCell`, `refreshRow`, `renderBody` depending on the situation.
+`true(1)`: Immediately reflected (`default`)|
+|ignoreEvent|`object` \| `boolean`|Optional|Option to control whether events triggered by `setValue` are fired. 
+Can be set in JSON object form, where the event name is set as the key value and `true` is set to prevent the corresponding event from being triggered. 
+When set to `true/false`, only the `onEndEdit` event is controlled.|
+|calc|`boolean`|Optional|Whether to perform formula calculation. 
+ When set to `0(false)`, formula calculation is not performed during `setValue`. 
+To reflect formulas afterwards, `calculate()` must be called. (`default:1`)|
 
 ### ignoreEvent Options
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| OnChange| `boolean` | 선택 | `setValue`시 발생하는 `OnChange` 이벤트 발생 여부를 제어합니다. true 리턴시 해당 이벤트가 발생하지 않습니다. (`default: 0(false)`) |
-| OnSame| `boolean` | 선택 | `setValue`시 발생하는 `OnSame` 이벤트 발생 여부를 제어합니다. true 리턴시 해당 이벤트가 발생하지 않습니다. (`default: 0(false)`) |
-|onEndEdit| `boolean` | 선택 | 편집상태에서 `setValue`를 할 경우, 기본적으로 `onEndEdit` 이벤트가 발생합니다. 
- 이때 발생하는 `onEndEdit` 이벤트의 발생 여부를 제어합니다. 
- true를 리턴할 경우, 해당 이벤트가 발생하지 않습니다. (`default: 0(false)`)|
+| OnChange| `boolean` | Optional | Controls whether the `OnChange` event triggered by `setValue` is fired. When set to true, the corresponding event is not triggered. (`default: 0(false)`) |
+| OnSame| `boolean` | Optional | Controls whether the `OnSame` event triggered by `setValue` is fired. When set to true, the corresponding event is not triggered. (`default: 0(false)`) |
+|onEndEdit| `boolean` | Optional | When `setValue` is called during edit state, the `onEndEdit` event is triggered by default. 
+ Controls whether the triggered `onEndEdit` event fires. 
+ When set to true, the corresponding event is not triggered. (`default: 0(false)`)|
 
-### ignoreEvent를 true/false로 설정할 경우 
-`ignoreEvent`를 true/false로 설정할 경우, 기존의 5번째 인자 옵션인 `ignoreOnEndEdit`으로 동작합니다. 
-`ignoreOnEndEdit`은 기본적으로 `ignoreEvent`의 `onEndEdit` 인자와 동일하게 동작하며 true를 설정할 경우 `onEndEdit` 이벤트가 발생하지 않게 동작합니다. 
- 다만 해당 옵션은 deprecated되었으니 `ignoreEvent` 사용을 권장하는 바입니다. 
+<!-- ### When setting ignoreEvent to true/false
+When `ignoreEvent` is set to true/false, it operates as the existing 5th argument option `ignoreOnEndEdit`. 
+By default, `ignoreOnEndEdit` operates the same as the `onEndEdit` argument of `ignoreEvent`, and when set to true, it prevents the `onEndEdit` event from being triggered. 
+ However, this option has been deprecated, so using `ignoreEvent` is recommended. -->
 
 ### Return Value
-***boolean*** : 값의 변경 여부 (값이 변경되면 `1(true)`, 변경되지 않으면(기존값과 동일한 경우) `0(false)`)
+***boolean*** : Whether the value was changed (returns `1(true)` if the value was changed, `0(false)` if not changed (same as existing value))
 
 ### Example
 ```javascript
+// ================================
+// Data row change example
+// ================================
+
+// Retrieve 5th row (row object id is AR5.)
 var r5 = sheet.getRowById("AR5");
-//AR5 행에 값을 입력
+
+// Change StartDate, EndDate values of the AR5 data row
 sheet.setValue( r5, "StartDate", "20160105");
-sheet.setValue({row:r5, col:"EndDate", val:"20160315", render:1});
+sheet.setValue({row:r5, col:"EndDate", val:"20160315"});
+
+// OnChange, onEndEdit not triggered
+sheet.setValue({row:r5, col:"A", val:10, ignoreEvent:{onEndEdit:true,OnChange:true}});
+
+// ================================
+// Data row change example
+// Multiple row iteration processing
+// ================================
+
+var Rows = sheet.getDataRows(); // Extract all data rows of the sheet
+
+for(var i=0; i<Rows.length; i++){
+    // Batch change the closed column (Name:close_data) column value
+   // By setting render to false(0), delaying screen rendering improves speed
+    sheet.setValue({row:Rows[i], col:"close_data", val:"Changed", render:0});
+
+}
+// Apply screen changes
+sheet.rerender(1);
+
+// ================================
+// Header row change example
+// ================================
+
+var hr = sheet.getRowById("Header"); // Retrieve the topmost header row
+
+// Change specific column header text
+sheet.setValue(hr, "SalesToday", "Sales");
+sheet.setValue(hr, "SalesSum", "Sales");
+sheet.setValue(hr, "CostToday", "Cost");
+sheet.setValue(hr, "CostSum", "Cost");
+
+// Re-apply merge according to the situation after header text change (row-based merge)
+sheet.setAutoMerge( {headerMerge:2});
+
+// ================================
+// Total row change example
+// ================================
+
+// (Col) FormulaRow set total columns are auto-calculated, so they cannot be directly changed with setValue.
+var sumRow = sheet.getRowById("FormulaRow"); // Retrieve total row
+
+// (Col) Columns without FormulaRow applied can be changed
+sheet.setValue(sumRow , "Notes", "Total reference memo");
+
 ```
 
 ### Read More
-
+- [getDataRows method](./get-data-rows)
+- [getRowById method](./get-row-by-id)
 - [getValue method](./get-value)
 - [getString method](./get-string)
+- [setAutoMerge method](./set-auto-merge)
+- [setRowValue method](./set-row-value)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.11|`ignoreOnEndEdit` 추가|
-|core|8.2.0.21|`ignoreEvent` 추가, `ignoreOnEndEdit` deprecated 처리|
-|core|8.3.0.45|`calc` 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.11|`ignoreOnEndEdit` added|
+|core|8.2.0.21|`ignoreEvent` added, `ignoreOnEndEdit` deprecated|
+|core|8.3.0.45|`calc` added|

@@ -2,13 +2,20 @@
 KEY: visible
 KIND: cell-property
 PATH: props/cell/visible
-ALIAS: 데이터의, 보임, 감춤, 여부를, 설정합니다
-ALIAS_EN: visible
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/visible
+ALIAS_EN: whether, cell, data, shown, hidden, visible
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/visible
 ---
 # Visible ***(cell)***
 
-> 셀 데이터의 보임/감춤 여부를 설정합니다.
+> Sets whether the cell data is shown or hidden.
+
+> This property only controls the visibility of the data value displayed in the cell.
+
+> Therefore, **UI elements and user interactions based on the cell type (Button, Bool, Enum, File, etc.) are maintained**.
+
+> For example, Enum type will still open the list box, and Bool type can still be checked/unchecked.
+
+> To restrict cell editing and behavior, use properties such as `CanEdit` and `Disabled`.
 
 
 ### Type
@@ -17,16 +24,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/visible
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|감춰짐|
-|`1(true)`|보임|
+|`0(false)`|Hidden|
+|`1(true)`|Visible (default)|
 
 ### Example
 ```javascript
-// 첫번째행 "CLS" 컬럼에 해당하는 셀의 데이터를 감춘다.
+// Hide the data of the cell in the first row corresponding to the "CLS" column.
 sheet.setAttribute(sheet.getRowById("AR1"), "CLS", "Visible", 0, 1);
 
 
-//조회 데이터에서 특정셀을 감춘다.
+// Hide a specific cell in loaded data.
 {"data":[
     ...
     {"ColName1Visible": 0, "ColName1": "Value1", "ColName2": "Value2", ...},
@@ -42,4 +49,4 @@ sheet.setAttribute(sheet.getRowById("AR1"), "CLS", "Visible", 0, 1);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

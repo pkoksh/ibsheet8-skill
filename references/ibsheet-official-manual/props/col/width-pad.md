@@ -2,14 +2,13 @@
 KEY: widthPad
 KIND: column-property
 PATH: props/col/width-pad
-ALIAS: 속성을, 이용하여, 우측에, 작은, 버튼을
-ALIAS_EN: width, pad
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/width-pad
+ALIAS_EN: width, small, button, displayed, right, side, cell, property
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/width-pad
 ---
 # WidthPad ***(col)***
-> [Button](./button)속성을 이용하여 셀 우측에 작은 버튼을 표시할때 버튼의 너비를 설정합니다.
+> Sets the width of the small button displayed on the right side of the cell when using the [Button](./button) property.
 
-> 너비는 pixel단위로 설정됩니다.
+> The width is set in pixel units.
 
 
 
@@ -19,14 +18,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/width-pad
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|우측 버튼의 너비|
+|`number`|Width of the right button (default: 25px)|
 
 ### Example
 ```javascript
 options.Cols = [
     ...
-    //셀 우측에 "확인"버튼을 표시한다.
-    {Type: "Text", Button: "Button", ButtonText: "확인", WidthPad: 25, Name: "conf_btn", Width: 120, ...},
+    // Display a "Confirm" button on the right side of the cell.
+    {Type: "Text", Button: "Button", ButtonText: "Confirm", WidthPad: 25, Name: "conf_btn", Width: 120, ...},
     ...
 ];
 ```
@@ -40,4 +39,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

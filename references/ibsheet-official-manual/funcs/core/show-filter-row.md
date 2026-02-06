@@ -2,43 +2,43 @@
 KEY: showFilterRow
 KIND: method
 PATH: funcs/core/show-filter-row
-ALIAS: sheet.showFilterRow, showFilterRow(), 헤더, 밑에, 필터, 행을, 보여지게
-ALIAS_EN: show, filter, row, header
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/show-filter-row
+ALIAS: sheet.showFilterRow, showFilterRow()
+ALIAS_EN: displays, filter, row, header, showfilterrow, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/show-filter-row
 ---
 # showFilterRow ***(method)***
-> 헤더 밑에 필터 행을 보여지게 합니다.
+> Displays the filter row below the header.
 
-> 필터를 통해 감춰지는 행은 내부적으로 [Visible](/docs/props/row/visible):`0(false)` 값이 설정됩니다. 
+> Rows hidden through the filter have their [Visible](/docs/props/row/visible):`0(false)` value set internally. 
 
-> 예약어의 사용을 원하지 않을 경우 [DisableKeyWord](/docs/props/cfg/disable-keyword) 를 통해 예약어 기능을 off 할 수 있습니다.
+> If you do not want to use reserved words, you can turn off the reserved word feature through [DisableKeyWord](/docs/props/cfg/disable-keyword).
 
 
 
-> 문자열 컬럼에서는 `','(and검색)` 나 `';'(or검색)` 을 사용하실 수 있습니다.
+> You can use `','(AND search)` or `';'(OR search)` in string columns.
 
->  - ex1. `사과;복숭아` ==> 사과나 복숭아 글자를 포함한 행만 남기고 감춤
->  - ex2. `사과,복숭아` ==> 사과 복숭아가 함께 있는 행만 남기고 감춤
- 
+> - ex1. `Apple;Peach` ==> Hides all except rows containing Apple or Peach
+> - ex2. `Apple,Peach` ==> Hides all except rows containing both Apple and Peach
 
-> 숫자나 날짜 컬럼에 대해서는 `'~'` 를 통해 범위를 설정 할 수 있습니다. 필터 행의 기호(연산자) 1(같음), 2(같지않음) 에서만 사용 할 수 있고 다른 기호 에서는 사용 할 수 없습니다.
 
->  - ex1. `20170101~20181231` ==> 2017년 1월 1일 부터 2018년 12월 31일 까지만 남기고 모두 감춤
->  - ex2. `20241022~20241025;20241031` ==> 2024년 10월 22일 부터 2024년 10월 25일 까지의 데이터와 2024년 10월 31일의 데이터만 남기고 모두 감춤
->  - ex3. `199000~488000` ==> 199000 부터 488000 사이의 데이터만 남기고 모두 감춤
->  - ex4. ` 99000;199000~488000` ==> 99000의 데이터와 199000 부터 488000 사이의 데이터만 남기고 모두 감춤
+> For Number or date columns, you can set a range using `'~'`. The filter row's operator can only be used with 1(equal) or 2(not equal), and other operators cannot be used.
 
-> 구분자는 메세지 파일에서 변경 가능합니다.
+> - ex1. `20170101~20181231` ==> Hides all except data from January 1, 2017 to December 31, 2018
+> - ex2. `20241022~20241025;20241031` ==> Hides all except data from October 22, 2024 to October 25, 2024 and data from October 31, 2024
+> - ex3. `199000~488000` ==> Hides all except data between 199000 and 488000
+> - ex4. `99000;199000~488000` ==> Hides all except data of 99000 and data between 199000 and 488000
 
-> "`ValueSeparator`": "`;`"     //or 구분자 
+> Delimiters can be changed in the message file.
 
-> "`ValueSeparatorHtml`": "`;`" //or 구분자 
+> "`ValueSeparator`": "`;`"     //OR delimiter 
 
-> "`ValueAndSeparator`": "`,`"  //and 구분자 
+> "`ValueSeparatorHtml`": "`;`" //OR delimiter 
 
-> "`RangeSeparator`": "`~`"     //범위 연산자 
+> "`ValueAndSeparator`": "`,`"  //AND delimiter 
 
-> "`RangeSeparatorHtml`": "`~`" //범위 연산자 
+> "`RangeSeparator`": "`~`"     //Range operator 
+
+> "`RangeSeparatorHtml`": "`~`" //Range operator 
 
 
 ### Syntax
@@ -48,11 +48,11 @@ boolean showFilterRow();
 
 
 ### Return Value
-***boolean*** : 필터 행 보임 여부 (필터 행이 이미 보여지고 있거나, 보일 수 없는 경우 `0(false)` 리턴)
+***boolean*** : Whether the filter row is visible (returns `0(false)` if the filter row is already displayed or cannot be made visible)
 
 ### Example
 ```javascript
-//필터 행을 보여 줍니다.
+// Display the filter row.
 sheet.showFilterRow();
 ```
 
@@ -64,4 +64,4 @@ sheet.showFilterRow();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

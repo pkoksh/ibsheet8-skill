@@ -2,16 +2,16 @@
 KEY: refreshCell
 KIND: method
 PATH: funcs/core/refresh-cell
-ALIAS: sheet.refreshCell, refreshCell(), 특정, 셀의, 변경된, 내용을, 화면에
-ALIAS_EN: refresh, cell
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/refresh-cell
+ALIAS: sheet.refreshCell, refreshCell()
+ALIAS_EN: specific, cellof, changedapplied, content, screen, reflect, refreshcell, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/refresh-cell
 ---
 # refreshCell ***(method)***
-> 특정 셀의 변경된 내용을 화면에 반영합니다.
+> specific cellof Changedapplied content screen reflect.
 
-> `render` 함수와 달리 화면의 깜빡임이 없습니다.
+> Unlike the `render` function, does not cause screen flickering.
 
-> 행 전체의 변경 내용을 반영할 때는 [refreshRow](./refresh-row)함수를 사용하는게 좋습니다.
+> When reflecting changes for an entire row, it is better to use the [refreshRow](./refresh-row) function.
 
 ### Syntax
 ```javascript
@@ -21,15 +21,15 @@ void refreshCell( row, col );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-//특정 셀에 변경된 내용(값,속성)을 화면에 반영한다.
+//specific cell Changedapplied content(value,property) screen reflect.
 sheet.refreshCell( sheet.getFirstVisibleRow(), "EMT_DESC" );
 ```
 
@@ -42,4 +42,4 @@ sheet.refreshCell( sheet.getFirstVisibleRow(), "EMT_DESC" );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

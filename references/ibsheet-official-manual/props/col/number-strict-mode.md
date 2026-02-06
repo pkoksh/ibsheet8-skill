@@ -2,15 +2,14 @@
 KEY: numberStrictMode
 KIND: column-property
 PATH: props/col/number-strict-mode
-ALIAS: 으로, 설정, 조회, 숫자, 타입
-ALIAS_EN: number, strict, mode, config, setting, option, search, query
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/number-strict-mode
+ALIAS_EN: false, empty, values, non, numeric, type, int, float
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/number-strict-mode
 ---
 # NumberStrictMode ***(col)***
 
-> 0(false)으로 설정 시 조회 시 숫자 타입(Int, Float)에 빈 값이나 숫자 형태가 아닌 경우 0으로 처리합니다.
+> When set to 0(false), empty values or non-numeric values in numeric type (Int, Float) columns are treated as 0 during data retrieval.
 
-> 천단위 구분자 ","가 포함된 문자열 형태의 숫자를 입력하는 경우 숫자로 표시됩니다.
+> String-format numbers containing the thousands separator "," will be displayed as numbers.
 
 
 
@@ -20,8 +19,8 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/number-st
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|숫자가 아닌 데이터에 대해 엄격하게 검사하지 않음. 숫자가 아닌 경우 NaN 대신 0으로 표시|
-|`1(true)`|숫자 타입 열에서 데이터의 타입에 대해 엄격하게 검사. 숫자형태가 아닌 경우 NaN으로 표시 (`default`)|
+|`0(false)`|Does not strictly validate non-numeric data. Displays 0 instead of NaN for non-numeric values|
+|`1(true)`|Strictly validates the data type in numeric type columns. Displays NaN for non-numeric values (`default`)|
 
 
 ### Example
@@ -29,12 +28,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/number-st
 options.Cols = [
     ...
     {
-        Header: '정수(Int)',
+        Header: 'Integer(Int)',
         Type: 'Int',
         Name: 'IntData',
         Width: 80,
         Align: 'Right',
-        NumberStrictMode: 0   // 숫자가 아닌 데이터에 대해 엄격하게 검사하지 않음.
+        NumberStrictMode: 0   // Does not strictly validate non-numeric data.
     },
     ...
 ];
@@ -43,10 +42,10 @@ options.Cols = [
 ### Read More
 - [Type appendix](/docs/appx/type)
 <!--!
-- `[비공개]` [NumberStrictMode cell](/docs/props/cell/number-strict-mode)
+- `[Private]` [NumberStrictMode cell](/docs/props/cell/number-strict-mode)
 !-->
 
 ### Since
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.17|기능 추가|
+|core|8.0.0.17|Feature added|

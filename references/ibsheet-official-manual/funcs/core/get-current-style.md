@@ -2,14 +2,14 @@
 KEY: getCurrentStyle
 KIND: method
 PATH: funcs/core/get-current-style
-ALIAS: sheet.getCurrentStyle, getCurrentStyle(), 현재, 시트의, 설정된, 테마, 배경색
-ALIAS_EN: get, current, style
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-current-style
+ALIAS: sheet.getCurrentStyle, getCurrentStyle()
+ALIAS_EN: method, retrieves, current, sheet, def, settings, including, theme
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-current-style
 ---
 # getCurrentStyle ***(method)***
-> 현재 시트의 Def에 설정된 테마, 배경색, 글자색 및 Alternate 색상, 글자크기 정보를 문자열로 가져오는 메소드입니다.
+> A method that retrieves the current sheet's Def settings including theme, background color, text color, Alternate color, and text size information as a string.
 
-> 테마를 제외한 속성의 default 값은 추가되지 않습니다.
+> Does not include default values for properties other than the theme.
 
 ### Syntax
 ```javascript
@@ -17,16 +17,16 @@ string getCurrentStyle();
 ```
 
 ### Return Value
-***string 현재 시트의 Def에 설정된 배경색, 글자색 및 Alternate 색상, 글자크기 정보 값***
+***string current sheet's Def settings including background color, text color, Alternate color, and text size information value***
 
 ### Example
 ```javascript
-// 현재 시트의 컬럼 정보를 담고 있는 문자열을 반환
+// Returns a string containing column information of the current sheet
 sheet.getCurrentStyle();
 ```
 
 ### Read More
-- [행(Row) 구조에 대한 이해 getting started](/docs/start/row)
+- [Understanding Row structure getting started](/docs/start/row)
 - [setCurrentStyle method](./set-current-style)
 - [AlternateColor row](/docs/props/row/alternate-color.md)
 - [Color row](/docs/props/row/color.md)
@@ -37,4 +37,4 @@ sheet.getCurrentStyle();
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.18|기능 추가|
+|core|8.3.0.18|Feature added|

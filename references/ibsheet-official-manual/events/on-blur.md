@@ -2,12 +2,11 @@
 KEY: onBlur
 KIND: event
 PATH: events/on-blur
-ALIAS: 시트가, 포커스를, 잃을, 호출되는, 이벤트입니다
-ALIAS_EN: on, blur
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-blur
+ALIAS_EN: event, called, sheet, loses, cell, focus, onblur
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-blur
 ---
 # onBlur ***(event)***
-> 시트가 셀 포커스를 잃을 때 호출되는 이벤트입니다.
+> Event called when the sheet loses cell focus.
 
 
 ### Syntax
@@ -25,10 +24,10 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|포커스를 잃은 시트 객체|
-|orow|`object`|포커스를 잃기전에 포커스가 되어있던 셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|ocol|`string`|포커스를 잃기전에 포커스가 되어있던 셀이 위치한 열이름|
-|orect|`array[object]`|포커스를 잃기전에 다수의 셀들을 포커스했을때의 영역|
+|sheet|`object`|Sheet object that lost focus|
+|orow|`object`|[Data row object](/docs/appx/row-object) where the cell that was focused before losing focus is located|
+|ocol|`string`|Column name where the cell that was focused before losing focus is located|
+|orect|`array[object]`|Area when multiple cells were focused before losing focus|
 
 ### Return
 ***none***
@@ -38,7 +37,7 @@ or
 ```javascript
 options.Events = {
     onBlur:function(evtParam){
-        alert("시트가 포커스를 잃었습니다. 이전 포커스된 셀의 값은"+evtParam.sheet.getValue({row :evtParam.orow, col: evtParam.ocol}+"입니다."));
+        alert("The sheet has lost focus. The value of the previously focused cell is "+evtParam.sheet.getValue({row :evtParam.orow, col: evtParam.ocol}+".")));
     }
 }
 ```
@@ -52,4 +51,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

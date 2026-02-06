@@ -2,13 +2,12 @@
 KEY: dragCell
 KIND: config-property
 PATH: props/cfg/drag-cell
-ALIAS: 드래그, 단위, 여부를, 설정합니다
-ALIAS_EN: drag, cell
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/drag-cell
+ALIAS_EN: whether, drag, cell, level, dragcell, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/drag-cell
 ---
 # DragCell ***(cfg)***
 
-> 드래그 시 셀 단위 드래그 여부를 설정합니다.
+> Sets whether to drag at the cell level.
 
 
 ### Type
@@ -17,15 +16,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/drag-cell
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|행 단위 드래깅 (`default`)|
-|`1(true)`|셀 단위 드래깅|
+|`0(false)`|Row-level dragging (`default`)|
+|`1(true)`|Cell-level dragging|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-   "CanDrag": true, // 마우스 드래그를 통한 이동 설정
-   "DragCell": true // 셀 단위 드래그 설정
+   "CanDrag": true, // Enable movement via mouse drag
+   "DragCell": true // Enable cell-level drag
 };
 ```
 
@@ -38,4 +37,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.27|기능 추가|
+|core|8.0.0.27|Feature added|

@@ -2,12 +2,11 @@
 KEY: resultText
 KIND: cell-property
 PATH: props/cell/result-text
-ALIAS: 위배되는, 내용이, 입력시, 으로, 보여줄
-ALIAS_EN: result, text
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-text
+ALIAS_EN: content, display, alert, input, violating, resultmask, result, mask
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/result-text
 ---
 # ResultText ***(cell)***
-> [ResultMask](./result-mask)에 위배되는 내용이 입력시 alert으로 보여줄 내용을 설정합니다.
+> Sets the content to display as an alert when input violating the [ResultMask](./result-mask) is entered.
 
 
 ### Type
@@ -16,14 +15,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-t
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|잘못된 내용이 입력시 보여질 경고문 내용|
+|`string`|Warning message content to display when invalid input is entered|
 
 ### Example
 ```javascript
-//특정 셀에서 ResultMask 속성 위배시 메세지 설정
+// Set message for when the ResultMask property is violated in a specific cell
 var ROW = sheet.getRowById("AR10");
-ROW["CLSResultText"] = "숫자만 입력 가능합니다.";
-//변경내용 확인
+ROW["CLSResultText"] = "Only numbers can be entered.";
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 ```
 
@@ -36,4 +35,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

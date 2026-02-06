@@ -2,13 +2,13 @@
 KEY: getFooterRows
 KIND: method
 PATH: funcs/common/get-footer-rows
-ALIAS: sheet.getFooterRows, getFooterRows(), 푸터, 영역에, 있는, 데이터, 로우
-ALIAS_EN: get, footer, rows, foot, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/get-footer-rows
+ALIAS: sheet.getFooterRows, getFooterRows()
+ALIAS_EN: returns, array, footer, data, row, objects, area, getfooterrows
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/get-footer-rows
 ---
 # getFooterRows ***(method)***
 
-> 푸터 영역에 있는 푸터 데이터 로우 객체들의 배열을 반환합니다. 
+> Returns an array of footer data row objects in the footer area. 
 
 
 ### Syntax
@@ -17,11 +17,11 @@ void getFooterRows();
 ```
 
 ### Return Value
-***array[row object]*** : 데이터 로우 객체 배열
+***array[row object]*** : Array of data row objects
 
 ### Example
 ```javascript
-// 푸터 영역에 있는 푸터 데이터 로우 객체들의 배열을 반환합니다.
+// Returns an array of footer data row objects in the footer area.
 sheet.getFooterRows();
 ```
 
@@ -31,4 +31,4 @@ sheet.getFooterRows();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

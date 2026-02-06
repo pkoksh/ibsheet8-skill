@@ -2,22 +2,21 @@
 KEY: relWidth
 KIND: column-property
 PATH: props/col/rel-width
-ALIAS: 열의, 상대적, 너비를, 설정합니다
-ALIAS_EN: rel, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/rel-width
+ALIAS_EN: relative, width, column, relwidth, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/rel-width
 ---
 # RelWidth ***(col)***
-> 열의 상대적 너비를 설정합니다.
+> Sets the relative width of a column.
 
-> 열의 너비를 퍼센트로 설정하는 것과 유사하게 열간의 상대적인 너비를 설정합니다.
+> Sets the relative width between columns, similar to setting the column width as a percentage.
 
-> 가령 시트의 크기가 1000px이고, 각 열의 너비가 100px 으로 설정한 열이 5개 있다고 가정할때 이중 한 열이 `RelWidth: 1`을 갖으면 해당 열의 너비는 600px를 갖게 됩니다.
+> For example, assuming the sheet size is 1000px and there are 5 columns each with a width of 100px, if one column has `RelWidth: 1`, that column will have a width of 600px.
 
-> 만약 두개 열이 `RelWidth: 1`을 갖으면 두개 열은 각각 300px를 갖게 됩니다.
+> If two columns have `RelWidth: 1`, both columns will each have 300px.
 
-> 만약 두개 열이 `RelWidth` 속성이 설정되어있는데, 하나는 `RelWidth: 1`이고 다른 하나는 `RelWidth: 2` 로 설정되어 있다면 `RelWidth: 1` 인 열의 너비는 200px, `RelWidth: 2`인 열의 너비는 400px가 됩니다. 
+> If two columns have the `RelWidth` property set, with one set to `RelWidth: 1` and the other set to `RelWidth: 2`, the column with `RelWidth: 1` will have a width of 200px, and the column with `RelWidth: 2` will have a width of 400px. 
 
-> **주의 : 상대적 너비를 설정하다 보니, 시트 전체 너비보다 설정된 컬럼들의 너비가 더 큰 경우, `RelWidth` 가 설정된 컬럼의 너비가 작아지거나 0 이 되는 경우가 있기 때문에, 반드시 `minWidth` 를 사용하여 최소 너비를 지정해주는 것이 좋습니다.**
+> **Note: Since relative widths are being set, if the total width of configured columns is larger than the overall sheet width, the width of columns with `RelWidth` set may become smaller or 0. Therefore, it is recommended to always use `minWidth` to specify a minimum width.**
 
 ### Type
 `number`
@@ -25,12 +24,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/rel-width
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|남는 너비에 대한 상대적인 비율|
+|`number`|Relative ratio for the remaining width|
 
 
 ### Example
 ```javascript
-//특정 열이 나머지 영역을 모두 차지하게 설정
+// Set a specific column to occupy all remaining area
 options.Cols = [
     ...
     {Type: "Date", Name: "em_date", RelWidth: 1, MinWidth: 100, ...},
@@ -51,4 +50,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

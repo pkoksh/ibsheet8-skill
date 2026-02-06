@@ -2,13 +2,12 @@
 KEY: rawSort
 KIND: cell-property
 PATH: props/cell/raw-sort
-ALIAS: 소팅시, 적용된, 데이터를, 기준으로, 소팅할지
-ALIAS_EN: raw, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/raw-sort
+ALIAS_EN: whether, sort, based, data, format, docs, props, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/raw-sort
 ---
 # RawSort ***(cell)***
 
-> 소팅시 [Format](/docs/props/cell/format) 이 적용된 데이터를 기준으로 소팅할지 여부를 설정합니다.
+> Sets whether to sort based on data with [Format](/docs/props/cell/format) applied during sorting.
 
 
 ### Type
@@ -17,16 +16,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/raw-sort
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|열의 `Type` 과 `Format`을 적용한 소팅 (`default`)|
-|`1`|`Format`을 적용하지 않은 순수 데이터를 기준으로 한 소팅
-`Enum`형식인 경우 `Key`를 기준으로 소팅|
-|`2`|`Enum`타입에서 `Enum`과 `EnumKey`의 입력순서(배열순서)로 정렬|
+|`0`|Sorting with the column's `Type` and `Format` applied (`default`)|
+|`1`|Sorting based on raw data without `Format` applied
+For `Enum` types, sorting is based on `Key`|
+|`2`|For `Enum` types, sorting by the input order (array order) of `Enum` and `EnumKey`|
 
 
 ### Example
 ```javascript
-//조회 데이터 내에서 속성 적용 (열이름: CLS)
-//포맷이 적용되지 않은 순수 데이터를 기준으로 소팅
+// Apply property within loaded data (column name: CLS)
+// Sort based on raw data without format applied
 {
     data:[
         {... , "CLSRawSort": 1, ...}
@@ -44,4 +43,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/raw-sort
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

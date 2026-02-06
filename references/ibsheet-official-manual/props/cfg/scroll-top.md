@@ -2,15 +2,14 @@
 KEY: scrollTop
 KIND: config-property
 PATH: props/cfg/scroll-top
-ALIAS: 시트의, 세로, 스크롤바, 위치를, 설정합니다
-ALIAS_EN: scroll, top
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/scroll-top
+ALIAS_EN: vertical, scrollbar, position, sheet, unit, pixel, scrolltop, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/scroll-top
 ---
 # ScrollTop ***(cfg)***
 
-> 시트의 세로 스크롤바 위치를 설정합니다. (단위: `pixel`) 
+> Sets the vertical scrollbar position of the sheet. (Unit: `pixel`) 
 
-> 스크롤바의 위치값을 0 이상으로 설정하는 경우 이동된 스크롤 바 위치의 데이터가 보여집니다.
+> When the scrollbar position value is set to 0 or more, data at the scrolled position is displayed.
 
 
 
@@ -20,13 +19,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/scroll-to
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|세로 스크롤바의 위치 (`단위: pixel`)  (`default: 0`)|
+|`number`|Position of the vertical scrollbar (`Unit: pixel`)  (`default: 0`)|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-  ScrollTop: 100      // 상단 스크롤의 스크롤바 시작점에서 100px 이동하여 해당 위치의 데이터를 보여줌.
+  ScrollTop: 100      // Moves the scrollbar 100px from the starting point of the top scroll to display data at that position.
 };
 ```
 
@@ -37,4 +36,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

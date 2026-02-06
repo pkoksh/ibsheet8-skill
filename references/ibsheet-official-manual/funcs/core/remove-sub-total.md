@@ -2,12 +2,12 @@
 KEY: removeSubTotal
 KIND: method
 PATH: funcs/core/remove-sub-total
-ALIAS: sheet.removeSubTotal, removeSubTotal(), 시트, 존재하는, 모든, 소계, 누계
-ALIAS_EN: remove, sub, total, sheet, grid, subtotal
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/remove-sub-total
+ALIAS: sheet.removeSubTotal, removeSubTotal()
+ALIAS_EN: removes, subtotal, cumulative, total, rows, existing, sheet, removesubtotal
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/remove-sub-total
 ---
 # removeSubTotal ***(method)***
-> 시트 내 존재하는 모든 소계/누계 행을 제거합니다.
+> Removes all subtotal/cumulative total rows existing in the sheet.
 
 ### Syntax
 ```javascript
@@ -19,7 +19,7 @@ void removeSubTotal();
 
 ### Example
 ```javascript
-// 소계/누계 행 제거
+// Remove subtotal/cumulative total rows
 sheet.removeSubTotal();
 ```
 
@@ -31,4 +31,4 @@ sheet.removeSubTotal();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,13 @@
 KEY: hideRows
 KIND: method
 PATH: funcs/common/hide-rows
-ALIAS: sheet.hideRows, hideRows(), 여러, 개의, 행을, 한꺼번에, 숨깁니다
-ALIAS_EN: hide, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/hide-rows
+ALIAS: sheet.hideRows, hideRows()
+ALIAS_EN: hides, multiple, rows, once, hiderows, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/hide-rows
 ---
 # hideRows ***(method)***
 
-> 여러 개의 행을 한꺼번에 숨깁니다. 
+> Hides multiple rows at once. 
 
 
 
@@ -21,7 +21,7 @@ void hideRows( rows );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|rows|`array[object]`|선택|숨길 [데이터 로우 객체](/docs/appx/row-object)의 배열|
+|rows|`array[object]`|Optional|Array of [data row objects](/docs/appx/row-object) to hide|
 
 
 ### Return Value
@@ -30,7 +30,7 @@ void hideRows( rows );
 
 ### Example
 ```javascript
-// AR1 행과 AR2행을 한꺼번에 숨깁니다.
+// Hides the AR1 row and AR2 row at once.
 sheet.hideRows([sheet.getRowById("AR1"), sheet.getRowById("AR2")]);
 ```
 
@@ -40,4 +40,4 @@ sheet.hideRows([sheet.getRowById("AR1"), sheet.getRowById("AR2")]);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

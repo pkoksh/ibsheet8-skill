@@ -2,17 +2,16 @@
 KEY: addEdit
 KIND: column-property
 PATH: props/col/add-edit
-ALIAS: 행의, 상태가, 추가, 컬럼의, 편집
-ALIAS_EN: add, edit, insert, append, create, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/add-edit
+ALIAS_EN: whether, column, editable, canedit, docs, props, row, edit
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/add-edit
 ---
 # AddEdit ***(col)***
 
-> 행의 상태가 추가([Added](/docs/props/row/added))인 행의 컬럼의 편집([CanEdit](/docs/props/row/can-edit)) 가능 여부를 설정합니다.
+> Sets whether the column is editable ([CanEdit](/docs/props/row/can-edit)) for rows with Added ([Added](/docs/props/row/added)) status.
 
-> 조회시에는 편집 불가, 행 추가 후 데이터 편집 가능, 저장 후 편집 불가를 설정하고 싶다면 [ChangeEdit](/docs/props/col/change-edit) 를 함께 설정해주어야 합니다. 
+> If you want to set it so that editing is disabled on data retrieval, editing is possible after adding a row, and editing is disabled after saving, you should also set [ChangeEdit](/docs/props/col/change-edit). 
 
-> `주의` 해당 속성을 설정하게 되면, `(Cell,Row,Col)CanEdit` 설정 속성은 무시됩니다.
+> `Caution` When this property is set, the `(Cell,Row,Col)CanEdit` settings will be ignored.
 
 ### Type
 `boolean`
@@ -20,20 +19,20 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/add-edit
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|행의 상태가 Added(추가) 일 경우 해당 컬럼 편집 불가|
-|`1(true)`|행의 상태가 Added(추가) 일 경우 해당 컬럼 편집 가능|
+|`0(false)`|Column is not editable when the row status is Added|
+|`1(true)`|Column is editable when the row status is Added|
 
 
 ### Example
 ```javascript
-//addRow 를 통하여 추가된 행에 대해서는 AMT 컬럼의 편집을 막음
+// Block editing of the AMT column for rows added via addRow
 options.Cols = [
     ...
     {Type: "Int", AddEdit: 0, Name: "AMT", Width: 120 ...},
     ...
 ];
 
-// 데이터 조회시 AMT 컬럼의 편집을 막고, addRow 를 통하여 추가한 경우에는 편집 가능, 저장 후 편집 불가로 설정
+// Block editing of the AMT column on data retrieval, allow editing when added via addRow, and disable editing after saving
 options.Cols = [
     ...
     {Type: "Int", AddEdit: 1, ChangeEdit:0, Name: "AMT", Width: 120 ...},
@@ -56,4 +55,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.87|기능 추가|
+|core|8.1.0.87|Feature added|

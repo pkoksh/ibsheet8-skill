@@ -2,14 +2,13 @@
 KEY: canFocus
 KIND: cell-property
 PATH: props/cell/can-focus
-ALIAS: 셀에, 클릭이나, 키보드를, 통한, 이동시
-ALIAS_EN: can, focus
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/can-focus
+ALIAS_EN: whether, cell, receive, focus, click, keyboard, navigation, canfocus
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/can-focus
 ---
 # CanFocus ***(cell)***
-> 셀에 클릭이나 키보드를 통한 이동시 포커스 가능 여부를 설정합니다.
+> Sets whether the cell can receive focus through click or keyboard navigation.
 
-> `CanFocus:0(false)`으로 설정된 셀에 대해서는 클릭을 통한 포커스 진입이 불가능하고, 키보드의 Tab 키를 이용한 이동시 열을 건너뛰게 됩니다.
+> Cells set to `CanFocus:0(false)` cannot be focused by clicking, and will be skipped when navigating with the Tab key.
 
 ### Type
 `boolean`
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/can-focu
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|포커스 진입 불가|
-|`1(true)`|포커스 집입 가능 (`default`)|
+|`0(false)`|Focus entry not allowed|
+|`1(true)`|Focus entry allowed (`default`)|
 
 
 
 ### Example
 ```javascript
-//특정 셀에 대해서 포커스가 들어가지 않게 한다.
+// Prevent a specific cell from receiving focus
 var ROW = sheet.getRowById("AR10");
 ROW["CLSCanFocus"] = 0;
 ```
@@ -37,4 +36,4 @@ ROW["CLSCanFocus"] = 0;
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

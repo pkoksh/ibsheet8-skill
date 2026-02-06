@@ -2,14 +2,14 @@
 KEY: hasFilter
 KIND: method
 PATH: funcs/core/has-filter
-ALIAS: sheet.hasFilter, hasFilter(), 필터가, 사용됐는지, 여부를, 리턴합니다
-ALIAS_EN: has, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/has-filter
+ALIAS: sheet.hasFilter, hasFilter()
+ALIAS_EN: returns, whether, filter, hasfilter, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/has-filter
 ---
 # hasFilter ***(method)***
-> 필터가 사용됐는지 여부를 리턴합니다.
+> Returns whether a filter has been used.
 
-> 필터된 결과와 무관하게 필터를 사용했으면 `true`가 리턴됩니다.
+> Returns `true` if a filter is set, regardless of the filter results.
 
 
 
@@ -19,11 +19,11 @@ boolean hasFilter();
 ```
 
 ### Return Value
-***boolean*** : 필터 적용 여부
+***boolean*** : filter applied whether
 
 ### Example
 ```javascript
-//필터를 사용했나?
+//filter usesetor?
 var fuse = sheet.hasFilter();
 ```
 
@@ -36,4 +36,4 @@ var fuse = sheet.hasFilter();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

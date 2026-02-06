@@ -2,17 +2,16 @@
 KEY: align
 KIND: row-property
 PATH: props/row/align
-ALIAS: 전체의, 문자열, 정렬을, 설정합니다
-ALIAS_EN: align
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/align
+ALIAS_EN: text, alignment, entire, row, align
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/align
 ---
 # Align ***(row)***
 
-> 행 전체의 문자열 정렬을 설정합니다.
+> Sets the text alignment for the entire row.
 
-> 트리 또는 그룹에서 사용할 때는 기준으로 지정된 컬럼(**트리의 접힘/펼침 아이콘이 보이는 컬럼**)의 데이터영역은 `Align`이 먹지 않습니다. 
+> When used in a tree or group, the data area of the column designated as the reference column (**the column where the tree collapse/expand icon is displayed**) is not affected by `Align`. 
 
-> 일반적으로 데이터 행보다는 헤더 행에서 사용됩니다.
+> Generally used for header rows rather than data rows.
 
 ### Type
 `string`
@@ -20,18 +19,18 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/align
 ### Options
 |Value|Description|
 |-----|-----|
-|`Left`|문자열 왼쪽 정렬  (Left, LEFT, left 허용)|
-|`Center`|문자열 가운데 정렬 (Center, CENTER, center 허용)|
-|`Right`|문자열 오른쪽 정렬 (Right, RIGHT, right 허용)
+|`Left`|Left-align text (Left, LEFT, left allowed)|
+|`Center`|Center-align text (Center, CENTER, center allowed)|
+|`Right`|Right-align text (Right, RIGHT, right allowed)
 
 ### Example
 ```javascript
-// 특정 행의 문자열을 가운데 정렬
+// Center-align text for a specific row.
 var row = sheet.getFirstVisibleRow();
 row["Align"] = "Center";
 sheet.refreshRow(row);
 
-// 전체 헤더 행에 대해 문자열을 가운데 정렬.
+// Center-align text for all header rows.
 options.Def.Header = {"Align": "CENTER"};
 ```
 
@@ -43,4 +42,4 @@ options.Def.Header = {"Align": "CENTER"};
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

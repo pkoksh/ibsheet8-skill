@@ -2,13 +2,12 @@
 KEY: tipMaxWidth
 KIND: config-property
 PATH: props/cfg/tip-max-width
-ALIAS: 팁의, 최대, 너비, 설정합니다
-ALIAS_EN: tip, max, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/tip-max-width
+ALIAS_EN: maximum, width, maxwidth, tip, tipmaxwidth, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/tip-max-width
 ---
 # TipMaxWidth ***(cfg)***
 
-> 팁의 최대 너비(`MaxWidth`)을 설정합니다. 
+> Sets the maximum width (`MaxWidth`) of the tip. 
 
 
 ### Type
@@ -19,12 +18,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/tip-max-w
 
 |Value|Description|
 |-----|-----|
-|`number`|팁의 최대 너비|
+|`number`|Maximum width of the tip|
 
 ### Example
 ```javascript
 options.Cfg = {
-    TipMaxWidth: 500 // 팁의 최대 너비를 500으로 설정
+    TipMaxWidth: 500 // Set the maximum width of the tip to 500
 };
 ```
 
@@ -36,4 +35,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.47|기능 추가|
+|core|8.3.0.47|Feature added|

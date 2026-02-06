@@ -2,15 +2,14 @@
 KEY: searchCaseSensitive
 KIND: config-property
 PATH: props/cfg/search-case-sensitive
-ALIAS: 검색어가, 영문, 혹은, 소문자를, 구분하는
-ALIAS_EN: search, case, sensitive
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/search-case-sensitive
+ALIAS_EN: whether, search, case, sensitivity, english, languages, distinguish, uppercase
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/search-case-sensitive
 ---
 # SearchCaseSensitive ***(cfg)***
 
-> 검색어가 영문(혹은 대/소문자를 구분하는 언어)에서 대/소문자를 구분해서 검색하도록 설정할 수 있습니다.
+> Sets whether to search with case sensitivity for English (or languages that distinguish uppercase/lowercase).
 
-> 기본값은 `0(false)`입니다.
+> The default value is `0(false)`.
 
 ### Type
 `boolean`
@@ -18,14 +17,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/search-ca
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|검색 시 대/소문자를 구분하지 않습니다.(`defalut`)|
-|`1(true)`|검색 시 대/소문자를 구분합니다.|
+|`0(false)`|Does not distinguish uppercase/lowercase when searching. (`default`)|
+|`1(true)`|Distinguishes uppercase/lowercase when searching.|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    SearchCaseSensitive: true       // 검색 기능 사용시 영문의 대/소문자 구분해서 검색
+    SearchCaseSensitive: true       // Distinguishes uppercase/lowercase for English when using the search feature
 };
 ```
 
@@ -38,4 +37,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

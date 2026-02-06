@@ -2,12 +2,12 @@
 KEY: isFocused
 KIND: method
 PATH: funcs/core/is-focused
-ALIAS: sheet.isFocused, isFocused(), 특정, 행이나, 셀에, 포커스가, 있는지
-ALIAS_EN: is, focused
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/is-focused
+ALIAS: sheet.isFocused, isFocused()
+ALIAS_EN: specific, rowor, cell, focus, present, isfocused, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/is-focused
 ---
 # isFocused ***(method)***
-> 특정 행이나 셀에 포커스가 있는지 확인합니다.
+> specific rowor cell focus present OK.
 
 
 
@@ -21,18 +21,18 @@ boolean isFocused( row, col );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|선택|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Optional|column name|
 
 ### Return Value
-***boolean*** : 포커스 유무 (0:unfocused, 1:focused)
+***boolean*** : focus presence (0:unfocused, 1:focused)
 
 ### Example
 ```javascript
-//id가 AR33인 행에 포커스가 있는지 확인한다.
+//id AR33 row focus present check.
 var isfo = sheet.isFocused(sheet.getRowById("AR33"));
 
-//특정 셀에 포커스가 있는지 확인한다.
+//specific cell focus present OK.
 var isfo = sheet.isFocused(sheet.getRowById("AR5"), "CA_DSC" );
 ```
 
@@ -45,4 +45,4 @@ var isfo = sheet.isFocused(sheet.getRowById("AR5"), "CA_DSC" );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

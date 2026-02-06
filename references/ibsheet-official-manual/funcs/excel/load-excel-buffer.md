@@ -2,17 +2,17 @@
 KEY: loadExcelBuffer
 KIND: method
 PATH: funcs/excel/load-excel-buffer
-ALIAS: sheet.loadExcelBuffer, loadExcelBuffer(), 하나의, 엑셀파일에서, 여러개의, 시트에, 번에
-ALIAS_EN: load, excel, buffer
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/excel/load-excel-buffer
+ALIAS: sheet.loadExcelBuffer, loadExcelBuffer()
+ALIAS_EN: provides, feature, load, multiple, sheets, single, excel, file
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/excel/load-excel-buffer
 ---
 # loadExcelBuffer ***(method)***
 
-> 하나의 엑셀파일에서 여러개의 시트에 한 번에 로드하는 기능을 제공합니다.
+> Provides a feature to load multiple sheets from a single Excel file at once.
 
-> **이 기능을 사용하시려면, 배포시 같이 제공되는 `/plugins/ibsheet-excel.js` 파일을 include 하셔야 합니다.**
+> **To use this feature, the `/plugins/ibsheet-excel.js` file provided with the distribution must be included.**
 >
-> `loadExcelBuffer(true)`를 호출하면 이후에 여러개 시트에서 [loadExcel](./load-excel)를 호출하더라도 실제로는 동작하지 않다가, 최종적으로 `loadExcelBuffer(false)`가 호출될 때 파일다이얼로그를 통해 선택한 엑셀파일의 내용을 각 시트에 로드할 수 있습니다.
+> If `loadExcelBuffer(true)` is called, subsequent [loadExcel](./load-excel) calls on multiple sheets will not actually execute. When `loadExcelBuffer(false)` is finally called, the contents of the Excel file selected through the file dialog can be loaded into each sheet.
 
 ### Syntax
 ```javascript
@@ -23,9 +23,9 @@ void loadExcelBuffer( isBuffer );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|isBuffer|`boolean`|필수|버퍼링 여부
-`0(false)`:버퍼링 사용 안함 (`default`)
-`1(true)`:버퍼링 사용|
+|isBuffer|`boolean`|Required|Whether to use buffering
+`0(false)`:Buffering not used (`default`)
+`1(true)`:Use buffering|
 
 
 ### Return Value
@@ -33,18 +33,18 @@ void loadExcelBuffer( isBuffer );
 
 ### Example
 ```javascript
-//버퍼링 시작
+//Start buffering
 sheet1.loadExcelBuffer(true);
 
-//정규직 워크시트의 내용을 sheet1에 업로드
-var param1 = {workSheetName:"정규직"};
+//Upload the "Regular Employee" worksheet's contents to sheet1
+var param1 = {workSheetName:"Regular Employee"};
 sheet1.loadExcel(param1);
 
-//비정규직 워크시트의 내용을 sheet1에 업로드
-var param2 = {workSheetName:"비정규직"};
+//Upload the "Contract Employee" worksheet's contents to sheet2
+var param2 = {workSheetName:"Contract Employee"};
 sheet2.loadExcel(param2);
 
-//버퍼링 종료 (파일다이얼로그 오픈)
+//End buffering (file dialog opens)
 sheet1.loadExcelBuffer(false);
 ```
 
@@ -55,4 +55,4 @@ sheet1.loadExcelBuffer(false);
 
 |product|version|desc|
 |---|---|---|
-|excel|0.0.3|기능 추가|
+|excel|0.0.3|Feature added|

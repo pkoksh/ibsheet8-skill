@@ -2,13 +2,12 @@
 KEY: rowMerge
 KIND: row-property
 PATH: props/row/row-merge
-ALIAS: 데이터, 영역, 헤더, 영역에서, 기준
-ALIAS_EN: row, merge, data, header
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/row-merge
+ALIAS_EN: whether, merge, row, executing, value, based, merging, data
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/row-merge
 ---
 # RowMerge ***(row)***
 
-> 데이터 영역/헤더 영역에서 값 기준 병합 실행([DataMerge](/docs/props/cfg/data-merge), [HeaderMerge](/docs/props/cfg/header-merge))시 해당 행에 대해서 `병합할지 여부`를 설정합니다.
+> Sets whether to `merge the row` when executing value-based merging in the data area/header area ([DataMerge](/docs/props/cfg/data-merge), [HeaderMerge](/docs/props/cfg/header-merge)).
 
 
 ### Type
@@ -17,17 +16,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/row-merge
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|해당 행을 병합 대상에 포함하지 않습니다.|
-|`1(true)`|해당 행을 병합 대상에 포함합니다. (`default`)|
+|`0(false)`|Do not include the row in merge targets.|
+|`1(true)`|Include the row in merge targets. (`default`)|
 
 ### Example
 ```javascript
-//특정행을 병합하지 않음.
+//Do not merge a specific row.
 var row = sheet.getFirstVisibleRow();
 row["RowMerge"] = false;
 sheet.setAutoMerge( {dataMerge: 1, headerMerge: 0, prevColumnMerge: 0} );
 
-// 첫번 째 헤더행을 병합하지 않음.
+// Do not merge the first header row.
 var header = sheet.getHeaderRows()[0];
 header["RowMerge"] = false;
 ```
@@ -42,4 +41,4 @@ header["RowMerge"] = false;
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

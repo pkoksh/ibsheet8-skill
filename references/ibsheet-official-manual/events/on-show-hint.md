@@ -2,14 +2,13 @@
 KEY: onShowHint
 KIND: event
 PATH: events/on-show-hint
-ALIAS: 힌트가, 화면에, 보여질, 호출되는, 이벤트입니다
-ALIAS_EN: on, show, hint
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-show-hint
+ALIAS_EN: event, called, hint, displayed, screen, onshowhint
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-show-hint
 ---
 # onShowHint ***(event)***
-> 힌트가 화면에 보여질 때 호출되는 이벤트입니다.
+> Event called when a hint is displayed on screen.
 
-> 힌트 값을 변경하고 싶은 경우, 사용자가 원하는 커스텀 `hint` 값(기본은 셀 값)을 리턴합니다.
+> If you want to change the hint value, return a custom `hint` value (default is the cell value).
 
 ### Syntax
 
@@ -26,14 +25,14 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|힌트가 보여질 시트 객체|
-|row|`object`|힌트가 보여질 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|힌트가 보여질 셀의 열이름|
-|hint|`object`|화면에 보여질 힌트 값|
-|reason|`number`|힌트가 보여지게된 원인
-`1`:셀 내용의 너비가 셀의 너비보다 클 때
-`2`:셀 내용의 높이가 셀의 높이보다 클 때
-`3`:셀 내용의 너비/높이가 셀의 너비/높이보다 클 때|
+|sheet|`object`|Sheet object where the hint will be displayed|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the hint will be displayed|
+|col|`string`|Column name of the cell where the hint will be displayed|
+|hint|`object`|Hint value to be displayed on screen|
+|reason|`number`|Reason why the hint is displayed
+`1`:When the cell content width is larger than the cell width
+`2`:When the cell content height is larger than the cell height
+`3`:When the cell content width/height is larger than the cell width/height|
 
 ### Return
 ***string***
@@ -42,7 +41,7 @@ or
 ```javascript
 options.Events = {
     onShowHint:function(evtParam){
-        // 열이름이 sTitle인 셀에서 힌트가 보여지는데 셀 내용이 5글자 이상이면 "첫 5글자..." 형태로 힌트를 보여줍니다.
+        // When a hint is shown for a cell with column name sTitle and the cell content is 5 characters or more, show the hint as "first 5 characters..." format.
         if(evtParam.col == "sTitle" && evtParam.hint.length >= 5) {
             return evtParam.hint.slice(0,5) + "...";
         }
@@ -53,7 +52,7 @@ options.Events = {
 ### Read More
 
 <!--!
-- `[비공개]` [HintValue col](/docs/props/col/hint-value) cell,col, row에 설정되는 값
+- `[Private]` [HintValue col](/docs/props/col/hint-value) Value set on cell, col, or row
 !-->
 - [showHint method](/docs/funcs/core/show-hint)
 
@@ -61,4 +60,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

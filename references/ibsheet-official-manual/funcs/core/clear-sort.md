@@ -2,12 +2,12 @@
 KEY: clearSort
 KIND: method
 PATH: funcs/core/clear-sort
-ALIAS: sheet.clearSort, clearSort(), 헤더, 소팅을, 취소합니다
-ALIAS_EN: clear, sort, header
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/clear-sort
+ALIAS: sheet.clearSort, clearSort()
+ALIAS_EN: cancels, header, sorting, clearsort, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/clear-sort
 ---
 # clearSort ***(method)***
-> 헤더 소팅을 취소합니다.
+> Cancels header sorting.
 
 ### Syntax
 ```javascript
@@ -19,7 +19,7 @@ void clearSort( );
 
 ### Example
 ```javascript
-//헤더 소팅된 내용을 원래 순서로 클리어
+//Clear header sorted content back to the original order
 sheet.clearSort();
 ```
 
@@ -30,4 +30,4 @@ sheet.clearSort();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

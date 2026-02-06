@@ -2,16 +2,15 @@
 KEY: spinnerStep
 KIND: cell-property
 PATH: props/cell/spinner-step
-ALIAS: 사용하는, 셀에서, 입력, 값의, 증감
-ALIAS_EN: spinner, step, input, import
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/spinner-step
+ALIAS_EN: increment, decrement, interval, input, values, cells, spinnervisible, spinner
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/spinner-step
 ---
 # SpinnerStep ***(cell)***
-> [SpinnerVisible](./spinner-visible)을 사용하는 셀에서 입력 값의 증감 간격을 설정할 수 있습니다.
+> Sets the increment/decrement interval for input values in cells using [SpinnerVisible](./spinner-visible).
 
 > 
 
-> 추가적으로 [SpinnerMax](./spinner-max), [SpinnerMax](./spinner-min)을 통해 input의 min, max를 설정 할 수 있습니다. 
+> Additionally, you can set the input min and max values through [SpinnerMax](./spinner-max) and [SpinnerMax](./spinner-min).
 
 ### Type
 `number`
@@ -19,7 +18,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/spinner-
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|편집 시 입력 값의 증감 간격|
+|`number`|Increment/decrement interval for input values during editing|
 
 
 ### Example
@@ -46,4 +45,4 @@ var data = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.42|기능 추가|
+|core|8.3.0.42|Feature added|

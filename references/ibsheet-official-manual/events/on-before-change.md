@@ -2,20 +2,19 @@
 KEY: onBeforeChange
 KIND: event
 PATH: events/on-before-change
-ALIAS: 사용자의, 입력에, 의해, 셀의, 값이
-ALIAS_EN: on, before, change
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-before-change
+ALIAS_EN: event, called, cell, value, modified, user, input, onbeforechange
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-before-change
 ---
 # onBeforeChange ***(event)***
-> 사용자의 입력에 의해 셀의 값이 수정되기 전에 호출되는 이벤트입니다.
+> Event called before a cell value is modified by user input.
 
-> `method`를 통한 수정에는 호출되지 않습니다.
+> Not called for modifications through `method`.
 
-> 기존의 값과 동일한 값으로 수정되었을 경우에도 발생합니다.
+> Also fires when the value is modified to the same value as the existing value.
 
-> `return Value`: 변경할 값을 리턴시 사용자 입력과 무관하게 변경된 내용이 셀에 셋팅 됩니다. 
+> `return Value`: When a value is returned, the returned content is set to the cell regardless of the user's input. 
 
-> `return null`: 사용자가 입력한 값이 적용됩니다.
+> `return null`: The value entered by the user is applied.
 
 ### Syntax
 
@@ -30,13 +29,13 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|값 변경이 일어난 시트 객체|
-|row |`object`|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|열이름|
-|val |`number` \| `string` \| `object`|변경하려는 값|
-|oldval|`number` \| `string` \| `object`|변경하기 이전값|
+|sheet|`object`|Sheet object where the value change occurred|
+|row |`object`|[Data row object](/docs/appx/row-object)|
+|col |`string`|Column name|
+|val |`number` \| `string` \| `object`|Value to be changed to|
+|oldval|`number` \| `string` \| `object`|Value before the change|
 <!--!
-|`[비공개]` error|`object`|[이벤트 error 객체](/docs/appx/event-error)| 
+|`[Private]` error|`object`|[Event error object](/docs/appx/event-error)|
 !-->
 
 ### Return Value
@@ -46,9 +45,9 @@ or
 ```javascript
 options.Events = {
     onBeforeChange:function(evtParam){
-        // 값 수정 전 이벤트 로직.
+        // Event logic before value modification.
         if(evtParam.col == "AMT" && evtParam.val > 2000){
-            alert("최대 설정 값은 2000까지 입니다.");
+            alert("The maximum allowed value is 2000.");
             return evtParam.oldval;
         } else {
             return null;
@@ -65,4 +64,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

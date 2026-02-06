@@ -1,0 +1,27 @@
+{
+  "name": "ibsheet8-skill",
+  "version": "1.0.0",
+  "description": "IBSheet 그리드 라이브러리를 활용한 웹 개발을 위한 Claude Code Skill입니다.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pkoksh/ibsheet8-skill.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pkoksh/ibsheet8-skill/issues"
+  },
+  "homepage": "https://github.com/pkoksh/ibsheet8-skill#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "playwright": "^1.58.1"
+  }
+}

@@ -2,31 +2,30 @@
 KEY: textFont
 KIND: column-property
 PATH: props/col/text-font
-ALIAS: 특정, 열의, 설정합니다
-ALIAS_EN: text, font
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/text-font
+ALIAS_EN: font, family, specific, column, textfont, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/text-font
 ---
 # TextFont ***(col)***
 
-> 특정 열의 `font-family`를 설정합니다.
+> Sets the `font-family` for a specific column.
 
-> 여러개 폰트를 지정하거나 폰트에 띄어씌기가 들어가는 경우에는 `single(')/double quotation(")`으로 지정합니다.
+> When specifying multiple fonts or fonts with spaces, use `single(')/double quotation(")` to specify them.
 ### Type
 `string`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|글자체|
+|`string`|Font family|
 
 ### Example
 ```javascript
-//특정열의 글자체를 수정합니다.
+// Change the font family of a specific column.
 options.Cols = [
     ...
     {
         TextFont: "Dotum",
-        Header: "부서",
+        Header: "Department",
         Type: "Text",
         Name: "Dept"
     },
@@ -44,4 +43,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

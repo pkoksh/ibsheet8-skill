@@ -2,13 +2,13 @@
 KEY: getEditText
 KIND: method
 PATH: funcs/core/get-edit-text
-ALIAS: sheet.getEditText, getEditText(), 편집, 중인, 데이터를, 반환합니다
-ALIAS_EN: get, edit, text, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-edit-text
+ALIAS: sheet.getEditText, getEditText()
+ALIAS_EN: returns, data, currently, edited, getedittext, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-edit-text
 ---
 # getEditText ***(method)***
 
-> 편집 중인 데이터를 반환합니다.
+> Returns the data currently being edited.
 
 ### Syntax
 ```javascript
@@ -16,7 +16,7 @@ string getEditText();
 ```
 
 ### Return Value
-***string*** : 편집 중인 데이터
+***string*** : data currently being edited
 
 ### Example
 ```javascript
@@ -30,4 +30,4 @@ sheet.getEditText();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

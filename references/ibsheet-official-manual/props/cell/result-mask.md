@@ -2,19 +2,18 @@
 KEY: resultMask
 KIND: cell-property
 PATH: props/cell/result-mask
-ALIAS: 편집, 종료시, 입력된, 글자를, 검사할
-ALIAS_EN: result, mask, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-mask
+ALIAS_EN: javascript, regular, expression, validate, entered, characters, cell, editing
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/result-mask
 ---
 # ResultMask ***(cell)***
 
-> 셀 편집 종료시 입력된 글자를 검사할 자바스크립트 정규식을 설정합니다.
+> Sets a JavaScript regular expression to validate the entered characters when cell editing ends.
 
-> 정규식 검사에 대한 로직은 [EditMask](/docs/props/cell/edit-mask)와 동일합니다.
+> The validation logic for the regular expression is the same as [EditMask](/docs/props/cell/edit-mask).
 >
-> 정규식에 맞지 않은 글자가 입력되었을 시에는 [ResultMessage](/docs/props/cell/result-message)속성으로 설정한 메세지가 화면에 보여집니다.
+> When characters that do not match the regular expression are entered, the message set via the [ResultMessage](/docs/props/cell/result-message) property is displayed on screen.
 
-> [onResultMask](/docs/events/on-result-mask)이벤트의 리턴값을 통해 잘못된 값이 입력되었을때 후속 처리에 대한 부분을 설정하실 수 있습니다.
+> You can configure the follow-up handling for invalid input through the return value of the [onResultMask](/docs/events/on-result-mask) event.
 
 
 ### Type
@@ -23,16 +22,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|자바스크립트 정규식 문자|
+|`string`|JavaScript regular expression string|
 
 ### Example
 ```javascript
-//조회 데이터 내에서 속성 적용  (열이름: CLS)
+// Apply property within loaded data (column name: CLS)
 {
     data:[
-        //이메일 주소만 입력 가능
+        // Only email addresses can be entered
         {... ,CLSResultMask:"^[\\w\\.\\+%-]+@[A-Za-z0-9\\.-]+\\.[A-Za-z]{2,6}$",
-          CLSResultText:"이메일 주소를 확인해 주세요.", ...}
+          CLSResultText:"Please check the email address.", ...}
     ]
 }
 ```
@@ -46,4 +45,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-m
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

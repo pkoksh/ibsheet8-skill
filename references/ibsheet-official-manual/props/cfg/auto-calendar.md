@@ -2,12 +2,11 @@
 KEY: autoCalendar
 KIND: config-property
 PATH: props/cfg/auto-calendar
-ALIAS: 모든, 셀에, 대해, 사용자가, 편집모드로
-ALIAS_EN: auto, calendar
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/auto-calendar
+ALIAS_EN: whether, show, calendar, user, enters, edit, mode, cells
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/auto-calendar
 ---
 # AutoCalendar ***(cfg)***
-> 모든 [Type](/docs/appx/type)이 `Date`인 셀에 대해 사용자가 편집모드로 들어갈때 달력을 띄울지 여부를 설정합니다.
+> Sets whether to show a calendar when the user enters edit mode for all cells with [Type](/docs/appx/type) of `Date`.
 
 
 ### Type
@@ -16,13 +15,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/auto-cale
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|기능 사용 안함 (`default`)|
-|`1(true)`|편집시 달력을 띄움|
+|`0(false)`|Feature disabled (`default`)|
+|`1(true)`|Show calendar when editing|
 
 
 ### Example
 ```javascript
-//모든 Date 타입 열에 대해서 편집시 자동으로 달력을 오픈한다.
+// Automatically open the calendar when editing all Date type columns.
 options.Cfg = {
     AutoCalendar: true
 };
@@ -35,4 +34,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: preserveNull
 KIND: config-property
 PATH: props/cfg/preserve-null
-ALIAS: 사용자가, 데이터를, 기입한, 경우, 시트
-ALIAS_EN: preserve, null, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/preserve-null
+ALIAS_EN: user, enters, data, null, value, bound, sheet, object
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/preserve-null
 ---
 # PreserveNull ***(cfg)***
 
-> 사용자가 데이터를 null로 기입한 경우 시트 객체에 null 값 그대로 바인딩하고, `getSaveJson`으로 데이터 추출시 데이터를 ""이 아닌 null 값 그대로 추출합니다. 
+> When the user enters data as null, the null value is bound as-is to the sheet object, and when extracting data with `getSaveJson`, the data is extracted as null instead of "". 
 
 
 ### Type
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/preserve-
 ### Options
 |Value|Description|
 |-----|-----|
-| `0` | 사용자가 데이터를 null로 기입해도 `getSaveJson`으로 데이터 추출할 때는 데이터가 ""으로 추출됨 (`default`)|
-| `1` | 사용자가 데이터를 null로 기입한 경우 `getSaveJson`으로 데이터 추출할 때 데이터가 null 값 그대로 추출됨 |
+| `0` | Even if the user enters data as null, when extracting data with `getSaveJson`, the data is extracted as "" (`default`)|
+| `1` | When the user enters data as null, when extracting data with `getSaveJson`, the data is extracted as the null value as-is |
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-        PreserveNull: 1, // 사용자가 데이터를 null로 기입한 경우 getSaveJson으로 데이터를 추출할 때 데이터가 null 값 그대로 추출됨
+        PreserveNull: 1, // When the user enters data as null, extracting data with getSaveJson preserves the null value as-is
         ...
     }
 };
@@ -36,4 +35,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.34|기능 추가|
+|core|8.3.0.34|Feature added|

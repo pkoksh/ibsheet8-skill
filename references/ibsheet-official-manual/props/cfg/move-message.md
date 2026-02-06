@@ -2,15 +2,14 @@
 KEY: moveMessage
 KIND: config-property
 PATH: props/cfg/move-message
-ALIAS: 시트, 메시지, 창의, 드래그, 여부를
-ALIAS_EN: move, message, sheet, grid, alert
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/move-message
+ALIAS_EN: whether, sheet, message, window, dragged, movemessage, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/move-message
 ---
 # MoveMessage ***(cfg)***
 
-> 시트 메시지 창의 드래그 여부를 설정합니다.  
+> Sets whether the sheet message window can be dragged.  
 
-> `1(true)`로 설정시 사용자가 메세지 장을 드래그를 통해 옮길 수 있습니다.
+> When set to `1(true)`, the user can move the message window by dragging.
 
 
 
@@ -20,14 +19,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/move-mess
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|메세지 창의 드래그 불가능 (`default`)|
-|`1(true)`|메세지 창의 드래그 가능|
+|`0(false)`|Message window cannot be dragged (`default`)|
+|`1(true)`|Message window can be dragged|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-  MoveMessage: 0,    // 메세지 창 드래깅 가능
+  MoveMessage: 0,    // Enable message window dragging
   ...
 };
 ```
@@ -40,4 +39,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

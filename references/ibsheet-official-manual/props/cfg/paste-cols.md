@@ -2,19 +2,18 @@
 KEY: pasteCols
 KIND: config-property
 PATH: props/cfg/paste-cols
-ALIAS: 클립보드의, 내용을, 시트에, 붙여넣을, 어떤
-ALIAS_EN: paste, cols
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/paste-cols
+ALIAS_EN: columns, data, pasted, pasting, clipboard, contents, sheet, via
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/paste-cols
 ---
 # PasteCols ***(cfg)***
 
-> `ctrl+v` 를 통해 클립보드의 내용을 시트에 붙여넣을 때, 어떤 열을 기준으로 데이터가 붙여넣어질지 설정합니다.
+> Sets which columns the data will be pasted into when pasting clipboard contents to the sheet via `ctrl+v`.
 
-> 맨 앞에 열 부터 붙여넣을 지, 포커스가 있는 위치 우측으로 붙여넣을 지 등을 설정할 수 있습니다.
+> You can set whether to paste from the leftmost column, or paste to the right of the focused position, etc.
 
-> [(col)CanCopyPaste](/docs/props/col/can-copy-paste)속성에 따라 붙여넣기 가능/불가능 여부가 결정됩니다.
+> Whether pasting is possible or not is determined by the [(col)CanCopyPaste](/docs/props/col/can-copy-paste) property.
 
-> 시트 내에서 드래그를 통한 선택은 [(cfg)SelectingCells](./selecting-cells)를 통해 설정가능합니다.
+> Selection through dragging within the sheet can be configured via [(cfg)SelectingCells](./selecting-cells).
 
 ### Type
 `number`
@@ -22,17 +21,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/paste-col
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|포커스가 된 열에만 붙여넣기가 됨.(포커스 된 셀을 기준으로 아래로 덮어씌움)|
-|`1`|포커스 위치와 무관하게 맨 왼쪽 열을 기준으로 보여지는 열에 붙여넣기가 됨.( `SelectingCells:0` 인 경우에 해당 값이 `default`)|
-|`2`|1번과 유사하게 왼쪽부터 붙여넣기가 되는데 히든된 열까지 포함해서 붙여넣기 함.|
-|`3`|포커스된 셀을 기준으로 우측, 아래로 붙여넣기 함.(`defaut`)|
+|`0`|Paste only to the focused column. (Overwrites downward from the focused cell)|
+|`1`|Paste to visible columns starting from the leftmost column regardless of focus position. (This value is `default` when `SelectingCells:0`)|
+|`2`|Similar to option 1, pastes from the left but includes hidden columns in the paste.|
+|`3`|Paste to the right and below from the focused cell. (`default`)|
 
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-      PasteCols: 1 // 맨 왼쪽부터 보여지는 열에 붙여넣기 한다.
+      PasteCols: 1 // Paste to visible columns starting from the leftmost.
     }
 };
 ```
@@ -45,4 +44,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

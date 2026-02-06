@@ -2,16 +2,15 @@
 KEY: spinnerMin
 KIND: column-property
 PATH: props/col/spinner-min
-ALIAS: 사용하는, 열에서, 화살표를, 통한, 입력
-ALIAS_EN: spinner, min, input, import
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/spinner-min
+ALIAS_EN: minimum, value, entering, via, arrows, columns, spinnervisible, spinner
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/spinner-min
 ---
 # SpinnerMin ***(col)***
-> [SpinnerVisible](./spinner-visible)을 사용하는 열에서 화살표를 통한 입력 시 최솟값을 설정할 수 있습니다.
+> Sets the minimum value when entering via arrows in columns that use [SpinnerVisible](./spinner-visible).
 
 > 
 
-> 추가적으로 [SpinnerStep](./spinner-step), [SpinnerMax](./spinner-Max)을 통해 input의 step, max를 설정 할 수 있습니다. 
+> Additionally, you can set the input step and max using [SpinnerStep](./spinner-step) and [SpinnerMax](./spinner-Max).
 
 ### Type
 `number`
@@ -19,7 +18,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/spinner-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|편집 시 입력 값의 최솟값|
+|`number`|Minimum value for input during editing|
 
 
 ### Example
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.88|기능 추가|
+|core|8.1.0.88|Feature added|

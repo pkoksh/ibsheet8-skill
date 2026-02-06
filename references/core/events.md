@@ -1,9 +1,13 @@
 # 이벤트 레퍼런스
 
 ## 이벤트 공통 주의사항
-1. ibsheet8의 모든 이벤트의 파라미터는 object 형태로 1개 입니다.
-2. 이벤트 마다 파라미터 object에 들어있는 값은 다르지만 eventName과 sheet객체는 돌일하게 들어 있습니다.
-3. 일부 이벤트에는 return 값을 통해 이벤트 진행을 중단할 수 있는데, 중단이 필요한 경우에는 1(또는 true)를 리턴해야 중단됩니다.
+1. ibsheet8의 모든 이벤트는 object 형태의 파라미터 1개를 갖고 있습니다.
+2. 일부 이벤트에는 return 값을 통해 이벤트 진행을 중단할 수 있는데, 중단이 필요한 경우에는 1(또는 true)를 리턴해야 중단됩니다.
+3. [전체 이벤트 리스트](../ibsheet-official-manual/events/index.md)
+4. IBSheet8의 이벤트 이름은 **"Start↔Finish"** 또는 **"Before↔After"** 쌍을 사용합니다. **"Start↔End" 패턴은 사용하지 않습니다.**
+   - `onSearchStart` ↔ `onSearchFinish` (O) — `onSearchEnd`는 존재하지 않음 (X)
+   - `onRenderStart` ↔ `onRenderFinish` (O)
+   - `onBeforeSort` ↔ `onAfterSort` (O)
 
 ## 이벤트 등록
 
@@ -35,17 +39,7 @@ sheet.bind("onClick", function(evt) { });
 
 ```javascript
 onRenderFirstFinish: function(evt) {
-  this.loadSearchData({ url: "/api/data/list" });
-}
-```
-
-### [onSearchFinish](../ibsheet-official-manual/events/on-search-finish.md)
-
-데이터 로드 완료. (xlsx import 후에도 발생)
-
-```javascript
-onSearchFinish: function(evt) {
-  console.log(`${evt.sheet.getDataRows().length}건 로드됨`);
+  evt.sheet.loadSearchData({ url: "/api/data/list" });
 }
 ```
 
@@ -56,8 +50,8 @@ onSearchFinish: function(evt) {
 ### [onClick](../ibsheet-official-manual/events/on-click.md)
 
 - 마우스로 클릭시 발생. (포커스 이동 전에 발생)
-- (Col)Type:Button 을 사용시에는 onClick 에 핸들러를 연결할 것.
-- 클릭한 셀의 값을 얻고자 할때는 `evt.row[evt.col]`로 확인 가능.
+- 클릭한 셀의 값을 얻고자 할때는 `evt.row[evt.col]`로 확인 가능
+- 가급적 onClick 이벤트 보다는 onAfterClick을 사용할 것
 
 ```javascript
 onClick: function(evt) {
@@ -88,7 +82,7 @@ onClick, onAfterClick 이벤트 파라미터 (두 이벤트 동일)
 ### [onIconClick](../ibsheet-official-manual/events/on-icon-click.md)
 
 - 셀 텍스트 좌측에 [Icon](../ibsheet-official-manual/props/col/icon.md)를 클릭시 onIconClick 이벤트 발생
-- 두 이벤트 모두 CanEdit나 Disable 여부와 무관하게 발생함.
+- 두 이벤트 모두 CanEdit나 Disable 여부와 무관하게 발생함
 
 ```javascript
 onIconClick: function(evt) {
@@ -138,6 +132,8 @@ onEndEdit: function(evt) {
 ### [onBeforeChange](../ibsheet-official-manual/events/on-before-change.md)
 
 - 값 변경 전 이벤트. **return '값' 으로 저장될 데이터 변경 가능.**
+- api(setValue)를 통한 변경에는 호출되지 않음
+- 기존과 동일한 값으로 수정했을 때에도 호출됨.
 
 ```javascript
 onBeforeChange: function(evt) {
@@ -161,92 +157,113 @@ onBeforeChange: function(evt) {
 
 ### [onAfterChange](../ibsheet-official-manual/events/on-after-change.md)
 
-값 변경 후. 연관 필드 계산에 사용.
+- 값 변경 후. 연관 필드 계산에 사용.
+- api(setValue)를 통한 변경에는 호출되지 않음
+- 기존과 동일한 값으로 수정했을 때에는 호출되지 않음
 
 ```javascript
 onAfterChange: function(evt) {
   if (evt.col === "quantity" || evt.col === "price") {
-    const total = this.getValue(evt.row, "quantity") * this.getValue(evt.row, "price");
-    this.setValue(evt.row, "total", total);
+    const total = evt.sheet.getValue(evt.row, "quantity") * evt.sheet.getValue(evt.row, "price");
+    evt.sheet.setValue(evt.row, "total", total);
   }
 }
 ```
 
-### onValidate
+### [onBeforePaste](../ibsheet-official-manual/events/on-before-paste.md)
+
+- ctrl+v를 통해 붙여넣기 전에 발생
+- 파라미터 값을 수정하면 수정된 값이 붙여넣어짐
+
 
 ```javascript
-onValidate: function(evt) {
-  if (evt.col === "email" && evt.value) {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(evt.value)) {
-      return { valid: false, message: "이메일 형식 오류" };
+onBeforePaste:function(evtParam){
+  var pasteArr = evtParam.pastedtext;
+    for(var i = 0; i < pasteArr.length; i++){
+      //붙여넣어질 내용에 주민등록번호 패턴[######-#######]이 있으면 뒤에 6자리를 '*'로 변경
+      pasteArr[i] = pasteArr[i].replace(/([0-9]{6}\-[0-9]{1})[0-9]{6}/g, "$1"+"******");
+      // 붙여 넣어질 내용 중에 SN- 로 시작하는 단어가 있는 경우 붙여넣기 중단.
+      if(pasteArr[i].startsWith("SN-")) return true;
     }
-  }
-  return { valid: true };
+    
 }
 ```
-
+|속성|유형|설명|
+|---|---|---|
+|cols|array[string]|붙여넣기가 이루어질 colName 배열(수정가능)|
+|pastedtext|array[string]|각 행에 붙여넣어질 내용(수정가능)|
 ---
 
 ## 행 조작 이벤트
 
-### onBeforeRowAdd
+### [onAddRow](../ibsheet-official-manual/funcs/core/add-row.md)
+
+- addRow 함수를 통해 새로운 행이 추가되어 렌더링 되기 전에 호출
+- 이벤트 내에서 행에 초기값을 설정할 수 있음.
 
 ```javascript
-onBeforeRowAdd: function(evt) {
-  if (this.getRowCount() >= 100) {
-    alert("최대 100행");
-    return false;
-  }
+onAddRow: function(evt) {
+  // 위 행의 C-CODE 값과 동일한 값을 초기값으로 설정
+  evt.row["C-CODE"] = evt.sheet.getPrevRow(evt.row)["C-CODE"];
 }
 ```
+### [onBeforeRowDelete](../ibsheet-official-manual/events/on-before-row-delete.md)
 
-### onAfterRowAdd
-
-```javascript
-onAfterRowAdd: function(evt) {
-  this.setValue(evt.row, "createDate", new Date().toISOString().slice(0, 10));
-  this.setFocus(evt.row, "name");
-}
-```
-
-### onBeforeRowDelete
+deleteRow(또는 deleteRows)를 이용해서 행의 상태를 삭제(Deleted:1)로 변경하거나 상태가 삭제인 행을 삭제 취소할 때 호출
 
 ```javascript
 onBeforeRowDelete: function(evt) {
-  if (this.getValue(evt.row, "status") === "승인") {
-    alert("승인된 항목은 삭제 불가");
-    return false;
+  if(evt.type === 0){
+    if (evt.sheet.getValue(evt.row, "status") === "승인") {
+      alert("승인된 항목은 삭제 불가");
+      return true;
+    }
+    return !confirm("삭제하시겠습니까?");
   }
-  return confirm("삭제하시겠습니까?");
 }
 ```
-
-### onAfterRowDelete
-
-행 삭제 후.
+| 속성 | 설명 |
+|------|------|
+| evt.row | 삭제 행 객체 |
+| evt.type | 삭제 여부 (0:삭제,1:삭제취소) |
+| evt.rows | deleteRows 함수로 여러행을 삭제처리시 행 객체 배열 |
 
 ---
 
 ## 정렬/필터 이벤트
 
-### onBeforeSort
+### [onBeforeSort](../ibsheet-official-manual/events/on-before-sort.md)
+사용자가 헤더셀을 클릭하여 소팅시 호출되는 이벤트 
+-1 리턴시 소팅 취소, 1 리턴시 헤더 소팅 아이콘만 변경되고 실제 소팅은 이루어지지 않음.
 
 ```javascript
 onBeforeSort: function(evt) {
-  if (this.getSaveJson({ check: 1 }).data.length > 0) {
+  if (evt.sheet.hasChangedData()) {
     alert("변경 데이터를 먼저 저장하세요");
-    return false;
+    return -1;
   }
 }
 ```
+| 속성 | 설명 |
+|------|------|
+| evt.col | 소팅 열 이름 |
+| evt.sort | 여러개 열에 대한 소팅 내역 (ex: "colName4, -colName2, colName6")<br>(열이름과 열이름 사이에 ","문자로 구분 된 문자열, 내림차순(descending) 소팅인 경우 열이름 앞에 "-" 가 붙음) |
 
-### onAfterSort / onBeforeFilter / onAfterFilter
+### [onAfterSort](../ibsheet-official-manual/events/on-after-sort.md)
+소팅이 이루어진 후 호출되는 이벤트
+
+### [onBeforeFilter](../ibsheet-official-manual/events/on-before-filter.md)
+필터링 전 호출. 1(true) 리턴시 필터링 취소.
+
+### [onAfterFilter](../ibsheet-official-manual/events/on-after-filter.md)
+필터링 완료 후 호출되는 이벤트
 
 ---
 
 ## 키보드 이벤트
 
-### onKeyDown
+### [onKeyDown](../ibsheet-official-manual/events/on-key-down.md)
+포커스된 시트에서 키를 눌렀을 때 호출. 1(true) 리턴시 키의 기본 동작 무시.
 
 ```javascript
 onKeyDown: function(evt) {
@@ -254,103 +271,124 @@ onKeyDown: function(evt) {
   if (evt.ctrlKey && evt.keyCode === 83) {
     evt.event.preventDefault();
     saveData();
-    return false;
   }
   // Ctrl+N: 행 추가
   if (evt.ctrlKey && evt.keyCode === 78) {
-    this.addRow();
-    return false;
+    evt.sheet.addRow();
   }
 }
 ```
-
-| 키 | 코드 |
-|-----|------|
-| Enter | 13 |
-| Escape | 27 |
-| Tab | 9 |
-| Delete | 46 |
-| S | 83 |
-| N | 78 |
 
 ---
 
 ## 서버 통신 이벤트
 
-### onBeforeDataLoad
+### 데이터 조회 이벤트 흐름
+
+`onSearchStart → onReceiveData → onBeforeDataLoad → onDataLoad → onSearchFinish`
+
+| 이벤트 | 시점 | 주요 용도 |
+|--------|------|-----------|
+| onSearchStart | 조회 시작 전 | 로딩 표시, 조회 취소 (return true) |
+| onReceiveData | 서버 응답 수신 직후 | 원본 데이터 가공 |
+| onBeforeDataLoad | 데이터 파싱 후, 시트 로드 전 | 로드될 데이터 수정 (evt.data) |
+| onDataLoad | 시트에 데이터 로드 완료 | 행 객체 접근, makeSubTotal 호출 |
+| onSearchFinish | 화면 렌더링 완료 | 로딩 제거, 건수 표시 |
+
+### [onSearchFinish](../ibsheet-official-manual/events/on-search-finish.md)
+
+데이터 로드 완료. (xlsx import 후에도 발생)
+
+```javascript
+onSearchFinish: function(evt) {
+  console.log(`${evt.sheet.getDataRows().length}건 로드됨`);
+}
+```
+
+### [onBeforeDataLoad](../ibsheet-official-manual/events/on-before-data-load.md)
+loadSearchData, doSearch, doSarchPaging 함수를 통해 데이터가 시트에 로드되기 전 호출. evt.data 파라미터로 로딩 될 데이터 변경 가능.
 
 ```javascript
 onBeforeDataLoad: function(evt) {
   showLoading();
-  evt.param.userId = currentUserId;
+  //첫번째 행의 배경색을 파란색으로 변경
+  evt.data[0]["Color"] = "#0000FF";
 }
 ```
 
-### onBeforeDataSave
+### [onBeforeSave](../ibsheet-official-manual/events/on-before-save.md)
+doSave 호출시 데이터 전송 전 호출. 1(true) 리턴시 저장 중단.
 
 ```javascript
-onBeforeDataSave: function(evt) {
-  if (evt.data.length === 0) {
-    alert("변경 데이터 없음");
-    return false;
+onBeforeSave: function(evt) {
+  // 서버에 보낼 데이터가 금지어1 또는 금지어2를 포함된 경우 저장 중단
+  if (source.params.indexOf("금지어1") > -1 || source.params.indexOf("금지어2") > -1) {
+      return true;
   }
-  return confirm(`${evt.data.length}건 저장?`);
+  
 }
 ```
+|속성|설명|
+|---|---|
+|evt.source.params|서버에 전송할 데이터. querystring 문자열 (doSave 사용시 queryMode: 1, 2 에서 사용가능)|
+|evt.source.data|서버에 전송할 데이터. json 문자열 (doSave 사용시 queryMode: 0 에서 사용가능)|
 
-### onAfterDataSave
+### [onAfterSave](../ibsheet-official-manual/events/on-after-save.md)
+서버 저장 응답 수신 후 호출. evt.result로 성공/실패 판별.
 
 ```javascript
-onAfterDataSave: function(evt) {
+onAfterSave: function(evt) {
   hideLoading();
-  if (evt.response.success) {
-    this.acceptChanges();
+  if (evt.result< 0 ) {
+    evt.sheet.acceptChangedData();
     alert("저장 완료");
   }
 }
 ```
-
-### onDataError
-
-```javascript
-onDataError: function(evt) {
-  hideLoading();
-  if (evt.status === 401) {
-    location.href = "/login";
-  } else {
-    alert("서버 오류");
-  }
-}
-```
-
+|속성|설명|
+|---|---|
+|result| 처리결과 (0 이상: 저장 성공, 0 미만: 저장 실패)|
+|message|서버에서 받은 메세지|
+|response|서버 응답 객체|
 ---
 
 ## 체크박스 이벤트
 
-### onCheck
+### [onBeforeCheckAll](../ibsheet-official-manual/events/on-before-check-all.md)
+- 사용자가 헤더 체크를 클릭하거나 setAllCheck 함수를 통해 열전체 체크/언체크가 발생할 때 호출.
+- 다른 이벤트와 달리 이 이벤트만 return false일때 중단됨.
 
 ```javascript
-onCheck: function(evt) {
-  console.log(`Checked: ${evt.checked}`);
+onBeforeCheckAll: function(evt) {
+  if(document.querySelector("#code").value == "F") {
+    return false;  //체크 중단
+  }
 }
 ```
 
-### onCheckAll
-
-전체 선택/해제.
+### [onCheckAllFinish](../ibsheet-official-manual/events/on-check-all-finish.md)
+전체 선택/해제 완료 시 호출.
 
 ---
 
 ## 포커스/스크롤 이벤트
 
-### onBeforeFocus / onAfterFocus
+### [onBeforeFocus](../ibsheet-official-manual/events/on-before-focus.md)
+셀 포커스 이동 전 호출. 1(true) 리턴시 포커스 이동 방지.
 
-### onScroll
+### [onFocus](../ibsheet-official-manual/events/on-focus.md)
+셀 포커스 완료 후 호출.
+
+### [onScroll](../ibsheet-official-manual/events/on-scroll.md)
+시트 스크롤(가로/세로) 이동 후 호출. 
+
+### [ononVScrollEndPoint](../ibsheet-official-manual/events/on-v-scroll-end-point.md)
+세로 스크롤바가 최상단이나 하단에 도착할때 발생
 
 ```javascript
-onScroll: function(evt) {
-  // 무한 스크롤
-  if (evt.scrollTop + evt.clientHeight >= evt.scrollHeight - 50) {
+onVScrollEndPoint: function(evt) {
+  // 기존 데이터 아래에 append
+  if (evt.vpos > 0) {
     loadMoreData();
   }
 }

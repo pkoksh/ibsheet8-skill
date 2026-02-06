@@ -2,14 +2,16 @@
 KEY: recordHColTitle
 KIND: column-property
 PATH: props/col/record-h-col-title
-ALIAS: 멀티레코드, 기능을, 사용하는, 시트에서, 설정
-ALIAS_EN: record, col, title, config, setting, option
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/record-h-col-title
+ALIAS_EN: title, header, column, recordhcolspan, docs, props, col, record
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/record-h-col-title
 ---
 # RecordHColTitle ***(col)***
-> 멀티레코드([MultiRecord](/docs/props/cfg/multi-record)) 기능을 사용하는 시트에서 [RecordHColSpan](/docs/props/col/record-h-col-span)이 설정 되어 있는 헤더의 열의 제목을 설정합니다.
+> Sets the title of the header column where [RecordHColSpan](/docs/props/col/record-h-col-span) is set in a sheet using the multi-record ([MultiRecord](/docs/props/cfg/multi-record)) feature.
 
-> **데이터와 상관없이 동작하며 서버로 전송되지 않습니다.**
+> **Operates independently of data and is not sent to the server.**
+
+> **<mark>Note</mark> : When [MultiRecord](/docs/props/cfg/multi-record) is set to `2`, this property cannot be used.**
+
 
 
 
@@ -19,44 +21,44 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/record-h-
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|[RecordHColSpan](/docs/props/col/record-h-col-span)이 설정 되어 있는 헤더의 열의 제목|
+|`string`|Title of the header column where [RecordHColSpan](/docs/props/col/record-h-col-span) is set|
 
 
 
 ### Example
 ```javascript
 options.Cfg = {
-   MultiRecord: true  // 멀티레코드 전용 시트로 설정
+   MultiRecord: 1 // Set as multi-record dedicated sheet
    ...
 };
 
-// 멀티레코드 기능 사용시 열설정(1차원 배열 -> 2차원 배열)
+// Column settings when using multi-record feature (1D array -> 2D array)
 Cols: [
-   //첫번째 단위데이터행(DataRow)
+   // First data row (DataRow)
    [
-      { "Header": "본사", Name: "HeadOffice", "Width": 60, RecordRowSpan: 3, RecordHColSpan: 5, RecordHColTitle: "기관" },
-      { "Header": "연구소", Name: "Laboratory", "Width": 60, RecordRowSpan: 3 },
-      { "Header": "지사1", Name: "BranchOffice1", "Width": 60, RecordRowSpan: 3 },
-      { "Header": "지사2", Name: "BranchOffice2", "Width": 60, RecordRowSpan: 3 },
-      { "Header": "기타", Name: "sEtc", "Width": 60, RecordRowSpan: 3 }
+      { "Header": "Head Office", Name: "HeadOffice", "Width": 60, RecordRowSpan: 3, RecordHColSpan: 5, RecordHColTitle: "Organization" },
+      { "Header": "Laboratory", Name: "Laboratory", "Width": 60, RecordRowSpan: 3 },
+      { "Header": "Branch 1", Name: "BranchOffice1", "Width": 60, RecordRowSpan: 3 },
+      { "Header": "Branch 2", Name: "BranchOffice2", "Width": 60, RecordRowSpan: 3 },
+      { "Header": "Other", Name: "sEtc", "Width": 60, RecordRowSpan: 3 }
    ],
 
-   //두번째 단위데이터행(DataRow)
+   // Second data row (DataRow)
    [
-      { "Header": "본사", RecordHColSpan: 2, RecordHColTitle: "계열1" },
-      { "Header": "연구소" },
-      { "Header": "지사1", RecordHColSpan: 2, RecordHColTitle: "계열2" },
-      { "Header": "지사2" },
-      { "Header": "기타" }
+      { "Header": "Head Office", RecordHColSpan: 2, RecordHColTitle: "Affiliate 1" },
+      { "Header": "Laboratory" },
+      { "Header": "Branch 1", RecordHColSpan: 2, RecordHColTitle: "Affiliate 2" },
+      { "Header": "Branch 2" },
+      { "Header": "Other" }
    ],
 
-   //세번째 단위데이터행(DataRow)
+   // Third data row (DataRow)
    [
-      { "Header": "본사" },
-      { "Header": "연구소" },
-      { "Header": "지사1" },
-      { "Header": "지사2" },
-      { "Header": "기타" }
+      { "Header": "Head Office" },
+      { "Header": "Laboratory" },
+      { "Header": "Branch 1" },
+      { "Header": "Branch 2" },
+      { "Header": "Other" }
    ]
 ];
 ```
@@ -73,4 +75,4 @@ Cols: [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

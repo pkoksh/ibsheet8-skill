@@ -2,22 +2,21 @@
 KEY: section
 KIND: column-property
 PATH: props/col/section
-ALIAS: 열의, 섹션을, 확인합니다
-ALIAS_EN: section
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/section
+ALIAS_EN: checks, section, column, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/section
 ---
 # Section ***(col)***
 
-> 열의 섹션을 확인합니다.
+> Checks the section of a column.
 
-> 시트의 열 생성시, `LeftCols` 배열에 추가한 열은 틀고정을 기준으로 좌측 섹션으로 들어가고, `Cols` 배열에 넣은 열은 가운데, `RightCols` 섹션에 넣은 열은 우측 섹션으로 추가됩니다.
+> When creating sheet columns, columns added to the `LeftCols` array go into the left section based on frozen panes, columns added to the `Cols` array go into the center, and columns added to the `RightCols` section go into the right section.
 
-> 이 속성은 특정 열이 어느 섹션에 위치하고 있는지를 확인하는 용도로 사용됩니다.(`Readonly`)
+> This property is used to check which section a specific column is located in. (`Readonly`)
 
 
 ###
-![섹션](/assets/imgs/section.png "섹션")
-<!-- IMAGE: 스크린샷/예시 이미지 - 섹션 -->
+![Section](/assets/imgs/section.png "Section")
+<!-- IMAGE: Screenshot/Example Image - Section -->
 
 
 ### Type
@@ -26,14 +25,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/section
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|좌측 섹션|
-|`1`|가운데 섹션|
-|`2`|우측 섹션|
+|`0`|Left section|
+|`1`|Center section|
+|`2`|Right section|
 
 
 ### Example
 ```javascript
-//열의 섹션을 확인
+// Check the column's section
 var section = sheet.getAttribute({col: "RENTFEE", attr: "Section"})
 ```
 
@@ -45,4 +44,4 @@ var section = sheet.getAttribute({col: "RENTFEE", attr: "Section"})
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

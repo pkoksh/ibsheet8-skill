@@ -2,13 +2,12 @@
 KEY: showDialog
 KIND: static-member
 PATH: static/show-dialog
-ALIAS: 시트가, 제공하는, 다이얼로그, 레이어팝업, 생성합니다
-ALIAS_EN: show, dialog, modal, popup
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/show-dialog
+ALIAS_EN: creates, dialog, layer, popup, provided, sheet, showdialog, static
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/show-dialog
 ---
 # showDialog ***(static)***
 
-> 시트가 제공하는 다이얼로그(레이어팝업)을 생성합니다.
+> Creates a dialog (layer popup) provided by the sheet.
 
 ### Syntax
 ```javascript
@@ -18,18 +17,18 @@ object IBSheet.showDialog(dialog, pos);
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|dialog|`object`|필수|`dialog` 에 대한 초기화 설정([Dialog appendix참고](/docs/appx/dialog))|
-|pos|`object`|선택|메뉴가 표시될 위치([Position appendix참고](/docs/appx/position))|
+|dialog|`object`|Required|Initialization settings for the `dialog` (Refer to [Dialog appendix](/docs/appx/dialog))|
+|pos|`object`|Optional|Position where the menu will be displayed (Refer to [Position appendix](/docs/appx/position))|
 
 ### Return Value
-***object*** : 다이얼로그 객체
+***object*** : Dialog object
 
 ### Example
 ```javascript
-//화면 가운데에 다이얼로그를 alert 처럼 띄운다.
+// Display a dialog like an alert in the center of the screen.
 var dlg = {
-  "Head": "IBSheet 경고",
-  "Body": "<div>선택하신 일자가 마감일 이후 입니다. 다시 선택하여 주세요.</div>",
+  "Head": "IBSheet Warning",
+  "Body": "<div>The selected date is after the deadline. Please select again.</div>",
   "Modal": 1,
   "CloseClick": 1,
   "MinHeight": 50
@@ -55,4 +54,4 @@ IBSheet.showDialog(
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

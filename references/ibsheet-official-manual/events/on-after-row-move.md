@@ -2,14 +2,13 @@
 KEY: onAfterRowMove
 KIND: event
 PATH: events/on-after-row-move
-ALIAS: 같은, 시트, 내에, 이동, 호출되는
-ALIAS_EN: on, after, row, move, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-row-move
+ALIAS_EN: event, called, moving, row, within, sheet, onafterrowmove
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-row-move
 ---
 # onAfterRowMove ***(event)***
-> 같은 시트 내에 행 이동 시 호출되는 이벤트입니다.
+> Event called when moving a row within the same sheet.
 
-> 드래그 앤 드랍, [moveRow](/docs/funcs/core/move-row)메소드 사용시 호출됩니다.
+> Called when using drag and drop or the [moveRow](/docs/funcs/core/move-row) method.
 
 ### Syntax
 ```
@@ -25,10 +24,10 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|이동할 행이 위치한 시트 객체|
-|row|`object`|이동할 행의 [데이터 로우 객체](/docs/appx/row-object)|
-|oldparent|`object`|이동할 행의 부모 객체([데이터 로우 객체](/docs/appx/row-object) 또는 [페이지 객체](/docs/appx/page-object))|
-|oldnext|`object`|이동할 행의 다음 행의 [데이터 로우 객체](/docs/appx/row-object)|
+|sheet|`object`|Sheet object where the row to be moved is located|
+|row|`object`|[Data row object](/docs/appx/row-object) of the row to be moved|
+|oldparent|`object`|Parent object of the row to be moved ([data row object](/docs/appx/row-object) or [page object](/docs/appx/page-object))|
+|oldnext|`object`|[Data row object](/docs/appx/row-object) of the next row after the row to be moved|
 
 ### Return
 ***number***
@@ -37,7 +36,7 @@ or
 ```javascript
 options.Events = {
     onAfterRowMove:function(evtParam){
-        alert(evtParam.row.id + "행을 옮깁니다.");
+        alert("Moving row " + evtParam.row.id + ".");
     }
 }
 ```
@@ -52,4 +51,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,19 +2,19 @@
 KEY: setFixedRight
 KIND: method
 PATH: funcs/core/set-fixed-right
-ALIAS: sheet.setFixedRight, setFixedRight(), 지정한, 숫자만큼의, 열을, 시트의, 우측
-ALIAS_EN: set, fixed, right
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-fixed-right
+ALIAS: sheet.setFixedRight, setFixedRight()
+ALIAS_EN: fixes, specified, number, columns, right, section, position, sheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-fixed-right
 ---
 # setFixedRight ***(method)***
-> 지정한 숫자만큼의 열을 시트의 우측(`Section:2`)에 위치시킵니다.(틀고정)
+> Fixes the specified number of columns to the right (`Section:2`) position of the sheet. (Fixed pane)
 
-> 지정한 열 수에는 `Hidden` 열도 포함하여 고정시킵니다.
+> The specified column count includes `Hidden` columns as well.
 
 
 ###
-![틀고정](/assets/imgs/setFixedCols1.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - 틀고정 -->
+![Fixed pane](/assets/imgs/setFixedCols1.png)
+<!-- IMAGE: Screenshot/Example Image - Fixed pane -->
 
 
 ### Syntax
@@ -25,21 +25,21 @@ array setFixedRight( count, reMerge, sync );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|count |`number`|선택|오른쪽 영역에 고정할 열 개수
-(설정을 안하거나 `0`으로 설정시, 해당영역에 열이 모두 center 영역으로 포함됨)|
-|reMerge |`boolean`|선택|컬럼 이동 후 다시 기존에 설정했던 값과 동일하게 [머지](./set-auto-merge) 다시 적용 여부
-`0(false)`:컬럼 이동 후 다시 기존에 설정해던 값과 동일하게 머지 하지 않음 (`default`)
-`1(true)`:컬럼 이동 후 다시 기존에 설정해던 값과 동일하게 머지|
-|sync|`boolean`|선택|렌더링 작업을 동기로 처리
-`0(false)`:비동기 방식 (`default`)
-`1(true)`:동기 방식|
+|count |`number`|Optional|Number of columns to fix in the right area
+(If not set or set to `0`, all columns in the corresponding area are moved to the center area)|
+|reMerge |`boolean`|Optional|After column move, re-apply the same as previously set [merge](./set-auto-merge) again applied whether
+`0(false)`:Do not re-apply merge same as previously set after column move (`default`)
+`1(true)`:Re-apply merge same as previously set after column move|
+|sync|`boolean`|Optional|Execute rendering synchronously processing
+`0(false)`:Asynchronous mode (`default`)
+`1(true)`:Synchronous mode|
 
 ### Return Value
-***boolean*** : 처리결과 (변동이 없으면 `false`)
+***boolean*** : Processing result (returns `false` if there is no change)
 
 ### Example
 ```javascript
-//우측 2개 열을 고정한다.
+// Fix 2 columns to the right.
 sheet.setFixedRight(2);
 ```
 
@@ -52,5 +52,5 @@ sheet.setFixedRight(2);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.16|`sync` 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.16|`sync` Feature added|

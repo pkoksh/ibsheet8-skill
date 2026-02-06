@@ -2,14 +2,13 @@
 KEY: groupWidth
 KIND: column-property
 PATH: props/col/group-width
-ALIAS: 열이, 그룹핑, 그룹, 트리가, 생성될
-ALIAS_EN: group, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-width
+ALIAS_EN: column, grouped, adjusts, width, group, tree, created, specified
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/group-width
 ---
 # GroupWidth ***(col)***
-> 열이 그룹핑 될 때, 그룹 트리가 생성될 열(`GroupMain` 옵션에 지정된 열. `GroupMain` 옵션이 없을 시 `SEQ`를 제외한 첫 번째 열)의 너비를 지정한 크기로 조정합니다.
+> When the column is grouped, adjusts the width of the column where the group tree will be created (the column specified in the `GroupMain` option; when `GroupMain` option is not set, the first column excluding `SEQ`) to the specified size.
 
-값을 1로 설정 시 열의 데이터 양에 따라 자동으로 조절됩니다.
+When set to 1, the width is automatically adjusted based on the amount of data in the column.
 
 
 
@@ -19,13 +18,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-wid
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|그룹핑 될때 열의 너비(pixel단위)|
+|`number`|Column width when grouped (in pixels)|
 
 
 
 ### Example
 ```javascript
-//열이 그룹핑될 때 그룹 트리가 위치될 열의 너비를 210px로 수정
+// Set the width of the column where the group tree will be placed to 210px when the column is grouped
 options.Cols = [
     ...
     {Type: "Text", Name: "SA_Name", Width: 100, GroupWidth: 210, ...},
@@ -47,4 +46,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,15 +2,20 @@
 KEY: withCredentials
 KIND: config-property
 PATH: props/cfg/with-credentials
-ALIAS: 사용시, 내부, 통신, 모듈, 동작에
-ALIAS_EN: with, credentials
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/with-credentials
+ALIAS_EN: dosearch, docs, funcs, core, search, dosearchpaging, paging, dosave
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/with-credentials
 ---
 # WithCredentials ***(cfg)***
 
-> [doSearch](/docs/funcs/core/do-search), [doSearchPaging](/docs/funcs/core/do-search-paging), [doSave](/docs/funcs/core/do-save) 사용시 내부 Ajax 통신 모듈 동작에 대해서 [withCredentials](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials) 옵션을 설정합니다. 
+> When using [doSearch](/docs/funcs/core/do-search), [doSearchPaging](/docs/funcs/core/do-search-paging), [doSave](/docs/funcs/core/do-save), the [withCredentials](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials) option can be set for internal Ajax requests.
 
-> `SearchMode: 4` 서버페이징 기능 사용시에도 해당 옵션이 설정됩니다.
+> Useful for requests that need to include cookies or authentication information.
+>
+> **Caution:** When using `WithCredentials: true`, CORS configuration is required on the server.
+> 1. Set `Access-Control-Allow-Origin` to the requesting domain (origin) instead of `"*"`
+> 2. Set `Access-Control-Allow-Credentials: true`
+> 3. Set `Access-Control-Allow-Methods` and `Access-Control-Allow-Headers` if needed
+> Requests will be blocked by the browser if server configuration is incorrect.
 
 ### Type
 `boolean`
@@ -18,13 +23,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/with-cred
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|내부 Ajax 통신 모듈 사용시 withCredentials 옵션 사용 안함 (`default`)|
-|`1(true)`|내부 Ajax 통신 모듈 사용시 withCredentials 옵션 사용|
+|`0(false)`|Do not use withCredentials for Ajax requests (`default`)|
+|`1(true)`|Use withCredentials option for Ajax requests|
 
 ### Example
 ```javascript
 options.Cfg = {
-    WithCredentials: true // 내부 Ajax 통신 모듈 사용시 `withCredentials` 옵션을 true로 설정.
+    WithCredentials: true // Include cookies/authentication information in Ajax requests
 };
 ```
 
@@ -37,4 +42,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.28|기능 추가|
+|core|8.1.0.28|Feature added|

@@ -2,12 +2,12 @@
 KEY: doGroup
 KIND: method
 PATH: funcs/core/do-group
-ALIAS: sheet.doGroup, doGroup(), 지정한, 열들을, 함수를, 그룹핑
-ALIAS_EN: do, group
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/do-group
+ALIAS: sheet.doGroup, doGroup()
+ALIAS_EN: groups, specified, columns, function, dogroup, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/do-group
 ---
 # doGroup ***(method)***
-> 지정한 열들을 함수를 통해 그룹핑 합니다.
+> Groups the specified columns in a function.
 ### Syntax
 ```javascript
 void doGroup( cols );
@@ -16,7 +16,7 @@ void doGroup( cols );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|cols|`string`|필수|그룹할 열이름을 ","를 구분자로 순서대로 입력
+|cols|`string`|Required|Column names to group, delimited by "," in order
 
 
 ### Return Value
@@ -24,7 +24,7 @@ void doGroup( cols );
 
 ### Example
 ```javascript
-//부서와 팀컬럼을 순서대로 그룹핑
+//Group department and team columns in order
 sheet.doGroup("dempNm,teamNm");
 ```
 
@@ -37,5 +37,5 @@ sheet.doGroup("dempNm,teamNm");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.3|groupcols 인자명 변경 -> cols, 다른 API와 통일|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.3|groupcols argument name changed -> cols, unified with other APIs|

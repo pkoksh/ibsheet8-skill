@@ -2,12 +2,11 @@
 KEY: onExportFinish
 KIND: event
 PATH: events/on-export-finish
-ALIAS: 시트의, 내용을, 등으로, 다운로드, 하는
-ALIAS_EN: on, export, finish
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-export-finish
+ALIAS_EN: fires, download, completed, calling, function, down, excel, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-export-finish
 ---
 # onExportFinish ***(event)***
-> 시트의 내용을 `Excel, Text, Pdf` 등으로 다운로드 하는 함수([down2Excel](/docs/funcs/excel/down-to-excel), [down2Text](/docs/funcs/excel/down-to-text), [exportData](/docs/funcs/core/export-data), [down2Pdf](/docs/funcs/excel/down-to-pdf)) 호출 후 다운로드 완료 시 발생합니다.
+> Fires when the download is completed after calling a function ([down2Excel](/docs/funcs/excel/down-to-excel), [down2Text](/docs/funcs/excel/down-to-text), [exportData](/docs/funcs/core/export-data), [down2Pdf](/docs/funcs/excel/down-to-pdf)) that downloads the sheet contents as `Excel, Text, Pdf`, etc.
 
 ### Syntax
 
@@ -24,11 +23,11 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|type|`string`|[down2Excel](/docs/funcs/excel/down-to-excel), [down2Text](/docs/funcs/excel/down-to-text), [exportData](/docs/funcs/core/export-data), [down2Pdf](/docs/funcs/excel/down-to-pdf) 함수 호출에 따라 `EXCEL, TEXT, PDF`|
-|result|`boolean`|다운로드 처리 결과
-`0(false)`:오류 발생
-`1(true)`:정상 종료|
+|sheet|`object`|Sheet object|
+|type|`string`|`EXCEL, TEXT, PDF` depending on [down2Excel](/docs/funcs/excel/down-to-excel), [down2Text](/docs/funcs/excel/down-to-text), [exportData](/docs/funcs/core/export-data), [down2Pdf](/docs/funcs/excel/down-to-pdf) function call|
+|result|`boolean`|Download processing result
+`0(false)`:Error occurred
+`1(true)`:Completed normally|
 
 ### Return
 ***none***
@@ -37,9 +36,9 @@ or
 ```javascript
 options.Events = {
     onExportFinish:function(evtParam){
-        //다운로드 완료 후 메세지 표시
+        //Display message after download completion
         if(evtParam.result){
-            alert("다운로드가 완료 되었습니다.");
+            alert("Download has been completed.");
         }
     }
 }
@@ -55,4 +54,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|excel|0.0.0|기능 추가|
+|excel|0.0.0|Feature added|

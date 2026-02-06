@@ -2,12 +2,12 @@
 KEY: getHeaderRows
 KIND: method
 PATH: funcs/core/get-header-rows
-ALIAS: sheet.getHeaderRows, getHeaderRows(), 헤더, 영역에, 있는, 로우, 객체
-ALIAS_EN: get, header, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-header-rows
+ALIAS: sheet.getHeaderRows, getHeaderRows()
+ALIAS_EN: header, area, present, row, object, docs, appx, sof
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-header-rows
 ---
 # getHeaderRows ***(method)***
-> 헤더 영역에 있는 [헤더 로우 객체](/docs/appx/row-object)들의 배열을 반환합니다.
+> header area present [header row object](/docs/appx/row-object)sof array returns.
 
 
 
@@ -18,11 +18,11 @@ object getHeaderRows(  );
 
 
 ### Return Value
-***array[row object]*** : 헤더 영역에 있는 [헤더 로우 객체](/docs/appx/row-object)들의 배열
+***array[row object]*** : header area present [header row object](/docs/appx/row-object)sof array
 
 ### Example
 ```javascript
-//행의 유형을 확인
+//row's type OK
 var headers = sheet.getHeaderRows();
 ```
 
@@ -32,4 +32,4 @@ var headers = sheet.getHeaderRows();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

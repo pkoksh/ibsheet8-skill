@@ -2,19 +2,18 @@
 KEY: groupChar
 KIND: column-property
 PATH: props/col/group-char
-ALIAS: 그룹, 기준, 내에서, 특정, 문자를
-ALIAS_EN: group, char
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-char
+ALIAS_EN: feature, splits, values, within, group, reference, column, based
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/group-char
 ---
 # GroupChar ***(col)***
-> 그룹 기준 열 내에서 특정 문자를 기준으로 Split하여 하위 노드로 만들어주는 기능입니다.
+> A feature that splits values within a group reference column based on a specific character to create child nodes.
 
-> 가령 열에 "ABCD-EF12","ABCD-EF22"와 같은 값이 있고, `GroupChar: "-"` 로 선언하면 실제 값은 다음과 같이 보여지게 됩니다.
+> For example, if the column has values like "ABCD-EF12","ABCD-EF22" and you declare `GroupChar: "-"`, the actual values will be displayed as follows:
 
 
 ###
-![GroupChar](/assets/imgs/groupChar.png "내용 내에서 특정 문자를 기준으로 다시 그룹핑한다.")
-<!-- IMAGE: 스크린샷/예시 이미지 - GroupChar -->
+![GroupChar](/assets/imgs/groupChar.png "Re-groups within content based on a specific character.")
+<!-- IMAGE: Screenshot/Example Image - GroupChar -->
 
 
 ### Type
@@ -23,11 +22,11 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-cha
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|그룹 데이터 내에서 나눌 기준 문자|
+|`string`|Character to use as the split delimiter within group data|
 
 ### Example
 ```javascript
-//특정문자를 기준으로 그룹핑을 나눈다
+// Group by splitting on a specific character
 options.Cols = [
     ...
     {Type: "Text", Name: "Product_Name", Width: 100, GroupChar: "-", ...},
@@ -49,4 +48,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

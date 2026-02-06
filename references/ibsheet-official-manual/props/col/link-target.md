@@ -2,13 +2,12 @@
 KEY: linkTarget
 KIND: column-property
 PATH: props/col/link-target
-ALIAS: 셀에, 속성이, 있는, 경우, 클릭시
-ALIAS_EN: link, target
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/link-target
+ALIAS_EN: cell, link, docs, props, col, property, target, window
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/link-target
 ---
 # LinkTarget ***(col)***
 
-> 셀에 [Link](/docs/props/col/link)속성이 있는 경우, 클릭시 이동할 target Window를 설정합니다..
+> When a cell has the [Link](/docs/props/col/link) property, sets the target window to navigate to on click.
 
 
 ### Type
@@ -17,15 +16,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/link-targ
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|클릭시 이동할 Target Window(_blank ,_parent ,_self ,_top, 특정 window명)|
+|`string`|Target window to navigate to on click (_blank, _parent, _self, _top, specific window name)|
 
 
 ### Example
 ```javascript
-//열을 클릭시 특정 URL로 이동한다.
+// Navigate to a specific URL when the column is clicked.
 options.Cols = [
     ...
-    //클릭시 새창으로 열기
+    // Open in a new window on click
     {Type: "Text", Link: "/tMIS/dcp/ConfProc.do", LinkTarget: "_blank", CanEdit: 0 , Name: "sa_cfprc", Width: 100 ...},
     ...
 ];
@@ -40,4 +39,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

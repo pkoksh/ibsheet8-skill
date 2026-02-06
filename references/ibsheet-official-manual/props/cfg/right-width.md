@@ -2,15 +2,14 @@
 KEY: rightWidth
 KIND: config-property
 PATH: props/cfg/right-width
-ALIAS: 오른쪽, 고정, 섹션의, 최대, 너비를
-ALIAS_EN: right, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/right-width
+ALIAS_EN: maximum, width, right, fixed, column, section, rightwidth, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/right-width
 ---
 # RightWidth ***(cfg)***
 
-> 오른쪽 고정 열 섹션의 최대 너비를 설정합니다. 
+> Sets the maximum width of the right fixed column section. 
 
-> 오른쪽 열 섹션의 열들이 설정된 너비보다 큰 경우 스크롤바가 생성됩니다.
+> A scrollbar is created when the columns in the right column section exceed the set width.
 
 
 
@@ -21,7 +20,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/right-wid
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|오른쪽 섹션의 총 너비|
+|`number`|Total width of the right section|
 
 
 ### Example
@@ -29,22 +28,22 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/right-wid
 options = {
     RightCols:[
       {
-        //열 헤더 설정
+        // Column header settings
         Header: {
-          Value: "No" // 헤더행의 SEQ 열에 해당하는 셀에 표시될 title 값
+          Value: "No" // Title value displayed in the cell corresponding to the SEQ column in the header row
         },
-        Name: "SEQ", // 행의 순서를 보여주는 열으로, 자동으로 순번이 시트에서 생성됩니다.
+        Name: "SEQ", // Column showing row order, sequence numbers are automatically generated in the sheet
       },
-      { // 열 헤더 설정
+      { // Column header settings
         Header: {
-          Value: "회사명3" // 헤더행의 sCorp 열에 해당하는 셀에 표시될 title 값
+          Value: "Company Name 3" // Title value displayed in the cell corresponding to the sCorp column in the header row
         },
-        Name: "sCorp",    // colName 열이름을 설정 (Data와 Matching)
-        Type: "Text"      // 열 타입
+        Name: "sCorp",    // Set column name (matches with Data)
+        Type: "Text"      // Column type
       }
     ],
     Cfg :{
-      RightWidth:200,      // 오른쪽 열 섹션의 최대 너비 설정
+      RightWidth:200,      // Set maximum width of the right column section
     }
 };
 ```
@@ -57,4 +56,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

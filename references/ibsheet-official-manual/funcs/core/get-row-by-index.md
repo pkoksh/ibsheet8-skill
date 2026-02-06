@@ -2,16 +2,16 @@
 KEY: getRowByIndex
 KIND: method
 PATH: funcs/core/get-row-by-index
-ALIAS: sheet.getRowByIndex, getRowByIndex(), 인덱스를, 기준으로, 데이터, 로우, 객체
-ALIAS_EN: get, row, by, index, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-row-by-index
+ALIAS: sheet.getRowByIndex, getRowByIndex()
+ALIAS_EN: index, based, onas, data, row, object, docs, appx
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-row-by-index
 ---
 # getRowByIndex ***(method)***
-> 인덱스를 기준으로 [데이터 로우 객체](/docs/appx/row-object)를 확인합니다.
+> index based onas [data row object](/docs/appx/row-object) check.
 
-> 인덱스는 `1`부터 시작
+> index `1`starting from
 
-> 감취진 행은 index계산에서 제외됩니다.
+> Hidden rows are excluded from the index calculation.
 
 ### Syntax
 ```javascript
@@ -21,15 +21,15 @@ object getRowByIndex( index );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|index|`number`|필수|행 인덱스(1부터 시작)|
+|index|`number`|Required|row index(1starting from)|
 
 
 ### Return Value
-***row object*** : [데이터 로우 객체](/docs/appx/row-object)
+***row object*** : [data row object](/docs/appx/row-object)
 
 ### Example
 ```javascript
-//5번 index행의 데이터 로우 객체를 얻습니다.
+//5th indexrow's data row object gets.
 var rowObj = sheet.getRowByIndex(5);
 ```
 
@@ -41,4 +41,4 @@ var rowObj = sheet.getRowByIndex(5);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

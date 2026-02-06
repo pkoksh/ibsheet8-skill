@@ -2,12 +2,11 @@
 KEY: onCancleFile
 KIND: event
 PATH: events/on-cancle-file
-ALIAS: 에서, 셀에서, 파일, 업로드, 선택
-ALIAS_EN: on, cancle, file, select, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-cancle-file
+ALIAS_EN: fires, file, upload, cancelled, selection, dialog, closed, type
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-cancle-file
 ---
 # onCancelFile ***(event)***
-> `Type:File`에서 셀에서 파일 업로드 할 때, 파일 선택 창의 파일 선택 취소 혹은 닫기 후 발생합니다. 
+> Fires when a file upload is cancelled or the file selection dialog is closed in a `Type:File` cell. 
 
 
 ### Syntax
@@ -22,9 +21,9 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|시트 객체|
-|row|`object`|	셀이 위치한 데이터 로우 객체|
-|col|`string`|셀의 열이름|
+|sheet|`object`|Sheet object|
+|row|`object`|Data row object where the cell is located|
+|col|`string`|Column name of the cell|
 
 
 ### Return
@@ -33,9 +32,9 @@ or
 ### Example
 ```javascript
 options.Events = {
-  // 파일 업로드 창에서 취소하는 시점에 취소 alert 띄우기
+  // Show cancel alert when cancelling in the file upload dialog
   onCancelFile: function(evtParam) {
-    alert('파일 선택 취소');
+    alert('File selection cancelled');
   }
 }
 ```
@@ -44,4 +43,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.86|기능 추가|
+|core|8.1.0.86|Feature added|

@@ -2,13 +2,13 @@
 KEY: setRangeAttribute
 KIND: method
 PATH: funcs/common/set-range-attribute
-ALIAS: sheet.setRangeAttribute, setRangeAttribute(), 이용하여, 범위, 내의, 속성, 값을
-ALIAS_EN: set, range, attribute, property
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/set-range-attribute
+ALIAS: sheet.setRangeAttribute, setRangeAttribute()
+ALIAS_EN: uses, setattribute, attribute, values, within, range, once, setrangeattribute
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/set-range-attribute
 ---
 # setRangeAttribute ***(method)***
 
-> setAttribute를 이용하여 범위 내의 속성 값을 일괄적으로 설정합니다. 
+> Uses setAttribute to set attribute values within a range at once. 
 
 
 ### Syntax
@@ -20,19 +20,19 @@ void setRangeAttribute( startRow, startCol, endRow, endCol, attr, val );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|startRow|`object`|선택|속성값 일괄 설정 시작 데이터 로우 객체|
-|startCol|`string`|선택|속성값 일괄 설정 시작 열이름|
-|endRow|`object`|선택|속성값 일괄 설정 종료 데이터 로우 객체|
-|endCol|`string`|선택|속성값 일괄 설정 종료 열이름|
-|attr|`string`|선택|설정하고자 하는 속성명|
-|val|`string`|선택|설정하고자 하는 속성 값|
+|startRow|`object`|Optional|Starting data row object for batch attribute setting|
+|startCol|`string`|Optional|Starting column name for batch attribute setting|
+|endRow|`object`|Optional|Ending data row object for batch attribute setting|
+|endCol|`string`|Optional|Ending column name for batch attribute setting|
+|attr|`string`|Optional|Attribute name to set|
+|val|`string`|Optional|Attribute value to set|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-// AR1행 ~ AR2행, Col1 ~ Col2 열 범주 셀의 TextColor 값을 blue로 일괄 변경합니다.
+// Changes the TextColor value to blue for all cells in the range from AR1 row to AR2 row, Col1 to Col2 columns.
 sheet.setRangeAttribute(sheet.getRowById("AR1"), "Col1", sheet.getRowById("AR3"), "Col2", "TextColor", "blue");
 ```
 
@@ -42,4 +42,4 @@ sheet.setRangeAttribute(sheet.getRowById("AR1"), "Col1", sheet.getRowById("AR3")
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

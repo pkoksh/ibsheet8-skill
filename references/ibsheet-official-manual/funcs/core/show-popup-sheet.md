@@ -2,17 +2,17 @@
 KEY: showPopupSheet
 KIND: method
 PATH: funcs/core/show-popup-sheet
-ALIAS: sheet.showPopupSheet, showPopupSheet(), 특정, 위치에, 시트, 객체를, 다이얼로그
-ALIAS_EN: show, popup, sheet, grid, dialog, modal
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/show-popup-sheet
+ALIAS: sheet.showPopupSheet, showPopupSheet()
+ALIAS_EN: displays, sheet, object, dialog, specific, cell, position, showpopupsheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/show-popup-sheet
 ---
 # showPopupSheet ***(method)***
-> 특정 셀 위치에 시트 객체를 다이얼로그 형태로 띄웁니다.
+> Displays a sheet object as a dialog at a specific cell position.
 
 
 ###
-![showPopupSheet](/assets/imgs/showPopupSheet.png "마우스 커서가 있는 위치에 시트객체를 띄움")
-<!-- IMAGE: 스크린샷/예시 이미지 - showPopupSheet -->
+![showPopupSheet](/assets/imgs/showPopupSheet.png "Displays sheet object at mouse cursor position")
+<!-- IMAGE: Sheet/Table View - showPopupSheet -->
 
 
 ### Syntax
@@ -24,32 +24,32 @@ void showPopupSheet( row, col, data, width, height, dialog, pos);
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|선택|팝업을 띄울 [데이터 로우 객체](/docs/appx/row-object) (`row, col` 중에 한 인자라도 없으면 시트 가운데에 생성)|
-|col |`string`|선택|팝업을 띄울 열이름 (`row, col` 중에 한 인자라도 없으면 시트 가운데에 생성)|
-|data|`object`|필수|팝업으로 보여질 시트객체 (객체에 대한 초기화 및 데이터 설정)|
-|width|`number`|선택|팝업의 너비|
-|height|`number`|선택|팝업의 높이|
-|dialog|`object`|선택|부모 팝업 객체|
-|pos|`object`|선택|보여질 메뉴의 좌우/상하 위치 조정 ex) `{x:10, y:10}`|
+|row |`object`|Optional|[data row object](/docs/appx/row-object) to display the popup at (if either `row` or `col` argument is missing, the popup is created at the sheet center)|
+|col |`string`|Optional|Column name to display the popup at (if either `row` or `col` argument is missing, the popup is created at the sheet center)|
+|data|`object`|Required|Sheet object to be displayed as popup (object for initialization and data settings)|
+|width|`number`|Optional|Width of the popup|
+|height|`number`|Optional|Height of the popup|
+|dialog|`object`|Optional|Parent popup object|
+|pos|`object`|Optional|Adjusts the left/right and top/bottom position of the displayed menu. ex) `{x:10, y:10}`|
 
 
 ### Return Value
-***object***  생성된 시트 객체
+***object*** : The created sheet object
 
 ### Example
 ```javascript
 function popup(){
-    // popup으로 나타날 시트에 대한 정의
-    // PSheet 는 showPopupSheet 를 호출하는 시트객체 입니다. 해당 예제에서는 이를 PSheet 라는 변수 이름으로 정의했을 뿐 입니다.
+  // Definition of the sheet to appear as popup
+  // PSheet is the sheet object returned when showPopupSheet is called. In this example, it is simply defined with the variable name PSheet.
     var sheetInfo = {};
     sheetInfo.Cols = [
-        {Header: "사원번호", Type:"Text", MinWidth:80, Name:"EMPNO",  Align:"Center", CanEdit:0},
-        {Header: "사원명", Type:"Text", MinWidth:80, Name:"EMPNM", Align:"Center", CanEdit:0},
-        {Header: "부서명", Type:"Text", MinWidth:80, Name:"DEPT", Align:"Center", CanEdit:0},
-        {Header: "직급", Type:"Text", Width:80, Name:"POSITION", Align:"Center", CanEdit:0}
+    {Header: "Employee No", Type:"Text", MinWidth:80, Name:"EMPNO", Align:"Center", CanEdit:0},
+    {Header: "Employee Name", Type:"Text", MinWidth:80, Name:"EMPNM", Align:"Center", CanEdit:0},
+        {Header: "Department Name", Type:"Text", MinWidth:80, Name:"DEPT", Align:"Center", CanEdit:0},
+    {Header: "Position", Type:"Text", Width:80, Name:"POSITION", Align:"Center", CanEdit:0}
     ];
     sheetInfo.Events = {
-        //팝업시트에서 더블클릭시 행동
+    // Action when double-clicking a row in the popup sheet
         "onDblClick":function(evt){
             if(PSheet.getFocusedRow()){
                 PSheet.setValue( PSheet.getFocusedRow() , "empNm" , evt.sheet.getValue(evt.row,"EMPNM") , 1);
@@ -58,10 +58,10 @@ function popup(){
         }
     };
     sheetInfo.Data = [
-        {EMPNO:"01514",EMPNM:"한득열",DEPT:"총무",POSITION:"부장"},
-        {EMPNO:"04140",EMPNM:"김하임",DEPT:"기획",POSITION:"부장"},
-        {EMPNO:"01794",EMPNM:"이수용",DEPT:"기획",POSITION:"대리"},
-        {EMPNO:"03414",EMPNM:"전수학",DEPT:"예산",POSITION:"과장"}
+    {EMPNO:"01514",EMPNM:"Han Deuk-yeol",DEPT:"General Affairs",POSITION:"Deputy Director"},
+    {EMPNO:"04140",EMPNM:"Kim Ha-jin",DEPT:"Planning",POSITION:"Deputy Director"},
+    {EMPNO:"01794",EMPNM:"Su Yong",DEPT:"Planning",POSITION:"Assistant Manager"},
+    {EMPNO:"03414",EMPNM:"Jeon Su-hak",DEPT:"Budget",POSITION:"Director"}
     ];
     var popSheet = PSheet.showPopupSheet( {row:PSheet.getRowById("AR2"),col:"empNm",data:sheetInfo,width:300,height:400});
 }
@@ -73,4 +73,4 @@ function popup(){
 ### Since
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

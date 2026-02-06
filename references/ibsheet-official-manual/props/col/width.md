@@ -2,14 +2,13 @@
 KEY: width
 KIND: column-property
 PATH: props/col/width
-ALIAS: 열의, 너비를, 단위로, 설정합니다
-ALIAS_EN: width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/width
+ALIAS_EN: column, width, pixels, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/width
 ---
 # Width ***(col)***
-> 열의 너비를 pixel단위로 설정합니다.
+> Sets the column width in pixels.
 
-> 시트객체의 최초 생성시 열의 너비를 의미합니다.
+> Refers to the column width at the initial creation of the sheet object.
 
 ### Type
 `number`
@@ -17,12 +16,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/width
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|열의 너비(pixel단위)|
+|`number`|Column width (in pixels)|
 
 
 ### Example
 ```javascript
-//특정 열의 너비를 85px로 설정합니다.
+// Set the width of a specific column to 85px.
 options.Cols = [
     ...
     {Type: "Text", Name: "EMPID", Width: 85, ...},
@@ -40,4 +39,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

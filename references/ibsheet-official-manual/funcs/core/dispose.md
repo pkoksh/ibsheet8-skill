@@ -2,16 +2,16 @@
 KEY: dispose
 KIND: method
 PATH: funcs/core/dispose
-ALIAS: sheet.dispose, dispose(), 시트를, 메모리에서, 제거합니다
-ALIAS_EN: dispose
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/dispose
+ALIAS: sheet.dispose, dispose()
+ALIAS_EN: sheet, domand, memoryin, remove, dispose, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/dispose
 ---
 # dispose ***(method)***
 
-> 시트를 DOM과 메모리에서 제거합니다.
+> sheet DOMand memoryin remove.
 
-> `dispose`된 시트는 더 이상 사용할 수 없고, 초기화 과정을 통해 처음부터 다시 생성해야 합니다.
-> SinglePageApplication 기반의 프로젝트에서는 페이지 이동 전에 이 함수를 통해 시트 객체를 제거해야만 합니다.
+> `dispose`sheet can no longer be used and must be recreated from scratch through the initialization process.
+> In SPA-based projects, the sheet object must be removed through this function before page navigation.
 ### Syntax
 ```javascript
 void dispose();
@@ -23,7 +23,7 @@ void dispose();
 
 ### Example
 ```javascript
-//시트객체를 완전히 제거
+//Completely remove the sheet object
 sheet.dispose();
 ```
 
@@ -36,4 +36,4 @@ sheet.dispose();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

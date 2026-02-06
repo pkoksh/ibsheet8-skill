@@ -2,42 +2,41 @@
 KEY: searchCount
 KIND: config-property
 PATH: props/cfg/search-count
-ALIAS: 사용시, 제공되는, 읽기, 전용, 옵션으로
-ALIAS_EN: search, count
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/search-count
+ALIAS_EN: read, option, provided, search, row, returns, number, rows
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/search-count
 ---
 # SearchCount ***(cfg)***
 
-> `Search` 행 사용시 제공되는 읽기 전용 옵션으로, `선택(Select), 마킹(Mark)` 동작에 의해 표시된 행들의 개수를 반환합니다. 
+> A read-only option provided when using the `Search` row, which returns the number of rows displayed by `Select (selection) and Mark (marking)` actions. 
 
-> `Search` 행에서 `Filter/Find/FindPrev` 동작을 실행하는 경우 `SearchCount` 옵션은 빈 값으로 변경됩니다.
+> When executing `Filter/Find/FindPrev` actions in the `Search` row, the `SearchCount` option is changed to an empty value.
 
 ### Type
 `number`
 
 ### Example
 ```javascript
-// Search행 설정할 때 사용 시
+// When used in Search row configuration
 options.Solid = [{
-    Kind: "Search", // Kind : 커스텀 행의 Kind를 지정합니다.{가능한 행 종류 : Header, Filter, Search, Group, Space, Data}
-    Space: 1, // Space : 커스텀 Row가 위치할 곳을 설정합니다 {-1: 테이블 상단 영역, 0: Head 영역, 1: Body와 Head 사이, 2: Body와 Foot 사이 빈공간, 3: Foot 바로 위, 4: Foot 아래 툴바위치, 5:하단 테이블 밖}
-    Cells: "Expression,Sep1,Counts,Filter,Select,Mark,FindPrev,Find,Clear,Sep2", // 커스텀 행 내에 Cell들을 생성하고 id를 부여함. Defs, Case, Type, Cols, List, Search, Actions, Expression, Filter, Select, Mark, Find, FindPrev, Clear, Help는 내장 설정 예약어
-    Expression: { // 검색하기 위한 expression 설정
-      Action: "Last", // expression 셀 내용이 변경되었을때 취할 동작에 대한 설정, Last로 설정시 사용자가 직전에 했던 동작을 실행합니다(필터를 이전에 사용했다면 필터를 사용).
-      NoColor: 0, // 셀이 css style의 컬러(Color, Background)를 가질지 여부
+    Kind: "Search", // Kind: Specifies the Kind of custom row. {Possible row types: Header, Filter, Search, Group, Space, Data}
+    Space: 1, // Space: Sets where the custom row will be positioned {-1: Top of table area, 0: Head area, 1: Between Body and Head, 2: Empty space between Body and Foot, 3: Right above Foot, 4: Toolbar position below Foot, 5: Outside bottom table}
+    Cells: "Expression,Sep1,Counts,Filter,Select,Mark,FindPrev,Find,Clear,Sep2", // Creates cells in the custom row and assigns IDs. Defs, Case, Type, Cols, List, Search, Actions, Expression, Filter, Select, Mark, Find, FindPrev, Clear, Help are built-in reserved words
+    Expression: { // Expression settings for searching
+      Action: "Last", // Setting for the action to take when expression cell content changes. When set to Last, executes the user's most recent action (uses filter if filter was used previously).
+      NoColor: 0, // Whether the cell has CSS style colors (Color, Background)
       CanFocus: 1,
-      Left: "5", // 셀 좌측에 지정한 px 만큼의 빈 공간 생성
-      MinWidth: "90", // 최소 너비 px 단위
-      EmptyValue: "<s>검색어를 입력해 주세요</s>"  // input의 placeholder 속성과 동일한 기능으로 Value가 없을 경우 지정된 값을 노출합니다
+      Left: "5", // Creates empty space of specified px on the left side of the cell
+      MinWidth: "90", // Minimum width in px
+      EmptyValue: "<s>Please enter search terms</s>"  // Same function as input's placeholder attribute, displays the specified value when Value is empty
     },
     Sep1: { Width: "10", Type: "Html" },
-    Counts: { Width: "50", CanFocus:0, Type: "html", Formula: "(Sheet.SearchCount ? Sheet.SearchCount : (Sheet.FilterCount ? Sheet.FilterCount : count(7))) +'개'" }, // filter, select 등의 버튼 클릭시 화면에 보이는 행의 개수를 세어 셀 값으로 사용.
-    Filter: { ButtonText: "필터" },
-    Select: { ButtonText: "선택" },
-    Mark: { ButtonText: "마킹" },
-    FindPrev:{ ButtonText: "(위로)찾기", Width: "70" },
-    Find: { ButtonText: "(아래로)찾기", Width: "70" },
-    Clear: { ButtonText: "클리어", Width: "50" },
+    Counts: { Width: "50", CanFocus:0, Type: "html", Formula: "(Sheet.SearchCount ? Sheet.SearchCount : (Sheet.FilterCount ? Sheet.FilterCount : count(7))) +'items'" }, // Counts the number of visible rows when buttons like filter, select are clicked, and uses it as cell value.
+    Filter: { ButtonText: "Filter" },
+    Select: { ButtonText: "Select" },
+    Mark: { ButtonText: "Mark" },
+    FindPrev:{ ButtonText: "Find(Up)", Width: "70" },
+    Find: { ButtonText: "Find(Down)", Width: "70" },
+    Clear: { ButtonText: "Clear", Width: "50" },
     Sep2: { Width: "5", Type: "Html" }
 }]
 ```
@@ -52,4 +51,4 @@ options.Solid = [{
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

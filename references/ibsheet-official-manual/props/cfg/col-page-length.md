@@ -2,13 +2,12 @@
 KEY: colPageLength
 KIND: config-property
 PATH: props/cfg/col-page-length
-ALIAS: 사용, 랜더링, 개수를, 설정합니다
-ALIAS_EN: col, page, length
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/col-page-length
+ALIAS_EN: number, columns, col, render, colpage, docs, funcs, core
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/col-page-length
 ---
 # ColPageLength ***(cfg)***
 
-> [ColPage](/docs/funcs/core/col-page) 사용 시 랜더링 할 열(`Col`)의 개수를 설정합니다.
+> Sets the number of columns (`Col`) to render when using [ColPage](/docs/funcs/core/col-page).
 
 ### Type
 `number`
@@ -16,7 +15,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/col-page-
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|한 페이지 단위의 행수 (`default: 10`)|
+|`number`|Number of columns per page unit (`default: 10`)|
 
 
 ### Example
@@ -25,17 +24,17 @@ options = {
   Cfg :{
     SearchMode: 2,
     ColPage: 1,
-    ColPageLength: 20,  // 한 페이지당 표시할 행수
+    ColPageLength: 20,  // Number of columns to display per page
   }
 };
 ```
 
 ### Read More
 - [ColPage](/docs/funcs/core/col-page)
-- [열(Col) 구조에 대한 이해](/docs/start/col)
+- [Understanding Col Structure](/docs/start/col)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.11|기능 추가|
+|core|8.3.0.11|Feature added|

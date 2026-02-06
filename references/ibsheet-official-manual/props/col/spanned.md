@@ -2,16 +2,15 @@
 KEY: spanned
 KIND: column-property
 PATH: props/col/spanned
-ALIAS: 특정, 열에, 속한, 셀들에, 대해서
-ALIAS_EN: spanned
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/spanned
+ALIAS_EN: whether, allow, merging, cells, vertically, down, belonging, specific
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/spanned
 ---
 # Spanned ***(col)***
-> 특정 열에 속한 셀들에 대해서 위/아래로 병합할 지 여부를 설정합니다. 
+> Sets whether to allow merging cells vertically (up/down) for cells belonging to a specific column. 
 
-> 실제 병합은 [RowSpan](/docs/props/cell/row-span) 속성을 사용하게 됩니다. 
+> The actual merging uses the [RowSpan](/docs/props/cell/row-span) property. 
 
-> 셀머지 기능 사용시 자동머지 기능과는 별도로 움직임으로 자동머지 기능을 꺼주셔야합니다. 
+> When using the cell merge feature, auto-merge functions independently and must be turned off. 
 
 
 ### Type
@@ -20,19 +19,19 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/spanned
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|병합 불가 (`default`)|
-|`1(true)`|병합 가능|
+|`0(false)`|Merge not allowed (`default`)|
+|`1(true)`|Merge allowed|
 
 ### Example
 ```javascript
-//전체 열들에 대해서 상/하 병합을 허용
+// Allow vertical merge for all columns
 options.Def.Col = {Spanned: true};
 opiotns.Cfg = {
-    HeaderMerge: 0 // 자동머지 끔
+    HeaderMerge: 0 // Turn off auto-merge
 };
-//헤더행을 위아래로 병합
+// Merge header rows vertically
 options.Cols = [
-    {Header:[{Value: "매장명", RowSpan: 2, Align: "Center"},{}], Type: "Text", Name: "사원명"},
+    {Header:[{Value: "Store Name", RowSpan: 2, Align: "Center"},{}], Type: "Text", Name: "EmployeeName"},
     ...
 ];
 ```
@@ -47,4 +46,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,26 +2,25 @@
 KEY: mergeVisibleDom
 KIND: config-property
 PATH: props/cfg/merge-visible-dom
-ALIAS: 에서, 보이는, 영역만, 머지할지에, 여부를
-ALIAS_EN: merge, visible, dom
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/merge-visible-dom
+ALIAS_EN: whether, merge, visible, area, searchmode, docs, props, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/merge-visible-dom
 ---
 # MergeVisibleDom ***(cfg)***
 
-> [SearchMode](/docs/props/cfg/search-mode):0 에서 보이는 영역만 머지할지에 대한 여부를 설정합니다. 
+> Sets whether to merge only the visible area in [SearchMode](/docs/props/cfg/search-mode):0. 
 
-> [MergeCellsMatch Cfg](/docs/props/cfg/merge-cells-match) 와 함께 사용시 보이지 않는 영역까지 머지된 셀에 대해서 데이터 값을 자동으로 바꾸게 할 수 있습니다.
-<!-- 해당 기능은 자동 머지([DataMerge](/docs/props/cfg/data-merge))를 이용한 머지 영역에서만 동작됩니다. 
+> When used together with [MergeCellsMatch Cfg](/docs/props/cfg/merge-cells-match), it can automatically change data values for merged cells in areas that are not visible.
+<!-- This feature only works in merge areas using automatic merge ([DataMerge](/docs/props/cfg/data-merge)). 
  -->
 
 ### Type
 `boolean`
 
-### Options 
+### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|자동 머지시 전체 머지 영역의 값 병합|
-|`1(true)`|자동 머지시 보여지는 셀의 영역까지만 병합 (`default`)|
+|`0(false)`|When auto-merging, merge values of the entire merge area|
+|`1(true)`|When auto-merging, merge only up to the visible cell area (`default`)|
 
 ### Example
 ```javascript
@@ -38,4 +37,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.26|기능 추가|
+|core|8.0.0.26|Feature added|

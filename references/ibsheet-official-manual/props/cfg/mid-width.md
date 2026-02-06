@@ -2,15 +2,14 @@
 KEY: midWidth
 KIND: config-property
 PATH: props/cfg/mid-width
-ALIAS: 중앙, 섹션의, 최대, 너비를, 설정합니다
-ALIAS_EN: mid, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/mid-width
+ALIAS_EN: maximum, width, center, column, section, midwidth, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/mid-width
 ---
 # MidWidth ***(cfg)***
 
-> 중앙 열 섹션의 최대 너비를 설정합니다. 
+> Sets the maximum width of the center column section. 
 
-> 열 섹션의 열들이 설정된 너비보다 큰 경우 스크롤바가 생성됩니다.
+> A scrollbar is created when the columns in the column section exceed the set width.
 
 
 
@@ -20,7 +19,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/mid-width
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|중앙 섹션의 총 너비|
+|`number`|Total width of the center section|
 
 
 ### Example
@@ -28,23 +27,23 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/mid-width
 options = {
     Cols:[
       {
-        //열 헤더 설정
+        // Column header settings
         Header: {
-          Value: "No" // 헤더행의 SEQ 열에 해당하는 셀에 표시될 title 값
+          Value: "No" // Title value displayed in the cell corresponding to the SEQ column in the header row
         },
-        Name: "SEQ", // 행의 순서를 보여주는 열으로, 자동으로 순번이 시트에서 생성됩니다.
+        Name: "SEQ", // Column showing row order, sequence numbers are automatically generated in the sheet
       },
-      { // 열 헤더 설정
+      { // Column header settings
         Header: {
-          Value: "회사명3" // 헤더행의 sCorp 열에 해당하는 셀에 표시될 title 값
+          Value: "Company Name 3" // Title value displayed in the cell corresponding to the sCorp column in the header row
         },
-        Name: "sCorp",    // colName 열이름을 설정 (Data와 Matching)
-        Type: "Text"      // 열 타입
+        Name: "sCorp",    // Set column name (matches with Data)
+        Type: "Text"      // Column type
       },
       ...
     ],
     Cfg :{
-      MidWidth: 500,      // 중앙 열 섹션의 최대 너비 설정
+      MidWidth: 500,      // Set maximum width of the center column section
     }
 };
 ```
@@ -57,4 +56,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

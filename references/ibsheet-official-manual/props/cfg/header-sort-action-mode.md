@@ -2,14 +2,13 @@
 KEY: headerSortActionMode
 KIND: config-property
 PATH: props/cfg/header-sort-action-mode
-ALIAS: 헤더, 클릭, 어떻게, 소팅할지, 결정합니다
-ALIAS_EN: header, sort, action, mode, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/header-sort-action-mode
+ALIAS_EN: determines, sorting, performed, header, click, ctrl, headersortactionmode, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/header-sort-action-mode
 ---
 # HeaderSortActionMode ***(cfg)***
 
-> 헤더 클릭/Ctrl 클릭 시 어떻게 소팅할지 결정합니다.</br>
-> 옵션에 따라 단일 열에 대한 소팅과 다중 열에 대한 소팅이 실행됩니다.
+> Determines how sorting is performed on header click/Ctrl click.</br>
+> Depending on the option, single column sorting or multi-column sorting is executed.
 
 ### Type
 `boolean`
@@ -17,8 +16,8 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/header-so
 ### Options
 |Value|Description|
 |-----|-----|
-| `0(false)` | 클릭 시 다중 소팅을 사용하며, Ctrl 클릭 시 단일 소팅을 사용합니다. (`default`)|
-| `1(true)` | 클릭 시 단일 소팅을 사용하며, Ctrl 클릭 시 다중 소팅을 사용합니다.|
+| `0(false)` | Click uses multi-sort, Ctrl click uses single sort. (`default`)|
+| `1(true)` | Click uses single sort, Ctrl click uses multi-sort.|
 
 ### Example
 ```javascript
@@ -36,4 +35,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.5|기능 추가|
+|core|8.0.0.5|Feature added|

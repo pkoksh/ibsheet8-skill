@@ -2,17 +2,16 @@
 KEY: radio
 KIND: column-property
 PATH: props/col/radio
-ALIAS: 혹은, 열들, 간에, 같은, 값을
-ALIAS_EN: radio
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/radio
+ALIAS_EN: groups, cells, value, assigned, among, columns, type, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/radio
 ---
 # Radio ***(col)***
-> [Type](/docs/appx/type)이 `Bool` 혹은 `Radio` 인 열들 간에 같은 값을 부여한 값을 갖고 있는 셀들을 하나의 그룹으로 묶여서 한 행에서 같은 그룹 내에 한 셀만 체크 가능하게 합니다.
+> Groups cells that have the same value assigned among columns with [Type](/docs/appx/type) `Bool` or `Radio`, so that only one cell can be checked within the same group in a row.
 
 
 ###
-![Radio](/assets/imgs/radio.png "같은 행에서 하나만 선택 가능")
-<!-- IMAGE: 스크린샷/예시 이미지 - Radio -->
+![Radio](/assets/imgs/radio.png "Only one can be selected in the same row")
+<!-- IMAGE: Screenshot/Example Image - Radio -->
 
 ### Type
 `number`
@@ -20,22 +19,22 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/radio
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|라디오처럼 하나로 묶을 그룹 인덱스|
+|`number`|Group index to bundle together like a radio button|
 
 
 
 
 ### Example
 ```javascript
-//행안에서 좌우로 비교하여 그룹내에서 하나의 셀만 체크 가능하게 설정
+// Set so that only one cell can be checked within a group by comparing horizontally within a row
 options.Cols = [
-    //1번 그룹
+    // Group 1
     {Type:"Bool", Name:"st1", HRadio:1, Radio:1, ...},
     {Type:"Bool", Name:"st2", HRadio:1, Radio:1, ...},
     {Type:"Bool", Name:"st3", HRadio:1, Radio:1, ...},
     {Type:"Bool", Name:"st4", HRadio:1, Radio:1, ...},
     {Type:"Bool", Name:"st5", HRadio:1, Radio:1, ...},
-    //2번 그룹
+    // Group 2
     {Type:"Bool", Name:"att1", HRadio:1, Radio:2, ...},
     {Type:"Bool", Name:"att2", HRadio:1, Radio:2, ...},
     {Type:"Bool", Name:"att3", HRadio:1, Radio:2, ...},
@@ -54,4 +53,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: useRandomId
 KIND: config-property
 PATH: props/cfg/use-random-id
-ALIAS: 시트, 생성시, 임의의, 생성하고, 글로벌
-ALIAS_EN: use, random, id, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/use-random-id
+ALIAS_EN: creates, sheet, random, creation, create, global, object, userandomid
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/use-random-id
 ---
 # UseRandomId ***(cfg)***
 
-> 시트 생성시 임의의 id로 생성하고, 글로벌 객체를 생성하지 않습니다.
+> Creates the sheet with a random id during creation, and does not create a global object.
 
-> IBSheet.create()를 통해 생성시 부여한 id의 유/무 무관하게 임의의 값으로 id가 생성됩니다. 
+> When creating through IBSheet.create(), the id is generated with a random value regardless of whether an id was provided. 
 
-> 생성된 시트의 id는 create()함수 호출 후 리턴되는 객체를 받아서 확인 하실 수 있습니다.
+> The id of the created sheet can be checked by receiving the object returned after calling the create() function.
 
 ### Type
 `boolean` or `string`
@@ -20,9 +19,9 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/use-rando
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|IBSheet.create()에서 정의한 id값 사용 (`default`)|
-|`1(true)`|"sheet" + 6자리 숫자 형식으로 생성 (ex: sheet847314)|
-|`string`|"입력값" + 6자리 숫자 형식으로 생성 (ex: grid125263 (값을 "grid"로 입력시))|
+|`0(false)`|Use the id value defined in IBSheet.create() (`default`)|
+|`1(true)`|Generated in "sheet" + 6-digit number format (ex: sheet847314)|
+|`string`|Generated in "inputValue" + 6-digit number format (ex: grid125263 (when value is set to "grid"))|
 
 
 ### Example
@@ -35,14 +34,14 @@ options = {
  };
 
 grid = IBSheet.create({
-   // 시트 생성시 id를 넣지 않음
+   // Do not include id when creating the sheet
   "el": "grid_DIV",
   "options": options
  });
 
-console.log(grid.id);  //myGrid123456 식으로 id가 생성됨.
+console.log(grid.id);  // Id is generated in format like myGrid123456.
 
-//함수에 접근 할때
+// When accessing functions
 grid.getValue(grid.getFocusedRow(),grid.getFocusedCol());
 
 ```
@@ -55,4 +54,4 @@ grid.getValue(grid.getFocusedRow(),grid.getFocusedCol());
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.47|기능 추가|
+|core|8.1.0.47|Feature added|

@@ -2,39 +2,39 @@
 KEY: loadExcel
 KIND: method
 PATH: funcs/excel/load-excel
-ALIAS: sheet.loadExcel, loadExcel(), 엑셀, 파일의, 내용을, 시트, 위로
-ALIAS_EN: load, excel, xlsx, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/excel/load-excel
+ALIAS: sheet.loadExcel, loadExcel()
+ALIAS_EN: imports, contents, excel, file, onto, sheet, loadexcel, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/excel/load-excel
 ---
 # loadExcel ***(method)***
 
-> 엑셀 파일의 내용을 시트 위로 `import` 합니다.
+> Imports the contents of an Excel file onto the sheet.
 
-> 해당 함수를 호출시 파일 다이얼로그가 나타나고, 사용자가 엑셀 파일을 선택하면 선택된 파일을 서버측에 지정한 jsp(통상적으로 `LoadExcel.jsp`)파일로 전달 됩니다.
+> When this function is called, a file dialog appears, and when the user selects an Excel file, the selected file is sent to the server-side specified jsp (typically `LoadExcel.jsp`) file.
 
-> 전달받은 `LoadExcel.jsp` 파일에서는 엑셀 파일을 파싱하여 JSON string 형태로 클라이언트로 리턴하게 됩니다.
+> The `LoadExcel.jsp` file that receives the file parses the Excel file and returns it as a JSON string to the client.
 
-> **이 기능을 사용하시려면, 배포시 같이 제공되는 `/plugins/ibsheet-excel.js` 파일을 include 하셔야 합니다.** 
+> **To use this feature, the `/plugins/ibsheet-excel.js` file provided with the distribution must be included.** 
 
 > 
 
-> `LoadExcel.jsp` 파일에 대한 경로는 Cfg속성 안에 [Export](/docs/props/cfg/export) 속성을 통해 설정되어야 합니다.
+> The file path for `LoadExcel.jsp` must be set through the [Export](/docs/props/cfg/export) property inside the Cfg property.
 
-> 매 시트 생성시 마다 Export속성을 설정하기 번거로운 경우에는 [IBSheet.CommonOptions](/docs/static/common-options) 속성을 통해 모든 시트에 공통으로 설정할 수도 있습니다.
+> Instead of setting the Export attribute every time a sheet is created, [IBSheet.CommonOptions](/docs/static/common-options) you can set it commonly for all sheets in the attribute.
 
-> 다시 정리해 보자면 다음과 같은 작업이 필요 합니다.
+> To summarize, the following steps are required.
 
-**자바 서버모듈**
+**Java Server Module**
 
-1. `ibsheet8-1.0.x.jar` 파일과 관련 `서버 라이브러리(POI jar파일)`를 WEB-INF/lib에 추가.
-2. `/plugins/ibsheet-excel.js` 파일을 해당 페이지에 include.
-3. 시트 생성시 `(cfg)Export` 속성을 통해 `LoadExcel.jsp` 파일에 대한 경로 설정
+1. Add `ibsheet8-1.0.x.jar` file and related `server library (POI jar file)` to WEB-INF/lib.
+2. `/plugins/ibsheet-excel.js` file must be included in the page.
+3. Set the path to the `LoadExcel.jsp` file through the `(cfg)Export` property when creating a sheet.
 
-**닷넷 서버모듈**
+**.NET Server Module**
 
-1. `IBSheet8-4.0.dll` 파일과 `공통 라이브러리(Syncfusion dll)`을 bin 또는 참조에 추가.
-2. `/plugins/ibsheet-excel.js` 파일을 해당 페이지에 include.
-3. 시트 생성시 `(cfg)Export` 속성을 통해 `LoadExcel.aspx` 파일에 대한 경로 설정
+1. Add `IBSheet8-4.0.dll` file and `Common library (Syncfusion dll)` to bin or reference.
+2. `/plugins/ibsheet-excel.js` file must be included in the page.
+3. Set the path to the `LoadExcel.aspx` file through the `(cfg)Export` property when creating a sheet.
 
 ### Syntax
 ```javascript
@@ -45,59 +45,59 @@ void loadExcel( param );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|append|`boolean`|선택|시트의 기존 데이터를 뒤에 엑셀의 데이터를 추가할지 여부
-설정을 하지 않으면 기존데이터는 모두 삭제한 후 엑셀의 데이터가 추가됨.
-`0(false)`:기존 데이터 제거 후 엑셀 데이터 추가 (`default`)
-`1(true)`:기존 데이터에 엑셀 데이터 추가|
-|fileExt|`string`|선택|업로드 가능한 파일 확장자를 구분자("\|")로 연결하여 설정합니다. (`default: "xls|xlsx"`)|
-|maxFileSize|`string`|선택|최대 업로드 가능한 파일 사이즈. (MB단위이며 설정하지 않으면 무제한입니다.)|
-|mode|`string`|선택| `"HeaderMatch"`, `"NoHeader"`, `"HeaderSkip"` 중에 하나의 문자열을 입력합니다.
-각 문자의 의미는 다음과 같습니다.
-<ul><li>`"HeaderMatch"` : 시트의 헤더행의 타이틀과 엑셀의 첫번째 행부터 타이틀을 비교해서 읽습니다.
-  `StartRow`속성이 지정된 경우 `StartRow`에서 지정한 행부터 해더행의 개수만큼의 행을 읽어 비교합니다.</li><li>`"NoHeader"` : 헤더행이 없다고 가정하고 첫행부터 순서대로 각 열에 대입합니다.</li><li>`"HeaderSkip"` : 헤더행은 있지만 열비교를 하지 않고 좌측부터 순서대로 읽습니다. 시트의 헤더행의 2개라면 엑셀의 위에서 두개행을 제외하고 그 아래부터 읽는다고 생각하시면 됩니다.</li><li>`"FullLoad"` : 파일의 모든 워크시트를 'NoHeader' 모드로 업로드 다이얼로그에 로드합니다. (아래 설명 참고)</li></ul>(`default: "HeaderMatch"`)|
-| next | `object` | 선택 | [데이터 로우 객체](/docs/appx/row-object)
-지정한 행 위에부터 데이터 `append`. (`append:1(true)`일때만 사용 가능) |
-|startRow|`number`|선택|엑셀에서 시트가 몇번째 행에서 시작하는지 설정합니다. 설정하지 않으면 엑셀의 첫번째 행부터 (1부터시작) 읽어들임.|
-|startCol|`number`|선택|엑셀에서 시트가 몇번째 열에서 시작하는지 설정합니다. 설정하지 않으면 엑셀의 첫번째 열부터 (1부터시작) 읽어들임. 
- `mode: HeaderMatch`의 경우 (7,12)에 있는 시트를 찾을 때, `startRow: 7` 만 설정해 줘도 그 Row에 헤더길이만큼 텍스트를 보기 때문에 `startCol`을 설정할 필요가 없다. 만약, `startCol`을 사용할 경우, 엑셀에 있는 시트에 첫번째 컬럼부터 `startCol`이 시작하게 된다.|
-|workSheetName|`string`|선택|읽어들일 엑셀 파일의 워크시트 명을 설정합니다. 일치하는 워크시트 명이 없으면 첫번째 워크시트를 읽습니다.|
-|workSheetNameStrict|`boolean`|선택|workSheetName에 설정한 워크시트가 없는 경우 첫번째 워크시트를 로드하지 않고 -17 에러 코드를 반환합니다
-`0(false)`:workSheetName에 설정된 워크시트가 없는 경우 첫번째 워크시트를 로드 (`default`)
-`1(true)`:workSheetName에 설정된 워크시트가 없는 경우  -17 에러 코드를 반환|
-|workSheetNo|`number`|선택|읽어들일 엑셀 파일의 워크시트 순번을 설정합니다. 설정하지 않으면 첫번째 워크시트를 읽습니다.|
-|columnMapping|`string`|선택|엑셀 컬럼 번호를 이용해서 시트의 열 순서에 따라 데이터를 로드하는 옵션입니다. 구분자("\|")로 연결하여 설정합니다.(1번부터 시작) mode 속성값은 무시된다.|
-|sendParam|`object`|선택|엑셀 로드시 서버로 전달할 파라미터를 설정합니다.|
-|endRow|`number`|선택|엑셀에서 몇번째 행까지 읽어들일 지 설정합니다. 설정하지 않으면 끝까지 읽어들입니다. 0부터 시작합니다.|
-|reqHeader|`object`|선택|서버 전송 헤더에 사용자가 지정한 헤더 정보를 설정합니다.|
-|skipEmptyRow|`boolean`|선택|엑셀 로드 시 빈 행을 생략할 지 설정합니다.
-`0(false)`:엑셀 로드 데이터에 빈 행 정보 포함
-`1(true)`:엑셀 로드 데이터에 빈 행 정보 제외 (`default`)|
-|workbookPassword|`string`|선택| 읽어들일 엑셀 파일에 비밀번호가 설정된 경우 사용하는 옵션입니다. 
-  xlsx 확장자 파일에서만 지원됩니다.|
-|useXhr|`boolean`|선택| xhr 통신을 이용해 엑셀 파일을 로드합니다.
-`0(false)`:xhr 통신 사용 안함 (`default`)
-`1(true)`:xhr 통신 사용|
-|uploadImage|`boolean`|선택| 셀 위에 띄워진 이미지를 업로드할지 여부를 결정합니다. 
- `0(false)`: 셀 위에 띄워진 이미지를 업로드하지 않음 
-`1(true)`:셀 위에 띄워진 이미지를 업로드함 (`default`) |
-|skipSEQ|`boolean`|선택|mode: `NoHeader`, `HeaderSkip`으로 데이터를 업로드할 때 SEQ 컬럼을 스킵하고 데이터를 업로드합니다. `columnMapping`을 설정한 경우에는 해당 인자가 동작하지 않습니다. (`default: 0`) |
-|activeSheet|`boolean`|선택|엑셀 업로드시 활성화된 워크시트를 업로드합니다.|
+|append|`boolean`|Optional|Whether to append Excel data after the sheet's existing data.
+If not set, all existing data is deleted before Excel data is added.
+`0(false)`:Add Excel data after removing existing data (`default`)
+`1(true)`:Append Excel data to existing data|
+|fileExt|`string`|Optional|Sets uploadable file extensions connected with delimiter ("\|"). (`default: "xls|xlsx"`)|
+|maxFileSize|`string`|Optional|Maximum uploadable file size. (In MB units; if not set, unlimited.)|
+|mode|`string`|Optional| Enter one string among `"HeaderMatch"`, `"NoHeader"`, `"HeaderSkip"`.
+The meaning of each string is as follows.
+<ul><li>`"HeaderMatch"` : Reads titles from the first row of the Excel file and compares them with the sheet's header row titles.
+ If the `StartRow` attribute is specified, it reads rows starting from the row specified in `StartRow` for as many rows as the header row count and compares them.</li><li>`"NoHeader"` : No header row; assigns data to each column in order starting from the first row.</li><li>`"HeaderSkip"` : Reads in order from the left without column comparison even when a header row exists. Skips rows above the header in Excel and reads from below.</li><li>`"FullLoad"` : Loads all worksheets from the file in 'NoHeader' mode into the upload dialog. (See description below)</li></ul>(`default: "HeaderMatch"`)|
+| next | `object` | Optional | [data row object](/docs/appx/row-object)
+Appends data above the specified row. (Only available when `append:1(true)`)|
+|startRow|`number`|Optional|Sets which row in the Excel sheet to start from. If not set, reads from the first row of Excel (starting from 1).|
+|startCol|`number`|Optional|Sets which column in the Excel sheet to start from. If not set, reads from the first column of Excel (starting from 1). 
+ For `mode: HeaderMatch`, when a sheet is found (e.g., at position 7,12), setting only `startRow: 7` is sufficient because it reads the text for the length of that row's header, so `startCol` does not need to be set. However, when using `startCol`, it is applied so that the sheet starts from the `startCol` column counting from the first column of Excel.|
+|workSheetName|`string`|Optional|Sets the worksheet name of the Excel file to read. If no matching worksheet name is found, the first worksheet is read.|
+|workSheetNameStrict|`boolean`|Optional|When the worksheet set by workSheetName does not exist, returns error code -17 instead of loading the first worksheet.
+`0(false)`:Load the first worksheet when the worksheet set by workSheetName does not exist (`default`)
+`1(true)`:Return error code -17 when the worksheet set by workSheetName does not exist|
+|workSheetNo|`number`|Optional|Sets the worksheet order number of the Excel file to read. If not set, reads the first worksheet.|
+|columnMapping|`string`|Optional|Option to load data according to the sheet's column order using Excel column numbers. Set by connecting with delimiter ("\|"). (Starting from 1) The mode property value is ignored.|
+|sendParam|`object`|Optional|Sets parameters to send to the server when loading Excel.|
+|endRow|`number`|Optional|Sets which row in the Excel file to read up to. If not set, reads to the end. Starting from 0.|
+|reqHeader|`object`|Optional|Sets user-specified header information in the server transmission header.|
+|skipEmptyRow|`boolean`|Optional|Whether to skip empty rows when loading Excel.
+`0(false)`:Include empty row information in Excel loaded data
+`1(true)`:Exclude empty row information from Excel loaded data (`default`)|
+|workbookPassword|`string`|Optional|Option to use when the Excel file to read has a password set. 
+ Only for xlsx extension files.|
+|useXhr|`boolean`|Optional|Load Excel file using xhr communication.
+`0(false)`:xhr communication not used (`default`)
+`1(true)`:xhr communication used|
+|uploadImage|`boolean`|Optional|Whether to upload images displayed on top of cells. 
+ `0(false)`: Do not upload images displayed on top of cells 
+`1(true)`:Upload images displayed on top of cells (`default`)|
+|skipSEQ|`boolean`|Optional|When uploading data with mode: `NoHeader` or `HeaderSkip`, skips the SEQ column and uploads data. Does not work when `columnMapping` is set. (`default: 0`)|
+|activeSheet|`boolean`|Optional|Uploads the active worksheet when uploading Excel.|
 <!--!
-|`[비공개]` useDOM|`boolean`|선택|자바 서버모듈에서 `xlsx` 형식의 엑셀 파일의 파싱 방법을 설정합니다.
-`0(false)`: SAX방식을 사용합니다. 이 방식은 대용량 처리에 적합합니다. 하지만, **서식 오류**가 생길 우려가 있습니다. (`default`)
-`1(true)`: DOM방식을 사용합니다. SAX방식에 비해 처리 속도는 느리지만, 서식에 맞게 로드가 가능합니다. 또한, `xls`와 `xlsx` 간의 호환성에도 유리합니다.|
+|`[Private]` useDOM|`boolean`|Optional|Sets the parsing method for `xlsx` format Excel files in Java Server Module.
+`0(false)`: Uses SAX method. This method is suitable for large-volume processing. However, **format errors** may occur. (`default`)
+`1(true)`: Uses DOM method. Processing speed is slower compared to SAX method, but loading fits the format. Also, compatibility between `xls` and `xlsx` is better.|
 !-->
 
-### FullLoad 모드
+### FullLoad mode
 
-![FullLoad 모드](/assets/imgs/loadexcel_mode_fullload.png "FullLoad 모드")
-<!-- IMAGE: 스크린샷/예시 이미지 - FullLoad 모드 -->
+![FullLoad mode](/assets/imgs/loadexcel_mode_fullload.png "FullLoad mode")
+<!-- IMAGE: Screenshot/Example Image - FullLoad mode -->
 
-`FullLoad` 모드는 엑셀 업로드시 파일에 존재하는 모든 워크시트를 'NoHeader' 모드 상태로 업로드 다이얼로그에 로드하는 모드입니다. 
- 
-로드된 워크 시트 중 한 가지를 선택한 뒤, 확인 버튼을 클릭해 선택된 워크 시트를 원본 시트에 로드하실 수 있습니다. 
+`FullLoad` mode is a mode that loads all worksheets in the file in 'NoHeader' state into the upload dialog when uploading Excel. 
 
-**`FullLoad` 모드를 사용하시려면 반드시 다이얼로그 플러그인을 `1.0.11` 이후 버전으로, 서버모듈을 `1.1.21` 이후 버전으로, 엑셀 플러그인을 `1.0.21` 이후 버전으로 패치해주셔야 됩니다.**
+After selecting one of the loaded worksheets and clicking the check button, the selected worksheet can be loaded into the original sheet. 
+
+**To use `FullLoad` mode, the dialog plugin must be version `1.0.11` or later, the server module must be version `1.1.21` or later, and the Excel plugin must be version `1.0.21` or later.**
 
 
 ### Return Value
@@ -105,20 +105,19 @@ void loadExcel( param );
 
 ### Example
 ```javascript
-// 모드가 HeaderMatch, 엑셀이 5번째 로우의 위치, 워크시트 이름은 12월결산인 엑셀을 로드
-var param = {startRow:5, mode:"HeaderMatch", workSheetName:"12월결산"};
+// mode HeaderMatch, starting from the 5th row of Excel, load Excel with worksheet name "December Settlement"
+var param = {startRow:5, mode:"HeaderMatch", workSheetName:"December Settlement"};
 sheet.loadExcel(param);
 
-// 모드가 HeaderSkip, 엑셀이 4번째 로우, 3번째 컬럼부터 시작.
+// mode HeaderSkip, starting from the 4th row and 3rd column of Excel.
 var param = {startRow:4, startCol:3, mode:"HeaderMatch"}
 sheet.loadExcel(param);
 
-// IBSheet의 첫번째 컬럼에 엑셀의 5번째 컬럼의 값을 로딩하고, IBSheet 의 5번째 컬럼에 엑셀의 1번째 컬럼의 값을 로딩
+// Loading the value of the 5th Excel column into IBSheet's first column, and loading the value of the 1st Excel column into IBSheet's 5th column
 sheet.loadExcel({columnMapping:"5|4|3|2|1"});
 ```
 
 ### Read More
-w
 - [LoadExcelConfig cfg](/docs/props/cfg/load-excel-config)
 - [loadText method](./load-text)
 - [down2Excel method](./down-to-excel)
@@ -130,11 +129,11 @@ w
 
 |product|version|desc|
 |---|---|---|
-|excel|0.0.0|기능 추가|
-|excel|0.0.8|`reqHeader` 기능 추가|
-|excel|1.0.12|`workSheetNameStrict` 기능 추가|
-|dialog|1.0.11|`FullLoad` 기능 추가 (`servermodule`: 1.1.21, `excel`: 1.0.21)|
-|excel|1.1.8|`next` 기능 추가|
-|excel|1.1.23|`uploadImage` 기능 추가 (`servermodule`: 2.0.2)|
-|excel|1.1.31|`skipSEQ` 기능 추가 (`servermodule`: 2.0.13)|
-|excel|1.1.32|`activeSheet` 기능 추가 (`servermodule`: 2.0.15)|
+|excel|0.0.0|Feature added|
+|excel|0.0.8|`reqHeader` Feature added|
+|excel|1.0.12|`workSheetNameStrict` Feature added|
+|dialog|1.0.11|`FullLoad` Feature added (`servermodule`: 1.1.21, `excel`: 1.0.21)|
+|excel|1.1.8|`next` Feature added|
+|excel|1.1.23|`uploadImage` Feature added (`servermodule`: 2.0.2)|
+|excel|1.1.31|`skipSEQ` Feature added (`servermodule`: 2.0.13)|
+|excel|1.1.32|`activeSheet` Feature added (`servermodule`: 2.0.15)|

@@ -2,17 +2,16 @@
 KEY: added
 KIND: row-property
 PATH: props/row/added
-ALIAS: 함수를, 추가된, 행은, 내부적으로, 해당
-ALIAS_EN: added
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/added
+ALIAS_EN: rows, added, addrow, docs, funcs, core, add, row
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/added
 ---
 # Added ***(row)***
 
-> [addRow](/docs/funcs/core/add-row) 함수를 통해 추가된 행은  내부적으로 해당 속성 값을 1로 갖게 됩니다.
+> Rows added through the [addRow](/docs/funcs/core/add-row) function internally have this property value set to 1.
 
-> 별도로 [NoColor](./no-color) 속성을 설정하지 않으면, 신규로 추가된 행의 배경색상은 css/default(테마)/main.css파일에 `.IBColorAdded`로 설정한 색상 (`기본값:#eee6fa` 연한파랑색)으로 변경됩니다.
+> Unless the [NoColor](./no-color) property is separately set, the background color of newly added rows will change to the color defined by `.IBColorAdded` in the css/default(theme)/main.css file (`default: #eee6fa` light blue).
 
-> 이 속성은 직접값을 수정하기 보다는 신규행 여부를 확인하는 용도로 사용하실 것을 권합니다.
+> It is recommended to use this property for checking whether a row is new rather than directly modifying its value.
 
 ### Type
 `boolean`
@@ -20,15 +19,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/added
 ### Options
 |Value|Description|
 |-----|-----|
-|`1(true)`|신규행|
+|`1(true)`|New row|
 
 
 ### Example
 ```javascript
-//삭제 버튼
+//Delete button
 function delete(sheet){
     var frow = sheet.getFocusedRow();
-    //신규행은 즉시 삭제하고, 그외에는 상태만 삭제로 바꾼다.
+    //Immediately delete new rows, and for others, only change the status to deleted.
     if (frow.Added) {
         sheet.removeRow(frow);
     } else {
@@ -48,4 +47,4 @@ function delete(sheet){
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

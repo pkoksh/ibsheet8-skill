@@ -2,23 +2,23 @@
 KEY: showSortDialog
 KIND: method
 PATH: funcs/dialog/show-sort-dialog
-ALIAS: sheet.showSortDialog, showSortDialog(), 시트의, 정렬을, 설정할, 있는, 다이얼로그
-ALIAS_EN: show, sort, dialog, modal, popup
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/dialog/show-sort-dialog
+ALIAS: sheet.showSortDialog, showSortDialog()
+ALIAS_EN: opens, dialog, window, allows, setting, sheet, sort, order
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/dialog/show-sort-dialog
 ---
 # showSortDialog ***(method)***
 
-> 시트의 정렬을 설정할 수 있는 다이얼로그 창을 오픈합니다.
+> Opens a dialog window that allows setting the sheet's sort order.
 
-> 확인 버튼 클릭시 다이얼로그에서 설정한 순서대로 정렬이 실행됩니다.
+> When the confirm button is clicked, sorting is performed in the order set in the dialog.
 
-> <mark>해당 함수는 `"/plugins/ibsheet-dialog.js"` 파일이 포함되어 있어야 사용하실 수 있습니다.</mark>
+> <mark>This function requires the `"/plugins/ibsheet-dialog.js"` file to be included.</mark>
 
-> 다이얼로그에 대한 자세한 수정은 `ibsheet-dialog.js`파일에서 하실 수 있습니다.
+> Detailed modifications to the dialog can be made through the `ibsheet-dialog.js` file.
 
 ###
-![다운로드](/assets/imgs/showSortDialog.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - 다운로드 -->
+![download](/assets/imgs/showSortDialog.png)
+<!-- IMAGE: Screenshot/Example Image - download -->
 
 ### Syntax
 ```javascript
@@ -29,34 +29,34 @@ object showSortDialog( width, height, headerIndex, name, excludeHideCol, useOpti
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|width|`number`|선택|다이얼로그 창의 너비 (`default: 600`)|
-|height|`number`|선택|다이얼로그 창의 높이 (`default: 200`)|
-|headerIndex|`number`|선택|헤더행이 여러 줄인 경우 몇 번째 헤더행을 다이얼로그의 기준 컬럼 셀 값으로 표시할 지 여부
-(`default: 모든 헤더행의 타이틀을 구분자 "/"로 연결하여 표시`)|
-|name|`string`|선택|다이얼로그 이름 (`default: "sortSheet_" + 시트id`)|
-|excludeHideCol|`boolean`|선택|숨겨진 컬럼에 대한 처리 여부
- `true`로 설정하는 경우 숨겨진 컬럼은 기준 컬럼 셀에서 보이지 않는다 
-`0(false)`:다이알로그 출력 시, 숨겨진 컬럼 포함 (`default`)
-`1(true)`:다이알로그 출력 시 숨겨진 컬럼 제외|
-|useOptions|`boolean`|선택|정렬에 대한 추가 옵션을 설정할 수 있는 컬럼들을 보일지 여부
-`true`로 설정하는 경우 [NumberSort](/docs/props/col/number-sort), [RawSort](/docs/props/col/raw-sort), [CaseSensitive](/docs/props/col/case-sensitive) 설정 컬럼이 보여진다. 
-`0(false)`:다이알로그 출력 시 정렬에 대한 추가 옵션 설정 컬럼 숨김 (`default`)
-`1(true)`:다이알로그 출력 시 정렬에 대한 추가 옵션 설정 컬럼 보임|
+|width|`number`|Optional|Dialog window width (`default: 600`)|
+|height|`number`|Optional|Dialog window height (`default: 200`)|
+|headerIndex|`number`|Optional|When the header row has multiple lines, which header row to display as the dialog's reference column cell value
+(`default: all header row titles are connected with "/" delimiter and displayed`)|
+|name|`string`|Optional|Dialog name (`default: "sortSheet_" + sheetid`)|
+|excludeHideCol|`boolean`|Optional|Whether to process hidden columns
+ When set to `true`, hidden columns are not shown in the reference column cell 
+`0(false)`:Include hidden columns when outputting the dialog (`default`)
+`1(true)`:Exclude hidden columns when outputting the dialog|
+|useOptions|`boolean`|Optional|Whether to display additional option setting columns for sorting
+When set to `true`, columns for setting [NumberSort](/docs/props/col/number-sort), [RawSort](/docs/props/col/raw-sort), [CaseSensitive](/docs/props/col/case-sensitive) are shown. 
+`0(false)`:Additional option setting columns for sorting are hidden when outputting the dialog (`default`)
+`1(true)`:Additional option setting columns for sorting are visible when outputting the dialog|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-// 정렬 다이얼로그 오픈
+// Open sort dialog
 sheet.showSortDialog(600, 400);
 
-// 객체 방식
+// Object method
 sheet.showSortDialog({
   width: 600,
   height: 400,
-  excludeHideCol: 1, // 숨긴 열 기준 컬럼으로 사용 안함
-  useOptions: 1 // 추가 옵션 기능 사용
+ excludeHideCol: 1, // Do not use hidden columns as reference columns
+ useOptions: 1 // Use additional option feature
 });
 ```
 
@@ -71,4 +71,4 @@ sheet.showSortDialog({
 
 |product|version|desc|
 |---|---|---|
-|dialog|0.0.8|기능 추가|
+|dialog|0.0.8|Feature added|

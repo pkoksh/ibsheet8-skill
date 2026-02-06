@@ -2,15 +2,14 @@
 KEY: canColResize
 KIND: config-property
 PATH: props/cfg/can-col-resize
-ALIAS: 마우스를, 통한, 너비, 조정의, 가능여부를
-ALIAS_EN: can, col, resize, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-col-resize
+ALIAS_EN: whether, column, width, adjusted, mouse, cancolresize, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/can-col-resize
 ---
 # CanColResize ***(cfg)***
 
-> 마우스를 통한 열 너비 조정의 가능여부를 설정할 수 있습니다. 
+> Sets whether column width can be adjusted using the mouse. 
 
-> 기본값은 `1(true)` 로 헤더 영역의 열과 열 사이에서 마우스를 이용하여 너비조절을 할 수 있습니다.
+> The default value is `1(true)`, which allows width adjustment using the mouse between columns in the header area.
 
 
 
@@ -20,14 +19,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-col-r
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|열 너비 조정 불가능|
-|`1(true)`|열 너비 조정 가능 (`default`)|
+|`0(false)`|Column width adjustment not allowed|
+|`1(true)`|Column width adjustment allowed (`default`)|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    "CanColResize": true        // 열 너비 조정 불허
+    "CanColResize": true        // Allow column width adjustment
 };
 ```
 
@@ -41,4 +40,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

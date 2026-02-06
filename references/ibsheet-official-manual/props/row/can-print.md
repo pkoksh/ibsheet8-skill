@@ -2,15 +2,14 @@
 KEY: canPrint
 KIND: row-property
 PATH: props/row/can-print
-ALIAS: 행의, 프린트, 가능, 여부
-ALIAS_EN: can, print
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-print
+ALIAS_EN: whether, row, printed, canprint
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/can-print
 ---
 # CanPrint ***(row)***
 
-> 행의 프린트 가능 여부.
+> Whether the row can be printed.
 
-> [doPrint](/docs/funcs/core/do-print) 또는 [down2Pdf](/docs/funcs/excel/down-to-pdf)를 이용하여 프린트 할 경우 해당 행을 프린트 할지 여부를 설정할 수 있습니다.
+> When printing using [doPrint](/docs/funcs/core/do-print) or [down2Pdf](/docs/funcs/excel/down-to-pdf), you can set whether to include the row in the printout.
 
 ### Type
 `number`
@@ -18,13 +17,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-print
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|프린트 불가|
-|`1`|프린트 가능 (`default`)|
+|`0`|Print disabled|
+|`1`|Print enabled (`default`)|
 
 
 ### Example
 ```javascript
-//특정 행에 대해서 프린트를 막는다.
+//Prevent a specific row from being printed.
 var row = sheet.getRowById("AR55");
 sheet.setAttribute(row, null, 'CanPrint', 0);
 ```
@@ -38,4 +37,4 @@ sheet.setAttribute(row, null, 'CanPrint', 0);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

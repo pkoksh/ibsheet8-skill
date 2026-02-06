@@ -2,14 +2,14 @@
 KEY: getMergeRange
 KIND: method
 PATH: funcs/core/get-merge-range
-ALIAS: sheet.getMergeRange, getMergeRange(), 특정, 셀을, 기준으로, 머지된, 영역
-ALIAS_EN: get, merge, range
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-merge-range
+ALIAS: sheet.getMergeRange, getMergeRange()
+ALIAS_EN: checks, merged, area, rowspan, span, based, specific, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-merge-range
 ---
 # getMergeRange ***(method)***
-> 특정 셀을 기준으로 머지된 영역(RowSpan,Span)을 확인합니다.
+> Checks the merged area (RowSpan, Span) based on a specific cell.
 
-> 지정한 셀을 기준으로 머지 시작셀(좌측 상단 셀)과 종료셀(우측 하단 셀)을 배열로 리턴합니다.
+> Returns the merge start cell (top-left cell) and end cell (bottom-right cell) based on the specified cell as an array.
 
 
 ### Syntax
@@ -20,25 +20,25 @@ array getMergeRange( row, col);
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|병합기준 [데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|병합기준 열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object) as merge reference|
+|col |`string`|Required|Column name as merge reference|
 
 ### Return Value
-***object (array[])*** : 머지 시작 행, 머지 시작 열, 머지 종료 행, 머지 종료 열 순차적으로 들어있는 배열 리턴
+***object (array[])*** : Returns an array created in the order of merge start row, merge start column, merge end row, merge end column
 
-[시작[데이터 로우 객체](/docs/appx/row-object) , 시작열이름 , 종료[데이터 로우 객체](/docs/appx/row-object) , 종료열이름 ]
+[start [data row object](/docs/appx/row-object), start column name, end [data row object](/docs/appx/row-object), end column name]
 
-*머지되지 않은 셀의 경우 파라미터로 입력한 row와 리턴되는 시작 행,종료 행이 동일하고 마찬가지로 파라미터로 입력한 col과 리턴되는 시작 열,종료 열이 동일합니다.*
+*For cells that are not merged, the start row and end row returned are the same as the row entered as parameter, and likewise the start column and end column are the same as the col entered as parameter.*
 
 ### Example
 ```javascript
-//AR2행, deptCd열이 주변과 병합된 경우 병합영역을 리턴
+// When the area around the AR2 row, deptCd column is merged, return the merge area
 var mergeArr = sheet.getMergeRange( sheet.getRowById("AR2"), "deptCd");
 
-var mergeStartRow = mergeArr[0]; // 머지 시작 행
-var mergeStartCol = mergeArr[1]; // 머지 시작 열
-var mergeEndRow = mergeArr[2]; // 머지 종료 행
-var mergeEndCol = mergeArr[3]; // 머지 종료 열
+var mergeStartRow = mergeArr[0]; // merge start row
+var mergeStartCol = mergeArr[1]; // merge start column
+var mergeEndRow = mergeArr[2]; // merge end row
+var mergeEndCol = mergeArr[3]; // merge end column
 ```
 
 ### Read More
@@ -49,4 +49,4 @@ var mergeEndCol = mergeArr[3]; // 머지 종료 열
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

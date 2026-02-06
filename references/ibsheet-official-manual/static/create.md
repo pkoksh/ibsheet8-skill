@@ -2,21 +2,20 @@
 KEY: create
 KIND: static-member
 PATH: static/create
-ALIAS: 지정한, 위치에, 시트객체를, 생성합니다
-ALIAS_EN: create
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/create
+ALIAS_EN: creates, sheet, object, specified, location, create, static
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/create
 ---
 # create ***(static)***
 
-> 지정한 위치에 시트객체를 생성합니다.
+> Creates a sheet object at the specified location.
 
-> 시트객체가 생성되면 `IBSheet`객체에 배열형식으로 추가(push)됩니다.
+> When a sheet object is created, it is added (pushed) to the `IBSheet` object in array format.
 
 
 
-- 'el' <mark>객체의 크기</mark>에 따라 시트의 너비/높이가 결정됩니다.
-- 'el'객체의 너비/높이가 정의되지 않은 경우에는 <mark>너비는 100%, 높이는 800px</mark>로 설정됩니다.
-- sync속성을 1로 사용 시 onRenderFirstFinish 이벤트에서는 window[id] 형식으로 시트에 접근할 수없습니다.(evtParam.sheet로만 접근 가능)
+- The sheet's width/height is determined by the <mark>size of the 'el' element</mark>.
+- If the width/height of the 'el' element is not defined, the <mark>width is set to 100% and the height to 800px</mark>.
+- When using the sync property set to 1, the sheet cannot be accessed in the format window[id] in the onRenderFirstFinish event. (Only accessible via evtParam.sheet)
 
 ### Syntax
 ```javascript
@@ -26,13 +25,13 @@ object IBSheet.create(id, el, options, data, sync);
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|id|`string`|필수|시트객체의 `id` (여기서 지정한 `id`는 `window` 객체에 `프로퍼티`로 생성됩니다.[전역변수]|
-|el|`string`|필수|시트객체가 생성될 div객체의 `id` (해당객체 안에 시트객체가 생성됨)|
-|[options](/docs/appx/init-structure)|`object`|필수|초기화 정보를 갖고있는 `json 객체`|
-|data|`array[object]`|선택|생성과 동시에 로드 될 `데이터 배열`|
-|sync|`boolean`|선택|시트를 동기로 생성합니다
-`0(false)`:비동기 방식 (`default`)
-`1(true)`:동기 방식|
+|id|`string`|Required|`id` of the sheet object (the `id` specified here is created as a `property` on the `window` object [global variable]|
+|el|`string`|Required|`id` of the div element where the sheet object will be created (the sheet object is created inside this element)|
+|[options](/docs/appx/init-structure)|`object`|Required|`json object` containing initialization information|
+|data|`array[object]`|Optional|`Data array` to be loaded simultaneously with creation|
+|sync|`boolean`|Optional|Creates the sheet synchronously
+`0(false)`: Asynchronous mode (`default`)
+`1(true)`: Synchronous mode|
 
 ### Return Value
 ***object***
@@ -40,38 +39,38 @@ object IBSheet.create(id, el, options, data, sync);
 ### Example
 ```javascript
 var opt = {
-        //각 열에 대한 정의 (열의 이름, 유형(Type), 포맷(Format)등을 설정)
+        // Definition for each column (set column name, Type, Format, etc.)
         Cols:[
-            {Header: {Value: "이름"}, Name: "sa_nm", Type: "Text"},
-            {Header: {Value: "사원번호" }, Name: "sa_id", Type: "Text", Align: "center"},
-            {Header: {Value: "부서"}, Name: "sa_dept", Type: "Enum",
-                Enum: "|경영지원|총무|인사|설계|시공1|시공2", EnumKeys: "|01|02|03|04|05|06"},
-            {Header: {Value: "직급"}, Name: "sa_position", Type: "Enum",
-                Enum: "|대표|상무|이사|부장|차장|과장|대리|사원", EnumKeys: "|A1|A2|A3|B0|B1|C4|C5|C6"},
-            {Header: {Value: "입사일"}, Name: "sa_enterdate", Type: "Date",Width:100, Format: "yyyy/MM/dd"},
-            {Header: {Value: "비고"}, Name: "sa_desc", Type: "Lines"}
+            {Header: {Value: "Name"}, Name: "sa_nm", Type: "Text"},
+            {Header: {Value: "Employee Number" }, Name: "sa_id", Type: "Text", Align: "center"},
+            {Header: {Value: "Department"}, Name: "sa_dept", Type: "Enum",
+                Enum: "|Management Support|General Affairs|HR|Design|Construction 1|Construction 2", EnumKeys: "|01|02|03|04|05|06"},
+            {Header: {Value: "Position"}, Name: "sa_position", Type: "Enum",
+                Enum: "|CEO|Senior Managing Director|Director|General Manager|Deputy General Manager|Manager|Assistant Manager|Staff", EnumKeys: "|A1|A2|A3|B0|B1|C4|C5|C6"},
+            {Header: {Value: "Hire Date"}, Name: "sa_enterdate", Type: "Date",Width:100, Format: "yyyy/MM/dd"},
+            {Header: {Value: "Remarks"}, Name: "sa_desc", Type: "Lines"}
         ]
     };
 var dataArr = [
-    {sa_nm: "홍길동", sa_id: "9821450", sa_dept: "04", sa_position: "B0", sa_enterdate: "19980305", sa_desc: ""},
-    {sa_nm: "김한국", sa_id: "9510427", sa_dept: "01", sa_position: "A3", sa_enterdate: "19890317", sa_desc: ""}
+    {sa_nm: "Hong Gildong", sa_id: "9821450", sa_dept: "04", sa_position: "B0", sa_enterdate: "19980305", sa_desc: ""},
+    {sa_nm: "Kim Hanguk", sa_id: "9510427", sa_dept: "01", sa_position: "A3", sa_enterdate: "19890317", sa_desc: ""}
 ];
 
-//시트객체 생성
+// Create sheet object
 IBSheet.create({
-    id: "sheet", // 생성할 시트의 id
-    el: "sheetDiv", // 시트를 생성할 Dom 객체 및 id
-    options: opt, // 생성될 시트의 속성
-    data: dataArr, // 생성될 시트의 정적데이터
-    sync: 1 // 동기로 시트 생성( 비동기로 시트 생성)
+    id: "sheet", // ID of the sheet to create
+    el: "sheetDiv", // DOM object or id where the sheet will be created
+    options: opt, // Properties of the sheet to be created
+    data: dataArr, // Static data for the sheet to be created
+    sync: 1 // Create sheet synchronously (asynchronous sheet creation)
 });
 
-//el에 html element 설정
+// Set html element for el
 IBSheet.create({
-    "id": "sheet", // 시트객체 이름 (SPA에서는 사용 X)
-    "el": document.querySelector("div.part1 .gridarea"), // 시트를 생성할 html element 
-    "options": opt, // 초기화 구문
-    "data": dataArr//초기 데이터
+    "id": "sheet", // Sheet object name (not used in SPA)
+    "el": document.querySelector("div.part1 .gridarea"), // HTML element where the sheet will be created
+    "options": opt, // Initialization options
+    "data": dataArr// Initial data
 });
 ```
 ### Read More
@@ -82,5 +81,5 @@ IBSheet.create({
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.45|sync 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.45|sync feature added|

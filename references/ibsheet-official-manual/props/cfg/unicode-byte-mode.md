@@ -2,33 +2,32 @@
 KEY: unicodeByteMode
 KIND: config-property
 PATH: props/cfg/unicode-byte-mode
-ALIAS: 한글, 자리의, 바이트, 수를, 설정합니다
-ALIAS_EN: unicode, byte, mode
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/unicode-byte-mode
+ALIAS_EN: byte, count, single, korean, character, unicodebytemode, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/unicode-byte-mode
 ---
 # UnicodeByteMode ***(cfg)***
 
-> 한글 1자리의 바이트 수를 설정합니다. 
+> Sets the byte count for a single Korean character. 
 
-> 자바스크립트에서는 모든 글자를 1바이트로 인식합니다. 그러나 한글은 DB의 언어 설정에 따라 2바이트 이상으로 인식되어야 하는 경우가 있습니다. 이런 경우 이 속성을 사용하여 한글의 바이트 수를 설정할 수 있습니다. 
+> In JavaScript, all characters are recognized as 1 byte. However, Korean characters may need to be recognized as 2 or more bytes depending on the DB's language settings. In such cases, this property can be used to set the byte count for Korean characters. 
 
-> `utf-8` 형식에서는 문자에 따라서 바이트 수가 달라지게 되는데 이런 경우 설정 인자를 `"utf-8"`로 설정하면 `utf-8` 형식에 맞게 처리 합니다.
+> In `utf-8` format, the byte count varies depending on the character. In such cases, setting the parameter to `"utf-8"` processes it according to the `utf-8` format.
 
 ### Type
-`number|string`
+`number` \| `string`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|한글 1자리의 바이트 수 설정 (`default: 1`)|
-|`string`|`"utf-8"`로 설정, `utf-8` 형식에 맞게 바이트 수 계산 |
+|`number`|Set the byte count for a single Korean character (`default: 1`)|
+|`string`|Set to `"utf-8"`, calculates byte count according to `utf-8` format |
 
 
 ### Example
 ```javascript
 options.Cfg = {
     ...
-    UnicodeByteMode: "utf-8"              // 한글의 바이트 수를 utf-8 형식에 맞춰 처리
+    UnicodeByteMode: "utf-8"              // Process Korean character byte count according to utf-8 format
     ...
 };
 ```
@@ -36,7 +35,7 @@ options.Cfg = {
 ```js
 options.Cfg = {
     ...
-    UnicodeByteMode: 3,              // 한글 1자리의 바이트 사이즈를 3으로 설정
+    UnicodeByteMode: 3,              // Set the byte size of a single Korean character to 3
     ...
 };
 ```
@@ -49,4 +48,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.10|기능 추가|
+|core|8.0.0.10|Feature added|

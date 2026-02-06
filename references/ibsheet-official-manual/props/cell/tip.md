@@ -2,15 +2,14 @@
 KEY: tip
 KIND: cell-property
 PATH: props/cell/tip
-ALIAS: 위에, 마우스, 커서, 오버시, 풍선도움말을
-ALIAS_EN: tip
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/tip
+ALIAS_EN: whether, display, tooltip, mouse, cursor, hovers, cell, configures
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/tip
 ---
 # Tip ***(cell)***
 
-> 셀 위에 마우스 커서 오버시 풍선도움말을 표시할지 여부와 표시될 내용을 설정 합니다.
+> Sets whether to display a tooltip when the mouse cursor hovers over the cell, and configures the content to be displayed.
 
-> 기본적으로 html태그를 사용하여 상세한 내용을 표시할 수 있으나, cfg의 [StandardTip](/docs/props/cfg/standard-tip)의 값이 `1(true)`인 경우에는 브라우저의 내장 툴팁을 사용하게 되어 html태그를 표현할수 없습니다.
+> By default, HTML tags can be used to display detailed content, but if the cfg [StandardTip](/docs/props/cfg/standard-tip) value is `1(true)`, the browser's built-in tooltip is used, which cannot render HTML tags.
 
 ### Type
 `mixed`( `boolean` \| `string` )
@@ -18,27 +17,27 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/tip
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|풍선도움말 사용 안함|
-|`1(true)`|풍선도움말 사용|
-|`string`|풍선도움말에서 표시 될 내용 설정|
+|`0(false)`|Do not use tooltip|
+|`1(true)`|Use tooltip|
+|`string`|Set the content to display in the tooltip|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름: CLS)
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Tip", 0);
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름: CLS)
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSTip"] = 1;
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용 (열이름: CLS)
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
-        {... , "CLSTip":"작업 시작일과 종료일을 입력해 주세요." , ...}
+        {... , "CLSTip":"Please enter the task start date and end date." , ...}
     ]
 }
 ```
@@ -52,4 +51,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

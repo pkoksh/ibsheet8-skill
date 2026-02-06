@@ -2,12 +2,12 @@
 KEY: getPageByRow
 KIND: method
 PATH: funcs/core/get-page-by-row
-ALIAS: sheet.getPageByRow, getPageByRow(), 특정, 데이터, 로우, 객체, 위치한
-ALIAS_EN: get, page, by, row, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-page-by-row
+ALIAS: sheet.getPageByRow, getPageByRow()
+ALIAS_EN: returns, page, object, docs, appx, containing, specified, data
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-page-by-row
 ---
 # getPageByRow ***(method)***
-> 특정 [데이터 로우 객체](/docs/appx/row-object)가 위치한 [페이지 객체](/docs/appx/page-object)를 리턴합니다.
+> Returns the [page object](/docs/appx/page-object) containing the specified [data row object](/docs/appx/row-object).
 
 
 
@@ -19,15 +19,15 @@ object getPageByRow( row );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|필수|[데이터 로우 객체](/docs/appx/row-object)
+|row|`object`|Required|[data row object](/docs/appx/row-object)
 
 
 ### Return Value
-***page object*** : row를 포함하고 있는  [페이지 객체](/docs/appx/page-object)
+***page object*** : row including present  [page object](/docs/appx/page-object)
 
 ### Example
 ```javascript
-//마지막 페이지 객체를 얻는다.
+//Gets the last page object.
 var lastRow = sheet.getLastRow();
 var lastPageObj = sheet.getPageByRow(lastRow);
 ```
@@ -41,4 +41,4 @@ var lastPageObj = sheet.getPageByRow(lastRow);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

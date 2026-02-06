@@ -2,12 +2,12 @@
 KEY: getLocale
 KIND: method
 PATH: funcs/core/get-locale
-ALIAS: sheet.getLocale, getLocale(), 시트에, 설정된, 언어, 코드를, 가져오는
-ALIAS_EN: get, locale
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-locale
+ALIAS: sheet.getLocale, getLocale()
+ALIAS_EN: returns, language, code, sheet, getlocale, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-locale
 ---
 # getLocale ***(method)***
-> 시트에 설정된 언어 코드를 가져오는 메소드입니다. 
+> Returns the language code set on the sheet. 
 
 
 ### Syntax
@@ -16,7 +16,7 @@ void getLocale();
 ```
 
 ### Return Value
-***string*** : 시트에 설정된 언어 코드
+***string*** : language code set on the sheet
 
 ### Example
 ```javascript
@@ -32,4 +32,4 @@ sheet.getLocale();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.2|기능 추가|
+|core|8.0.0.2|Feature added|

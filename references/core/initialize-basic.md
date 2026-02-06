@@ -19,7 +19,7 @@ IBSheet8 그리드를 페이지에 생성하고 초기화하는 방법을 설명
 
 IBSheet8 초기화는 다음 3단계로 이루어집니다:
 
-1. **라이브러리 로드**: IBSheet8 스크립트 및 스타일시트 포함
+1. **라이브러리 로드**: IBSheet8 스크립트 및 메세지파일, 스타일시트 포함
 2. **컨테이너 준비**: 그리드가 렌더링될 HTML 요소 정의
 3. **시트 생성**: `IBSheet.create()` API 호출
 
@@ -37,10 +37,13 @@ IBSheet8 초기화는 다음 3단계로 이루어집니다:
   <title>IBSheet8 예제</title>
 
   <!-- IBSheet8 스타일시트 -->
-  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
+  <link rel="stylesheet" href="ibsheet/css/default/ibsheet.css">
 
   <!-- IBSheet8 스크립트 -->
   <script src="ibsheet/ibsheet.js"></script>
+
+  <!-- IBSheet8 메세지 파일 -->
+  <script src="ibsheet/locale/ko.js"></script>
 </head>
 <body>
   <!-- 그리드 컨테이너 -->

@@ -2,16 +2,16 @@
 KEY: getRowsByStatus
 KIND: method
 PATH: funcs/core/get-rows-by-status
-ALIAS: sheet.getRowsByStatus, getRowsByStatus(), 특정, 상태의, 행을, 배열로, 리턴
-ALIAS_EN: get, rows, by, status
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-rows-by-status
+ALIAS: sheet.getRowsByStatus, getRowsByStatus()
+ALIAS_EN: returns, rows, specific, status, array, getrowsbystatus, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-rows-by-status
 ---
 # getRowsByStatus ***(method)***
-> 특정 상태의 행을 배열로 리턴 합니다.
+> Returns rows of a specific status as an array.
 
-> 행이 상태는 `Added, Changed, Deleted`이 있습니다. 
+> Row states include `Added, Changed, Deleted`. 
 
-> 속성명 앞에 `!`를 붙이면 해당 속성의 값이 참(`true` or `1`)이더라도 건너뛸 수 있습니다.
+> Prefixing a property name with `!` allows skipping records where that property's value is truthy (`true` or `1`).
 
 
 ### Syntax
@@ -22,24 +22,24 @@ array getRowsByStatus( status );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|status|`string`|필수|상태값(여러개 상태를 동시에 확인하고자 하는 경우에는 ","구분자로 연결|
+|status|`string`|Required|Status value (use `,` as delimiter to check multiple statuses simultaneously)|
 
 
 ### Return Value
-***array[row object]*** : [데이터 로우 객체](/docs/appx/row-object) 배열
+***array[row object]*** : [data row object](/docs/appx/row-object) array
 
 ### Example
 ```javascript
-// 수정된 행을 모두 얻습니다.
+// Get all modified rows.
 var chgRows = sheet.getRowsByStatus("Changed");
 
-// 신규로 추가되거나 수정된 행을 모두 얻습니다.
+// Get all newly added or modified rows.
 var rows = sheet.getRowsByStatus("Added,Changed");
 
-// Added 속성이 설정되어 있으면서, Deleted 속성이 설정되지 않은 행을 추출
+// Extract rows where the Added attribute is set but the Deleted attribute is not set
 var rows = sheet.getRowsByStatus("Added,!Deleted");
 
-// Changed 속성이 설정되어 있으면서, Added, Deleted 속성이 설정되지 않은 행만 추출
+// Extract only rows where the Changed attribute is set but both Added and Deleted attributes are not set
 var rows = sheet.getRowsByStatus("!Added,Changed,!Deleted");
 
 ```
@@ -50,4 +50,4 @@ var rows = sheet.getRowsByStatus("!Added,Changed,!Deleted");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

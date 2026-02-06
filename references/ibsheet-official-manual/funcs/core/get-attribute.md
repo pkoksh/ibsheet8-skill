@@ -2,17 +2,17 @@
 KEY: getAttribute
 KIND: method
 PATH: funcs/core/get-attribute
-ALIAS: sheet.getAttribute, getAttribute(), 특정, 셀에, 설정된, 속성값을, 확인합니다
-ALIAS_EN: get, attribute
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-attribute
+ALIAS: sheet.getAttribute, getAttribute()
+ALIAS_EN: specific, row, column, cell, settingapplied, propertyvalue, getattribute, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-attribute
 ---
 # getAttribute ***(method)***
 
-> 특정 행,열,셀에 설정된 속성값을 확인합니다.
+> specific row,column,cell settingapplied propertyvalue OK.
 
-> `row`를 `null`로 설정시 열에 설정한 속성값이 리턴됩니다.
+> `row` `null`, column set attribute value is set to return.
 
-> `col`을 `null`로 설정시 행에 설정한 속성값이 리턴됩니다.
+> `col` `null`, row set attribute value is set to return.
 
 
 ### Syntax
@@ -24,21 +24,21 @@ mixed getAttribute( row, col, attr);
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|row |`object`|선택|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|선택|열이름|
-|attr|`string`|선택|확인하고자 하는 속성명|
+|row |`object`|Optional|[data row object](/docs/appx/row-object)|
+|col |`string`|Optional|column name|
+|attr|`string`|Optional|OKwant to propertyname|
 
 ### Return Value
-***mixed ( `number` \| `string` )*** : 인자에 따라 행이나 열,셀의 속성 값을 리턴
+***mixed ( `number` \| `string` )*** : argument according to rowor column,cellof property value return
 
 ### Example
 ```javascript
-//특정 열의 타입 확인
+//specific columnof type OK
 if (sheet.getAttribute(null, sheet.getFocusedCol(), "Type") == "Radio") {
-    alert("해당 열에는 적용할 수 없습니다.");
+    alert("Cannot be applied to this column.");
 }
 
-//합계 행의 셀의 글자색 확인
+//total rowof Cell text color OK
 var fcolor =  sheet.getAttribute( sheet.getRowById("FormulaRow"), sheet.getFocusedCol(), "TextColor");
 ```
 
@@ -50,4 +50,4 @@ var fcolor =  sheet.getAttribute( sheet.getRowById("FormulaRow"), sheet.getFocus
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

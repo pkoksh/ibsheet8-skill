@@ -2,22 +2,21 @@
 KEY: event
 KIND: event
 PATH: events/event
-ALIAS: 사용법, 기초, 시트의, 이벤트는, 아래와
-ALIAS_EN: event
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/event
+ALIAS_EN: sheet, events, configured, following, two, ways, event, usage
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/event
 ---
-# event 사용법 기초
-> 시트의 이벤트는 아래와 같이 두 가지 방법으로 설정할 수 있습니다.
+# Event Usage Basics
+> Sheet events can be configured in the following two ways.
 
-## 1. 객체 생성시점에서 이벤트 설정하기
-시트를 초기화하는 `options` 속성 설정 시 `Events` 속성을 통해 다음과 같이 설정합니다.
+## 1. Setting Events at Object Creation Time
+When setting the `options` properties to initialize the sheet, configure events through the `Events` property as follows.
 ```javascript
 var OPTS = {
     Cfg:{ ... },
     Cols:[ ... ],
     "Events":{
         onAfterChange:function(evtParam){
-            ... 이벤트 발생 시 로직 구현 ...
+            ... implement logic when event occurs ...
         }
     }
 };
@@ -27,17 +26,17 @@ IBSheet.create(
     options:OPTS
 )
 ```
-## 2. 객체 생성 이후 이벤트 설정하기
-객체가 생성되고 난 이후에는 `bind` 함수를 통해 이벤트를 설정하실 수 있습니다.
+## 2. Setting Events After Object Creation
+After the object has been created, you can set events through the `bind` function.
 ```javascript
-    // onAfterChange 이벤트
+    // onAfterChange event
     sheet.bind("onAfterChange", function(evtParam) {
 
     });
 ```
-이벤트 발생시 `evtParam`에는 각 이벤트 별로 이벤트가 발생한 `시트 객체나, 행 객체, 열이름` 등이 들어 있습니다.
+When an event occurs, `evtParam` contains the `sheet object, row object, column name`, etc. for each respective event.
 
-> **<mark>주의</mark> : 객체 생성 이후에 이벤트를 추가하는 것은 [onBeforeCreate](/docs/static/on-before-create)에서 공통으로 처리한 로직을 무시할 수 있으므로 권장하지 않습니다.**
+> **<mark>Caution</mark> : Adding events after object creation is not recommended as it may override logic commonly handled in [onBeforeCreate](/docs/static/on-before-create).**
 
 
 ### Example
@@ -45,9 +44,9 @@ IBSheet.create(
 options.Events = {
     onAfterChange :function(evtParam){
         if(evtParam.row["ConFirmYn"]=="Y"){
-            alert("금월 결산이 종료되었습니다.</br>마감 정보를 확인하시고 수정해 주세요.");
+            alert("This month's closing has been completed.</br>Please check the closing information and make corrections.");
         }else if(evtParam.value > evtParam.row["MaxBud"]){
-            alert("입력값이 최대 예산치보다 높습니다.");
+            alert("The input value exceeds the maximum budget.");
         }
     },
     onClick:function(evtParam){
@@ -69,4 +68,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

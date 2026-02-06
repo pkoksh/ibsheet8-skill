@@ -2,12 +2,12 @@
 KEY: getScrollLeft
 KIND: method
 PATH: funcs/core/get-scroll-left
-ALIAS: sheet.getScrollLeft, getScrollLeft(), 가로스크롤, 바의, 위치를, 단위로, 확인합니다
-ALIAS_EN: get, scroll, left
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-scroll-left
+ALIAS: sheet.getScrollLeft, getScrollLeft()
+ALIAS_EN: checks, position, horizontal, scrollbar, pixel, units, getscrollleft, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-scroll-left
 ---
 # getScrollLeft ***(method)***
-> 가로스크롤 바의 위치를 pixel단위로 확인합니다.
+> Checks the position of the horizontal scrollbar in pixel units.
 
 ### Syntax
 ```javascript
@@ -17,22 +17,22 @@ number getScrollLeft( section );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|section|`number`|선택|틀고정을 기준으로 한 좌우 영역
-`0`:좌측
-`1`:가운데 (`default`)
-`2`:우측|
+|section|`number`|Optional|Left/right area based on the fixed pane
+`0`:left
+`1`:center (`default`)
+`2`:right|
 
 
 ### Return Value
-***number*** : 가로 스크롤바에 대해 x축으로 이동한 거리(pixel단위)
+***number*** : Distance moved along the x-axis for the horizontal scrollbar (pixel unit)
 
 ### Example
 ```javascript
-//현재 가로스크롤 바의 위치를 얻는다.
+// Get the current horizontal scrollbar position.
 var offset = sheet.getScrollLeft(1);
-//다시 렌더링
+//Re-render
 sheet.rerender();
-//원래 위치로 이동시킴
+//Move to original position
 sheet.setScrollLeft(offset , 1 );
 ```
 
@@ -45,4 +45,4 @@ sheet.setScrollLeft(offset , 1 );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

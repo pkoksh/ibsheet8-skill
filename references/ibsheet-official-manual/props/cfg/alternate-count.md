@@ -2,21 +2,20 @@
 KEY: alternateCount
 KIND: config-property
 PATH: props/cfg/alternate-count
-ALIAS: 설정된, 간격에, 정의한, 개수만큼, 배경색를
-ALIAS_EN: alternate, count
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/alternate-count
+ALIAS_EN: applies, alternatecolor, docs, props, row, alternate, color, background
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/alternate-count
 ---
 # AlternateCount ***(cfg)***
 
-> [Alternate](./alternate) 로 설정된 행 간격에 `AlternateCount` 정의한 개수만큼 [AlternateColor](/docs/props/row/alternate-color) 배경색를 적용합니다.  
+> Applies [AlternateColor](/docs/props/row/alternate-color) background color for the number of rows defined by `AlternateCount` within the row interval set by [Alternate](./alternate).  
 
-> 예를 들어 `Alternate: 5` 이고, `AlternateCount: 2` 인 경우 5개 행 간격으로 마지막 2개 행에만 하이라이트를 적용합니다.
+> For example, if `Alternate: 5` and `AlternateCount: 2`, the highlight is applied only to the last 2 rows within every 5-row interval.
 
 ###
 ![AlternateCount](/assets/imgs/alternateCount.png "AlternateCount")
-<!-- IMAGE: 스크린샷/예시 이미지 - AlternateCount -->
+<!-- IMAGE: Screenshot/Example Image - AlternateCount -->
 
-[`Alternate: 5, AlternateCount: 2` 로 설정한 경우]
+[When set to `Alternate: 5, AlternateCount: 2`]
 
 
 
@@ -26,7 +25,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/alternate
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|`alternate` 설정된 행 간격마다 하이라이트가 적용될 마지막 행수 (`default: 1`)|
+|`number`|Number of last rows to apply highlight within each `alternate` row interval (`default: 1`)|
 
 
 ### Example
@@ -47,4 +46,4 @@ options["Cfg"] = {
 ### Since
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

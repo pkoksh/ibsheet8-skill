@@ -2,21 +2,20 @@
 KEY: autoExcelMode
 KIND: config-property
 PATH: props/cfg/auto-excel-mode
-ALIAS: 함수를, 이용하여, 엑셀, 다운, 업로드를
-ALIAS_EN: auto, excel, mode, xlsx
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/auto-excel-mode
+ALIAS_EN: mode, allows, you, choose, whether, server, module, client
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/auto-excel-mode
 ---
 # AutoExcelMode ***(cfg)***
 
-> down2Excel(),loadExcel() 함수를 이용하여 엑셀 다운/업로드를 할 때, 서버모듈을 이용할지 클라이언트 모듈을 이용할지 정할 수 있는 모드 입니다. 
+> This mode allows you to choose whether to use the server module or the client module when downloading/uploading Excel files using the down2Excel() and loadExcel() functions. 
 
-> 따로 설정하지 않으면 서버모듈을 기준으로 사용됩니다. 
+> If not configured separately, the server module is used by default. 
 
-> `AutoExcelMode`를 `1`로 설정시 서버모듈([down2Excel](/docs/funcs/excel/down-to-excel), [loadExcel](/docs/funcs/excel/load-excel)) 과 동일합니다.
+> Setting `AutoExcelMode` to `1` is the same as using the server module ([down2Excel](/docs/funcs/excel/down-to-excel), [loadExcel](/docs/funcs/excel/load-excel)).
 
-> `AutoExcelMode`를 `2`로 설정시 클라이언트 모듈([exportData](/docs/funcs/core/export-data), [importData](/docs/funcs/core/import-data))과 동일합니다. 클라이언트 모듈만을 사용하고 싶은 경우는 따로 설정하지 않고 ([exportData](/docs/funcs/core/export-data), [importData](/docs/funcs/core/import-data))를 사용하셔도 됩니다. 
+> Setting `AutoExcelMode` to `2` is the same as using the client module ([exportData](/docs/funcs/core/export-data), [importData](/docs/funcs/core/import-data)). If you only want to use the client module, you can also use ([exportData](/docs/funcs/core/export-data), [importData](/docs/funcs/core/import-data)) without any separate configuration. 
 
-> `AutoExcelMode`를 `3`으로 설정하면 브라우저의 성능에 따라 서버모듈([down2Excel](/docs/funcs/excel/down-to-excel), [loadExcel](/docs/funcs/excel/load-excel))과 클라이언트 모듈([exportData](/docs/funcs/core/export-data), [importData](/docs/funcs/core/import-data))에 대해 **자동분기점**이 형성된다. 
+> Setting `AutoExcelMode` to `3` creates an **automatic branching point** between the server module ([down2Excel](/docs/funcs/excel/down-to-excel), [loadExcel](/docs/funcs/excel/load-excel)) and the client module ([exportData](/docs/funcs/core/export-data), [importData](/docs/funcs/core/import-data)) based on browser capability. 
 
 
 ### Type
@@ -25,32 +24,32 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/auto-exce
 ### Options
 |Value|Description|
 |-----|-----|
-|`1`|서버모듈을 (`down2Excel, loadExcel`) 사용합니다. (`default`)|
-|`2`|클라이언트 모듈을 (`exportData, importData`) 사용합니다. **(IE10이상에서만 사용 가능)** |
-|`3`|브라우저의 성능에 따라 서버모듈, 클라이언트 모듈로 **자동분기점**을 형성한다. 
- 하위 브라우저(IE9 이하)의 경우: `서버모듈`, 상위 브라우저의 경우: `클라이언트 모듈`.|
+|`1`|Uses the server module (`down2Excel, loadExcel`). (`default`)|
+|`2`|Uses the client module (`exportData, importData`). **(Available only in IE10 and above)** |
+|`3`|Creates an **automatic branching point** between server module and client module based on browser capability. 
+ For older browsers (IE9 and below): `Server module`, For modern browsers: `Client module`.|
 
 ### Example
 ```javascript
 options.Cfg = {
-    // 서버모듈을 사용
+    // Use server module
     AutoExcelMode: 1
 };
-//  AutoExcelMode: 1, 서버모듈 엑셀 다운
+//  AutoExcelMode: 1, server module Excel download
 sheet.down2Excel({fileName: "Excel.xlsx"});
 
 options.Cfg = {
-    // 클라이언트 모듈 사용
+    // Use client module
     AutoExcelMode: 2
 };
-// 상위 브라우저(IE10이상), AutoExcelMode: 2, 클라이언트 업로드
-sheet.loadExcel(); // sheet.importData()와 같음.
+// Modern browser (IE10 and above), AutoExcelMode: 2, client upload
+sheet.loadExcel(); // Same as sheet.importData().
 
 options.Cfg = {
-    // 클라이언트 모듈, 서버모듈 자동 분기점.
+    // Client module, server module automatic branching point.
     AutoExcelMode: 3
 };
-// 상위 브라우저(IE10이상), AutoExcelMode: 3, 클라이언트 엑셀 다운
+// Modern browser (IE10 and above), AutoExcelMode: 3, client Excel download
 sheet.down2Excel({fileName: "Excel.xlsx"});
 
 ```
@@ -65,5 +64,5 @@ sheet.down2Excel({fileName: "Excel.xlsx"});
 
 |product|version|desc|
 |---|---|---|
-|excel|8.0.0.4|기능 추가|
-|excel|8.0.0.5|명칭 변경 `ExportMode => AutoExcelMode`|
+|excel|8.0.0.4|Feature added|
+|excel|8.0.0.5|Name changed `ExportMode => AutoExcelMode`|

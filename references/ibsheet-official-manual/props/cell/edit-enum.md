@@ -2,25 +2,24 @@
 KEY: editEnum
 KIND: cell-property
 PATH: props/cell/edit-enum
-ALIAS: 셀에서, 드랍리스트가, 펼쳐졌을때, 보여지는, 아이템의
-ALIAS_EN: edit, enum
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/edit-enum
+ALIAS_EN: you, want, item, text, shown, dropdown, list, expanded
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/edit-enum
 ---
 # EditEnum ***(cell)***
-> [Type](/docs/appx/type)이 `Enum`인 셀에서 드랍리스트가 펼쳐졌을때 보여지는 아이템의 Text를 [Enum](./enum)에서 설정한 값과 다르게 하고자 할때  사용합니다.
+> Used when you want the item text shown in the dropdown list when expanded to be different from the value set in [Enum](./enum) for cells with [Type](/docs/appx/type) `Enum`.
 
-> '\\t'구분자를 이용하여 아이템을 여러개의 컬럼으로 표현할 수 있습니다.
+> You can display items in multiple columns using the '\\t' delimiter.
 
 ###
-**1. 일반적인 EditEnum 사용** 
+**1. Standard EditEnum usage** 
 
 ![EditEnum](/assets/imgs/editEnum.png "EditEnum")
-<!-- IMAGE: 스크린샷/예시 이미지 - EditEnum -->
+<!-- IMAGE: Screenshot/Example Image - EditEnum -->
 
-**2. '\t' 구분자를 사용한 EditEnum 사용** 
+**2. EditEnum usage with '\t' delimiter** 
 
 ![EditEnum2](/assets/imgs/editEnum2.png "EditEnum2")
-<!-- IMAGE: 스크린샷/예시 이미지 - EditEnum2 --> 
+<!-- IMAGE: Screenshot/Example Image - EditEnum2 --> 
 
 
 ### Type
@@ -29,21 +28,21 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/edit-enu
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|첫번째 글자를 구분자로 하는 문자열 (ex:"#사장#부사장#전무#상무#이사#부서장#차장#과장#대리#주임#사원")|
+|`string`|A string with the first character as the delimiter (e.g., "#CEO#VP#Senior Director#Director#Manager#Dept Head#Deputy Manager#Section Chief#Assistant Manager#Senior Staff#Staff")|
 
 ### Example
 ```javascript
-//Enum 열에 item을 설정한다.
+// Set items for an Enum column
 {
     "data":[
         ...
         { ...,
-            CLSEnum: "|시흥현장|안산현장|화성현장",
-            CLSEditEnum: "|경기도 시흥시 은행로216번길 26|경기도 안산시 단원구 안산천남로 245|경기도 화성시 동탄반석로 96"
+            CLSEnum: "|Site A|Site B|Site C",
+            CLSEditEnum: "|123 Main Street, City A|456 Oak Avenue, City B|789 Pine Road, City C"
         },
         { ...,
-            CLSEnum: "|시흥현장|안산현장|화성현장",
-            CLSEditEnum: "|경기도\t시흥시\t은행로216번길 26|경기도\t안산시 단원구\t안산천남로 245|경기도\t화성시\t동탄반석로 96"
+            CLSEnum: "|Site A|Site B|Site C",
+            CLSEditEnum: "|State\tCity A\t123 Main Street|State\tCity B\t456 Oak Avenue|State\tCity C\t789 Pine Road"
         }
         ...
     ]
@@ -59,4 +58,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/edit-enu
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

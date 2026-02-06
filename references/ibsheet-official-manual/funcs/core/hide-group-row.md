@@ -2,12 +2,12 @@
 KEY: hideGroupRow
 KIND: method
 PATH: funcs/core/hide-group-row
-ALIAS: sheet.hideGroupRow, hideGroupRow(), 그룹행을, 제거하거나, 숨깁니다
-ALIAS_EN: hide, group, row
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/hide-group-row
+ALIAS: sheet.hideGroupRow, hideGroupRow()
+ALIAS_EN: removes, hides, group, rows, hidegrouprow, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/hide-group-row
 ---
 # hideGroupRow ***(method)***
-> 그룹행을 제거하거나 숨깁니다.
+> Removes or hides group rows.
 
 ### Syntax
 ```javascript
@@ -19,17 +19,17 @@ void hideGroupRow( del );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|del |`string or object`|선택|그룹행을 삭제합니다. (`default: 1`)|
+|del |`string or object`|Optional|grouprow Delete. (`default: 1`)|
 
 ### Return Value
-***boolean*** : 설정 완료 여부
+***boolean*** : setting complete whether
 
 ### Example
 ```javascript
-// 그룹행을 제거합니다.
+// grouprow remove.
 sheet.hideGroupRow(); 
 
-// 그룹행을 숨깁니다.
+// grouprow hides.
 sheet.hideGroupRow(0); 
 ```
 
@@ -39,4 +39,4 @@ sheet.hideGroupRow(0);
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.9|기능 추가|
+|core|8.3.0.9|Feature added|

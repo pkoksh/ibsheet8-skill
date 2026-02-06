@@ -2,14 +2,13 @@
 KEY: maxHeight
 KIND: row-property
 PATH: props/row/max-height
-ALIAS: 행의, 최대, 높이를, 설정합니다
-ALIAS_EN: max, height
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/max-height
+ALIAS_EN: maximum, height, row, maxheight
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/max-height
 ---
 # MaxHeight ***(row)***
-> 행의 최대 높이를 설정합니다.
+> Sets the maximum height of a row.
 
-> Wrap 설정시 데이터의 양에 따라 행의 높이가 늘어나게 되는데, 이때 최대 증가할 수 있는 높이를 설정합니다.
+> When Wrap is enabled, the row height increases depending on the amount of data; this sets the maximum height it can increase to.
 
 ### Type
 `number`
@@ -17,7 +16,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/max-heigh
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|행의 최대 높이 (pixel 단위)|
+|`number`|Maximum row height (in pixels)|
 
 
 
@@ -30,7 +29,7 @@ options.Def.Row = {
 
 ### Read More
 <!--!
-- `[비공개]` [MinHeight row](./min-height) 
+- `[Private]` [MinHeight row](./min-height)
 !-->
 
 
@@ -38,4 +37,4 @@ options.Def.Row = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

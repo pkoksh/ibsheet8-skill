@@ -2,16 +2,16 @@
 KEY: setFixedTop
 KIND: method
 PATH: funcs/core/set-fixed-top
-ALIAS: sheet.setFixedTop, setFixedTop(), 데이터행을, 상단에, 고정시킵니다
-ALIAS_EN: set, fixed, top
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-fixed-top
+ALIAS: sheet.setFixedTop, setFixedTop()
+ALIAS_EN: fixes, data, rows, top, setfixedtop, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-fixed-top
 ---
 # setFixedTop ***(method)***
-> 데이터행을 상단에 고정시킵니다.
+> Fixes data rows to the top.
 
-> **제약: `SearchMode: 0 or 3`의 경우 해당 기능을 사용할 수 없습니다.**
+> **Note: This feature cannot be used with `SearchMode: 0 or 3`.**
 
-> **제약: `DataMerge` 와 함께 사용할 수 없고 시트의 데이터행이 `최소 4개의 행 이상`이어야 합니다.**
+> **Note: Cannot be used together with `DataMerge`, and the sheet's data rows must have `at least 4 rows`.**
 
 ### Syntax
 ```javascript
@@ -21,18 +21,18 @@ boolean setFixedTop( count, render );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|count |`number`|선택|상단에 고정시킬 데이터행의 갯수|
-|render |`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
+|count |`number`|Optional|Number of data rows to fix at the top|
+|render |`boolean`|Optional|whether immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+`0(false)`:Not reflected
+`1(true)`:Immediately reflected (`default`)|
 
 ### Return Value
-***boolean*** : 설정에 대한 결과
+***boolean*** : Result of the setting
 
 ### Example
 ```javascript
-// 헤더행을 제외한 데이터행 4개를 상단에 고정한다.
+// Fix 4 data rows at the top, excluding header rows.
 sheet.setFixedTop(4,1);
 ```
 
@@ -43,5 +43,5 @@ sheet.setFixedTop(4,1);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.13|`render` 인자 default 변경|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.13|`render` argument default Changed|

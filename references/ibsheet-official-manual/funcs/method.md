@@ -2,21 +2,21 @@
 KEY: method
 KIND: method
 PATH: funcs/method
-ALIAS: sheet.method, method(), 사용법, 기초, 시트가, 제공하는, 모든
-ALIAS_EN: method
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/method
+ALIAS: sheet.method, method()
+ALIAS_EN: methods, provided, sheet, configured, setting, parameter, order, single
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/method
 ---
-# method 사용법 기초
-> 시트가 제공하는 모든 메소드는 각 파라미터를 순서대로 설정하거나 하나의 `object` 형태로 설정할 수 있습니다.
+# Method Usage Basics
+> All methods provided by the sheet can be configured by setting each parameter in order or as a single `object`.
 
-### 파라미터 설정 방법
+### How to Set Parameters
 ```javascript
-//addRow 행추가   (next: 행위치, visible: 보임여부, focus: 포커스 이동여부, parent: 트리사용시 부모 행객체)
+//addRow - Add a row (next: row position, visible: visibility, focus: whether to move focus, parent: parent row object when using tree)
 
-//각 파라미터를 순서대로 설정
+//Set each parameter in order
 sheet.addRow(sheet.getFirstRow(), 1);
 
-//파라미터를 object 형태로 설정
+//Set parameters as an object
 sheet.addRow({visible: 1, focus: 1});
 ```
 
@@ -26,4 +26,4 @@ sheet.addRow({visible: 1, focus: 1});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

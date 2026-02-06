@@ -2,13 +2,12 @@
 KEY: enumOpenMode
 KIND: config-property
 PATH: props/cfg/enum-open-mode
-ALIAS: 포커스, 이동, 간에, 목록, 열기
-ALIAS_EN: enum, open, mode, focus
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/enum-open-mode
+ALIAS_EN: open, enum, list, focus, navigation, enumopenmode, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/enum-open-mode
 ---
 # EnumOpenMode ***(cfg)***
 
-> 포커스 이동 간에 Enum목록 열기 방법을 설정합니다. 
+> Sets how to open the Enum list during focus navigation. 
 
 
 ### Type
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/enum-open
 ### Options
 |Value|Description|
 |-----|-----|
-|0(false)|포커스 시 Enum 리스트 목록을 표시하지 않음|
-|1(true)|포커스 시 Enum 리스트 목록을 표시 (`default`)|
+|0(false)|Do not display the Enum list on focus|
+|1(true)|Display the Enum list on focus (`default`)|
 
 ### Example
 ```javascript
 options.Cfg = {
-  EnumOpenMode: false      // 포커스 시 Enum 리스트 목록을 표시하지 않음
+  EnumOpenMode: false      // Do not display the Enum list on focus
 };
 ```
 
@@ -34,4 +33,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.11|기능 추가|
+|core|8.3.0.11|Feature added|

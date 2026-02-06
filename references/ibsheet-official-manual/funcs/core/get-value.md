@@ -2,12 +2,12 @@
 KEY: getValue
 KIND: method
 PATH: funcs/core/get-value
-ALIAS: sheet.getValue, getValue(), 특정, 셀의, 값을, 구분자를, 제거하고
-ALIAS_EN: get, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-value
+ALIAS: sheet.getValue, getValue()
+ALIAS_EN: retrieves, value, specific, cell, delimiters, removed, getvalue, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-value
 ---
 # getValue ***(method)***
-> 특정 셀의 값을 구분자를 제거하고 가져오는 함수입니다.
+> Retrieves the value of a specific cell with delimiters removed.
 
 ### Syntax
 ```javascript
@@ -17,16 +17,16 @@ mixed getValue( row, col );
 ### Parameters
 |Name|Type|Required| Description |
 |----|----|--------|-------------|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
 
 ### Return Value
-***mixed ( `number` \| `string` )*** : 셀의 타입에 따른 값을 리턴
+***mixed ( `number` \| `string` )*** : Returns the value according to the cell's type
 
 ### Example
 ```javascript
 var r = sheet.getFirstRow();
-//구분자 없이 yyyyMMdd 형태로 추출
+//Extract in yyyyMMdd format without delimiters
 var sdate = sheet.getValue( r , "StartDate" );
 var edate = sheet.getValue({row:r,col:"EndDate"});
 ```
@@ -39,4 +39,4 @@ var edate = sheet.getValue({row:r,col:"EndDate"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: color
 KIND: cell-property
 PATH: props/cell/color
-ALIAS: 셀의, 배경, 색상을, 설정합니다
-ALIAS_EN: color, background
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/color
+ALIAS_EN: background, color, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/color
 ---
 # Color ***(cell)***
 
-> 셀의 배경 색상을 설정합니다.
+> Sets the background color of the cell.
 
-> 색상은 상태에 따른 배경 색상의 영향을 받습니다.
+> The color is affected by the background color based on state.
 
-> rgb(255,255,255)는 투명색이 됩니다.
+> rgb(255,255,255) becomes transparent.
 
 ### Type
 `string`
@@ -20,13 +19,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/color
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|HEX형식 (ex:#FF00F0)
-rgb형식 (ex:rgb(244,200,40)|
+|`string`|HEX format (e.g., #FF00F0)
+rgb format (e.g., rgb(244,200,40)|
 
 ### Example
 
 ```javascript
-//조회 데이터 내에서 속성 적용  (열이름 :CLS )
+// Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSColor":"#ADADAD" , ...}
@@ -44,4 +43,4 @@ rgb형식 (ex:rgb(244,200,40)|
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

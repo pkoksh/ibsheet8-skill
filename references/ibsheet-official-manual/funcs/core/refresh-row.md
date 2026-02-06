@@ -2,14 +2,14 @@
 KEY: refreshRow
 KIND: method
 PATH: funcs/core/refresh-row
-ALIAS: sheet.refreshRow, refreshRow(), 특정, 행의, 변경된, 내용을, 화면에
-ALIAS_EN: refresh, row
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/refresh-row
+ALIAS: sheet.refreshRow, refreshRow()
+ALIAS_EN: specific, rowof, changedapplied, content, screen, reflect, refreshrow, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/refresh-row
 ---
 # refreshRow ***(method)***
-> 특정 행의 변경된 내용을 화면에 반영합니다.
+> specific rowof Changedapplied content screen reflect.
 
-> 반영이 이루어질 때 화면이 깜빡이지 않습니다.
+> Does not cause screen flickering when reflecting changes.
 
 ### Syntax
 ```javascript
@@ -20,14 +20,14 @@ void refreshRow( row );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-//특정 행에 변경된 내용(값,속성)을 화면에 반영한다.
+//specific row Changedapplied content(value,property) screen reflect.
 sheet.refreshRow( row );
 ```
 
@@ -40,4 +40,4 @@ sheet.refreshRow( row );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

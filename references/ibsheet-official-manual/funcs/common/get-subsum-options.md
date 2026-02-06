@@ -2,13 +2,13 @@
 KEY: getSubsumOptions
 KIND: method
 PATH: funcs/common/get-subsum-options
-ALIAS: sheet.getSubsumOptions, getSubsumOptions(), 시트에, 소계, 기능을, 사용시, 설정된
-ALIAS_EN: get, subsum, options, subtotal
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/get-subsum-options
+ALIAS: sheet.getSubsumOptions, getSubsumOptions()
+ALIAS_EN: subtotal, feature, sheet, via, makesubtotal, core, make, sub
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/get-subsum-options
 ---
 # getSubSumOptions ***(method)***
 
-> [makeSubTotal()](../core/make-sub-total)로 시트에 소계 기능을 사용시, 설정된 옵션을 확인합니다. 
+> When the subtotal feature is used on the sheet via [makeSubTotal()](../core/make-sub-total), retrieves the configured options. 
 
 
 ### Syntax
@@ -17,7 +17,7 @@ object getSubSumOptions();
 ```
 
 ### Return Value
-***array[option]*** makeSubTotal()에 설정된 옵션
+***array[option]*** Options configured in makeSubTotal()
 ```
 [
   {
@@ -52,15 +52,15 @@ object getSubSumOptions();
 
 ### Example
 ```javascript
-// 소계에 설정된 옵션을 배열 형태로 반환합니다.
+// Returns the options configured for subtotals as an array.
 var opt = sheet.getSubSumOptions();
 ```
 
 ### Read More
-- [makeSubTotal method](../core/make-sub-total) 
+- [makeSubTotal method](../core/make-sub-total)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

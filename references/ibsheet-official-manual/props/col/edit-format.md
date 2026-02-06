@@ -2,42 +2,41 @@
 KEY: editFormat
 KIND: column-property
 PATH: props/col/edit-format
-ALIAS: 사용자가, 셀을, 더블클릭하여, 편집모드로, 들어갔을때
-ALIAS_EN: edit, format
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/edit-format
+ALIAS_EN: format, display, user, double, clicks, cell, enter, edit
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/edit-format
 ---
 # EditFormat ***(col)***
-> 사용자가 셀을 더블클릭하여 편집모드로 들어갔을때 보여 줄 포맷을 설정합니다
+> Sets the format to display when the user double-clicks a cell to enter edit mode.
 
-> 각 열의 [Type](/docs/appx/type)에 따라 설정 방법이나 동작이 달라집니다.
-> 가장 쉽게 이해하자면 날짜 유형 포맷을 사용하는 열에서 "EditFormat":"ddMMyyyy"로 설정하면, 셀에 보여질때는 "2019-12-31"형식으로 보여지다가, 사용자가 셀의 데이터를 편집하려 할때는 "31122019"로 나타나게 됩니다.
+> The setting method and behavior differ depending on the column [Type](/docs/appx/type).
+> To understand easily, for a column using date format, if you set "EditFormat":"ddMMyyyy", the cell displays as "2019-12-31" format normally, but when the user tries to edit the cell data, it appears as "31122019".
 
-> 포맷에 대한 자세한 내용은 [Format appendix](/docs/appx/format)을 참고해 주세요.
-> `Int`나 `Float` 타입에선 %는 `EditFormat`에서 사용할 수 없습니다.
+> For detailed information about formats, please refer to [Format appendix](/docs/appx/format).
+> For `Int` or `Float` types, % cannot be used in `EditFormat`.
 
 
 ### Type
-mixed( `string` \| `object`)
+`mixed`( `string` \| `object`)
 
 ### Options
-|타입|유형|사용방법 |
+|Type|Category|Usage|
 |---|---|---|
-|`Text, Lines`|`object`|셀에서 더블클릭을 통해 편집모드로 들어갈때 원래의 값을 어떤 형식으로 보여줄지 설정합니다.
-ex) "EditFormat":{"KOR":"대한민국", "JPN":"일본", "USA":"미국"}
-셀의 값이 KOR일때 편집모드로 들어가면 대한민국으로 보여줌
+|`Text, Lines`|`object`|Sets the format to display the original value when entering edit mode by double-clicking the cell.
+ex) "EditFormat":{"KOR":"South Korea", "JPN":"Japan", "USA":"United States"}
+When the cell value is KOR, entering edit mode shows South Korea
 ![EditFormat Text](/assets/imgs/editFormatText.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - EditFormat Text -->|
-|`Date`|`string`|편집시 보여질 년,월,일의 순서
+<!-- IMAGE: Screenshot/Example Image - EditFormat Text -->|
+|`Date`|`string`|Order of year, month, day shown during editing
 ex) "EditFormat":"ddMMyyyy"
 ![EditFormat Date](/assets/imgs/editFormatDate.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - EditFormat Date -->|
+<!-- IMAGE: Screenshot/Example Image - EditFormat Date -->|
 
 
 
 
 ### Example
 ```javascript
-//특정 열에서  편집시 일월년 순으로 보여지게끔 설정
+// Set to display in day-month-year order when editing a specific column
 options.Cols = [
     ...
     {Type: "Date", Format: "yyyy-MM-dd", EditFormat: "ddMMyyyy", Name: "enterDate",Width: 120 ...},
@@ -55,4 +54,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

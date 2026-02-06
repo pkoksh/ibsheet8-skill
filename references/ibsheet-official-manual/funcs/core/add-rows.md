@@ -2,15 +2,15 @@
 KEY: addRows
 KIND: method
 PATH: funcs/core/add-rows
-ALIAS: sheet.addRows, addRows(), 신규, 행을, 여러개, 추가합니다
-ALIAS_EN: add, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/add-rows
+ALIAS: sheet.addRows, addRows()
+ALIAS_EN: adds, multiple, new, rows, addrows, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/add-rows
 ---
 # addRows ***(method)***
 
-> 신규 행을 여러개 추가합니다.
+> Adds multiple new rows.
 
-> 트리 기능을 사용시에는 `parent`인자를 지정해 줘야 원하는 레벨로 행을 추가할 수 있습니다.
+> When using the tree feature, you must specify the `parent` argument to add rows at the desired level.
 
 ### Syntax
 ```javascript
@@ -20,28 +20,28 @@ object addRows( count, next, focus, parent, valid );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|count|`number`|필수|추가할 행의 개수|
-|next|`object`|선택|[데이터 로우 객체](/docs/appx/row-object)
-(지정한 행의 위에 신규행이 생성됨. 값이 없으면 맨 마지막행에 생성)|
-|focus|`boolean`|선택|생성 후 생성된 행으로 포커스 이동 여부
-`0(false)`:포커스 이동 안함
-`1(true)`:포커스 이동 (`default`)|
-|parent|`object`|선택|[데이터 로우 객체](/docs/appx/row-object) (트리 사용시 부모에 해당하는 행 지정)|
-|valid|`boolean`|선택|행추가 가능여부 확인
-(실제로 행이 추가되지 않고, 가능/불가능 여부를 확인해서 리턴)
-`0(false)`:행추가 가능여부 확인 안함 (`default`)
-`1(true)`:행추가 가능여부 확인 사용|
+|count|`number`|Required|Number of rows to add|
+|next|`object`|Optional|[Data row object](/docs/appx/row-object)
+(New rows are created above the specified row. If no value is given, they are created at the last row)|
+|focus|`boolean`|Optional|Whether to move focus to the created rows after creation
+`0(false)`:Do not move focus
+`1(true)`:Move focus (`default`)|
+|parent|`object`|Optional|[Data row object](/docs/appx/row-object) (Specifies the parent row when using tree)|
+|valid|`boolean`|Optional|Check whether row addition is possible
+(Rows are not actually added; it checks and returns whether addition is possible or not)
+`0(false)`:Do not check row addition possibility (`default`)
+`1(true)`:Check row addition possibility|
 
 
 ### Return Value
-***object*** : 추가된 행들 중에 최상단 행의 [데이터 로우 객체](/docs/appx/row-object)
+***object*** : [Data row object](/docs/appx/row-object) of the topmost row among the added rows
 
 ### Example
 ```javascript
-//포커스행 위로 신규행을 3개 추가합니다.
+//Adds 3 new rows above the focused row.
 var firtAddRow = sheet.addRows( {"count":3, "next":sheet.getFocusedRow()} );
 
-//선택 행 위치에 신규행을 2개 추가합니다.
+//Adds 2 new rows at the selected row position.
 sheet.addRows({"count":2, "parent":sheet.getFocusedRow().parentNode, "next":sheet.getFocusedRow()});
 ```
 
@@ -56,4 +56,4 @@ sheet.addRows({"count":2, "parent":sheet.getFocusedRow().parentNode, "next":shee
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

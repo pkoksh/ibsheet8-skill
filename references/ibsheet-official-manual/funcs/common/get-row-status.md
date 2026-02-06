@@ -2,25 +2,25 @@
 KEY: getRowStatus
 KIND: method
 PATH: funcs/common/get-row-status
-ALIAS: sheet.getRowStatus, getRowStatus(), 특정, 행의, 상태값을, 반환합니다
-ALIAS_EN: get, row, status
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/get-row-status
+ALIAS: sheet.getRowStatus, getRowStatus()
+ALIAS_EN: returns, status, value, specific, row, getrowstatus, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/get-row-status
 ---
 # getRowStatus ***(method)***
 
-> 특정 행의 상태값을 반환합니다. 
+> Returns the status value of a specific row. 
 
-> 상태값 반환 우선순위는 아래와 같습니다. 
+> The priority for returning status values is as follows: 
 
 > 
 
-> 1. 행 상태에 Added가 포함된 경우 우선 무조건적으로 Added를 반환합니다. 
+> 1. If the row status includes Added, it unconditionally returns Added first. 
 
-> 2. 행 상태에 Deleted가 포함된 경우 그 다음 무조건적으로 Deleted를 반환합니다. 
+> 2. If the row status includes Deleted, it unconditionally returns Deleted next. 
 
-> 3. 그 이외의 경우에는 Changed를 반환합니다. 
+> 3. In all other cases, it returns Changed. 
 
-> 4. 상태가 없는 경우에는 ""를 반환합니다. 
+> 4. If there is no status, it returns "". 
 
 
 ### Syntax
@@ -29,11 +29,11 @@ void getRowStatus();
 ```
 
 ### Return Value
-***string*** 행 상태
+***string*** Row status
 
 ### Example
 ```javascript
-sheet.getRowStatus( row ); // 파라미터로 기입한 행의  상태값을 반환합니다.
+sheet.getRowStatus( row ); // Returns the status value of the row specified as a parameter.
 ```
 
 ### Read More
@@ -42,4 +42,4 @@ sheet.getRowStatus( row ); // 파라미터로 기입한 행의  상태값을 반
 
 |product|version|desc|
 |---|---|---|
-|common|1.0.27|기능 추가|
+|common|1.0.27|Feature added|

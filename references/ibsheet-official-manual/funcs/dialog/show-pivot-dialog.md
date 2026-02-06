@@ -2,23 +2,23 @@
 KEY: showPivotDialog
 KIND: method
 PATH: funcs/dialog/show-pivot-dialog
-ALIAS: sheet.showPivotDialog, showPivotDialog(), 피벗, 데이터를, 확인하기, 위한, 다이얼로그를
-ALIAS_EN: show, pivot, dialog
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/dialog/show-pivot-dialog
+ALIAS: sheet.showPivotDialog, showPivotDialog()
+ALIAS_EN: opens, dialog, checking, pivot, data, showpivotdialog, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/dialog/show-pivot-dialog
 ---
 # showPivotDialog ***(method)***
 
-> 피벗 데이터를 확인하기 위한 다이얼로그를 오픈합니다.
+> Opens a dialog for checking pivot data.
 
-> 피벗 데이터를 만들 열을 우측으로 드래그하여 설정하신 후, 피벗 테이블 생성 버튼을 클릭하시면 원본시트 위치에 동적으로 생성된 피벗 시트가 보여집니다.
+> After setting the columns for pivot data creation by dragging them to the right, clicking the pivot Table creation button dynamically creates a pivot sheet at the original sheet's position.
 
-> <mark>해당 함수는 `"/plugins/ibsheet-dialog.js"` 파일이 포함되어 있어야 사용하실 수 있습니다.</mark>
+> <mark>This function requires the `"/plugins/ibsheet-dialog.js"` file to be included.</mark>
 
-> **<mark>주의</mark> : 피벗 다이얼로그 사용 시, 필터 다이얼로그([UseFilterDialog (cfg)](/docs/props/cfg/use-filter-dialog))는 사용 하실 수 없습니다.**
+> **<mark>Note</mark> : When using the pivot dialog, the filter dialog ([UseFilterDialog (cfg)](/docs/props/cfg/use-filter-dialog)) cannot be used.**
 
 ###
-![피봇다이얼로그](/assets/imgs/showPivotDialog.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - 피봇다이얼로그 -->
+![pivotdialog](/assets/imgs/showPivotDialog.png)
+<!-- IMAGE: Screenshot/Example Image - pivotdialog -->
 
 ### Syntax
 ```javascript
@@ -29,15 +29,15 @@ object showPivotDialog(width, height, name, pivotParams, useStorage);
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|width|`number`|선택|다이얼로그 창의 너비 (`default: 500`)|
-|height|`number`|선택|다이얼로그 창의 높이 (`default: 600`)|
-|name|`string`|선택|다이얼로그 이름 (`default: "pivotDialog_" + 시트id`)|
-|pivotParams|`object`|선택|[makePivotTable method](/docs/funcs/core/make-pivot-table) 옵션 사용
- (`format`, `callback`, `hideTotal` 사용 가능)|
-|useStorage|`boolean`|선택|피벗 생성 정보 저장 기능 보여지기 여부 (`default: 0(false)`)
-해당 기능을 사용할 때에는 [StorageSession](/docs/props/cfg/storage-session)를 설정해야 합니다
-`0(false)`:피벗 생성 정보 저장 기능 미표시 (`default`)
-`1(true)`:피벗 생성 정보 저장 기능 표시|
+|width|`number`|Optional|Dialog window width (`default: 500`)|
+|height|`number`|Optional|Dialog window height (`default: 600`)|
+|name|`string`|Optional|Dialog name (`default: "pivotDialog_" + sheetid`)|
+|pivotParams|`object`|Optional|Uses [makePivotTable method](/docs/funcs/core/make-pivot-table) options
+ (`format`, `callback`, `hideTotal` available)|
+|useStorage|`boolean`|Optional|Whether to enable the pivot creation information save feature (`default: 0(false)`)
+To use this feature, [StorageSession](/docs/props/cfg/storage-session) must be set 
+`0(false)`:Pivot creation information save feature not displayed (`default`)
+`1(true)`:Pivot creation information save feature displayed|
 
 
 ### Return Value
@@ -45,17 +45,17 @@ object showPivotDialog(width, height, name, pivotParams, useStorage);
 
 ### Example
 ```javascript
-//피봇 다이얼로그 오픈
+//Open pivot dialog
 sheet.showPivotDialog();
 
-//객체 방식
+//Object method
 sheet.showPivotDialog({ width: 700, height: 700 });
 
 sheet.showPivotDialog({
       width: 700,
       height: 700,
       pivotParams: {
-        format: '#,### 만원',
+    format: '#,### Won',
         callback: function (evt) {
           var dataRows = evt.sheet.getDataRows();
 
@@ -83,10 +83,10 @@ sheet.showPivotDialog({
 
 |product|version|desc|
 |---|---|---|
-|dialog|0.0.0|기능 추가|
-|dialog|0.0.6|`showType` 기능 추가|
-|dialog|0.0.7|`pivotParams` 기능 추가|
-|dialog|0.0.8|기능 명 변경 (`createPivotDialog` -> `showPivotDialog`)|
-|dialog|0.0.11|`useStorage` 기능 추가|
-|dialog|1.0.29|`showPivotDialog` 의 `pivotType` 관련 기능 개선|
-|dialog|1.0.39|`pivotParams`에 `hideTotal` 파라미터 기능 추가|
+|dialog|0.0.0|Feature added|
+|dialog|0.0.6|`showType` Feature added|
+|dialog|0.0.7|`pivotParams` Feature added|
+|dialog|0.0.8|Feature name changed (`createPivotDialog` -> `showPivotDialog`)|
+|dialog|0.0.11|`useStorage` Feature added|
+|dialog|1.0.29|`showPivotDialog` `pivotType` related feature improved|
+|dialog|1.0.39|`pivotParams` `hideTotal` parameter Feature added|

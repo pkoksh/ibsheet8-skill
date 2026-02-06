@@ -2,34 +2,33 @@
 KEY: wrap
 KIND: row-property
 PATH: props/row/wrap
-ALIAS: 셀의, 내용이, 열의, 너비보다, 많은
-ALIAS_EN: wrap
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/wrap
+ALIAS_EN: whether, display, content, line, wrapping, cell, exceeds, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/wrap
 ---
 # Wrap ***(row)***
 
-> 셀의 내용이 열의 너비보다 많은 경우 줄넘김을 통해 표현할지 여부를 설정합니다.(css의 white-space속성)
+> Sets whether to display content through line wrapping when cell content exceeds the column width. (CSS white-space property)
 
-> 줄넘김이 발생할때 행의 높이가 자동으로 조절됩니다.
+> When line wrapping occurs, the row height is automatically adjusted.
 
-> 일반적으로 `Text` 타입에서 사용하며, `Radio` 타입에서도 사용하실 수 있습니다.
+> Generally used with `Text` type, and can also be used with `Radio` type.
 
-> [Lines 타입](/docs/appx/type) 컬럼에서는 `default: 1(true)`로 설정됩니다.
+> For [Lines type](/docs/appx/type) columns, it is set to `default: 1(true)`.
 
-<!--! > 대용량 모드에서는 [SearchMode:0](/docs/props/cfg/search-mode)은 데이터행의 높이에 동적인 경우에 대해 지원하지 않으므로 해당 기능을 사용할 수 없습니다.
+<!--! > In large data mode, [SearchMode:0](/docs/props/cfg/search-mode) does not support dynamic row heights for data rows, so this feature cannot be used.
 !-->
 
 ###
-![Wrap:0(false)](/assets/imgs/wrap0.png "Wrap:0(false) 설정시")
-<!-- IMAGE: 스크린샷/예시 이미지 - Wrap:0(false) -->
+![Wrap:0(false)](/assets/imgs/wrap0.png "When Wrap:0(false) is set")
+<!-- IMAGE: Screenshot/Example Image - Wrap:0(false) -->
 
-[`Wrap:0(false)` 설정시]
+[`Wrap:0(false)` setting]
 
 
-![Wrap:1(true)](/assets/imgs/wrap1.png "Wrap:1(true) 설정시")
-<!-- IMAGE: 스크린샷/예시 이미지 - Wrap:1(true) -->
+![Wrap:1(true)](/assets/imgs/wrap1.png "When Wrap:1(true) is set")
+<!-- IMAGE: Screenshot/Example Image - Wrap:1(true) -->
 
-[`Wrap:1(true)` 설정시]
+[`Wrap:1(true)` setting]
 
 ### Type
 `boolean`
@@ -37,17 +36,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/wrap
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|줄넘김 사용 안함 (`white-space:nowrap`)|
-|`1(true)`|줄넘김 사용 (`white-space:normal`)|
+|`0(false)`|Line wrapping disabled (`white-space:nowrap`)|
+|`1(true)`|Line wrapping enabled (`white-space:normal`)|
 
 ### Example
 ```javascript
-//특정행에 Wrap를 허용
+//Allow Wrap for a specific row.
 var row = sheet.getRowById("AR33");
 row["Wrap"] = 1;
 sheet.refreshRow(row);
 
-//전체 데이터 행에 대해 줄넘김 허용.
+//Allow line wrapping for all data rows.
 options.Def.Row = {"Wrap": 1};
 ```
 
@@ -61,4 +60,4 @@ options.Def.Row = {"Wrap": 1};
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

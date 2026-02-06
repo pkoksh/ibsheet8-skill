@@ -2,16 +2,15 @@
 KEY: onIconClick
 KIND: event
 PATH: events/on-icon-click
-ALIAS: 속성, 값이, 이미지, 설정되어, 있을때
-ALIAS_EN: on, icon, click, property, attribute
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-icon-click
+ALIAS_EN: event, called, clicking, icon, within, cell, docs, props
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-icon-click
 ---
 # onIconClick ***(event)***
-> [Icon](/docs/props/col/icon)속성 값이 이미지 URL로 설정되어 있을때 셀 내 아이콘을 클릭하는 경우 호출되는 이벤트입니다.
+> Event called when clicking the icon within a cell where the [Icon](/docs/props/col/icon) property value is set to an image URL.
 
-> [Icon](/docs/props/col/icon)이 설정된 셀이 편집 불가능한 경우 버튼 클릭 뿐만 아니라 셀 내부를 클릭 시 이 이벤트가 호출됩니다.
+> If the cell with [Icon](/docs/props/col/icon) set is not editable, this event is called not only when clicking the button but also when clicking inside the cell.
 
-> `1(true)`를 리턴 시 현재의 클릭으로 발생 가능한 이벤트들 중 `onIconClick` 후에 발생하는 이벤트들의 동작(ex [OnClickSide](/docs/props/event/on-click-side))을 막습니다.
+> Returning `1(true)` prevents events that fire after `onIconClick` among the events that can be triggered by the current click (e.g., [OnClickSide](/docs/props/event/on-click-side)).
 
 ### Syntax
 
@@ -28,11 +27,11 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|셀의 열이름|
-|x|`number`|아이콘 내에서 마우스 클릭 x좌표|
-|y|`number`|아이콘 내에서 마우스 클릭 y좌표|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) where the cell is located|
+|col|`string`|Column name of the cell|
+|x|`number`|Mouse click x-coordinate within the icon|
+|y|`number`|Mouse click y-coordinate within the icon|
 
 ### Return
 ***boolean***
@@ -41,7 +40,7 @@ or
 ```javascript
 options.Cols = [
     {
-        Header : "아이디",
+        Header : "ID",
         Name: "sId",
         Type: "Text",
         Icon: "http://ibsheet.com/demo/images/11/s1.jpg"
@@ -50,7 +49,7 @@ options.Cols = [
 
 options.Events = {
     onIconClick:function(evtParam){
-        // sId 열에 있는 아이콘 클릭시 http://ibsheet.com/ibsheet_main.html url이 새창에서 열리도록 합니다.
+        // When clicking the icon in the sId column, open http://ibsheet.com/ibsheet_main.html in a new window.
         if (evtParam.col == "sId") {
            window.open('http://ibsheet.com/ibsheet_main.html');
         }
@@ -67,4 +66,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

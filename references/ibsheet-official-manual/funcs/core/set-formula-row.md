@@ -2,12 +2,12 @@
 KEY: setFormulaRow
 KIND: method
 PATH: funcs/core/set-formula-row
-ALIAS: sheet.setFormulaRow, setFormulaRow(), 합계행, 계산을, 변경, 하거나, 행을
-ALIAS_EN: set, formula, row, change, modify
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-formula-row
+ALIAS: sheet.setFormulaRow, setFormulaRow()
+ALIAS_EN: changes, formularow, summary, row, calculation, sum, avg, min
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-formula-row
 ---
 # setFormulaRow ***(method)***
-> `FormulaRow`(합계행)에 계산을 변경(`Sum,Avg,Min,Max`)하거나 행을 감출수 있습니다.
+> Changes the `FormulaRow` (summary row) calculation (`Sum,Avg,Min,Max`) or hides the row.
 
 ### Syntax
 ```javascript
@@ -19,27 +19,27 @@ void setFormulaRow( val, cols, visible, render );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|val |`string`\|`object`|필수|설정할 계산 방식 (`'Sum'`,`'Avg'`,`'Min'`,`'Max'` 중 하나) 
-또는 object 형태로 설정시 `{"ColName1":"Sum","ColName2:"Avg"}` 식으로 설정 가능
-(object형을 사용시에는 `cols` 인자는 필요 없음)|
-|cols |`string`|선택|계산할 열이름(복수개인 경우 ,를 구분자로 연결한 문자열)|
-|visible |`boolean`|선택|`FormulaRow` 보임 여부
-`0(false)`:`FormulaRow`(합계행) 감춤 (`default`)
-`1(true)`:`FormulaRow`(합계행) 보임|
-|render |`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함 (`default`)
-`1(true)`:즉시 반영|
+|val |`string` \| `object`|Required|Calculation method to set (one of `'Sum'`,`'Avg'`,`'Min'`,`'Max'`) 
+or can be set in object form, such as `{"ColName1":"Sum","ColName2:"Avg"}`
+(When using the object form, the `cols` argument is not required)|
+|cols |`string`|Optional|Column name(s) to calculate (comma-delimited string when specifying multiple columns)|
+|visible |`boolean`|Optional|Whether `FormulaRow` is visible
+`0(false)`:`FormulaRow` (summary row) hidden (`default`)
+`1(true)`:`FormulaRow` (summary row) visible|
+|render |`boolean`|Optional|whether immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+`0(false)`:Not reflected (`default`)
+`1(true)`:Immediately reflected|
 
 ### Return Value
-***boolean*** : 설정 완료 여부
+***boolean*** : Whether setting is complete
 
 ### Example
 ```javascript
-//합계행에 계산을 평균값으로 변경
+// Change the summary row calculation to average value
 sheet.setFormulaRow( "Avg", "AMT1,AMT2", 1, 1 );
 
-//합계행을 감춘다.
+// Hide the summary row.
 sheet.setFormulaRow({visible:0});
 ```
 
@@ -50,4 +50,4 @@ sheet.setFormulaRow({visible:0});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

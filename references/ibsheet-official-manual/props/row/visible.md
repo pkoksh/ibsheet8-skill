@@ -2,15 +2,14 @@
 KEY: visible
 KIND: row-property
 PATH: props/row/visible
-ALIAS: 행의, 보임, 감춤, 여부를, 설정합니다
-ALIAS_EN: visible
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/visible
+ALIAS_EN: whether, row, shown, hidden, visible
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/visible
 ---
 # Visible ***(row)***
 
-> 행의 보임/감춤 여부를 설정합니다.
+> Sets whether a row is shown or hidden.
 
-> 필터를 통해 감춰지는 행은 자동으로 `Visible: (0)false` 속성이 설정됩니다.
+> Rows hidden through filtering automatically have the `Visible: (0)false` property set.
 
 ### Type
 `boolean`
@@ -18,23 +17,23 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/visible
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|감춰짐|
-|`1(true)`|보임|
+|`0(false)`|Hidden|
+|`1(true)`|Visible|
 
 ### Example
 ```javascript
-//Chk열의 값이 1인 행들을 감춘다.
+//Hide rows where the Chk column value is 1.
 var rows = sheet.getDataRows();
 for(var i = 0; i < rows.length; i++){
     if (rows[i]["Chk"] == 1) {
-        //속성 값을 바꾼다고 즉시 행이 감춰지는 것은(렌더링이 일어나는 것은) 아님.
+        //Changing the property value does not immediately hide the row (rendering does not occur).
         rows[i]["Visible"] = 0;
     }
 }
-sheet.renderBody(); //감춘 행을 화면에 반영(렌더링)
+sheet.renderBody(); //Apply hidden rows to the screen (rendering)
 
 
-//조회 데이터에서 특정행을 감춘다.
+//Hide a specific row in the loaded data.
 {"data":[
     ...
     {"Visible": 0, "ColName1": "Value1", "ColName2": "Value2", ...},
@@ -50,4 +49,4 @@ sheet.renderBody(); //감춘 행을 화면에 반영(렌더링)
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

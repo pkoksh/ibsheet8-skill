@@ -2,22 +2,22 @@
 KEY: makePivotTable
 KIND: method
 PATH: funcs/core/make-pivot-table
-ALIAS: sheet.makePivotTable, makePivotTable(), 대상, 시트의, 모든, 데이터를, 기준으로
-ALIAS_EN: make, pivot, table
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/make-pivot-table
+ALIAS: sheet.makePivotTable, makePivotTable()
+ALIAS_EN: creates, pivot, table, based, data, target, sheet, makepivottable
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/make-pivot-table
 ---
 # makePivotTable ***(method)***
 
-> 대상 시트의 모든 데이터를 기준으로 피벗 테이블을 생성합니다.
+> Creates a pivot table based on all data from the target sheet.
 
-> 만약 피벗 생성 시점에 대상 시트가 필터링 되어 있는 경우 필터가 취소된 후 피벗이 생성됩니다.
+> However, if the target sheet has a filter applied at the time of pivot creation, the filter is cancelled before creating the pivot.
 
-> 생성된 피벗 테이블의 시트는 원본시트의 `"pivotSheet_" + id`로 생성됩니다. 예를 들어 원본 시트의 id가 `"sheet"`인 경우 피벗 시트의 id는 `"pivotSheet_sheet"`가 됩니다. 
+> The created pivot table sheet's ID is created as `"pivotSheet_" + id` of the original sheet. For example, if the original sheet's ID is `"sheet"`, the pivot sheet's ID will be `"pivotSheet_sheet"`. 
 
-> 피벗 테이블의 시트에서는 `DataMerge` 기능을 지원하지 않습니다.
+> The `DataMerge` feature is not supported in the pivot table sheet.
 
-> **<mark>주의</mark> : `makeSubTotal`로 행 5000개, 열 200개 이상의 피벗 테이블을 만들 경우 브라우저 성능을 보장할 수 없습니다. 
-해당 개수 미만으로 생성되게 `makeSubTotal` 기준 행,열을 설정하도록 권장합니다.**
+> **<mark>Note</mark> : Creating a pivot table with more than 5000 rows and 200 columns using `makeSubTotal` may cause browser performance issues. 
+It is recommended to configure `makeSubTotal` base row and column settings so that the table is created within these limits.**
 
 
 
@@ -29,44 +29,44 @@ object makePivotTable(criterias, init, format, type, callback, hideTotal);
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|criterias|`object`|선택|피벗테이블 기준 대상 컬럼명들 설정
- row, col에는 일반 컬럼 data에는 숫자형 컬럼(`int, float`) 사용|
-|init|`object`|필수|피벗테이블의 열, 행, 계산 대상 설정
- row, col에는 일반 컬럼 data에는 숫자형 컬럼(`int, float`) 사용|
-|format|`string`|선택|피벗 테이블에서 보여질 포맷|
-|type|`string`|선택|계산 대상 컬럼별 계산 방법 (`default: "Sum"`)
- `"Sum"`, `"Count"`, `"Max"`, `"Min"` 사용 가능
-컬럼별 계산 방법을 data 컬럼 개수에 맞게 `,(쉼표)` 로 연결하여 여러 개를 설정할 수 있습니다.|
-|callback|`function`|선택|피벗 시트 생성 후 호출할 콜백 함수. 피벗 시트 생성 후 [onRenderFirstFinish](/docs/events/on-render-first-finish) 시점에 발생합니다.|
-|hideTotal|`object`|선택|피벗 테이블에서 총합계 표시 여부|
+|criterias|`object`|Optional|Settings for pivot table base target column names
+ Use general column data for row and col, and use numeric columns (`int, float`) for data.|
+|init|`object`|Required|Settings for pivot table columns, rows, and calculation targets
+ Use general column data for row and col, and use numeric columns (`int, float`) for data.|
+|format|`string`|Optional|Format to be displayed in the pivot table|
+|type|`string`|Optional|Calculation method for each calculation target column (`default: "Sum"`)
+ `"Sum"`, `"Count"`, `"Max"`, `"Min"` are available.
+Multiple calculation methods per column can be set by connecting with `,(comma)` to match the number of data columns.|
+|callback|`function`|Optional|Callback function to call after the pivot sheet is created. Triggered at the [onRenderFirstFinish](/docs/events/on-render-first-finish) point after the pivot sheet is created.|
+|hideTotal|`object`|Optional|Whether to display grand total in the pivot table|
 
 ### criterias
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|row|`string`|필수|행 레이블 필드 기준 컬럼 명을 구분자(",")로 연결한 문자열|
-|col|`string`|필수|열 레이블 필드 기준 컬럼 명을 구분자(",")로 연결한 문자열|
-|data|`string`|필수|계산 대상 기준 컬럼 명을 구분자(",")로 연결한 문자열|
+|row|`string`|Required|Row level field base column names connected with delimiter (",") as a string|
+|col|`string`|Required|Column level field base column names connected with delimiter (",") as a string|
+|data|`string`|Required|Calculation target base column names connected with delimiter (",") as a string|
 
 ### init
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|row|`string`|필수|행 레이블 필드에 설정할 컬럼 명을 구분자(",")로 연결한 문자열|
-|col|`string`|필수|열 레이블 필드에 설정할 컬럼 명을 구분자(",")로 연결한 문자열|
-|data|`string`|필수|계산 대상 컬럼의 컬럼 명을 구분자(",")로 연결한 문자열|
+|row|`string`|Required|Row level field column names to set, connected with delimiter (",") as a string|
+|col|`string`|Required|Column level field column names to set, connected with delimiter (",") as a string|
+|data|`string`|Required|Calculation target column names connected with delimiter (",") as a string|
 
 ### hideTotal
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|hideTotalRow|`boolean`|선택|행 총합계 숨김여부 (`default: false`)|
-|hideTotalRow|`boolean`|선택|열 총합계 숨김여부 (`default: false`)|
+|hideTotalRow|`boolean`|Optional|Whether to hide the row grand total (`default: false`)|
+|hideTotalCol|`boolean`|Optional|Whether to hide the column grand total (`default: false`)|
 
 
 ### Return Value
-***object*** : 생성된 피벗 시트 객체
+***object*** : The created pivot sheet object
 
 ### Example
 ```javascript
-// 피벗 테이블 생성
+// Pivot table creation
 var criterias = {
   row: 'sDept,sTeam,sPosition,sName,sGender,sAgeRange,sAddr',
   col: 'sDept,sTeam,sPosition,sName,sGender,sAgeRange,sAddr',
@@ -85,24 +85,24 @@ var hideTotal = {
   hideTotalCol: true
 }
 
-// 초기화 data 컬럼이 sSalary,sAge 두 개이므로 각각 Sum,Avg 타입을 적용하며, 열 총합계를 감춥니다.
-sheet.makePivotTable(criterias, init, '#,### 만원', 'Sum,Avg', callback, hideTotalCol);
+// Since there are two initialized data columns (sSalary, sAge), Sum and Avg types are applied respectively, and column grand total is hidden.
+sheet.makePivotTable(criterias, init, '#,###', 'Sum,Avg', callback, hideTotalCol);
 ```
 
 ### Read More
 - [showPivotDialog method](/docs/funcs/dialog/show-pivot-dialog)
 - [switchPivotSheet method](./switch-pivot-sheet)
 <!--!
-- `[비공개]` [clearPivotSheet method](/docs/funcs/dialog/clear-pivot-sheet)
+- `[Private]` [clearPivotSheet method](/docs/funcs/dialog/clear-pivot-sheet)
 !-->
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.17|`callback` 기능 추가|
-|core|8.1.0.46|`type` 옵션 `Max`, `Min` 추가|
-|core|8.1.0.94|`criterias` 인자 선택으로 변경|
-|core|8.2.0.15|`pivotType` 관련 기능 개선|
-|core|8.3.0.9|`hideTotal` 인자 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.17|`callback` Feature added|
+|core|8.1.0.46|`type` option `Max`, `Min` added|
+|core|8.1.0.94|`criterias` argument changed to Optional|
+|core|8.2.0.15|`pivotType` related Feature improved|
+|core|8.3.0.9|`hideTotal` argument Feature added|

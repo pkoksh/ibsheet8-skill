@@ -2,12 +2,11 @@
 KEY: onEndDragCell
 KIND: event
 PATH: events/on-end-drag-cell
-ALIAS: 드래그, 셀이, 드랍되는, 시점에, 호출되는
-ALIAS_EN: on, end, drag, cell
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-end-drag-cell
+ALIAS_EN: event, called, moment, dragged, cell, dropped, onenddragcell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-end-drag-cell
 ---
 # onEndDragCell ***(event)***
-> 드래그 된 셀이 드랍되는 시점에 호출되는 이벤트입니다.
+> Event called at the moment when a dragged cell is dropped.
 
 
 
@@ -24,14 +23,14 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|드래그 된 셀이 기존에 위치하던 시트 객체|
-|row|`object`|드래그 된 셀의 기존 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|드래그 된 셀의 기존 열 이름|
-|tosheet|`object`|드랍 된 시트 객체|
-|torow|`object`|드랍 된 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|tocol|`string`|드랍 된 셀의 열 이름|
-|x|`number`|드랍할 때 마우스 커서의 x좌표(브라우저 기준)|
-|y|`number`|드랍할 때 마우스 커서의 y좌표(브라우저 기준)|
+|sheet|`object`|Sheet object where the dragged cell was originally located|
+|row|`object`|Original [data row object](/docs/appx/row-object) of the dragged cell|
+|col|`string`|Original column name of the dragged cell|
+|tosheet|`object`|Sheet object where the cell was dropped|
+|torow|`object`|[Data row object](/docs/appx/row-object) of the dropped cell|
+|tocol|`string`|Column name of the dropped cell|
+|x|`number`|x-coordinate of the mouse cursor when dropping (browser-based)|
+|y|`number`|y-coordinate of the mouse cursor when dropping (browser-based)|
 
 
 ### Return
@@ -70,4 +69,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.27|기능 추가|
+|core|8.0.0.27|Feature added|

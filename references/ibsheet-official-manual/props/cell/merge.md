@@ -2,22 +2,21 @@
 KEY: merge
 KIND: cell-property
 PATH: props/cell/merge
-ALIAS: 같은, 안에, 다른, 셀들의, 값을
-ALIAS_EN: merge
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/merge
+ALIAS_EN: feature, displays, values, cells, row, within, single, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/merge
 ---
 # Merge ***(cell)***
-> 같은 행 안에 다른 셀들의 값을 한 셀에서 표현하는 기능입니다.
+> A feature that displays values from other cells in the same row within a single cell.
 
-> 눈에 보이기만 할뿐 실제 셀의 값은 별도로 관리됩니다.
+> It is only visually displayed; the actual cell values are managed separately.
 
-> `row`에 [Spanned](/docs/props/row/spanned) 속성이 `1`로 설정되어야 동작합니다.
+> The `row` must have the [Spanned](/docs/props/row/spanned) property set to `1` for this to work.
 
 
 ###
-![Merge속성](/assets/imgs/Merge.png "Merge속성")
-<!-- IMAGE: 스크린샷/예시 이미지 - Merge속성 -->
-[empinfoMerge:"empno,empNm,pstnGbn" 으로 설정]
+![Merge property](/assets/imgs/Merge.png "Merge property")
+<!-- IMAGE: Screenshot/Example Image - Merge property -->
+[Set as empinfoMerge:"empno,empNm,pstnGbn"]
 
 
 ### Type
@@ -26,14 +25,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/merge
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|열이름 (","구분자로 여러개 지정 가능)|
+|`string`|Column names (multiple can be specified using "," as delimiter)|
 
 ### Example
 ```javascript
-//Spanned가 설정되어 있어야 함.
+// Spanned must be configured.
 options.Def.Row = {Spanned: 1};
 
-//empinfo 열에서 empno,empNo,pstnGbn 열의 값을 모두 표시
+// Display values from empno, empNm, pstnGbn columns in the empinfo column
 opyiond.Def.Row["empinfo"] = {"Merge": "empno,empNm,pstnGbn"}
 
 ```
@@ -45,4 +44,4 @@ opyiond.Def.Row["empinfo"] = {"Merge": "empno,empNm,pstnGbn"}
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

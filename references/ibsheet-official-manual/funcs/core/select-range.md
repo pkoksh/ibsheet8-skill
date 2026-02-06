@@ -2,16 +2,16 @@
 KEY: selectRange
 KIND: method
 PATH: funcs/core/select-range
-ALIAS: sheet.selectRange, selectRange(), 셀부터, 셀까지, 사각형, 영역을, 선택
-ALIAS_EN: select, range, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/select-range
+ALIAS: sheet.selectRange, selectRange()
+ALIAS_EN: selects, deselects, rectangular, area, row, col, cell, selectrange
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/select-range
 ---
 # selectRange ***(method)***
-> `row1, col1` 셀부터 `row2, col2` 셀까지 사각형 영역을 선택 혹은 선택해제 합니다.
+> Selects or deselects a rectangular area from the `row1, col1` cell to the `row2, col2` cell.
 
-> 열을 설정하지 않으면 (`col1, col2`를 설정하지 않으면), `row1` 부터 `row2` 까지 **행**을 선택,선택해제 합니다.
+> If columns are not set (`col1, col2` are not set), **rows** from `row1` to `row2` are selected/deselected.
 
-> 행을 설정하지 않으면 (`row1, row2`를 설정하지 않으면), `col1` 부터 `col2` 까지 **열**을 선택,선택해제 합니다.
+> If rows are not set (`row1, row2` are not set), **columns** from `col1` to `col2` are selected/deselected.
 
 ### Syntax
 ```javascript
@@ -21,29 +21,29 @@ number selectRange( row1, col1, row2, col2, select, type, valid, ignoreEvent );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row1|`object`|선택|선택 시작 [데이터 로우 객체](/docs/appx/row-object)|
-|col1|`string`|선택|선택 시작 열이름|
-|row2|`object`|선택|선택 종료 [데이터 로우 객체](/docs/appx/row-object)|
-|col2|`string`|선택|선택 종료 열이름|
-|select|`boolean`|선택| 선택 / 선택해제 여부
-`0(false)`:선택해제
-`1(true)`:선택
+|row1|`object`|Optional|Selection start [data row object](/docs/appx/row-object)|
+|col1|`string`|Optional|Selection start column name|
+|row2|`object`|Optional|Selection end [data row object](/docs/appx/row-object)|
+|col2|`string`|Optional|Selection end column name|
+|select|`boolean`|Optional| Whether to select/deselect
+`0(false)`:Deselect
+`1(true)`:Select
 `null`:Toggle (`default`)|
-|type|`number`|선택|`1`: 히든된 행은 제외 `2`:트리에서 접힌 자식노드는 제외|
-|valid|`boolean`|선택|실제로 영역 선택/선택해제 가능여부 확인
-(실제로 영역 선택/선택해제 되지 않고, 선택/선택해제 될 행,셀 수 리턴)
-`0(false)`:영역 선택/선택해제 가능여부 확인 안함 (`default`)
-`1(true)`:영역 선택/선택해제 가능여부 확인 사용|
-|ignoreEvent|`boolean`|선택| [onSelectEnd](/docs/events/on-select-end) 이벤트 발생 여부 
-`0(false)`: 발생
-`1(true)`: 발생하지 않음 (`default`)|
+|type|`number`|Optional|`1`: Exclude hidden rows `2`: Exclude collapsed child nodes in tree|
+|valid|`boolean`|Optional|Whether to check if the area can actually be selected/deselected
+(Does not actually select/deselect the area, but returns the number of rows/cells that would be selected/deselected)
+`0(false)`:Do not check if area selection/deselection is possible (`default`)
+`1(true)`:Check if area selection/deselection is possible|
+|ignoreEvent|`boolean`|Optional| Whether to trigger [onSelectEnd](/docs/events/on-select-end) event 
+`0(false)`: Triggered
+`1(true)`: Not triggered (`default`)|
 
 ### Return Value
-***number*** : 선택이나 선택해제된 행,셀 수
+***number*** : Number of rows/cells selected or deselected
 
 ### Example
 ```javascript
-//AR5행 deptName 셀부터 AR10행 bizname 셀까지를 선택
+//Select from the AR5 row deptName cell to the AR10 row bizname cell
 sheet.selectRange( sheet.getRowById("AR4"), "deptName", sheet.getRowById("AR10"), "bizname", 1 );
 ```
 
@@ -58,5 +58,5 @@ sheet.selectRange( sheet.getRowById("AR4"), "deptName", sheet.getRowById("AR10")
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.3.0.14|`ignoreEvent` 인자 추가|
+|core|8.0.0.0|Feature added|
+|core|8.3.0.14|`ignoreEvent` argument added|

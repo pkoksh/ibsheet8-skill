@@ -2,15 +2,14 @@
 KEY: dateStrictMode
 KIND: column-property
 PATH: props/col/date-strict-mode
-ALIAS: 조회시, 날짜, 타입의, 열에서, 설정된
-ALIAS_EN: date, strict, mode, datetime
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/date-strict-mode
+ALIAS_EN: dataformat, date, type, column, processes, value, blank, retrieved
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/date-strict-mode
 ---
 # DateStrictMode ***(col)***
 
-> 조회시 날짜 타입의 열에서 `DataFormat`이 설정된 경우 설정된 포맷과 길이가 일치하지 않거나 잘못된 날짜가 조회되는 경우 공백으로 처리합니다.
+> When `DataFormat` is set for a date type column, processes the value as blank if the retrieved data does not match the configured format or length, or if the date is invalid.
 
-> `DataFormat`을 "yyyyMMdd" 로 설정한 후 "88" 이라는 값이 조회되는 경우 해당 셀 값은 공백으로 처리됩니다.
+> For example, if `DataFormat` is set to "yyyyMMdd" and the value "88" is retrieved, the cell value will be treated as blank.
 
 
 
@@ -20,13 +19,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/date-stri
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|정밀검사하지 않음 (`default`)|
-|`1(true)`|`DataFormat`에 설정된 포맷에 대한 정밀 검사|
+|`0(false)`|No strict validation (`default`)|
+|`1(true)`|Strict validation against the format set in `DataFormat`|
 
 
 ### Example
 ```javascript
-//특정 열에서 잘못된 날짜 데이터 조회시 공백처리 합니다.
+// Treat invalid date data as blank when retrieving a specific column
 options.Cols = [
     ...
     {Type: "Date", DateStrictMode: 1 Format: "yyyy.MM.dd", DataFormat: "yyyyMMdd", Name: "enterDate", Width: 120 ...},
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.12|기능 추가|
+|core|8.0.0.12|Feature added|

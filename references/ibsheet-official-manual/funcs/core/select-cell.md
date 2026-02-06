@@ -2,14 +2,14 @@
 KEY: selectCell
 KIND: method
 PATH: funcs/core/select-cell
-ALIAS: sheet.selectCell, selectCell(), 지정한, 셀을, 선택, 혹은, 선택해제
-ALIAS_EN: select, cell, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/select-cell
+ALIAS: sheet.selectCell, selectCell()
+ALIAS_EN: selects, deselects, specified, cell, selectcell, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/select-cell
 ---
 # selectCell ***(method)***
-> 지정한 셀을 선택 혹은 선택해제 합니다.
+> Selects or deselects the specified cell.
 
-> 시트 `Cfg`의 `SelectingCells`설정이 `0` 일때는 사용 하실 수 없습니다.
+> Cannot be used when the sheet `Cfg`'s `SelectingCells` setting is `0`.
 
 ### Syntax
 ```javascript
@@ -19,28 +19,28 @@ boolean selectCell( row, col, select, valid, ignoreEvent );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|필수|열이름|
-|select|`boolean`|선택| 선택 / 선택해제  여부
-`0(false)`:선택해제
-`1(true)`:선택
+|row|`object`|Required|[data row object](/docs/appx/row-object)|
+|col|`string`|Required|column name|
+|select|`boolean`|Optional| Whether to select/deselect
+`0(false)`:Deselect
+`1(true)`:Select
  `null`:Toggle (`default`)
-|valid|`boolean`|선택|실제로 선택/선택해제 가능여부 확인
-(실제로 셀 선택/선택해제 되진 않고, 가능/불가능 여부를 확인해서 리턴)
-`0(false)`:선택/선택해제 가능여부 확인 안함 (`default`)
-`1(true)`:선택/선택해제 가능여부 확인 사용|
-|ignoreEvent|`boolean`|선택| [onSelectEnd](/docs/events/on-select-end) 이벤트 발생 여부 
-`0(false)`: 발생
-`1(true)`: 발생하지 않음 (`default`)|
+|valid|`boolean`|Optional|Whether to check if selection/deselection is possible
+(Does not actually select/deselect the cell, but checks whether it is possible and returns the result)
+`0(false)`:Do not check if selection/deselection is possible (`default`)
+`1(true)`:Check if selection/deselection is possible|
+|ignoreEvent|`boolean`|Optional| Whether to trigger [onSelectEnd](/docs/events/on-select-end) event 
+`0(false)`: Triggered
+`1(true)`: Not triggered (`default`)|
 
 ### Return Value
-***boolean*** : 선택/선택해제 변경 여부
+***boolean*** : Whether selection/deselection was changed
 
-이미 선택한 셀을 다시 선택하려 하거나, 해제된 셀을 다시 해제하려 하면 `false`를 리턴
+Returns `false` when trying to select an already selected cell or deselect an already deselected cell
 
 ### Example
 ```javascript
-//현재 포커스가 있는 셀을 선택
+//Select the currently focused cell
 var row = sheet.getFocusedRow();
 var col = sheet.getFocusedCol();
 sheet.selectCell( row, col, 1);
@@ -58,5 +58,5 @@ sheet.selectCell( row, col, 1);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.3.0.14|`ignoreEvent` 인자 추가|
+|core|8.0.0.0|Feature added|
+|core|8.3.0.14|`ignoreEvent` argument added|

@@ -2,12 +2,11 @@
 KEY: onCheckAllFinish
 KIND: event
 PATH: events/on-check-all-finish
-ALIAS: 시트에서, 사용자의, 클릭이나, 타입의, 전체
-ALIAS_EN: on, check, all, finish, total
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-check-all-finish
+ALIAS_EN: event, called, cells, bool, type, column, checked, unchecked
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-check-all-finish
 ---
 # onCheckAllFinish ***(event)***
-> 시트에서 사용자의 클릭이나 [setAllCheck](/docs/funcs/core/set-all-check)를 통해 `Bool` 타입의 열 전체 체크/언체크 완료 시 호출되는 이벤트입니다.
+> Event called when all cells in a `Bool` type column have been checked/unchecked via user click or [setAllCheck](/docs/funcs/core/set-all-check) in the sheet.
 
 
 ### Syntax
@@ -24,11 +23,11 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|열 전체 체크/언체크가 완료 된 시트 객체|
-|col|`string`|열 전체 체크/언체크가 완료 된 열이름|
-|result|`boolean`|열 전체 체크 여부
-`0(false)`:체크해제
-`1(true)`:체크|
+|sheet|`object`|Sheet object where the column-wide check/uncheck has been completed|
+|col|`string`|Column name where the column-wide check/uncheck has been completed|
+|result|`boolean`|Whether all column cells are checked
+`0(false)`:Unchecked
+`1(true)`:Checked|
 
 ### Return
 ***none***
@@ -37,7 +36,7 @@ or
 ```javascript
 options.Events = {
     onCheckAllFinish:function(evtParam){
-        alert(evtParam.col + "열이 체크(" + evtParam.result + ") 완료되었습니다.");
+        alert("The " + evtParam.col + " column check (" + evtParam.result + ") has been completed.");
     }
 }
 ```
@@ -51,4 +50,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.8|기능 추가|
+|core|8.0.0.8|Feature added|

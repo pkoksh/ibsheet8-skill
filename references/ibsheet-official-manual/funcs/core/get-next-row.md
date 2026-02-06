@@ -2,15 +2,15 @@
 KEY: getNextRow
 KIND: method
 PATH: funcs/core/get-next-row
-ALIAS: sheet.getNextRow, getNextRow(), 지정한, 행의, 바로, 아래, 행을
-ALIAS_EN: get, next, row, bottom
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-next-row
+ALIAS: sheet.getNextRow, getNextRow()
+ALIAS_EN: returns, row, immediately, specified, getnextrow, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-next-row
 ---
 # getNextRow ***(method)***
 
-> 지정한 행의 바로 아래 행을 리턴합니다.
+> Returns the row immediately below the specified row.
 
-> 마지막 행인 경우 `null`이 리턴됩니다.
+> last rowwhen set to `null` return.
 
 
 ### Syntax
@@ -21,15 +21,15 @@ object getNextRow( row );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
+|row|`object`|Required|[data row object](/docs/appx/row-object)|
 
 
 ### Return Value
-***row object*** :  [데이터 로우 객체](/docs/appx/row-object)
+***row object*** :  [data row object](/docs/appx/row-object)
 
 ### Example
 ```javascript
-//AR5행의 다음 행을 확인.
+//AR5rowof  row OK.
 var row = sheet.getRowById("AR55");
 var nrow = sheet.getNextRow(row);
 ```
@@ -41,4 +41,4 @@ var nrow = sheet.getNextRow(row);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

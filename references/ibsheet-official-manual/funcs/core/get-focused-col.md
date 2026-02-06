@@ -2,13 +2,13 @@
 KEY: getFocusedCol
 KIND: method
 PATH: funcs/core/get-focused-col
-ALIAS: sheet.getFocusedCol, getFocusedCol(), 시트, 내에, 현재, 포커스된, 셀의
-ALIAS_EN: get, focused, col, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-focused-col
+ALIAS: sheet.getFocusedCol, getFocusedCol()
+ALIAS_EN: returns, column, name, currently, focused, cell, sheet, getfocusedcol
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-focused-col
 ---
 # getFocusedCol ***(method)***
 
-> 시트 내에 현재 포커스된 셀의 열이름을 반환합니다.
+> Returns the column name of the currently focused cell in the sheet.
 
 ### Syntax
 ```javascript
@@ -16,11 +16,11 @@ string getFocusedCol();
 ```
 
 ### Return Value
-***string*** : 열이름
+***string*** : column name
 
 ### Example
 ```javascript
-//현재 포커스된 셀의 열이름을 반환합니다.
+//Returns the column name of the currently focused cell.
 var row = sheet.getFocusedCol();
 ```
 
@@ -32,4 +32,4 @@ var row = sheet.getFocusedCol();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

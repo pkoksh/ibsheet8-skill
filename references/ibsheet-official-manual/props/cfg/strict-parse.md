@@ -2,23 +2,22 @@
 KEY: strictParse
 KIND: config-property
 PATH: props/cfg/strict-parse
-ALIAS: 조회, 함수에서, 데이터를, 파싱할, 파서를
-ALIAS_EN: strict, parse, search, query, fetch, load, retrieve
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/strict-parse
+ALIAS_EN: selects, parser, parsing, json, data, search, functions, strictparse
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/strict-parse
 ---
 # StrictParse ***(cfg)***
 
-> 조회 함수에서 JSON 데이터를 파싱할 때 파서를 선택합니다.
+> Selects the parser when parsing JSON data in search functions.
 
-> 설정을 안하거나 false로 설정시 유연한 파서를 통해 파싱되고, true로 설정시 브라우져가 제공하는 JSON.parse()를 통해 파싱됩니다.
+> When not set or set to false, data is parsed through a lenient parser. When set to true, data is parsed through the browser-provided JSON.parse().
 
-유연한 파서란 일반적인 JSON.parse()를 통해 파싱하는 경우 허용하지 않는 몇가지를 허용합니다.
- 1. 여분의 콤마 허용
- 2. 프로퍼티 이름의 쌍따옴표가 없어도 됨.
+The lenient parser allows several things that are not permitted when parsing through the standard JSON.parse().
+ 1. Allows trailing commas
+ 2. Property names do not require double quotes.
 
-참고 
+Reference
 - [MDN:bad parsing](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Errors/JSON_bad_parse)
-- JSON.parse()가 유연한 파서보다 성능이 우수(약 5배)하지만 데이터 로딩과정에서 파싱이 차지하는 시간이 크지 않아 5만건 이내에서는 사용자가 느끼기 어려운 수준임.
+- JSON.parse() has better performance than the lenient parser (approximately 5x), but since parsing does not take up a large portion of the data loading process, the difference is imperceptible to users for datasets within 50,000 records.
 
 ### Type
 `boolean`
@@ -26,15 +25,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/strict-pa
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|유연한 파서 사용 (`default`)|
-|`1(true)`|브라우저에서 제공하는 JSON.parse() 내장함수 사용|
+|`0(false)`|Use lenient parser (`default`)|
+|`1(true)`|Use the browser-provided JSON.parse() built-in function|
 
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    StrictParse: 1,       // 조회 함수를 JSON.parse()를 통해 데이터 파싱  
+    StrictParse: 1,       // Parse data through JSON.parse() in search functions
 };
 ```
 
@@ -46,4 +45,4 @@ options.Cfg = {
 ### Since
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

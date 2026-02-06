@@ -2,12 +2,12 @@
 KEY: clearSelection
 KIND: method
 PATH: funcs/core/clear-selection
-ALIAS: sheet.clearSelection, clearSelection(), 드래그나, 함수등을, 선택한, 영역에, 대해
-ALIAS_EN: clear, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/clear-selection
+ALIAS: sheet.clearSelection, clearSelection()
+ALIAS_EN: deselects, area, selected, via, drag, functions, clearselection, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/clear-selection
 ---
 # clearSelection ***(method)***
-> 드래그나 함수등을 통해 선택한 영역에 대해 선택을 취소한다.
+> Deselects the area selected via drag or functions.
 
 ### Syntax
 ```javascript
@@ -19,7 +19,7 @@ void clearSelection( );
 
 ### Example
 ```javascript
-//선택 영역 모두 취소
+//Deselect all selected areas
 sheet.clearSelection();
 ```
 
@@ -36,4 +36,4 @@ sheet.clearSelection();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

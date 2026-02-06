@@ -2,12 +2,11 @@
 KEY: groupSingle
 KIND: column-property
 PATH: props/col/group-single
-ALIAS: 해당, 열을, 기준으로, 그룹행, 생성시
-ALIAS_EN: group, single
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-single
+ALIAS_EN: creating, group, row, based, column, whether, create, child
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/group-single
 ---
 # GroupSingle ***(col)***
-> 해당 열을 기준으로 그룹행 생성시, 하위노드의 값이 모두 동일한 경우(그룹 기준이 되는 열의 모든 값이 동일한 경우) 그룹열을 생성할지 여부를 설정합니다.
+> When creating a group row based on this column, sets whether to create a group column when all child node values are the same (when all values of the group reference column are identical).
 
 
 ### Type
@@ -16,13 +15,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-sin
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|열의 모든 내용이 같은 경우 그룹 열을 생성하지 않음|
-|`1(true)`|열의 모든 내용이 동일해도 그룹 열 생성 (`default`)|
+|`0(false)`|Do not create a group column when all column content is the same|
+|`1(true)`|Create a group column even when all column content is identical (`default`)|
 
 
 ### Example
 ```javascript
-//열 내에 모든 값이 같은 경우 그룹열 생성 안함
+// Do not create a group column when all values in the column are the same
 options.Cols = [
     ...
     {Type: "Text", Name: "SA_DEPTID", GroupSingle: 0, ...},
@@ -45,4 +44,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

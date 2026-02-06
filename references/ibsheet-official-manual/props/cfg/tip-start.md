@@ -2,17 +2,16 @@
 KEY: tipStart
 KIND: config-property
 PATH: props/cfg/tip-start
-ALIAS: 기능을, 이용하여, 풍선도움말을, 기능, 사용시
-ALIAS_EN: tip, start
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/tip-start
+ALIAS_EN: balloon, tooltip, feature, tip, function, time, mouse, cursor
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/tip-start
 ---
 # TipStart ***(cfg)***
 
-> `Tip`기능을 이용하여 풍선도움말을 기능 사용시, 마우스 커서가 멈춘 후 부터 풍선도움말이 보여지기까지 시간을 설정합니다..
+> When using the balloon tooltip feature with the `Tip` function, sets the time from when the mouse cursor stops until the balloon tooltip is displayed.
 
-> 단위는 `ms` 이며, 설정하지 않으면 500ms 후에 풍선도움말이 표시됩니다.
+> The unit is `ms`, and if not set, the balloon tooltip is displayed after 500ms.
 
-> `0`으로 설정시 풍선도움말이 표시되지 않으며, `1`로 설정시 즉시 보여지게 됩니다.
+> When set to `0`, the balloon tooltip is not displayed. When set to `1`, it is displayed immediately.
 
 
 ### Type
@@ -21,18 +20,18 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/tip-start
 ### Options
 |Value|Description|
 |-----|-----|
-|`value`|커서가 멈춘 후, 풍선도움말이 표시될때까지 대기시간(ms단위) (`default: 500`)|
+|`value`|Wait time (in ms) after the cursor stops until the balloon tooltip is displayed (`default: 500`)|
 
 
 ### Example
 ```javascript
 options = {
     Cfg:{
-      TipStart: 300  //0.3초 후에 풍선도움말이 표시됩니다.
+      TipStart: 300  // Balloon tooltip is displayed after 0.3 seconds.
     },
     Def:{
       Row:{
-        Tip: 1  // 데이터 모든 행에서 풍선도움말 표시
+        Tip: 1  // Display balloon tooltip for all data rows
       }
     }
 };
@@ -47,4 +46,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.5|기능 추가|
+|core|8.0.0.5|Feature added|

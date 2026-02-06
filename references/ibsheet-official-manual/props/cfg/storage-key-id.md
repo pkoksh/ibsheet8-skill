@@ -2,17 +2,16 @@
 KEY: storageKeyId
 KIND: config-property
 PATH: props/cfg/storage-key-id
-ALIAS: 로컬, 스토리지, 혹은, 세션, 스토리지에
-ALIAS_EN: storage, key, id
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/storage-key-id
+ALIAS_EN: option, custom, postfix, key, value, instead, sheet, saving
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/storage-key-id
 ---
 # StorageKeyId ***(cfg)***
 
-> 로컬 스토리지 혹은 세션 스토리지에 현재 시트의 정보가 저장될 때 시트의 Id를 대신해 Key 값의 `postFix`로 설정할 커스텀 Id를 설정하는 옵션입니다.
+> Option to set a custom Id to use as the `postFix` of the Key value instead of the sheet's Id when saving current sheet information to local storage or session storage.
 > 
- 해당 옵션을 설정하시면 Key값이 `StorageKeyPrefix+"^시트id"`와 같이 설정되지 않으며, 그 대신 `StorageKeyPrefix+"^설정값"`으로 설정됩니다.
+ When this option is set, the Key value is not set as `StorageKeyPrefix+"^sheetId"`, but instead set as `StorageKeyPrefix+"^configuredValue"`.
 > 
- [StorageSession](./storage-session) 값이 없으면 동작하지 않습니다.
+ Does not operate if there is no [StorageSession](./storage-session) value.
 
 ### Type
 `string`
@@ -21,12 +20,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/storage-k
 ### Example
 ```javascript
 options.Cfg = {
-    StorageSession: 1,       // 로컬 스토리지에 현재 시트 정보를 저장할 수 있고 가져올 수 있도록 설정
-    StorageKeyId: "customId", // `StorageKeyPrefix+"^customId"`를 키 값으로 하여 로컬 스토리지에 현재 시트 정보를 저장합니다.
+    StorageSession: 1,       // Set to allow saving and retrieving current sheet information in local storage
+    StorageKeyId: "customId", // Saves current sheet information to local storage with `StorageKeyPrefix+"^customId"` as the key value.
 };
 
-sheet.saveCurrentInfo();      // 로컬 스토리지에 현재 시트 정보를 저장
-sheet.clearCurrentInfo();     // 로컬 스토리지에 현재 시트 정보를 제거
+sheet.saveCurrentInfo();      // Save current sheet information to local storage
+sheet.clearCurrentInfo();     // Remove current sheet information from local storage
 ```
 
 ### Read More
@@ -39,4 +38,4 @@ sheet.clearCurrentInfo();     // 로컬 스토리지에 현재 시트 정보를 
 
 |product|version|desc|
 |---|---|---|
-|core|8.2.0.7|기능 추가|
+|core|8.2.0.7|Feature added|

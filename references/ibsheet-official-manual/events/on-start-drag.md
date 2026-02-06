@@ -2,18 +2,17 @@
 KEY: onStartDrag
 KIND: event
 PATH: events/on-start-drag
-ALIAS: 시트, 드래그되기, 전에, 호출되는, 이벤트입니다
-ALIAS_EN: on, start, drag, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-start-drag
+ALIAS_EN: event, called, row, dragged, within, sheet, onstartdrag
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-start-drag
 ---
 # onStartDrag ***(event)***
-> 시트 내 행(들)이 드래그되기 전에 호출되는 이벤트입니다.
+> Event called before row(s) are dragged within the sheet.
 
-> `1(true)`를 리턴 시 행 드래그가 취소되고 행 선택(`Select`)이 실행됩니다.
+> Returning `1(true)` cancels the row drag and executes row selection (`Select`) instead.
 
-> `-1` 리턴 시 행 드래그가 취소되고 이후 동작도 모두 취소됩니다. 
+> Returning `-1` cancels the row drag and also cancels all subsequent actions. 
 
-> `string`을 리턴하는 경우 드래그로 보여지는 `html` 값이 리턴값으로 보여집니다.
+> Returning a `string` displays the returned value as the `html` shown during dragging.
 
 
 ### Syntax
@@ -31,24 +30,24 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|드래그가 실행된 시트 객체|
-|row|`object`|드래그가 시작된 지점의 셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|드래그가 시작된 지점의 셀이 위치한 열이름|
-|more|`boolean`|복수개의 행들이 드래그될지 여부|
-|rows|`array[object]`|복수개의 행들이 드래그된 경우 해당 행들의 [데이터 로우 객체](/docs/appx/row-object) 배열|
+|sheet|`object`|Sheet object where the drag was initiated|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the drag started|
+|col|`string`|Column name of the cell where the drag started|
+|more|`boolean`|Whether multiple rows will be dragged|
+|rows|`array[object]`|Array of [data row objects](/docs/appx/row-object) when multiple rows are dragged|
 <!--!
-|`[비공개]` copy|`boolean`|드래그 시 행의 이동이 아닌 행의 복사가 일어나는지 여부|
+|`[Private]` copy|`boolean`|Whether the drag operation is copying rows instead of moving them|
 !-->
 
 ### Return
-***mixed(`number` \| `string`)*** : string을 리턴할 경우 셀 드래그 객체가 리턴된 값으로 대체 됩니다
+***mixed(`number` \| `string`)*** : When a string is returned, the cell drag object is replaced with the returned value
 
 
 ### Example
 ```javascript
 options.Events = {
     onStartDrag:function(evtParam){
-        // 새롭게 추가된 행 또는 다중 행들을 드래깅할 경우 취소합니다.
+        // Cancel dragging if the row is newly added or if multiple rows are being dragged.
         if(evtParam.row["Added"] == 1 || evtParam.more) return true;
     }
 }
@@ -62,6 +61,6 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.1|`-1` 리턴 기능 추가|
-|core|8.1.0.14|`string` 리턴 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.1|`-1` return feature added|
+|core|8.1.0.14|`string` return feature added|

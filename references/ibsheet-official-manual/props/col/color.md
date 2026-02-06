@@ -2,17 +2,16 @@
 KEY: color
 KIND: column-property
 PATH: props/col/color
-ALIAS: 열의, 배경색상을, 설정합니다
-ALIAS_EN: color
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/color
+ALIAS_EN: background, color, column, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/color
 ---
 # Color ***(col)***
 
-> 열의 배경색상을 설정합니다.
+> Sets the background color of the column.
 
-> 열의 색상은 상태에 따른 배경 색상의 영향을 받습니다.
+> The column color is affected by the background color based on the state.
 
-> rgb(255,255,255)는 투명색이 됩니다.
+> rgb(255,255,255) becomes transparent.
 
 ### Type
 `string`
@@ -20,13 +19,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/color
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|HEX형식 (ex:#FF00F0)
-rgb형식 (ex:rgb(244,200,40)|
+|`string`|HEX format (ex:#FF00F0)
+rgb format (ex:rgb(244,200,40)|
 
 ### Example
 
 ```javascript
-//특정 열에 배경색을 "#ADADAD"로 설정
+// Set the background color of a specific column to "#ADADAD"
 options.Cols = [
     ...
     {Type: "Text", Name: "Dept", Color: "#ADADAD", Width: 100 ...},
@@ -44,4 +43,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

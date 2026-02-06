@@ -2,14 +2,13 @@
 KEY: onAfterSectionResize
 KIND: event
 PATH: events/on-after-section-resize
-ALIAS: 좌우측, 섹션의, 크기를, 변경하는, 경우
-ALIAS_EN: on, after, section, resize
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-section-resize
+ALIAS_EN: fires, left, right, section, size, changed, onaftersectionresize, event
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-section-resize
 ---
 # onAfterSectionResize ***(event)***
-> 좌우측 섹션의 크기를 변경하는 경우 발생합니다.
+> Fires when the left/right section size is changed.
 
-> cfg [SectionCanResize](/docs/props/cfg/section-can-resize)속성 설정시 사용자가 좌우측 영역의 크기를 변경할 수 있는데, 이렇게 크기가 변경된 이후에 발생합니다.
+> When the cfg [SectionCanResize](/docs/props/cfg/section-can-resize) property is set, users can change the size of the left/right areas, and this event fires after the size has been changed.
 >
 
 
@@ -25,10 +24,10 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|서버에 변경된 내용을 전송한 시트 객체|
-|section |`number`|왼쪽, 오른쪽 변경된 섹션
-`0`:왼쪽 섹션 크기 변경시
-`2`:오른쪽 섹션 크기 변경시|
+|sheet|`object`|Sheet object that sent changed content to the server|
+|section |`number`|Left or right changed section
+`0`:When left section size is changed
+`2`:When right section size is changed|
 
 ### Return
 ***none***
@@ -38,7 +37,7 @@ or
 ```javascript
 options.Events = {
     onAfterSectionResize:function(evtParam){
-        //왼쪽 section 크기 변경시 가로스크롤바를 이동
+        //Move the horizontal scrollbar when the left section size is changed
         if(evtParam.section==0){
             sheet.setScrollLeft(0 , 1);
         }
@@ -58,4 +57,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

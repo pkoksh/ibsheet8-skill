@@ -2,21 +2,20 @@
 KEY: wrap
 KIND: column-property
 PATH: props/col/wrap
-ALIAS: 셀에, 내용이, 많아, 뒷부분이, 안보여질
-ALIAS_EN: wrap
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/wrap
+ALIAS_EN: whether, line, wrapping, feature, cell, content, long, trailing
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/wrap
 ---
 # Wrap ***(col)***
 
-> 셀에 내용이 많아 뒷부분이 안보여질 때, 줄넘김 기능 사용 여부를 설정합니다.
+> Sets whether to use the line wrapping feature when the cell content is too long and the trailing part is not visible.
 
-> 줄넘김이 이루어지는 경우 행의 높이가 증가하게 됩니다.
+> When line wrapping occurs, the row height increases.
 
-> 일반적으로 `Text` 타입에서 사용하며, `Radio` 타입에서도 사용하실 수 있습니다.
+> Generally used with `Text` type, and can also be used with `Radio` type.
 
-> [Lines 타입](/docs/appx/type) 컬럼에서는 `default: 1(true)`로 설정됩니다.
+> For [Lines type](/docs/appx/type) columns, it is set to `default: 1(true)`.
 
-<!--!> 대용량 모드에서는 [(SearchMode:0)](/docs/props/cfg/search-mode)은 데이터행의 높이에 동적인 경우에 대해 지원하지 않으므로 해당 기능을 사용할 수 없습니다. 
+<!--!> In large data mode [(SearchMode:0)](/docs/props/cfg/search-mode), dynamic data row heights are not supported, so this feature cannot be used. 
 !-->
 
 ### Type
@@ -25,16 +24,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/wrap
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|줄넘김 사용 안함 (`default`)|
-|`1(true)`|줄넘김 사용 (`컬럼의 Type이 Lines인 경우 default: 1(true)`)|
+|`0(false)`|Line wrapping disabled (`default`)|
+|`1(true)`|Line wrapping enabled (`default: 1(true) when column Type is Lines`)|
 
 
 ### Example
 ```javascript
-//특정 열의 줄넘김 허용
+// Allow line wrapping on a specific column
 options.Cols = [
     ...
-    {Header: "의견", Type: "Text", Wrap: 1, Name: "DESC", ...},
+    {Header: "Comments", Type: "Text", Wrap: 1, Name: "DESC", ...},
     ...
 ];
 ```
@@ -47,4 +46,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

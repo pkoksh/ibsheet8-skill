@@ -2,13 +2,12 @@
 KEY: noButtonInFilter
 KIND: column-property
 PATH: props/col/no-button-in-filter
-ALIAS: 해당, 열의, 필터행에, 생성되는, 혹은
-ALIAS_EN: no, button, in, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/no-button-in-filter
+ALIAS_EN: prevents, button, timepicker, created, time, picker, generated, filter
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/no-button-in-filter
 ---
 # NoButtonInFilter ***(col)***
 
-> 해당 열의 필터행에 [Button](./button), [TimePicker](./time-picker) 을 통해 생성되는 `Button` 혹은 `TimePicker` 가 생성되지 않도록 합니다.
+> Prevents the `Button` or `TimePicker` created through [Button](./button) or [TimePicker](./time-picker) from being generated in the filter row of the column.
 
 
 ### Type
@@ -17,12 +16,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/no-button
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|필터행에 `Button` 혹은 `TimePicker` 생성됨 (`default`)|
-|`1(true)`|필터행에 `Button` 혹은 `TimePicker` 생성되지 않음|
+|`0(false)`|`Button` or `TimePicker` is created in the filter row (`default`)|
+|`1(true)`|`Button` or `TimePicker` is not created in the filter row|
 
 ### Example
 ```javascript
-// 특정 열의 필터행에 버튼이 생성되지 않도록 설정
+// Set a specific column's filter row to not generate buttons
 options.Cols = [
     {Type: "Text", Button: "Button", ButtonText: "TestButton", Name: "sNumber", NoButtonInFilter: 1, Width: 70 ...},
     ...
@@ -37,4 +36,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.76|기능 추가|
+|core|8.1.0.76|Feature added|

@@ -2,14 +2,13 @@
 KEY: onAfterPivot
 KIND: event
 PATH: events/on-after-pivot
-ALIAS: 피벗, 시트를, 생성, 시트가, 호출되는
-ALIAS_EN: on, after, pivot
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-pivot
+ALIAS_EN: event, called, pivot, sheet, created, creating, usepivot, onafterpivot
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-pivot
 ---
 # onAfterPivot ***(event)***
-> 'UsePivot: 1'로 피벗 시트를 생성 할 때, 피벗 시트가 생성 된 후 호출되는 이벤트 입니다.
+> Event called after the pivot sheet is created when creating a pivot sheet with 'UsePivot: 1'.
 
-> 피벗 시트가 생성 후 onRenderFirstFinish 시점에 발생합니다.
+> Fires at the onRenderFirstFinish point after the pivot sheet is created.
 
 ### Syntax
 
@@ -26,12 +25,12 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|부모 시트 객체|
-|pivotSheet|`object`|피벗시트 객체|
-|criterias|`object`|피벗시트 기준 대상 컬럼명들 설정|
-|init|`object`|피벗시트 열, 행, 계산 대상 설정|
-|format|`string`|피벗시트에서 보여질 포맷|
-|type|`string`|계산 대상 컬럼별 계산 방법|
+|sheet|`object`|Parent sheet object|
+|pivotSheet|`object`|Pivot sheet object|
+|criterias|`object`|Column names set as pivot sheet criteria targets|
+|init|`object`|Pivot sheet column, row, and calculation target settings|
+|format|`string`|Format to be displayed in the pivot sheet|
+|type|`string`|Calculation method per calculation target column|
 
 ### Return
 ***boolean***|
@@ -41,8 +40,8 @@ or
 ```javascript
 options.Events = {
     onAfterPivot:function(evtParam){
-        // 피벗시트가 생성된 후 피벗시트의 정보 확인
-        alert("피벗시트의 계산 타입은 " + evtParam.type + "입니다.");
+        // Check pivot sheet information after the pivot sheet is created
+        alert("The calculation type of the pivot sheet is " + evtParam.type + ".");
     }
 }
 ```
@@ -55,4 +54,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.41|기능 추가|
+|core|8.1.0.41|Feature added|

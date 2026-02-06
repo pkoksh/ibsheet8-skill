@@ -2,17 +2,16 @@
 KEY: reqStatusName
 KIND: config-property
 PATH: props/cfg/req-status-name
-ALIAS: 저장, 함수, 호출시, 행의, 상태
-ALIAS_EN: req, status, name, save, persist, store, function, method
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/req-status-name
+ALIAS_EN: variable, name, row, status, added, changed, deleted, calling
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/req-status-name
 ---
 # ReqStatusName ***(cfg)***
 
-> 저장 함수([doSave](/docs/funcs/core/do-save), [getSaveString](/docs/funcs/core/get-save-string), [getSaveJson](/docs/funcs/core/get-save-json)) 호출시 각 행의 상태(`Added`, `Changed`, `Deleted`)에 대해서 전달하는 변수 명을 설정합니다.
+> Sets the variable name for each row's status (`Added`, `Changed`, `Deleted`) when calling save functions ([doSave](/docs/funcs/core/do-save), [getSaveString](/docs/funcs/core/get-save-string), [getSaveJson](/docs/funcs/core/get-save-json)).
 
-> 별도의 설정이 없는 경우에는 `"STATUS"`로 전달 됩니다. 
+> If no separate configuration is made, it is sent as `"STATUS"`. 
 
-> 서버로 전달할 상태값은 `local/언어.js` 파일 안에 문자열(`"ReqStatusAdded": "Added"`\(I\), `"ReqStatusChanged": "Changed"`\(U\), `"ReqStatusDeleted": "Deleted"`\(D\), `"ReqStatusEmpty": ""`\(R\))을 수정하면 됩니다.
+> The status values sent to the server can be modified by editing the strings in the `local/language.js` file (`"ReqStatusAdded": "Added"`\(I\), `"ReqStatusChanged": "Changed"`\(U\), `"ReqStatusDeleted": "Deleted"`\(D\), `"ReqStatusEmpty": ""`\(R\)).
 
 ### Type
 `string`
@@ -20,14 +19,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/req-statu
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|서버로 전송될 상태 명 (`default: STATUS`)|
+|`string`|Status name to be sent to the server (`default: STATUS`)|
 
 
 ### Example
 ```javascript
 options.Cfg = { "ReqStatusName": "mySheet_st" };
 ```
-//실제 서버로 전송시 다음과 같이 전달 됩니다.
+// When actually sent to the server, it is transmitted as follows.
 ```javascript
 var saveStr = sheet.getSaveString();
 //saveStr
@@ -43,4 +42,4 @@ var saveStr = sheet.getSaveString();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

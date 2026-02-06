@@ -2,15 +2,15 @@
 KEY: setTotalRowCount
 KIND: method
 PATH: funcs/core/set-total-row-count
-ALIAS: sheet.setTotalRowCount, setTotalRowCount(), 기능, 사용시, 표시되는, 전체, 데이터
-ALIAS_EN: set, total, row, count, all, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-total-row-count
+ALIAS: sheet.setTotalRowCount, setTotalRowCount()
+ALIAS_EN: changes, total, data, row, count, displayed, inforowconfig, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-total-row-count
 ---
 # setTotalRowCount ***(method)***
 
-> [InfoRowConfig cfg](/docs/props/cfg/info-row-config) 기능 사용시 표시되는 전체 데이터 행수를 변경합니다.
+> Changes the total data row count displayed when using the [InfoRowConfig cfg](/docs/props/cfg/info-row-config) feature.
 
-> DB에서 가저온 건수와 다르게 표시하고 싶을때 유용합니다.
+> Useful when you want to display a count different from the count stored in the DB.
 
 
 ### Syntax
@@ -21,14 +21,14 @@ void setTotalRowCount ( count );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|count |`number`|필수|전체 데이터 행수로 표시할 숫자|
+|count |`number`|Required|Number to display as the total data row count|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-// 전체 데이터 행수를 변경
+// Change the total data row count
 sheet.setTotalRowCount ( 2000 );
 ```
 
@@ -41,4 +41,4 @@ sheet.setTotalRowCount ( 2000 );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

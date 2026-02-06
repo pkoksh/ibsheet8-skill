@@ -2,16 +2,19 @@
 KEY: class
 KIND: column-property
 PATH: props/col/class
-ALIAS: 열에, 적용할, 커스텀, 설정합니다
-ALIAS_EN: class
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/class
+ALIAS_EN: custom, css, class, name, apply, column, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/class
 ---
 # Class ***(col)***
 
-> 열에 적용할 커스텀 `css class명`을 설정합니다.
+> Sets a custom CSS class name to apply to the column.
+
+> For `Type : "Button"`, the Class property is not applied due to its internal structure, so you should use the [AddClass](./add-class) property.
 
 
-> **<mark>주의</mark> : Class로 적용한 css는 엑셀 다운로드시 디자인 반영되지 않습니다.**
+> **<mark>Caution</mark> : CSS applied via Class will not be reflected in the design when downloading to Excel.**
+
+> **<mark>Caution</mark> : If CSS applied via Class is not reflected, please check through the browser's developer tools whether there is any CSS information that takes priority over the applied Class.**
 
 ### Type
 `string`
@@ -19,17 +22,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/class
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|열에 적용할 css class 명|
+|`string`|CSS class name to apply to the column|
 
 
 ### Example
 ```css
 <style>
-.RedBold{color:#FF0000;font-weight:700}
+.RedBold{color:#FF0000!important;font-weight:700!important;}
 </style>
 ```
 ```javascript
-//특정 열에 "RedBold" 클래스를 적용
+// Apply "RedBold" class to a specific column
 options.Cols = [
     ...
 
@@ -39,11 +42,11 @@ options.Cols = [
 ```
 
 ### Read More
-
+- [AddClass col](./add-class)
 
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

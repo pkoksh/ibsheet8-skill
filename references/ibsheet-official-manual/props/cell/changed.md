@@ -2,19 +2,18 @@
 KEY: changed
 KIND: cell-property
 PATH: props/cell/changed
-ALIAS: 셀의, 변경, 여부를, 나타냅니다
-ALIAS_EN: changed, change, modify
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/changed
+ALIAS_EN: indicates, whether, cell, modified, changed
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/changed
 ---
 # Changed ***(cell)***
 
-> 셀의 변경 여부를 나타냅니다.
+> Indicates whether the cell has been modified.
 
-> 셀의 값을 수정시 자동으로 `1(true)`로 수정되고, 값을 원래 값으로 복원하면 자동으로 속성이 제거됩니다.
+> When the cell value is modified, it is automatically set to `1(true)`, and when the value is restored to the original value, the property is automatically removed.
 
-> 별도로 [NoColor](./no-color) 속성을 설정하지 않으면, 수정시 셀의 배경색상은 css/default(테마)/main.css파일에 .IBColorChangedCell 로 설정한 색상 (기본값:#EEE 연한 회색)으로 변경됩니다.
+> Unless the [NoColor](./no-color) property is separately set, the cell background color will change to the color set as .IBColorChangedCell in the css/default(theme)/main.css file (default: #EEE light gray) when modified.
 
-> 이 속성은 직접 값을 변경하기 보다는 수정 여부를 확인하는 용도로 사용할 것을 권합니다.
+> It is recommended to use this property for checking modification status rather than directly changing its value.
 
 ### Type
 `boolean`
@@ -22,15 +21,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/changed
 ### Options
 |Value|Description|
 |-----|-----|
-|`1(true)`|수정됨|
+|`1(true)`|Modified|
 
 
 ### Example
 ```javascript
-//셀값의 수정여부를 확인합니다. (열이름이 CLS 라고 가정)
+// Check whether the cell value has been modified. (assuming column name is CLS)
 var row = sheet.getRowById("AR10");
 if (row["CLSChanged"]) {
-    //셀값이 수정되었습니다...
+    // The cell value has been modified...
 }
 ```
 
@@ -43,4 +42,4 @@ if (row["CLSChanged"]) {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,86 +2,85 @@
 KEY: dialog
 KIND: appendix
 PATH: appx/dialog
-ALIAS: 지정한, 위치에, 레이어팝업, 형식의, 다이얼로그를
-ALIAS_EN: dialog
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/dialog
+ALIAS_EN: creates, layer, popup, style, dialog, specified, position, appendix
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/dialog
 ---
 # Dialog  ***(appendix)***
-> 지정한 위치에 레이어팝업 형식의 다이얼로그를 생성합니다.
+> Creates a layer popup style dialog at a specified position.
 
-> 시트 안에서 다이얼로그 생성시 sheet.showDialog() 함수를 사용하고, 시트 외부에서는 IBSheet.showDialog() 를 통하여 사용하실 수 있습니다.
+> When creating a dialog inside the sheet, use the sheet.showDialog() function, and outside the sheet, use IBSheet.showDialog().
 
-## 사용 가능한 속성
+## Available Properties
 |Name|Type|Description|
 |---|---|---|
-|Head|`string`|다이얼로그 상단에 들어갈 타이틀|
-|Foot|`string`|다이얼로그 하단에 들어갈 타이틀|
-|Header|`string`|**시트의 특정 셀 위에 다이얼로그를 생성할 때 해당 셀이 다이얼로그의 헤더가 됩니다**.
-이 속성은 해당 셀에 보여질 문자열(다이얼로그가 닫히면 자동으로 사라짐)을 설정합니다.
-아래 속성 설명에서 헤더라 함은 모두 이 셀을 의미합니다.|
-|HeadClose|`boolean`|Head가 설정되어 있을 때, 헤더 타이틀 우측편에 닫기 위한 X 버튼을 보여줄지 여부|
-|CanFocus|`boolean`|다이얼로그 생성시 포커스를 갖게 할 것인지 여부|
-|Modal|`boolean`|다이얼로그 생성시 화면에 다른 객체에 접근하지 못하게끔 합니다.|
-|Body|`string`|다이얼로그 안에 구성할 HTML 내용을 설정합니다.|
-|Wrap|`boolean`|다이얼로그 내부의 내용이 다이얼로그 너비보다 큰 경우 줄넘김 시킬지 여부를 설정합니다.|
-|MaxHeight|`number`|헤더를 제외한 다이얼로그의 최대 높이를 설정합니다.
-MaxHeight값보다 다이얼로그 내부의 내용이 크면 세로 스크롤바가 생성됩니다.|
-|MinHeight|`number`|헤더를 제외한 다이얼로그의 최소 높이를 설정합니다.|
-|MaxWidth|`number`|다이얼로그의 최대 너비
-다이얼로그 안에 내용이 MaxWidth보다 크면 overflow-x:hidden으로 감춰집니다.
-0으로 설정하면 다이얼로그 안에 셀의 너비에 맞게 자동으로 크기가 결정됩니다.|
-|MinWidth|`number`|다이얼로그의 최소 너비
-0으로 설정하면 다이얼로그 안에 셀의 너비에 맞게 자동으로 크기가 결정됩니다.|
-|Area|`object`|다이얼로그를 브라우저 내에 특정 범위 안에서만 보여지게끔 합니다.
-(지정한 영역을 넘어서 창크기를 조절하거나 다이얼로그의 위치를 이동할 수 없음)
-영역은 X, Y (영역의 시작점)과 Width, Height(영역의 크기)로 설정합니다.
+|Head|`string`|Title to be placed at the top of the dialog|
+|Foot|`string`|Title to be placed at the bottom of the dialog|
+|Header|`string`|**When creating a dialog on a specific cell in the sheet, that cell becomes the dialog's header**.
+This property sets the string to be displayed in that cell (automatically disappears when the dialog closes).
+In the property descriptions below, "header" refers to this cell.|
+|HeadClose|`boolean`|When Head is set, whether to show a close X button on the right side of the header title|
+|CanFocus|`boolean`|Whether to give focus when the dialog is created|
+|Modal|`boolean`|Prevents access to other objects on the screen when the dialog is created.|
+|Body|`string`|Sets the HTML content to be composed inside the dialog.|
+|Wrap|`boolean`|Sets whether to wrap the content when the dialog's internal content is wider than the dialog width.|
+|MaxHeight|`number`|Sets the maximum height of the dialog excluding the header.
+If the dialog's internal content is larger than MaxHeight, a vertical scrollbar is created.|
+|MinHeight|`number`|Sets the minimum height of the dialog excluding the header.|
+|MaxWidth|`number`|Maximum width of the dialog
+If the content inside the dialog is larger than MaxWidth, it is hidden with overflow-x:hidden.
+Setting to 0 automatically determines the size to match the cell width inside the dialog.|
+|MinWidth|`number`|Minimum width of the dialog
+Setting to 0 automatically determines the size to match the cell width inside the dialog.|
+|Area|`object`|Makes the dialog only visible within a specific range in the browser.
+(Cannot resize the window or move the dialog beyond the specified area)
+The area is set with X, Y (start point of the area) and Width, Height (size of the area).
 ex ) { X:100, Y:100, Width:400, Height:500 }|
-|Position|`object`|다이얼로그의 생성 위치를 설정합니다.([Position appendix](/docs/appx/position)을 참고)|
-|HeadDrag|`boolean`|다이얼로그의 헤드(헤더아님)를 드래그하여 다이얼로그의 위치를 변경할 지 여부를 설정합니다.|
-|Shadow|`boolean`|다이얼로그에 우측아래로 그림자를 표현할 지 여부|
-|ShadowHeader|`boolean`|다이얼로그 헤더의 우측아래로 그림자를 표현할 지 여부|
-|CloseOut|`boolean`|마우스커서가 다이얼로그 밖으로 나가거나 다이얼로그 헤더 위로 가면 다이얼로그를 닫습니다.|
-|CloseTimeout|`number`|다이얼로그에서 커서가 벗어났을 때 지정한 시간이 경과시 닫습니다(기본값 300, 밀리초 단위)|
-|CloseClickHeader|`boolean`|다이얼로그 헤더를 클릭하면 다이얼로그를 닫습니다.|
-|CloseAfter|`number`|다이얼로그가 오픈 된 이후 특정 시간 경과 후 자동으로 다이얼로그를 닫습니다.(밀리초 단위)|
-|CloseClick|`boolean`|다이얼로그를 클릭시 다이얼로그를 닫습니다.|
-|ZIndex|`number`|해당 다이얼로그가 갖게 될 z-index를 설정합니다.(default:258)|
+|Position|`object`|Sets the creation position of the dialog. (Refer to [Position appendix](/docs/appx/position))|
+|HeadDrag|`boolean`|Sets whether to change the dialog position by dragging the dialog's head (not header).|
+|Shadow|`boolean`|Whether to display a shadow on the bottom-right of the dialog|
+|ShadowHeader|`boolean`|Whether to display a shadow on the bottom-right of the dialog header|
+|CloseOut|`boolean`|Closes the dialog when the mouse cursor goes outside the dialog or over the dialog header.|
+|CloseTimeout|`number`|Closes the dialog after the specified time when the cursor leaves the dialog (default 300, in milliseconds)|
+|CloseClickHeader|`boolean`|Closes the dialog when clicking the dialog header.|
+|CloseAfter|`number`|Automatically closes the dialog after a specified time has elapsed since it was opened (in milliseconds).|
+|CloseClick|`boolean`|Closes the dialog when clicking on the dialog.|
+|ZIndex|`number`|Sets the z-index for this dialog. (default:258)|
 
 
-## 다이얼로그 객체
-showDialog()의 리턴 값이나 sheet.Dialog 를 통해 현재 생성된 다이얼로그에 접근할 수 있습니다.
+## Dialog Object
+You can access the currently created dialog through the return value of showDialog() or sheet.Dialog.
 
-이와 같은 Dialog 객체는 다음과 같은 속성과 함수를 갖습니다.
+Such Dialog objects have the following properties and functions.
 
 ### Property
-Tag : 다이얼로그안의 HTML객체를 갖고 있습니다.
+Tag : Contains the HTML object inside the dialog.
 ```javascript
-//Tag 사용 예
+//Tag usage example
 var dialogObj = IBSheet.showDialog(...);
 var x = dialogObj.Tag.querySelector("#dlgInput").value;
 ```
 ### method
-Close() : 선택한 다이얼로그 창을 닫습니다.
+Close() : Closes the selected dialog window.
 ```javascript
-//Close() 사용 예
-dialogObj = sheet.Dialog; // 열려있는 Dialog 객체를 시트로 부터 얻음
-dialogObj.Close(); // Dialog 객체를 닫음.
+//Close() usage example
+dialogObj = sheet.Dialog; // Get the open Dialog object from the sheet
+dialogObj.Close(); // Close the Dialog object.
 ```
 
-![dialog](/assets/imgs/dialog0.png "다이얼로그")
-<!-- IMAGE: 스크린샷/예시 이미지 - dialog -->
+![dialog](/assets/imgs/dialog0.png "Dialog")
+<!-- IMAGE: Screenshot/Example Image - dialog -->
 
-[아래 Example  다이얼로그 사용 예]
+[Example dialog usage below]
 
 ### Example
 ```javascript
 function openDlg() {
     var dialog = {
-			Header: "계산 중",          // 다이얼로그를 오픈한 셀에 표시될 글자
-			Head:"환율계산기",          // 다이얼로그 상단 타이틀
-			Foot: "ibleaders co.,ltd",  // 다이얼로그 하단 타이틀
-			MinWidth:0,                 // 다이얼로그 너비
-			Body: "<div>"                // 다이얼로그 안 내용
+			Header: "Calculating",          // Text displayed in the cell that opened the dialog
+			Head:"Currency Calculator",          // Dialog top title
+			Foot: "ibleaders co.,ltd",  // Dialog bottom title
+			MinWidth:0,                 // Dialog width
+			Body: "<div>"                // Dialog content
 				+ "<select id='inputUnit' onchange='calc()'>"
 				+ "<option value='USD'>USD</option><option value='JPY'>JPY</option>"
 				+ "<option value='EUR'>EUR</option><option value='CNY'>CNY</option>"
@@ -98,14 +97,14 @@ function openDlg() {
 				+ " <input type='text' id='outMoney'  class='number readonly' />"
 				+ "</div>"
 				+ "<div style='text-align:center;padding:10px 0 5px 0;'>"
-				+ "<button type='button' onclick='confirmCalc()'>확인</button>"
+				+ "<button type='button' onclick='confirmCalc()'>Confirm</button>"
 				+ "</div>"
     };
 
     sheet.showDialog({row : sheet.getRowById("AR5"), col: "AMOUNT06", dialog: dialog});
 }
 
-// 확인 버튼 클릭시
+// When the confirm button is clicked
 function confirmCalc() {
 	var dd = sheet.Dialog;
 	var v = dd.Tag.querySelector("#outMoney").value;
@@ -115,7 +114,7 @@ function confirmCalc() {
 	dd.Close();
 }
 
-// 다이얼로그 내에 값 변경시
+// When a value changes inside the dialog
 function calc() {
 	var dd = sheet.Dialog;
 	var inpU = dd.Tag.querySelector("#inputUnit");
@@ -172,4 +171,4 @@ function calc() {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

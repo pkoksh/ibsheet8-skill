@@ -2,14 +2,13 @@
 KEY: enumDisabled
 KIND: cell-property
 PATH: props/cell/enum-disabled
-ALIAS: 속성을, 설정한, 아이템들의, 선택, 불가능
-ALIAS_EN: enum, disabled, select, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/enum-disabled
+ALIAS_EN: whether, items, configured, enum, property, selectable, enumdisabled, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/enum-disabled
 ---
 # EnumDisabled ***(cell)***
-> [Enum](./enum) 속성을 통해 설정한 아이템들의 선택 불가능 여부를 설정합니다.
+> Sets whether items configured through the [Enum](./enum) property are selectable or not.
 
-> 첫번째 글자를 구분자로 설정하게 됩니다. 
+> The first character is set as the delimiter. 
 
 
 ### Type
@@ -18,22 +17,22 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/enum-dis
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|첫번째 글자를 구분자로 하는 문자열 (ex:"#1#0")|
+|`string`|A string with the first character as the delimiter (e.g., "#1#0")|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름 :CLS )
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "EnumDisabled", "|1|0|0|0|0|1|0|1|1|0|0");
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름 :CLS )
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSEnumDisabled"] = "|1|0|0|0";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용  (열이름 :CLS )
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {..., "CLSEnumDisabled":"|1|0", ...}
@@ -50,4 +49,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.16|기능 추가|
+|core|8.3.0.16|Feature added|

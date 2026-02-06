@@ -2,21 +2,20 @@
 KEY: path
 KIND: cell-property
 PATH: props/cell/path
-ALIAS: 열의, 경우, 파일을, 다운받을, 경로를
-ALIAS_EN: path
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/path
+ALIAS_EN: column, type, docs, props, cell, file, path, download
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/path
 ---
 # Path ***(cell)***
-> 열의 [Type](/docs/props/cell/type)이 `File`인 경우 파일을 다운받을 경로를 설정합니다.
+> When the column [Type](/docs/props/cell/type) is `File`, sets the path to download files from.
 
-> `File` [Type](/docs/props/cell/type)을 사용하시는 경우 반드시 설정해야 정상적으로 다운로드 됩니다. 
+> When using the `File` [Type](/docs/props/cell/type), this must be configured for downloads to work properly. 
 
-> 해당 속성 혹은 [FilePath](/docs/props/cfg/export)가 설정된 경우에만 [File](/docs/appx/file-type-upload)타입인 셀에 데이터가 표시됩니다. 
+> Data is displayed in [File](/docs/appx/file-type-upload) type cells only when this property or [FilePath](/docs/props/cfg/export) is set. 
 
 >
-> 구분자를 포함하여 해당 셀의 파일들의 경로를 개별 설정할 수 있습니다.
+> You can set individual paths for files in the cell by including a delimiter.
 <!--!
-> `[비공개 설명]` 배열로도 개별 경로 설정이 가능 
+> `[Private description]` Individual path configuration is also possible using arrays
 !-->
 
 ### Type
@@ -25,29 +24,29 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/path
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`| 파일을 다운받을 경로 |
+|`string`| Path to download files from |
 
 ### Example
 ```javascript
-//1. 메소드를 통해 속성 설정
+//1. Set property via method
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Path", "https://api.ibleaders.com/ibsheet/v8/samples/customer/files/");
 
 
-//2. 객체에 직접 접근해서 속성 설정(열이름이 CLS 로 가정)
+//2. Apply property by directly accessing the object (assuming column name is CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSPath"] = "https://api.ibleaders.com/ibsheet/v8/samples/customer/files/";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성설정(열이름이 CLS 로 가정)
+//3. Apply property within loaded data (assuming column name is CLS)
 {
     data:[
         {... , "CLS":"testFile.xlsx", "CLSPath":"https://api.ibleaders.com/ibsheet/v8/samples/customer/files/" , ...}
     ]
 }
 
-//4. 개별 경로를 설정을 하는 경우
+//4. When setting individual paths
 {
     data: [
         {
@@ -60,12 +59,12 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 ### Read More
 - [Type appendix](/docs/appx/type)
-- [File Type 업로드 appendix](/docs/appx/file-type-upload)
+- [File Type upload appendix](/docs/appx/file-type-upload)
 - [Alias cell](/docs/props/cell/Alias)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.5|기능 추가|
-|core|8.3.0.21|개별 설정 동작 개선|
+|core|8.0.0.5|Feature added|
+|core|8.3.0.21|Individual setting behavior improved|

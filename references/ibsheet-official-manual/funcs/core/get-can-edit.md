@@ -2,13 +2,13 @@
 KEY: getCanEdit
 KIND: method
 PATH: funcs/core/get-can-edit
-ALIAS: sheet.getCanEdit, getCanEdit(), 특정, 셀의, 편집, 가능, 여부를
-ALIAS_EN: get, can, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-can-edit
+ALIAS: sheet.getCanEdit, getCanEdit()
+ALIAS_EN: checks, whether, specific, cell, editable, getcanedit, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-can-edit
 ---
 # getCanEdit ***(method)***
 
-> 특정 셀의 편집 가능 여부를 확인합니다.
+> Checks whether a specific cell is editable.
 
 
 ### Syntax
@@ -20,30 +20,30 @@ number getCanEdit( row, col );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|필수|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col|`string`|Required|column name|
 
 ### Return Value
 ***number***
 
-|value|설명|
+|value|Description|
 |-----|-----|
-|`0`|편집 불가(읽기 전용)
+|`0`|Not editable (read-only)
 ![CanEdit](/assets/imgs/canEdit0.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`1`|편집 가능
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`1`|Editable
 ![CanEdit](/assets/imgs/canEdit1.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`2`|행의 내용은 편집 불가하지만, 편집 미리보기를 제공
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`2`|Row content is not editable, but provides edit preview
 ![CanEdit](/assets/imgs/canEdit2.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
 
 ### Example
 ```javascript
-//특정 셀에 편집 가능 여부를 확인.
+// Check whether a specific cell is editable.
 var edit = sheet.getCanEdit(sheet.getFocusedRow(), "RES_ENDDATE");
 if (!edit) {
-    alert("마감되었습니다");
+    alert("Editing is closed");
 }
 ```
 
@@ -55,4 +55,4 @@ if (!edit) {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

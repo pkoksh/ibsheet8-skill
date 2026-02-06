@@ -2,82 +2,88 @@
 KEY: getSaveJson
 KIND: method
 PATH: funcs/core/get-save-json
-ALIAS: sheet.getSaveJson, getSaveJson(), 시트, 내에, 변경된, 내용, 입력
-ALIAS_EN: get, save, json, sheet, grid, input, import
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-save-json
+ALIAS: sheet.getSaveJson, getSaveJson()
+ALIAS_EN: extracts, changed, content, within, sheet, added, deleted, moved
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-save-json
 ---
 # getSaveJson ***(method)***
-> 시트 내에 변경된 내용(`입력(Added)`, `수정(Changed)`, `삭제(Deleted)`, `이동(Moved)`)을 json 형식의 객체로 추출합니다.
+> Extracts the changed content within the sheet (`Added`, `Changed`, `Deleted`, `Moved`) as a JSON format object.
 
+> After sending the extracted data to the server, the result must be reflected on the sheet using [acceptChangedData](/docs/funcs/core/accept-changed-data) or [applySaveResult](/docs/funcs/core/apply-save-result).
+
+> For details related to the server response (JSON) structure, refer to [dataStructure](/docs/dataStructure/saving-structure).
 
 ### Syntax
 ```javascript
-object getSaveJson( saveMode, col, validRequired, showAlert, saveAttr, useLevel, formData, saveExtraAttr, rows );
+object getSaveJson( saveMode, col, validRequired, showAlert, saveAttr, useLevel, formData, saveExtraAttr, rows, validSize, validEditMask, validResultMask );
 ```
 
 ### Parameters
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|saveMode|`number`|선택|상태별 데이터 추출 여부 
-`0`:전체데이터
-`1`:전체데이터 중 `Deleted` 만 제외
-`2`:수정된 데이터(`Added`,`Changed`,`Deleted`) (`default`)
-`3`:수정된 데이터(`Added`,`Changed`,`Deleted`)+이동한 데이터(`Moved`)|
-|col|`string`|선택|저장 기준 열의 열이름
-특정 열을 지정하면 행의 상태(`Added`,`Changed`,`Deleted`)를 무시하고 지정한 열의 데이터 유무에 따라 저장됨.|
-|validRequired|`boolean`|선택|데이터 필수 입력 항목([Required col](/docs/props/col/required) 설정된 열)에 대한 검사 여부 설정.
-`0(false)`:필수 입력 항목 검사 안함
-`1(true)`:필수 입력 항목 검사 실행 (`default`)|
-|showAlert|`boolean`|선택|`validRequired` 검사를 통과하지 못할 시 메세지 표시 여부
-`0(false)`:메시지 표시 안함 (`default`)
-`1(true)`:메세지 표시
-![테이블](/assets/imgs/doSaveRequired1.png "테이블")
-<!-- IMAGE: 시트/테이블 화면 - 테이블 -->
-![경고창](/assets/imgs/doSaveRequired2.png "경고창")
-<!-- IMAGE: 경고/확인 대화상자 - 경고창 -->|
-|saveAttr|`string`|선택|각 셀의 속성값을 같이 추출하고자 하는 경우 Name+속성명 형식으로 설정
-여러개 속성을 추출하고자 하는 경우 ","를 구분자로 작성
+|saveMode|`number`|Optional|Data extraction by status 
+`0`:All data
+`1`:All data with `Deleted` excluded only
+`2`:Modified data(`Added`,`Changed`,`Deleted`) (`default`)
+`3`:Modified data(`Added`,`Changed`,`Deleted`)+Moved data(`Moved`)|
+|col|`string`|Optional|Save reference column column name
+When specifying a specific column, row status(`Added`,`Changed`,`Deleted`)the row status is ignored and saving is based on the presence of data in the specified column.|
+|validRequired|`boolean`|Optional|Whether to validate required data input fields ([Required col](/docs/props/col/required) setting applied columns).
+`0(false)`:Do not validate required input fields
+`1(true)`:Validate required input fields (`default`)|
+|showAlert|`boolean`|Optional|When `validRequired`, `validSize`, `validEditMask`, `validResultMask` is set,
+whether to display a message when validation fails.
+`0(false)`:Do not display message (`default`)
+`1(true)`:Display message
+![Table](/assets/imgs/doSaveRequired1.png "Table")
+<!-- IMAGE: Sheet/Table View - Table -->
+![Warning dialog](/assets/imgs/doSaveRequired2.png "Warning dialog")
+<!-- IMAGE: Screenshot/Example Image - Warning dialog -->
+The displayed message uses the content defined in the message file (e.g., `ko.js`, etc.).
+(EditMaskError, SizeError, RequiredError, ResultMaskError)|
+|saveAttr|`string`|Optional|When you want to extract cell attribute values together, configure in Name+propertyname format.
+When extracting multiple attributes, use "," as delimiter.
 ex) `"sNameColor,sNoCanEdit"`|
-|useLevel|`boolean`|선택|Tree기능 사용시 각 행의 Level(Depth)값을 추출되는 데이터에 포함할지 여부 (default: `1(true)`)
+|useLevel|`boolean`|Optional|When using the Tree feature, whether to include each row's Level (Depth) value in extracted data. (default: `1(true)`)
 
-최 상위 노드를 1부터 시작하여 계산하며, `"tLEVEL"`이라는 이름으로 행 데이터에 추가됩니다.
-`"tLEVEL"`은 각 메세지 파일(ex:`ko.js`)에서 `"TreeLevelName"`으로 변경할 수 있습니다.
-Tree기능을 사용하는 시트에서 해당 속성을 `0(false)`로 설정시 `saveMode:0`을 통해 추출되는 데이터는 계층구조를 갖게 됩니다.
-`saveMode`를 이용하여 전체 데이터가 아닌 일부 데이터를 추출 할 경우 데이터는 계층 구조를 가지지 않으며 `"tLEVEL"` 값은 모두 1이 됩니다.|
-|formData|`boolean`|선택|저장 데이터를 Form Data로 추출 할지 여부 (default: `0(false)`)
+Calculated starting from 1 for the top-level node, and `"tLEVEL"` is added to the row data.
+`"tLEVEL"` can be changed to a different name in each message file (ex: `ko.js`) via `"TreeLevelName"`.
+When this property is set to `0(false)` and `saveMode:0` in a sheet using the Tree feature, the extracted data will have a hierarchical structure.
+When extracting partial data (not all data) using `saveMode`, the data will not have a hierarchical structure and all `"tLEVEL"` values become 1.|
+|formData|`boolean`|Optional|Whether to extract save data as Form Data. (default: `0(false)`)
 
-***File 타입 저장 시 사용***|
-|saveExtraAttr|`boolean`|선택|시트에 (col)[Name](/docs/props/col/name)으로 정의하지 않은 데이터가 [doSearch](/docs/funcs/core/do-search)나 [loadSearchData](/docs/funcs/core/load-search-data)함수를 통해 로드 된 경우, 함수 호출시 해당 데이터를 같이 추출할 지 여부.
-로드 데이터 첫번째 행의 keyset을 기준으로 추출됨.
-`0(false)`:시트에 (col)[Name](/docs/props/col/name)으로 정의 되지 않은 데이터 서버 전송 시 미포함 (`default`)
-`1(true)`:시트에 (col)[Name](/docs/props/col/name)으로 정의 되지 않은 데이터 서버 전송 시 포함|
-|rows|`array[object]`|선택| [데이터 로우 객체](/web-service/manuals/ibsheet8/-/wikis/docs/appx/row-object) 배열로 입력한 행에 대한 정보를 추출합니다.  (default: `null`)|
-|validSize|`boolean`|선택|사이즈 설정([Size col](/docs/props/col/size))에 대한 유효성 검사 여부 설정.
-`0(false)`:사이즈 유효성 검사 안함 (`default`)
-`1(true)`:사이즈 유효성 검사 실행|
-|validEditMask|`boolean`|선택|EditMask 설정([EditMask col](/docs/props/col/edit-mask))에 대한 유효성 검사 여부 설정.
-`0(false)`:EditMask 유효성 검사 안함 (`default`)
-`1(true)`:EditMask 유효성 검사 실행|
-|validResultMask|`boolean`|선택|ResultMask 설정([ResultMask col](/docs/props/col/result-mask))에 대한 유효성 검사 여부 설정.
-`0(false)`:ResultMask 유효성 검사 안함 (`default`)
-`1(true)`:ResultMask 유효성 검사 실행|
+***Used when saving File type data***|
+|saveExtraAttr|`boolean`|Optional|When data not defined with (col)[Name](/docs/props/col/name) in the sheet is loaded through [doSearch](/docs/funcs/core/do-search) or [loadSearchData](/docs/funcs/core/load-search-data) function, whether to extract that data as well when this function is called.
+Extracted based on the keyset of the first row of loaded data.
+`0(false)`:Data not defined with (col)[Name](/docs/props/col/name) is not included when sending to server (`default`)
+`1(true)`:Data not defined with (col)[Name](/docs/props/col/name) is included when sending to server|
+|rows|`array[object]`|Optional| Extracts information for rows entered as [data row object](/web-service/manuals/ibsheet8/-/wikis/docs/appx/row-object) array. (default: `null`)|
+|validSize|`boolean`|Optional|Whether to validate Size setting ([Size col](/docs/props/col/size)).
+`0(false)`:Do not validate size (`default`)
+`1(true)`:Validate size|
+|validEditMask|`boolean`|Optional|Whether to validate EditMask setting ([EditMask col](/docs/props/col/edit-mask)).
+`0(false)`:Do not validate EditMask (`default`)
+`1(true)`:Validate EditMask|
+|validResultMask|`boolean`|Optional|Whether to validate ResultMask setting ([ResultMask col](/docs/props/col/result-mask)).
+`0(false)`:Do not validate ResultMask (`default`)
+`1(true)`:Validate ResultMask|
 
-Parameter 설정 시 결과에 대응하는 코드는 다음과 같습니다.
+When `validRequired`, `rows`, `validSize`, `validEditMask`, `validResultMask` properties are set when calling `getSaveJson`, validation is performed for these options, and the following `Code` and `Message` are returned according to the validation result.
 
 | Code | Message         | Description |
 |------| --------------- |-------------|
-| `IBS000` |NoTargetRows | 저장(Added, Changed, Deleted) 대상이 없는 경우 |
-| `IBS010` |RequiredError| `validRequired` 설정 시 Validation 오류인 경우  |
-| `IBS020` |InvalidRows  | `rows` 설정 시 처리대상이 없는 경우 |
-| `IBS040` |SizeError | `validSize` 설정 시 Validation 오류인 경우 |
-| `IBS050` |EditMaskError | `validEditMask` 설정 시 Validation 오류인 경우 |
-| `IBS060` |ResultMaskError| `validResultMask` 설정 시 Validation 오류인 경우 |
+| `IBS000` |NoTargetRows | When there are no save target (`Added`, `Changed`, `Deleted`) rows |
+| `IBS010` |RequiredError| Validation error for required input items when `validRequired` is set |
+| `IBS020` |InvalidRows | When specified `rows` are not valid or there are no processing targets |
+| `IBS040` |SizeError | Size validation error when `validSize` is set |
+| `IBS050` |EditMaskError | EditMask validation error when `validEditMask` is set |
+| `IBS060` |ResultMaskError| ResultMask validation error when `validResultMask` is set |
 
 ### Return Value
-**json 형식의 object**
+**JSON format object**
 ```json
-// 정상적인 처리시
+// When processed properly
 {
     "data":[
         {"id":"AR1","ColName1":"12345","ColName2":"ABCDE" ...},
@@ -85,18 +91,17 @@ Parameter 설정 시 결과에 대응하는 코드는 다음과 같습니다.
         ...
     ]
 }
-```
-```json
-// validRequired 오류시
+
+// When validRequired error occurs
 {
     "Message":"RequiredError",
     "Code":"IB010",
-    "row":오류 발생 행 객체,
-    "col":오류 발생 열 Name,
+  "row": error triggered row object,
+  "col": error triggered column Name,
     "data":[]
 }
 
-// rows에 입력한 행 객체가 유효하지 않을 경우 
+// When entered row object in rows is not valid
 {
     "Message":"InvalidRows",
     "Code":"IB020",
@@ -107,7 +112,7 @@ Parameter 설정 시 결과에 대응하는 코드는 다음과 같습니다.
 
 ### Example
 ```javascript
-// 각 컬럼에 수정된 데이터와 DESC 컬럼의 Color 속성값을 추출한다.
+// Extract each column's modified data and the Color property value of the DESC column.
 var saveJson = sheet.getSaveJson({saveMode:2, saveAttr:"DESCColor"});
 $.ajax({
         type: 'post'
@@ -118,30 +123,32 @@ $.ajax({
         ,url: "/xgs/manage/sys/sawonTelSave.do"
         ,data: JSON.stringify(saveJson)
         , success: function(data) {
-            // 저장 결과 반영
+            // Reflect save result
             sheet.acceptChangedData();
         }
         , error: function(data, status, err) {
-            alert('서버와의 통신이 실패했습니다.');
+      alert('Communication with server failed.');
         }
 });
 ```
 
 ### Read More
 
-- [getSaveString method](./get-save-string)
 - [acceptChangedData method](./accept-changed-data)
+- [applySaveResult method](./apply-save-result)
+- [doSave method](./do-save)
+- [getSaveString method](./get-save-string)
 - [Required col](/docs/props/col/required)
-- [ValidCheck cfg](/docs/props/cfg/valid-check)
 - [ValidateMessage cfg](/docs/props/cfg/validate-message)
+- [ValidCheck cfg](/docs/props/cfg/valid-check)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.4|`saveAttr`,`useLevel` 기능 추가|
-|core|8.0.0.5|`formData` 기능 추가|
-|core|8.1.0.32|`saveExtraAttr` 기능 추가|
-|core|8.1.0.43|`rows` 기능 추가|
-|core|8.3.0.24|`validSize`, `validEditMask`, `validResultMask` 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.4|`saveAttr`,`useLevel` Feature added|
+|core|8.0.0.5|`formData` Feature added|
+|core|8.1.0.32|`saveExtraAttr` Feature added|
+|core|8.1.0.43|`rows` Feature added|
+|core|8.3.0.24|`validSize`, `validEditMask`, `validResultMask` Feature added|

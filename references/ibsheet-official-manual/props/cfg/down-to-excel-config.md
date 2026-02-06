@@ -2,15 +2,14 @@
 KEY: downToExcelConfig
 KIND: config-property
 PATH: props/cfg/down-to-excel-config
-ALIAS: 함수, 호출시, 들어가는, 인자를, 공통으로
-ALIAS_EN: down, to, excel, config, function, method
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/down-to-excel-config
+ALIAS_EN: common, arguments, down, excel, docs, funcs, function, called
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/down-to-excel-config
 ---
 # Down2ExcelConfig ***(cfg)***
 
-> [down2Excel](/docs/funcs/excel/down-to-excel) 함수 호출시 들어가는 인자를 공통으로 설정합니다.
+> Sets common arguments for when the [down2Excel](/docs/funcs/excel/down-to-excel) function is called.
 
-> [CommontOptions (static)](/docs/static/common-options)에 Cfg속성에 설정하시면 모든 화면에서 [down2Excel](/docs/funcs/excel/down-to-excel) 함수 호출시 기본적인 속성을 설정하실 수 있습니다.
+> If set in the Cfg property of [CommonOptions (static)](/docs/static/common-options), you can configure default properties for [down2Excel](/docs/funcs/excel/down-to-excel) function calls across all pages.
 
 ### Type
 `object`
@@ -18,14 +17,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/down-to-e
 ### Options
 |Value|Description|
 |-----|-----|
-|`object`|[down2Excel](/docs/funcs/excel/down-to-excel) 함수에 들어가는 인자와 동일(각 화면에서 동일한 속성을 설정시 화면에서 설정한 값이 반영됩니다.)|
+|`object`|Same as the arguments passed to the [down2Excel](/docs/funcs/excel/down-to-excel) function (when the same property is set on individual pages, the page-level value takes effect.)|
 
 
 
 ### Example
 ```javascript
 options.Cfg  = {
-  // 모든 화면에서 엑셀 다운로드시 기본 속성을 설정
+  // Set default properties for Excel download across all pages
   Down2ExcelConfig: {
     "sheetDesign":0,
     "merge":1
@@ -41,4 +40,4 @@ options.Cfg  = {
 
 |product|version|desc|
 |---|---|---|
-|excel|0.0.0|기능 추가|
+|excel|0.0.0|Feature added|

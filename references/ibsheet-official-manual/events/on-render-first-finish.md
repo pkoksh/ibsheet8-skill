@@ -2,14 +2,13 @@
 KEY: onRenderFirstFinish
 KIND: event
 PATH: events/on-render-first-finish
-ALIAS: 시트가, 처음, 생성되어, 렌더링될, 호출되는
-ALIAS_EN: on, render, first, finish
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-render-first-finish
+ALIAS_EN: event, called, sheet, first, created, rendered, fires, once
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-render-first-finish
 ---
 # onRenderFirstFinish ***(event)***
-> 시트가 **처음** 생성되어 렌더링될 때 호출되는 이벤트 입니다. **(최초 1회만 발생)**
+> Event called when the sheet is **first** created and rendered. **(Fires only once)**
 
-> 데이터 없이 시트 생성 함수(IBSheet.create)를 호출한 경우 onRenderFirstFinish 이벤트에서 시트에 데이터를 넣을 수 있습니다.
+> If the sheet creation function (IBSheet.create) is called without data, you can insert data into the sheet in the onRenderFirstFinish event.
 
 ### Syntax
 
@@ -26,7 +25,7 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|처음 생성된 시트 객체|
+|sheet|`object`|Initially created sheet object|
 
 ### Return
 ***none***
@@ -35,13 +34,13 @@ or
 ### Example
 ```javascript
 var data = [
-    {"chgrDptNm":"전략기획","taskId":"100201","actnEndTm":"190000","ordr":"1","preTaskId":"100200"},
-    {"chgrDptNm":"실행예산","taskId":"100204","actnEndTm":"170000","ordr":"2","preTaskId":"100200"}
+    {"chgrDptNm":"Strategic Planning","taskId":"100201","actnEndTm":"190000","ordr":"1","preTaskId":"100200"},
+    {"chgrDptNm":"Execution Budget","taskId":"100204","actnEndTm":"170000","ordr":"2","preTaskId":"100200"}
 ];
 
 options.Events = {
     onRenderFirstFinish: function(evtParam){
-        // 시트에 데이터를 넣습니다.
+        // Load data into the sheet.
         evtParam.sheet.loadSearchData(data);
     }
 }
@@ -57,4 +56,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

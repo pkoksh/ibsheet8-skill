@@ -2,17 +2,16 @@
 KEY: size
 KIND: config-property
 PATH: props/cfg/size
-ALIAS: 행의, 최소, 높이, 아이콘, 크기를
-ALIAS_EN: size, height, icon
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/size
+ALIAS_EN: minimum, height, row, icon, size, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/size
 ---
 # Size ***(cfg)***
 
-> 각 행의 최소 높이 및 아이콘 크기를 설정합니다.
+> Sets the minimum height of each row and icon size.
 
-> 시트 생성시 기본적인 행의 높이는 `30px` 이며 이보다 줄이려면 `Size` 속성으로 통해 더 작은 디자인을 설정해야 합니다. 
+> When creating a sheet, the default row height is `30px`, and to make it smaller, you need to set a smaller design through the `Size` property. 
 
-> 아래의 행 높이는 최소 높이일 뿐 이보다 늘리는 것은 가능합니다. 
+> The row heights below are only minimum heights, and it is possible to increase them beyond these values. 
 
 
 
@@ -22,23 +21,23 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/size
 ### Options
 |Value|Description|
 |-----|-----|
-|`Tiny`|최소 행 높이 `20px`|
-|`Small`|최소 행 높이 `22px`|
-|`Low`|최소 행 높이 `27px`|
-|`Normal`|최소 행 높이 `30px` (`default`)|
-|`High`|최소 행 높이 `42px`|
-|`Big`|최소 행 높이 `52px`|
+|`Tiny`|Minimum row height `20px`|
+|`Small`|Minimum row height `22px`|
+|`Low`|Minimum row height `27px`|
+|`Normal`|Minimum row height `30px` (`default`)|
+|`High`|Minimum row height `42px`|
+|`Big`|Minimum row height `52px`|
 
 
 ### Example
 ```javascript
 options = {
     Cfg:{
-      Size: "Small",  //기본보다 작게 설정
+      Size: "Small",  // Set smaller than default
     },
     Def:{
       Row:{
-        Height: 25  //원래 설정(22px)보다 약간 늘림
+        Height: 25  // Slightly increased from original setting (22px)
       }
     }
 };
@@ -56,4 +55,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.1|기능 추가|
+|core|8.0.0.1|Feature added|

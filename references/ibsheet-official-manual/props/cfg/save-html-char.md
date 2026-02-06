@@ -2,13 +2,12 @@
 KEY: saveHtmlChar
 KIND: config-property
 PATH: props/cfg/save-html-char
-ALIAS: 저장시, 변환되지, 않고, 그대로, 저장됩니다
-ALIAS_EN: save, html, char
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/save-html-char
+ALIAS_EN: saving, dosave, querymode, saved, without, converted, namecode, savehtmlchar
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/save-html-char
 ---
 # SaveHTMLChar ***(cfg)***
-> `doSave (queryMode: 0)` 저장시 `<, >, &`가 `NameCode`로 변환되지 않고 그대로 저장됩니다.
-> **해당 옵션 사용시 xss (Cross-Site Scripting) 문제가 발생할 수 있으므로 사용에 주의 바랍니다.**
+> When saving with `doSave (queryMode: 0)`, `<, >, &` are saved as-is without being converted to `NameCode`.
+> **Caution: Using this option may cause XSS (Cross-Site Scripting) issues, so please use with care.**
 
 ### Type
 `boolean`
@@ -16,13 +15,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/save-html
 ### Options
 |Value|Description|
 |-----|-----|
-| `0(false)` | `<, >, &`가 각각 `&lt;`, `&gt;`, `&amp;`로 변환되어 전송 됨 (`default`)|
-| `1(true)` | `<, >, &` 문자 그대로 전송됨|
+| `0(false)` | `<, >, &` are converted to `&lt;`, `&gt;`, `&amp;` respectively before transmission (`default`)|
+| `1(true)` | `<, >, &` characters are transmitted as-is|
 
 ### Example
 ```javascript
 options.Cfg = {
-    SaveHTMLChar: 1   // <, >, & 그대로 서버 전송
+    SaveHTMLChar: 1   // Transmit <, >, & as-is to server
 };
 
 sheet.doSave({url})
@@ -36,4 +35,4 @@ sheet.doSave({url})
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.22|기능 추가|
+|core|8.0.0.22|Feature added|

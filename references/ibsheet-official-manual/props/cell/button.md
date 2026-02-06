@@ -2,34 +2,33 @@
 KEY: button
 KIND: cell-property
 PATH: props/cell/button
-ALIAS: 셀의, 우측에, 원하는, 아이콘이미지, 체크박스
-ALIAS_EN: button
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/button
+ALIAS_EN: feature, displays, desired, icon, image, checkbox, button, right
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/button
 ---
 # Button ***(cell)***
-> 셀의 우측에 원하는 아이콘이미지, 체크박스 혹은 버튼을 표시하는 기능입니다. 
+> A feature that displays a desired icon image, checkbox, or button on the right side of a cell. 
 
-> 열의 [Type](/docs/appx/type)이 `Date`거나 `Enum`인 경우에는 설정과 상관없이 달력이나 드롭다운 모양의 버튼이 표시됩니다.
+> When the column [Type](/docs/appx/type) is `Date` or `Enum`, a calendar or dropdown-shaped button is displayed regardless of this setting.
 
 >
-> 열의 타입이 `Button`인 경우에는 셀 버튼에 대한 기능으로 동작하게 됩니다.
+> When the column type is `Button`, it operates as a feature for the cell button.
 
-> *셀의 좌측에 버튼을 설정하고자 할때는 [Icon](/docs/props/cell/icon)속성을 확인하세요.*
+> *To set a button on the left side of a cell, check the [Icon](/docs/props/cell/icon) property.*
 
 ###
-![Button속성](/assets/imgs/button1.png "Button속성")
-<!-- IMAGE: 버튼 이미지 - Button속성 -->
-[그림1]
+![Button property](/assets/imgs/button1.png "Button property")
+<!-- IMAGE: Button Image - Button property -->
+[Figure 1]
 
 
-![Button속성](/assets/imgs/button2.png "Button속성")
-<!-- IMAGE: 버튼 이미지 - Button속성 -->
-[그림2]
+![Button property](/assets/imgs/button2.png "Button property")
+<!-- IMAGE: Button Image - Button property -->
+[Figure 2]
 
 
-![Button속성](/assets/imgs/button3.png "Button속성")
-<!-- IMAGE: 버튼 이미지 - Button속성 -->
-[그림3]
+![Button property](/assets/imgs/button3.png "Button property")
+<!-- IMAGE: Button Image - Button property -->
+[Figure 3]
 
 
 
@@ -38,49 +37,49 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/button
 `string`
 
 ### Options
-**열의 Type이 Button이 아닌 경우**
+**When the column Type is not Button**
 
 |Value|Description|
 |-----|-----|
-|`Clear`|셀 우측에 셀 내용을 지우기위한 버튼이 표시됩니다. [그림1] 참고|
-|`Check`|셀 우측에 체크박스를 표시합니다. [그림2] 참고|
-|`Html`|[ButtonText](/docs/props/cell/button-text) 속성으로 원하는 HTML태그를 넣으면 셀 우측에 표시됩니다.|
-|`공백`|원래 보여져야 하는 버튼 이미지를 감춥니다.
- 가령 Date 타입 열은 기본적으로 달력버튼이 표시되는데 이 속성을 이용하여 버튼을 감출수 있습니다.
-|`기타`|이미지 파일에 대한 url을 넣으면 버튼의 배경으로 이미지가 표시됩니다. [그림3] 참고
-(이미지는 gif, png, jpg만 가능  / 클릭시 `onButtonClick이벤트`가 호출)|
+|`Clear`|A button for clearing cell content is displayed on the right side of the cell. See [Figure 1]|
+|`Check`|A checkbox is displayed on the right side of the cell. See [Figure 2]|
+|`Html`|Set the desired HTML tag using the [ButtonText](/docs/props/cell/button-text) property, and it will be displayed on the right side of the cell.|
+|`Empty string`|Hides the button image that would normally be shown.
+ For example, Date type columns show a calendar button by default, and this property can be used to hide the button.
+|`Other`|If you enter a URL to an image file, the image will be displayed as the button background. See [Figure 3]
+(Only gif, png, jpg images are supported / `onButtonClick event` is triggered on click)|
 <!--!
-|`[비공개]` `Expand`|접음/펼침 기능을 사용하기 위한 버튼이 표시됩니다.|
+|`[Private]` `Expand`|A button for collapse/expand functionality is displayed.|
 !-->
 
 
-**열의 Type이 Button인 경우**
+**When the column Type is Button**
 
 |value|desc|
 |---|---|
-|`Button`|일반적인 버튼 형태로 보여줍니다. 
-[UseButton](/docs/props/cfg/use-button)속성의 값에 따라 셀의 값을 \<u>태그 또는 \<button>태그로 만들어 줍니다.|
-|`Html`|속성을 `Html`로 설정하고 셀의 값을 `Html` 형태로 사용하실 수 있습니다.  (ex: <div class="button>버튼\</div>)|
+|`Button`|Displays as a standard button form. 
+Depending on the value of [UseButton](/docs/props/cfg/use-button), the cell value is wrapped in a \<u> tag or \<button> tag.|
+|`Html`|Set the property to `Html` and use the cell value in `Html` format. (e.g., <div class="button>Button\</div>)|
 <!--!
-|`[비공개]` `Class`|셀에 커스텀 css Class를 적용합니다.
-가령 기본테마를 사용하면서 Button속성의 값을 `Class`로, [ButtonClass](/docs/props/cell/button-class)속성의 값을 "CUST_BTN"으로 설정하면,
-실제 해당셀의 클래스는 **IBToolCUST_BTN** 으로 설정됩니다.|
+|`[Private]` `Class`|Applies a custom CSS Class to the cell.
+For example, if using the default theme with Button property value set to `Class` and [ButtonClass](/docs/props/cell/button-class) value set to "CUST_BTN",
+the actual class of the cell will be set to **IBToolCUST_BTN**.|
 !-->
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름 :CLS)
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Button", "Clear");
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름 :CLS)
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSButton"] = "/images/alBtn.gif";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용  (열이름 :CLS)
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {..., "CLSButton":"Check", ...}
@@ -99,4 +98,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

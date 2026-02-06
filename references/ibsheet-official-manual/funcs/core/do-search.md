@@ -2,16 +2,21 @@
 KEY: doSearch
 KIND: method
 PATH: funcs/core/do-search
-ALIAS: sheet.doSearch, doSearch(), 통신을, 형식의, 데이터를, 가져와, 시트에
-ALIAS_EN: do, search
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/do-search
+ALIAS: sheet.doSearch, doSearch()
+ALIAS_EN: dosearch, loads, data, json, format, sheet, ajax, communication
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/do-search
 ---
 # doSearch ***(method)***
 
-> ajax 통신을 통해 json형식의 데이터를 가져와 시트에 로드합니다.
+> `doSearch` loads data in JSON format to the sheet in AJAX communication.
 
-> 비동기형식으로 동작하므로, 데이터 로드 이후에 대한 처리는 [onSearchFinish](/docs/events/on-search-finish) 이벤트에서 로직을 구성하셔야 합니다.
+> Since it operates asynchronously, post-data-load processing should be implemented in the [onReceiveData](/docs/events/on-receive-data), [onBeforeDataLoad](/docs/events/on-before-data-load), [onDataLoad](/docs/events/on-data-load) events.
 
+> By default, `doSearch` clears the existing data in the sheet and loads the data fetched from the server.
+
+> To append new data after existing data, use the `append: true` option.
+
+> For details related to the server response (JSON) structure, refer to [dataStructure](/docs/dataStructure/1data-structure).
 
 ### Syntax
 
@@ -23,46 +28,46 @@ void doSearch( url, param,  method, append, reqHeader, callback, timeout, sync, 
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|url|`string`|필수|ajax를 통해 호출할 url|
-|param|`string`\|`object`|선택|서버로 전송할 파라미터|
-|method|`string`|선택| 전송방식 GET / POST 선택 (`default: 'GET'`)|
-|append|`boolean`|선택|기존 데이터에 `append` 여부
-조회 방식의 차이로 인해 `append:1(true)`사용 시 [SearchMode](/docs/props/cfg/search-mode):2인 경우 [onRenderFinish](/docs/events/on-render-finish)이벤트가 발생하지 않습니다.
-`0(false)`:기존 데이터 제거 후 조회 데이터 로드 (`default`)
-`1(true)`:기존 데이터에 조회 데이터 추가|
-|reqHeader|`object`|선택|서버 전송시 request header에 정의할 내용
+|url|`string`|Required|URL to call in AJAX|
+|param|`string` \| `object`|Optional|Parameters to send to the server|
+|method|`string`|Optional| Transmission method GET / POST Select (`default: 'GET'`)|
+|append|`boolean`|Optional|Whether to `append` to existing data
+Due to differences in search methods, when using `append:1(true)` with [SearchMode](/docs/props/cfg/search-mode):2, [onRenderFinish](/docs/events/on-render-finish) event is not triggered.
+`0(false)`:Remove existing data then load search data (`default`)
+`1(true)`:Append search data to existing data|
+|reqHeader|`object`|Optional|Content to define in the request header when sending to the server
 ex : `{"callBy":"ibsheetObject","method":"doSearch"}`|
-|callback|`function`|선택|조회 후 호출할 콜백 함수|
-|timeout|`number`|선택|서버 통신 최대 대기 시간 (단위: 초(second), `default: 60`)|
-|sync|`number`|선택|동기 조회 여부. 비동기일 경우 연속으로 호출시 이전 조회가 종료되지 않으면 이후의 조회는 무시됩니다. 연속으로 호출해야 되고, 반드시 모든 조회가 완료되어야 한다면 동기 조회 모드를 사용해야 합니다.
-`0`:비동기 방식 (`default`)
-`1`:비동기 순차 처리 방식
-`2`:동기 방식|
-|next|`object`|선택|[데이터 로우 객체](/docs/appx/row-object)
-지정한 행 위에부터 데이터 `append`. (`append:1(true)`일때만 사용 가능)|
-|strictParse|`boolean`|선택|json 파서 선택
-일반적으로 유연한 파서를 통해 JSON데이터를 파싱하고, true 설정시에 브라우져의 JSON.parse()를 통해 파싱
-`0(false)`:유연한 파서 사용 (`default`)
-`1(true)`:	브라우저에서 제공하는 JSON.parse() 내장함수 사용|
-|traditional|`boolean`|선택|서버로 전달될 param 구조 설정
-`param: {"data": [1, 2]}` 배열 구조 param 전송시 설정
-**`0(false)`:[] 을 포함하여 전송** (`default`)
+|callback|`function`|Optional|Callback function to call after search|
+|timeout|`number`|Optional|Maximum wait time for server communication (unit: seconds, `default: 60`)|
+|sync|`number`|Optional|Synchronous search setting. When set to asynchronous, if called consecutively and the previous search has not finished, subsequent searches are ignored. If you need to call consecutively and all searches must complete, synchronous search mode must be used.
+`0`:Asynchronous mode (`default`)
+`1`:Asynchronous sequential processing mode
+`2`:Synchronous mode|
+|next|`object`|Optional|[data row object](/docs/appx/row-object)
+Data is `append`ed above the specified row. (only available when `append:1(true)`)|
+|strictParse|`boolean`|Optional|JSON parser Select
+Normally parses JSON data through a flexible parser, and when set to true, parses through the browser's JSON.parse()
+`0(false)`:Use flexible parser (`default`)
+`1(true)`:Use browser's built-in JSON.parse() function|
+|traditional|`boolean`|Optional|Configure param structure sent to the server
+`param: {"data": [1, 2]}` Set when sending array structure params
+**`0(false)`:Send including []** (`default`)
 ex) `data[]=1&data[]=2`
-**`1(true)`:[] 없이 전송**
+**`1(true)`:Send without []**
 ex) `data=1&data=2`
 |
-|parent|`object`|선택|[데이터 로우 객체](/docs/appx/row-object)
- (동적 트리 조회 사용시 부모에 해당하는 행 지정) 
+|parent|`object`|Optional|[data row object](/docs/appx/row-object)
+ (Specifies the parent row when using dynamic tree search) 
 |
 
 
-유연한 파서란 일반적인 JSON.parse()를 통해 파싱하는 경우 허용하지 않는 몇가지를 허용합니다.
- 1. 여분의 콤마 허용
- 2. 프로퍼티 이름의 쌍따옴표가 없어도 됨.
+A flexible parser allows several things that standard JSON.parse() does not allow, permitting a few exceptions.
+ 1. Extra commas allowed
+ 2. Property names do not require double quotes.
 
-참고
+Reference
 - [MDN:bad parsing](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Errors/JSON_bad_parse)
-- JSON.parse()가 유연한 파싱보다 성능이 우수(약 5배)하지만 데이터 로딩과정에서 파싱이 차지하는 시간이 크지 않아 5만건 이내에서는 사용자가 느끼기 어려운 수준임.
+- JSON.parse() has better performance than flexible parsing (approximately 5 times), however the parsing time difference during data loading is not large, and within 50,000 records, it is at a level that is difficult for users to notice.
 
 ### Return Value
 ***none***
@@ -70,10 +75,10 @@ ex) `data=1&data=2`
 ### Example
 
 ```javascript
-// GET 방식으로 데이터 조회
+// GET method data retrieval
 sheet.doSearch("./insaAppMain.do", "dept_cd=031&position_cd=A0", "GET");
 
-// POST 방식으로 데이터 조회
+// POST method data retrieval
 var opt = {
   url: "./insaAppMain.do",
   param: {"dept_cd": 031, "position_cd": "A0"},
@@ -85,7 +90,6 @@ sheet.doSearch(opt);
 
 ### Read More
 
-- [dataStructure appendix](/docs/appx/data-structure)
 - [loadSearchData method](./load-search-data)
 - [doSearchPaging method](./do-search-paging)
 - [onReceiveData event](/docs/events/on-receive-data)
@@ -100,11 +104,11 @@ sheet.doSearch(opt);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.4|다른 API와 동일하게 제공하기 위해 `params` 인자명을 `param`으로 변경, 기존의 `params`를 사용할 수 있지만 권장하지 않음.|
-|core|8.0.0.5|`timeout` 인자 추가|
-|core|8.0.0.6|`sync` 인자 추가|
-|core|8.0.0.7|`next` 인자 추가|
-|core|8.0.0.7|`strictParse` 인자 추가|
-|core|8.0.0.7|`traditional` 인자 추가|
-|core|8.0.0.25|`parent` 인자 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.4|To provide consistency with other APIs, `params` argument name to `param`changed to `params`can still be used but is not recommended.|
+|core|8.0.0.5|`timeout` argument added|
+|core|8.0.0.6|`sync` argument added|
+|core|8.0.0.7|`next` argument added|
+|core|8.0.0.7|`strictParse` argument added|
+|core|8.0.0.7|`traditional` argument added|
+|core|8.0.0.25|`parent` argument added|

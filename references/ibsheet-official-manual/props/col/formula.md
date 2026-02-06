@@ -2,26 +2,25 @@
 KEY: formula
 KIND: column-property
 PATH: props/col/formula
-ALIAS: 간에, 계산, 로직을, 문자열이나, 함수를
-ALIAS_EN: formula
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/formula
+ALIAS_EN: calculation, logic, columns, strings, functions, formula, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/formula
 ---
 # Formula ***(col)***
-> 열 간에 계산 로직을 문자열이나 함수를 통해 설정합니다. 
+> Sets calculation logic between columns through strings or functions. 
 
-> 함수 형태로 `Formula`를 설정시에는 반드시 `return값`이 있어야 반영됩니다.
+> When setting `Formula` in function form, it must have a `return value` for it to be applied.
 
 >
-> ※**매우중요**
+> * **Very Important**
 
-> 1. 모든 포뮬러 기능을 사용시에는 (row)[**CanFormula**](/docs/props/row/can-formula)가 1로 설정되어야 동작합니다.
-> 2. 열 간의 계산의 순서를 정하기 위해 반드시 (row)[**CalcOrder**](/docs/props/row/calc-order)를 정의해야 합니다.
+> 1. When using any formula feature, (row)[**CanFormula**](/docs/props/row/can-formula) must be set to 1 for it to work.
+> 2. (row)[**CalcOrder**](/docs/props/row/calc-order) must be defined to determine the order of calculation between columns.
 >
-> `Formula`로 설정한 기능은 조회되거나, 연관된 열의 값이 사용자의 편집에 의해 변경될 때 자동으로 계산,적용됩니다.
+> The feature set by `Formula` is automatically calculated and applied when data is retrieved or when the value of a related column is changed by user editing.
 
-> 특히 Formula를 통해 값이 변경되는 것도 Formula를 일으키므로 자신의 컬럼값을 Formula를 통해 수정하는 것은 권장하지 않습니다.(Formula에 의해 수정되면서 다시 Formula가 발생하여 무한루프에 빠질수 있음)
+> In particular, since value changes through Formula also trigger Formula, modifying the column's own value through Formula is not recommended. (If modified by Formula, it triggers Formula again, which may result in an infinite loop)
 
-> 자세한 내용은 7장 [Formula appendix](/docs/appx/formula)를 참고하세요.
+> For detailed information, please refer to Chapter 7 [Formula appendix](/docs/appx/formula).
 
 
 ### Type
@@ -30,12 +29,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/formula
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|열이름을 기준으로 한 계산 로직 (ex: "sCount \* sPrice - ( Discount \* Rate ) \* 1.24")|
-|`function`|별도 함수를 통해 계산 가능(함수 내에서는 `Sheet, Row, Col` 예약어를 통해 접근 가능)|
+|`string`|Calculation logic based on column names (ex: "sCount \* sPrice - ( Discount \* Rate ) \* 1.24")|
+|`function`|Calculation through a separate function (within the function, access is available via the reserved words `Sheet, Row, Col`)|
 
 ### Example
 ```javascript
-//                           yearSum열이 먼저 계산되고 total열이 계산됨.
+//                           yearSum column is calculated first, then total column
 options.Def.Row = {CanFormula: 1, CalcOrder: "yearSum,total"};
 options.Cols = [
     ...
@@ -72,4 +71,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

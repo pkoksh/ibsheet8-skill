@@ -2,17 +2,16 @@
 KEY: onAfterRowAdd
 KIND: event
 PATH: events/on-after-row-add
-ALIAS: 시트에, 새로운, 행이, 추가되어, 렌더링된
-ALIAS_EN: on, after, row, add
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-row-add
+ALIAS_EN: event, called, new, row, added, rendered, sheet, onafterrowadd
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-row-add
 ---
 # onAfterRowAdd ***(event)***
-> 시트에 새로운 행이 추가되어 렌더링된 후 호출되는 이벤트입니다.
+> Event called after a new row has been added and rendered in the sheet.
 
-> 단일 행 추가([addRow](/docs/funcs/core/add-row))가 아닌 여러개 행을 추가하는 ([addRows](/docs/funcs/core/add-rows)) 메소드 사용시 호출됩니다.
+> Called when using the [addRows](/docs/funcs/core/add-rows) method that adds multiple rows, not the single row addition ([addRow](/docs/funcs/core/add-row)).
 
 <!--!
-> `[비공개 설명]` addRows, copyRows에서 호출됩니다. 
+> `[Private note]` Called from addRows and copyRows. 
 
 !-->
 
@@ -28,8 +27,8 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|시트에 추가된 [데이터 로우 객체](/docs/appx/row-object)|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) added to the sheet|
 
 ### Return
 ***none***
@@ -38,11 +37,11 @@ or
 ```javascript
 options.Events = {
     onAfterRowAdd:function(evtParam){
-        // 행 추가시 여기서 초기값을 설정해줄 수 있습니다.
-        // 렌더링 된 후 호출되는 이벤트이기에 값 변경시 렌더링을 해줘야합니다.
-        evtParam.sheet.setValue({row:evtParam.row,col:"sTitle",val:"없음",render:1});
+        // You can set initial values here when adding a row.
+        // Since this event is called after rendering, you need to render when changing values.
+        evtParam.sheet.setValue({row:evtParam.row,col:"sTitle",val:"None",render:1});
         evtParam.sheet.setValue({row:evtParam.row,col:"sAudience",val:0,render:1});
-        evtParam.sheet.setValue({row:evtParam.row,col:"sPlace",val:"미정",render:1});
+        evtParam.sheet.setValue({row:evtParam.row,col:"sPlace",val:"TBD",render:1});
     }
 }
 ```
@@ -55,4 +54,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

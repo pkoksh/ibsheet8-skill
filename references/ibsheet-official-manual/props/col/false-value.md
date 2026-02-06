@@ -2,19 +2,18 @@
 KEY: falseValue
 KIND: column-property
 PATH: props/col/false-value
-ALIAS: 타입, 열에는, 기본적으로, 값만, 입력이
-ALIAS_EN: false, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/false-value
+ALIAS_EN: bool, type, columns, accept, true, false, values, default
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/false-value
 ---
 # FalseValue ***(col)***
 
-> `Bool타입` 열에는 기본적으로 `1(true)/0(false)`값만 입력이 가능합니다.
+> `Bool type` columns can only accept `1(true)/0(false)` values by default.
 
-> 하지만 디비에 저장된 값이 `1(true)/0(false)`가 아닌 별도의 값인 경우를 대비하여 `0(false)`값에 해당하는 값을 해당 속성을 통해 설정합니다.
+> However, in case the values stored in the database are not `1(true)/0(false)` but separate values, this property is used to set the value corresponding to `0(false)`.
 
-> 해당 속성을 통해 설정된 값은 데이터를 조회([doSearch](/docs/funcs/core/do-search),[loadSearchData](/docs/funcs/core/load-search-data)등)하거나 저장([doSave](/docs/funcs/core/do-save),[getSaveJson](/docs/funcs/core/get-save-json)등)할때 사용됩니다.
+> The value set through this property is used when retrieving data ([doSearch](/docs/funcs/core/do-search), [loadSearchData](/docs/funcs/core/load-search-data), etc.) or saving ([doSave](/docs/funcs/core/do-save), [getSaveJson](/docs/funcs/core/get-save-json), etc.).
 
-> 이 속성 값은 단지 서버와 데이터를 주고 받을때만 사용될 뿐, 해당 셀의 값을 [getValue](/docs/funcs/core/get-value)함수를 통해 확인시에는 `1(true)/0(false)`로 리턴됩니다.
+> This property value is only used when exchanging data with the server; when checking the cell value through the [getValue](/docs/funcs/core/get-value) function, it returns `1(true)/0(false)`.
 
 ### Type
 `string`
@@ -22,12 +21,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/false-val
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|`Bool타입`의 열에 대해 `0(false)`(언체크)에 해당하는 값|
+|`string`|Value corresponding to `0(false)` (unchecked) for a `Bool type` column|
 
 
 ### Example
 ```javascript
-//Bool Type 열에 대해서 서버에서 주고 받는 값을 Y/N으로 설정
+// Set the values exchanged with the server to Y/N for a Bool Type column
 options.Cols = [
     ...
     {
@@ -53,4 +52,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

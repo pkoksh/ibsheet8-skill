@@ -2,17 +2,16 @@
 KEY: numberSort
 KIND: column-property
 PATH: props/col/number-sort
-ALIAS: 열의, 데이터를, 숫자형식으로, 소팅할지, 여부를
-ALIAS_EN: number, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/number-sort
+ALIAS_EN: whether, sort, column, data, numeric, format, numbersort, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/number-sort
 ---
 # NumberSort ***(col)***
 
-> 열의 데이터를 숫자형식으로 소팅할지 여부를 설정합니다.
+> Sets whether to sort the column data in numeric format.
 
-> 일반적으로 `Int, Float, Date` [Type](/docs/appx/type)은 숫자형식으로, 그 외의 [Type](/docs/appx/type)은 문자형식으로 소팅이 이루어집니다.
+> Generally, `Int, Float, Date` [Types](/docs/appx/type) are sorted numerically, while other [Types](/docs/appx/type) are sorted alphabetically.
 
-> 여기서 값을 `0(false)`으로 설정하면, [Type](/docs/appx/type)과 무관하게 문자형식으로 소팅되고, `1(true)`로 설정시 숫자형식으로 소팅이 이루어집니다.
+> Setting the value to `0(false)` forces alphabetical sorting regardless of [Type](/docs/appx/type), while setting it to `1(true)` forces numeric sorting.
 
 ### Type
 `boolean`
@@ -20,13 +19,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/number-so
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|문자형식의 소팅 (`default`)|
-|`1(true)`|숫자형식의 소팅|
+|`0(false)`|Alphabetical sorting (`default`)|
+|`1(true)`|Numeric sorting|
 
 
 ### Example
 ```javascript
-//특정 열에 대해 숫자형식으로 소팅
+// Sort a specific column numerically
 options.Cols = [
     ...
     {Type: "Text", Name: "SA_ID", NumberSort: 1 ...},
@@ -48,4 +47,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: useHeaderSortCancel
 KIND: config-property
 PATH: props/cfg/use-header-sort-cancel
-ALIAS: 일반적으로, 헤더, 셀을, 클릭하여, 소팅하는
-ALIAS_EN: use, header, sort, cancel
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/use-header-sort-cancel
+ALIAS_EN: normally, sorting, clicking, header, cell, alternates, ascending, descending
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/use-header-sort-cancel
 ---
 # UseHeaderSortCancel ***(cfg)***
-> 일반적으로 헤더 셀을 클릭하여 소팅하는 경우 오름차순, 내림차순이 번갈아가며 정렬되는데,
-> `UseHeaderSortCancel`을 `1(true)`로 설정하면, 오름차순, 내림차순 후  **정렬취소** 순서로 변경됩니다.
+> Normally, when sorting by clicking a header cell, it alternates between ascending and descending order.
+> When `UseHeaderSortCancel` is set to `1(true)`, the order changes to ascending, descending, and then **sort cancel**.
 
 ### Type
 `boolean`
@@ -16,8 +15,8 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/use-heade
 ### Options
 |Value|Description|
 |-----|-----|
-| `0(false)` | 헤더클릭 정렬 순서가 오름차순, 내림차순 순서로 정렬 (`default`) |
-| `1(true)` | 헤더클릭 정렬 순서가 오름차순, 내림차순, 정렬취소 순서로 정렬 |
+| `0(false)` | Header click sort order is ascending, descending (`default`) |
+| `1(true)` | Header click sort order is ascending, descending, sort cancel |
 
 ### Example
 ```javascript
@@ -37,4 +36,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.5|기능 추가|
+|core|8.0.0.5|Feature added|

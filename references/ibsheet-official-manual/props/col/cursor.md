@@ -2,15 +2,14 @@
 KEY: cursor
 KIND: column-property
 PATH: props/col/cursor
-ALIAS: 위에, 마우스, 커서가, 호버시, 커서의
-ALIAS_EN: cursor
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/cursor
+ALIAS_EN: cursor, shape, mouse, hovers, column, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/cursor
 ---
 # Cursor ***(col)***
 
-> 열 위에 마우스 커서가 호버시 커서의 모양을 설정합니다.
+> Sets the cursor shape when the mouse cursor hovers over the column.
 
-> 설정가능한 커서의 모양은 css를 따릅니다.
+> The available cursor shapes follow CSS standards.
 
 > ex) auto, crosshair, default, pointer, move, e-resize, ne-resize, nw-resize, n-resize, se-resize, sw-resize, w-resize, text, wait, help
 
@@ -21,12 +20,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/cursor
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|원하는 커서 모양|
+|`string`|Desired cursor shape|
 
 
 ### Example
 ```javascript
-//열에 커서가 들어갔을때 커서 모양을 클릭가능한 손가락 모양으로 변경.
+// Change the cursor to a clickable pointer shape when entering the column
 options.Cols = [
     ...
     {Type: "Text", Name: "sa_nm", Cursor: 'pointer', TextStyle: 4},
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,26 +2,25 @@
 KEY: controlsTag
 KIND: config-property
 PATH: props/cfg/controls-tag
-ALIAS: 시트, 팝업, 메뉴, 툴팁, 메시지
-ALIAS_EN: controls, tag, sheet, grid, message, alert
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/controls-tag
+ALIAS_EN: option, specifies, parent, tag, positioning, popup, menus, tooltips
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/controls-tag
 ---
 # ControlsTag ***(cfg)***
 
-> 시트 내 팝업 메뉴, 툴팁, 메시지, 힌트를 띄울 위치를 설정하기 위한 부모 태그를 지정하는 옵션입니다. 
+> This option specifies the parent tag for positioning popup menus, tooltips, messages, and hints within the sheet. 
 
 >
-> 해당 옵션을 설정하지 않을 경우 부모 태그는 `document.body` 내부에 자동적으로 생성됩니다. 
+> If this option is not set, the parent tag is automatically created inside `document.body`. 
 
 >
-> SalesForce의 Lightening Web Component나 ShadowDOM 환경처럼 `document.body` 전체를 시트의 기준 영역으로 설정하지 않고 페이지 내 특정 컴포넌트 영역을 시트 기준 영역으로 잡아야 할 경우, 해당 컴포넌트 내에 별도로 div를 만들어 해당 div를 `(Cfg) ControlsTag`로 설정해야 합니다. 
+> In environments like SalesForce's Lightening Web Component or ShadowDOM where you need to set a specific component area within the page as the sheet's reference area instead of the entire `document.body`, you must create a separate div within that component and set that div as `(Cfg) ControlsTag`. 
 
 >
-> 주의사항
-> * `ControlsTag`는 시트를 처음 생성할 때 설정해야 하며, 이후에는 동적으로 변경할 수 없습니다. 
+> Caution
+> * `ControlsTag` must be set when first creating the sheet and cannot be changed dynamically afterwards. 
 
-> * `ControlsTag`는 반드시 시트의 DIV와 동일한 컴포넌트 영역에 있어야 하며, 시트의 DIV가 생성되는 컴포넌트보다 상위 컴포넌트에 생성되어서는 안됩니다.
-> * `ControlsTag`는 반드시 `position:absolute;left:0px;top:0px;` 스타일이 적용되어 생성되어야 합니다.
+> * `ControlsTag` must be in the same component area as the sheet's DIV, and must not be created in a parent component above the component where the sheet's DIV is created.
+> * `ControlsTag` must be created with the `position:absolute;left:0px;top:0px;` style applied.
 
 ### Type
 `object`
@@ -29,7 +28,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/controls-
 ### Options
 |Value|Description|
 |-----|-----|
-|`object`|시트 내 팝업 메뉴, 툴팁, 메시지, 힌트를 띄울 위치를 설정하기 위한 부모 태그|
+|`object`|Parent tag for positioning popup menus, tooltips, messages, and hints within the sheet|
 
 ### Example
 ```javascript
@@ -37,7 +36,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/controls-
 <template>
   <lightning-card>
     <div>
-      <div class="IBControls" style="position:absolute;left:0px;top:0px;"  lwc:dom="manual"></div> <!-- LWC 환경의 컴포넌트 내부에서 ControlsTag 역할을 맡을 태그를 생성 -->
+      <div class="IBControls" style="position:absolute;left:0px;top:0px;"  lwc:dom="manual"></div> <!-- Create a tag to serve as ControlsTag inside the LWC component -->
       <div class="sheetDiv" style="width: 100%; height: 400px;" lwc:dom="manual"></div>
     </div>
   </lightning-card>
@@ -46,7 +45,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/controls-
 ...
 
 options.Cfg = {
-   ControlsTag: this.template.querySelector(".IBControls") // 시트 내 팝업 메뉴, 툴팁, 메시지, 힌트를 띄울 위치를 설정하기 위한 부모 태그 설정
+   ControlsTag: this.template.querySelector(".IBControls") // Set parent tag for positioning popup menus, tooltips, messages, and hints within the sheet
 };
 ```
 
@@ -58,4 +57,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.0|기능 추가|
+|core|8.3.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: resultMessage
 KIND: column-property
 PATH: props/col/result-message
-ALIAS: 위배되는, 내용이, 입력시, 레이어, 팝업으로
-ALIAS_EN: result, message
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/result-message
+ALIAS_EN: content, display, div, layer, popup, input, violates, resultmask
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/result-message
 ---
 # ResultMessage ***(col)***
 
-> [ResultMask](./result-mask)에 위배되는 내용이 입력시 DIV 레이어 팝업으로 보여질 내용을 설정합니다.
+> Sets the content to display as a DIV layer popup when input violates the [ResultMask](./result-mask).
 
 
 
@@ -18,16 +17,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/result-me
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|잘못된 내용이 입력시 보여질 경고문 내용|
+|`string`|Warning message content to display when invalid content is entered|
 
 ### Example
 ```javascript
-//이메일 주소 확인
+// Email address validation
 options.Cols = [
     ...
     {Type: "Text",
         ResultMask: "^[\\w\\.\\+%-]+@[A-Za-z0-9\\.-]+\\.[A-Za-z]{2,6}$",
-        ResultMessage: "이메일 주소를 확인해 주세요.",
+        ResultMessage: "Please check the email address.",
         ResultMessageTime: 800,
         Name:"sa_email", Width: 120 ...},
     ...
@@ -42,4 +41,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

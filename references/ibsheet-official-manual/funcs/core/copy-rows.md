@@ -2,15 +2,15 @@
 KEY: copyRows
 KIND: method
 PATH: funcs/core/copy-rows
-ALIAS: sheet.copyRows, copyRows(), 지정한, 행들을, 특정, 위치로, 복사합니다
-ALIAS_EN: copy, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/copy-rows
+ALIAS: sheet.copyRows, copyRows()
+ALIAS_EN: specified, rows, specific, positionas, copy, copyrows, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/copy-rows
 ---
 # copyRows ***(method)***
 
-> 지정한 행들을 특정 위치로 복사합니다.
+> specified rows specific positionas copy.
 
-> 내부적으로는 여러개 행을 복사 후 추가(ctrl+c, ctrl+v)하는 행위이기 때문에 [onAfterRowCopy](/docs/events/on-after-row-copy) 이벤트와 [onAfterRowAdd](/docs/events/on-after-row-add)이벤트가 발생합니다.
+> Internally, since this is an action of copying and adding multiple rows (ctrl+c, ctrl+v), [onAfterRowCopy](/docs/events/on-after-row-copy) event and [onAfterRowAdd](/docs/events/on-after-row-add)event is triggered.
 
 ### Syntax
 ```javascript
@@ -20,27 +20,27 @@ object copyRows( rows, next, empty, parent, child, forceVisible );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|rows|`object`|필수|[데이터 로우 객체](/docs/appx/row-object) 배열|
-|next|`object`|선택|[데이터 로우 객체](/docs/appx/row-object)
-(next로 지정한 행의 위에 rows행들이 복사됨. 값이 없으면 마지막 행에 복사)|
-|empty|`boolean`|선택|복사 시 데이터 포함 여부
-`1(true)`로 설정하여 사용 시 [onAfterRowCopy](/docs/events/on-after-row-copy) 이벤트 미발생
-`0(false)`:데이터 포함 (`default`)
-`1(true)`:데이터 미포함|
-|parent|`object`|선택|[데이터 로우 객체](/docs/appx/row-object) (트리 사용시 부모에 해당하는 행 지정)|
-|child|`boolean`|선택|트리 사용시 자식행도 복사할 지 여부
-`0(false)`:자식행 미포함 (`default`)
-`1(true)`:자식행 포함|
-|forceVisible|`boolean`|선택|보이지 않는 행을 복사할 때 보이도록 설정
-`0(false)`:행을 감춤(Visible:`0(false)`) 상태로 변경 시키고 복사 (`default`)
-`1(true)`:행을 보임(Visible:`1(true)`) 상태로 변경 시키고 복사|
+|rows|`object`|Required|[data row object](/docs/appx/row-object) array|
+|next|`object`|Optional|[data row object](/docs/appx/row-object)
+(nextThe row specified by rowsrows are copied above the specified row. If no value, copied to the last row)|
+|empty|`boolean`|Optional|copy when Include data whether
+`1(true)`When set to [onAfterRowCopy](/docs/events/on-after-row-copy) event is not triggered
+`0(false)`:Include data (`default`)
+`1(true)`:Exclude data|
+|parent|`object`|Optional|[data row object](/docs/appx/row-object) (tree When using parent specifying the corresponding row)|
+|child|`boolean`|Optional|tree When using whether to also copy child rows
+`0(false)`:Exclude child rows (`default`)
+`1(true)`:Include child rows|
+|forceVisible|`boolean`|Optional|Set invisible rows to be visible when copying
+`0(false)`:row Hidden(Visible:`0(false)`) state and copy (`default`)
+`1(true)`:row Visible(Visible:`1(true)`) state and copy|
 
 ### Return Value
-***array[row object]*** : 복사된 [데이터 로우 객체](/docs/appx/row-object)들
+***array[row object]*** : Copied [data row object](/docs/appx/row-object)s
 
 ### Example
 ```javascript
-//AR5,AR6,AR9행을 최상단에 복사
+//AR5,AR6,AR9Copy rows to the top
 sheet.copyRows({rows:[
     sheet.getRowById("AR5"),
     sheet.getRowById("AR6"),
@@ -50,7 +50,7 @@ sheet.copyRows({rows:[
 
 
 
-//CHK열에 체크한 행들을 sheet2에 맨 마지막 행으로 복사
+//Copies rows with CHK column checked to the last row of sheet2
 function work(){
     var chkRows = sheet.getRowsByChecked("CHK");
     sheet2.copyRows({rows:chkRows});
@@ -67,4 +67,4 @@ function work(){
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

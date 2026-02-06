@@ -2,92 +2,91 @@
 KEY: header
 KIND: appendix
 PATH: appx/header
-ALIAS: 여러줄의, 헤더를, 설정하거나, 헤더에, 내용을
-ALIAS_EN: header
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/header
+ALIAS_EN: learn, multi, line, headers, modify, header, content, insert
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/header
 ---
 # Header  ***(appendix)***
-> 여러줄의 헤더를 설정하거나, 헤더에 내용을 수정하거나 체크박스 등을 삽입하는 방법에 대해 알아봅니다.
+> Learn how to set up multi-line headers, modify header content, or insert checkboxes in the header.
 
-## 1. 단일 헤더행
-가장 간단하게 Cols값 설정시 Header속성을 통해 헤더 타이틀을 설정하실 수 있습니다.
+## 1. Single Header Row
+The simplest way is to set the header title through the Header property when configuring Cols values.
 ```javascript
 init.Cols = [
-    {Header:"첫번째 열 타이틀", Type:"Int", Name:"sActSum", Width:100},
-    {Header:"두번째 열 타이틀", Type:"Date", Name:"sDate", Width:120},
+    {Header:"First Column Title", Type:"Int", Name:"sActSum", Width:100},
+    {Header:"Second Column Title", Type:"Date", Name:"sDate", Width:120},
     ...
 ]
 ```
-[단일헤더행]
+[Single header row]
 
-![단일 헤더행](/assets/imgs/onelineHeader.png "단일 헤더행")
-<!-- IMAGE: 스크린샷/예시 이미지 - 단일 헤더행 -->
+![Single header row](/assets/imgs/onelineHeader.png "Single header row")
+<!-- IMAGE: Screenshot/Example Image - Single header row -->
 
-## 2. 여러줄 헤더행
-Header 속성에 값을 배열형태로 설정하시면 두줄 이상의 헤더행을 설정하실 수 있습니다.
+## 2. Multi-line Header Rows
+By setting the Header property value in array format, you can configure two or more header rows.
 ```javascript
 init.Cols = [
-    {Header:["경제활동인구","취업자","소계"], Type:"Int", Name:"sEmplySum"},
-    {Header:["경제활동인구","취업자","남자"], Type:"Int", Name:"sEmplyM"},
-    {Header:["경제활동인구","취업자","여자"], Type:"Int", Name:"sEmplyW"},
+    {Header:["Economically Active Population","Employed","Subtotal"], Type:"Int", Name:"sEmplySum"},
+    {Header:["Economically Active Population","Employed","Male"], Type:"Int", Name:"sEmplyM"},
+    {Header:["Economically Active Population","Employed","Female"], Type:"Int", Name:"sEmplyW"},
     ...
 ];
 ```
-[다중헤더행]
+[Multi-line header rows]
 
-![여러줄 헤더행](/assets/imgs/multilineHeader.png "여러줄 헤더행")
-<!-- IMAGE: 스크린샷/예시 이미지 - 여러줄 헤더행 -->
+![Multi-line header rows](/assets/imgs/multilineHeader.png "Multi-line header rows")
+<!-- IMAGE: Screenshot/Example Image - Multi-line header rows -->
 
 
 
-## 3. 헤더행 내용 수정
-데이터 행과 마찬가지로 해더행 객체를 통해 행의 값을 얻거나 수정하실 수 있습니다. 해더행의 ID는 다음과 같은 형식으로 자동을 부여됩니다.
+## 3. Modifying Header Row Content
+Just like data rows, you can get or modify row values through header row objects. The ID of header rows is automatically assigned in the following format.
 
-1) 헤더행이 한 줄인 경우, 헤더행의 ID는 `Header`입니다.
-2) 헤더행이 두 줄 이상인 경우, 첫번째 헤더행의 ID는 `Header`이고 두번째 이후부터는 `HR1`,`HR2`.. 로 부여됩니다.
+1) When there is a single header row, the header row ID is `Header`.
+2) When there are two or more header rows, the first header row ID is `Header` and subsequent ones are assigned as `HR1`, `HR2`..
 ```javascript
-//첫번째 헤더행의 sPosition 열의 내용 얻기
+//Get the sPosition column content of the first header row
 var hdStr = sheet.getValue( sheet.getRowById("Header"), "sPosition" );
 
-//세번째 헤더행의 sPosition 열에 내용 수정하기
-sheet.setValue( sheet.getRowById("HR2"), "sPosition" , "직책" )
+//Modify the sPosition column content of the third header row
+sheet.setValue( sheet.getRowById("HR2"), "sPosition" , "Position" )
 ```
 
-## 4. 헤더에 글자색,배경색 변경 및 이미지 넣기
-열 설정시 Header 속성에 값을 문자열이 아닌 object 형태를 통해서 헤더 셀이 배경색이나 글자색등 다양한 기능을 설정하실 수 있습니다.
+## 4. Changing Header Text Color, Background Color, and Adding Images
+When configuring columns, by using object format instead of a string for the Header property value, you can set various features such as background color and text color for header cells.
 
-아래 예제에서 Header속성 내에 Color,TextColo,Type 등을 확인해 보세요.
+Check the Color, TextColor, Type, etc. within the Header property in the example below.
 ```javascript
 init.Cols = [
-    //헤더 셀에 배경색을 "#FF0000"으로 설정
-    {Header:{Value:"헤더 타이틀1", Color:"#FF0000"}, Type:"Text", Width:150, Name:"Col1"},
-    //헤더 셀에 글자색을 "#FFFF00"으로 설정
-    {Header:{Value:"헤더 타이틀2", TextColor:"#FFFF00"}, Type:"Text", Width:120, Name:"Col2"},
-    //헤더 셀에 객체를 설정
+    //Set header cell background color to "#FF0000"
+    {Header:{Value:"Header Title 1", Color:"#FF0000"}, Type:"Text", Width:150, Name:"Col1"},
+    //Set header cell text color to "#FFFF00"
+    {Header:{Value:"Header Title 2", TextColor:"#FFFF00"}, Type:"Text", Width:120, Name:"Col2"},
+    //Set an object in the header cell
     {Header:{Value:"|./assets/imgs/am.jpg|||||",Type:"Img"}, Type:"Text", Width:120, Name:"Col3"},
     ...
 ];
 ```
-[헤더 색상,타입변경]
+[Header color, type change]
 
-![헤더색상,타입변경](/assets/imgs/multiFuncHeader.png "헤더색상,타입변경")
-<!-- IMAGE: 스크린샷/예시 이미지 - 헤더색상,타입변경 -->
+![Header color, type change](/assets/imgs/multiFuncHeader.png "Header color, type change")
+<!-- IMAGE: Screenshot/Example Image - Header color, type change -->
 
 
-## 5. 헤더체크박스
-Type이 Bool인 열은 `HeaderCheck`속성을 통해서 헤더 셀에 체크박스를 설정하실 수 있습니다.
+## 5. Header Checkbox
+For columns with Type Bool, you can set a checkbox in the header cell through the `HeaderCheck` property.
 ```javascript
 init.Cols = [
     {Header:"No", Name:"SEQ", Width:"90"},
-    {Header:{Value:"확인",HeaderCheck:1}, Type:"Bool", Name:"sCheck", Width:"60"},
-    {Header:"회사", Type:"Text", Name:"sCompany", Width:"150"},
+    {Header:{Value:"Confirm",HeaderCheck:1}, Type:"Bool", Name:"sCheck", Width:"60"},
+    {Header:"Company", Type:"Text", Name:"sCompany", Width:"150"},
     ...
 ]
 ```
-[헤더셀 체크박스]
+[Header cell checkbox]
 
-![헤더셀 체크박스](/assets/imgs/headerCheck.png "헤더셀 체크박스")
-<!-- IMAGE: 스크린샷/예시 이미지 - 헤더셀 체크박스 -->
+![Header cell checkbox](/assets/imgs/headerCheck.png "Header cell checkbox")
+<!-- IMAGE: Screenshot/Example Image - Header cell checkbox -->
 
 ### Read More
 - [HeaderCheck col](/docs/props/col/header-check)
@@ -99,4 +98,4 @@ init.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

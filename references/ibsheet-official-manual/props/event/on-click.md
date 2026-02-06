@@ -2,17 +2,16 @@
 KEY: onClick
 KIND: event-property
 PATH: props/event/on-click
-ALIAS: 클릭시, 호출되는, 이벤트입니다
-ALIAS_EN: on, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/event/on-click
+ALIAS_EN: json, event, called, cell, clicked, onclick
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/event/on-click
 ---
 # OnClick ***(json event)***
 
-> 셀 클릭시 호출되는 `Json` 이벤트입니다.
+> A `Json` event that is called when a cell is clicked.
 
-> `Json` 이벤트는 셀, 행, 열에서 선언될 수 있으며 적용되는 우선 순위는 **셀 > 행 > 열**입니다. 
+> `Json` events can be declared on cells, rows, and columns, and the priority order is **cell > row > column**. 
 
-> 예를 들어, 셀과 행 둘 다 선언했다면, 우선순위로 인해 행에 선언한 이벤트는 발생하지 않습니다.
+> For example, if declared on both a cell and a row, the event declared on the row will not fire due to priority.
 
 ### Syntax
 
@@ -21,18 +20,18 @@ function Handler(evtParam) {
     ...
 }
 
-// 행에 넣는 경우
+// When adding to a row
 var options = {
     ...
     Def: {
         Row: {
             ...
-            OnClick: Handler,  // 함수 호출이 아닌 문자열을 통한 간단한 로직 설정 가능
-                                // ** 아래와 같은 예약어 사용 가능
-                                // Sheet(현재 시트 객체),
-                                // Row(현재 이벤트가 호출된 셀의 데이터 로우 객체),
-                                // Value(현재 이벤트가 호출된 셀의 값),
-                                // Col(현재 이벤트가 호출된 열이름),
+            OnClick: Handler,  // Simple logic can be set through a string instead of a function call
+                                // ** The following reserved words can be used
+                                // Sheet (current sheet object),
+                                // Row (data row object of the cell where the event was called),
+                                // Value (value of the cell where the event was called),
+                                // Col (column name where the event was called),
                                 // ex) "Value && alert('Changed')"
             ...
         }
@@ -40,7 +39,7 @@ var options = {
     ...
 };
 
-// 열에 넣는 경우
+// When adding to a column
 var options = {
     ...
     Cols: [
@@ -54,18 +53,18 @@ var options = {
     ...
 };
 
-// 특정 셀에 넣는 경우
+// When adding to a specific cell
 var data = [
     {
         ...
-        열이름: "",
-        열이름OnClick: Handler,
+        columnName: "",
+        columnNameOnClick: Handler,
         ...
     },
     ...
 ];
 
-// 특정 행에 넣는 경우
+// When adding to a specific row
 var data = [
     {
         ...
@@ -75,7 +74,7 @@ var data = [
     ...
 ];
 
-// 위에서 설정한 options 또는 data 객체를 시트 생성자의 인자로 넣습니다.
+// Pass the options or data object configured above as arguments to the sheet constructor.
 IBSheet.create({
     id: "sheet",
     el: "Main",
@@ -89,10 +88,10 @@ IBSheet.create({
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|클릭된 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|클릭된 셀의 열이름|
-|event|`object`|이벤트에 대한 정보를 담고 있는 객체|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the clicked cell|
+|col|`string`|Column name of the clicked cell|
+|event|`object`|Object containing information about the event|
 
 ### Return
 boolean
@@ -101,10 +100,10 @@ boolean
 ### Example
 ```javascript
 /*
-  예시 1 열에 OnClick이벤트를 선언하는 경우
+  Example 1: Declaring OnClick event on a column
 */
 
-// PCount 열의 셀을 클릭시 해당 셀의 값을 sProduct 열의 셀의 값과 곱하여 그 결과를 sTotal 열의 셀에 설정합니다.
+// When clicking a cell in the PCount column, multiply its value by the sProduct column value and set the result in the sTotal column.
 function Handler(evtParam) {
     evtParam.sheet.setValue({row: evtParam.row, col: "sTotal", val: evtParam.sheet.getValue({row: evtParam.row,col: evtParam.col}) * evtParam.sheet.getValue({row: evtParam.row,col: "sProduct"}), render:1});
 }
@@ -121,7 +120,7 @@ var options = {
 
 
 /*
-  예시 2 셀에 OnClick이벤트 선언하는 경우(시트에 사용될 데이터에 선언)
+  Example 2: Declaring OnClick event on a cell (declared in data used by the sheet)
 */
 var data = [
     {
@@ -139,4 +138,4 @@ var data = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

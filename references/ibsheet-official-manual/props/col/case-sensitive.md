@@ -2,13 +2,12 @@
 KEY: caseSensitive
 KIND: column-property
 PATH: props/col/case-sensitive
-ALIAS: 소팅시, 혹은, 필터, 사용시, 대소문자
-ALIAS_EN: case, sensitive, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/case-sensitive
+ALIAS_EN: whether, distinguish, uppercase, lowercase, letters, sorting, filters, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/case-sensitive
 ---
 # CaseSensitive ***(col)***
 
-> 열 소팅시(혹은 필터 사용시) 대소문자 구분 여부를 설정합니다.
+> Sets whether to distinguish between uppercase and lowercase letters when sorting (or using filters) on the column.
 
 
 ### Type
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/case-sens
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|대소문자 구분 안함|
-|`1(true)`|대소문자 구분 사용 (`default`)|
+|`0(false)`|Case insensitive|
+|`1(true)`|Case sensitive (`default`)|
 
 
 ### Example
 ```javascript
-//특정 열 소팅시 대소문자를 구분.
+// Enable case sensitivity when sorting a specific column
 options.Cols = [
     ...
     {Type: "Text", Name: "SA_DEPTID", CaseSensitive: 1, ...},
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,13 @@
 KEY: getSelectionSummaryInfoElement
 KIND: method
 PATH: funcs/core/get-selection-summary-info-element
-ALIAS: sheet.getSelectionSummaryInfoElement, getSelectionSummaryInfoElement(), 선택한, 영역의, 개수, 합계, 평균
-ALIAS_EN: get, selection, summary, info, element, total, sum
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-selection-summary-info-element
+ALIAS: sheet.getSelectionSummaryInfoElement, getSelectionSummaryInfoElement()
+ALIAS_EN: selected, area, cell, count, sum, average, value, information
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-selection-summary-info-element
 ---
 # getSelectionSummaryInfoElement ***(method)***
 
-> 선택한 영역의 셀 개수 및 합계/평균 값 정보를 시트 외부의 Dom Element 에 표시하고 있을 경우 정보 출력되는 Dom Element 를 반환합니다.
+> When the selected area's cell count and sum/average value information is displayed in a Dom Element outside the sheet, returns the Dom Element where the information is output.
 
 
 ### Syntax
@@ -17,11 +17,11 @@ HTML Element getCountInfoElement ();
 ```
 
 ### Return Value
-***object*** : 선택한 영역의 셀 개수 및 합계/평균 값 정보가 출력 되는 Dom Element
+***object*** : Dom Element where the selected area's cell count and sum/average value information is output
 
 ### Example
 ```javascript
-// 선택한 영역의 셀 개수 및 합계/평균 값 정보가 출력 되는 Dom Element 확인
+// Check the Dom Element where the selected area's cell count and sum/average value information is output
 sheet.getSelectionSummaryInfoElement ();
 ```
 
@@ -35,4 +35,4 @@ sheet.getSelectionSummaryInfoElement ();
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.6|기능 추가|
+|core|8.1.0.6|Feature added|

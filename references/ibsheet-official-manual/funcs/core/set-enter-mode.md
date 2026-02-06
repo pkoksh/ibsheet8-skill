@@ -2,12 +2,12 @@
 KEY: setEnterMode
 KIND: method
 PATH: funcs/core/set-enter-mode
-ALIAS: sheet.setEnterMode, setEnterMode(), 설정을, 동적으로, 변경합니다
-ALIAS_EN: set, enter, mode
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-enter-mode
+ALIAS: sheet.setEnterMode, setEnterMode()
+ALIAS_EN: dynamically, changes, cfg, entermode, docs, props, enter, mode
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-enter-mode
 ---
 # setEnterMode ***(method)***
-> (Cfg) [EnterMode](/docs/props/cfg/enter-mode)설정을 동적으로 변경합니다.
+> Dynamically changes the (Cfg) [EnterMode](/docs/props/cfg/enter-mode) setting.
 
 ### Syntax
 ```javascript
@@ -17,14 +17,14 @@ boolean setEnterMode(enterMode);
 ### Parameters
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|enterMode|`number`|필수|변경할 [EnterMode](/docs/props/cfg/enter-mode) 속성|
+|enterMode|`number`|Required|[EnterMode](/docs/props/cfg/enter-mode) property value to change to|
 
 ### Return Value
-***boolean*** : 함수 정상 동작 여부. (인자값이 잘못되어 수행되지 못한 경우에는 `false` 리턴)
+***boolean*** : Whether the function operated normally. (Returns false if the argument values are invalid and could not be executed, `false` return)
 
 ### Example
 ```javascript
-// Cfg.EnterMode를 5로 변경
+// Cfg.EnterMode 5as Changed
 sheet.setEnterMode(5);
 ```
 
@@ -38,4 +38,4 @@ sheet.setEnterMode(5);
 ### Since
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.13|기능 추가|
+|core|8.0.0.13|Feature added|

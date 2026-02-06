@@ -2,16 +2,15 @@
 KEY: onReadMenu
 KIND: event
 PATH: events/on-read-menu
-ALIAS: 마우스, 오른쪽, 클릭, 시트에, 설정된
-ALIAS_EN: on, read, menu, right, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-read-menu
+ALIAS_EN: event, called, menu, configured, sheet, displayed, screen, right
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-read-menu
 ---
 # onReadMenu ***(event)***
-> 마우스 오른쪽 클릭 시 시트에 설정된 메뉴가 화면에 보여지기전 호출되는 이벤트 입니다.
+> Event called before the menu configured in the sheet is displayed on screen when right-clicking.
 
-> **[showMenu](/docs/funcs/core/show-menu) 메소드에 의해 호출되지 않습니다.**
+> **Not called by the [showMenu](/docs/funcs/core/show-menu) method.**
 
-> 새로운 메뉴를 문자열 또는 객체로 리턴하여 사용할 수 있습니다(기존에 메뉴가 설정되어 있는 경우 이를 대체합니다).
+> You can return a new menu as a string or object to use (replaces the existing menu if one is configured).
 
 ### Syntax
 
@@ -26,10 +25,10 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|메뉴가 보여질 시트 객체|
-|row|`object`|메뉴가 보여질 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|메뉴가 보여질 셀의 열이름|
-|menu|`object`|화면에 보여질 메뉴에 대한 설정을 담고 있는 객체|
+|sheet|`object`|Sheet object where the menu will be displayed|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the menu will be displayed|
+|col|`string`|Column name of the cell where the menu will be displayed|
+|menu|`object`|Object containing the configuration for the menu to be displayed on screen|
 
 ### Return
 ***mixed( `string` \| `object` )***
@@ -37,26 +36,26 @@ or
 ### Example
 ```javascript
 options.Cfg = {
-    // 기존에 설정된 메뉴
+    // Previously configured menu
     Menu: {
         Items: [
-            { Name: "before", Text: "이전" },
-            { Name: "after", Text: "이후" },
-            { Name: "now", Text: "지금" }
+            { Name: "before", Text: "Previous" },
+            { Name: "after", Text: "Next" },
+            { Name: "now", Text: "Now" }
         ]
     }
 }
 
 options.Events = {
     onReadMenu:function(evtParam){
-        // 열이름이 sTitle인 경우 기존의 메뉴가 아닌 새로운 메뉴를 사용합니다.
+        // When the column name is sTitle, use a new menu instead of the existing one.
         if(evtParam.col == "sTitle") {
             var M = { Items: [
-                { Name: "title", Text: "바로가기" },
-                { Name: "title1", Text: "바로가기1" },
-                { Name: "title2", Text: "바로가기2" },
-                { Name: "title3", Text: "바로가기3" },
-                { Name: "title4", Text: "바로가기4" }
+                { Name: "title", Text: "Shortcut" },
+                { Name: "title1", Text: "Shortcut1" },
+                { Name: "title2", Text: "Shortcut2" },
+                { Name: "title3", Text: "Shortcut3" },
+                { Name: "title4", Text: "Shortcut4" }
                 ] };
 
             return M;
@@ -72,4 +71,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

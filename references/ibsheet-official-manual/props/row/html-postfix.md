@@ -2,15 +2,14 @@
 KEY: htmlPostfix
 KIND: row-property
 PATH: props/row/html-postfix
-ALIAS: 전체, 셀의, 문자열, 뒤에, 원하는
-ALIAS_EN: html, postfix, all, total
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/html-postfix
+ALIAS_EN: inserts, desired, html, tag, text, string, cell, entire
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/html-postfix
 ---
 # HtmlPostfix ***(row)***
 
-> 행 전체 각 셀의 문자열 뒤에 원하는 HTML 태그를 삽입합니다.
+> Inserts a desired HTML tag after the text string of each cell in the entire row.
 
-> 이 속성은 행에서 사용되는 일은 거의 드물며, 보통 `Col`이나 `Cell`단위로 사용한다.
+> This property is rarely used at the row level; it is usually used at the `Col` or `Cell` level.
 
 ### Type
 `string`
@@ -18,12 +17,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/html-post
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|원하는 Html태그|
+|`string`|Desired HTML tag|
 
 
 ### Example
 ```javascript
-//헤더행의 각 셀 타이틀 끝에 특정 Icon을 추가한다
+//Add a specific icon at the end of each cell title in the header row.
 options.Def.Header = {"HtmlPostfix": '<i class="fas fa-apple-alt"></i>'};
 ```
 
@@ -34,4 +33,4 @@ options.Def.Header = {"HtmlPostfix": '<i class="fas fa-apple-alt"></i>'};
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

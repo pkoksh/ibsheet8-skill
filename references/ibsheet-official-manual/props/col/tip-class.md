@@ -2,13 +2,12 @@
 KEY: tipClass
 KIND: column-property
 PATH: props/col/tip-class
-ALIAS: 풍선도움말, 객체에, 원하는, 클래스를, 적용하여
-ALIAS_EN: tip, class
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/tip-class
+ALIAS_EN: design, applying, desired, css, class, tooltip, object, tipclass
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/tip-class
 ---
 # TipClass ***(col)***
 
-> 풍선도움말 객체에 원하는 css클래스를 적용하여 디자인을 설정 합니다.
+> Sets the design by applying a desired CSS class to the tooltip object.
 
 
 ### Type
@@ -17,7 +16,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/tip-class
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|풍선도움말 객체에 적용할 클래스 명|
+|`string`|Class name to apply to the tooltip object|
 
 ### Example
 ```css
@@ -28,7 +27,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/tip-class
 ```
 ```javascript
 
-//특정 열에 풍선도움말 표시시 사용될 클레스를 설정.
+// Set the class to use when displaying the tooltip on a specific column.
 options.Cols = [
     ...
     {Type:"Text", Tip: 1, TipClass: "deepblue", Name: "procs", Width: 120 ...},
@@ -45,4 +44,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

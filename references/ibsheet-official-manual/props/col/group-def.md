@@ -2,16 +2,15 @@
 KEY: groupDef
 KIND: column-property
 PATH: props/col/group-def
-ALIAS: 열이, 그룹핑될때, 그룹행에, 적용될, 공통
-ALIAS_EN: group, def
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-def
+ALIAS_EN: specifies, common, settings, apply, group, rows, column, grouped
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/group-def
 ---
 # GroupDef ***(col)***
-> 열이 그룹핑될때, 그룹행에 적용될 공통 설정을 지정합니다.
+> Specifies the common settings to apply to group rows when the column is grouped.
 
-> 시트 초기화시 `Def` 영역에 커스텀하게 기능을 설정해 두고, 해당 열에서 `Def`에 정의된 ID를 지정해 설정하실 수 있습니다.
+> During sheet initialization, you can set custom features in the `Def` area and specify the ID defined in `Def` for the column.
 
-> `Def` 영역에 커스텀하게 기능을 설정할 때 `Def` 속성에 <b>반드시 `Group`을 설정</b>해야 정상적으로 동작합니다.
+> When setting custom features in the `Def` area, <b>`Group` must be set in the `Def` property</b> for it to work correctly.
 
 ### Type
 `string`
@@ -19,18 +18,18 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-def
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|Def에 설정한 커스텀 기능 ID|
+|`string`|Custom feature ID set in Def|
 
 
 
 ### Example
 ```javascript
 options.Def = {
-    //커스텀 그룹행 설정
+    // Custom group row settings
     "myGroupRow": {Def: "Group", Color: "#FFADAD", CanEdit: 0, CanFocus: 0}
 };
 
-//특정 열에 대해 그룹핑 불허
+// Apply custom group settings to a specific column
 options.Cols = [
     ...
     {Type: "Text", Name: "SA_DEPTID", GroupDef: "myGroupRow", ...},
@@ -53,4 +52,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

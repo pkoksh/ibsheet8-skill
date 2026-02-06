@@ -2,13 +2,12 @@
 KEY: copyCols
 KIND: config-property
 PATH: props/cfg/copy-cols
-ALIAS: 복사하여, 붙여넣기에, 사용할, 열을, 설정합니다
-ALIAS_EN: copy, cols
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/copy-cols
+ALIAS_EN: columns, copy, paste, copycols, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/copy-cols
 ---
 # CopyCols ***(cfg)***
 
-> 복사하여 붙여넣기에 사용할 열을 설정합니다.
+> Sets the columns to use for copy and paste.
 
 
 ### Type
@@ -17,17 +16,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/copy-cols
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|포커스된 열만 붙여넣기에 사용|
-|`1`|모든 표시열을 붙여넣기에 사용 (`SelectingCells : 0` 인 경우 해당 값이 `default`로 설정됩니다.)|
-|`2`|모든 열을 붙여넣기에 사용(숨겨진 컬럼도 포함)|
-|`3`|포커스된 행에 대해서만 포커스된 셀 범위 또는 모든 표시 열(`default`)|
+|`0`|Use only the focused column for pasting|
+|`1`|Use all visible columns for pasting (If `SelectingCells : 0`, this value is set as `default`.)|
+|`2`|Use all columns for pasting (including hidden columns)|
+|`3`|Only for the focused row, use the focused cell range or all visible columns (`default`)|
 
 
 ### Example
 ```javascript
 options = {
     "Cfg":{
-      "CopyCols": 1,  // 모든 표시열을 붙여넣기에 사용
+      "CopyCols": 1,  // Use all visible columns for pasting
     }
 };
 ```
@@ -38,4 +37,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.20|기능 추가|
+|core|8.3.0.20|Feature added|

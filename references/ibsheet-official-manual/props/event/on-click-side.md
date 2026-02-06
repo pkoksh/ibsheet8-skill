@@ -2,22 +2,21 @@
 KEY: onClickSide
 KIND: event-property
 PATH: props/event/on-click-side
-ALIAS: 또는, 속성을, 사용하는, 셀에, 만들어지는
-ALIAS_EN: on, click, side
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/event/on-click-side
+ALIAS_EN: json, event, called, clicking, button, created, cell, uses
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/event/on-click-side
 ---
 # OnClickSide ***(json event)***
 
-> [Button](/docs/props/col/button) 또는 [Icon](/docs/props/col/icon)이 속성을 사용하는 셀에 만들어지는 버튼을 클릭시 호출되는 `Json` 이벤트 입니다.
+> A `Json` event that is called when clicking a button created in a cell that uses the [Button](/docs/props/col/button) or [Icon](/docs/props/col/icon) property.
 
-> `Json` 이벤트는 셀, 행, 열에서 선언될 수 있으며 적용되는 우선 순위는 **셀 > 행 > 열**입니다. 
+> `Json` events can be declared on cells, rows, and columns, and the priority order is **cell > row > column**. 
 
-> 예를 들어, 셀과 행 둘 다 선언했다면, 우선순위로 인해 행에 선언한 이벤트는 발생하지 않습니다.
+> For example, if declared on both a cell and a row, the event declared on the row will not fire due to priority.
 
 
-***Icon이나 Button 속성의 값이 Check 인 경우, 이 이벤트 내에서 값을 얻어보면 변경 전에 값이 추출됩니다.
-이는 이 이벤트의 발생 시점이 실제로 체크가 변경되기 보다 앞서있기 때문입니다.
-따라서 "Check"를 사용하실 때는 얻은 값의 반대 값을 입력해 주어야 합니다.***
+***When the Icon or Button property value is Check, retrieving the value within this event will return the value before the change.
+This is because the timing of this event precedes the actual check change.
+Therefore, when using "Check", you must input the opposite of the obtained value.***
 
 ### Syntax
 
@@ -26,18 +25,18 @@ function Handler(evtParam) {
   // ...
 }
 
-// 행에 넣는 경우
+// When adding to a row
 var options = {
   // ...
   Def: {
     Row: {
       // ...
-      // 함수 호출이 아닌 문자열을 통한 간단한 로직 설정 가능
-      // ** 아래와 같은 예약어 사용 가능
-      // Sheet(현재 시트 객체),
-      // Row(현재 이벤트가 호출된 셀의 데이터 로우 객체),
-      // Value(현재 이벤트가 호출된 셀의 값),
-      // Col(현재 이벤트가 호출된 열이름),
+      // Simple logic can be set through a string instead of a function call
+      // ** The following reserved words can be used
+      // Sheet (current sheet object),
+      // Row (data row object of the cell where the event was called),
+      // Value (value of the cell where the event was called),
+      // Col (column name where the event was called),
       // ex) 'Value && alert("Changed")'
       OnClickSide: Handler,
       // ...
@@ -46,7 +45,7 @@ var options = {
   // ...
 };
 
-// 열에 넣는 경우
+// When adding to a column
 var options = {
   // ...
   Cols: [{
@@ -59,17 +58,17 @@ var options = {
     // ...
 };
 
-// 특정 셀에 넣는 경우
+// When adding to a specific cell
 var data = [{
     // ...
-    '열이름': '',
-    '열이름OnClickSide': Handler,
+    'columnName': '',
+    'columnNameOnClickSide': Handler,
     // ...
   },
   ...
 ];
 
-// 특정 행에 넣는 경우
+// When adding to a specific row
 var data = [{
     // ...
     OnClickSide: Handler,
@@ -78,7 +77,7 @@ var data = [{
   // ...
 ];
 
-// 위에서 설정한 options 또는 data 객체를 시트 생성자의 인자로 넣습니다.
+// Pass the options or data object configured above as arguments to the sheet constructor.
 IBSheet.create({
   id: 'sheet',
   el: 'Main',
@@ -92,10 +91,10 @@ IBSheet.create({
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|클릭된 버튼/아이콘이 위치한 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|클릭된 버튼/아이콘이 위치한 셀의 열이름|
-|event|`object`|이벤트에 대한 정보를 담고 있는 객체|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the clicked button/icon is located|
+|col|`string`|Column name of the cell where the clicked button/icon is located|
+|event|`object`|Object containing information about the event|
 
 ### Return
 boolean
@@ -103,11 +102,11 @@ boolean
 ### Example
 ```js
 /**
- * [예시 1]
- * 열에 OnClickSide이벤트를 선언하는 경우
+ * [Example 1]
+ * Declaring OnClickSide event on a column
  * */
 
-// 셀 내에 위치한 오른쪽 버튼을 클릭시 http://www.ibsheet.com 페이지를 새창에서 띄웁니다.
+// When clicking the right button in a cell, open http://www.ibsheet.com in a new window.
 function Handler(evtParam) {
   window.open('http://www.ibsheet.com', '_blank');
 }
@@ -123,11 +122,11 @@ var options = {
 };
 
 /**
- * [예시 2]
- * 셀에 OnClickSide이벤트 선언하는 경우(시트에 사용될 데이터에 선언)
+ * [Example 2]
+ * Declaring OnClickSide event on a cell (declared in data used by the sheet)
  * */
 var data = [{
-    sCompany: '시트',
+    sCompany: 'Sheet',
     sCompanyOnClickSide: 'window.open("http://www.ibsheet.com", "_blank")',
   },
   // ...
@@ -141,4 +140,4 @@ var data = [{
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

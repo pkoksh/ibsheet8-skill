@@ -2,13 +2,16 @@
 KEY: getSaveString
 KIND: method
 PATH: funcs/core/get-save-string
-ALIAS: sheet.getSaveString, getSaveString(), 시트, 내에, 변경된, 내용, 입력
-ALIAS_EN: get, save, string, sheet, grid, input, import
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-save-string
+ALIAS: sheet.getSaveString, getSaveString()
+ALIAS_EN: extracts, changed, content, within, sheet, added, deleted, moved
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-save-string
 ---
 # getSaveString ***(method)***
-> 시트 내에 변경된 내용(`입력(Added)`, `수정(Changed)`, `삭제(Deleted)`, `이동(Moved)`)을 querystring 형식의 문자열로 추출합니다.
+> Extracts the changed content within the sheet (`Added`, `Changed`, `Deleted`, `Moved`) as a querystring format string.
 
+> After sending the extracted data to the server, the result must be reflected on the sheet using [acceptChangedData](/docs/funcs/core/accept-changed-data) or [applySaveResult](/docs/funcs/core/apply-save-result).
+
+> For details related to the server response (JSON) structure, refer to [dataStructure](/docs/dataStructure/saving-structure).
 
 ### Syntax
 ```javascript
@@ -19,84 +22,107 @@ string getSaveString( saveMode, col, urlEncode, delim, queryMode, validRequired,
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|saveMode|`number`|선택|상태별 데이터 추출 여부 
-`0`:전체데이터
-`1`:전체데이터 중 `Deleted` 만 제외
-`2`:수정된 데이터(`Added`,`Changed`,`Deleted`) (`default`)
-`3`:수정된 데이터(`Added`,`Changed`,`Deleted`)+이동한 데이터(`Moved`)|
-|col|`string`|선택|저장 기준 열의 열이름
-특정 열을 지정하면 행의 상태(`Added`,`Changed`,`Deleted`)를 무시하고 지정한 열의 데이터 유무에 따라 저장됨.|
-|urlEncode|`boolean`|선택|조합되는 문자열의 인코딩 여부(encodeURIComponent로 문자열을 인코딩함 )
- **`queryMode`별로 `default`가 달라짐** 
+|saveMode|`number`|Optional|Data extraction by status 
+`0`:All data
+`1`:All data with `Deleted` excluded only
+`2`:Modified data(`Added`,`Changed`,`Deleted`) (`default`)
+`3`:Modified data(`Added`,`Changed`,`Deleted`)+Moved data(`Moved`)|
+|col|`string`|Optional|Save reference column column name
+When specifying a specific column, row status(`Added`,`Changed`,`Deleted`)the row status is ignored and saving is based on the presence of data in the specified column.|
+|urlEncode|`boolean`|Optional|Whether to encode the composed string (encodes string with encodeURIComponent)
+ **`default` varies depending on `queryMode`** 
 `0(false)`:`queryMode:0 (default)`
 `1(true)`:`queryMode:1/2 (default)`|
-|delim|`string`|선택|queryMode값이 2인 경우에 데이터 사이 구분자 지정 (`default : "\|"`)|
-|queryMode|`number`|선택|서버로 전달될 데이터 구조 설정
-**`0`:json 구조로 전달**
+|delim|`string`|Optional|Specifies the delimiter between data when queryMode value is 2. (`default : "\|"`)|
+|queryMode|`number`|Optional|Configure data structure sent to the server
+**`0`:Sent in json structure**
 ex)
 Data={
 "data":[
-{"STATUS":"Added","ColName1":"홍길동","ColName2":25},
-{"STATUS":"Changed","ColName1":"심청","ColName2":18}
+{"STATUS":"Added","ColName1":"John Doe","ColName2":25},
+{"STATUS":"Changed","ColName1":"Jane Doe","ColName2":18}
 ]}
-*단 **reqHeader**속성에 {"Content-Type":"application/json"}를 추가시 앞에 "Data="이 제거되고 순수하게 json형식만 서버로 전송*
-**`1`:QueryString 구조 전달** (`default`)
+*However when **reqHeader** property {"Content-Type":"application/json"} is added, the front "Data=" is removed and only pure json format is sent to the server*
+**`1`:QueryString structure sent** (`default`)
 ex)
-STATUS=Added&ColName1=홍길동&ColName2=25&STATUS=Changed&ColName1=심청&ColName2=18
-**`2`:열데이터 기준 QueryString 구조 전달**
+STATUS=Added&ColName1=John Doe&ColName2=25&STATUS=Changed&ColName1=Jane Doe&ColName2=18
+**`2`:Based on column data QueryString structure sent**
 ex)
-STATUS=Added\|Changed&ColName1=홍길동\|심청&ColName2=25\|18|
-|validRequired|`boolean`|선택|데이터 필수 입력 항목([Required col](/docs/props/col/required) 설정된 열)에 대한 검사 여부
-`0(false)`:필수 입력 항목 검사 안함
-`1(true)`:필수 입력 항목 검사 실행 (`default`)
-**`Validation`결과가 실패인 경우 규격** 
- 1. Validation 오류인 경우 
+STATUS=Added\|Changed&ColName1=John Doe\|Jane Doe&ColName2=25\|18|
+|validRequired|`boolean`|Optional|Whether to validate required data input fields ([Required col](/docs/props/col/required) setting applied columns).
+`0(false)`:Do not validate required input fields
+`1(true)`:Validate required input fields (`default`)
+**`Validation` failure result specification:** 
+ 1. When validation error occurs: 
  - Code: `IBS010`, Message: `RequiredError`|
-|prefix|`string`|선택|열의 이름 앞에 설정할 문자열
-여러개 시트를 한번에 서버로 보낼때 시트id_colName 형식으로 보낼 수 있음
-ex) `sheet_saName=홍길동&sheet_saId=839212` 식으로 queryString이 만들어짐
+|prefix|`string`|Optional|String to prepend before column names.
+Can be used to send multiple sheets to one server in the format sheetid_colName.
+ex) `sheet_saName=John Doe&sheet_saId=839212` format queryString is created
 (`default : ""`)|
-|showAlert|`boolean`|선택| `validRequired` 검사를 통과하지 못할 시 메세지 표시 여부
-`0(false)`:메시지 표시 안함 (`default`)
-`1(true)`:메세지 표시
-![테이블](/assets/imgs/doSaveRequired1.png "테이블")
-<!-- IMAGE: 시트/테이블 화면 - 테이블 -->
-![경고창](/assets/imgs/doSaveRequired2.png "경고창")
-<!-- IMAGE: 경고/확인 대화상자 - 경고창 -->|
-|saveAttr|`string`|선택|각 셀의 속성값을 같이 추출하고자 하는 경우 Name+속성명 형식으로 설정
-여러개 속성을 추출하고자 하는 경우 ","를 구분자로 작성
+|showAlert|`boolean`|Optional|When `validRequired`, `validSize`, `validEditMask`, `validResultMask` is set,
+whether to display a message when validation fails.
+`0(false)`:Do not display message (`default`)
+`1(true)`:Display message
+![Table](/assets/imgs/doSaveRequired1.png "Table")
+<!-- IMAGE: Sheet/Table View - Table -->
+![Warning dialog](/assets/imgs/doSaveRequired2.png "Warning dialog")
+<!-- IMAGE: Screenshot/Example Image - Warning dialog -->
+The displayed message uses the content defined in the message file (e.g., `ko.js`, etc.).
+(EditMaskError, SizeError, RequiredError, ResultMaskError)|
+|saveAttr|`string`|Optional|When you want to extract cell attribute values together, configure in Name+propertyname format.
+When extracting multiple attributes, use "," as delimiter.
 ex) `"sNameColor,sNoCanEdit"`|
-|saveExtraAttr|`boolean`|선택|시트에 (col)[Name](/docs/props/col/name)으로 정의하지 않은 데이터가 [doSearch](/docs/funcs/core/do-search)나 [loadSearchData](/docs/funcs/core/load-search-data)함수를 통해 로드 된 경우, 함수 호출시 해당 데이터를 같이 추출할 지 여부.
-로드 데이터 첫번째 행의 keyset을 기준으로 추출됨
-`0(false)`:시트에 (col)[Name](/docs/props/col/name)으로 정의 되지 않은 데이터 서버 전송 시 미포함 (`default`)
-`1(true)`:시트에 (col)[Name](/docs/props/col/name)으로 정의 되지 않은 데이터 서버 전송 시 포함|
-|validSize|`boolean`|선택|사이즈 설정([Size col](/docs/props/col/size))에 대한 유효성 검사 여부 설정.
-`0(false)`:사이즈 유효성 검사 안함 (`default`)
-`1(true)`:사이즈 유효성 검사 실행|
-|validEditMask|`boolean`|선택|EditMask 설정([EditMask col](/docs/props/col/edit-mask))에 대한 유효성 검사 여부 설정.
-`0(false)`:EditMask 유효성 검사 안함 (`default`)
-`1(true)`:EditMask 유효성 검사 실행|
-|validResultMask|`boolean`|선택|ResultMask 설정([ResultMask col](/docs/props/col/result-mask))에 대한 유효성 검사 여부 설정.
-`0(false)`:ResultMask 유효성 검사 안함 (`default`)
-`1(true)`:ResultMask 유효성 검사 실행|
+|saveExtraAttr|`boolean`|Optional|When data not defined with (col)[Name](/docs/props/col/name) in the sheet is loaded through [doSearch](/docs/funcs/core/do-search) or [loadSearchData](/docs/funcs/core/load-search-data) function, whether to extract that data as well when this function is called.
+Extracted based on the keyset of the first row of loaded data.
+`0(false)`:Data not defined with (col)[Name](/docs/props/col/name) is not included when sending to server (`default`)
+`1(true)`:Data not defined with (col)[Name](/docs/props/col/name) is included when sending to server|
+|validSize|`boolean`|Optional|Whether to validate Size setting ([Size col](/docs/props/col/size)).
+`0(false)`:Do not validate size (`default`)
+`1(true)`:Validate size|
+|validEditMask|`boolean`|Optional|Whether to validate EditMask setting ([EditMask col](/docs/props/col/edit-mask)).
+`0(false)`:Do not validate EditMask (`default`)
+`1(true)`:Validate EditMask|
+|validResultMask|`boolean`|Optional|Whether to validate ResultMask setting ([ResultMask col](/docs/props/col/result-mask)).
+`0(false)`:Do not validate ResultMask (`default`)
+`1(true)`:Validate ResultMask|
+
+When `validRequired`, `validSize`, `validEditMask`, `validResultMask` properties are set when calling `getSaveString`, validation is performed for these options, and the following `Code` and `Message` are returned according to the validation result.
+
+| Code | Message         | Description |
+|------| --------------- |-------------|
+| `IBS010` |RequiredError| Validation error for required input items when `validRequired` is set |
+| `IBS040` |SizeError | Size validation error when `validSize` is set |
+| `IBS050` |EditMaskError | EditMask validation error when `validEditMask` is set |
+| `IBS060` |ResultMaskError| ResultMask validation error when `validResultMask` is set |
 
 ### Return Value
-| 결과 | Description |
+**String**
+```json
+// When processed properly (querystring form)
+"sa_name=John Doe&sa_id=02712&sa_dept=031&..."
+
+// When there are no save (Added, Changed, Deleted) targets
+""
+
+// When validation error occurs with validRequired set
+"RequiredError|IBS010|error triggered row id|error triggered column Name"
+```
+<!--| result | Description |
 |------|-------------|
-|sa_name=홍길동&sa_id=02712&sa_dept=031&...| 정상 처리일 경우(querystring 형태) |
-|""| 저장(Added, Changed, Deleted) 대상이 없는 경우 |
-|RequiredError\|IBS010\|오류발생 행 id\|오류발생 열 Name| `validRequired` 설정 시 Validation 오류인 경우  |
+|sa_name=John Doe&sa_id=02712&sa_dept=031&...| When processed properly (querystring form) |
+|""| When there are no save (Added, Changed, Deleted) targets |
+|RequiredError\|IBS010\|error triggered row id\|error triggered column Name| When validation error occurs with `validRequired` set |-->
 
 ### Example
 ```javascript
-// 열이름이 CHK인 열에 체크된 데이터만 추출한다.
-// 데이터를 추출하면서 AA 컬럼에 Checked 속성도 추출한다.
+// Extract only data with column name CHK column checked.
+// Also extract the Checked property of the AA column along with the data.
 var saveStr = sheet.getSaveString({col:"CHK",saveAttr:"AAChecked"});
 $.ajax({
     url:"sheetSaveWorx.do",
     data:saveStr,
     success:function(data){
-        // 저장성공시 처리
+    // Processing when save succeeds
         sheet.acceptChangedData();
     }
 })
@@ -114,7 +140,7 @@ $.ajax({
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.4|`saveAttr` 기능 추가|
-|core|8.1.0.32|`saveExtraAttr` 기능 추가|
-|core|8.3.0.24|`validSize`, `validEditMask`, `validResultMask` 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.4|`saveAttr` Feature added|
+|core|8.1.0.32|`saveExtraAttr` Feature added|
+|core|8.3.0.24|`validSize`, `validEditMask`, `validResultMask` Feature added|

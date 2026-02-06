@@ -2,30 +2,29 @@
 KEY: timePicker
 KIND: column-property
 PATH: props/col/time-picker
-ALIAS: 시분초, 컬럼에, 아이콘이, 생성됩니다, 아이콘
-ALIAS_EN: time, picker, icon
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/time-picker
+ALIAS_EN: creates, icon, hour, minute, second, column, clicked, time
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/time-picker
 ---
 # TimePicker ***(col)***
 
-> 시분초 컬럼에 아이콘이 생성됩니다. 아이콘 클릭시, 달력이 아닌 시분초 다이얼로그를 사용합니다.
+> Creates an icon for the hour/minute/second column. When the icon is clicked, a time picker dialog is used instead of a calendar.
 
 
-### 아이콘 표시 조건
+### Icon Display Conditions
 > `Type: Date`
 
-> `EditFormat`, `Format`, `DataFormat` 3가지의 포맷 중 하나에 날짜 포맷이 없고 시간과 관련된 포맷값만 있을 경우 표시.
+> Displayed when one of the 3 formats `EditFormat`, `Format`, `DataFormat` contains no date format and only time-related format values.
 
-> ex) `HH:mm` or `HH:mm:ss`
+> e.g.) `HH:mm` or `HH:mm:ss`
 
-> `EditFormat` -> `Format` -> `DataFormat` 우선순위를 따릅니다.
+> Follows the priority order of `EditFormat` -> `Format` -> `DataFormat`.
 
-> ex) `EditFormat: yyyy-MM-dd`, `DataFormat: HH:mm` 일 경우 TimePicker 아이콘이 표시 되지 않음.
+> e.g.) When `EditFormat: yyyy-MM-dd` and `DataFormat: HH:mm`, the TimePicker icon is not displayed.
 
 ###
 
 ![TimePicker](/assets/imgs/timepicker.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - TimePicker -->
+<!-- IMAGE: Screenshot/Example Image - TimePicker -->
 
 
 ### Type
@@ -34,14 +33,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/time-pick
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|시분초 아이콘 생성하지 않음 (`default`)|
-|`1(true)`|시분초 아이콘 생성, 다이얼로그 사용|
+|`0(false)`|Does not create the time picker icon (`default`)|
+|`1(true)`|Creates the time picker icon, uses dialog|
 
 
 ### Example
 ```javascript
 
-//시분초 컬럼에 TimePicker 설정.
+// Set TimePicker for hour/minute/second column.
 options.Cols = [
     ...
     {Type:"Date", Name: "Data_Hms", Format: 'HH:mm:ss', TimePicker: true}
@@ -57,4 +56,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.26|기능 추가|
+|core|8.0.0.26|Feature added|

@@ -2,25 +2,23 @@
 KEY: exportData
 KIND: method
 PATH: funcs/core/export-data
-ALIAS: sheet.exportData, exportData(), 시트의, 내용을, 엑셀, 파일로, 다운로드
-ALIAS_EN: export, data, excel, xlsx
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/export-data
+ALIAS: sheet.exportData, exportData()
+ALIAS_EN: downloads, sheet, contents, excel, file, exportdata, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/export-data
 ---
 # exportData ***(method)***
 
-> 시트의 내용을 엑셀 파일로 다운로드 합니다. 
+> Downloads the sheet contents as an Excel file. 
 
-> 해당 함수를 사용하시려면 `jszip` 라이브러리가 반드시 필요합니다. 
+> This feature uses the `jszip` library for Excel file creation. 
 
-> 기본적으로 `jszip` 라이브러리가 있는 경우, 그것을 그대로 사용하게 되고 `jszip` 라이브러리가 없는 경우, `plugins/jszip.min.js` 라이브러리를 가져와 사용합니다.
+> This feature is a client-side feature processed in the browser. 
 
-> [down2Excel](/docs/funcs/excel/down-to-excel) 과 동일한 기능(서버에서 처리하는 기능을 제외하고)을 제공합니다. (`xlsx 기준`) 
+> The `plugins/jszip.min.js` file must exist.
 
-> 지원 하는 파일 형식은 **xlsx, txt, csv** 입니다.
-> 
+> If the file does not exist, the Excel download feature will not work.
 
-> 해당 함수는 [down2Text](/docs/funcs/excel/down-to-text) 에서 사용되는 기능 또한 제공됩니다. (`colDelim, rowDelim, downSum`) 
-
+> Supported file formats are **xlsx, txt, csv**.
 
 ### Syntax
 ```javascript
@@ -31,138 +29,166 @@ void exportData( param );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|fileName|`string`|선택|생성할 엑셀파일 명 (`default: Excel.xlsx`) 
-**이 속성에서 파일명과 함께 확장자를 xlsx, txt, csv로 붙이느냐에 따라서 생성 파일이 xlsx형식, (txt, csv)형식으로 만들어집니다.**
-해당 속성 사용시에는 확장자를 입력해야 적용된 파일이 다운로드 됩니다.|
-|sheetName|`string`|선택|만들어지는 엑셀 파일의 WorkSheet에 부여할 이름 `(xlsx에서만 지원)`|
-|downRows|`string`|선택|지정한 행만 다운로드 합니다.
- 별도의 설정이 없을시 모든 행이 다운로드 됩니다.
- 보여지는 행만 다운로드하고 싶을 경우 `"Visible"`로 설정하면 됩니다.
- (ex: "1\|3\|4\|5\|9" 식의 문자열) 
- `downRows`를 사용하면 머지 기능이 동작하지 않습니다.|
-|downCols|`string`|선택|지정한 열만 다운로드 합니다.
- 별도의 설정이 없을시 모든 열이 다운로드 됩니다.
- 보여지는 열만 다운로드하고 싶을 경우 `"Visible"`로 설정하면 됩니다.
-(ex: "Price\|AMT\|TOTAL" 식의 문자열)|
-|downTreeHide|`boolean`|선택|tree를 사용하는 경우, 접혀진 행도 엑셀에 다운로드 할지 여부를 설정합니다.
-`1(true)`로 설정시 접혀있는 자식노드도 모두 다운로드 됩니다.(`default: 0(false)`)|
-|downHeader|`boolean`|선택|헤더행을 다운로드 할지 여부를 설정합니다.(`default: 1(true)`)|
-|sheetDesign|`number`|선택|시트의 디자인 요소를 엑셀에도 반영할지 여부를 설정합니다. 
- 반영되는 디자인 요소는 다음과 같습니다: 헤더의 배경색,폰트명,폰트크기,데이터 배경색 
- `0`: 셀 외곽선을 제외한 모든 디자인을 적용하지 않습니다.
- `1`: 셀 외곽선을 포함해 모든 디자인을 적용합니다. (default) 
- `2`: 셀 외곽선을 제외한 셀 스타일을 적용합니다. 
- `3`: 셀 외곽선 및 스타일을 모두 적용하지 않습니다.`(xlsx에서만 지원)` 
-  `4`: 헤더행에만 모든 디자인을 적용합니다. 
-|titleText|`string`|선택|엑셀 문서의 상단에 원하는 문자를 추가합니다.
- 문자는 열구분자("\|")와 행구분자(`"\r\n"`)을 통해서 작성하실수 있습니다.
-가령 "A\|B\|C\r\nD\|E\|F" 와 같이 입력한 경우 첫 행에 3개의 셀에 각각 A, B, C 값이 들어가고 두번째 행의 3개의 셀에 각각 D, E, F 값이 입력됩니다. 값 안에서 엔터를 포함하려면 `"\r"` 이나 `"\n"` 을 삽입하면 됩니다. `"\r\n"` 이 10개가 포함되면 11줄을 차지하게 되고 12번째 행부터 시트 내용이 출력됩니다. `(xlsx에서만 지원)`|
-|userMerge|`string`|선택|`titleText`와 같이 사용하며, titleText를 원하는 모양으로 머지합니다.
- 입력방법은 4개의 숫자로 `"머지시작셀 row index, 머지시작셀 col index, 아래로 병합할 행 개수(1을 설정하면 병합 없음), 우측으로 병합할 개수"` 로 이루어 집니다. 
-(여러개 병합시에는 띄어쓰기로 구분)
-가령 `"2,2,1,6 3,2,3,3"`위와 같이 설정하였다면 2,2 셀부터 오른쪽으로 6칸이 병합되고, 3,2 셀부터 아래로 3칸, 오른쪽으로 3칸이 병합 됩니다. `(xlsx에서만 지원)`
+|fileName|`string`|Optional|Name of the Excel file to create (`default: Excel.xlsx`)
+If no extension is entered, it is downloaded with the default filename (xlsx).
+If the extension is specified as `xlsx`, `txt`, or `csv`, it is downloaded in that format.|
+|sheetName|`string`|Optional|Name to assign to the WorkSheet of the created Excel file `(xlsx only)`|
+|downRows|`string`|Optional|Downloads only the specified rows.
+(ex: "1\|3\|4\|5\|9" format string)
+ Without separate settings, all rows are downloaded.
+If you want to include only visible rows on screen or filtered rows, set it to `"Visible"`.
+ When using `downRows`, the **merge feature** does not work.
+ Only data rows can be set, and the starting index of data rows begins from 1.|
+|downCols|`string`|Optional|Downloads only the specified columns.
+ Without separate settings, all columns are downloaded.
+ If you want to download only visible columns, set it to `"Visible"`.
+(ex: "Price\|AMT\|TOTAL" format string)|
+|downTreeHide|`boolean`|Optional|When using tree, sets whether to also download collapsed rows to Excel.
+`1(true)`: All collapsed child nodes are also downloaded.(`default: 0(false)`)|
+|downHeader|`boolean`|Optional|Sets whether to download the header row.(`default: 1(true)`)|
+|sheetDesign|`number`|Optional|Sets whether to reflect the sheet's design elements in Excel as well. 
+ The design elements that are reflected are as follows: header background color, font name, font size, data background color 
+ `0`: Does not apply any design except cell borders.
+ `1`: Applies all design including cell borders. (default) 
+ `2`: Applies cell styles except cell borders. 
+ `3`: Does not apply any cell borders or styles.`(xlsx only)` 
+  `4`: Applies all design to header rows only.
+|titleText|`string`|Optional|Adds a desired string at the top of the Excel document.
+ The string can be composed using the column delimiter ("\|") and row delimiter (`"\r\n"`).
+For example, if "A\|B\|C\r\nD\|E\|F" is entered, the first row's 3 cells are filled with A, B, C values respectively,
+and the second row's 3 cells are filled with D, E, F values respectively.
+To include a line break within a value, insert `"\r"` or `"\n"`.
+ If 10 `"\r\n"` are included, it takes up 11 lines and the sheet content starts from the 12th row. `(xlsx only)`|
+|userMerge|`string`|Optional|Used together with `titleText` to merge the titleText into the desired shape.
+ The input method consists of 4 numbers: `"merge start cell row index, merge start cell col index, number of rows to merge downward (set to 1 for no merge), number of cells to merge to the right"`. 
+(When merging multiple areas, separate with spaces)
+For example, if set as `"2,2,1,6 3,2,3,3"`,
+from cell 2,2 it merges 6 cells to the right,
+and from cell 3,2 it merges 3 cells downward and 3 cells to the right. `(xlsx only)`
 ![userMerge](/assets/imgs/userMerge.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - userMerge -->|
-|excelRowHeight|`number`|선택|엑셀 문서의 행 높이를 설정합니다. -1 설정시 셀의 내용물 크기에 맞춰 엑셀 문서의 행 높이가 조절됩니다. `(xlsx에서만 지원)`|
-|excelHeaderRowHeight|`number`|선택|엑셀의 헤더행의 높이를 설정합니다. `(xlsx에서만 지원)`|
-|wordWrap|`boolean`|선택|엑셀 문서의 "텍스트 줄바꿈" 여부를 설정합니다.(`default: 1(true)`) `(xlsx에서만 지원)`|
-|comboValidation|`boolean`|선택|Enum 타입으로 만들어진 열에 대해 엑셀에서도 데이터 기능을 통해 드롭다운리스트 형태로 표현합니다. `(xlsx에서만 지원)`|
-|rowDelim|`string`|선택|text파일을 만들때 행 구분자(기본은 줄넘김 문자 `"\r\n"`) `(txt, csv)에서만 지원`
-|colDelim|`string`|선택|txt 다운로드 일 경우(`default: \t(탭문자)`, csv 다운로드 일 경우(`default: ,(콤마)` 업로드되는 파일에 따라 기본 구분자가 변경됩니다. `(txt, csv)에서만 지원`
-|hiddenColumn|`boolean`|선택|숨은 컬럼들을 엑셀로 다운로드 받은 경우, 해당 컬럼이 눈에 보이지는 않지만 엑셀 메뉴중 "숨기기 취소"를 선택한 경우 해당 컬럼이 다시 보일 수 있도록 엑셀 문서에 다운로드 받는다.
- `hiddenColumn:1` 은 `downCols`와 **절대 같이 사용하시면 안됩니다.**
-`0(false)`: 엑셀 다운로드 시 감춰진 열도 Visible:1 컬럼과 동일하게 일반 컬럼처럼 표현됨 (`default`)
-`1(true)`:감춰진 열 다운로드 시 "열 숨기기" 형태로 엑셀 다운로드|
-|merge|`number`|선택|시트의 머지 상태를 엑셀에 그대로 반영할지를 설정합니다.
- `0`: 사용 안 함 (`default`)
- `1`: 사용함 (셀 병합 시, 부속 셀의 값을 원본으로 유지함)
- `2`: 사용함 (셀 병합 시, 부속 셀의 값을 비움) `(xlsx에서만 지원)`|
-|textToGeneral|`boolean`|선택|Type:`Text`의 엑셀 서식 형식
-`0(false)`: Type:`Text`의 엑셀 서식을 텍스트 서식으로 지정 
-`1(true)`: Type:`Text`의 엑셀 서식을 일반 서식으로 지정(`default`)|
-|allTypeToText|`boolean`|선택|시트의 `Int`, `Float` 타입을 제외한 모든 컬럼의 엑셀 서식을 `Text` 타입으로 받고자 하는 경우 설정합니다.(`default: 0(false)`) `(xlsx에서만 지원)`|
-|checkBoxOnValue|`string`|선택|체크박스와 라디오 박스에서 체크를 한 경우 `1`값 대신 지정한 값을 사용합니다. `(xlsx에서만 지원)`|
-|checkBoxOffValue|`string`|선택|체크박스와 라디오 박스에서 체크 해제를 한 경우 `0`값 대신 지정한 값을 사용합니다. `(xlsx에서만 지원)`|
-|downSum|`boolean`|선택|합계 행 다운로드 여부를 설정합니다.(`default: 1(true)`)|
-|excelFontSize|`number`|선택|엑셀의 폰트 크기를 설정합니다. `(xlsx에서만 지원)`|
-|excludeFooterRow|`boolean`|선택|푸터 행 제외 여부를 설정합니다.(`default: 0(false)`) `(xlsx에서만 지원)`|
-|numberTypeToText|`boolean`|선택|`Int`, `Float` 타입의 컬럼을 `Text` 타입으로 다운로드 받을지 여부를 설정합니다.(`default: 0(false)`) `(xlsx에서만 지원)`|
-|excelFontFamily|`string`|선택|엑셀의 폰트를 설정합니다. `(xlsx에서만 지원)`|
-|exHead|`array[object]`|선택|시트 상단에 표시하고 싶은 내용을 설정합니다.
-**titleText 속성과 같이 사용할 수 없으며, 같이 사용시 titleText속성은 무시됩니다.**`(xlsx에서만 지원)`|
-|exFoot|`array[object]`|선택|시트 하단에 표시하고 싶은 내용을 설정합니다.`(xlsx에서만 지원)`
-|appendPrevSheet|`boolean`|선택|[exportDataBuffer](./export-data-buffer) 메소드를 사용하여 2개 이상의 시트를 엑셀로 다운로드 할 때 마지막으로 작성한 워크시트에 해당 옵션이 적용된 시트를 덧붙일지 여부를 설정합니다. 
- `0(false)`: 워크시트를 새로 생성하여 작성합니다.(`default`) 
- `1(true)`: 마지막으로 작성한 워크시트에 시트를 덧붙입니다. `(xlsx에서만 지원)`|
-|onlyHeaderMerge|`boolean`|선택|`1(true)`로 설정 시, 시트의 데이터 영역의 머지를 강제로 제한하고 헤더 영역의 머지만을 엑셀에 반영합니다.(`default: 0(false)`)|
-|freezePane|`number`|선택|상단 행과 왼쪽 열을 틀 고정하여 다운로드하는 옵션입니다. 옵션 설정에 따라 다르게 틀 고정이 적용되어 다운로드되며, 비트 연산으로 동작합니다. 
+<!-- IMAGE: Screenshot/Example Image - userMerge -->|
+|excelRowHeight|`number`|Optional|Sets the row height of the Excel document.
+When set to -1, the row height of the Excel document is adjusted to fit the cell content size. `(xlsx only)`|
+|excelHeaderRowHeight|`number`|Optional|Sets the header row height of Excel.
+`(xlsx only)`|
+|wordWrap|`boolean`|Optional|Sets whether to enable "text wrapping" in the Excel document.
+(`default: 1(true)`) `(xlsx only)`|
+|comboValidation|`boolean`|Optional|For columns created as Enum type, represents them as a dropdown list using the data validation feature in Excel as well.
+`(xlsx only)`|
+|rowDelim|`string`|Optional|Row delimiter when creating text files (default line break string `"\r\n"`)
+`(txt, csv only)`
+|colDelim|`string`|Optional|Column delimiter for txt download (`default: \t (tab character)`)
+Column delimiter for csv download (`default: , (comma)`) 
+The default delimiter changes according to the uploaded file.
+`(txt, csv only)`
+|hiddenColumn|`boolean`|Optional|When downloading hidden columns to Excel,
+the column is not visible but when selecting "Unhide" from the Excel menu, the column becomes visible again.
+`hiddenColumn:1` and `downCols` **must never be used together.**
+`0(false)`: When downloading to Excel, hidden columns are displayed as normal columns like Visible:1 columns (`default`)
+`1(true)`:When downloading, hidden columns are downloaded in "column hidden" format in Excel|
+|merge|`number`|Optional|Sets whether to reflect the sheet's merge state as-is in Excel.
+ `0`: Not used (`default`)
+ `1`: Used (when merging cells, subsidiary cell values are kept as original)
+ `2`: Used (when merging cells, subsidiary cell values are cleared) `(xlsx only)`|
+|textToGeneral|`boolean`|Optional|Type:`Text`Excel format style of
+`0(false)`: Type:`Text`Set Excel format to text format 
+`1(true)`: Type:`Text`Set Excel format to general format(`default`)|
+|allTypeToText|`boolean`|Optional|Set when you want to receive all columns' Excel format as `Text` type, excluding `Int` and `Float` types from the sheet.
+(`default: 0(false)`) `(xlsx only)`|
+|checkBoxOnValue|`string`|Optional|When a checkbox or radio box is checked, uses the specified value instead of `1`.
+`(xlsx only)`|
+|checkBoxOffValue|`string`|Optional|When a checkbox or radio box is unchecked, uses the specified value instead of `0`.
+`(xlsx only)`|
+|downSum|`boolean`|Optional|Sets whether to download the total row.(`default: 1(true)`)|
+|excelFontSize|`number`|Optional|Sets the Excel font size. `(xlsx only)`|
+|excludeFooterRow|`boolean`|Optional|Sets whether to exclude the footer row.(`default: 0(false)`) `(xlsx only)`|
+|numberTypeToText|`boolean`|Optional|Sets whether to download `Int`, `Float` type columns as `Text` type.
+(`default: 0(false)`) `(xlsx only)`|
+|excelFontFamily|`string`|Optional|Sets the Excel font.
+`(xlsx only)`|
+|exHead|`array[object]`|Optional|Sets content to display at the top of the sheet.
+**Cannot be used together with the titleText property; when used together, the titleText property is ignored.**`(xlsx only)`
+ex) First row height 30, first cell text specified
+exHead:[{Height:30, Cells:[{Value:"Department"}]}]|
+|exFoot|`array[object]`|Optional|Sets content to display at the bottom of the sheet.`(xlsx only)`
+ex) First row at the bottom of the sheet with height 30, first cell text specified
+exFoot:[{Height:30, Cells:[{Value:"Output: 2023-06-23 John Doe"}]}]|appendPrevSheet|`boolean`|Optional|When using the [exportDataBuffer](./export-data-buffer) method to download 2 or more sheets to Excel, sets whether to append this sheet's content to the last written worksheet. 
+ `0(false)`: Creates a new worksheet and writes. (`default`) 
+ `1(true)`: Appends to the last written worksheet. `(xlsx only)`|
+|onlyHeaderMerge|`boolean`|Optional|When set to `1(true)`, forcefully restricts merge in the sheet's data area and reflects only header area merge in Excel.(`default: 0(false)`)|
+|freezePane|`number`|Optional|Option to freeze top rows and left columns when downloading. Freeze pane is applied differently based on option settings, and operates with bitwise operations. 
  
- `0`: 틀 고정을 적용하지 않음(`default`) 
- `1`: 헤더 틀 고정 적용 (`2`과 함께 적용시 헤드 영역 틀 고정으로 동작) 
- `2`: 헤드 영역 틀 고정 적용 
- `4`: 왼쪽 고정 열 틀 고정 적용|
-|numberFormatMode|`number`|선택|실수 형태의 데이터 타입에 대한 셀 서식 설정 방식을 설정합니다.
-`0`:시트의 컬럼 포맷을 따릅니다. (`default`)
-`1`:셀의 값 기준에 따라 정수 또는 실수 형태로 셀 서식을 설정합니다.
-`2`:일반 서식으로 설정합니다.|
+ `0`: Do not apply freeze pane(`default`) 
+ `1`: Apply header freeze pane (When applied together with `2`, operates as head area freeze pane) 
+ `2`: Apply head area freeze pane 
+ `4`: Apply left fixed column freeze pane|
+|numberFormatMode|`number`|Optional|Sets the cell format configuration method for float-type data types.
+`0`:Follows the sheet column format. (`default`)
+`1`:Sets cell format as integer or float based on the cell value.
+`2`:Sets to general format.|
+|excelPage|`object`|Optional|Sets Excel paper-related behavior. `(xlsx only)`
+ex) Excel paper setting (Landscape direction)
+excelPage: { orientation: "landscape" }|
 
 <!--!
-|`[비공개]` directExcelData|`object`|선택|시트의 데이터가 아닌 별도의 데이터를 이용하여 엑셀을 다운로드 하는 기능 (xlsx에서만 지원)|
-|`[비공개]` excelPage|`object`|선택|엑셀 용지에 대한 동작을 설정합니다 (xlsx에서만 지원)|
-|`[비공개]` downCombo|`string`|선택|`Enum` 타입의 선택 항목을 `Enum` 속성과 `EnumKeys` 속성 어떤 형태로 다운로드를 받을 지 설정합니다.
- `TEXT`: `Enum` 속성을 사용하여 다운로드 합니다. (`default`)
- `CODE`: `EnumKeys` 속성을 사용하여 다운로드합니다.|
-|`[비공개]` requiredMark|`string`|선택|필수 입력 항목 마크(`*`)를 다운로드 받을지 여부를 설정합니다.(`default: 1(true)`)|
+|`[Private]` directExcelData|`object`|Optional|Feature for downloading to Excel using separate data instead of sheet data (xlsx only)|
+|`[Private]` downCombo|`string`|Optional|Sets which format to use for downloading `Enum` type select items between the `Enum` property and `EnumKeys` property.
+ `TEXT`: Downloaded using the `Enum` property. (`default`)
+ `CODE`: Downloaded using the `EnumKeys` property.|
+|`[Private]` requiredMark|`string`|Optional|Sets whether to include the required input field mark (`*`) in download.(`default: 1(true)`)|
 !-->
 
-<!--!
-### `[비공개]` excelPage Options
+### excelPage Options
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|paperSize|`string`|선택|용지 크기를 설정합니다. 설정하지 않을 경우 기본 `A4`로 다운로드 됩니다. (`default: "A4"`)|
-|orientation|`string`|선택|용지 방향을 설정합니다.
-세로: "portrait", 가로: "landscape" (`default: "portrait"`)|
-|marginLeft|`number`|선택|용지 왼쪽의 여백을 설정합니다. (`default: 1.8`)|
-|marginRight|`number`|선택|용지 오른쪽의 여백을 설정합니다. (`default: 1.8`)|
-|marginTop|`number`|선택|용지 위쪽의 여백을 설정합니다. (`default: 1.9`)|
-|marginBottom|`number`|선택|용지 아래쪽의 여백을 설정합니다. (`default: 1.9`)|
-|marginHeader|`number`|선택|용지 머리글의 여백을 설정합니다. (`default: 0.8`)|
-|marginFooter|`number`|선택|용지 바닥글의 여백을 설정합니다. (`default: 0.8`)|
-|fitToWidth|`number`|선택|페이지 레이아웃의 너비를 설정합니다. (`default: 0`)|
-|fitToHeight|`number`|선택|페이지 레이아웃의 높이를 설정합니다. (`default: 0`)|
-!-->
+|paperSize|`string`|Optional|Sets the paper size. If not set, defaults to `A4`. (`default: "A4"`)|
+|orientation|`string`|Optional|Sets the paper orientation.
+Portrait: "portrait", Landscape: "landscape" (`default: "portrait"`)|
+|marginLeft|`number`|Optional|Sets the left margin of the paper. (`default: 1.8`)|
+|marginRight|`number`|Optional|Sets the right margin of the paper. (`default: 1.8`)|
+|marginTop|`number`|Optional|Sets the top margin of the paper. (`default: 1.9`)|
+|marginBottom|`number`|Optional|Sets the bottom margin of the paper. (`default: 1.9`)|
+|marginHeader|`number`|Optional|Sets the header margin of the paper. (`default: 0.8`)|
+|marginFooter|`number`|Optional|Sets the footer margin of the paper. (`default: 0.8`)|
+|fitToWidth|`number`|Optional|Sets the page layout width. (`default: 0`)|
+|fitToHeight|`number`|Optional|Sets the page layout height. (`default: 0`)|
+
 ### exHead,exFoot options
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|Height|`number`|선택|행의 높이|
-|Cells|`array[object]`|선택|행의 각셀에 표시될 내용,속성 설정|
-|Cells[{Value}]|`string`|선택|셀에 표시될 내용|
-|Cells[{Color}]|`string`|선택|셀의 배경색 (ex `#FFDDEE`)|
-|Cells[{TextColor}]|`string`|선택|셀의 글자색 (ex `#446622`)|
-|Cells[{TextSize}]|`number`|선택|셀의 글자 크기|
-|Cells[{TextStyle}]|`number`|선택|셀의 글자 style ([참고](/docs/props/cell/text-style))|
-|Cells[{TextFont}]|`string`|선택|셀의 글자 family ([참고](/docs/props/cell/text-font))|
-|Cells[{Wrap}]|`boolean`|선택|자동 줄바꿈 여부(default: true)|
-|Cells[{Type}]|`string`|선택|셀타입(Image를 사용해야 하는 경우에만 Img로 설정)|
-|Cells[{ColSpan}]|`number`|선택|가로 병합 셀 개수(default: 1)|
-|Cells[{RowSpan}]|`number`|선택|세로 병합 셀 개수(default: 1)|
-|Cells[{BorderTop}]|`string`|선택|`상단 보더` 굵기,스타일,색상을 구분자 " "로 연결한 문자열  (ex: "1 solid #FF0000")|
-|Cells[{BorderBottom}]|`string`|선택|`하단 보더` 굵기,스타일,색상을 구분자 " "로 연결한 문자열  (ex: "1 solid #FF0000")|
-|Cells[{BorderLeft}]|`string`|선택|`좌측 보더` 굵기,스타일,색상을 구분자 " "로 연결한 문자열  (ex: "1 solid #FF0000")|
-|Cells[{BorderRight}]|`string`|선택|`우측 보더` 굵기,스타일,색상을 구분자 " "로 연결한 문자열  (ex: "1 solid #FF0000")|
+|Height|`number`|Optional|Row height|
+|Cells|`array[object]`|Optional|Content and attribute settings to display in each cell of the row|
+|Cells[{Value}]|`string`|Optional|Content to display in the cell|
+|Cells[{Color}]|`string`|Optional|Cell background color (ex `#FFDDEE`)|
+|Cells[{TextColor}]|`string`|Optional|Cell text color (ex `#446622`)|
+|Cells[{TextSize}]|`number`|Optional|Cell text size|
+|Cells[{TextStyle}]|`number`|Optional|Cell text style ([Reference](/docs/props/cell/text-style))|
+|Cells[{TextFont}]|`string`|Optional|Cell text font family ([Reference](/docs/props/cell/text-font))|
+|Cells[{Wrap}]|`boolean`|Optional|Auto line break setting (default: true)|
+|Cells[{Type}]|`string`|Optional|Cell type (set to Img only when Image is needed)|
+|Cells[{ColSpan}]|`number`|Optional|Number of cells to merge horizontally (default: 1)|
+|Cells[{RowSpan}]|`number`|Optional|Number of cells to merge vertically (default: 1)|
+|Cells[{BorderTop}]|`string`|Optional|`Top border` - string composed of thickness, style, color connected with " " as delimiter
+(ex: "1 solid #FF0000")|
+|Cells[{BorderBottom}]|`string`|Optional|`Bottom border` - string composed of thickness, style, color connected with " " as delimiter
+(ex: "1 solid #FF0000")|
+|Cells[{BorderLeft}]|`string`|Optional|`Left border` - string composed of thickness, style, color connected with " " as delimiter
+(ex: "1 solid #FF0000")|
+|Cells[{BorderRight}]|`string`|Optional|`Right border` - string composed of thickness, style, color connected with " " as delimiter
+(ex: "1 solid #FF0000")|
 
-#### Cells 내에 Border 속성 설정시 주의 사항
+#### Cells Notes when setting Border attribute within
 
-1. 굵기는 px단위가 아닌 1은 가늘게 2는 굵게 표시
+1. Thickness is not in px units; 1 displays thin, 2 displays bold
 
-   스타일은 `solid`,`dashed`,`dotted` 제공 
+   Provides styles: `solid`, `dashed`, `dotted` 
 
-   색상은 hex code로 설정 (ex `#FF00FF`)
-2. 좌우로 붙어있는 셀에 각각 우측보더와 좌측보더를 다르게 설정시 우측셀에 설정한 좌측 보더값이 적용됨
+   Color is set with hex code (ex `#FF00FF`)
+2. When adjacent left-right cells have different right border and left border settings, the left border value set on the right cell is applied
 
-   상하로 붙어있는 셀에 각각 하단보더와 상단보더를 다르게 설정시 하단셀에 설정하 상단 보더값이 적용됨
-3. RowSpan,ColSpan속성으로 통해 병합 된 셀이라도 각 셀별로 보더 설정이 필요함
+   When adjacent top-bottom cells have different bottom border and top border settings, the top border value set on the bottom cell is applied
+3. Even for cells merged through RowSpan,ColSpan properties, border settings are required for each individual cell
 
 
 
@@ -171,34 +197,34 @@ void exportData( param );
 
 ### Example
 ```javascript
-// xlsx 확장자로 다운로드, 보여지는 행만 다운로드.
-sheet.exportData({fileName: "재고리스트.xlsx",downRows: "Visible"});
+// Download with xlsx extension, downloading only visible rows.
+sheet.exportData({fileName: "InventoryList.xlsx",downRows: "Visible"});
 
-// txt 확장자로 다운로드, 열 구분자 ',' 로 변경.
+// Download with txt extension, changing column delimiter to ','.
 var param = {fileName: "exportTEXT.txt", colDelim: ","};
 sheet.exportData(param);
 
-// csv 확장자로 다운로드, 합계행 다운받지 않음.
+// Download with csv extension, without downloading the total row.
 var param = {fileName: "exportCSV.csv", downSum: 0}
 sheet.exportData(param);
 ```
 
 <!--!
-### [`비공개`] Example
+### [`Private`] Example
 ```js
-// 임의의 데이터
+// Temporary data
 var tmpData = [
   {
     SEQ: 1,
-    TextData: '박만우',
+    TextData: 'Park Man-woo',
     ComboData: '02',
     ISO: 'AWG',
-    Currency: '아루바 플로린',
+    Currency: 'Aruban Florin',
     IntData: 1120,
     FloatData: 115.25,
     DateData: '20100922',
     PhoneNo: '0425741245',
-    LinesData: '서해상에 위치한 고기압의 영향을 받겠습니다.',
+    LinesData: 'Will be affected by a high pressure system located in the West Sea.',
     Userformat: '',
     ImageData: '|../assets/imgs/fe.jpg|||||',
     PassData: '75646',
@@ -207,10 +233,10 @@ var tmpData = [
   },
   {
     SEQ: 3,
-    TextData: '최호건',
+    TextData: 'Choi Ho-geon',
     ComboData: '01',
     ISO: 'GBP',
-    Currency: '영국 파운드',
+    Currency: 'British Pound',
     IntData: 65,
     FloatData: 154.36,
     DateData: '',
@@ -224,46 +250,46 @@ var tmpData = [
   }
 ];
 
-// 임의의 데이터를 이용한 엑셀 다운로드
+// Excel download using temporary data
 sheet.exportData({ directExcelData: tmpData });
 ```
 !-->
 
 ```javascript
-//exHead 사용 예제
+//exHead usage example
 var param = {
           sheetDesign: 1,
           merge: 1,
-          fileName: '22년도_근무외수당.xlsx'
+          fileName: '2022_OvertimeAllowance.xlsx'
         };
 
         param["exHead"] = [
-          { // 첫번째 행
+          { // First row
             Height: 30,
             Cells:[
               {
-                // 첫번째 셀에 이미지 설정
+                // First cell image setting
                 Type:"Img",
                 Value:"|/assets/imgs/logo.png|78|28"
               },
-              {},{},{},{},{},{},{}, //7칸 빈셀
+              {},{},{},{},{},{},{}, //7 empty cells
               {
                 Type:"Text",
-                Value:"(취급주의)대외비",
+                Value:"(Handling Note) Confidential",
                 TextColor:"#FF0000",
                 Wrap: 0,
                 TextSize: 14
               }
             ]
-          }, 
-          { // 두번째 행
+          },
+          { // Second row
             Height: 40,
             Cells:[
-              {}, //첫칸 빈셀
+              {}, //First empty cell
               {
                 Type:"Text",
                 Align: "Center",
-                Value: "2022년 근무 외 수당 청구 내역",
+                Value: "2022 Overtime Allowance Claim Details",
                 Color:"#DEDEDE",
                 TextSize: 45,
                 TextStyle: 1,
@@ -303,11 +329,11 @@ var param = {
               }
             ]
           },
-          {}, // 3번째 행 (빈행)
-          {// 4번째 행
+          {}, // 3rd row (empty row)
+          {// 4th row
             Cells:[
               {
-                Value:"부서",
+                Value:"Department",
                 Align:"Right",
                 Color:"#DEDEDE",
                 BorderTop:"1 solid #222222",
@@ -316,7 +342,7 @@ var param = {
                 BorderLeft:"1 solid #222222",
               },{
                 ColSpan: 3,
-                Value:"총무부",
+                Value:"General Affairs Dept.",
                 Align:"Left",
                 BorderTop:"1 solid #222222",
                 BorderRight:"1 solid #222222",
@@ -334,10 +360,10 @@ var param = {
               }
             ]
           },
-          {// 5번째 행
+          {// 5th row
             Cells:[
               {
-                Value:"기간",
+                Value:"Period",
                 Align:"Right",
                 Color:"#DEDEDE",
                 BorderTop:"1 solid #222222",
@@ -366,12 +392,12 @@ var param = {
           }
         ];
         param["exFoot"] = [
-          {}, //첫번째 행 (빈행)
-          { 
+          {}, //First row (empty row)
+          {
             Height:30,
             Cells:[
               {
-                Value: "출력: 2023-06-23 홍길동",
+                Value: "Output: 2023-06-23 John Doe",
                 Align: "Left",
                 Wrap: 0
               }
@@ -384,45 +410,45 @@ var param = {
 
 ```
 ![exHead,exFoot](/assets/imgs/exportDataExHeadExFoot.png "exHead,exFoot")
-<!-- IMAGE: 스크린샷/예시 이미지 - exHead,exFoot -->
+<!-- IMAGE: Screenshot/Example Image - exHead,exFoot -->
 
 
-### `downCols, downRows` 사용시 `merge` 적용 정리
+### `downCols, downRows` When using `merge` - summary
 
-| downCols |화면과 동일하게 컬럼 설정 | 화면과 다르게 컬럼 설정 |
+| downCols |Configure columns same as screen | Configure columns different from screen |
 | ------ | ------ | ------ |
-| downRows 사용| X |  X |
-| downRows 사용 안함 | O | 아래 설명 참고|
+| downRows used| X |  X |
+| downRows Not used | O | See description below|
 
-merge 옵션을 적용해 downCols를 사용하시려면 downCols에 머지가 이뤄진 컬럼을 **순서대로** **모두** 포함하고 있어야만 합니다. **Visible: 0이 설정된 컬럼이 있다면 해당 컬럼도 반드시 downCols에 포함해둬야만 합니다.** 
-
-
-머지가 이뤄진 컬럼 중 특정 컬럼이 빠지거나, 머지가 이뤄진 컬럼을 모두 포함하고 있더라도 다운로드받는 컬럼의 순서가 다르면 엑셀 다운시 머지가 정상적으로 이뤄지지 않습니다. 
+To use downCols with the merge option, downCols must contain all merged columns **in order** and **all** must be included. **If Visible: 0 columns are set, those columns must also be included in downCols.** 
 
 
-
-
-
-![downCols사용시 머지](/assets/imgs/downcols_merge.png "downCols사용시 머지")
-<!-- IMAGE: 스크린샷/예시 이미지 - downCols사용시 머지 -->
+If a specific column is missing from the merged columns, or even if all merged columns are included but the download column order differs, merge will not be properly applied when downloading to Excel. 
 
 
 
 
-이미지로 예를 들자면,  "머지 컬럼" 컬럼을 온전히 머지가 적용된 채로 다운로드받고 싶다면 downCols: "컬럼1|컬럼2|컬럼3|컬럼4"와 같이 설정하셔야 합니다. 
+
+![downCols when using merge](/assets/imgs/downcols_merge.png "downCols when using merge")
+<!-- IMAGE: Screenshot/Example Image - downCols when using merge -->
 
 
-downCols: "컬럼2|컬럼3|컬럼4"와 같이 특정 컬럼을 제외하거나 downCols: "컬럼4|컬럼1|컬럼3|컬럼2"와 같이 컬럼 순서를 바꾸시면 머지가 온전히 적용되지 않습니다. 
 
-### 템플릿 파일을 활용한 엑셀 파일 다운로드 
 
-`tempFile` 옵션은 미리 서버에 템플릿을 준비해둔 뒤, 해당 템플릿에 시트 데이터만 삽입해 엑셀 파일을 다운로드하고 싶으실 때 사용하는 옵션입니다.  
+To explain with the image, if you want to download the "merged columns" with merge fully applied, you should configure as downCols: "Column1|Column2|Column3|Column4". 
 
-템플릿 기능을 사용하시려면 `Down2Excel.jsp`또는 `Down2Excel.aspx`에 미리 `TempRoot` 설정을 이용해 템플릿 파일 폴더 위치를 지정해주셔야 됩니다. 
 
-`startRow`, `startCol` 옵션으로 템플릿 파일에서 데이터를 작성하기 시작할 위치를 지정하실 수 있으며, `sheetNo` 옵션으로 템플릿 파일에서 데이터를 작성할 워크시트를 지정하실 수 있습니다. 
+If you exclude a specific column like downCols: "Column2|Column3|Column4", or change the column order like downCols: "Column4|Column1|Column3|Column2", merge will not be fully applied.
 
-더불어 `tempFile` 옵션을 이용해 엑셀 파일을 다운로드받는 경우, 디자인은 온전히 템플릿 파일에 설정된 디자인을 따라가게 되며 `excelFontSize`, `excelRowHeight`, `sheetDesign` 등 옵션은 무시됩니다.
+### Download Excel file using template file
+
+`tempFile` option is used when you want to prepare a template on the server in advance, then download an Excel file by inserting only sheet data into that template.  
+
+To use the template feature, `Down2Excel.jsp` or `Down2Excel.aspx` must have `TempRoot` setting configured to specify the template file folder location. 
+
+`startRow`, `startCol` options to specify the starting position for writing data in the template file, and `sheetNo` option to specify the worksheet for writing data in the template file. 
+
+Additionally, when downloading an Excel file using the `tempFile` option, the design entirely follows the design set in the template file, and options such as `excelFontSize`, `excelRowHeight`, `sheetDesign` etc. are ignored.
 
 
 ### Read More
@@ -439,23 +465,23 @@ downCols: "컬럼2|컬럼3|컬럼4"와 같이 특정 컬럼을 제외하거나 d
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.6|`fileName`, `sheetName`, `downRows`, `downCols`, `downRows`, `downTreeHide`, `downHeader`, `sheetDesign`, `titleText`, `userMerge`, `excelRowHeight`, `excelHeaderRowHeight`, `wordWrap`, `comboValidation`, `rowDelim`, `colDelim`, `downSum` 기능 추가|
-|core|8.0.0.20|파일 형식 내용 추가|
-|core|8.0.0.21|`merge`, `allTypeToText`, `checkBoxOnValue`, `checkBoxOffValue`, `excelFontSize`, `excludeFooterRow`, `numberTypeToText` (xlsx 에서만 지원)|
-|core|8.0.0.29|`excelFontFamily` 기능 추가 (xlsx 에서만 지원)|
-|core|8.1.0.30|`exHead`,`exFoot` 기능 추가 (xlsx 에서만 지원)|
-|core|8.1.0.39|`excelRowHeight : -1` 설정 추가|
-|core|8.1.0.41|`sheetDesign : 4` 설정 추가|
-|core|8.1.0.83|`appendPrevSheet` 설정 추가 (exportDataBuffer 사용시에만 사용 가능)|
-|core|8.2.0.5|`onlyHeaderMerge` 설정 추가|
-|core|8.2.0.11|`hiddenColumn` 설정 추가|
-|core|8.2.0.25|`freezePane` 설정 추가|
-|core|8.3.0.16|`numberFormatMode` 설정 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.6|`fileName`, `sheetName`, `downRows`, `downCols`, `downRows`, `downTreeHide`, `downHeader`, `sheetDesign`, `titleText`, `userMerge`, `excelRowHeight`, `excelHeaderRowHeight`, `wordWrap`, `comboValidation`, `rowDelim`, `colDelim`, `downSum` Feature added|
+|core|8.0.0.20|File format content added|
+|core|8.0.0.21|`merge`, `allTypeToText`, `checkBoxOnValue`, `checkBoxOffValue`, `excelFontSize`, `excludeFooterRow`, `numberTypeToText` (xlsx only)|
+|core|8.0.0.29|`excelFontFamily` Feature added (xlsx only)|
+|core|8.1.0.30|`exHead`,`exFoot` Feature added (xlsx only)|
+|core|8.1.0.39|`excelRowHeight : -1` setting added|
+|core|8.1.0.41|`sheetDesign : 4` setting added|
+|core|8.1.0.83|`appendPrevSheet` setting added (available only when using exportDataBuffer)|
+|core|8.2.0.5|`onlyHeaderMerge` setting added|
+|core|8.2.0.11|`hiddenColumn` setting added|
+|core|8.2.0.25|`freezePane` setting added|
+|core|8.3.0.16|`numberFormatMode` setting added|
 <!--!
-|`[비공개]` core|8.0.0.22|`downCombo` 기능 추가|
-|`[비공개]` core|8.1.0.4|`excelPage.paperSize`, `excelPage.orientation`, `excelPage.marginLeft`, `excelPage.marginRight`, `excelPage.marginTop`, `excelPage.marginBottom`, `excelPage.marginHeader`, `excelPage.marginFooter` 기능 추가|
-|`[비공개]` core|8.1.0.6|`directExcelData` 기능 추가|
-|`[비공개]` core|8.1.0.40|`requiredMark` 기능 추가|
-|`[비공개]` core|8.1.0.73|`excelPage.fitToWidth`, `excelPage.fitToHeight` 기능 추가|
+|`[Private]` core|8.0.0.22|`downCombo` Feature added|
+|`[Private]` core|8.1.0.4|`excelPage.paperSize`, `excelPage.orientation`, `excelPage.marginLeft`, `excelPage.marginRight`, `excelPage.marginTop`, `excelPage.marginBottom`, `excelPage.marginHeader`, `excelPage.marginFooter` Feature added|
+|`[Private]` core|8.1.0.6|`directExcelData` Feature added|
+|`[Private]` core|8.1.0.40|`requiredMark` Feature added|
+|`[Private]` core|8.1.0.73|`excelPage.fitToWidth`, `excelPage.fitToHeight` Feature added|
 !-->

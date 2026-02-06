@@ -2,13 +2,12 @@
 KEY: allCheckIgnoreEvent
 KIND: column-property
 PATH: props/col/all-check-ignore-event
-ALIAS: 헤더, 전체, 체크, 언체크, 시에
-ALIAS_EN: all, check, ignore, event, header, total, checkbox
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/all-check-ignore-event
+ALIAS_EN: option, whether, trigger, onafterchange, event, checking, unchecking, checkboxes
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/all-check-ignore-event
 ---
 # AllCheckIgnoreEvent ***(col)***
 
-> Type: "Bool" 헤더 전체 체크/언체크 시에 `onAfterChange` 이벤트를 호출할지 말지 설정하는 옵션입니다. 
+> An option to set whether to trigger the `onAfterChange` event when checking/unchecking all checkboxes in the header for Type: "Bool".
 
 ### Type
 `boolean`
@@ -16,15 +15,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/all-check
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|`onAfterChange` 이벤트가 발생합니다. (`default`)|
-|`1(true)`|`onAfterChange` 이벤트가 발생하지 않습니다.|
+|`0(false)`|The `onAfterChange` event is triggered. (`default`)|
+|`1(true)`|The `onAfterChange` event is not triggered.|
 
 ### Example
 ```javascript
 options.Cols = [
     ...
-    //헤더의 전체 체크박스를 클릭할시 onAfterChange이벤트가 발생하지 않습니다.
-    {Header: {Value: "주관부서", HeaderCheck: 1}, Type: "Bool", Width: 80, Align: "Center", Name:"ORG_NM", AllCheckIgnoreEvent:1}
+    // The onAfterChange event will not be triggered when clicking the select-all checkbox in the header.
+    {Header: {Value: "Department", HeaderCheck: 1}, Type: "Bool", Width: 80, Align: "Center", Name:"ORG_NM", AllCheckIgnoreEvent:1}
     ...
 ];
 ```
@@ -40,4 +39,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.15|기능 추가|
+|core|8.0.0.15|Feature added|

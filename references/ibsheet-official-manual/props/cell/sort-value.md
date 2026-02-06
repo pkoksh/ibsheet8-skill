@@ -2,17 +2,16 @@
 KEY: sortValue
 KIND: cell-property
 PATH: props/cell/sort-value
-ALIAS: 셀의, 원래, 대신, 소팅시, 사용할
-ALIAS_EN: sort, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/sort-value
+ALIAS_EN: value, sorting, instead, cell, original, sortvalue
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/sort-value
 ---
 # SortValue ***(cell)***
 
-> 셀의 원래 값 대신 소팅시 사용할 값을 설정합니다.
+> Sets a value to be used for sorting instead of the cell's original value.
 
-> 특히 타입이 Html이나 버튼 같이 편집이 불가능한 셀에 유용하게 사용하실 수 있습니다.
+> This is particularly useful for non-editable cells such as Html type or button cells.
 
-> 이 속성은 그룹 기능 사용 시 그룹핑 기준으로 사용 됩니다.
+> This property is also used as the grouping criterion when using the group feature.
 
 
 ### Type
@@ -21,13 +20,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/sort-val
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|소팅이 이루어질때 사용될 기준 문자|
+|`string`|Reference string to be used when sorting|
 
 
 ### Example
 ```javascript
-//조회 데이터 내에서 속성 적용  (열이름: CLS)
-//특정 셀은 오름차순 소팅시 최상단에 올라오게 설정
+// Apply property within loaded data (column name: CLS)
+// Set a specific cell to appear at the top when sorting in ascending order
 {
     data:[
         {... ,"CLSSortValue": "00000" , ...}
@@ -45,4 +44,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/sort-val
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

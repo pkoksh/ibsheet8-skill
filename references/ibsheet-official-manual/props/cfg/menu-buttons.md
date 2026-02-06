@@ -2,17 +2,16 @@
 KEY: menuButtons
 KIND: config-property
 PATH: props/cfg/menu-buttons
-ALIAS: 기존의, 아무설정, 없이, 타입의, 포함
-ALIAS_EN: menu, buttons
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/menu-buttons
+ALIAS_EN: default, without, configuration, menu, buttons, order, enum, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/menu-buttons
 ---
 # MenuButtons ***(cfg)***
 
-> 기존의 아무설정 없이 [Enum](/docs/props/col/enum) 타입의 셀([Defaults](/docs/props/col/defaults) 포함)에서 `Menu.Buttons`의 순서는 `Clear, Ok` 순서로만 만들어지고 있다. 
+> By default, without any configuration, the `Menu.Buttons` order in [Enum](/docs/props/col/enum) type cells (including [Defaults](/docs/props/col/defaults)) is created only in `Clear, Ok` order. 
 
-> [Enum](/docs/props/col/enum) 타입의 셀([Defaults](/docs/props/col/defaults) 포함)에서 [Menu](/docs/appx/menu) 하단의 `Buttons`의 순서를 변경할 수 있다. 
+> You can change the order of `Buttons` at the bottom of the [Menu](/docs/appx/menu) in [Enum](/docs/props/col/enum) type cells (including [Defaults](/docs/props/col/defaults)). 
 
-> `Type`은 배열형태로 지원한다.
+> The `Type` is supported as an array format.
 
 ### Type
 `array`
@@ -20,17 +19,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/menu-butt
 ### Example
 ```javascript
 options.Cfg = {
-    MenuButtons: ["Ok", "Clear"],              // 버튼의 순서를 Ok, Clear 순으로 변경한다.
+    MenuButtons: ["Ok", "Clear"],              // Change the button order to Ok, Clear.
     ...
 };
 options.Col = [
     {
-        Header: '콤보(Enum)',
+        Header: 'Combo(Enum)',
         Type: 'Enum',
         Name: 'ComboData',
         Width: 100,
         Align: 'Right',
-        Enum: '|대기|진행중|완료',
+        Enum: '|Pending|In Progress|Completed',
         EnumKeys: '|01|02|03',
         Range: true,
      }
@@ -47,4 +46,4 @@ options.Col = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

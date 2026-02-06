@@ -2,14 +2,14 @@
 KEY: setString
 KIND: method
 PATH: funcs/core/set-string
-ALIAS: sheet.setString, setString(), 타입이, 셀에, 대해서, 포맷이, 적용된
-ALIAS_EN: set, string
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-string
+ALIAS: sheet.setString, setString()
+ALIAS_EN: modifies, date, type, cell, value, format, applied, string
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-string
 ---
 # setString ***(method)***
-> 타입이 `Date`인 셀에 대해서 포맷이 적용된 날짜 문자열로 셀의 값을 수정합니다.
+> Modifies a `Date` type cell's value with a format-applied date string.
 
-> [EnumKeys](/docs/props/cell/enum-keys)가 정의되어 있는 `Enum, Radio` 타입인 셀은 지정된 `EnumKeys`값으로 저장됩니다.
+> For `Enum, Radio` type cells with [EnumKeys](/docs/props/cell/enum-keys) defined, saves with the specified `EnumKeys` value.
 
 
 ### Syntax
@@ -22,13 +22,13 @@ void setString( row, col, val, render);
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
-|val |`string`|필수|입력값(셀 타입에 맞는 값) |
-|render |`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
+|val |`string`|Required|Input value (value matching the cell type) |
+|render |`boolean`|Optional|whether immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+`0(false)`:Not reflected
+`1(true)`:Immediately reflected (`default`)|
 
 ### Return Value
 ***none***
@@ -36,7 +36,7 @@ void setString( row, col, val, render);
 ### Example
 ```javascript
 var r5 = sheet.getRowById("AR5");
-//AR5 행에 값을 입력
+//AR5 row value input
 sheet.setString( r5, "StartDate", "2016/12/23" );
 ```
 
@@ -52,5 +52,5 @@ sheet.setString( r5, "StartDate", "2016/12/23" );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.3|Enum 타입, Radio 타입의 Enum의 값을 EnumKeys와 매칭하는 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.3|Enum type, Radio type Enum value and EnumKeys matching Feature added|

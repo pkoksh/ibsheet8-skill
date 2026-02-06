@@ -2,121 +2,120 @@
 KEY: format
 KIND: appendix
 PATH: appx/format
-ALIAS: 데이터가, 화면에, 보여질, 형식을, 정의합니다
-ALIAS_EN: format
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/format
+ALIAS_EN: defines, format, data, displayed, screen, appendix
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/format
 ---
 # Format ***(appendix)***
-> 데이터가 화면에 보여질 형식을 정의합니다.
+> Defines the format in which data is displayed on screen.
 
-> 가령 Type이 "Int"이고 Format이 "#,###원"인 경우, 실제값이 15000이라면 시트에는 **15,000원** 으로 표시됩니다.
+> For example, if the Type is "Int" and the Format is "#,###won", when the actual value is 15000, the sheet displays **15,000won**.
 
-> ***[타입](./type)별로 정의되는 구문이 다르며***, 실제 셀값은 변경되지 않습니다.(저장작업을 통해 서버로 전송시 실제 값(포맷이 적용되지 않은 값)이 전송됩니다.) 
+> ***The syntax differs depending on the [type](./type)***, and the actual cell value does not change. (When transmitting to the server through save operations, the actual value (without format applied) is sent.) 
 
->`"결과: #,###원"처럼 Format을 사용하며 ':' 등 특수문자를 사용하시는 경우 특수문자 앞에 '\\'를 붙여주셔야 합니다.`
+>`When using special characters like ':' in Format such as "Result: #,###won", you must add '\\' before the special character.`
 ---
 
-## 1. 타입이 Text, Lines 인 경우
+## 1. When Type is Text or Lines
 
-### 구분자로 연결된 문자열 형식으로 실제 값의 앞,뒤에 붙이고 싶은 문자를 설정하거나,원래 문자열 중 일부 글자를 다른 글자로 변경할수 있습니다. Object형식을 사용하는 경우에는 Key:Value 형식으로 실제 값과 그에 대해 보여질 값으로 설정 하실 수 있습니다.
+### You can set characters to prepend or append to the actual value, or replace some characters in the original string with other characters, using a delimiter-separated string format. When using the Object format, you can set it as Key:Value pairs with the actual value and the display value.
 
-**1) 구분자 활용 방식**
-  * 첫문자를 구분자로 사용하여 구분된 설정 값들의 나열로 정의됩니다.
+**1) Delimiter-based method**
+  * The first character is used as a delimiter, and the settings are listed separated by this delimiter.
 
-  * 구분자로 사용된 문자는 설정할 내용에 포함되선 안됩니다.
+  * The character used as the delimiter must not be included in the setting contents.
 
 ### Syntax
 ```javascript
-// 구분자 활용 방식 '|'이 구분자
+// Delimiter-based method, '|' is the delimiter
 Format: "|LetterType|Prefix|Postfix|Search|Flags|Replace"
 ```
 
 |Value|Description|
 |---|---|
-|LetterType|대소문자를 구분할지 여부 및 기타 설정
-0 : 대소문자 구분 없음
-1 : 영문을 소문자로 표현
-2 : 영문을 대문자로 표현
-3 : 각 지역 문자의 소문자 사용
-4 : 각 지역 문자의 대문자 사용|
-|Prefix|셀 값 앞에 붙일 문자열|
-|Postfix|셀 값 뒤에 붙일 문자열|
-|Search|정규 표현식으로 찾을 문자열로, Replace 구문에 있는 값으로 대체되어 보일 문자열|
-|Flags|자바스크립트 정규식의 Flag(i,g,m 사용 가능)
-*i : 대소문자 구분 안함, g : 처음부터 끝까지 모두 변경 , m : 줄넘김 포함 검색*|
-|Replace|Search 구문으로 찾은 문자열을 대체할 문자열|
+|LetterType|Whether to distinguish case and other settings
+0 : No case distinction
+1 : Display English in lowercase
+2 : Display English in uppercase
+3 : Use lowercase of each locale's characters
+4 : Use uppercase of each locale's characters|
+|Prefix|String to prepend to the cell value|
+|Postfix|String to append to the cell value|
+|Search|String to find using regular expression, which will be replaced by the value in the Replace clause|
+|Flags|JavaScript regex flags (i, g, m available)
+*i : case insensitive, g : replace all from start to end, m : search including line breaks*|
+|Replace|String to replace the string found by the Search clause|
 
 ### Example
-*열 설정*
+*Column configuration*
 ```javascript
 options.Cols = [
     {
         Name:"sTitle",
         Type:"Text",
-        //셀의 값을 모두 대문자로 보여줍니다. 또한 앞에 '☜☜☜', 뒤에 '☞☞☞' 문자를 추가하고, 셀 값에 있는 "=" 문자열을 ":::" 로 대체합니다.
-        Format:"|2|☜☜☜|☞☞☞|=|ig|:::"
+        //Display all cell values in uppercase. Also prepend '<<<', append '>>>', and replace "=" characters in the cell value with ":::".
+        Format:"|2|<<<|>>>|=|ig|:::"
     },
     ...
 ]
 ```
-*조회 데이터*
+*Loaded data*
 ```json
 {"Data":[
-    {... "sTitle":"붉은 악마=Red Devils", ...}
+    {... "sTitle":"Red Devils=Red Devils", ...}
 ]}
 ```
-*시트내에 보여지는 데이터*
+*Data displayed in the sheet*
 
-![보여지는 데이터](/assets/imgs/textFormat2.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->
-
-
+![Displayed data](/assets/imgs/textFormat2.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->
 
 
 
-**2) 객체 방식**
-  * JSON 형태로 (문자열도 가능), 실제값과 화면에 보여질 문자열의 쌍으로 구성됩니다.
-  * 영문자를 사용하는 경우 대소문자를 **반드시** 구분해야하며, 화면에 보여질 값에 HTML 코드를 사용할 수 있습니다.
+
+
+**2) Object method**
+  * In JSON format (strings are also possible), composed of pairs of actual values and display strings.
+  * When using English characters, case **must** be distinguished, and HTML code can be used in the display value.
 
 ### Syntax
 ```javascript
-// 객체 방식
+// Object method
 Format: "{'Key1':'Value1', 'Key2':'Value2', 'key3':'Value3' ... }"
 ```
 
-**[구분자 활용 방식]**
+**[Delimiter-based method]**
 
 |Value|Description|
 |---|---|
-|Key|셀의 실제 값(서버에서 조회되거나 저장시 서버로 전송됨)|
-|Value|Data에 설정된 값을 대체할 문자열(화면에 보여질 문자)|
+|Key|Actual cell value (loaded from or sent to the server)|
+|Value|String to replace the value set in Data (displayed on screen)|
 
 ### Example
-*열 설정*
+*Column configuration*
 ```javascript
 options.Cols = [
     {
         Name:"sCountry",
         Type:"Text",
-        // 셀 값이 A인 경우 한국으로, B인 경우 일본으로, C인 경우 중국으로 대체되어 화면에 보입니다.
-        Format:"{'A':'<b>한국</b>','B':'일본','C':'중국'}"
+        // When the cell value is A, it displays as Korea; B as Japan; C as China on screen.
+        Format:"{'A':'<b>Korea</b>','B':'Japan','C':'China'}"
     }
     ...
 ]
 ```
-*조회 데이터*
+*Loaded data*
 ```json
 {"Data":[
     {... "sCountry":"A", ...}
 ]}
 ```
-*실제 보여지는 데이터*
+*Actual displayed data*
 
-![보여지는 데이터](/assets/imgs/textFormat4.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->
+![Displayed data](/assets/imgs/textFormat4.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->
 
 
-***Text타입에서 주민등록번호나, 카드번호와 같이 숫자와 구분자로 연결된 형식의 Format을 적용하고자 하실 경우에는 [CustomFormat](/docs/props/col/custom-format)속성을 사용하세요.***
+***For applying formats like resident registration numbers or card numbers with digits connected by delimiters in Text type, please use the [CustomFormat](/docs/props/col/custom-format) property.***
 
 
 
@@ -127,80 +126,80 @@ options.Cols = [
 
 
 ---
-## 2. 타입이 Date 인 경우
-* 예약어의 조합
-  * y(년), M(월), d(일), H(시간), m(분), s(초)등의 예약어와 예약어를 제외한 문자를 조합해서 사용 가능합니다.
-  * 포맷이 비어있는 경우 yyyy/MM/dd 형식을 기본값으로 사용합니다.
-  * 년도는 yyyy(4자리 표현), yy(마지막 2자리 표현. 값이 2018이면 18, 2008이면 08로 표시), y(마지막 1~2자리 표현. 값이 2018이면 18, 2008이면 8로 표시)가 사용가능합니다.
-  * 나머지 예약어는 2자리 표현과 1,2자리 표현을 사용할 수 있습니다. 예를 들어 월의 경우 MM(2자리 표현. 값이 12이면 12, 08이면 08로 표시), M(1~2자리 표현. 값이 12이면 12, 08이면 8로 표시)이 사용 가능합니다.
+## 2. When Type is Date
+* Combination of reserved words
+  * Can be used by combining reserved words such as y(year), M(month), d(day), H(hour), m(minute), s(second) with non-reserved characters.
+  * When the format is empty, the yyyy/MM/dd format is used as default.
+  * For year, yyyy (4-digit display), yy (last 2-digit display: 2018 shows as 18, 2008 shows as 08), y (1-2 digit display: 2018 shows as 18, 2008 shows as 8) are available.
+  * Other reserved words can use 2-digit display and 1-2 digit display. For example, for month, MM (2-digit display: 12 shows as 12, 08 shows as 08) and M (1-2 digit display: 12 shows as 12, 08 shows as 8) are available.
 
 <!--!
-  * `[비공개 설명]` H는 24시간제를, h는 12시간제를 의미합니다.
+  * `[Private description]` H means 24-hour format, h means 12-hour format.
 !-->
 <!--!
-* 메시지 파일에 따른 자동 포맷 설정 기능 
-  * d, h 등의 한 자리 예약어를 사용해서 메시지 파일에 따라 자동적으로 컬럼 포맷을 설정하도록 처리하실 수 있습니다. 
+* Automatic format setting based on message file
+  * You can use single-character reserved words like d, h to automatically set column format based on the message file. 
 
 
 |Value|Description|
 |---|---|
-|m|월, 일 데이터를 포함해서 포맷 형성("M/d")|
-|d|년, 월, 일 데이터를 포함해서 포맷 형성("M/d/yyyy")|
-|h|년, 월, 일, 시, 분 데이터를 포함해서 포맷 형성("M/d/yyyy H:mm")|
-|t|시, 분 데이터를 포함해서 포맷 형성("H:mm")|
-|T|시, 분, 초 데이터를 포함해서 포맷 형성("H:mm:ss")|
-|Y|년, 월 데이터에 문자 포함해서 포맷 형성("4월 2013")|
-|D|년, 월, 일 데이터에 문자 포함해서 포맷 형성("23일 4월 2013")|
-|l|년, 월, 일 데이터에 문자 포함하고, 시, 분 데이터 덧붙여 포맷 형성("23일 4월 2013 9:10")|
-|L|년, 월, 일 데이터에 문자 포함하고, 시, 분, 초 데이터 덧붙여 포맷 형성("23일 4월 2013 9:10:20")|
+|m|Format including month and day data ("M/d")|
+|d|Format including year, month, and day data ("M/d/yyyy")|
+|h|Format including year, month, day, hour, and minute data ("M/d/yyyy H:mm")|
+|t|Format including hour and minute data ("H:mm")|
+|T|Format including hour, minute, and second data ("H:mm:ss")|
+|Y|Format including year and month data with text ("April 2013")|
+|D|Format including year, month, and day data with text ("23 April 2013")|
+|l|Format including year, month, and day data with text, plus hour and minute data ("23 April 2013 9:10")|
+|L|Format including year, month, and day data with text, plus hour, minute, and second data ("23 April 2013 9:10:20")|
 !-->
 ### Syntax
 ```javascript
-    // 예약어의 조합
+    // Combination of reserved words
     Format: "yyyy.MM.dd"
 ```
 
 ### Example
-*열 설정*
+*Column configuration*
 ```javascript
     options.Cols = [
         {
             "Name" : "startDate",
             "Type" : "Date",
-            "Format" : "yyyy.MM.dd",    //화면에 보이는 데이터의 형식
-            "EditFormat" : "dd-MM-yyyy",//편집시 사용자에게 보여질 데이터 형식
-            "DataFormat" : "yyyyMMdd"   //서버에서 데이터를 받거나 보낼때 데이터 형식
+            "Format" : "yyyy.MM.dd",    //Format of data displayed on screen
+            "EditFormat" : "dd-MM-yyyy",//Data format shown to user during editing
+            "DataFormat" : "yyyyMMdd"   //Data format when receiving or sending data to the server
         }
         ...
     ]
 ```
-*조회 데이터*
+*Loaded data*
 ```json
 {"Data":[
-    {... "startDate":"20190725", ...} //2019년 7월 25일
+    {... "startDate":"20190725", ...} //July 25, 2019
 ]}
 ```
-*실제 보여지는 데이터*
+*Actual displayed data*
 
-![보여지는 데이터](/assets/imgs/dateFormat1.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->
+![Displayed data](/assets/imgs/dateFormat1.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->
 
-*편집시 보여지는 데이터*
+*Data displayed during editing*
 
-![편집시 보여지는 데이터](/assets/imgs/dateFormat2.png "편집시 보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 편집시 보여지는 데이터 -->
-
-
-***Date타입에서는 [DataFormat](/docs/props/col/data-format), [EditFormat](/docs/props/col/edit-format) 속성을 통해 서버에서 갖고올 데이터 형식이나 편집시 사용자에게 보여질 형식도 설정할 수 있습니다.***
+![Data displayed during editing](/assets/imgs/dateFormat2.png "Data displayed during editing")
+<!-- IMAGE: Screenshot/Example Image - Data displayed during editing -->
 
 
-***Date타입과 그에 따른 포맷들(Format,EditFormat,DateFormat)을 [Extend](/docs/props/col/extend) 속성을 통해 한번에 정의할 수 있습니다.***
-*Extend:IB_Preset 사용 설정*
+***In Date type, you can also set the data format received from the server or the format shown to users during editing through [DataFormat](/docs/props/col/data-format) and [EditFormat](/docs/props/col/edit-format) properties.***
+
+
+***Date type and its related formats (Format, EditFormat, DateFormat) can be defined all at once through the [Extend](/docs/props/col/extend) property.***
+*Extend:IB_Preset usage configuration*
 ```javascript
     options.Cols = [
         {
             "Name" : "startDate",
-            "Extend" : IB_Preset.YMD // Type, Format, EditFormat등이 미리 정의된 변수 사용
+            "Extend" : IB_Preset.YMD // Uses a variable with pre-defined Type, Format, EditFormat, etc.
         }
         ...
     ]
@@ -214,54 +213,54 @@ options.Cols = [
 
 
 ---
-## 3. 타입이 Int, Float 인 경우
-* 예약어의 조합
-  * "0" : 값이 없는 경우 0을 기본값으로 채웁니다.
-  * "#" : 값이 있을때만 표현됩니다.
-  * "%" : 값에 100을 곱한 값이 표현됩니다.
+## 3. When Type is Int or Float
+* Combination of reserved words
+  * "0" : Fills with 0 as default when there is no value.
+  * "#" : Only displayed when there is a value.
+  * "%" : Displays the value multiplied by 100.
 
-  %는 #또는 0과 같이 사용해야합니다. ex: "#,##0.##%"
+  % must be used with # or 0. ex: "#,##0.##%"
 
-  100을 곱한 계산값이 아닌 원래값의 뒤에 "%"기호만 추가하고자 하실 때는,`"#,###\\%"` 로 설정하시면 됩니다.
+  When you want to just add the "%" symbol after the original value without multiplying by 100, set it as `"#,###\\%"`.
 
-  위의 예약어와 예약어를 제외한 문자를 조합해서 사용 가능합니다. ex:"$ #,##0.00"
+  The above reserved words can be combined with non-reserved characters. ex:"$ #,##0.00"
 
-`;(세미콜론)`으로 구분해서 값이 양수, 음수, 0일 때에 따라 화면에 보일 형식을 다르게 설정할 수 있습니다.
+  By separating with `;(semicolon)`, you can set different display formats for positive, negative, and 0 values.
 
-<b>'_', 'e', '8', '?', '*' '@'에 해당하는 문자는 사용하시려면 반드시 문자 앞에 `"\\"`을 덧붙여주셔야 합니다. </b> 
+<b>For characters '_', 'e', '8', '?', '*' '@', you must prefix them with `"\\"`. </b> 
 
 
-  <mark>Type이 "Int"인 컬럼은 "#,##0", "Float"인 컬럼은 "#,##0.######"를 기본 포멧으로 갖습니다.</mark>
+  <mark>Columns with Type "Int" have "#,##0" as the default format, and "Float" columns have "#,##0.######" as the default format.</mark>
 
 ### Syntax
 ```javascript
-    //;을 이용하여 양수,음수,0 일때의 포맷을 다르게 설정
-    Format: "#,###원;외상 #,###원;-"
+    //Set different formats for positive, negative, and 0 using ;
+    Format: "#,###won;credit #,###won;-"
 ```
 
 ### Example
-*열 설정*
+*Column configuration*
 ```javascript
     options.Cols = [
         {
             Name:"sNum",
             Type:"Int",
-            Format:"#,###만원"
-            // Format:"플러스 #,###;마이너스 #,###;없음" // 100은 플러스100 -100은 마이너스100 0은 없음 으로 표시됩니다.
+            Format:"#,###won"
+            // Format:"Plus #,###;Minus #,###;None" // 100 displays as Plus100, -100 as Minus100, 0 as None
         }
         ...
     ]
 ```
-*조회 데이터*
+*Loaded data*
 ```json
 {"Data":[
     {... "sNum":56200, ...}
 ]}
 ```
-*실제 보여지는 데이터*
+*Actual displayed data*
 
-![보여지는 데이터](/assets/imgs/intFormat.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->
+![Displayed data](/assets/imgs/intFormat.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->
 
 
 
@@ -271,20 +270,20 @@ options.Cols = [
 
 
 ---
-## 4. 타입이 Html 인 경우
-* JSON 형태로 (문자열도 가능), 실제값과 화면에 보여질 값의 쌍으로 구성됩니다. (위에 Text 타입의 객체 방식과 동일)
+## 4. When Type is Html
+* In JSON format (strings are also possible), composed of pairs of actual values and display values. (Same as the object method for the Text type above)
 
 ### Syntax
 
 ```javascript
-    // 객체 방식
+    // Object method
     Format: "{'Key1':'Value1', 'Key2':'Value2', 'key3':'Value3' ... }"
 ```
 
 |Value|Description|
 |---|---|
-|Key|셀의 실제 값(서버에서 조회되거나 저장시 서버로 전송됨)|
-|Value|Data에 설정된 값을 대체할 문자열(HTML 태그)|
+|Key|Actual cell value (loaded from or sent to the server)|
+|Value|String to replace the value set in Data (HTML tag)|
 
 ### Example
 ```html
@@ -301,20 +300,20 @@ options.Cols = [
         Type:"Html",
         Width:80,
         Format:{
-                "0":"<div class='alertCircle' style='background-color:#009688;'>안전</div>"
-                ,"1":"<div class='alertCircle' style='background-color:#ff9800;'>주의</div>"
-                ,"2":"<div class='alertCircle' style='background-color:#db4437;'>위험</div>"
+                "0":"<div class='alertCircle' style='background-color:#009688;'>Safe</div>"
+                ,"1":"<div class='alertCircle' style='background-color:#ff9800;'>Caution</div>"
+                ,"2":"<div class='alertCircle' style='background-color:#db4437;'>Danger</div>"
             },
     }
     ...
 ]
 </script>
 ```
-|조회된 데이터|실제 보여지는 데이터|
+|Loaded data|Actual displayed data|
 |---|---|
-|![조회데이터](/assets/imgs/htmlFormat1.png "조회 된 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 조회데이터 -->|![보여지는 데이터](/assets/imgs/htmlFormat2.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->
+|![Loaded data](/assets/imgs/htmlFormat1.png "Loaded data")
+<!-- IMAGE: Screenshot/Example Image - Loaded data -->|![Displayed data](/assets/imgs/htmlFormat2.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->
 
 
 
@@ -324,25 +323,25 @@ options.Cols = [
 
 ---
 
-## 5. 타입이 Link 인 경우
+## 5. When Type is Link
 
-**1) 구분자 활용 방식**
-  * 첫문자를 구분자로 사용하여 구분된 설정 값들의 나열로 정의됩니다.
+**1) Delimiter-based method**
+  * The first character is used as a delimiter, and the settings are listed separated by this delimiter.
 
-  * 구분자로 사용된 문자는 설정할 내용에 포함되선 안됩니다.
+  * The character used as the delimiter must not be included in the setting contents.
 
 ### Syntax
 ```javascript
-    // 구분자 활용 방식 '|'이 구분자
+    // Delimiter-based method, '|' is the delimiter
     Format: "|UrlPrefix|UrlPostfix|HtmlPrefix|HtmlPostfix"
 ```
 
 |Value|Description|
 |---|---|
-|UrlPrefix|실제 링크 url의 앞에 추가될 문자열|
-|UrlPostfix|실제 링크 url의 뒤에 추가될 문자열|
-|HtmlPrefix|화면에 보일 링크 텍스트의 앞에 추가될 html 코드|
-|HtmlPostfix|화면에 보일 링크 텍스트의 뒤에 추가될 html 코드|
+|UrlPrefix|String to be added before the actual link URL|
+|UrlPostfix|String to be added after the actual link URL|
+|HtmlPrefix|HTML code to be added before the link text displayed on screen|
+|HtmlPostfix|HTML code to be added after the link text displayed on screen|
 
 ### Example
 ```javascript
@@ -350,10 +349,10 @@ options.Cols = [
         {
             Name:"sLink",
             Type:"Link",
-            //1. anchor 태그의 앞에 URL
-            //2. anchor 태그의 뒤 URL
-            //3. anchor 태그 앞에 붙여질 text or html
-            //4. anchor 태그 뒤에 붙여질 text or html
+            //1. URL before the anchor tag
+            //2. URL after the anchor tag
+            //3. Text or HTML to prepend to the anchor tag
+            //4. Text or HTML to append to the anchor tag
             Format:"|/EMS/gm1/board.do?contents=|&group=USER4"
             +"|<img src='./assets/imgs/hot.svg' style='width:20px;height:20px;'>"
             +"|<img src='./assets/imgs/new.jpg' style='width:20px;height:20px;'>"
@@ -361,39 +360,39 @@ options.Cols = [
         ...
     ]
 ```
-조회된 데이터 ([Link 타입에 대한 데이터 구조 참고](./type))
+Loaded data ([Refer to Link type data structure](./type))
 ```json
 {"Data":[
     {... "LinkData":"|487141|Best way to save and edit text data without a database|_self " ...}
 ]}
 ```
-|실제 보여지는 데이터|link 된 내용|
+|Actual displayed data|Linked content|
 |---|---|
-|![보여지는 데이터](/assets/imgs/linkFormat1.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->|![보여지는 데이터](/assets/imgs/linkFormat2.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->|
+|![Displayed data](/assets/imgs/linkFormat1.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->|![Displayed data](/assets/imgs/linkFormat2.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->|
 
 
 
 
 
 
-**2) 객체 방식**
- * JSON 형태로 (문자열도 가능), 옵션과 추가할 문자열의 쌍으로 구성됩니다.
+**2) Object method**
+ * In JSON format (strings are also possible), composed of option and string pairs.
 
 ### Syntax
 
 ```javascript
-    // 객체 방식
+    // Object method
     Format: "{'UrlPrefix':'Value1', 'UrlPostfix':'Value2', 'HtmlPrefix':'Value3', 'HtmlPostfix':'Value4'}"
 ```
 
 |Value|Description|
 |---|---|
-|UrlPrefix|실제 링크 url의 앞에 추가될 문자열|
-|UrlPostfix|실제 링크 url의 뒤에 추가될 문자열|
-|HtmlPrefix|화면에 보일 링크 텍스트의 앞에 추가될 html 코드|
-|HtmlPostfix|화면에 보일 링크 텍스트의 뒤에 추가될 html 코드|
+|UrlPrefix|String to be added before the actual link URL|
+|UrlPostfix|String to be added after the actual link URL|
+|HtmlPrefix|HTML code to be added before the link text displayed on screen|
+|HtmlPostfix|HTML code to be added after the link text displayed on screen|
 
 ### Example
 ```javascript
@@ -411,17 +410,17 @@ options.Cols = [
         ...
     ]
 ```
-조회된 데이터 ([Link 타입에 대한 데이터 구조 참고](./type))
+Loaded data ([Refer to Link type data structure](./type))
 ```json
 {"Data":[
     {... "LinkData":"|487141|Best way to save and edit text data without a database|_self " ...}
 ]}
 ```
-|실제 보여지는 데이터|link 된 내용|
+|Actual displayed data|Linked content|
 |---|---|
-|![보여지는 데이터](/assets/imgs/linkFormat1.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->|![보여지는 데이터](/assets/imgs/linkFormat2.png "보여지는 데이터")
-<!-- IMAGE: 스크린샷/예시 이미지 - 보여지는 데이터 -->|
+|![Displayed data](/assets/imgs/linkFormat1.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->|![Displayed data](/assets/imgs/linkFormat2.png "Displayed data")
+<!-- IMAGE: Screenshot/Example Image - Displayed data -->|
 
 
 
@@ -432,27 +431,27 @@ options.Cols = [
 
 ---
 
-## 6. 타입이 Img 인 경우
-**1) 구분자 활용 방식**
-  * 첫문자를 구분자로 사용하여 구분된 설정 값들의 나열로 정의됩니다.
+## 6. When Type is Img
+**1) Delimiter-based method**
+  * The first character is used as a delimiter, and the settings are listed separated by this delimiter.
 
-  * 구분자로 사용된 문자는 설정할 내용에 포함되선 안됩니다.
+  * The character used as the delimiter must not be included in the setting contents.
 
 
 ### Syntax
 ```javascript
-    // 구분자 활용 방식 '|'이 구분자
+    // Delimiter-based method, '|' is the delimiter
     Format: "|UrlPrefix|UrlPostfix|HtmlPrefix|HtmlPostfix|LinkPrefix|LinkPostfix"
 ```
 
 |Value|Description|
 |---|---|
-|UrlPrefix|이미지의 src 속성 앞에 추가될 문자열|
-|UrlPostfix|이미지의 src 속성 뒤에 추가될 문자열|
-|HtmlPrefix|이미지 태그 앞에 추가될 html 코드|
-|HtmlPostfix|이미지 태그 뒤에 추가될 html 코드|
-|LinkPrefix|이미지 클릭시 이동할 링크 앞에 추가될 경로 URL|
-|LinkPostfix|이미지 클릭시 이동할 링크 뒤에 추가될 경로 URL|
+|UrlPrefix|String to be added before the image src attribute|
+|UrlPostfix|String to be added after the image src attribute|
+|HtmlPrefix|HTML code to be added before the image tag|
+|HtmlPostfix|HTML code to be added after the image tag|
+|LinkPrefix|URL path to be added before the link navigated to when clicking the image|
+|LinkPostfix|URL path to be added after the link navigated to when clicking the image|
 
 ### Example
 ```javascript
@@ -460,41 +459,41 @@ options.Cols = [
         {
             Name: "sImg",
             Type: "Img",
-            //1. img 태그의 src 값의 앞에 추가될 경로
-            //2. img 태그의 src 값의 뒤에 추가될 경로
-            //3. img 태그 앞에 넣고 싶은 text나 html
-            //4. img 태그 뒤에 넣고 싶은 text나 html
-            //5. 이미지를 클릭시 연결될 URL의 앞에 추가될 경로
-            //6. 이미지를 클릭시 연결될 URL의 뒤에 추가될 경로
+            //1. Path to be added before the img tag's src value
+            //2. Path to be added after the img tag's src value
+            //3. Text or HTML to insert before the img tag
+            //4. Text or HTML to insert after the img tag
+            //5. Path to be added before the URL linked when clicking the image
+            //6. Path to be added after the URL linked when clicking the image
             Format: "|http://ibsheet.com/demo/images/icons/|.jpg|<button cls='imgMBtn'>|</button>|/EMS/gm1/board.do?contents=|&group=USER4"
         }
         ...
     ]
 ```
-([Image 타입에 대한 데이터 구조 참고](./type))
+([Refer to Image type data structure](./type))
 
 
 
 
 
-**2) 객체 방식**
- * JSON 형태로 (문자열도 가능), 옵션과 추가할 문자열의 쌍으로 구성됩니다.
+**2) Object method**
+ * In JSON format (strings are also possible), composed of option and string pairs.
 
 ### Syntax
 
 ```javascript
-    // 객체 방식
+    // Object method
     Format: "{'UrlPrefix':'Value1', 'UrlPostfix':'Value2', 'HtmlPrefix':'Value3', 'HtmlPostfix':'Value4', 'LinkPrefix':'Value5', 'LinkPostfix':'Value6'}"
 ```
 
 |Value|Description|
 |---|---|
-|UrlPrefix|이미지의 src 속성 앞에 추가될 문자열|
-|UrlPostfix|이미지의 src 속성 뒤에 추가될 문자열|
-|HtmlPrefix|이미지 태그 앞에 추가될 html 코드|
-|HtmlPostfix|이미지 태그 뒤에 추가될 html 코드|
-|LinkPrefix|이미지 클릭시 이동할 링크 앞에 추가될 경로 URL|
-|LinkPostfix|이미지 클릭시 이동할 링크 뒤에 추가될 경로 URL|
+|UrlPrefix|String to be added before the image src attribute|
+|UrlPostfix|String to be added after the image src attribute|
+|HtmlPrefix|HTML code to be added before the image tag|
+|HtmlPostfix|HTML code to be added after the image tag|
+|LinkPrefix|URL path to be added before the link navigated to when clicking the image|
+|LinkPostfix|URL path to be added after the link navigated to when clicking the image|
 
 ### Example
 ```javascript
@@ -502,10 +501,10 @@ options.Cols = [
        {
            Name: "sImg",
            Type: "Img",
-           Format: { 
-                    UrlPrefix: "http://ibsheet.com/demo/images/icons/", 
+           Format: {
+                    UrlPrefix: "http://ibsheet.com/demo/images/icons/",
                     UrlPostfix: ".jpg",
-                    HtmlPrefix: "<button cls='imgMBtn'>", 
+                    HtmlPrefix: "<button cls='imgMBtn'>",
                     HtmlPostfix: "</button>",
                     LinkPrefix: "/EMS/gm1/board.do?contents=",
                     LinkPostfix: "&group=USER4"
@@ -532,4 +531,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

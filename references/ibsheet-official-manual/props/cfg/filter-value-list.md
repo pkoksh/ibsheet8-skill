@@ -2,13 +2,12 @@
 KEY: filterValueList
 KIND: config-property
 PATH: props/cfg/filter-value-list
-ALIAS: 필터행의, 특정셀에, 목록이, 있을때, 처리하는
-ALIAS_EN: filter, value, list
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/filter-value-list
+ALIAS_EN: handle, specific, cell, filter, row, value, list, filtervaluelist
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/filter-value-list
 ---
 # FilterValueList ***(cfg)***
 
-> 필터행의 특정셀에 값 목록이 있을때 처리하는 방법을 설정합니다.
+> Sets how to handle when a specific cell in the filter row has a value list.
 
 
 ### Type
@@ -18,10 +17,10 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/filter-va
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|필터 값이 빈값일때 빈값 그대로 보여줌 (`default`) |
-|`1`|`Button: "Defaults"`, `Defaults`를 `*Row`로 설정할 경우 필터 값이 빈값일때 메시지 파일에 `Lang.Text.FilterEmptyValue`에 정의된 문자열로 표시 |
-|`2`|`Enum` 타입일 경우 필터 값이 빈값일때 메시지 파일에 `Lang.Text.FilterEmptyValue`에 정의된 문자열로 표시 |
-|`3`|`1번 설정`과 `2번 설정`을 동시에 적용 |
+|`0`|Shows empty value as-is when filter value is empty (`default`) |
+|`1`|When `Button: "Defaults"` and `Defaults` is set to `*Row`, displays the string defined in `Lang.Text.FilterEmptyValue` in the message file when the filter value is empty |
+|`2`|For `Enum` type, displays the string defined in `Lang.Text.FilterEmptyValue` in the message file when the filter value is empty |
+|`3`|Applies both `setting 1` and `setting 2` simultaneously |
 
 ### Example
 ```javascript
@@ -40,4 +39,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

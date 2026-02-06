@@ -3,307 +3,307 @@ KEY: quickStart
 KIND: guide
 PATH: start/quick-start
 ALIAS_EN: quick, start
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/start/quick-start
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/start/quick-start
 ---
 # Quick Start
 
 
-## ibsheet 파일 구성
-`IBSheet8`을 사용하기 위해서 다음 4~7가지 파일을 추가합니다.
+## ibsheet File Configuration
+To use `IBSheet8`, add the following 4 to 7 files.
 
 ```html
-<!----- ibsheet 기본 모듈 ----->
-<!-- 디자인 css -->
+<!----- ibsheet basic modules ----->
+<!-- Design CSS -->
 <link rel="stylesheet" type="text/css" href="ibsheet/css/default/main.css">
-<!-- 시트 코어 파일 -->
+<!-- Sheet core file -->
 <script src="ibsheet/ibsheet.js"></script>
-<!-- 라이선스 파일 -->
+<!-- License file -->
 <script src="ibsheet/ibleaders.js"></script>
-<!-- 메세지 파일 ko.js 나 en.js 중 하나 추가 -->
+<!-- Message file - add either ko.js or en.js -->
 <script src="ibsheet/locale/ko.js"></script>
 
 
-<!----- ibsheet 선택 모듈 ----->
-<!-- 엑셀 다운/업로드 관련 모듈 -->
+<!----- ibsheet optional modules ----->
+<!-- Excel download/upload related module -->
 <script src="ibsheet/plugins/ibsheet-excel.js"></script>
-<!-- 찾기,상세보기 등 다이얼로그 관련 모듈 -->
+<!-- Dialog related module for search, detail view, etc. -->
 <script src="ibsheet/plugins/ibsheet-dialog.js"></script>
-<!-- 공통 속성 관련 모듈 -->
+<!-- Common property related module -->
 <script src="ibsheet/plugins/ibsheet-common.js"></script>
 ```
 
-## 시트 생성
+## Sheet Creation
 
-이 후 열의 개수와 기능, 헤더 타이틀과 같은 정보를 설정하고 **[IBSheet.create()](/docs/static/create)** 함수를 통해 객체를 생성합니다.
+After configuring information such as the number of columns, features, and header titles, create the object through the **[IBSheet.create()](/docs/static/create)** function.
 
-*초기 생성시 **시트의 너비, 높이**는 el 속성에서 정의하는 **div객체의 너비, 높이**를 따르며, <mark>*해당 div에 너비, 높이가 **없는 경우*** 너비는 **100%**, 높이는 **800px**를 기본값으로 갖습니다.</mark>*
+*During initial creation, the **width and height of the sheet** follow the **width and height of the div element** defined in the el property, and <mark>*if the div has **no width or height*** the default values are **100%** for width and **800px** for height.</mark>*
 
-[자바스크립트 구문]
+[JavaScript syntax]
 ```javascript
 function initSheet() {
-    //시트의 초기화 속성 설정
+    // Set sheet initialization properties
     var OPT = {
-            //각 열에 대한 정의 (열의 이름, 유형(Type), 포맷(Format)등을 설정)
-            //열의 "Type"과 "Name" 속성은 반드시 설정되어야 합니다.
+            // Definition for each column (set column name, Type, Format, etc.)
+            // The "Type" and "Name" properties of a column must always be set.
             Cols:[
-                {Header: "컬럼1", Name: "colName1", Type: "Text"},
-                {Header: "컬럼2", Name: "colName2", Type: "Text", Align: "center"}
+                {Header: "Column1", Name: "colName1", Type: "Text"},
+                {Header: "Column2", Name: "colName2", Type: "Text", Align: "center"}
             ]
         };
-    //초기 데이터 설정
+    // Set initial data
     var DATA = [];
 
     IBSheet.create({
-        id: "sheet",        // 시트 객체 ID
-        el: "sheetDiv",     // 시트를 생성할 DIV객체 ID
-        options: OPT,       // 초기화 구문 변수
-        data: DATA          // 초기 로딩 데이터
+        id: "sheet",        // Sheet object ID
+        el: "sheetDiv",     // DIV element ID where the sheet will be created
+        options: OPT,       // Initialization options variable
+        data: DATA          // Initial loading data
     });
 }
 ```
-[HTML 구문 - 시트 높이 고정]
+[HTML syntax - Fixed sheet height]
 ```html
 <body onload="initSheet()">
   <div class="btnCls">
-     <button type="button" class="mainBtnB">조회</button>
-     <button type="button" class="mainBtnB">신규</button>
+     <button type="button" class="mainBtnB">Search</button>
+     <button type="button" class="mainBtnB">New</button>
   </div>
   <hr>
-  <!-- 시트가 될 DIV 객체 -->
+  <!-- DIV element that will become the sheet -->
   <div id="sheetDiv" style="width:100%; height:500px;"></div>
 </body>
 ```
-[HTML 구문 - 시트 부모 요소 높이 고정]
+[HTML syntax - Fixed parent element height]
 ```html
 <body onload="initSheet()">
   <div class="btnCls">
-     <button type="button" class="mainBtnB">조회</button>
-     <button type="button" class="mainBtnB">신규</button>
+     <button type="button" class="mainBtnB">Search</button>
+     <button type="button" class="mainBtnB">New</button>
   </div>
   <hr>
-  <!-- 시트의 부모 요소 -->
+  <!-- Parent element of the sheet -->
   <div style="width:100%; height:600px;">
-     <!-- 시트가 될 DIV 객체 -->
+     <!-- DIV element that will become the sheet -->
      <div id="sheetDiv" style="width:100%; height:100%;"></div>
    </div>
 </body>
 ```
 
-**시트의 높이를 100% 등 상대값으로 생성할 경우 부모 요소의 높이가 고정되어 있어야합니다.**
+**When creating the sheet with a relative height value such as 100%, the parent element's height must be fixed.**
 
-<mark>**시트의 높이는 고정된 행(헤더,필터,합계 행등)이 모두 보여질 정도로 설정 되어야 합니다.** 
-이는 보통 150~200px 정도이며 이보다 작게 설정한 경우에는 시트가 생성되지 않을 수 있습니다.</mark>
+<mark>**The sheet height must be set large enough to display all fixed rows (header, filter, total rows, etc.).** 
+This is typically around 150~200px, and if set smaller than this, the sheet may not be created.</mark>
 
-*`options` 와 `data` 는 [시트객체구조](/docs/start/basic-structure)를 참고하세요.*
+*Refer to [Sheet Object Structure](/docs/start/basic-structure) for `options` and `data`.*
 
-![시트생성](/assets/imgs/quickStart1.png "시트 간단 생성")
-<!-- IMAGE: 시트/테이블 화면 - 시트생성 -->
+![Sheet Creation](/assets/imgs/quickStart1.png "Simple sheet creation")
+<!-- IMAGE: Sheet/Table View - Sheet Creation -->
 
-[그림 1] 생성된 ibsheet
+[Figure 1] Created ibsheet
 
-## 시트 초기화 및 열 설정
+## Sheet Initialization and Column Configuration
 
-[IBSheet.create()](/docs/static/create) 함수의 `options`를 통해 시트의 헤더, 행, 열 등에 대한 자세한 부분을 설정할 수 있습니다.
+You can configure detailed settings for the sheet's header, rows, columns, etc. through the `options` of the [IBSheet.create()](/docs/static/create) function.
 ```javascript
 var OPT = {
-        //각 열에 대한 정의 (열의 이름, 유형(Type), 포맷(Format)등을 설정)
+        // Definition for each column (set column name, Type, Format, etc.)
         Cols:[
             {
-                Header: "이름",
+                Header: "Name",
                 Name: "sa_nm", Type: "Text"
             },
             {
-                Header: "사원번호",
+                Header: "Employee Number",
                 Name: "sa_id", Type: "Text", Align: "center"
             },
             {
-                Header: "부서",
+                Header: "Department",
                 Name: "sa_dept", Type: "Enum",
-                Enum: "|경영지원|총무|인사|설계|시공1|시공2", EnumKeys: "|01|02|03|04|05|06"
+                Enum: "|Management Support|General Affairs|HR|Design|Construction 1|Construction 2", EnumKeys: "|01|02|03|04|05|06"
             },
             {
-                Header: "직급",
+                Header: "Position",
                 Name: "sa_position", Type: "Enum",
-                Enum: "|대표|상무|이사|부장|차장|과장|대리|사원", EnumKeys: "|A1|A2|A3|B0|B1|C4|C5|C6"
+                Enum: "|CEO|Senior Managing Director|Director|General Manager|Deputy General Manager|Manager|Assistant Manager|Staff", EnumKeys: "|A1|A2|A3|B0|B1|C4|C5|C6"
             },
             {
-                Header: "입사일",
+                Header: "Hire Date",
                 Name: "sa_enterdate", Type: "Date", Width:100, Format: "yyyy/MM/dd",
             },
             {
-                Header: "비고",
+                Header: "Remarks",
                 Name: "sa_desc", Type: "Lines"
             }
         ]
     };
 ```
-![시트생성2](/assets/imgs/quickStart2.png "시트생성2")
-<!-- IMAGE: 시트/테이블 화면 - 시트생성2 -->
+![Sheet Creation 2](/assets/imgs/quickStart2.png "Sheet Creation 2")
+<!-- IMAGE: Sheet/Table View - Sheet Creation 2 -->
 
-[그림 2] 열 설정이 적용된 `ibsheet`
+[Figure 2] `ibsheet` with column settings applied
 
-두 줄 이상의 헤더를 생성하거나 헤더 안에 셀간 병합을 설정하는 방법은 [(col)Header](/docs/props/col/header)속성을 참고해 주세요.
+For creating multi-line headers or setting cell merging within headers, please refer to the [(col)Header](/docs/props/col/header) property.
 
 
-[IBSheet.create](/docs/static/create)의 data를 설정하면 시트를 생성하는 것과 동시에 데이터를 로딩할 수 있습니다.
+By setting the data in [IBSheet.create](/docs/static/create), you can load data simultaneously with sheet creation.
 
 ```javascript
 var DATA = [
-    {"sa_nm": "홍길동", "sa_id": "9821450", "sa_dept": "04", "sa_position": "B0", "sa_enterdate": "19980305", "sa_desc": ""},
-    {"sa_nm": "김한국", "sa_id": "9510427", "sa_dept": "01", "sa_position": "A3", "sa_enterdate": "19890317", "sa_desc": ""}
+    {"sa_nm": "Hong Gildong", "sa_id": "9821450", "sa_dept": "04", "sa_position": "B0", "sa_enterdate": "19980305", "sa_desc": ""},
+    {"sa_nm": "Kim Hanguk", "sa_id": "9510427", "sa_dept": "01", "sa_position": "A3", "sa_enterdate": "19890317", "sa_desc": ""}
 ];
 ```
 
-![시트생성3](/assets/imgs/quickStart3.png "시트생성3")
-<!-- IMAGE: 시트/테이블 화면 - 시트생성3 -->
+![Sheet Creation 3](/assets/imgs/quickStart3.png "Sheet Creation 3")
+<!-- IMAGE: Sheet/Table View - Sheet Creation 3 -->
 
-[그림 3] 데이터가 로드된 `ibsheet`
+[Figure 3] `ibsheet` with data loaded
 
-사용자 입력에 의한 조회가 필요하면 시트를 생성 후, [loadSearchData()](/docs/funcs/core/load-search-data) 나 [doSearch()](/docs/funcs/core/do-search) API 를 이용하면 됩니다.
+If you need to search based on user input, after creating the sheet, use the [loadSearchData()](/docs/funcs/core/load-search-data) or [doSearch()](/docs/funcs/core/do-search) API.
 
 
 <div class='notice'>
 
-### 주의
-시트 생성 함수 [IBSheet.create()](/docs/static/create)는 비동기 형식으로 동작함으로 생성 직후에 시트의 기능 함수를 호출시 오류가 발생할 수 있습니다.
+### Caution
+The sheet creation function [IBSheet.create()](/docs/static/create) operates asynchronously, so calling sheet functions immediately after creation may cause errors.
 
 ```javascript
-//시트 생성 함수
+// Sheet creation function
 IBSheet.create({ ... });
-//비동기적으로 생성됨으로 "sheet"객체가 생성되었는지 알 수 없다.
-sheet.showFilterRow(); //onRenderFirstFinish 이벤트에서 호출하거나 options.Cfg.ShowFilter: true로 설정하면 시트 생성과 동시에 필터행이 보여집니다.
+// Since it is created asynchronously, it is unknown whether the "sheet" object has been created.
+sheet.showFilterRow(); // Call this in the onRenderFirstFinish event, or set options.Cfg.ShowFilter: true to display the filter row simultaneously with sheet creation.
 ```
-따라서 시트 생성 후 필요한 함수를 호출하시려면 [onRenderFirstFinish](/docs/events/on-render-first-finish) 이벤트에 로직을 구성하셔야 합니다.
+Therefore, to call necessary functions after sheet creation, you should configure the logic in the [onRenderFirstFinish](/docs/events/on-render-first-finish) event.
 
 </div>
 
-## 각종 기능 사용의 예
+## Examples of Using Various Features
 
-[아이비시트 메소드 사용법](/docs/funcs/method)
+[IBSheet Method Usage](/docs/funcs/method)
 
-### **행추가**
-[addRow()](/docs/funcs/core/add-row) 함수를 통해 신규 행을 추가할 수 있습니다.	
+### **Adding Rows**
+You can add a new row through the [addRow()](/docs/funcs/core/add-row) function.	
 
 ```javascript
-//선택행 행 위로 새로운 행을 추가합니다.
+// Add a new row above the selected row.
 sheet.addRow(sheet.getFocusedRow(), 1);
 ```
 
-### **데이터 로드**
-[loadSearchData()](/docs/funcs/core/load-search-data) 함수를 통해 데이터를 로딩할 수 있습니다.
+### **Loading Data**
+You can load data through the [loadSearchData()](/docs/funcs/core/load-search-data) function.
 
 ```javascript
-//jquery를 이용한 ajax 통신
+// Ajax communication using jQuery
 $.ajax({
     url: "./data.jsp",
     param: "edate=19950101&position=C1",
     success: function (rtnData) {
-        //서버에서 가져온 json데이터를 로딩
+        // Load JSON data retrieved from the server
         sheet.loadSearchData(rtnData);
     }
 });
 ```
 
-[doSearch()](/docs/funcs/core/do-search) 함수를 통해 url에서 데이터를 로딩할 수 있습니다.
+You can load data from a URL through the [doSearch()](/docs/funcs/core/do-search) function.
 
 
-조회된 데이터라 로딩 완료 후
+After the search data loading is complete
 ```javascript
-//ajax 통신 및 데이터 로드
+// Ajax communication and data loading
 sheet.doSearch("/ex/getPetaData.do", "edate=19950101&position=C1");
 ```
 
-위 [loadSearchData()](/docs/funcs/core/load-search-data)와 [doSearch()](/docs/funcs/core/do-search) 함수는 모두 비동기 형식으로 동작합니다.
+Both the [loadSearchData()](/docs/funcs/core/load-search-data) and [doSearch()](/docs/funcs/core/do-search) functions above operate asynchronously.
 
 
-### **수정된 데이터 추출**
+### **Extracting Modified Data**
 
- [getSaveJson()](/docs/funcs/core/get-save-json), [getSaveString()](/docs/funcs/core/get-save-string) 함수를 통해 시트에서 수정된 데이터(혹은 전체 데이터)를 json형식이나 querystring 형식으로 추출할 수 있습니다.
+ You can extract modified data (or all data) from the sheet in JSON format or querystring format through the [getSaveJson()](/docs/funcs/core/get-save-json) and [getSaveString()](/docs/funcs/core/get-save-string) functions.
 
-([getChangedData()](/docs/funcs/core/get-changed-data)는 수정된 데이터를 셀단위로 추출하고, [getSaveJson()](/docs/funcs/core/get-save-json), [getSaveString()](/docs/funcs/core/get-save-string)은 행단위로 추출합니다.)
+([getChangedData()](/docs/funcs/core/get-changed-data) extracts modified data at the cell level, while [getSaveJson()](/docs/funcs/core/get-save-json) and [getSaveString()](/docs/funcs/core/get-save-string) extract at the row level.)
 
 ```javascript
 var chgData = sheet.getSaveJson();
 ```
-return 값
+return value
 ```js
 {
     "data":[
-        // 삭제 데이터
-        {"id":"AR2","SEQ":2,"sStatus":"D","DCheck":"1","sNation":"한국", ... "STATUS":"Deleted"},
-        // 신규 데이터
-        {"id":"AR51","SEQ":4,"sStatus":"I","DCheck":"0","sNation":"미국", ... "STATUS":"Added"},
-        // 수정 데이터
-        {"id":"AR5","SEQ":6,"sStatus":"U","DCheck":"0","sNation":"한국", ... "STATUS":"Changed"}
+        // Deleted data
+        {"id":"AR2","SEQ":2,"sStatus":"D","DCheck":"1","sNation":"Korea", ... "STATUS":"Deleted"},
+        // New data
+        {"id":"AR51","SEQ":4,"sStatus":"I","DCheck":"0","sNation":"USA", ... "STATUS":"Added"},
+        // Modified data
+        {"id":"AR5","SEQ":6,"sStatus":"U","DCheck":"0","sNation":"Korea", ... "STATUS":"Changed"}
     ]
 }
 ```
-시트의 수정 여부는 [hasChangedData()](/docs/funcs/core/has-changed-data)를 통해 확인할 수 있습니다.
+You can check whether the sheet has been modified through [hasChangedData()](/docs/funcs/core/has-changed-data).
 
-특정 상태의 행만 추출하는 경우, 가령 신규 입력된 행만 추출해야 한다면 [getRowsByStatus('Added')](/docs/funcs/core/get-rows-by-status)함수를 이용하시면 편리합니다.
+To extract only rows of a specific status, for example, to extract only newly added rows, you can conveniently use the [getRowsByStatus('Added')](/docs/funcs/core/get-rows-by-status) function.
 
 
 
-### **행삭제**
-[deleteRow()](/docs/funcs/core/delete-row) 함수로 특정 행의 상태를 `Deleted`로 변경 할 수 있습니다.
+### **Deleting Rows**
+You can change a specific row's status to `Deleted` with the [deleteRow()](/docs/funcs/core/delete-row) function.
 
-[removeRow()](/docs/funcs/core/remove-row) 함수로 특정 행을 즉시 삭제할 수 있습니다.
+You can immediately delete a specific row with the [removeRow()](/docs/funcs/core/remove-row) function.
 
-[removeAll()](/docs/funcs/core/remove-all) 함수로 모든 데이터 행을 삭제할 수 있습니다.
+You can delete all data rows with the [removeAll()](/docs/funcs/core/remove-all) function.
 ```javascript
-//첫번째 행 객체 추출
+// Extract the first row object
 var row = sheet.getFirstRow();
-//첫번째 행을 즉시 삭제한다.
+// Immediately delete the first row.
 sheet.removeRow(row);
 ```
 
-### **상태 클리어**
-[acceptChangedData](/docs/funcs/core/accept-changed-data) 함수를 통해 저장 작업이 완료된 후 시트의 상태를 클리어 할 수 있습니다.
+### **Clearing Status**
+You can clear the sheet's status after a save operation is completed through the [acceptChangedData](/docs/funcs/core/accept-changed-data) function.
 
-위 함수를 호출하면 수정(Changed),입력(Added)인 행은 조회 상태로 변경되고, 삭제(Deleted)인 행은 삭제 됩니다.
+When this function is called, rows with Modified (Changed) or Added status are changed to loaded status, and rows with Deleted status are removed.
 
 
-### **셀 값의 확인/변경**
-[getValue](/docs/funcs/core/get-value),[setValue](/docs/funcs/core/set-value) 함수를 통해 셀의 값을 확인하거나 변경하실 수 있습니다.
+### **Checking/Changing Cell Values**
+You can check or change cell values through the [getValue](/docs/funcs/core/get-value) and [setValue](/docs/funcs/core/set-value) functions.
 
 ```javascript
-// 셀의 값 READ
-var cls = sheet.getValue( sheet.getFirstRow(), "CLS" ); //첫번째 데이터 행에 "CLS" 컬럼의 값을 얻음.
+// READ cell value
+var cls = sheet.getValue( sheet.getFirstRow(), "CLS" ); // Get the value of the "CLS" column in the first data row.
 
-// 셀의 값 WRITE
-sheet.setValue( sheet.getRowByIndex(100), "DESC", "임계값 근접 경고!" ); //100번째 행의 "DESC" 값을 변경.
+// WRITE cell value
+sheet.setValue( sheet.getRowByIndex(100), "DESC", "Threshold proximity warning!" ); // Change the "DESC" value of the 100th row.
 ```
 
 
 
-### **글자색,배경색 설정**
-[setAttribute()](/docs/funcs/core/set-attribute) 함수를 통해 특정 셀의 속성을 변경 할 수 있습니다.
+### **Setting Text Color and Background Color**
+You can change the properties of a specific cell through the [setAttribute()](/docs/funcs/core/set-attribute) function.
 ```javascript
-// AMT 컬럼의 배경색을 FF0000로 변경
+// Change the background color of the AMT column to FF0000
 sheet.setAttribute(null, "AMT", "Color", "#FF0000" );
 
-// 마지막행의 글자색을 0000FF로 변경
+// Change the text color of the last row to 0000FF
 sheet.setAttribute( sheet.getLastRow(), null, "TextColor", "#0000FF" );
 
-// 특정 셀의 폰트를 Bold로 변경
+// Change the font of a specific cell to Bold
 sheet.setAttribute( sheet.getFocusedRow(), "ETC", "TextStyle", 1 );
 ```
 
 
-여러개의 디자인 속성을 한꺼번에 변경해야 하는 경우에는 [setCellStyle()](/docs/funcs/core/set-cell-style) 함수를 사용합니다.
+When you need to change multiple design properties at once, use the [setCellStyle()](/docs/funcs/core/set-cell-style) function.
 ```javascript
 var row = sheet.getFirstRow();
 sheet.setCellStyle({row: row, col: "sa_nm", attr: {TextColor:"red", Color: "#00FF00"}, render: 1});
 ```
 
 
-## 이벤트 사용
+## Using Events
 
-[아이비시트 이벤트 사용법](/docs/events/event)
+[IBSheet Event Usage](/docs/events/event)
 
-### 데이터 수정시 이벤트 사용 예
+### Example of Using Events When Data is Modified
 ```javascript
-//객체 생성시 이벤트 선언
+// Declare events during object creation
 options.Events = {
     onAfterChange:function (evtParam) {
         if (evtParam.col == "AMT" && evtParam.val == 3000) {
@@ -313,13 +313,13 @@ options.Events = {
 };
 ```
 
-### 더블 클릭 이벤트 bind 예 (권장하지 않음)
+### Double Click Event Bind Example (Not Recommended)
 ```javascript
-//시트객체 생성 이후 이벤트 바인딩
+// Event binding after sheet object creation
 sheet.bind("onDblClick" , function(evtParam) {
     var row = evtParam.row;
     var col = evtParam.col;
-    //편집불가능한 셀 더블클릭시 상세 다이얼로그 open
+    // Open detail dialog when double-clicking a non-editable cell
     if (!sheet.getAttribute(row, col, "Edit")) {
         evtParam.sheet.showEditDialog(row);
     }
@@ -328,10 +328,10 @@ sheet.bind("onDblClick" , function(evtParam) {
 
 
 ### Read More
-- [시트 객체 구조 getting started](/docs/start/basic-structure)
+- [Sheet object structure getting started](/docs/start/basic-structure)
 - [Header col](/docs/props/col/header)
-- [method 사용법 기초 method](/docs/funcs/method)
-- [event 사용법 기초 event](/docs/events/event)
+- [Method usage basics method](/docs/funcs/method)
+- [Event usage basics event](/docs/events/event)
 - [onRenderFirstFinish event](/docs/events/on-render-first-finish)
 - [create static](/docs/static/create)
 
@@ -339,4 +339,4 @@ sheet.bind("onDblClick" , function(evtParam) {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

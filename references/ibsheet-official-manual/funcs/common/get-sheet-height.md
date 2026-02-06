@@ -2,13 +2,13 @@
 KEY: getSheetHeight
 KIND: method
 PATH: funcs/common/get-sheet-height
-ALIAS: sheet.getSheetHeight, getSheetHeight(), 시트의, 높이를, 반환합니다
-ALIAS_EN: get, sheet, height
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/get-sheet-height
+ALIAS: sheet.getSheetHeight, getSheetHeight()
+ALIAS_EN: returns, height, sheet, getsheetheight, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/get-sheet-height
 ---
 # getSheetHeight ***(method)***
 
-> 시트의 높이를 반환합니다. 
+> Returns the height of the sheet. 
 
 
 ### Syntax
@@ -17,12 +17,12 @@ void getSheetHeight();
 ```
 
 ### Return Value
-***number*** 시트의 높이
+***number*** Height of the sheet
 
 
 ### Example
 ```javascript
-// 시트의 높이를 반환합니다.
+// Returns the height of the sheet.
 sheet.getSheetHeight();
 ```
 
@@ -32,4 +32,4 @@ sheet.getSheetHeight();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,12 +2,11 @@
 KEY: version
 KIND: static-member
 PATH: static/version
-ALIAS: 시트의, 제품, 버전을, 확인합니다
-ALIAS_EN: version
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/version
+ALIAS_EN: checks, product, version, sheet, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/version
 ---
 # version ***(method)***
-> 시트의 제품 버전을 확인합니다.
+> Checks the product version of the sheet.
 
 ### Syntax
 ```javascript
@@ -15,11 +14,11 @@ string version();
 ```
 
 ### Return Value
-***string***: 화면에 로드된 `ibsheet.js` 제품의 버전 및 로드된 플러그인들의 버전 문자열
+***string***: Version of the `ibsheet.js` product loaded on the page and version strings of loaded plugins
 
 ### Example
 ```javascript
-// 시트의 제품 버전 확인
+// Check the product version of the sheet
 IBSheet.version();
 ```
 
@@ -29,4 +28,4 @@ IBSheet.version();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

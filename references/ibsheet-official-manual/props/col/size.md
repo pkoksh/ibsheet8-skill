@@ -2,14 +2,13 @@
 KEY: size
 KIND: column-property
 PATH: props/col/size
-ALIAS: 열에, 입력가능한, 글자수를, 설정합니다
-ALIAS_EN: size
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/size
+ALIAS_EN: maximum, number, characters, entered, column, size, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/size
 ---
 # Size ***(col)***
-> 열에 입력가능한 글자수를 설정합니다. 
+> Sets the maximum number of characters that can be entered in a column. 
 
-> [cfg.UnicodeByteMode](/docs/props/cfg/unicode-byte-mode)를 설정할 경우 한글의 바이트 수를 계산하여 입력을 제한합니다.
+> When [cfg.UnicodeByteMode](/docs/props/cfg/unicode-byte-mode) is set, input is restricted by calculating the byte count of Korean characters.
 
 ### Type
 `number`
@@ -17,12 +16,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/size
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|입력가능한 글자수|
+|`number`|Maximum number of characters that can be entered|
 
 
 ### Example
 ```javascript
-//CarName열에 최대 10글자까지 입력가능
+// Allow up to 10 characters in the CarName column
 options.Cols = [
     ...
     {Type: "Text", Size: 10, Name: "CarName", Width: 120 ...},
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: hover
 KIND: config-property
 PATH: props/cfg/hover
-ALIAS: 시트내의, 또는, 셀에, 마우스, 커서가
-ALIAS_EN: hover
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/hover
+ALIAS_EN: hover, action, mode, mouse, cursor, positioned, row, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/hover
 ---
 # Hover ***(cfg)***
 
-> 시트내의 행 또는 셀에 마우스 커서가 위치 했을때 `Hover` 동작 모드를 설정합니다.
+> Sets the `Hover` action mode when the mouse cursor is positioned on a row or cell in the sheet.
 
 
 
@@ -18,15 +17,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/hover
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|`Hover` 동작 안함 |
-|`1`|셀단위 `Hover`|
-|`2`|행단위 `Hover` (`default`)  |
-|`3`|행단위, 열단위 `Hover` ([MultiRecord](./multi-record)에서는 열단위 `Hover` 동작 안함) |
+|`0`|No `Hover` action |
+|`1`|Cell-level `Hover`|
+|`2`|Row-level `Hover` (`default`)  |
+|`3`|Row-level and column-level `Hover` (column-level `Hover` does not work in [MultiRecord](./multi-record)) |
 
 ### Example
 ```javascript
 options.Cfg = {
-    Hover: "1",       // 셀단위 Hover 동작처리  
+    Hover: "1",       // Cell-level Hover action
 };
 ```
 
@@ -36,5 +35,5 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.3.0.47|`3` 옵션 추가|
+|core|8.0.0.0|Feature added|
+|core|8.3.0.47|Added `3` option|

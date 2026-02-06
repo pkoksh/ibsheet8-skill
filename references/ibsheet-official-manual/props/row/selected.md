@@ -2,16 +2,15 @@
 KEY: selected
 KIND: row-property
 PATH: props/row/selected
-ALIAS: 행을, 선택합니다
-ALIAS_EN: selected
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/selected
+ALIAS_EN: selects, row, selected
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/selected
 ---
 # Selected ***(row)***
-> 행을 선택합니다.
+> Selects a row.
 
-> 속성을 `1(true)`로 설정하면 [getSelectedRows()](/docs/funcs/core/get-selected-rows)를 통해 선택한 행을 얻을 수 있습니다.
+> When the property is set to `1(true)`, the selected row can be obtained through [getSelectedRows()](/docs/funcs/core/get-selected-rows).
 
-> [SelectingCells cfg](/docs/props/cfg/selecting-cells) 속성에 따라 선택한 행을 표시하거나 무시할 수 있습니다.
+> Depending on the [SelectingCells cfg](/docs/props/cfg/selecting-cells) property, the selected row can be displayed or ignored.
 
 ### Type
 `boolean`
@@ -19,14 +18,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/selected
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|선택 해제|
-|`1(true)`|선택|
+|`0(false)`|Deselected|
+|`1(true)`|Selected|
 
 
 
 ### Example
 ```javascript
-//특정 행을 선택한다.
+//Select a specific row.
 var row = sheet.getRowById("AR55");
 row["Selected"] = 1;
 ```
@@ -39,4 +38,4 @@ row["Selected"] = 1;
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

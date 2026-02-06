@@ -2,12 +2,12 @@
 KEY: hideTip
 KIND: method
 PATH: funcs/core/hide-tip
-ALIAS: sheet.hideTip, hideTip(), 시트가, 띄운, 풍선도움말을, 감춥니다
-ALIAS_EN: hide, tip
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/hide-tip
+ALIAS: sheet.hideTip, hideTip()
+ALIAS_EN: hides, tooltip, balloon, displayed, sheet, hidetip, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/hide-tip
 ---
 # hideTip ***(method)***
-> 시트가 띄운 풍선도움말을 감춥니다.
+> Hides the tooltip balloon displayed on the sheet.
 
 ### Syntax
 ```javascript
@@ -19,7 +19,7 @@ void hideTip();
 
 ### Example
 ```javascript
-//풍선도움말을 감춤
+//Hide the tooltip balloon
 sheet.hideTip();
 ```
 
@@ -32,4 +32,4 @@ sheet.hideTip();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

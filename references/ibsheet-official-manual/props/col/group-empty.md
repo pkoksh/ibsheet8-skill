@@ -2,14 +2,13 @@
 KEY: groupEmpty
 KIND: column-property
 PATH: props/col/group-empty
-ALIAS: 또는, 공백, 대해서, 그룹핑을, 할지
-ALIAS_EN: group, empty
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-empty
+ALIAS_EN: whether, group, empty, values, groupempty, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/group-empty
 ---
 # GroupEmpty ***(col)***
-> `0` 또는 `""(공백)` 에 대해서 그룹핑을 할지 여부를 설정합니다.
+> Sets whether to group `0` or `""(empty)` values.
 
-> 그룹핑 제외된 행은 상단에 위치하게 됩니다.
+> Rows excluded from grouping are positioned at the top.
 
 ### Type
 `number`
@@ -17,15 +16,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-emp
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|0이나 ""(공백) 모두 그룹핑 불가|
-|`1`|0은 그룹핑 가능하나 ""(공백)은 그룹핑 불가|
-|`2`|0이나 ""(공백) 모두 그룹핑 가능 (`default`)|
+|`0`|Neither 0 nor ""(empty) can be grouped|
+|`1`|0 can be grouped but ""(empty) cannot be grouped|
+|`2`|Both 0 and ""(empty) can be grouped (`default`)|
 
 
 
 ### Example
 ```javascript
-//""(공백) 행을 그룹에서 제외시킨다.
+// Exclude ""(empty) rows from the group
 options.Cols = [
     ...
     {Type: "Text", Name: "Product_Name", Width: 100, GroupEmpty: 0, ...},
@@ -46,4 +45,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

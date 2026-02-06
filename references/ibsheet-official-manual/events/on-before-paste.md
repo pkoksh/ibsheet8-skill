@@ -2,16 +2,15 @@
 KEY: onBeforePaste
 KIND: event
 PATH: events/on-before-paste
-ALIAS: 시트, 내에서, 붙여넣기가, 이루지기, 전에
-ALIAS_EN: on, before, paste, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-before-paste
+ALIAS_EN: fires, paste, operation, via, ctrl, performed, within, sheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-before-paste
 ---
 # onBeforePaste ***(event)***
-> 시트 내에서 `ctrl+v`를 통해 붙여넣기가 이루지기 전에 발생합니다.
+> Fires before a paste operation via `ctrl+v` is performed within the sheet.
 
-> `cols, pastedtext`의 내용을 수정하시면 붙여넣어질 내용이나 위치를 수정하실 수 있습니다.
+> You can modify the content or position to be pasted by modifying the contents of `cols, pastedtext`.
 
-> 이벤트에서 `1(true)`를 리턴시 붙여넣기를 중단합니다.
+> Returning `1(true)` in the event stops the paste operation.
 
 
 ### Syntax
@@ -28,9 +27,9 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|cols|`array[string]`|붙여넣기가 이루어질 `colName` 배열(수정가능)|
-|pastedtext|`array[string]`|각 행에 붙여넣어질 내용(수정가능)|
+|sheet|`object`|Sheet object|
+|cols|`array[string]`|Array of `colName` where paste will be performed (modifiable)|
+|pastedtext|`array[string]`|Content to be pasted into each row (modifiable)|
 
 ### Return
 ***boolean***
@@ -39,7 +38,7 @@ or
 ```javascript
 options.Events = {
     onBeforePaste:function(evtParam){
-        //붙여넣어질 내용에 주민등록번호 패턴[######-#######]이 있으면 뒤에 6자리를 '*'로 변경
+        //If the content to be pasted contains a resident registration number pattern [######-#######], replace the last 6 digits with '*'
         var pasteArr = evtParam.pastedtext;
         for(var i = 0; i < pasteArr.length; i++){
             pasteArr[i] = pasteArr[i].replace(/([0-9]{6}\-[0-9]{1})[0-9]{6}/g, "$1"+"******")
@@ -57,4 +56,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

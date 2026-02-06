@@ -2,12 +2,12 @@
 KEY: version
 KIND: method
 PATH: funcs/core/version
-ALIAS: sheet.version, version(), 인스턴스화된, 시트, 객체의, 버전을, 확인합니다
-ALIAS_EN: version, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/version
+ALIAS: sheet.version, version()
+ALIAS_EN: checks, version, instantiated, sheet, object, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/version
 ---
 # version ***(method)***
-> 인스턴스화된 시트 객체의 버전을 확인합니다.
+> Checks the version of the instantiated sheet object.
 
 ### Syntax
 ```javascript
@@ -15,11 +15,11 @@ string version();
 ```
 
 ### Return Value
-***string***: 인스턴스화된 시트 객체의 버전 및 로드된 플러그인들의 버전 문자열
+***string***: Version of the instantiated sheet object and loaded plugins as a string
 
 ### Example
 ```javascript
-// 인스턴스화된 시트 객체의 버전 확인
+// Check the version of the instantiated sheet object
 sheet.version();
 ```
 
@@ -29,4 +29,4 @@ sheet.version();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

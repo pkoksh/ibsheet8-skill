@@ -2,13 +2,13 @@
 KEY: getDataVisibleRows
 KIND: method
 PATH: funcs/common/get-data-visible-rows
-ALIAS: sheet.getDataVisibleRows, getDataVisibleRows(), 시트에서, 보여지고, 있는, 데이터, 로우
-ALIAS_EN: get, data, visible, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/get-data-visible-rows
+ALIAS: sheet.getDataVisibleRows, getDataVisibleRows()
+ALIAS_EN: retrieves, data, row, objects, currently, visible, sheet, getdatavisiblerows
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/get-data-visible-rows
 ---
 # getDataVisibleRows ***(method)***
 
-> 시트에서 보여지고 있는 데이터 로우 객체들을 확인합니다. 
+> Retrieves the data row objects currently visible in the sheet. 
 
 
 ### Syntax
@@ -20,18 +20,18 @@ void getDataVisibleRows( noSubTotal );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|noSubTotal|`boolean`|선택|소계/누계 행을 제외할지 여부|
+|noSubTotal|`boolean`|Optional|Whether to exclude subtotal/cumulative total rows|
 
 ### Return Value
 ***none***
 
 ### Return Value
-***array[row object]*** : 데이터 로우 객체 배열
+***array[row object]*** : Array of data row objects
 
 
 ### Example
 ```javascript
-// 시트에서 보여지고 있는 데이터 로우 객체들을 반환합니다.
+// Returns the data row objects currently visible in the sheet.
 sheet.getDataVisibleRows();
 ```
 
@@ -41,4 +41,4 @@ sheet.getDataVisibleRows();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

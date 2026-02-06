@@ -2,13 +2,13 @@
 KEY: getSheetWidth
 KIND: method
 PATH: funcs/common/get-sheet-width
-ALIAS: sheet.getSheetWidth, getSheetWidth(), 시트의, 너비를, 반환합니다
-ALIAS_EN: get, sheet, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/get-sheet-width
+ALIAS: sheet.getSheetWidth, getSheetWidth()
+ALIAS_EN: returns, width, sheet, getsheetwidth, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/get-sheet-width
 ---
 # getSheetWidth ***(method)***
 
-> 시트의 너비를 반환합니다. 
+> Returns the width of the sheet. 
 
 
 ### Syntax
@@ -17,11 +17,11 @@ void getSheetWidth();
 ```
 
 ### Return Value
-***number*** 시트의 높이
+***number*** Width of the sheet
 
 ### Example
 ```javascript
-// 시트의 높이를 반환합니다.
+// Returns the width of the sheet.
 sheet.getSheetWidth();
 ```
 
@@ -31,4 +31,4 @@ sheet.getSheetWidth();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

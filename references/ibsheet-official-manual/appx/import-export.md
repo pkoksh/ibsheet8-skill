@@ -2,72 +2,71 @@
 KEY: importExport
 KIND: appendix
 PATH: appx/import-export
-ALIAS: 엑셀파일, 업로드, 다운로드, 시트의, 내용을
-ALIAS_EN: import, export
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/import-export
+ALIAS_EN: learn, download, sheet, content, excel, text, files, upload
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/import-export
 ---
-# 엑셀파일 업로드/다운로드  ***(appendix)***
-> 시트의 내용을 엑셀이나,텍스트 파일로 다운로드 하거나, 반대로 파일의 내용을 읽어 시트에 업로드하는 방법에 대해 알아봅니다.
+# Excel File Upload/Download  ***(appendix)***
+> Learn how to download sheet content as Excel or text files, or upload file content to the sheet.
 
-> **이 내용은 서버 기반 파일 다운로드/업로드 방법을 설명합니다.**
- 
-> **클라이언트 기반 다운로드/업로드는 [exportData](/docs/funcs/export-data)/[importData](/docs/funcs/import-data) 함수를 참고해 주세요.**
+> **This content explains server-based file download/upload methods.**
 
-## 필수 파일 요소
-업로드/다운로드 작업을 위해서 다음과 같은 파일이 필요합니다.
-1. 서버모듈(엑셀모듈)
-<!--!- poi 3.13 이용시 필요 파일(JAVA)
+> **For client-based download/upload, please refer to the [exportData](/docs/funcs/export-data)/[importData](/docs/funcs/import-data) functions.**
 
-|파일명|용도|
+## Required File Components
+The following files are required for upload/download operations.
+1. Server module (Excel module)
+<!--!- Required files when using poi 3.13 (JAVA)
+
+|File Name|Purpose|
 |---|---|
-|ibsheet8-1.0.x.jar|엑셀 서버코어모듈|
-|ibsheet8-hwpx-1.0.x.jar|`down2Hwpx` 서버코어모듈|
-|poi-3.13, poi-ooxml-3.13, poi-ooxml-schemas-3.13 jar |엑셀 파일 생성/파싱 모듈|
-|commons-codec-1.6.jar|엑셀 업로드 관련 인코딩 모듈, `down2Hwpx`시 필요|
-|commons-logging-1.1.3.jar|로그 모듈|
-|ib-itext.jar|pdf다운로드 모듈|
-|batik-all-xml.jar|이미지 처리 관련 모듈, `down2Hwpx`시 필요|
+|ibsheet8-1.0.x.jar|Excel server core module|
+|ibsheet8-hwpx-1.0.x.jar|`down2Hwpx` server core module|
+|poi-3.13, poi-ooxml-3.13, poi-ooxml-schemas-3.13 jar |Excel file creation/parsing module|
+|commons-codec-1.6.jar|Encoding module for Excel upload, required for `down2Hwpx`|
+|commons-logging-1.1.3.jar|Log module|
+|ib-itext.jar|PDF download module|
+|batik-all-xml.jar|Image processing module, required for `down2Hwpx`|
 
-- poi 4.1.2 이용시 필요 파일(JAVA)
+- Required files when using poi 4.1.2 (JAVA)
 !-->
-|파일명|용도|
+|File Name|Purpose|
 |---|---|
-|ibsheet8-1.x.x.jar|엑셀 서버코어모듈|
-|ibsheet8-hwpx-1.0.x.jar|`down2Hwpx` 서버코어모듈|
-|poi-4.1.2, poi-ooxml-4.1.2, poi-ooxml-schemas-4.1.2|엑셀 파일 생성/파싱 모듈|
+|ibsheet8-1.x.x.jar|Excel server core module|
+|ibsheet8-hwpx-1.0.x.jar|`down2Hwpx` server core module|
+|poi-4.1.2, poi-ooxml-4.1.2, poi-ooxml-schemas-4.1.2|Excel file creation/parsing module|
 |commons-collections4-4.4.jar, commons-compress-1.19.jar
 commons-math3-3.6.1.jar, curvesapi-1.06.jar, servlet-api.jar
-SparseBitSet-1.2.jar, xmlbeans-3.1.0.jar |poi 이용시 필요 파일|
-|commons-codec-1.13.jar|엑셀 업로드 관련 인코딩 모듈, `down2Hwpx`시 필요|
-|commons-logging-1.1.3.jar|로그 모듈|
-|ib-itext.jar|pdf 다운로드 모듈|
+SparseBitSet-1.2.jar, xmlbeans-3.1.0.jar |Required files when using poi|
+|commons-codec-1.13.jar|Encoding module for Excel upload, required for `down2Hwpx`|
+|commons-logging-1.1.3.jar|Log module|
+|ib-itext.jar|PDF download module|
 |batik-all-1.17.jar, commons-io-2.11.0.jar
 xml-apis-ext-1.3.04.jar, xmlgraphics-commons-2.9.jar
-|이미지 처리 관련 모듈, `down2Hwpx`시 필요|
+|Image processing module, required for `down2Hwpx`|
 
-- dotnet 4.0 이용시 필요 파일
+- Required files when using dotnet 4.0
 
-|파일명|용도|
+|File Name|Purpose|
 |---|---|
-|IBSheet8-4.0.dll|엑셀 서버코어모듈|
-|IBSheet8-4.0.resources.dll|엑셀 서버코어 서브모듈|
+|IBSheet8-4.0.dll|Excel server core module|
+|IBSheet8-4.0.resources.dll|Excel server core sub-module|
 |Syncfusion.Compression.Base.dll, Syncfusion.Core.dll,
-Syncfusion.XlsIO.Base.dll|엑셀 생성/파싱 모듈|
-|wkhtmltopdf.exe|pdf생성 모듈|
+Syncfusion.XlsIO.Base.dll|Excel creation/parsing module|
+|wkhtmltopdf.exe|PDF creation module|
 
 
-### 서버모듈 확인 방법(엑셀 모듈)
+### How to Verify Server Module (Excel Module)
 
-서버에서 jar 파일이 정상적으로 로드되었는지 다음 구문을 통해 확인 할 수 있습니다.
+You can check if the jar files are properly loaded on the server through the following statement.
 
 ```jsp
 <%
 System.out.println(com.ibleaders.ibsheet.util.Version.getVersion());
 %>
 ```
-위와 같이 jsp파일에 입력시 서버에 콘솔창에 다음과 같은 메세지가 나오면 정상입니다.
+When entered in a jsp file as above, if the following message appears in the server console, it is working correctly.
 
-(각 jar 파일에 버젼 정보를 확인해 주세요.)
+(Please check the version information of each jar file.)
 ```console
 ********************************************************************************
 # ibsheet8-1.1.X
@@ -103,28 +102,28 @@ POI Core Library file:/D:/tomcat/tomcat-8.5_servertest/webapps/ibsheet8_demo_tes
 POI OOXML Library file:/D:/tomcat/tomcat-8.5_servertest/webapps/ibsheet8_demo_test/WEB-INF/lib/poi-ooxml-4.1.2.jar
 ```
 
-3. jsp,aspx 파일
+3. jsp, aspx files
 
-|파일명|용도|
+|File Name|Purpose|
 |---|---|
-|DirectDown2Excel.jsp(aspx)|엑셀파일 다운로드|
-|DirectLoadExcel.jsp(aspx)|엑셀파일 업로드|
-|Down2Excel.jsp(aspx)|엑셀파일 다운로드|
-|Down2Hwpx.jsp|한글(Hwpx) 파일 다운로드, 닷넷은 지원하지 않음|
-|Down2Text.jsp(aspx)|텍스트파일 다운로드|
-|Down2Pdf.jsp(aspx)|PDF파일 다운로드|
-|LoadExcel.jsp(aspx)|엑셀파일 업로드|
-|LoadText.jsp(aspx)|텍스트파일 업로드|
+|DirectDown2Excel.jsp(aspx)|Excel file download|
+|DirectLoadExcel.jsp(aspx)|Excel file upload|
+|Down2Excel.jsp(aspx)|Excel file download|
+|Down2Hwpx.jsp|Hangul (Hwpx) file download, not supported for dotnet|
+|Down2Text.jsp(aspx)|Text file download|
+|Down2Pdf.jsp(aspx)|PDF file download|
+|LoadExcel.jsp(aspx)|Excel file upload|
+|LoadText.jsp(aspx)|Text file upload|
 
 
-4. 플러그인 파일 include 파일
+4. Plugin file include file
 
-시트를 이용하여 다운로드/업로드 작업을 할 모든 페이지에는  `/plugins/ibsheet-excel.js` 파일이 인클루드 되어야 합니다.
+All pages that will perform download/upload operations using the sheet must include the `/plugins/ibsheet-excel.js` file.
 
-## 준비 과정
+## Preparation
 
-### jsp 파일경로 설정
-시트 생성시 Cfg 프로퍼티에 `Export.Url` 속성을 통해 jsp 파일이 위치한 경로를 설정해야 합니다.
+### Setting JSP File Path
+When creating the sheet, you must set the path where the jsp files are located through the `Export.Url` property in the Cfg property.
 
 ```json
 options.Cfg = {
@@ -134,18 +133,18 @@ options.Cfg = {
 }
 ```
 
-## 기능 구현
-[down2Excel](/docs/funcs/excel/down-to-excel)이나 [loadText](/docs/funcs/excel/load-text)함수를 통해 시트의 내용을 다운로드/업로드 하실 수 있습니다.
+## Feature Implementation
+You can download/upload sheet content through functions such as [down2Excel](/docs/funcs/excel/down-to-excel) or [loadText](/docs/funcs/excel/load-text).
 
 
 ```javascript
 sheet.down2Excel({"fileName":"boardList.xlsx","sheetDesign":1,"merge":1});
 ```
 ![down2Excel](/assets/imgs/down2Excel.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - down2Excel -->
+<!-- IMAGE: Screenshot/Example Image - down2Excel -->
 
 
-업로드/다운로드 함수에 대한 자세한 기능은 해당 함수에 대한 메뉴얼 파트를 참고해 주세요.
+For detailed features of upload/download functions, please refer to the manual section for each function.
 
 ### Read More
 - [Export cfg](/docs/props/cfg/export)
@@ -162,7 +161,7 @@ sheet.down2Excel({"fileName":"boardList.xlsx","sheetDesign":1,"merge":1});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.85|Down2Hwpx 기능 추가|
-|excel|1.1.2|Down2Hwpx 기능 추가|
-|jar|1.0.0|Down2Hwpx 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.85|Down2Hwpx feature added|
+|excel|1.1.2|Down2Hwpx feature added|
+|jar|1.0.0|Down2Hwpx feature added|

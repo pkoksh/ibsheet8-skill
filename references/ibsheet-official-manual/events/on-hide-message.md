@@ -2,14 +2,13 @@
 KEY: onHideMessage
 KIND: event
 PATH: events/on-hide-message
-ALIAS: 시트의, 메시지가, 없어질때, 실행되는, 이벤트입니다
-ALIAS_EN: on, hide, message
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-hide-message
+ALIAS_EN: event, fires, sheet, message, removed, onhidemessage
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-hide-message
 ---
 # onHideMessage ***(event)***
-> 시트의 메시지가 없어질때 실행되는 이벤트입니다.
+> Event that fires when the sheet's message is removed.
 
-> 이벤트를 통해서 외부 라이브러리의 메시지를 닫을 수 있습니다.
+> Through this event, you can close messages from external libraries.
 
 ### Syntax
 
@@ -26,58 +25,58 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|메시지가 발생한 시트 객체|
+|sheet|`object`|Sheet object where the message occurred|
 
 ### Return
 ***none***
 
 ### Example
 ```javascript
-// [SweetAlert2](https://sweetalert2.github.io/)를 활용한 예제
+// Example using [SweetAlert2](https://sweetalert2.github.io/)
 options.Events = {
     onShowMessage: function (evtParams) {
         if (window.Swal) {
-            // showMessage와 showMessageTime에 따라 메시지 처리를 다르게 해준다.
+            // Handle messages differently based on showMessage and showMessageTime.
             if (evtParams.isConfirm) {
                 Swal.fire({
-                    title: "<div>" + evtParams.message + "</div>", // 메시로 보여질 문자열(HTML Tag 포함)
+                    title: "<div>" + evtParams.message + "</div>", // String to be shown as message (including HTML tags)
                     icon: 'warning',
-                    showConfirmButton: (evtParams.buttons.indexOf("Ok") > -1), // 확인 버튼이 있으면 확인 버튼을 만들어준다.
-                    showCancelButton: (evtParams.buttons.indexOf("Cancel") > -1), // 취소 버튼이 있으면 취소 버튼을 만들어준다.
+                    showConfirmButton: (evtParams.buttons.indexOf("Ok") > -1), // Create confirm button if it exists.
+                    showCancelButton: (evtParams.buttons.indexOf("Cancel") > -1), // Create cancel button if it exists.
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: '확인',
-                    cancelButtonText: '취소',
-                    timer: evtParams.time // showMessageTime의 time인자로 단위는 밀리초(ms)로 설정한다.
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    timer: evtParams.time // Time argument of showMessageTime, unit is milliseconds (ms).
                 }).then((result) => {
                     if (result.value) {
-                        // confirmButton이 눌렸을때 시트에서도 후속 기능이 실행되도록 callback을 통해 Ok 버튼이 눌린 정보를 전달한다.
+                        // When confirmButton is clicked, pass the Ok button click info through callback so the sheet can execute subsequent functions.
                         if (evtParams.callback) evtParams.callback(evtParams.buttons.indexOf("Ok") + 1);
                     } else {
-                        // cancelButton이 눌렸을때 시트에서도 후속 기능이 실행되지 않도록 callback을 통해 Cancel 버튼이 눌린 정보를 전달한다.
+                        // When cancelButton is clicked, pass the Cancel button click info through callback so the sheet does not execute subsequent functions.
                         if (evtParams.callback) evtParams.callback(evtParams.buttons.indexOf("Cancel") + 1);
                     }
                 });
             } else {
                 Swal.fire({
-                    title: "<div>" + evtParams.message + "</div>", // 메시로 보여질 문자열(HTML Tag 포함)
+                    title: "<div>" + evtParams.message + "</div>", // String to be shown as message (including HTML tags)
                     icon: 'success',
-                    showConfirmButton: false // IBSheet는 단순 메시지에서 확인버튼을 노출 시키지 않기때문에 비슷하게 구현하려면 Swal의 버튼도 숨겨야한다.
+                    showConfirmButton: false // IBSheet does not show confirm button in simple messages, so hide Swal's button for similar implementation.
                 }).then((result) => {
-                    // Swal이 클릭이나 esc 키 등 Swal 액션으로 닫혔을때 sheet.hideMessage()도 같이 실행 시켜준다.
-                    // sheet.hideMessage()호출로 Swal가 닫히면 result.value, result.dismiss 등 값이 없음.
-                    // 무조건 sheet.hideMessage()를 호출하도록 코드가 구현되어 있으면 연속으로 메시지가 호출되는 경우 메시지가 제대로 보여지지 않을 수 있음.
+                    // When Swal is closed by click or Esc key etc., also execute sheet.hideMessage().
+                    // When Swal is closed by sheet.hideMessage() call, result.value, result.dismiss etc. have no value.
+                    // If the code is implemented to always call sheet.hideMessage(), messages may not be displayed properly when messages are called consecutively.
                     if (result.value || result.dismiss) {
                         evtParams.sheet.hideMessage();
                     }
                 });
             }
-            return true; // 시트 메시지를 대체함.
+            return true; // Replace the sheet message.
         }
     },
     onHideMessage: function (evtParams) {
         if (window.Swal) {
-            // sheet.hideMessage()가 호출될때 Swal의 메시지도 close() 시켜준다.
+            // When sheet.hideMessage() is called, also close() Swal's message.
             Swal.close();
         }
     }
@@ -95,4 +94,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

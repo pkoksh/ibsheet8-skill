@@ -2,15 +2,14 @@
 KEY: includeDelRow
 KIND: config-property
 PATH: props/cfg/include-del-row
-ALIAS: 소계, 누계, 합계, 삭제, 상태
-ALIAS_EN: include, del, row, subtotal, total, sum, delete, remove
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/include-del-row
+ALIAS_EN: whether, include, deleted, rows, docs, props, row, calculation
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/include-del-row
 ---
 # IncludeDelRow ***(cfg)***
 
-> 소계/누계([makeSubTotal](/docs/funcs/core/make-sub-total)) / 합계([FormulaRow](/docs/props/col/formula-row))에 삭제 상태 행 ([Deleted](/docs/props/row/deleted): 1) 을 계산에 포함할지 여부를 설정합니다. 
+> Sets whether to include deleted rows ([Deleted](/docs/props/row/deleted): 1) in the calculation of subtotals/cumulative totals ([makeSubTotal](/docs/funcs/core/make-sub-total)) / grand totals ([FormulaRow](/docs/props/col/formula-row)). 
 
-> bit 연산 형태로 속성을 설정합니다. 3으로 설정시 1번옵션 + 2번옵션 대해 설정하게 됩니다.
+> The property is set in bitwise operation format. Setting to 3 configures both option 1 and option 2.
 
 
 ### Type
@@ -19,15 +18,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/include-d
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|삭제행 계산에 포함하지 않음. (`default`)|
-|`1`|소계/누계 계산에 삭제행을 포함하여 계산|
-|`2`|합계 계산에 삭제행을 포함하여 계산|
+|`0`|Do not include deleted rows in calculation. (`default`)|
+|`1`|Include deleted rows in subtotal/cumulative total calculation|
+|`2`|Include deleted rows in grand total calculation|
 
 ### Example
 ```javascript
 options.Cfg = {
    ...
-   "IncludeDelRow": 3 // 소계/누계, 합계 계산 모두 삭제행을 포함하여 계산
+   "IncludeDelRow": 3 // Include deleted rows in both subtotal/cumulative total and grand total calculations
    ...
 };
 ```
@@ -41,4 +40,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.11|기능 추가|
+|core|8.0.0.11|Feature added|

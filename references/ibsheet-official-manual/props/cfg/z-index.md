@@ -2,15 +2,14 @@
 KEY: zIndex
 KIND: config-property
 PATH: props/cfg/z-index
-ALIAS: 시트와, 시트의, 팝업, 다이얼로그, 메세지
-ALIAS_EN: index, dialog, modal, popup
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/z-index
+ALIAS_EN: base, value, css, index, sheet, popup, dialogs, messages
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/z-index
 ---
 # ZIndex ***(cfg)***
 
-> 시트와 시트의 팝업 다이얼로그, 메세지, 커서들에 대한 `css z-index` 기준 값을 설정합니다.
+> Sets the base value for `css z-index` for the sheet and its popup dialogs, messages, and cursors.
 
-> 기준 값 설정 시 시트에 속한 객체들은 `Zindex ~ Zindex+20` 까지의 `css z-index` 를 가지게 됩니다.
+> When a base value is set, objects belonging to the sheet will have `css z-index` values from `ZIndex` to `ZIndex+20`.
 
 
 
@@ -21,14 +20,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/z-index
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|`ZIndex`로 가질 기준 값을 설정한다. |
+|`number`|Sets the base value, for `ZIndex`. |
 
 
 ### Example
 ```javascript
 options.Cfg = {
-   // 시트와 시트 내부 객체들의 z-index 기준값을 300 으로 설정
-   // 내부 객체들은 최대 320 까지의 z-index 를 가짐
+   // Set the z-index base value for the sheet and internal objects to 300
+   // Internal objects will have z-index values up to 320
    ZIndex: 300,
    ...
 };
@@ -40,4 +39,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

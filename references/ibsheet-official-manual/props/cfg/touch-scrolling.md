@@ -2,13 +2,12 @@
 KEY: touchScrolling
 KIND: config-property
 PATH: props/cfg/touch-scrolling
-ALIAS: 모바일, 환경에서, 시트, 바디, 영역
-ALIAS_EN: touch, scrolling, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/touch-scrolling
+ALIAS_EN: determines, whether, touch, scrolling, sheet, body, area, works
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/touch-scrolling
 ---
 # TouchScrolling ***(cfg)***
 
-> 모바일 환경에서 시트 바디 영역 터치 스크롤이 동작할지 여부를 결정합니다. 
+> Determines whether touch scrolling in the sheet body area works in a mobile environment. 
 
 
 ### Type
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/touch-scr
 ### Options
 |Value|Description|
 |-----|-----|
-| `0` | 모바일 환경에서 시트 바디 영역 터치 스크롤이 동작하지 않습니다.|
-| `1` | 모바일 환경에서 시트 바디 영역 터치 스크롤이 동작합니다. (`default`)|
+| `0` | Touch scrolling in the sheet body area does not work in a mobile environment.|
+| `1` | Touch scrolling in the sheet body area works in a mobile environment. (`default`)|
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-        TouchScrolling: 0, // 모바일 환경에서 시트 바디 영역 터치 스크롤을 막습니다.
+        TouchScrolling: 0, // Disable touch scrolling in the sheet body area in a mobile environment.
         ...
     }
 };
@@ -36,4 +35,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.38|기능 추가|
+|core|8.3.0.38|Feature added|

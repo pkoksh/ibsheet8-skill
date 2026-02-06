@@ -2,13 +2,12 @@
 KEY: htmlPostfix
 KIND: cell-property
 PATH: props/cell/html-postfix
-ALIAS: 셀의, 문자열, 뒤에, 원하는, 태그를
-ALIAS_EN: html, postfix
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/html-postfix
+ALIAS_EN: inserts, desired, html, tag, cell, text, string, htmlpostfix
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/html-postfix
 ---
 # HtmlPostfix ***(cell)***
 
-> 셀의 문자열 뒤에 원하는 HTML 태그를 삽입합니다.
+> Inserts a desired HTML tag after the cell's text string.
 
 
 ### Type
@@ -17,23 +16,23 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/html-pos
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|원하는 HTML태그|
+|`string`|Desired HTML tag|
 
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름 :CLS )
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "HtmlPostfix", "<i class='fas fa-apple-alt'></i>");
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름 :CLS )
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
-ROW["CLSHtmlPostfix"] = "약어";
-//변경내용 확인
+ROW["CLSHtmlPostfix"] = "abbr";
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용  (열이름 :CLS )
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSHtmlPostfix":"<div class='btn'>time</div>" , ...}
@@ -48,4 +47,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

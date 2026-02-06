@@ -2,239 +2,238 @@
 KEY: menu
 KIND: appendix
 PATH: appx/menu
-ALIAS: 마우스, 우측, 버튼, 클릭시, 보여질
-ALIAS_EN: menu
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/menu
+ALIAS_EN: configures, appearance, content, context, menu, displayed, right, clicking
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/menu
 ---
 # Menu  ***(appendix)***
-> 마우스 우측 버튼 클릭시 보여질 컨텍스트 메뉴의 모양과 내용을 설정합니다.
+> Configures the appearance and content of the context menu displayed when right-clicking the mouse.
 
-> 단순한 컨텍스트 메뉴를 사용 시에는 구분자로 연결한 문자열로 설정할 수 있습니다. (ex: Menu:"|저장|취소|미리보기" )
+> For simple context menus, you can set them as delimiter-separated strings. (ex: Menu:"|Save|Cancel|Preview" )
 
-> 보다 복잡한 구조의 컨텍스트 메뉴를 표현할 때는 json 형식으로 설정해야 합니다.
+> For more complex context menu structures, you need to configure them in json format.
 
-> 메뉴를 선택하거나, 확인 버튼을 클릭하면 onSelectMenu 이벤트를 통해 선택한 내용을 확인할 수 있습니다.
+> When a menu item is selected or the confirm button is clicked, you can check the selected content through the onSelectMenu event.
 
 
-## Menu 속성
-Menu에서 설정되는 속성은 크게 두가지로 나뉩니다.
-1. 메뉴 객체 대한 속성
-2. 메뉴 내에 특정 item 에 대한 속성
+## Menu Properties
+Properties set in Menu are divided into two main categories.
+1. Properties for the menu object
+2. Properties for specific items within the menu
 
 ```js
   {
     "Menu":{
       "Buttons":[ "Ok", "Cancel" ],
       "Items":[
-        {"Name":"미국","Value":1,"Bool":1},
-        {"Name":"일본","Value":0,"Bool":1},
-        {"Name":"중국","Value":0,"Bool":1},
-        {"Name":"북한","Value":1,"Bool":1}
+        {"Name":"USA","Value":1,"Bool":1},
+        {"Name":"Japan","Value":0,"Bool":1},
+        {"Name":"China","Value":0,"Bool":1},
+        {"Name":"North Korea","Value":1,"Bool":1}
       ],
       "OnSave":function(item,data) {
-        alert("["+data.join(",")+"]를 선택하셨습니다.");
+        alert("["+data.join(",")+"] has been selected.");
       }
     }
   }
 ```
-![메뉴기능](/assets/imgs/menuBasic.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - 메뉴기능 -->
+![Menu feature](/assets/imgs/menuBasic.png)
+<!-- IMAGE: Screenshot/Example Image - Menu feature -->
 
 
 
-### 1. 메뉴 객체 대한 속성
+### 1. Properties for the Menu Object
 |Name|Type|Description|
 |---|---|---|
-|*Items*|`array[object]`|메뉴에 보여질 아이템들을 배열 형태로 설정합니다.|
-|*Default*|`object`|Items 배열 내에 설정된 모든 하위 아이템 객체에 공통으로 적용해야 할 내용을 설정합니다.
+|*Items*|`array[object]`|Sets the items to be displayed in the menu as an array.|
+|*Default*|`object`|Sets content to be commonly applied to all sub-item objects set within the Items array.
 ex)
- //하위 아이템들을 체크박스 형식으로 설정
+ //Set sub-items as checkbox format
 Default:{ Bool:1 },   Items:[{}, {}, {}] |
-|*SaveType*|`number`|여러 아이템을 선택 혹은 수정 후 최종적으로 onSelectMenu이벤트로 전달될 값을 설정합니다.
-설정에 따라 리턴되는 값은 다음과 같습니다.
-0 : 빈값이 아닌 아이템만 리턴됩니다. Bool속성을 사용하는 아이템은 체크된 경우 Name속성이 리턴되며, 편집가능한 타입의 아이템은 Name:Value형태로 리턴됩니다.
-1 : 수정된 아이템들만 리턴됩니다. Bool속성을 사용하는 아이템은 Name: 0, Name: 1 형태로 리턴되며, 편집가능한 타입의 아이템은  Name: Value 형태로 리턴됩니다.
-2 : 모든 값들이 리턴됩니다. Bool속성을 사용하는 아이템은 Name: 0, Name: 1 형태로 리턴되며, 편집가능한 타입의 아이템은 Name: Value 형태로 리턴됩니다.
-3 : 모든 값들이 리턴됩니다. Bool속성을 사용하는 아이템은  0/1 형태로 리턴되며, 편집가능한 타입의 아이템은 Value 만 리턴됩니다.
-4 : 모든 값들이 리턴됩니다. Bool속성을 사용하는 아이템은  0/1 대신 언체크는 ""(공백)/체크는 Name이 리턴되며, 편집가능한 타입의 아이템은 Value 만 리턴됩니다.|
-|*Buttons*|`array[string]`|메뉴 하단에 표시될 버튼을 배열로 설정합니다. 
-설정할 수 있는 버튼은 다음과 같습니다.
-"Ok":선택한 값을 리턴
-"Clear":Bool속성 사용하는 아이템에 대해 전체 선택 혹은 선택 취소
-"Cancel":선택값을 무시하고 메뉴 닫기
+|*SaveType*|`number`|Sets the value to be finally passed to the onSelectMenu event after selecting or modifying multiple items.
+The returned values depending on the setting are as follows:
+0 : Only non-empty items are returned. Items using the Bool property return the Name property when checked, and editable type items are returned in Name:Value format.
+1 : Only modified items are returned. Items using the Bool property are returned in Name: 0, Name: 1 format, and editable type items are returned in Name: Value format.
+2 : All values are returned. Items using the Bool property are returned in Name: 0, Name: 1 format, and editable type items are returned in Name: Value format.
+3 : All values are returned. Items using the Bool property are returned in 0/1 format, and editable type items return only the Value.
+4 : All values are returned. Items using the Bool property return ""(blank) for unchecked/Name for checked instead of 0/1, and editable type items return only the Value.|
+|*Buttons*|`array[string]`|Sets buttons to be displayed at the bottom of the menu as an array. 
+Available buttons are as follows:
+"Ok": Return selected values
+"Clear": Select all or deselect all for items using the Bool property
+"Cancel": Ignore selected values and close the menu
 ex)
 "Buttons":[ "Ok", "Cancel" ]|
-|*ExpandTime*|`number`|Level속성을 통해 하위 아이템을 트리 형식으로 표현할 때 상위 아이템에 마우스 호버 시 설정된 시간(ms단위) 이후에 자동으로 하위 아이템 메뉴가 펼쳐집니다.
-0으로 설정시 항상 하위 아이템 메뉴가 펼쳐진 상태로 보여지며 접기 위한 아이콘도 표시되지 않습니다. (default:200)|
-|*CollapseOther*|`boolean`|트리 형식 사용시 사용자가 어떤 상위 아이템을 클릭하여 하위 아이템 메뉴가 보여지도록 펼치면, 자동으로 기존에 펼쳐져 있던 다른 상위 아이템의 하위 아이템 메뉴를 접게 합니다.(default:1)|
-|*ShowHint*|`boolean`|메뉴 크기가 작아서 일부 내용이 안보이는 경우, 마우스 커서 호버시 해당 아이템의 너비를 늘려 가려진 부분을 보여줍니다.|
+|*ExpandTime*|`number`|When displaying sub-items in tree format using the Level property, the sub-item menu automatically expands after the set time (in ms) when hovering over the parent item.
+When set to 0, the sub-item menu is always shown expanded and no collapse icon is displayed. (default:200)|
+|*CollapseOther*|`boolean`|When using tree format, when a user clicks a parent item to expand its sub-item menu, it automatically collapses the previously expanded sub-item menus of other parent items.(default:1)|
+|*ShowHint*|`boolean`|When the menu is too small to show some content, hovering the mouse cursor expands the width of that item to show the hidden part.|
 
-### 2. 메뉴 내 특정 item에 대한 속성
+### 2. Properties for Specific Items within the Menu
 |Name|Type|Description|
 |---|---|---|
 |*Name*
-**필수**|`string`|각 아이템의 이름을 설정합니다. 
-Text속성을 설정하지 않는 경우 Name으로 설정한 값이 아이템 리스트에 보여집니다.
-Value속성이 설정되지 않는 경우 Name으로 설정한 값이 전달됩니다.
- Name은 아이템 별로 고유해야 합니다.|
-|*Text*|`string`|메뉴에 보여질 아이템 텍스트를 설정합니다. 
-Text속성을 설정하지 않는 경우 Name으로 설정한 값이 아이템 리스트에 보여집니다.|
-|*Value*|`string`|특정 아이템을 선택시 전달할 값을 설정합니다.
-Value속성이 설정되지 않는 경우 Name으로 설정한 값이 전달됩니다.
-다만 Bool:1 로 각 아이템에 체크박스를 두는 경우에는 용도가 완전히 달라져서 체크박스에 대한 초기 선택 여부로 사용됩니다.|
-|*Icon*|`string`|아이템 텍스트 왼쪽에 보여질 아이콘의 url을 설정합니다.|
-|*IconWidth*|`number`|아이콘 객체의 너비를 설정합니다.|
-|*LeftHtml*|`string`|아이템 텍스트 왼쪽에 원하는 HTML객체를 넣습니다.|
-|*LeftWidth*|`number`|왼쪽 HTML객체의 너비를 설정합니다.|
-|*RightHtml*|`string`|아이템 텍스트 오른쪽에 원하는 HTML객체를 넣습니다.|
-|*RightWidth*|`number`|오른쪽 HTML객체의 너비를 설정합니다.|
-|*Height*|`number`|아이템 객체의 최소 높이를 설정합니다.(설정하지 않는 경우 내용의 높이에 따라 자동 결정됩니다.)|
-|*Hidden*|`boolean`|특정 아이템 객체의 감춤 여부를 설정합니다. 
-아이템이 자식 메뉴를 갖고 있는 경우, 자식도 모수 숨겨집니다.|
-|*Disabled*|`boolean`|특정 아이템을 비활성화 합니다. 
-아이템이 보이지만 선택이 불가능한 상태가 됩니다.|
-|*Default*|`object`|Items 배열 내에 설정된 모든 하위 아이템 객체에 공통으로 적용해야 할 내용을 설정합니다.
+**Required**|`string`|Sets the name of each item. 
+If the Text property is not set, the value set in Name is displayed in the item list.
+If the Value property is not set, the value set in Name is passed.
+ Name must be unique for each item.|
+|*Text*|`string`|Sets the item text to be displayed in the menu. 
+If the Text property is not set, the value set in Name is displayed in the item list.|
+|*Value*|`string`|Sets the value to be passed when a specific item is selected.
+If the Value property is not set, the value set in Name is passed.
+However, when Bool:1 is used to place checkboxes on each item, the purpose changes completely and it is used as the initial selection state for the checkbox.|
+|*Icon*|`string`|Sets the URL of the icon to be displayed to the left of the item text.|
+|*IconWidth*|`number`|Sets the width of the icon object.|
+|*LeftHtml*|`string`|Inserts a desired HTML object to the left of the item text.|
+|*LeftWidth*|`number`|Sets the width of the left HTML object.|
+|*RightHtml*|`string`|Inserts a desired HTML object to the right of the item text.|
+|*RightWidth*|`number`|Sets the width of the right HTML object.|
+|*Height*|`number`|Sets the minimum height of the item object. (If not set, it is automatically determined based on the content height.)|
+|*Hidden*|`boolean`|Sets whether to hide a specific item object. 
+If the item has child menus, they are all hidden as well.|
+|*Disabled*|`boolean`|Disables a specific item. 
+The item is visible but cannot be selected.|
+|*Default*|`object`|Sets content to be commonly applied to all sub-item objects set within the Items array.
 ex)
- //하위 아이템들에게 동일한 Icon을 적용한다.
+ //Apply the same Icon to sub-items.
 Default:{ Icon:"./image/icon/bt.gif", IconWidth:24 },   Items:[{},{},{}] |
-|*Caption*|`boolean`|특정 아이템을 머릿말로 사용합니다.
-이 기능을 설정시 해당아이템은 선택되지 않습니다.
+|*Caption*|`boolean`|Uses a specific item as a caption.
+When this feature is set, the item cannot be selected.
 <pre>Menu:{
   Items:[
-    {Name:"N1",Text:"연령별",Caption:1},
-    {Name:"N2",Text:"경행대"},
-    {Name:"N3",Text:"성인"},
-    {Name:"N4",Text:"청소년"},
-    {Name:"N5",Text:"어린이"}
+    {Name:"N1",Text:"By Age",Caption:1},
+    {Name:"N2",Text:"Light vehicle"},
+    {Name:"N3",Text:"Adult"},
+    {Name:"N4",Text:"Youth"},
+    {Name:"N5",Text:"Child"}
   ] 
 }</pre>
 ![Caption](/assets/imgs/menuCaption.png "Caption")
-<!-- IMAGE: 스크린샷/예시 이미지 - Caption -->|
-|*Items*|`array[object]`|특정 아이템 아래 하위 아이템 객체를 설정합니다.|
-|*Level*|`boolean`|하위 아이템 객체들을 Tree 형식으로 표현합니다.
+<!-- IMAGE: Screenshot/Example Image - Caption -->|
+|*Items*|`array[object]`|Sets sub-item objects under a specific item.|
+|*Level*|`boolean`|Displays sub-item objects in Tree format.
 ![Level](/assets/imgs/menuLevel.png "Level")
-<!-- IMAGE: 스크린샷/예시 이미지 - Level -->|
-|*Expanded*|`number`|Level속성을 통해 아이템을 Tree 형식으로 표현할때 아이템의 펼침 여부를 설정합니다.
--1 : 펼쳐져있고 닫기 불가
-1 : 펼쳐저 있고 닫기 가능
-0 : 닫혀 있음
-<b>이 속성은 상위의 CollapseOther 나 ExpandTime 속성에 영향을 받습니다.</b>|
-|*Menu*|`boolean`|하위 아이템 객체들을 부모아이템 우측에 메뉴 형식으로 표현합니다.
+<!-- IMAGE: Screenshot/Example Image - Level -->|
+|*Expanded*|`number`|Sets the expand/collapse state of an item when displaying items in Tree format using the Level property.
+-1 : Expanded and cannot be collapsed
+1 : Expanded and can be collapsed
+0 : Collapsed
+<b>This property is affected by the parent CollapseOther and ExpandTime properties.</b>|
+|*Menu*|`boolean`|Displays sub-item objects as a menu to the right of the parent item.
 ![Menu](/assets/imgs/menuMenu.png "Menu")
-<!-- IMAGE: 스크린샷/예시 이미지 - Menu -->|
-|*Columns*|`number`|하위 아이템 객체를 여러개 열으로 나누어 표현합니다.
+<!-- IMAGE: Screenshot/Example Image - Menu -->|
+|*Columns*|`number`|Displays sub-item objects divided into multiple columns.
 <pre>Menu:{
   Items:[
     {
       Columns:2,
       Items:[
-        {Name:"안보전략"},
-        {Name:"군사발전"},
-        {Name:"국방자원"}
+        {Name:"Security Strategy"},
+        {Name:"Military Development"},
+        {Name:"Defense Resources"}
       ] 
     }
   ]
 }</pre>
 ![Columns](/assets/imgs/menuColumns.png "Columns")
-<!-- IMAGE: 스크린샷/예시 이미지 - Columns -->
-|*ColumnSizes*|`string`|열당 들어갈 아이템 개수를 ","를 구분자로 설정합니다.
-가령 Columns:3 이고 ColumnSizes:"3,2,4"인 경우, 다음과 같이 표시됩니다.
+<!-- IMAGE: Screenshot/Example Image - Columns -->
+|*ColumnSizes*|`string`|Sets the number of items per column using "," as a delimiter.
+For example, if Columns:3 and ColumnSizes:"3,2,4", it is displayed as follows:
 ![ColumnSizes](/assets/imgs/menuColumnSizes.png "ColumnSizes")
-<!-- IMAGE: 스크린샷/예시 이미지 - ColumnSizes -->|
-|*Bool*|`boolean`|아이템 텍스트 우측에 체크박스를 표시합니다.
-이 속성이 적용된 아이템은 클릭시 체크박스의 값이 변경됩니다.
-체크된 전체 아이템은 Buttons속성을 통해 "확인"버튼을 클릭하시면 onSelectMenu 이벤트로 전달됩니다.
+<!-- IMAGE: Screenshot/Example Image - ColumnSizes -->|
+|*Bool*|`boolean`|Displays a checkbox to the right of the item text.
+Items with this property applied will toggle the checkbox value when clicked.
+All checked items are passed to the onSelectMenu event when clicking the "Ok" button through the Buttons property.
 ![Bool](/assets/imgs/menuBool.png "Bool")
-<!-- IMAGE: 스크린샷/예시 이미지 - Bool -->|
-|*Group*|`number`|Bool속성을 사용하는 아이템들 간에 Radio 그룹을 형성하여 같은 그룹 내에서는 하나의 아이템만 선택가능하게 합니다.
-Group의 값은 1이상의 숫자로 설정할 수 있습니다.|
-|*UnCheck*|`boolean`|Group 속성을 사용하는 아이템에서 Radio에 대한 선택을 해제할 수 있는지 여부를 설정합니다.|
+<!-- IMAGE: Screenshot/Example Image - Bool -->|
+|*Group*|`number`|Forms a Radio group among items using the Bool property so that only one item can be selected within the same group.
+The Group value can be set to a number of 1 or greater.|
+|*UnCheck*|`boolean`|Sets whether the Radio selection can be deselected for items using the Group property.|
 |*GroupAll*
 *CheckAll*|`number`
-`boolean`|Bool 속성을 사용하는 아이템들 중에서 같은 GroupAll 속성값을 갖는 아이템들은 CheckAll설정이 되어있는 아이템이 체크될때 같이 체크 됩니다.<pre>//과일전체 아이템 선택시 사과,배,오렌지 아이템도 선택됩니다.
+`boolean`|Among items using the Bool property, items with the same GroupAll property value will be checked together when the item with CheckAll set is checked.<pre>//When "All Fruits" item is selected, Apple, Pear, Orange items are also selected.
 Menu:{
   Items:[
-    {Name:"과일전체",Bool:1,GroupAll:200,CheckAll:1},
-    {Name:"사과",Bool:1,GroupAll:200},
-    {Name:"배",Bool:1,GroupAll:200},
-    {Name:"오렌지",Bool:1,GroupAll:200},
+    {Name:"All Fruits",Bool:1,GroupAll:200,CheckAll:1},
+    {Name:"Apple",Bool:1,GroupAll:200},
+    {Name:"Pear",Bool:1,GroupAll:200},
+    {Name:"Orange",Bool:1,GroupAll:200},
   ] 
 }</pre>|
-|*NoAll*|`boolean`|설정한 아이템은 "전체취소(Clear)/전체선택(All)"버튼의 영향을 받지 않게 됩니다.|
-|*Enum*|`boolean`|하위 아이템을 부모아이템 우측에 콤보 형태로 표현할지 여부를 설정합니다.
+|*NoAll*|`boolean`|The set item will not be affected by the "Deselect All (Clear)/Select All (All)" buttons.|
+|*Enum*|`boolean`|Sets whether to display sub-items as a combo box to the right of the parent item.
 ![Enum](/assets/imgs/menuEnum.png "Enum")
-<!-- IMAGE: 스크린샷/예시 이미지 - Enum -->|
-|*Edit*|`boolean`|아이템 텍스트 우측에 편집 가능한 input 객체를 표시합니다.
-{Name:"이름",Edit:1,Width:150}설정시
+<!-- IMAGE: Screenshot/Example Image - Enum -->|
+|*Edit*|`boolean`|Displays an editable input object to the right of the item text.
+When {Name:"Name",Edit:1,Width:150} is set:
 ![Edit](/assets/imgs/menuEdit.png "Edit")
-<!-- IMAGE: 스크린샷/예시 이미지 - Edit -->|
-|*Width*|`number`|Enum속성 사용시 콤보 박스의 너비를 설정합니다.
-Edit 속성 사용시 input 객체의 너비를 설정합니다.|
-|*Left*|`boolean`|Bool속성 사용시 체크박스를 왼쪽에 위치시킵니다.
-Enum속성을 사용시 콤보박스를 왼쪽에 위치시킵니다.
-Edit속성을 사용시 input 객체를 왼쪽에 위치시킵니다.|
+<!-- IMAGE: Screenshot/Example Image - Edit -->|
+|*Width*|`number`|Sets the width of the combo box when using the Enum property.
+Sets the width of the input object when using the Edit property.|
+|*Left*|`boolean`|Positions the checkbox on the left when using the Bool property.
+Positions the combo box on the left when using the Enum property.
+Positions the input object on the left when using the Edit property.|
 ---
 
-## Menu 이벤트
-전역으로 발생하는 onShowMenu나 onSelectMenu 이벤트 외에 메뉴별로 각각 이벤트를 설정할 수 있습니다.
-메뉴에 설정되는 이벤트도 속성과 마찬가지로 전역 이벤트와 특정 아이템에 설정하는 이벤트로 나뉩니다.
+## Menu Events
+In addition to the global onShowMenu and onSelectMenu events, each menu can have its own events.
+Events set on menus are also divided into global events and events set on specific items, just like properties.
 
-### 1. 메뉴 전체 이벤트
+### 1. Menu-wide Events
 
 #### OnSave
-메뉴를 선택하거나 확인 버튼을 클릭시 발생합니다.(메뉴가 닫히고 나서 발생)
-1. 특정 아이템을 클릭하는 경우
-item인자에 클릭한 item객체가 넘어오고, Name/Value 속성을 통해 값을 확인하실수 있습니다.
-data에는 null이 담깁니다.
-2. 편집가능한 아이템을 수정 후 확인 버튼을 클릭하는 경우
-item인자는 null이 넘어오고, data인자에 선택한 아이템의 값이 배열로 담겨 넘어옵니다.
+Triggered when a menu item is selected or the confirm button is clicked. (Triggered after the menu closes)
+1. When a specific item is clicked
+The clicked item object is passed in the item argument, and you can check the value through the Name/Value properties.
+data contains null.
+2. When clicking the confirm button after modifying editable items
+The item argument is null, and the data argument contains an array of selected item values.
 
-|인자|유형|기능설명|
+|Argument|Type|Description|
 |---|---|---|
-|item|`object`|메뉴에서 선택한 아이템 객체|
-|data|`array`|메뉴에서 선택한 아이템들의 값|
+|item|`object`|Item object selected from the menu|
+|data|`array`|Values of items selected from the menu|
 
 #### OnButton
-하단에 버튼을 클릭시 발생합니다.
+Triggered when a bottom button is clicked.
 
-OnSave보다 먼저 발생합니다.
+Triggered before OnSave.
 
-false를 리턴시 버튼 클릭에 대한 후 처리 기능을 막을수 있습니다.
+Returning false can prevent post-processing for the button click.
 
-|인자|유형|기능설명|
+|Argument|Type|Description|
 |---|---|---|
-|button|`string`|선택한 버튼 문자열|
+|button|`string`|Selected button string|
 
 
-### 2. 아이템 개별 이벤트
+### 2. Individual Item Events
 #### OnClick
-특정 메뉴 아이템을 클릭시 발생 합니다.
+Triggered when a specific menu item is clicked.
 
-리턴값에 따라 다양한 기능을 부여할 수 있습니다.
+Various features can be assigned depending on the return value.
 
-* false를 리턴시 : 아이템 클릭 후 발생하는 모든 기능을 실행하지 않고 메뉴를 계속 탐색할 수 있습니다.
-* true를 리턴시  : 아이템 클릭 후 발생하는 모든 기능을 실행하지 않고 메뉴를 닫습니다.
-* null을 리턴시  : 클릭으로인한 기본 동작(메뉴 아이템 선택)을 실행합니다.
+* When returning false: All features that occur after clicking the item are not executed, and you can continue browsing the menu.
+* When returning true: All features that occur after clicking the item are not executed, and the menu closes.
+* When returning null: The default action from the click (menu item selection) is executed.
 
-이벤트 안에서 클릭한 아이템(MenuItem)은 this로 (아이템 Name의 경우 this.Name으로 접근) 바인딩됩니다.
+Inside the event, the clicked item (MenuItem) is bound to this (for item Name, access via this.Name).
 
-this.Owner를 통해 해당 아이템을 가지고 있는 전체 메뉴 객체에 접근 가능하며 부모 아이템 이나 메뉴는 this.Parent로 접근 가능합니다.
+Through this.Owner, you can access the entire menu object that contains the item, and the parent item or menu can be accessed via this.Parent.
 
-시트 셀에서 메뉴가 생성된 경우 this.Owner.Sheet, this.Owner.Row, this.Owner.Col로 메뉴가 생성된 시트, 행, 열이 접근가능합니다.
+When the menu is created from a sheet cell, you can access the sheet, row, and column where the menu was created via this.Owner.Sheet, this.Owner.Row, this.Owner.Col.
 
 
 #### OnChanged
-수정이 가능한 형태의 아이템(Bool, Enum, Edit 속성 사용)에서 변경사항이 있을시 발생합니다. (변경사항 적용되기전 발생)
+Triggered when there is a change in editable type items (using Bool, Enum, Edit properties). (Triggered before the change is applied)
 
-아이템은 Owner(Menu)라는 프로퍼티를 통해 해당 아이템을 가지고 있는 전체 메뉴를 접근 가능합니다.
+Items can access the entire menu that contains them through the Owner(Menu) property.
 
-이벤트 안에서 클릭한 아이템(MenuItem)은 this로(아이템 Name의 경우 this.Name으로 접근하고, 원래의 값은 this.Value로 접근)바인딩됩니다.
+Inside the event, the clicked item (MenuItem) is bound to this (for item Name, access via this.Name, and the original value via this.Value).
 
-this.Owner를 통해 해당 아이템을 가지고 있는 전체 메뉴 객체에 접근 가능하며 부모 아이템이나 메뉴는 this.Parent로 접근 가능합니다.
+Through this.Owner, you can access the entire menu object that contains the item, and the parent item or menu can be accessed via this.Parent.
 
-시트 셀에서 메뉴가 생성된 경우 this.Owner.Sheet, this.Owner.Row, this.Owner.Col로 메뉴가 생성된 시트, 행, 열이 접근가능합니다.
+When the menu is created from a sheet cell, you can access the sheet, row, and column where the menu was created via this.Owner.Sheet, this.Owner.Row, this.Owner.Col.
 
-값이 설정되기 위해 반드시 Value를 리턴해야 하며 변경사항을 무시하기 위해선 this.Value를 리턴해야합니다.
+A Value must be returned for the value to be set, and this.Value must be returned to ignore the change.
 
 ---
 
@@ -246,48 +245,48 @@ this.Owner를 통해 해당 아이템을 가지고 있는 전체 메뉴 객체�
     Items:[
       {
       Menu:1,
-      Name:"과일",
+      Name:"Fruit",
         Items:[
-          {Name:"과일이름",Caption:1},
-          {Name:"사과",Bool:1},
-          {Name:"배",Bool:1},
-          {Name:"오렌지",Bool:1}
+          {Name:"Fruit Name",Caption:1},
+          {Name:"Apple",Bool:1},
+          {Name:"Pear",Bool:1},
+          {Name:"Orange",Bool:1}
         ]
       },
       {
         Enum:1,
-        Name:"채소",
+        Name:"Vegetable",
         Items:[
-          {Name:"당근"},
-          {Name:"오이"},
-          {Name:"가지"},
-          {Name:"토마토"}
+          {Name:"Carrot"},
+          {Name:"Cucumber"},
+          {Name:"Eggplant"},
+          {Name:"Tomato"}
         ]
       },
       {
         Level:1,
         Expanded:1,
         Default:{OnClick:ItemClickHandler},
-        Name:"나물",
+        Name:"Wild Greens",
         Items:[
-          {Name:"도라지"},
-          {Name:"더덕"},
-          {Name:"미나리"}
+          {Name:"Bellflower Root"},
+          {Name:"Deodeok"},
+          {Name:"Water Parsley"}
         ]
       }
     ],
     OnButton:function(button){
       if(button == "Cancel"){
-        if(!confirm("정말로 취소하시겠습니까?")){
+        if(!confirm("Are you sure you want to cancel?")){
           return false;
         }
       }
     }
   }
 }
-```   
+```
 ![Menu](/assets/imgs/menu.png "Menu")
-<!-- IMAGE: 스크린샷/예시 이미지 - Menu -->
+<!-- IMAGE: Screenshot/Example Image - Menu -->
 
 
 ### Read More
@@ -304,4 +303,4 @@ this.Owner를 통해 해당 아이템을 가지고 있는 전체 메뉴 객체�
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

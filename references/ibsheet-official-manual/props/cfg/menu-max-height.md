@@ -2,15 +2,14 @@
 KEY: menuMaxHeight
 KIND: config-property
 PATH: props/cfg/menu-max-height
-ALIAS: 열에서, 열리는, 메뉴의, 최대, 높이를
-ALIAS_EN: menu, max, height
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/menu-max-height
+ALIAS_EN: specifies, maximum, height, menu, opens, columns, col, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/menu-max-height
 ---
 # MenuMaxHeight ***(cfg)***
 
-> `(Col, Cell)Type`이 `Enum`인 열에서 열리는 메뉴의 최대 높이를 지정합니다.
+> Specifies the maximum height of the menu that opens in columns where `(Col, Cell)Type` is `Enum`.
 
-> `Suggest`로 열리는 메뉴에도 적용됩니다.
+> Also applies to menus opened via `Suggest`.
 
 ### Type
 `string`
@@ -32,4 +31,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

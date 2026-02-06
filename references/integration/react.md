@@ -215,13 +215,6 @@ export default App;
 
 ---
 
-## 예제 링크
-
-- [React 예제 (StackBlitz)](https://stackblitz.com/edit/vitejs-vite-ejncmlbw)
-- [React + TypeScript 예제 (StackBlitz)](https://stackblitz.com/edit/vitejs-vite-bsfserm2)
-
----
-
 ## 지원 버전
 
 | 제품 | 버전 | 비고 |

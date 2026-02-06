@@ -2,17 +2,16 @@
 KEY: headerCheck
 KIND: config-property
 PATH: props/cfg/header-check
-ALIAS: 시트, 생성, 타입이, 모든, 열들의
-ALIAS_EN: header, check, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/header-check
+ALIAS_EN: creates, checkboxes, headers, columns, bool, type, creating, sheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/header-check
 ---
 # HeaderCheck ***(cfg)***
 
-> 시트 생성 시 타입이 `Bool`인 모든 열들의 헤더에 체크 박스를 생성합니다. 
+> Creates checkboxes in the headers of all columns with `Bool` type when creating the sheet. 
 
-> 헤더 셀의 체크 박스를 클릭 시 해당 열의 체크박스를 모두 **체크** 또는 **체크해제** 합니다.
+> Clicking the checkbox in the header cell **checks** or **unchecks** all checkboxes in that column.
 
-> 특정 열에만 적용하고자 하실 때는[(Col)HeaderCheck](/docs/props/col/header-check)를 참고하세요.
+> If you want to apply it to specific columns only, refer to [(Col)HeaderCheck](/docs/props/col/header-check).
 
 ### Type
 `number`
@@ -20,14 +19,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/header-ch
 ### Options
 |Value|Description|
 |-----|-----|
-| `0` | 체크 박스 생성 안함 (`default`)|
-| `1` | 체크 박스 생성|
+| `0` | Do not create checkboxes (`default`)|
+| `1` | Create checkboxes|
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-        HeaderCheck: 1,  // Type이 Bool인 모든 열의 헤더에 체크박스를 생성합니다.
+        HeaderCheck: 1,  // Creates checkboxes in the header of all Bool type columns.
         ...
     }
 };
@@ -41,4 +40,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

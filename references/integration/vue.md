@@ -152,8 +152,6 @@ const handleGetData = () => {
 </template>
 ```
 
-**예제:** [Vue 기본 예제 (StackBlitz)](https://stackblitz.com/edit/vitejs-vite-brpanol5)
-
 ---
 
 ## 3. Vue + TypeScript 사용
@@ -253,8 +251,6 @@ const handleLoadData = () => {
 </template>
 ```
 
-**예제:** [Vue + TypeScript 예제 (StackBlitz)](https://stackblitz.com/edit/vitejs-vite-fx91nwtn)
-
 ---
 
 ## 4. 주의사항: onMounted와 IBSheet 객체 생성 시점
@@ -319,8 +315,6 @@ onMounted(async () => {
   <IBSheetVue v-if="createSheet" :options="sheetOptions" :style="customStyle" />
 </template>
 ```
-
-**예제:** [v-if를 통한 시트 생성 시점 제어 예제 (StackBlitz)](https://stackblitz.com/edit/vitejs-vite-qljaavkt?file=data.js)
 
 ---
 

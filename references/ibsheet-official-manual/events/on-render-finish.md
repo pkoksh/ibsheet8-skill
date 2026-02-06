@@ -2,21 +2,20 @@
 KEY: onRenderFinish
 KIND: event
 PATH: events/on-render-finish
-ALIAS: 시트가, 렌더링된, 발생되는, 이벤트입니다
-ALIAS_EN: on, render, finish
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-render-finish
+ALIAS_EN: event, occurs, sheet, rendered, onrenderfinish
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-render-finish
 ---
-# onRenderFinish ***(event)*** 
+# onRenderFinish ***(event)***
 
-> 시트가 렌더링된 후 발생되는 이벤트입니다.
+> Event that occurs after the sheet is rendered.
 
-> 아래와 같은 부분에서 이벤트 발생합니다.
+> The event fires in the following cases:
 
-1. 시트 초기화
-1. 데이터 조회
-1. 화면의 크기 변화시 (예: Ctrl + 휠)
-1. 소계행 사용 시
-1. 그룹핑 시
+1. Sheet initialization
+1. Data retrieval
+1. Screen size changes (e.g., Ctrl + mouse wheel)
+1. When using subtotal rows
+1. Grouping
 1. `removeAll`
 1. `rerender`
 1. `revertData`
@@ -32,7 +31,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-render-fi
 1. `setLocale`
 1. `updateClientPaging`
 1. `setCurrentInfo`
-1. `setAttribute`로 `Width`나 `Visible`을 변경하는 경우
+1. When changing `Width` or `Visible` via `setAttribute`
 
 ### Syntax
 
@@ -47,7 +46,7 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|렌더링된 시트 객체|
+|sheet|`object`|Rendered sheet object|
 
 ### Return
 ***none***
@@ -57,13 +56,13 @@ or
 ```javascript
 options.Events = {
     onRenderFinish:function(evtParam){
-        // 시트 렌더링이 진행된 후 AR5 행 "sPerson" 열에 해당하는 셀에 12345 값을 입력
+        // After sheet rendering, enter value 12345 in the "sPerson" column of row AR5
         var r5 = sheet.getRowById("AR5");
         sheet.setValue({row:r5 , col:"sPerson" , val:12345 , render:1});
 
         /*
-         ***** 주의 사항 *****
-          시트 전체 렌더링 시 항상 onRenderFinish 이벤트가 호출되므로, 시트 전체에 대해 렌더링을 진행하는 메소드는 여기서 작성하면 안됩니다.
+         ***** Caution *****
+          Since the onRenderFinish event is always called during full sheet rendering, methods that perform full sheet rendering should not be written here.
          */
     }
 }
@@ -78,4 +77,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

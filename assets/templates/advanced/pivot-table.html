@@ -2,398 +2,134 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>피벗 테이블</title>
-  <script src="ibsheet/ibsheet.js"></script>
-  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
+  <title>피벗 테이블 - makePivotTable 활용</title>
+  <link rel="stylesheet" href="../../../ibsheet/css/default/main.css">
+  <script src="../../../ibsheet/ibsheet.js"></script>
+  <script src="../../../ibsheet/locale/ko.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; background: #f5f5f5; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    .panel { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .panel-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .panel-header h2 { font-size: 1.2rem; color: #333; }
-    .panel-body { padding: 20px; }
-    .filter-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-    .filter-item { display: flex; align-items: center; gap: 8px; }
-    .filter-item label { font-size: 14px; color: #666; }
-    .filter-item select, .filter-item input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; }
-    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
-    .btn-primary { background: #1976d2; color: white; }
-    .btn-secondary { background: #757575; color: white; }
-    .btn:hover { opacity: 0.9; }
-    .summary-cards { display: flex; gap: 20px; margin-bottom: 20px; }
-    .card { flex: 1; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .card-title { font-size: 13px; color: #666; margin-bottom: 8px; }
-    .card-value { font-size: 24px; font-weight: bold; color: #333; }
-    .card-value.primary { color: #1976d2; }
-    .card-value.success { color: #388e3c; }
-    .card-value.warning { color: #f57c00; }
-    .legend { display: flex; gap: 20px; margin-top: 15px; }
-    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #666; }
-    .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .btn-area { padding: 10px 0; }
+    .btn-area button { padding: 6px 14px; margin-right: 6px; cursor: pointer; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- 필터 영역 -->
-    <div class="panel">
-      <div class="panel-body">
-        <div class="filter-row">
-          <div class="filter-item">
-            <label>연도:</label>
-            <select id="filterYear">
-              <option value="2024">2024년</option>
-              <option value="2023">2023년</option>
-            </select>
-          </div>
-          <div class="filter-item">
-            <label>분기:</label>
-            <select id="filterQuarter">
-              <option value="">전체</option>
-              <option value="Q1">1분기</option>
-              <option value="Q2">2분기</option>
-              <option value="Q3">3분기</option>
-              <option value="Q4">4분기</option>
-            </select>
-          </div>
-          <div class="filter-item">
-            <label>지역:</label>
-            <select id="filterRegion">
-              <option value="">전체</option>
-              <option value="서울">서울</option>
-              <option value="경기">경기</option>
-              <option value="부산">부산</option>
-              <option value="대구">대구</option>
-            </select>
-          </div>
-          <button class="btn btn-primary" id="btnApply">적용</button>
-          <button class="btn btn-secondary" id="btnReset">초기화</button>
-          <button class="btn btn-secondary" id="btnExcel" style="margin-left:auto;">엑셀 다운로드</button>
-        </div>
-      </div>
-    </div>
-    
-    <!-- 요약 카드 -->
-    <div class="summary-cards">
-      <div class="card">
-        <div class="card-title">총 매출</div>
-        <div class="card-value primary" id="totalSales">0원</div>
-      </div>
-      <div class="card">
-        <div class="card-title">총 비용</div>
-        <div class="card-value warning" id="totalCost">0원</div>
-      </div>
-      <div class="card">
-        <div class="card-title">순이익</div>
-        <div class="card-value success" id="totalProfit">0원</div>
-      </div>
-      <div class="card">
-        <div class="card-title">이익률</div>
-        <div class="card-value" id="profitRate">0%</div>
-      </div>
-    </div>
-    
-    <!-- 피벗 테이블 -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>📊 지역별 · 분기별 매출 현황</h2>
-      </div>
-      <div class="panel-body">
-        <div id="pivotSheet" style="width:100%; height:400px;"></div>
-        <div class="legend">
-          <div class="legend-item">
-            <span class="legend-dot" style="background:#e3f2fd;"></span>
-            <span>평균 이상</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-dot" style="background:#ffebee;"></span>
-            <span>평균 이하</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- 상세 데이터 -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>📋 상세 데이터</h2>
-      </div>
-      <div class="panel-body">
-        <div id="detailSheet" style="width:100%; height:300px;"></div>
-      </div>
-    </div>
+  <!-- 원본 시트 (피벗의 소스 데이터) -->
+  <div id="sheet" style="width:100%;height:300px;"></div>
+
+  <div class="btn-area">
+    <button onclick="doPivot()">피벗 생성</button>
+    <button onclick="switchToOriginal()">원본 시트 보기</button>
+    <button onclick="switchToPivot()">피벗 시트 보기</button>
+    <button onclick="disposePivot()">피벗 제거</button>
   </div>
 
   <script>
-    let pivotSheet, detailSheet;
-    
-    // 샘플 원본 데이터
-    const rawData = [
-      // 서울
+    // 원본 데이터: 지역별/분기별 매출·비용
+    var rawData = [
       { region: "서울", quarter: "Q1", sales: 150000000, cost: 90000000 },
       { region: "서울", quarter: "Q2", sales: 180000000, cost: 100000000 },
       { region: "서울", quarter: "Q3", sales: 200000000, cost: 110000000 },
       { region: "서울", quarter: "Q4", sales: 220000000, cost: 120000000 },
-      // 경기
       { region: "경기", quarter: "Q1", sales: 120000000, cost: 75000000 },
       { region: "경기", quarter: "Q2", sales: 140000000, cost: 85000000 },
       { region: "경기", quarter: "Q3", sales: 160000000, cost: 95000000 },
       { region: "경기", quarter: "Q4", sales: 180000000, cost: 105000000 },
-      // 부산
       { region: "부산", quarter: "Q1", sales: 80000000, cost: 50000000 },
       { region: "부산", quarter: "Q2", sales: 95000000, cost: 58000000 },
       { region: "부산", quarter: "Q3", sales: 110000000, cost: 68000000 },
       { region: "부산", quarter: "Q4", sales: 125000000, cost: 78000000 },
-      // 대구
       { region: "대구", quarter: "Q1", sales: 60000000, cost: 38000000 },
       { region: "대구", quarter: "Q2", sales: 72000000, cost: 45000000 },
       { region: "대구", quarter: "Q3", sales: 85000000, cost: 52000000 },
       { region: "대구", quarter: "Q4", sales: 98000000, cost: 60000000 }
     ];
-    
+
     document.addEventListener("DOMContentLoaded", function() {
-      initPivotSheet();
-      initDetailSheet();
-      bindEvents();
-      loadData();
-    });
-    
-    function initPivotSheet() {
+      // 원본 시트 생성
       IBSheet.create({
-        id: "pivotSheet",
-        el: "pivotSheet",
+        id: "sheet",
+        el: "sheet",
         options: {
           Cfg: {
             SearchMode: 0,
-            CanEdit: false,
-            MergeSheet: 1,
-            FooterRow: true
-          },
-          Cols: [
-            { 
-              Header: "지역", 
-              Name: "region", 
-              Type: "Text", 
-              Width: 100, 
-              Align: "Center",
-              Merge: true,
-              Footer: "합계"
-            },
-            { 
-              Header: "1분기", 
-              Name: "Q1", 
-              Type: "Int", 
-              Width: 130, 
-              Align: "Right", 
-              Format: "#,##0",
-              Footer: "SUM"
-            },
-            { 
-              Header: "2분기", 
-              Name: "Q2", 
-              Type: "Int", 
-              Width: 130, 
-              Align: "Right", 
-              Format: "#,##0",
-              Footer: "SUM"
-            },
-            { 
-              Header: "3분기", 
-              Name: "Q3", 
-              Type: "Int", 
-              Width: 130, 
-              Align: "Right", 
-              Format: "#,##0",
-              Footer: "SUM"
-            },
-            { 
-              Header: "4분기", 
-              Name: "Q4", 
-              Type: "Int", 
-              Width: 130, 
-              Align: "Right", 
-              Format: "#,##0",
-              Footer: "SUM"
-            },
-            { 
-              Header: "합계", 
-              Name: "total", 
-              Type: "Int", 
-              Width: 150, 
-              Align: "Right", 
-              Format: "#,##0",
-              Footer: "SUM",
-              OnCellStyle: function(row, col, value) {
-                return { FontWeight: "bold", Background: "#f5f5f5" };
-              }
-            }
-          ],
-          Events: {
-            onRenderFirstFinish: function(evt) {
-              pivotSheet = IBSheet.getSheetById("pivotSheet");
-            },
-            onClick: function(evt) {
-              // 셀 클릭 시 상세 데이터 필터
-              if (evt.col !== "region" && evt.col !== "total") {
-                const region = this.getValue(evt.row, "region");
-                const quarter = evt.col;
-                filterDetailData(region, quarter);
-              } else if (evt.col === "region") {
-                const region = this.getValue(evt.row, "region");
-                filterDetailData(region, null);
-              }
-            }
-          }
-        },
-        data: []
-      });
-    }
-    
-    function initDetailSheet() {
-      IBSheet.create({
-        id: "detailSheet",
-        el: "detailSheet",
-        options: {
-          Cfg: {
-            SearchMode: 0,
-            CanEdit: false
+            CanEdit: 0,
+            ClickPivotFilter: true  // 피벗 셀 클릭 시 원본 시트에서 해당 데이터만 필터 표시
           },
           Cols: [
             { Header: "지역", Name: "region", Type: "Text", Width: 100, Align: "Center" },
             { Header: "분기", Name: "quarter", Type: "Text", Width: 80, Align: "Center" },
-            { Header: "매출", Name: "sales", Type: "Int", Width: 150, Align: "Right", Format: "#,##0원" },
-            { Header: "비용", Name: "cost", Type: "Int", Width: 150, Align: "Right", Format: "#,##0원" },
-            { 
-              Header: "이익", 
-              Name: "profit", 
-              Type: "Int", 
-              Width: 150, 
-              Align: "Right", 
-              Format: "#,##0원",
-              OnCellStyle: function(row, col, value) {
-                if (value < 0) {
-                  return { Color: "#d32f2f" };
-                } else if (value > 50000000) {
-                  return { Color: "#388e3c", FontWeight: "bold" };
-                }
-                return null;
-              }
-            },
-            { 
-              Header: "이익률", 
-              Name: "profitRate", 
-              Type: "Float", 
-              Width: 100, 
-              Align: "Right", 
-              Format: "#,##0.0%"
-            }
+            { Header: "매출", Name: "sales", Type: "Int", Width: 150, Align: "Right", Format: "#,##0" },
+            { Header: "비용", Name: "cost", Type: "Int", Width: 150, Align: "Right", Format: "#,##0" }
           ],
           Events: {
-            onRenderFirstFinish: function(evt) {
-              detailSheet = IBSheet.getSheetById("detailSheet");
+            // 데이터 로드 완료 후 피벗 자동 생성
+            onSearchFinish: function(evt) {
+              doPivot();
             }
           }
+        }
+      });
+
+      // 원본 시트에 데이터 로드
+      window["sheet"].loadSearchData({ data: rawData });
+    });
+
+    // makePivotTable()을 사용한 피벗 생성
+    function doPivot() {
+      var sheet = window["sheet"];
+
+      // 피벗 대상 열 후보군 (사용자가 피벗 구성 변경 시 선택 가능한 열)
+      var criterias = {
+        row: "region,quarter",
+        col: "region,quarter",
+        data: "sales,cost"
+      };
+
+      // 실제 피벗 구성: 행=지역, 열=분기, 값=매출,비용
+      var init = {
+        row: "region",
+        col: "quarter",
+        data: "sales,cost"
+      };
+
+      sheet.makePivotTable(
+        criterias,                          // 피벗 대상 열 후보
+        init,                               // 실제 피벗 구성 (row, col, data)
+        "#,##0",                            // 값 포맷
+        "Sum,Sum",                          // 집계함수 (data 열 수와 일치: sales=Sum, cost=Sum)
+        function(evt) {                     // 피벗 생성 완료 콜백 (onRenderFirstFinish 시점)
+          console.log("피벗 시트 생성 완료:", evt.sheet.id);
         },
-        data: []
-      });
+        { hideTotalRow: false, hideTotalCol: false }  // 행/열 합계 모두 표시
+      );
     }
-    
-    function bindEvents() {
-      document.getElementById("btnApply").onclick = loadData;
-      
-      document.getElementById("btnReset").onclick = function() {
-        document.getElementById("filterYear").value = "2024";
-        document.getElementById("filterQuarter").value = "";
-        document.getElementById("filterRegion").value = "";
-        loadData();
-      };
-      
-      document.getElementById("btnExcel").onclick = function() {
-        pivotSheet.exportExcel({
-          fileName: "매출현황_피벗_" + new Date().toISOString().slice(0, 10),
-          sheetName: "피벗테이블"
-        });
-      };
-    }
-    
-    function loadData() {
-      const filterQuarter = document.getElementById("filterQuarter").value;
-      const filterRegion = document.getElementById("filterRegion").value;
-      
-      // 필터 적용
-      let filteredData = rawData;
-      if (filterQuarter) {
-        filteredData = filteredData.filter(d => d.quarter === filterQuarter);
+
+    // 피벗 시트로 전환
+    function switchToPivot() {
+      var pivotSheet = window["pivotSheet_sheet"];
+      if (pivotSheet) {
+        pivotSheet.switchPivotSheet(1);
+      } else {
+        alert("피벗 시트가 생성되지 않았습니다. '피벗 생성' 버튼을 먼저 클릭하세요.");
       }
-      if (filterRegion) {
-        filteredData = filteredData.filter(d => d.region === filterRegion);
-      }
-      
-      // 피벗 데이터 생성
-      const pivotData = createPivotData(filteredData);
-      pivotSheet.loadSearchData({ data: pivotData });
-      
-      // 상세 데이터 로드
-      const detailData = filteredData.map(d => ({
-        ...d,
-        profit: d.sales - d.cost,
-        profitRate: d.sales > 0 ? (d.sales - d.cost) / d.sales : 0
-      }));
-      detailSheet.loadSearchData({ data: detailData });
-      
-      // 요약 카드 업데이트
-      updateSummaryCards(filteredData);
     }
-    
-    function createPivotData(data) {
-      const regions = [...new Set(data.map(d => d.region))];
-      const quarters = ["Q1", "Q2", "Q3", "Q4"];
-      
-      return regions.map(region => {
-        const row = { region };
-        let total = 0;
-        
-        quarters.forEach(q => {
-          const item = data.find(d => d.region === region && d.quarter === q);
-          row[q] = item ? item.sales : 0;
-          total += row[q];
-        });
-        
-        row.total = total;
-        return row;
-      });
-    }
-    
-    function filterDetailData(region, quarter) {
-      let filteredData = rawData;
-      
-      if (region) {
-        filteredData = filteredData.filter(d => d.region === region);
+
+    // 원본 시트로 전환
+    function switchToOriginal() {
+      var pivotSheet = window["pivotSheet_sheet"];
+      if (pivotSheet) {
+        pivotSheet.switchPivotSheet(0);
       }
-      if (quarter) {
-        filteredData = filteredData.filter(d => d.quarter === quarter);
-      }
-      
-      const detailData = filteredData.map(d => ({
-        ...d,
-        profit: d.sales - d.cost,
-        profitRate: d.sales > 0 ? (d.sales - d.cost) / d.sales : 0
-      }));
-      
-      detailSheet.loadSearchData({ data: detailData });
     }
-    
-    function updateSummaryCards(data) {
-      const totalSales = data.reduce((sum, d) => sum + d.sales, 0);
-      const totalCost = data.reduce((sum, d) => sum + d.cost, 0);
-      const totalProfit = totalSales - totalCost;
-      const profitRate = totalSales > 0 ? (totalProfit / totalSales) * 100 : 0;
-      
-      document.getElementById("totalSales").textContent = totalSales.toLocaleString() + "원";
-      document.getElementById("totalCost").textContent = totalCost.toLocaleString() + "원";
-      document.getElementById("totalProfit").textContent = totalProfit.toLocaleString() + "원";
-      document.getElementById("profitRate").textContent = profitRate.toFixed(1) + "%";
+
+    // 피벗 시트 제거
+    function disposePivot() {
+      var sheet = window["sheet"];
+      if (sheet.PivotSheet) {
+        sheet.PivotSheet.dispose();
+        sheet.PivotSheet.switchPivotSheet();
+        delete sheet.PivotSheet;
+        console.log("피벗 시트가 제거되었습니다.");
+      }
     }
   </script>
 </body>

@@ -2,29 +2,28 @@
 KEY: memoId
 KIND: config-property
 PATH: props/cfg/memo-id
-ALIAS: 시트에, 메모기능을, 사용하기, 필요한, 고유한
-ALIAS_EN: memo, id
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/memo-id
+ALIAS_EN: unique, value, required, memo, feature, sheet, memoid, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/memo-id
 ---
 # MemoId ***(cfg)***
 
-> 시트에 메모기능을 사용하기 위해 필요한 고유한 id 값을 설정합니다.
+> Sets a unique id value required to use the memo feature on the sheet.
 
-> 메모기능은 시트의 헤더 셀에 설정 가능합니다.
+> The memo feature can be set on header cells of the sheet.
 
-> 메모기능이 설정된 헤더 셀에는 왼쪽 위에 빨간색 삼각형이 표시됩니다.
+> Header cells with the memo feature enabled display a red triangle in the upper left corner.
 
-> 메모기능이 설정된 헤더 셀에 마우스를 올렸을 경우 툴팁 형태로 메모값이 보여집니다.
+> When hovering the mouse over a header cell with the memo feature enabled, the memo value is shown as a tooltip.
 
-> 메모 값 설정을 위해서는 [showMemoDialog method](/docs/funcs/core/show-memo-dialog)를 통하여 셋팅 가능합니다.
+> Memo values can be set through [showMemoDialog method](/docs/funcs/core/show-memo-dialog).
 
-> 메모 데이터는 브라우저의 localStorage에 관리됩니다.
+> Memo data is managed in the browser's localStorage.
 
 ![MemoId](/assets/imgs/memoId0.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - MemoId -->
+<!-- IMAGE: Screenshot/Example Image - MemoId -->
 
 ![MemoId](/assets/imgs/memoId1.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - MemoId -->
+<!-- IMAGE: Screenshot/Example Image - MemoId -->
 
 ### Type
 `string`
@@ -33,7 +32,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/memo-id
 ### Example
 ```javascript
 options.Cfg = {
-    MemoId: "sheet1Memo" // 메모기능을 사용하기 위한 시트의 메모 id 값 설정
+    MemoId: "sheet1Memo" // Set the memo id value for the sheet to use the memo feature
 };
 ```
 
@@ -45,4 +44,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.19|기능 추가|
+|core|8.0.0.19|Feature added|

@@ -2,90 +2,92 @@
 KEY: header
 KIND: column-property
 PATH: props/col/header
-ALIAS: 열의, 헤더, 셀을, 정의합니다
-ALIAS_EN: header
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/header
+ALIAS_EN: defines, header, cell, column, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/header
 ---
 # Header ***(col)***
-> 열의 헤더 셀을 정의합니다.
+> Defines the header cell of the column.
 
-> 단순히 헤더셀에 들어가야 할 문자열을 설정 할 수도 있고, 셀의 색상이나 정렬 등의 기능을 같이 정의하거나 여러 개의 헤더행을 만들기 위해 배열로 설정 할 수도 있습니다.
+> You can set a simple string for the header cell, or set properties such as background color and alignment together.
 
-> **여러 개의 헤더 행을 만드는 경우 컬럼별 헤더 배열의 길이는 같아야 합니다.**
+> To create multiple header rows, set as an array, and **the array length must be the same for all columns**. 
 
-> **<mark>주의</mark> : 헤더에 빈값을 셋팅하려면 공백데이터를 포함해야 합니다. 
-Header:"<mark> </mark>"**
+
+> **<mark>Caution</mark>** : To set an empty header, you must use a space character string.
+Header:"<mark> </mark>"
 
 
 ### Type
-`mixed`( `string` \| `object` \| `array[string|object]` )
+`mixed`( `string` \| `object` \| `array`\[`string`\|`object`\] )
 
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|헤더셀에 들어갈 타이틀(`\n` 줄바꿈 기호를 통해 문자열을 줄바꿈 할 수 있습니다.)|
-|`object`|헤더셀에 들어갈 타이틀과 문자열 정렬, 배경색 등을 설정|
-|`array`\[`string`\|`object`\]|여러개의 헤더 행을 만드는 경우 설정|
+|`string`|Title for the header cell
+Line break possible with `\n`|
+|`object`|Set title along with alignment, background color, text color, etc.|
+|`array`\[`string`\|`object`\]|Set as array when configuring multiple header rows|
 
 ### Example
-한줄 헤더행 예)
+Single header row example)
 ```javascript
 options.Cols = [
-    {   //string 형태로 사원명 지정
-        Header: "사원명", // Header: "사원\n명" 을 하면 줄바꿈 되어 표시 됩니다.
+    {
+        // Simple title in string format
+        Header: "Employee Name", // "Employee\nName" -> line break display
         Type: "Text", MinWidth: 120, Name: "sa_name"
     },
-    {  //object 형태의 사원명 지정
-        Header: {Value: "부서", Color: "#EDEDED", TextColor: "#FF0000", Align: "Left"},
+    {
+        // Specify background color, text color, alignment in object format
+        Header: {Value: "Department", Color: "#EDEDED", TextColor: "#FF0000", Align: "Left"},
         Type: "Text", MinWidth: 120, Name: "deptCd"
     }
 ];
 ```
-!["한줄헤더"](/assets/imgs/headerSingleRow.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - "한줄헤더" -->
+!["Single row header"](/assets/imgs/headerSingleRow.png)
+<!-- IMAGE: Screenshot/Example Image - "Single row header" -->
 
 
 
 
-두줄 해더행 예)
+Multiple header rows example)
 ```javascript
-options.Cfg = {HeaderMerge: 3}; //헤더 영역 머지모드
+options.Cfg = {HeaderMerge: 3}; // Header area merge mode
 options.Cols = [
-    //  String 형태로 간단하게 설정
     {
-        Header: ["사원정보", "이름"],
+        Header: ["Employee Info", "Name"], // String format
         Type: "Text", MinWidth: 120, Name: "sa_name"
      },
     {
-        Header: ["사원정보","사번"],
+        Header: ["Employee Info","Employee No."],
         Type: "Text", MinWidth: 80, Name: "sa_no"
     }
 ]
 
-//or
+// Or with styles in object format
 
-options.Cfg = {HeaderMerge: 3}; //헤더 영역 머지모드
+options.Cfg = {HeaderMerge: 3}; // Header area merge mode
 options.Cols = [
-    // Object 형태로 배경이나 글자색,정렬등을 같이 설정하는 방법
     {
         Header:[
-            {Value: "사원정보", Align: "Center"},
-            {Value: "이름", Color: "#315C81", TextColor: "#FFEEFF", Align: "Left"}
+            {Value: "Employee Info", Align: "Center"},
+            // Setting background, text color, alignment, etc. in object format
+            {Value: "Name", Color: "#315C81", TextColor: "#FFEEFF", Align: "Left"}
         ],
         Type: "Text", MinWidth: 120, Name: "sa_name"
      },
     {
         Header:[
-            {Value: "사원정보"},
-            {Value: "사번", Color: "#315C81", TextColor: "#ED6655", Align: "Left"}
+            {Value: "Employee Info"},
+            {Value: "Employee No.", Color: "#315C81", TextColor: "#ED6655", Align: "Left"}
         ],
         Type: "Text", MinWidth: 80, Name: "sa_no"
     },
 ];
 ```
-!["두줄헤더"](/assets/imgs/headerDoubleRow.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - "두줄헤더" -->
+!["Double row header"](/assets/imgs/headerDoubleRow.png)
+<!-- IMAGE: Screenshot/Example Image - "Double row header" -->
 
 
 ### Read More
@@ -96,4 +98,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

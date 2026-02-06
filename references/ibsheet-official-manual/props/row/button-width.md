@@ -2,12 +2,11 @@
 KEY: buttonWidth
 KIND: row-property
 PATH: props/row/button-width
-ALIAS: 이고, 속성의, 값이, 경우, 셀에
-ALIAS_EN: button, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/button-width
+ALIAS_EN: type, col, docs, props, button, value, row, property
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/button-width
 ---
 # ButtonWidth ***(row)***
-> [Type col](/docs/props/col/type)이 [Button col](/docs/props/col/button)이고, [Button row](./button)속성의 값이 `Button`인 경우, 셀에 생성되는 버튼 객체의 너비를 설정합니다.
+> When [Type col](/docs/props/col/type) is [Button col](/docs/props/col/button) and the value of the [Button row](./button) property is `Button`, sets the width of the button object created in the cell.
 
 
 ### Type
@@ -16,11 +15,11 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/button-wi
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|버튼 태그의 너비(pixel단위)|
+|`number`|Width of the button tag (in pixels)|
 
 ### Example
 ```javascript
-//특정행의 들여쓰기 정도를 2로 설정
+//Set the indentation level of a specific row to 2.
 var rows = sheet.getDataRows();
 rows[3]["ButtonWidth"] = "16px";
 sheet.refreshRow(rows[3]);
@@ -34,4 +33,4 @@ sheet.refreshRow(rows[3]);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: autoSelectFirstenum
 KIND: config-property
 PATH: props/cfg/auto-select-firstenum
-ALIAS: 컬럼, 아이템의, 첫번째, 값이, 선택
-ALIAS_EN: auto, select, firstenum, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/auto-select-firstenum
+ALIAS_EN: first, item, enum, column, automatically, selected, autoselectfirstenum, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/auto-select-firstenum
 ---
 # AutoSelectFirstEnum ***(cfg)***
 
-> `Enum` 컬럼 아이템의 첫번째 값이 선택 되도록 설정 합니다.
+> Sets the first item of an `Enum` column to be automatically selected.
 
-> 행 추가, setAttribute 함수로 Enum/EnumKeys 설정시에 동작 합니다.
+> This works when adding rows or setting Enum/EnumKeys with the setAttribute function.
 
-> 단 Enum/EnumKeys를 동시에 설정 할 경우 `EnumKeys`를 먼저 설정해야 getValue시 첫번째 아이템의 값으로 읽을 수 있습니다.
+> When setting Enum/EnumKeys simultaneously, `EnumKeys` must be set first so that getValue can read the value of the first item.
 
 ### Type
 `boolean`
@@ -20,8 +19,8 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/auto-sele
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|기능 사용 안함 (`default`)|
-|`1(true)`|Enum 아이템의 첫번째 값이 선택 되도록 설정|
+|`0(false)`|Feature disabled (`default`)|
+|`1(true)`|Sets the first Enum item value to be automatically selected|
 
 ### Example
 ```javascript
@@ -31,7 +30,7 @@ options.Cfg = {
 
 
 sheet.setAttribute(sheet.getFocusedRow(), "ComboData", "EnumKeys", "|101|102");
-sheet.setAttribute(sheet.getFocusedRow(), "ComboData", "Enum", "|진행중|완료");
+sheet.setAttribute(sheet.getFocusedRow(), "ComboData", "Enum", "|In Progress|Completed");
 
 ```
 
@@ -42,4 +41,4 @@ sheet.setAttribute(sheet.getFocusedRow(), "ComboData", "Enum", "|진행중|완�
 
 |product|version|desc|
 |---|---|---|
-|core|8.2.0.5|기능 추가|
+|core|8.2.0.5|Feature added|

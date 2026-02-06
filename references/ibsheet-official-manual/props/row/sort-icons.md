@@ -2,15 +2,14 @@
 KEY: sortIcons
 KIND: row-property
 PATH: props/row/sort-icons
-ALIAS: 정렬, 아이콘의, 화면, 표시여부와, 동작을
-ALIAS_EN: sort, icons, align, alignment
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/sort-icons
+ALIAS_EN: display, behavior, sort, icons, sorticons, row, header
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/sort-icons
 ---
 # SortIcons ***(Row>Header)***
 
-> 정렬 아이콘의 화면 표시여부와 동작을 설정합니다. 
+> Sets the display and behavior of sort icons. 
 
-> 해당 기능과 [SortIcons cfg](/docs/props/cfg/sort-icons)를 같이 사용하는 경우 옵션 `0`은 해당 옵션이 적용되고, 옵션 `1, 2`는[SortIcons cfg](/docs/props/cfg/sort-icons)이 적용됩니다. 
+> When using this feature together with [SortIcons cfg](/docs/props/cfg/sort-icons), option `0` applies this option, and options `1, 2` apply [SortIcons cfg](/docs/props/cfg/sort-icons). 
 
 
 
@@ -20,15 +19,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/sort-icon
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`| 아이콘이 모두 숨겨지고 정렬 불가 |
-|`1`| 모든 정렬 아이콘 표시(정렬되기 전에는 .IBSort0Right 이미지가 표시) , `MultiRecord`에서는 사용 불가 |
-|`2`| 정렬한 열에만 아이콘이 표시됨 (`default`) |
+|`0`| All icons are hidden and sorting is disabled |
+|`1`| All sort icons are displayed (before sorting, the .IBSort0Right image is displayed), not available in `MultiRecord` |
+|`2`| Icons are only displayed on the sorted column (`default`) |
 
 
 ### Example
 ```javascript
 options.Def.Header  = {
-    SortIcons: 1       // 모든 정렬 아이콘 표시
+    SortIcons: 1       // Display all sort icons
 };
 ```
 
@@ -39,4 +38,4 @@ options.Def.Header  = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

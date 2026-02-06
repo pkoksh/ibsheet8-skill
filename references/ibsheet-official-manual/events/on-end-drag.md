@@ -2,14 +2,13 @@
 KEY: onEndDrag
 KIND: event
 PATH: events/on-end-drag
-ALIAS: 드래그된, 드랍되는, 시점에, 호출되는, 이벤트입니다
-ALIAS_EN: on, end, drag
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-end-drag
+ALIAS_EN: event, called, moment, dragged, row, dropped, onenddrag
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-end-drag
 ---
 # onEndDrag ***(event)***
-> 드래그된 행(들)이 드랍되는 시점에 호출되는 이벤트입니다.
+> Event called at the moment when dragged row(s) are dropped.
 
-> 리턴 값으로 드래그 드랍이 가능할지 여부 및 드랍될 위치를 선택할 수 있습니다(리턴값으로 취할 수 있는 값은 type 파라미터와 동일합니다).
+> The return value can determine whether drag and drop is possible and the drop position (the values that can be returned are the same as the type parameter).
 
 ### Syntax
 
@@ -24,21 +23,21 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|드래그된 행들이 기존에 위치하던 시트 객체|
-|row|`object`|드래그된 행들의 기존 [데이터 로우 객체](/docs/appx/row-object)|
-|tosheet|`object`|드랍된 시트 객체|
-|torow|`object`|드랍했을때 어디에 들어갈지에 대한 기준이 되는 [데이터 로우 객체](/docs/appx/row-object)|
-|type|`number`|드래그 드랍이 가능할지 여부 및 드랍될 위치에 대한 정보
-`0`:드래그 드랍할 수 없음
-`1`:`torow` [데이터 로우 객체](/docs/appx/row-object)의 위쪽에 드랍(드랍될 시트의 데이터가 없을 경우도 이에 해당)
-`2`:`tosheet` 시트가 트리/그룹인 경우 `torow` [데이터 로우 객체](/docs/appx/row-object)의 하위 노드에 드랍
-`3`:`torow` [데이터 로우 객체](/docs/appx/row-object)의 아래쪽에 드랍
-`4`:드래그 드랍할 수 없는 시트 외부 영역에 드랍|
-|x|`number`|드랍할 때 마우스 커서의 x좌표(브라우저 기준)|
-|y|`number`|드랍할 때 마우스 커서의 y좌표(브라우저 기준)|
-|rows|`array[object]`|복수개의 행들이 드래그 드랍된 경우 해당 행들의 [데이터 로우 객체](/docs/appx/row-object) 배열|
+|sheet|`object`|Sheet object where the dragged rows were originally located|
+|row|`object`|Original [data row object](/docs/appx/row-object) of the dragged rows|
+|tosheet|`object`|Sheet object where the rows were dropped|
+|torow|`object`|[Data row object](/docs/appx/row-object) that serves as the reference for where the rows will be placed when dropped|
+|type|`number`|Information about whether drag and drop is possible and the drop position
+`0`:Cannot drag and drop
+`1`:Drop above the `torow` [data row object](/docs/appx/row-object) (also applies when the target sheet has no data)
+`2`:If `tosheet` is a tree/group, drop as a child node of the `torow` [data row object](/docs/appx/row-object)
+`3`:Drop below the `torow` [data row object](/docs/appx/row-object)
+`4`:Dropped on an area outside the sheet where drag and drop is not possible|
+|x|`number`|x-coordinate of the mouse cursor when dropping (browser-based)|
+|y|`number`|y-coordinate of the mouse cursor when dropping (browser-based)|
+|rows|`array[object]`|Array of [data row objects](/docs/appx/row-object) when multiple rows are dragged and dropped|
 <!--!
-|`[비공개]` copy|`boolean`|드래그 드랍 시 행의 이동이 아닌 행의 복사가 일어날지 여부|
+|`[Private]` copy|`boolean`|Whether the drag and drop action will be a copy rather than a move|
 !-->
 
 ### Return
@@ -48,7 +47,7 @@ or
 ```javascript
 options.Events = {
     onEndDrag:function(evtParam){
-        // 서로 다른 시트 객체간 드래그 드롭할 경우 이를 취소합니다.
+        // Cancel drag and drop between different sheet objects.
         if(evtParam.sheet == evtParam.tosheet) return 0;
     }
 }
@@ -62,5 +61,5 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.3.0.28|type:4 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.3.0.28|type:4 feature added|

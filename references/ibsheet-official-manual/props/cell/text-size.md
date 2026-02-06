@@ -2,36 +2,35 @@
 KEY: textSize
 KIND: cell-property
 PATH: props/cell/text-size
-ALIAS: 지정한, 셀의, 글자, 크기를, 설정합니다
-ALIAS_EN: text, size
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/text-size
+ALIAS_EN: font, size, specified, cell, textsize
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/text-size
 ---
 # TextSize ***(cell)***
-> 지정한 셀의 글자 크기를 설정합니다.
+> Sets the font size of the specified cell.
 
-> `px, pt, em` 단위를 사용할 수 있으며, 단위를 지정하지 않으면 px기준으로 설정됩니다.
+> `px, pt, em` units can be used, and if no unit is specified, px is used by default.
 ### Type
 `string`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|크기숫자와 단위로 이루어진 문자열(ex: 25px)|
+|`string`|A string consisting of a size number and unit (e.g.: 25px)|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름: CLS)
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "TextSize", "12pt");
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름: CLS)
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSTextSize"] = "20px";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용 (열이름: CLS)
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSTextSize": "22px", ...}
@@ -49,4 +48,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

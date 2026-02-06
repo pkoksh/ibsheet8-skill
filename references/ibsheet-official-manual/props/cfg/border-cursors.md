@@ -2,26 +2,25 @@
 KEY: borderCursors
 KIND: config-property
 PATH: props/cfg/border-cursors
-ALIAS: 행단위, 설정시, 호버되는, 행의, 보일지
-ALIAS_EN: border, cursors
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/border-cursors
+ALIAS_EN: whether, show, border, hovered, row, level, hover, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/border-cursors
 ---
 # BorderCursors ***(cfg)***
 
->  (cfg)[Hover](./hover) : 2 로 행단위 `Hover`를 설정시 호버되는 행의 `Border` 가 보일지 여부를 설정합니다.(`Hover:0/1` 일 때는 동작안함) 
+>  Sets whether to show the `Border` of the hovered row when row-level `Hover` is set with (cfg)[Hover](./hover) : 2. (Does not work with `Hover:0/1`) 
 
 
 ###
 ![borderCursors](/assets/imgs/borderCursors1.png "borderCursors")
-<!-- IMAGE: 스크린샷/예시 이미지 - borderCursors -->
+<!-- IMAGE: Screenshot/Example Image - borderCursors -->
 
-[`borderCursors : 1` 인 경우]
+[When `borderCursors : 1`]
 
 
 ![borderCursors](/assets/imgs/borderCursors0.png "borderCursors")
-<!-- IMAGE: 스크린샷/예시 이미지 - borderCursors -->
+<!-- IMAGE: Screenshot/Example Image - borderCursors -->
 
-[`borderCursors : 0` 인 경우]
+[When `borderCursors : 0`]
 
 
 ### Type
@@ -30,15 +29,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/border-cu
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|`Hover` 된 행과 셀의 `Border` 표시 안함|
-|`1(true)`|`Hover` 된 행과 셀의 `Border` 표시 (`default`)  |
+|`0(false)`|Do not show `Border` for hovered row and cell|
+|`1(true)`|Show `Border` for hovered row and cell (`default`)  |
 
 
 ### Example
 ```javascript
 options.Cfg  = {
-  "Hover": 2,               // 행단위 Hover 동작
-  "BorderCursors": true,       // Hover 행과 셀의 Border 표시
+  "Hover": 2,               // Row-level Hover behavior
+  "BorderCursors": true,       // Show Border for hovered row and cell
 };
 ```
 
@@ -49,4 +48,4 @@ options.Cfg  = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: noVScroll
 KIND: config-property
 PATH: props/cfg/no-v-scroll
-ALIAS: 시트에, 세로스크롤바를, 표시하지, 않는, 기능으로
-ALIAS_EN: no, scroll
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-v-scroll
+ALIAS_EN: feature, hides, vertical, scrollbar, sheet, height, dynamically, changes
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-v-scroll
 ---
 # NoVScroll ***(cfg)***
 
-> 시트에 세로스크롤바를 표시하지 않는 기능으로 조회된 데이터의 갯수만큼 시트의 높이가 동적으로 변경됩니다.
+> A feature that hides the vertical scrollbar in the sheet, where the sheet height dynamically changes according to the number of retrieved data.
 
-> `SearchMode: 1`이나 `SearchMode: 4,5`를 이용한 페이징 조회시에는, 전체 데이터에서 `PageLength`에 설정한 크기만큼 높이가 변경됩니다.
+> When using paging search with `SearchMode: 1` or `SearchMode: 4,5`, the height changes according to the size set in `PageLength` from the total data.
 
-> 해당 기능은 `SearchMode: 0`에서는 사용할 수 없습니다.
+> This feature cannot be used in `SearchMode: 0`.
 
 ### Type
 `boolean`
@@ -20,15 +19,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-v-scro
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|시트내 세로 스크롤 사용 (`default`)|
-|`1(true)`|세로 스크롤 사용안함|
+|`0(false)`|Use vertical scroll in the sheet (`default`)|
+|`1(true)`|Do not use vertical scroll|
 
 
 ### Example
 ```javascript
 options = {
     Cfg:{
-      NoVScroll: true  //시트에 세로스크롤바를 표시하지 않고 전체 데이터 양에 따라 높이 자동 조절
+      NoVScroll: true  // Do not display vertical scrollbar in the sheet, auto-adjust height based on total data volume
     }
 };
 ```
@@ -40,4 +39,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

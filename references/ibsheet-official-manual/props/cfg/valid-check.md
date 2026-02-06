@@ -2,26 +2,27 @@
 KEY: validCheck
 KIND: config-property
 PATH: props/cfg/valid-check
-ALIAS: 저장, 함수, 호출시, 유효성, 검사를
-ALIAS_EN: valid, check, save, persist, store, function, method, validation
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/valid-check
+ALIAS_EN: performs, validation, save, functions, dosave, docs, funcs, core
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/valid-check
 ---
 # ValidCheck ***(cfg)***
 
-> 저장 함수(doSave, getSaveString, getSaveJson) 호출시 유효성 검사를 수행하고, 유효성 검사 실패한 셀을 마킹합니다.
+> Performs validation when save functions ([doSave](/docs/funcs/core/do-save), [getSaveJson](/docs/funcs/core/get-save-json), [getSaveString](/docs/funcs/core/get-save-string)) are called, and marks cells that failed validation.
 
-> 유효성 검사에 실패한 첫 셀에 focus가 위치 하며, 편집 상태를 만듭니다.
+> The `focus` is placed on the first cell that failed validation, and it enters edit mode.
 
-> 유효성 검사 항목은 다음과 같습니다. 
+> Validation items are as follows. 
 
 
-> - `EditMask` 유효성 검사 
+> **<mark>Caution</mark>: Cells that failed validation are only marked when the property value is set to `true` or `object`.**
 
-> - `ResultMask` 유효성 검사 
+> - `EditMask` validation 
 
-> - `Required` 유효성 검사 
+> - `ResultMask` validation 
 
-> - `Size` 유효성 검사 
+> - `Required` validation 
+
+> - `Size` validation 
 
 
 ### Type
@@ -30,36 +31,40 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/valid-che
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|저장 함수(doSave, getSaveString, getSaveJson) 호출시 Required 유효성 검사만 수행합니다. (`default`)|
-|`1(true)` |저장 함수(doSave, getSaveString, getSaveJson) 호출시 유효성 검사를 수행합니다.
-|
-|`object`  |유효성 검사에 실패한 첫셀에 `Focus`(`default :1`), `Edit`(`default :1`) 유무 설정
+|`0(false)`|When save functions ([doSave](/docs/funcs/core/do-save), [getSaveJson](/docs/funcs/core/get-save-json), [getSaveString](/docs/funcs/core/get-save-string)) are called, only Required validation is performed. (`default`)
+During save function operation, the `validRequired` parameter setting is reflected, while `validSize`, `validEditMask`, `validResultMask` settings are not reflected.|
+|`1(true)` |When save functions ([doSave](/docs/funcs/core/do-save), [getSaveJson](/docs/funcs/core/get-save-json), [getSaveString](/docs/funcs/core/get-save-string)) are called, validation is performed.
+During save function operation, `validRequired`, `validSize`, `validEditMask`, `validResultMask` parameter settings are reflected.|
+|`object`  |Operates the same as `1(true)`, with settings for whether `Focus`(`default :1`) and `Edit`(`default :1`) are applied to the first cell that failed validation
 |
 
 ### Example
 ```javascript
-// 저장 함수(doSave, getSaveString, getSaveJson) 호출시 유효성 검사를 수행합니다.
-// 유효성 검사 실패한 제일 첫번째 셀에 Focus 이동, 셀을 편집 상태로 설정 합니다.
+// Performs validation when save functions (doSave, getSaveString, getSaveJson) are called.
+// Moves Focus to the first cell that failed validation and sets the cell to edit mode.
 options.Cfg = {
-    ValidCheck: true  
+    ValidCheck: true
 };
 
-// 저장 함수(doSave, getSaveString, getSaveJson) 호출시 유효성 검사를 수행합니다.
-// 유효성 검사 실패한 제일 첫번째 셀에 Focus 이동합니다.
+// Performs validation when save functions (doSave, getSaveString, getSaveJson) are called.
+// Moves Focus to the first cell that failed validation.
 options.Cfg = {
     ValidCheck: {
         Focus : 1,
         Edit : 0
-    },  
+    },
 };
 ```
 
 ### Read More
+- [doSave method](/docs/funcs/core/do-save)
+- [getSaveJson method](/docs/funcs/core/get-save-json)
+- [getSaveString method](/docs/funcs/core/get-save-string)
 - [ValidateMessage cfg](/docs/props/cfg/validate-message)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.2.0.3|기능 추가|
-|core|8.2.0.15|`object` 기능 추가|
+|core|8.2.0.3|Feature added|
+|core|8.2.0.15|`object` feature added|

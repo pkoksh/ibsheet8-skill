@@ -2,24 +2,23 @@
 KEY: formulaRow
 KIND: column-property
 PATH: props/col/formula-row
-ALIAS: 영역에, 고정된, 행을, 생성하여, 열의
-ALIAS_EN: formula, row
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/formula-row
+ALIAS_EN: creates, fixed, row, foot, area, display, column, totals
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/formula-row
 ---
 # FormulaRow ***(col)***
-> `Foot` 영역에 고정된 행을 생성하여 열의 합계나 평균값을 보여줍니다. 
+> Creates a fixed row in the `Foot` area to display column totals or average values. 
 
-> `id`는 `FormulaRow`로 생성되며, `NoColor:2` 속성이 기본으로 들어갑니다. 
+> The `id` is generated as `FormulaRow`, and the `NoColor:2` property is included by default. 
 
-> `SearchMode:3, 4, 5` 일 경우에는 사용 할 수 없습니다. 
+> Cannot be used when `SearchMode:3, 4, 5`. 
 
-> 숫자형 컬럼(`Int`, `Float`)를 제외한 다른 컬럼은 `"Count"`만 사용 가능합니다.
+> For columns other than numeric columns (`Int`, `Float`), only `"Count"` can be used.
 
 ###
 ![FormulaRow](/assets/imgs/formulaRow.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - FormulaRow -->
+<!-- IMAGE: Screenshot/Example Image - FormulaRow -->
 ![FormulaRow](/assets/imgs/formulaRow1.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - FormulaRow -->
+<!-- IMAGE: Screenshot/Example Image - FormulaRow -->
 ### Type
 `mixed`( `string` \| `function` )
 
@@ -27,12 +26,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/formula-r
 
 |Value|Description|
 |-----|-----|
-|`'Sum'` 또는 `'합계 {Sum} 원'`|열의 합계값|
-|`'Avg'` 또는 `'평균 {Avg}'`|열의 평균값|
-|`'Max'` 또는 `'최대값 {Max}'`|열의 최대값|
-|`'Min'` 또는 `'최소값 {Min}'`|열의 최소값|
-|`'Count'` 또는 `'{Count} 건'`|행의 개수|
-|`function`|사용자 정의 함수|
+|`'Sum'` or `'Total {Sum} won'`|Sum of the column values|
+|`'Avg'` or `'Average {Avg}'`|Average of the column values|
+|`'Max'` or `'Maximum {Max}'`|Maximum value of the column|
+|`'Min'` or `'Minimum {Min}'`|Minimum value of the column|
+|`'Count'` or `'{Count} items'`|Number of rows|
+|`function`|User-defined function|
 
 ### Example
 
@@ -56,23 +55,23 @@ options.Cols = [
     {
         Type: "Int",
         Name: "brnSaleAmt",
-        FormulaRow: "최대값 {Max}", //FormulaRow 행에 text+값 형태로 표현
+        FormulaRow: "Maximum {Max}", // Display as text+value format in the FormulaRow row
         Width: 120,
         // ...
     },
     {
-        //사용자 정의 함수(글자색이 "#FF0000"인 행의 수 리턴)
+        // User-defined function (returns the count of rows with TextColor "#FF0000")
         Type: "Text",
         Name: "user",
         FormulaRow: function(fr){
             var rows = fr.Sheet.getDataRows();
             var count = 0;
-            for(var i = 0; i < rows.length; i++){ //row의 TextColor 색상이 빨간색만 count
+            for(var i = 0; i < rows.length; i++){ // Count only rows where the row's TextColor is red
                 if( rows[i].TextColor == "#FF0000"){
                     count++;
                 }
             }
-            return "경고 :" + count + "건";
+            return "Warning: " + count + " items";
         },
         Width: 120,
         // ...
@@ -81,13 +80,13 @@ options.Cols = [
 ];
 
 
-// 객체 직접 접근하여 FormulaRow 행의 sDetail셀 값 교체
-sheet.getRowById("FormulaRow")["sDetailVisible"] = 1; // 셀의 Visible 속성변경.
-sheet.getRowById("FormulaRow")["sDetail"] = "가나다";
+// Directly access the object to replace the sDetail cell value of the FormulaRow row
+sheet.getRowById("FormulaRow")["sDetailVisible"] = 1; // Change the cell's Visible property
+sheet.getRowById("FormulaRow")["sDetail"] = "ABC";
 sheet.refreshRow(sheet.getRowById("FormulaRow"));
 
-//setValue로 값 교체
-sheet.setValue(sheet.getRowById("FormulaRow"),"sDetail","가나다");
+// Replace value with setValue
+sheet.setValue(sheet.getRowById("FormulaRow"),"sDetail","ABC");
 
 ```
 
@@ -99,5 +98,5 @@ sheet.setValue(sheet.getRowById("FormulaRow"),"sDetail","가나다");
 ### Since
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.2.0.3|{Sum, Avg, Max, Min, Count} 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.2.0.3|{Sum, Avg, Max, Min, Count} feature added|

@@ -2,13 +2,13 @@
 KEY: getLastPageindex
 KIND: method
 PATH: funcs/core/get-last-pageindex
-ALIAS: sheet.getLastPageindex, getLastPageindex(), 페이징, 조회, 방식에서, 마지막, 페이지의
-ALIAS_EN: get, last, pageindex, search, query, fetch, load, retrieve
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-last-pageindex
+ALIAS: sheet.getLastPageindex, getLastPageindex()
+ALIAS_EN: returns, index, last, page, paging, search, mode, getlastpageindex
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-last-pageindex
 ---
 # getLastPageIndex ***(method)***
 
-> 페이징 조회 방식에서 마지막 페이지의 인덱스를 반환합니다.
+> Returns the index of the last page in paging search mode.
 
 ### Syntax
 ```javascript
@@ -16,11 +16,11 @@ number getLastPageIndex();
 ```
 
 ### Return Value
-***number*** : 마지막 페이지 인덱스
+***number*** : last Page index
 
 ### Example
 ```javascript
-// 현재 조회된 마지막 페이지의 인덱스를 얻습니다.
+// Gets the index of the last page in the current search.
 var lastIndex = sheet.getLastPageIndex();
 ```
 
@@ -28,4 +28,4 @@ var lastIndex = sheet.getLastPageIndex();
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.78|기능 추가|
+|core|8.1.0.78|Feature added|

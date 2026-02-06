@@ -2,12 +2,11 @@
 KEY: sortPos
 KIND: row-property
 PATH: props/row/sort-pos
-ALIAS: 소팅시, 지정한, 행의, 위치를, 고정합니다
-ALIAS_EN: sort, pos
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/sort-pos
+ALIAS_EN: fixes, position, specified, row, sorting, sortpos
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/sort-pos
 ---
 # SortPos ***(row)***
-> 소팅시 지정한 행의 위치를 고정합니다.
+> Fixes the position of a specified row when sorting.
 
 
 ### Type
@@ -16,16 +15,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/sort-pos
 ### Options
 |Value|Description|
 |-----|-----|
-|`양수`|위에서부터 순서대로 원하는 `SortPos`가 지정된 행들 가운데 지정한 순번에 위치하게 됩니다.
- 가령 `2`로 설정하면 헤더 아래 `SortPos`가 설정된 행들 중에 두번째 행에 고정됩니다.
- 만약 `SortPos`를 지정한 행이 하나밖에 없다면 첫번째 행에 위치하게 됩니다.|
-|`음수`|아래에서부터 순서대로 원하는 인덱스에 위치하게 됩니다.
-가령 `1`로 설정하면 맨 아래 행에 고정됩니다.|
+|`positive`|The row will be positioned at the specified order among rows that have `SortPos` set, counting from the top.
+ For example, if set to `2`, the row will be fixed at the second position among rows with `SortPos` set below the header.
+ If there is only one row with `SortPos` set, it will be positioned at the first row.|
+|`negative`|The row will be positioned at the specified index counting from the bottom.
+For example, if set to `1`, the row will be fixed at the very bottom.|
 
 
 ### Example
 ```javascript
-//지정한 행들을 소팅시 최상단에 위치시킨다.
+//Position specified rows at the top when sorting.
 var row = sheet.getFocusedRow();
 row["SortPos"] = 1;
 ```
@@ -37,4 +36,4 @@ row["SortPos"] = 1;
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,29 +2,28 @@
 KEY: textSize
 KIND: column-property
 PATH: props/col/text-size
-ALIAS: 지정한, 열의, 글자, 크기를, 설정합니다
-ALIAS_EN: text, size
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/text-size
+ALIAS_EN: text, size, specified, column, textsize, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/text-size
 ---
 # TextSize ***(col)***
 
-> 지정한 열의 글자 크기를 설정합니다.
+> Sets the text size for the specified column.
 
-> `px, pt, em` 단위를 사용할 수 있으며, 단위를 지정하지 않으면 px기준으로 설정됩니다.
+> `px, pt, em` units can be used, and if no unit is specified, it defaults to px.
 ### Type
 `string`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|크기숫자와 단위로 이루어진 문자열(ex: 25px)|
+|`string`|String consisting of size number and unit (e.g.: 25px)|
 
 ### Example
 ```javascript
-//특정 열의 글자를 1.2em 지정합니다.
+// Set the text of a specific column to 1.2em.
 options.Cols = [
     ...
-    {TextSize: "1.2em", Header: "부서", Type: "Text", Name: "Dept" ...},
+    {TextSize: "1.2em", Header: "Department", Type: "Text", Name: "Dept" ...},
     ...
 ];
 ```
@@ -39,4 +38,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

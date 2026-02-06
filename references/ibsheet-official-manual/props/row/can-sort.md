@@ -2,13 +2,12 @@
 KEY: canSort
 KIND: row-property
 PATH: props/row/can-sort
-ALIAS: 트리사용시, 자식행들에, 소팅, 가능, 불가능
-ALIAS_EN: can, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-sort
+ALIAS_EN: whether, sorting, allowed, child, rows, tree, cansort, row
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/can-sort
 ---
 # CanSort ***(row)***
 
-> 트리사용시 자식행들에 대한 소팅 가능 불가능 여부를 설정합니다.
+> Sets whether sorting is allowed for child rows when using a tree.
 
 
 ### Type
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-sort
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|소팅 불가|
-|`1(true)`|소팅 가능|
+|`0(false)`|Sorting disabled|
+|`1(true)`|Sorting enabled|
 
 
 ### Example
 ```javascript
-//특정행의 자식행에 대해 소팅을 허용한다.
+//Allow sorting for child rows of a specific row.
 var row = sheet.getNextSiblingRow(true);
 row["CanSort"] = 1;
 ```
@@ -36,4 +35,4 @@ row["CanSort"] = 1;
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

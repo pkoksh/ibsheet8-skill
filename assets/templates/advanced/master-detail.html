@@ -2,349 +2,150 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>마스터-디테일 그리드</title>
-  <script src="ibsheet/ibsheet.js"></script>
-  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; background: #f5f5f5; }
-    .container { max-width: 1400px; margin: 0 auto; }
-    .panel { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .panel-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .panel-header h2 { font-size: 1.1rem; color: #333; }
-    .panel-body { padding: 15px 20px; }
-    .btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
-    .btn-sm { padding: 4px 10px; font-size: 12px; }
-    .btn-primary { background: #1976d2; color: white; }
-    .btn-success { background: #388e3c; color: white; }
-    .btn-danger { background: #d32f2f; color: white; }
-    .btn:hover { opacity: 0.9; }
-    .toolbar { display: flex; gap: 8px; }
-    .info-text { color: #666; font-size: 13px; }
-    .highlight { background: #fff3e0; padding: 2px 8px; border-radius: 4px; }
-    .grid-wrapper { display: flex; gap: 20px; }
-    .master-panel { flex: 0 0 45%; }
-    .detail-panel { flex: 1; }
-    @media (max-width: 1200px) {
-      .grid-wrapper { flex-direction: column; }
-      .master-panel { flex: none; }
-    }
-  </style>
+  <title>마스터-디테일</title>
+  <link rel="stylesheet" href="../../../ibsheet/css/default/main.css">
+  <script src="../../../ibsheet/ibsheet.js"></script>
+  <script src="../../../ibsheet/locale/ko.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="grid-wrapper">
-      <!-- 마스터 그리드: 주문 목록 -->
-      <div class="master-panel">
-        <div class="panel">
-          <div class="panel-header">
-            <h2>📋 주문 목록 (마스터)</h2>
-            <div class="toolbar">
-              <button class="btn btn-sm btn-primary" id="btnRefreshMaster">새로고침</button>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div id="masterSheet" style="width:100%; height:400px;"></div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 디테일 그리드: 주문 상세 -->
-      <div class="detail-panel">
-        <div class="panel">
-          <div class="panel-header">
-            <h2>
-              📦 주문 상세 (디테일)
-              <span class="info-text" id="selectedOrder">- 주문을 선택하세요</span>
-            </h2>
-            <div class="toolbar">
-              <button class="btn btn-sm btn-primary" id="btnAddDetail">항목 추가</button>
-              <button class="btn btn-sm btn-danger" id="btnDeleteDetail">항목 삭제</button>
-              <button class="btn btn-sm btn-success" id="btnSaveDetail">저장</button>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div id="detailSheet" style="width:100%; height:400px;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- 요약 정보 -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>📊 선택 주문 요약</h2>
-      </div>
-      <div class="panel-body">
-        <div style="display:flex; gap:40px;">
-          <div>
-            <span class="info-text">주문번호:</span>
-            <strong id="summaryOrderNo">-</strong>
-          </div>
-          <div>
-            <span class="info-text">고객명:</span>
-            <strong id="summaryCustomer">-</strong>
-          </div>
-          <div>
-            <span class="info-text">상품 수:</span>
-            <strong id="summaryItemCount">0</strong>건
-          </div>
-          <div>
-            <span class="info-text">총 금액:</span>
-            <strong id="summaryTotalAmount" class="highlight">0</strong>원
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- 마스터 그리드: 주문 목록 -->
+  <div id="masterSheet" style="width:100%;height:250px;"></div>
+
+  <!-- 디테일 그리드: 주문 상세 -->
+  <button onclick="addDetail()">항목 추가</button>
+  <button onclick="deleteDetail()">항목 삭제</button>
+  <button onclick="saveDetail()">저장</button>
+  <div id="detailSheet" style="width:100%;height:250px;"></div>
 
   <script>
-    let masterSheet, detailSheet;
-    let selectedOrderId = null;
-    
+    var selectedOrderId = null;
+
     // 샘플 데이터
-    const ordersData = [
-      { orderId: "ORD-001", orderDate: "2024-01-15", customerName: "홍길동", customerPhone: "010-1234-5678", status: "배송중", totalAmount: 125000 },
-      { orderId: "ORD-002", orderDate: "2024-01-16", customerName: "김철수", customerPhone: "010-2345-6789", status: "준비중", totalAmount: 89000 },
-      { orderId: "ORD-003", orderDate: "2024-01-17", customerName: "이영희", customerPhone: "010-3456-7890", status: "완료", totalAmount: 256000 },
-      { orderId: "ORD-004", orderDate: "2024-01-18", customerName: "박민수", customerPhone: "010-4567-8901", status: "준비중", totalAmount: 45000 },
-      { orderId: "ORD-005", orderDate: "2024-01-19", customerName: "정수진", customerPhone: "010-5678-9012", status: "배송중", totalAmount: 178000 }
+    var ordersData = [
+      { orderId: "ORD-001", orderDate: "2024-01-15", customerName: "홍길동", status: "배송중", totalAmount: 125000 },
+      { orderId: "ORD-002", orderDate: "2024-01-16", customerName: "김철수", status: "준비중", totalAmount: 89000 },
+      { orderId: "ORD-003", orderDate: "2024-01-17", customerName: "이영희", status: "완료", totalAmount: 256000 }
     ];
-    
-    const orderDetailsData = {
+
+    var orderDetailsData = {
       "ORD-001": [
-        { detailId: 1, productName: "노트북", quantity: 1, unitPrice: 100000, amount: 100000 },
-        { detailId: 2, productName: "마우스", quantity: 1, unitPrice: 25000, amount: 25000 }
+        { productName: "노트북", quantity: 1, unitPrice: 100000 },
+        { productName: "마우스", quantity: 1, unitPrice: 25000 }
       ],
       "ORD-002": [
-        { detailId: 3, productName: "키보드", quantity: 2, unitPrice: 35000, amount: 70000 },
-        { detailId: 4, productName: "USB 케이블", quantity: 3, unitPrice: 6333, amount: 19000 }
+        { productName: "키보드", quantity: 2, unitPrice: 35000 },
+        { productName: "USB 케이블", quantity: 3, unitPrice: 6333 }
       ],
       "ORD-003": [
-        { detailId: 5, productName: "모니터", quantity: 1, unitPrice: 200000, amount: 200000 },
-        { detailId: 6, productName: "HDMI 케이블", quantity: 2, unitPrice: 15000, amount: 30000 },
-        { detailId: 7, productName: "모니터 암", quantity: 1, unitPrice: 26000, amount: 26000 }
-      ],
-      "ORD-004": [
-        { detailId: 8, productName: "USB 허브", quantity: 1, unitPrice: 45000, amount: 45000 }
-      ],
-      "ORD-005": [
-        { detailId: 9, productName: "웹캠", quantity: 1, unitPrice: 80000, amount: 80000 },
-        { detailId: 10, productName: "마이크", quantity: 1, unitPrice: 55000, amount: 55000 },
-        { detailId: 11, productName: "조명", quantity: 1, unitPrice: 43000, amount: 43000 }
+        { productName: "모니터", quantity: 1, unitPrice: 200000 },
+        { productName: "HDMI 케이블", quantity: 2, unitPrice: 15000 },
+        { productName: "모니터 암", quantity: 1, unitPrice: 26000 }
       ]
     };
-    
+
     document.addEventListener("DOMContentLoaded", function() {
-      initMasterSheet();
-      initDetailSheet();
-      bindEvents();
-      loadMasterData();
-    });
-    
-    function initMasterSheet() {
+      // 마스터 시트
       IBSheet.create({
         id: "masterSheet",
         el: "masterSheet",
         options: {
           Cfg: {
             SearchMode: 0,
-            CanEdit: false
+            CanEdit: 0
           },
           Cols: [
             { Header: "주문번호", Name: "orderId", Type: "Text", Width: 100 },
             { Header: "주문일", Name: "orderDate", Type: "Date", Width: 100, Align: "Center", Format: "yyyy-MM-dd" },
-            { Header: "고객명", Name: "customerName", Type: "Text", Width: 80 },
-            { Header: "연락처", Name: "customerPhone", Type: "Text", Width: 120 },
-            { 
-              Header: "상태", 
-              Name: "status", 
-              Type: "Text", 
-              Width: 70, 
-              Align: "Center",
-              OnCellStyle: function(row, col, value) {
-                const styles = {
-                  "준비중": { Background: "#FFF3E0", Color: "#E65100" },
-                  "배송중": { Background: "#E3F2FD", Color: "#1565C0" },
-                  "완료": { Background: "#E8F5E9", Color: "#2E7D32" }
-                };
-                return styles[value] || null;
-              }
-            },
-            { Header: "총 금액", Name: "totalAmount", Type: "Int", Width: 100, Align: "Right", Format: "#,##0원" }
+            { Header: "고객명", Name: "customerName", Type: "Text", Width: 100 },
+            { Header: "상태", Name: "status", Type: "Text", Width: 80, Align: "Center" },
+            { Header: "총 금액", Name: "totalAmount", Type: "Int", Width: 120, Align: "Right", Format: "#,##0원" }
           ],
           Events: {
             onRenderFirstFinish: function(evt) {
-              masterSheet = IBSheet.getSheetById("masterSheet");
+              evt.sheet.loadSearchData({ data: ordersData });
             },
-            onRowSelect: function(evt) {
+            onAfterClick: function(evt) {
               if (evt.row) {
-                selectedOrderId = this.getValue(evt.row, "orderId");
+                selectedOrderId = evt.sheet.getValue(evt.row, "orderId");
                 loadDetailData(selectedOrderId);
-                updateSummary(evt.row);
               }
             }
           }
-        },
-        data: []
+        }
       });
-    }
-    
-    function initDetailSheet() {
+
+      // 디테일 시트
       IBSheet.create({
         id: "detailSheet",
         el: "detailSheet",
         options: {
           Cfg: {
             SearchMode: 0,
-            CanEdit: true
+            CanEdit: 1
+          },
+          Def: {
+            Row: {
+              CanFormula: 1,
+              CalcOrder: "amount"
+            }
           },
           Cols: [
-            { Header: "No", Name: "_rowNum", Type: "RowNum", Width: 50, Align: "Center" },
-            { Header: "상품명", Name: "productName", Type: "Text", Width: 200, Required: true },
-            { Header: "수량", Name: "quantity", Type: "Int", Width: 80, Align: "Right", Min: 1 },
+            { Header: "상품명", Name: "productName", Type: "Text", Width: 200, Required: 1 },
+            { Header: "수량", Name: "quantity", Type: "Int", Width: 80, Align: "Right" },
             { Header: "단가", Name: "unitPrice", Type: "Int", Width: 100, Align: "Right", Format: "#,##0" },
-            { 
-              Header: "금액", 
-              Name: "amount", 
-              Type: "Int", 
-              Width: 120, 
-              Align: "Right", 
-              Format: "#,##0원",
-              CanEdit: false
-            }
-          ],
-          Events: {
-            onRenderFirstFinish: function(evt) {
-              detailSheet = IBSheet.getSheetById("detailSheet");
-            },
-            onAfterChange: function(evt) {
-              // 금액 자동 계산
-              if (evt.col === "quantity" || evt.col === "unitPrice") {
-                const qty = this.getValue(evt.row, "quantity") || 0;
-                const price = this.getValue(evt.row, "unitPrice") || 0;
-                this.setValue(evt.row, "amount", qty * price);
+            {
+              Header: "금액", Name: "amount", Type: "Int", Width: 120, Align: "Right", Format: "#,##0원",
+              Formula: function(fr) {
+                return (fr.Row["quantity"] || 0) * (fr.Row["unitPrice"] || 0);
               }
-              updateDetailSummary();
-            },
-            onAfterRowAdd: function(evt) {
-              updateDetailSummary();
-            },
-            onAfterRowDelete: function(evt) {
-              updateDetailSummary();
             }
-          }
-        },
-        data: []
+          ]
+        }
       });
+    });
+
+    function loadDetailData(orderId) {
+      var detailSheet = window["detailSheet"];
+      var details = orderDetailsData[orderId] || [];
+      detailSheet.loadSearchData({ data: details });
     }
-    
-    function bindEvents() {
-      document.getElementById("btnRefreshMaster").onclick = loadMasterData;
-      
-      document.getElementById("btnAddDetail").onclick = function() {
-        if (!selectedOrderId) {
-          alert("먼저 주문을 선택하세요.");
-          return;
-        }
-        detailSheet.addRow({
-          init: { quantity: 1 },
-          focus: true,
-          focusCol: "productName"
-        });
-      };
-      
-      document.getElementById("btnDeleteDetail").onclick = function() {
-        const row = detailSheet.getFocusedRow();
-        if (!row) {
-          alert("삭제할 항목을 선택하세요.");
-          return;
-        }
-        if (confirm("이 항목을 삭제하시겠습니까?")) {
+
+    function addDetail() {
+      if (!selectedOrderId) {
+        alert("먼저 주문을 선택하세요.");
+        return;
+      }
+      var detailSheet = window["detailSheet"];
+      detailSheet.addRow({ init: { quantity: 1 } });
+    }
+
+    function deleteDetail() {
+      var detailSheet = window["detailSheet"];
+      var row = detailSheet.getFocusedRow();
+      if (!row) {
+        alert("삭제할 항목을 선택하세요.");
+        return;
+      }
+      if (confirm("이 항목을 삭제하시겠습니까?")) {
+        if(row["Added"]) {
+          detailSheet.removeRow(row);
+        }else{
           detailSheet.deleteRow(row);
         }
-      };
-      
-      document.getElementById("btnSaveDetail").onclick = function() {
-        if (!selectedOrderId) {
-          alert("저장할 주문이 선택되지 않았습니다.");
-          return;
-        }
-        
-        const saveData = detailSheet.getSaveJson({ check: 1 });
-        if (saveData.data.length === 0) {
-          alert("변경된 내용이 없습니다.");
-          return;
-        }
-        
-        console.log("저장 데이터:", { orderId: selectedOrderId, details: saveData });
-        
-        // 서버 저장 후
-        detailSheet.acceptChanges();
-        alert("저장되었습니다.");
-        
-        // 마스터 금액 업데이트
-        updateMasterAmount();
-      };
-    }
-    
-    function loadMasterData() {
-      masterSheet.loadSearchData({ data: ordersData });
-      
-      // 상세 초기화
-      selectedOrderId = null;
-      detailSheet.clearData();
-      clearSummary();
-    }
-    
-    function loadDetailData(orderId) {
-      const details = orderDetailsData[orderId] || [];
-      detailSheet.loadSearchData({ data: details });
-      
-      document.getElementById("selectedOrder").textContent = `- ${orderId}`;
-      updateDetailSummary();
-    }
-    
-    function updateSummary(masterRow) {
-      document.getElementById("summaryOrderNo").textContent = 
-        masterSheet.getValue(masterRow, "orderId");
-      document.getElementById("summaryCustomer").textContent = 
-        masterSheet.getValue(masterRow, "customerName");
-      updateDetailSummary();
-    }
-    
-    function updateDetailSummary() {
-      const rows = detailSheet.getAllRows();
-      let totalAmount = 0;
-      
-      rows.forEach(row => {
-        totalAmount += detailSheet.getValue(row, "amount") || 0;
-      });
-      
-      document.getElementById("summaryItemCount").textContent = rows.length;
-      document.getElementById("summaryTotalAmount").textContent = totalAmount.toLocaleString();
-    }
-    
-    function updateMasterAmount() {
-      if (!selectedOrderId) return;
-      
-      const masterRow = masterSheet.findRow("orderId", selectedOrderId);
-      if (masterRow) {
-        let totalAmount = 0;
-        detailSheet.getAllRows().forEach(row => {
-          totalAmount += detailSheet.getValue(row, "amount") || 0;
-        });
-        masterSheet.setValue(masterRow, "totalAmount", totalAmount);
       }
     }
-    
-    function clearSummary() {
-      document.getElementById("selectedOrder").textContent = "- 주문을 선택하세요";
-      document.getElementById("summaryOrderNo").textContent = "-";
-      document.getElementById("summaryCustomer").textContent = "-";
-      document.getElementById("summaryItemCount").textContent = "0";
-      document.getElementById("summaryTotalAmount").textContent = "0";
+
+    function saveDetail() {
+      if (!selectedOrderId) {
+        alert("저장할 주문이 선택되지 않았습니다.");
+        return;
+      }
+      var detailSheet = window["detailSheet"];
+      detailSheet.doSave({
+        url: "/api/orders/detail/save",
+        param: { orderId: selectedOrderId },
+        quest: 1
+      });
     }
   </script>
 </body>

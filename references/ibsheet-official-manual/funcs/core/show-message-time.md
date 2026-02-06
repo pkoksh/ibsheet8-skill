@@ -2,23 +2,23 @@
 KEY: showMessageTime
 KIND: method
 PATH: funcs/core/show-message-time
-ALIAS: sheet.showMessageTime, showMessageTime(), 시트, 영역, 가운데에, 특정, 시간동안
-ALIAS_EN: show, message, time, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/show-message-time
+ALIAS: sheet.showMessageTime, showMessageTime()
+ALIAS_EN: displays, message, dialog, center, sheet, area, specific, duration
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/show-message-time
 ---
 # showMessageTime ***(method)***
-> 시트 영역 가운데에 특정 시간동안 메세지 `Dialog`를 띄웁니다.
+> Displays a message `Dialog` in the center of the sheet area for a specific duration.
 > 
-특정 시간 이후에는 자동으로 메세지가 `Dialog` 가 닫힙니다.
+After the specific duration, the message `Dialog` automatically closes.
 > 
-**`time` 속성을 설정하지 않으면 메세지 아래 반투명 레이어가 생기고 확인 버튼을 누를때까지 닫히지 않습니다. (alert같이 동작)**
+**If the `time` property is not set, a semi-transparent layer appears below the message and it does not close until the confirm button is pressed. (Works like an alert)**
 > 
-`type` 속성은 `time` 속성을 설정하지 않으면 `1(true)`이 기본으로 동작하고, `time` 속성을 설정하면 `0(false)`이 기본으로 동작한다
-> 메세지 `Dialog` 오픈 전에 [onShowMessage event](/docs/events/on-show-message) 이벤트가 발생합니다.
+When the `type` property is not set with the `time` property, it defaults to `1(true)`, and when the `time` property is set, it defaults to `0(false)`.
+> The [onShowMessage event](/docs/events/on-show-message) event is triggered before the message `Dialog` opens.
 
 ###
 ![showMessageTime](/assets/imgs/showMessageTime.png "showMessageTime")
-<!-- IMAGE: 스크린샷/예시 이미지 - showMessageTime -->
+<!-- IMAGE: Screenshot/Example Image - showMessageTime -->
 
 ### Syntax
 ```javascript
@@ -28,21 +28,21 @@ void showMessageTime( message, time, func, buttons, importance, type );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|message|`string`|필수|시트 위에 다이얼로그 형태로 보여질 메세지 내용|
-|time|`number`|선택|메세지가 보여질 시간(ms단위). 설정을 안하거나 `0`으로 설정시 계속 보여짐|
-|func|`function`|선택|메세지에서 표시되는 버튼을 눌렀을 때 콜백함수
-버튼의 순서대로 `1,2,3,4` 숫자가 `args`로 넘어옴
+|message|`string`|Required|Message content to be displayed as a dialog on the sheet|
+|time|`number`|Optional|Duration for the message to be displayed (in ms). If not set or set to `0`, the message is displayed indefinitely|
+|func|`function`|Optional|Callback function called when a button displayed in the message is pressed
+The button's order number `1,2,3,4` is passed as `args`
 ex)
  `func`:function(args) {
-&nbsp;&nbsp;if(args===1){alert('첫번째버튼 클릭'}
+&nbsp;&nbsp;if(args===1){alert('first button clicked'}
  }|
-|buttons|`array[string]`|선택|메세지가 표시될때 같이 보여질 버튼들 정의
+|buttons|`array[string]`|Optional|Definition of buttons to be displayed together with the message
 ex)
- `buttons`:['계속', '중단']|
-|importance|`number`|선택|메세지 중요도 (시트 초기화시 `Cfg`설정에 `SuppressMessage`(`default: 3`) 속성값보다 커야만 화면에 보여짐)|
-|type|`number`|선택|메세지 다이얼로그 생성시 시트 위에 반투명한 레이어로 덮을지 여부
-`0`:안덮음 (`default`)
-`1`:덮음|
+ `buttons`:['Continue', 'Cancel']|
+|importance|`number`|Optional|Message importance level (the value must be greater than the `Cfg` setting `SuppressMessage`(`default: 3`) property value set during sheet initialization for the message to appear on screen)|
+|type|`number`|Optional|Whether to cover the sheet with a semi-transparent layer when the message dialog is created
+`0`:Not covered (`default`)
+`1`:Covered|
 
 
 ### Return Value
@@ -52,14 +52,14 @@ ex)
 ```javascript
 function popup() {
     sheet.showMessageTime({
-        message: "상신하시겠습니까?",
+    message: "Are you sure you want to proceed?",
         time: 10000,
-        buttons: ["OK", "취소"],
+        buttons: ["OK", "Cancel"],
         func: function (args) {
             if (args==1) {
-                //OK에 대한 처리
+                //OK for processing
             } else if (args==2) {
-                //취소에 대한 처리
+                //Cancel for processing
             }
         }
     });
@@ -76,5 +76,5 @@ function popup() {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.27|`type` 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.27|`type` Feature added|

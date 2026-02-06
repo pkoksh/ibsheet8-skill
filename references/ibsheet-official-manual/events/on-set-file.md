@@ -2,16 +2,15 @@
 KEY: onSetFile
 KIND: event
 PATH: events/on-set-file
-ALIAS: 에서, 셀에, 파일, 업로드, 직전
-ALIAS_EN: on, set, file
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-set-file
+ALIAS_EN: type, file, fires, upload, cell, immediately, completing, selection
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-set-file
 ---
 # onSetFile ***(event)***
-> `Type:File`에서 셀에 파일 업로드 직전, 파일 선택 창의 파일 선택 완료 직후 발생합니다. 
+> In `Type:File`, fires just before file upload to the cell, immediately after completing file selection in the file selection dialog. 
 
-> `files`인자로 선택한 파일 정보를 확인할 수 있습니다.
+> You can check the selected file information through the `files` parameter.
 
-> `1(true)`를 리턴하는 경우 파일 타입에 값 입력이 중단되고 파일이 올라가지 않습니다
+> Returning `1(true)` stops the value input for the file type and the file is not uploaded.
 
 
 ### Syntax
@@ -26,10 +25,10 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|시트 객체|
-|row|`object`|	셀이 위치한 데이터 로우 객체|
-|col|`string`|셀의 열이름|
-|files|`array`|선택한 파일 객체 (`FileList`)|
+|sheet|`object`|Sheet object|
+|row|`object`|Data row object where the cell is located|
+|col|`string`|Column name of the cell|
+|files|`array`|Selected file object (`FileList`)|
 
 
 ### Return
@@ -38,7 +37,7 @@ or
 ### Example
 ```javascript
 options.Events = {
-  // 파일 업로드 창에서 선택한 파일명 확인
+  // Check the file name selected from the file upload dialog
   onSetFile: function(evtParam) {
     console.log(evtParam.files[0].name);
   }
@@ -46,10 +45,10 @@ options.Events = {
 ```
 
 ### Read More
-- [File Type 업로드 appendix](/docs/appx/file-type-upload)
+- [File Type upload appendix](/docs/appx/file-type-upload)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.19|기능 추가|
+|core|8.0.0.19|Feature added|

@@ -2,15 +2,15 @@
 KEY: getPivotFilterRows
 KIND: method
 PATH: funcs/core/get-pivot-filter-rows
-ALIAS: sheet.getPivotFilterRows, getPivotFilterRows(), 피벗, 시트에서, 특정, 셀의, 데이터를
-ALIAS_EN: get, pivot, filter, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-pivot-filter-rows
+ALIAS: sheet.getPivotFilterRows, getPivotFilterRows()
+ALIAS_EN: function, retrieves, original, sheet, rows, compose, specific, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-pivot-filter-rows
 ---
 # getPivotFilterRows ***(method)***
 
-> 피벗 시트에서 특정 셀의 데이터를 구성하는 원본 시트의 행을 가져오는 함수입니다.
+> A function that retrieves the original sheet's rows that compose a specific cell's data in the pivot sheet.
 
-> <mark>**주의!: 해당 API는 원본 시트의 필터링 내용을 제거합니다. API 사용시 원본 시트의 필터링 내용이 변경될 수 있습니다.**</mark>
+> <mark>**Note: This API removes the original sheet's filter content. The original sheet's filter content may change when using this API.**</mark>
 
 ### Syntax
 ```javascript
@@ -20,12 +20,12 @@ object getPivotFilterRows( row, col );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
 
 
 ### Return Value
-***array[row object]*** : 필터된 원본 시트 [데이터 로우 객체](/docs/appx/row-object)들의 배열
+***array[row object]*** : Array of filtered original sheet [data row object](/docs/appx/row-object)s
 
 ### Example
 
@@ -33,7 +33,7 @@ object getPivotFilterRows( row, col );
 var focusRow = pivotSheet_sheet.getFocusedRow();
 var focusCol = pivotSheet_sheet.getFocusedCol();
 
-// 피벗 데이터를 구성하는 행을 가져오기
+// Retrieve the rows that compose the pivot data
 var datas = pivotSheet_sheet.getPivotFilterRows(focusRow, focusCol);
 ```
 
@@ -48,4 +48,4 @@ var datas = pivotSheet_sheet.getPivotFilterRows(focusRow, focusCol);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.28|기능 추가|
+|core|8.0.0.28|Feature added|

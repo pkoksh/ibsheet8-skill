@@ -2,14 +2,13 @@
 KEY: minWidth
 KIND: column-property
 PATH: props/col/min-width
-ALIAS: 열의, 최소, 너비를, 단위로, 설정합니다
-ALIAS_EN: min, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/min-width
+ALIAS_EN: minimum, column, width, pixels, minwidth, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/min-width
 ---
 # MinWidth ***(col)***
-> 열의 최소 너비를 pixel단위로 설정합니다.
+> Sets the minimum column width in pixels.
 
-> 사용자가 드래그를 통해 열의 너비를 조정할 때, 지정한 크기 이하로 작아지지 않게 합니다.
+> Prevents the column from being reduced below the specified size when the user adjusts the column width by dragging.
 
 ### Type
 `number`
@@ -17,12 +16,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/min-width
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|열의 최소 너비(pixel단위)|
+|`number`|Minimum column width (in pixels)|
 
 
 ### Example
 ```javascript
-//특정 열의 최소 너비를 110px로 설정합니다.
+// Set the minimum width of a specific column to 110px.
 options.Cols = [
     ...
     {Type: "Enum", Name: "DeptNm", MinWidth: 110, ...},
@@ -40,4 +39,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

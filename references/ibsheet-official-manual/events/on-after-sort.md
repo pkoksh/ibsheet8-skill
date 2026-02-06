@@ -2,12 +2,11 @@
 KEY: onAfterSort
 KIND: event
 PATH: events/on-after-sort
-ALIAS: 소팅이, 이루어진, 호출되는, 이벤트입니다
-ALIAS_EN: on, after, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-sort
+ALIAS_EN: event, called, sorting, performed, onaftersort
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-sort
 ---
 # onAfterSort ***(event)***
-> 소팅이 이루어진 후 호출되는 이벤트입니다.
+> Event called after sorting has been performed.
 
 
 ### Syntax
@@ -23,7 +22,7 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|소팅이 실행된 시트 객체|
+|sheet|`object`|Sheet object where sorting was executed|
 
 ### Return
 ***none***
@@ -34,8 +33,8 @@ or
 ```javascript
 options.Events = {
     onAfterSort:function(evtParam){
-        // 모든 정렬이 다 끝난 후 호출되기에 여기서 상태 메시지를 띄운다.
-        alert("정렬이 완료되었습니다.");
+        // Called after all sorting is complete, so display a status message here.
+        alert("Sorting has been completed.");
     }
 }
 ```
@@ -49,4 +48,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

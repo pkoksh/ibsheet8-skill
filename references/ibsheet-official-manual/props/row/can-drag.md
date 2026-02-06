@@ -2,14 +2,13 @@
 KEY: canDrag
 KIND: row-property
 PATH: props/row/can-drag
-ALIAS: 행의, 가능여부를, 설정합니다
-ALIAS_EN: can, drag
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-drag
+ALIAS_EN: whether, drag, allowed, row, candrag
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/can-drag
 ---
 # CanDrag ***(row)***
-> 행의 Drag 가능여부를 설정합니다.
+> Sets whether drag is allowed for a row.
 
-> [CanDrag cfg](/docs/props/cfg/can-drag) 속성이 `1(true)`인 경우 사용 가능합니다
+> Available when the [CanDrag cfg](/docs/props/cfg/can-drag) property is `1(true)`.
 
 
 ### Type
@@ -18,14 +17,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-drag
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|드래그 불가|
-|`1(true)`|드래그 가능|
+|`0(false)`|Drag disabled|
+|`1(true)`|Drag enabled|
 
 
 
 ### Example
 ```javascript
-//특정 행에 대해서 드래그를 막는다.
+//Prevent drag on a specific row.
 var row = sheet.getRowById("AR55");
 row["CanDrag"] = 0;
 ```
@@ -38,4 +37,4 @@ row["CanDrag"] = 0;
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

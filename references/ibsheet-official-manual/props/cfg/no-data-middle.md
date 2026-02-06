@@ -2,13 +2,12 @@
 KEY: noDataMiddle
 KIND: config-property
 PATH: props/cfg/no-data-middle
-ALIAS: 조회, 데이터가, 없는, 경우, 표시되는
-ALIAS_EN: no, data, middle, search, query, fetch, load, retrieve
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-data-middle
+ALIAS_EN: displays, nodata, row, center, screen, there, retrieved, data
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-data-middle
 ---
 # NoDataMiddle ***(cfg)***
 
-> 조회 된 데이터가 없는 경우 표시되는 NoData행을 화면 가운데에 표시합니다.
+> Displays the NoData row in the center of the screen when there is no retrieved data.
 
 
 ### Type
@@ -17,27 +16,27 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-data-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|NoData행을 상단에 표시 (`default`)|
-|`1(true)`|NoData행을 화면 가운데에 표시|
+|`0(false)`|Display the NoData row at the top (`default`)|
+|`1(true)`|Display the NoData row in the center of the screen|
 
 NoDataMiddle : 0 (`default`)
 
 ![NoDataMiddle:0](/assets/imgs/NoDataMiddle0.png "NoDataMiddle:0")
-<!-- IMAGE: 스크린샷/예시 이미지 - NoDataMiddle:0 -->
+<!-- IMAGE: Screenshot/Example Image - NoDataMiddle:0 -->
 
 
 
 NoDataMiddle : 1 
 
 ![NoDataMiddle:1](/assets/imgs/NoDataMiddle.png "NoDataMiddle:1")
-<!-- IMAGE: 스크린샷/예시 이미지 - NoDataMiddle:1 -->
+<!-- IMAGE: Screenshot/Example Image - NoDataMiddle:1 -->
 
 
 
 ### Example
 ```javascript
 options.Cfg = {
-  NoDataMiddle: 1,  // 조회된 데이터가 없는 경우 화면 가운데에 표시
+  NoDataMiddle: 1,  // Display in the center of the screen when there is no retrieved data
   ...
 };
 ```
@@ -51,4 +50,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.36|기능 추가|
+|core|8.1.0.36|Feature added|

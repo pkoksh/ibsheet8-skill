@@ -2,17 +2,16 @@
 KEY: noChanged
 KIND: column-property
 PATH: props/col/no-changed
-ALIAS: 열의, 값이, 변경되었을때, 수정, 상태를
-ALIAS_EN: no, changed, edit, modify, update, change
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/no-changed
+ALIAS_EN: whether, change, modified, status, column, value, changed, nochanged
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/no-changed
 ---
 # NoChanged ***(col)***
 
-> 열의 값이 변경되었을때 수정 상태를 변경 하지 않도록 설정합니다.
+> Sets whether to not change the modified status when the column value is changed.
 
-> 값이 `1(true)`로 설정되어 있다면 열의 값이 변경되어도 수정 상태를 변경하지 않습니다.
+> If the value is set to `1(true)`, the modified status will not change even when the column value is modified.
 
-> 수정 상태를 변경(`Changed`)하지 않지만 수정 관련된 이벤트는 발생합니다.
+> The modified status (`Changed`) is not changed, but modification-related events are still triggered.
 
 ### Type
 `boolean`
@@ -20,12 +19,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/no-change
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|열 값을 수정하면 수정 상태를 변경 (`default`)|
-|`1(true)`|열 값을 수정해도 수정 상태를 변경하지 않음|
+|`0(false)`|Changes the modified status when the column value is edited (`default`)|
+|`1(true)`|Does not change the modified status even when the column value is edited|
 
 ### Example
 ```javascript
-// 특정 열의 값이 수정될때 수정 상태가 변경되지 않도록 설정
+// Set a specific column so that the modified status does not change when its value is edited
 options.Cols = [
     {Type: "Int", Name: "sNumber", NoChanged: true, Width: 70 ...},
     ...
@@ -39,4 +38,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

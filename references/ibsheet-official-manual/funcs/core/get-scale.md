@@ -2,12 +2,12 @@
 KEY: getScale
 KIND: method
 PATH: funcs/core/get-scale
-ALIAS: sheet.getScale, getScale(), 시트의, 배율, 정보를, 확인합니다
-ALIAS_EN: get, scale
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-scale
+ALIAS: sheet.getScale, getScale()
+ALIAS_EN: returns, zoom, factor, information, sheet, getscale, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-scale
 ---
 # getScale ***(method)***
-> 시트의 배율(zoom factor)정보를 확인합니다.
+> Returns the zoom factor information of the sheet.
 
 ### Syntax
 ```javascript
@@ -16,7 +16,7 @@ number getScale();
 
 
 ### Return Value
-***number*** : 시트에 설정된 배율 정보
+***number*** : zoom factor set on the sheet
 
 ### Example
 ```javascript
@@ -30,4 +30,4 @@ sheet.getScale();
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.11|기능 추가|
+|core|8.3.0.11|Feature added|

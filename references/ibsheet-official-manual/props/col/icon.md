@@ -2,31 +2,30 @@
 KEY: icon
 KIND: column-property
 PATH: props/col/icon
-ALIAS: 셀의, 좌측에, 원하는, 아이콘, 이미지
-ALIAS_EN: icon
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/icon
+ALIAS_EN: feature, displays, desired, icon, image, checkbox, button, left
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/icon
 ---
 # Icon ***(col)***
-> 셀의 좌측에 원하는 아이콘 이미지, 체크박스 혹은 버튼을 표시하는 기능입니다. 
+> A feature that displays a desired icon image, checkbox, or button on the left side of a cell. 
 
-> 셀의 우측에 버튼을 표시하는 [Button](/docs/props/col/button) 속성과 유사한 기능입니다.
+> Similar to the [Button](/docs/props/col/button) property that displays a button on the right side of a cell.
 
-> 열의 타입이 `Button`인 경우에는 사용하실 수 없습니다.
+> Cannot be used when the column type is `Button`.
 
 
 ###
 
-![Icon속성](/assets/imgs/Icon2.png "Icon속성")
-<!-- IMAGE: 아이콘 이미지 - Icon속성 -->
-[그림1]
+![Icon property](/assets/imgs/Icon2.png "Icon property")
+<!-- IMAGE: Icon Image - Icon property -->
+[Figure 1]
 
-![Icon속성](/assets/imgs/Icon1.png "Icon속성")
-<!-- IMAGE: 아이콘 이미지 - Icon속성 -->
-[그림2]
+![Icon property](/assets/imgs/Icon1.png "Icon property")
+<!-- IMAGE: Icon Image - Icon property -->
+[Figure 2]
 
-![Icon속성](/assets/imgs/iconDefaults.png "Icon속성")
-<!-- IMAGE: 아이콘 이미지 - Icon속성 -->
-[그림3]
+![Icon property](/assets/imgs/iconDefaults.png "Icon property")
+<!-- IMAGE: Icon Image - Icon property -->
+[Figure 3]
 
 
 ### Type
@@ -35,21 +34,21 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/icon
 ### Options
 |Value|Description|
 |-----|-----|
-|`Clear`|셀 좌측에 셀 내용을 지우기위한 버튼이 표시됩니다.|
-|`Date`|셀 좌측에 달력 아이콘을 보여줍니다. 열의 타입이 `Date`인 경우에만 클릭시 달력이 표시됩니다.[그림1] 참고|
-|`Check`|셀 좌측에 체크박스를 표시합니다.|
-|`공백`|원래 보여져야 하는 `Icon` 이미지를 감춥니다.|
-|`기타`|이미지 파일에 대한 url을 넣으면 아이콘의 배경으로 이미지가 표시됩니다. [그림2] 참고
-(이미지는 `gif, png, jpg`만 가능)|
-|`Defaults`|셀 좌측에 [Defaults](./defaults) 버튼을 표시합니다. [그림3] 참고|
+|`Clear`|Displays a button for clearing the cell content on the left side of the cell.|
+|`Date`|Displays a calendar icon on the left side of the cell. A calendar is shown on click only when the column type is `Date`. See [Figure 1]|
+|`Check`|Displays a checkbox on the left side of the cell.|
+|`empty string`|Hides the `Icon` image that would normally be displayed.|
+|`other`|If you enter a URL to an image file, the image is displayed as the icon background. See [Figure 2]
+(Only `gif, png, jpg` images are supported)|
+|`Defaults`|Displays a [Defaults](./defaults) button on the left side of the cell. See [Figure 3]|
 <!--!
-|`[비공개]` `Expand`|접음/펼침 기능을 사용하기 위한 버튼이 표시됩니다.|
+|`[Private]` `Expand`|Displays a button for collapse/expand functionality.|
 !-->
 
 
-*[IconWidth](/docs/props/col/icon-width) 속성을 통해 아이콘 영역의 넓이를 설정할 수 있습니다.
-아이콘을 클릭시 [onIconClick](/docs/events/on-icon-click)이벤트가 호출됩니다.
-`"Clear"`나 `"Check"`로 설정하면 [OnClickSide](/docs/props/event/on-click-side) 이벤트만 호출합니다.*
+*You can set the width of the icon area through the [IconWidth](/docs/props/col/icon-width) property.
+When the icon is clicked, the [onIconClick](/docs/events/on-icon-click) event is triggered.
+When set to `"Clear"` or `"Check"`, only the [OnClickSide](/docs/props/event/on-click-side) event is triggered.*
 
 
 ### Example
@@ -57,20 +56,22 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/icon
 ```javascript
 options.Cols = [
     ...
-    //셀의 좌측에 체크박스를 표시
+    // Display a checkbox on the left side of the cell
     {Type: "Text", Name: "product_name", Icon: "Check", Width: 120 ...},
-    //셀의 좌측에 이미지로 버튼을 추가합니다.
+    // Add an image button on the left side of the cell
     {Type: "Text", Name: "brnSaleAmt", Icon: "/pcd/img/popIcon.png", IconWidth: 15, Width: 120 ...},
     ...
 ];
 
-//4. Icon:"Check"를 사용할때, 조회 데이터 내에서 체크시 (열이름 : CLS)
+// 4. When using Icon:"Check", to check in retrieved data (column name: CLS)
 {
     "data": [
         {... , "CLSChecked": 1 , ...}
     ]
 }
 ```
+### Try it
+- [Demo of Icon](https://portal.ibsheet.com/ko/support/solutions/articles/72000650962-셀-좌측-버튼-icon-속성-사용-방법)
 
 ### Read More
 
@@ -87,4 +88,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

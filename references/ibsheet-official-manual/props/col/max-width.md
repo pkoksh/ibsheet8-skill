@@ -2,12 +2,11 @@
 KEY: maxWidth
 KIND: column-property
 PATH: props/col/max-width
-ALIAS: 사용자가, 마우스, 드래그를, 이용하여, 열의
-ALIAS_EN: max, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/max-width
+ALIAS_EN: maximum, column, width, expanded, user, adjusts, mouse, drag
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/max-width
 ---
 # MaxWidth ***(col)***
-> 사용자가 마우스 드래그를 이용하여 열의 너비를 조정할 때, 늘릴수 있는 최대 열의 너비를 설정합니다.
+> Sets the maximum column width that can be expanded when the user adjusts the column width using mouse drag.
 
 
 ### Type
@@ -16,12 +15,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/max-width
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|열의 최대 너비(pixel단위)|
+|`number`|Maximum column width (in pixels)|
 
 
 ### Example
 ```javascript
-//특정 열의 최대 너비를 120px로 설정합니다.
+// Set the maximum width of a specific column to 120px.
 options.Cols = [
     ...
     {Type: "Date", Name: "em_date", MaxWidth: 120, ...},
@@ -39,4 +38,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

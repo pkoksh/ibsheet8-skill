@@ -2,22 +2,21 @@
 KEY: pos
 KIND: column-property
 PATH: props/col/pos
-ALIAS: 섹션, 내에서, 열의, 인덱스를, 확인합니다
-ALIAS_EN: pos
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/pos
+ALIAS_EN: checks, index, column, within, section, pos, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/pos
 ---
 # Pos ***(col)***
 
-> 섹션 내에서 열의 인덱스를 확인합니다.
+> Checks the index of a column within its section.
 
-> 시트의 열 생성시, `LeftCols` 배열에 추가한 열은 틀고정을 기준으로 좌측 섹션으로 들어가고, `Cols` 배열에 넣은 열은 가운데, `RightCols` 섹션에 넣은 열은 우측 섹션으로 추가됩니다.
+> When creating sheet columns, columns added to the `LeftCols` array go into the left section based on frozen panes, columns added to the `Cols` array go into the center, and columns added to the `RightCols` section go into the right section.
 
-> 이 속성은 자신의 섹션 내에서 왼쪽을 기준으로 몇번째로 열이 위치하고 있는지를 확인합니다. (`Readonly`)
+> This property checks the position of the column from the left within its own section. (`Readonly`)
 
 
 ###
-![섹션](/assets/imgs/section.png "섹션")
-<!-- IMAGE: 스크린샷/예시 이미지 - 섹션 -->
+![Section](/assets/imgs/section.png "Section")
+<!-- IMAGE: Screenshot/Example Image - Section -->
 
 
 ### Type
@@ -26,15 +25,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/pos
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|섹션 내에 순번(좌측 기준 0부터 시작)
-`LeftCols`에는 제품 내부적으로 사용하는 숨겨진 열이 있어 1부터 시작합니다.
-또한 `SEQ` 열을 별도로 지정하지 않는 경우, 자동으로 `LeftCols`에 `SEQ` 열이 감춰진 상태로 생성됩니다.|
+|`number`|Sequence number within the section (starts from 0 based on the left)
+`LeftCols` starts from 1 because there are hidden columns used internally by the product.
+Also, if a `SEQ` column is not separately specified, a hidden `SEQ` column is automatically created in `LeftCols`.|
 
 
 
 ### Example
 ```javascript
-//열의 순번을 확인
+// Check the column's sequence number
 var pos = sheet.getAttribute({col: "RENTFEE", attr: "Pos"})
 ```
 
@@ -46,4 +45,4 @@ var pos = sheet.getAttribute({col: "RENTFEE", attr: "Pos"})
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -1,450 +1,270 @@
-<template>
-  <div class="ibsheet-wrapper">
-    <!-- Toolbar (optional) -->
-    <div v-if="showToolbar" class="toolbar">
-      <slot name="toolbar">
-        <button @click="handleRefresh" :disabled="loading">
-          {{ loading ? '로딩...' : '조회' }}
-        </button>
-        <button @click="handleAdd">추가</button>
-        <button @click="handleDelete">삭제</button>
-        <button @click="handleSave" class="btn-primary">저장</button>
-      </slot>
-    </div>
-    
-    <!-- Grid Container -->
-    <div 
-      ref="containerRef" 
-      :style="{ width: '100%', height: height }"
-    ></div>
-    
-    <!-- Loading Overlay -->
-    <div v-if="loading" class="loading-overlay">
-      <div class="loading-spinner">로딩 중...</div>
-    </div>
-  </div>
-</template>
+<!--
+  IBSheet8 + Vue 예제
 
-<script>
-import { ref, onMounted, onUnmounted, watch, defineComponent } from 'vue';
+  사전 준비:
+    npm i @ibsheet/loader @ibsheet/vue
 
-export default defineComponent({
-  name: 'IBSheetGrid',
-  
-  props: {
-    // Required props
-    id: {
-      type: String,
-      required: true
-    },
-    options: {
-      type: Object,
-      required: true
-    },
-    
-    // Optional props
-    data: {
-      type: Array,
-      default: () => []
-    },
-    height: {
-      type: String,
-      default: '500px'
-    },
-    showToolbar: {
-      type: Boolean,
-      default: true
-    },
-    autoLoad: {
-      type: Boolean,
-      default: false
-    }
-  },
-  
-  emits: ['ready', 'change', 'row-add', 'row-delete', 'save'],
-  
-  setup(props, { emit, expose }) {
-    const containerRef = ref(null);
-    const sheet = ref(null);
-    const isReady = ref(false);
-    const loading = ref(false);
-    
-    // Initialize sheet
-    const initSheet = () => {
-      if (!containerRef.value || !window.IBSheet) {
-        console.error('IBSheet library not loaded or container not found');
-        return;
-      }
-      
-      window.IBSheet.create({
-        id: props.id,
-        el: containerRef.value,
-        options: {
-          ...props.options,
-          Events: {
-            ...props.options.Events,
-            onRenderFirstFinish: (evt) => {
-              sheet.value = window.IBSheet.getSheetById(props.id);
-              isReady.value = true;
-              props.options.Events?.onRenderFirstFinish?.(evt);
-              emit('ready', sheet.value);
-            },
-            onAfterChange: (evt) => {
-              props.options.Events?.onAfterChange?.(evt);
-              emit('change', getChangedData());
-            },
-            onAfterRowAdd: (evt) => {
-              props.options.Events?.onAfterRowAdd?.(evt);
-              emit('row-add', evt);
-            },
-            onAfterRowDelete: (evt) => {
-              props.options.Events?.onAfterRowDelete?.(evt);
-              emit('row-delete', evt);
-            }
-          }
-        },
-        data: props.data
-      });
-    };
-    
-    // Destroy sheet
-    const destroySheet = () => {
-      if (sheet.value) {
-        window.IBSheet.dispose(props.id);
-        sheet.value = null;
-        isReady.value = false;
-      }
-    };
-    
-    // API Methods
-    const loadData = (data) => {
-      sheet.value?.loadSearchData({ data });
-    };
-    
-    const getData = (options = {}) => {
-      return sheet.value?.getSaveJson(options);
-    };
-    
-    const getChangedData = () => {
-      return sheet.value?.getSaveJson({ check: 1 });
-    };
-    
-    const addRow = (init = {}, focus = true) => {
-      return sheet.value?.addRow({ init, focus, focusCol: getFirstEditableCol() });
-    };
-    
-    const deleteRow = (row) => {
-      const targetRow = row || sheet.value?.getFocusedRow();
-      if (targetRow) {
-        sheet.value?.deleteRow(targetRow);
-      }
-    };
-    
-    const getCheckedRows = () => {
-      return sheet.value?.getCheckedRows() || [];
-    };
-    
-    const acceptChanges = () => {
-      sheet.value?.acceptChanges();
-    };
-    
-    const validate = () => {
-      return sheet.value?.validate();
-    };
-    
-    const setFocus = (row, col) => {
-      sheet.value?.setFocus(row, col);
-    };
-    
-    const getFirstEditableCol = () => {
-      const cols = props.options.Cols || [];
-      const editableCol = cols.find(col => 
-        col.CanEdit !== false && 
-        col.Type !== 'CheckBox' && 
-        col.Type !== 'RowNum' &&
-        col.Name !== '_STATUS'
-      );
-      return editableCol?.Name || null;
-    };
-    
-    // Toolbar handlers
-    const handleRefresh = () => {
-      emit('refresh');
-    };
-    
-    const handleAdd = () => {
-      addRow({});
-    };
-    
-    const handleDelete = () => {
-      const checkedRows = getCheckedRows();
-      if (checkedRows.length === 0) {
-        const focusedRow = sheet.value?.getFocusedRow();
-        if (focusedRow) {
-          if (confirm('선택한 항목을 삭제하시겠습니까?')) {
-            deleteRow(focusedRow);
-          }
-        } else {
-          alert('삭제할 항목을 선택하세요.');
-        }
-        return;
-      }
-      
-      if (confirm(`${checkedRows.length}건을 삭제하시겠습니까?`)) {
-        checkedRows.forEach(row => deleteRow(row));
-      }
-    };
-    
-    const handleSave = () => {
-      // Validate
-      const validation = validate();
-      if (!validation?.valid) {
-        alert(validation?.message || '유효성 검사 실패');
-        if (validation?.row && validation?.col) {
-          setFocus(validation.row, validation.col);
-        }
-        return;
-      }
-      
-      const saveData = getChangedData();
-      if (!saveData?.data?.length) {
-        alert('변경된 데이터가 없습니다.');
-        return;
-      }
-      
-      emit('save', saveData);
-    };
-    
-    // Watch for data changes
-    watch(() => props.data, (newData) => {
-      if (sheet.value && newData?.length > 0) {
-        loadData(newData);
-      }
-    }, { deep: true });
-    
-    // Lifecycle
-    onMounted(() => {
-      initSheet();
-    });
-    
-    onUnmounted(() => {
-      destroySheet();
-    });
-    
-    // Expose methods to parent
-    expose({
-      getSheet: () => sheet.value,
-      loadData,
-      getData,
-      getChangedData,
-      addRow,
-      deleteRow,
-      getCheckedRows,
-      acceptChanges,
-      validate,
-      setFocus
-    });
-    
-    return {
-      containerRef,
-      sheet,
-      isReady,
-      loading,
-      handleRefresh,
-      handleAdd,
-      handleDelete,
-      handleSave
-    };
-  }
-});
-</script>
+  IBSheet JS 파일은 npm 배포가 불가하므로 public/ibsheet/ 폴더에 배치하고
+  loader를 통해 로드합니다.
 
-<script>
-// ============================================================
-// Composable: useIBSheet (Alternative approach)
-// ============================================================
-import { ref, onMounted, onUnmounted } from 'vue';
-
-export function useIBSheet(id, options, initialData = []) {
-  const containerRef = ref(null);
-  const sheet = ref(null);
-  const isReady = ref(false);
-
-  const initSheet = () => {
-    if (!containerRef.value || !window.IBSheet) return;
-
-    window.IBSheet.create({
-      id,
-      el: containerRef.value,
-      options: {
-        ...options,
-        Events: {
-          ...options.Events,
-          onRenderFirstFinish: (evt) => {
-            sheet.value = window.IBSheet.getSheetById(id);
-            isReady.value = true;
-            options.Events?.onRenderFirstFinish?.(evt);
-          }
-        }
-      },
-      data: initialData
-    });
-  };
-
-  onMounted(() => initSheet());
-  
-  onUnmounted(() => {
-    if (sheet.value) {
-      window.IBSheet.dispose(id);
-    }
-  });
-
-  return {
-    containerRef,
-    sheet,
-    isReady,
-    loadData: (data) => sheet.value?.loadSearchData({ data }),
-    getData: (opts) => sheet.value?.getSaveJson(opts),
-    addRow: (init) => sheet.value?.addRow({ init, focus: true }),
-    deleteRow: (row) => sheet.value?.deleteRow(row),
-    acceptChanges: () => sheet.value?.acceptChanges()
-  };
-}
-</script>
-
-<style scoped>
-.ibsheet-wrapper {
-  position: relative;
-}
-
-.toolbar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-  padding: 10px;
-  background: #f5f5f5;
-  border-radius: 4px;
-}
-
-.toolbar button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  background: #fff;
-  border: 1px solid #ddd;
-}
-
-.toolbar button:hover {
-  background: #e0e0e0;
-}
-
-.toolbar button.btn-primary {
-  background: #1976d2;
-  color: white;
-  border-color: #1976d2;
-  margin-left: auto;
-}
-
-.toolbar button.btn-primary:hover {
-  background: #1565c0;
-}
-
-.toolbar button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-.loading-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-.loading-spinner {
-  padding: 20px 40px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-</style>
+  참고: https://stackblitz.com/edit/vitejs-vite-brpanol5 (JS)
+        https://stackblitz.com/edit/vitejs-vite-fx91nwtn (TS)
+-->
 
 <!--
 ============================================================
-Example Usage in Parent Component
+1. Entry Point (main.js 등)에서 loader 설정 - 앱 전체에서 1회만 호출
 ============================================================
 
-<template>
-  <div>
-    <IBSheetGrid
-      ref="gridRef"
-      id="productSheet"
-      :options="sheetOptions"
-      :data="products"
-      height="500px"
-      @ready="onSheetReady"
-      @change="onDataChange"
-      @save="onSave"
-    />
-  </div>
-</template>
+import loader from '@ibsheet/loader'
 
+const loaderOption = {
+  name: 'ibsheet',
+  baseUrl: '/ibsheet',           // public/ibsheet 폴더 기준
+  // theme: 'mint',              // CSS 테마 (생략 시 default)
+  locales: ['en', 'ko'],
+  plugins: ['dialog', 'common', 'excel'],
+  license: 'YOUR_LICENSE_KEY'
+};
+
+loader.load(loaderOption);
+-->
+
+<!-- ============================================================ -->
+<!-- 2. 기본 사용법 (JavaScript) - App.vue                         -->
+<!-- ============================================================ -->
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
-import IBSheetGrid from './IBSheetGrid.vue';
+import { IBSheetVue, IB_Preset } from '@ibsheet/vue';
+import { shallowRef } from 'vue';
 
-const gridRef = ref(null);
-const products = ref([]);
+// 시트 객체를 담을 ref 객체
+const mySheet = shallowRef(null);
 
-const sheetOptions = reactive({
+const sheetOptions = {
   Cfg: {
-    SearchMode: 0,
-    CanEdit: true,
-    HeaderCheck: true
+    Style: 'mint',
   },
   Cols: [
-    { Header: '선택', Name: 'chk', Type: 'CheckBox', Width: 50 },
-    { Header: 'ID', Name: 'id', Type: 'Int', Width: 60, CanEdit: false },
-    { Header: '상품명', Name: 'name', Type: 'Text', Width: 200, Required: true },
-    { Header: '가격', Name: 'price', Type: 'Int', Width: 100, Format: '#,##0' },
-    { Header: '재고', Name: 'stock', Type: 'Int', Width: 80 }
-  ]
-});
-
-const onSheetReady = (sheet) => {
-  console.log('Sheet ready:', sheet);
+    { Header: 'No', Type: 'Text', Name: 'SEQ', RelWidth: 30 },
+    {
+      Header: 'Name',
+      Type: 'Text',
+      Name: 'name',
+      RelWidth: 120,
+      Required: 1,
+      Size: 10,
+    },
+    { Header: 'Age', Type: 'Int', Name: 'age', RelWidth: 60 },
+    { Header: 'Ymd', Name: 'sDate_Ymd', Extend: IB_Preset.YMD, RelWidth: 110 },
+  ],
+  Events: {
+    // 값 변경 이벤트
+    onBeforeChange: (evt) => {
+      console.log(`${evt.oldval}값이 ${evt.val}로 변경되었습니다.`);
+    },
+    // 시트 생성 완료 이벤트
+    onRenderFirstFinish: (evt) => {
+      // 시트객체 생성시 1회만 발생합니다.
+      mySheet.value = evt.sheet; // 생성된 시트 객체를 ref객체에 담음
+    },
+  },
 };
 
-const onDataChange = (data) => {
-  console.log('Data changed:', data);
+// 조회 데이터
+const sheetData = [
+  { name: 'John Doe', age: 30, sDate_Ymd: '20251011' },
+  { name: 'Jane Smith', age: 25, sDate_Ymd: '20251205' },
+];
+
+// 시트 객체 너비/높이 style
+const customStyle = {
+  width: '100%',
+  height: '400px',
+  border: '1px solid #ccc',
 };
 
-const onSave = async (saveData) => {
-  try {
-    await fetch('/api/products/save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(saveData)
-    });
-    
-    gridRef.value?.acceptChanges();
-    alert('저장되었습니다.');
-  } catch (error) {
-    alert('저장 실패');
+const handleAddRow = () => {
+  mySheet.value.addRow();
+};
+const handleLoadData = () => {
+  mySheet.value.loadSearchData(sheetData);
+};
+const handleGetData = () => {
+  const saveData = mySheet.value.getSaveJson();
+  if (saveData.data.length) {
+    alert('수정된 행 데이터 \n\n\n' + JSON.stringify(saveData));
+  } else {
+    if (saveData.Code == 'IBS000') {
+      alert('수정된 데이터가 없습니다.');
+    } else if (saveData.Code == 'IBS010') {
+      alert(
+        `${mySheet.value.getRowIndex(saveData.row)} 행의 ${saveData.col} 열은 필수 입력 항목입니다.`
+      );
+    }
   }
 };
+</script>
 
+<template>
+  <h1>IBSheet + Vue</h1>
+  <div class="btn">
+    <button @click="handleAddRow">행 추가</button>
+    <button @click="handleGetData">수정된 데이터 확인</button>
+    <button @click="handleLoadData">데이터로드</button>
+  </div>
+  <IBSheetVue :options="sheetOptions" :style="customStyle" />
+</template>
+
+<!--
+============================================================
+3. TypeScript 사용법 (참고용 - lang="ts" 사용)
+============================================================
+
+<script setup lang="ts">
+import {
+  IBSheetVue,
+  IB_Preset,
+  type IBSheetInstance,
+  type IBSheetOptions,
+  type IBSheetEvents,
+} from '@ibsheet/vue';
+import { shallowRef } from 'vue';
+
+// 시트 객체를 담을 ref 객체
+const mySheet = shallowRef<IBSheetInstance>(null);
+
+// 시트 클릭 이벤트
+const handleAfterClick: IBSheetEvents['onAfterClick'] = (evt) => {
+  console.log(
+    `${evt.sheet.getRowIndex(evt.row)}행, ${evt.sheet.getString(
+      evt.sheet.getRowById('Header'),
+      evt.col
+    )}열이 클릭되었습니다.`
+  );
+};
+
+// 시트 객체 생성 이벤트 (객체 생성시 1회 발생)
+const handleRenderFinish: IBSheetEvents['onRenderFirstFinish'] = (evt) => {
+  mySheet.value = evt.sheet;
+};
+
+// 시트 초기화 구문
+const sheetOptions: IBSheetOptions = {
+  Cfg: {
+    SearchMode: 0,
+  },
+  Def: {
+    Col: { RelWidth: 1 },
+  },
+  Cols: [
+    { Header: 'No', Type: 'Text', Name: 'SEQ', RelWidth: 50 },
+    {
+      Header: { Value: '', HeaderCheck: 1, IconAlign: 'Center' },
+      Type: 'Bool',
+      Name: 'CHK',
+      CanSort: 0,
+      RelWidth: 50,
+    },
+    { Header: '이름', Type: 'Text', Name: 'name', RelWidth: 200 },
+    { Header: '나이', Type: 'Int', Name: 'age', RelWidth: 100 },
+    {
+      Header: '입사일',
+      Name: 'sDate_Ymd',
+      Extend: IB_Preset.YMD,
+      RelWidth: 120,
+    },
+  ],
+  Events: {
+    onAfterClick: handleAfterClick,
+    onRenderFirstFinish: handleRenderFinish,
+  },
+};
+
+const sheetData = [
+  { name: 'John Doe', age: 30, sDate_Ymd: '20251011' },
+  { name: 'Jane Smith', age: 25, sDate_Ymd: '20251205' },
+];
+
+const customStyle = {
+  width: '500px',
+  height: '400px',
+  border: '1px solid #ccc',
+};
+
+const handleAddRow = () => {
+  mySheet.value.addRow();
+};
+const handleExportXls = () => {
+  mySheet.value.exportData({ fileName: 'ibsheet_vue_typescript_example.xlsx' });
+};
+const handleLoadData = () => {
+  mySheet.value.loadSearchData(sheetData);
+};
+</script>
+
+<template>
+  <div class="btn">
+    <button @click="handleAddRow">Add Row</button>
+    <button @click="handleLoadData">Load Data</button>
+    <button @click="handleExportXls">Export Xls</button>
+  </div>
+  <IBSheetVue :options="sheetOptions" :style="customStyle" />
+</template>
+-->
+
+<!--
+============================================================
+4. 주의사항: onMounted와 IBSheet 객체 생성 시점
+============================================================
+IBSheet 객체는 비동기로 생성되기 때문에 onMounted 시점에서 시트 생성이
+완료되지 않았을 수 있습니다. v-if를 사용하여 시점을 제어할 수 있습니다.
+
+<script setup>
+import { IBSheetVue, IB_Preset } from '@ibsheet/vue';
+import { ref, shallowRef, onMounted } from 'vue';
+
+// 시트 생성 시점 제어
+const createSheet = ref(false);
+const mySheet = shallowRef(null);
+
+const customStyle = {
+  width: '100%',
+  height: '400px',
+  border: '1px solid #ccc',
+};
+
+const sheetOptions = {
+  Cols: [
+    { Header: 'No', Type: 'Int', Width: 50, Name: 'SEQ' },
+    { Header: '이름', Type: 'Text', Name: 'name', Width: 200 },
+    { Header: '나이', Type: 'Int', Name: 'age', Width: 100 },
+  ],
+  Events: {
+    onRenderFirstFinish: (evt) => {
+      // v-if를 통해 항상 onMounted 이후에 생성됩니다.
+      mySheet.value = evt.sheet;
+      mySheet.value.loadSearchData(sheetData);
+    },
+  },
+};
+
+const sheetData = [
+  { name: 'John Doe', age: 30 },
+  { name: 'Jane Smith', age: 25 },
+];
+
+// 화면 마운트 시점 (IBSheet 객체는 아직 생성되기 전)
 onMounted(async () => {
-  const response = await fetch('/api/products');
-  products.value = await response.json();
+  // 서버 데이터 가져오기 등 시간이 걸리는 작업
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  // v-if를 통해 onMounted 함수 마지막 부분에서 시트 객체 생성
+  createSheet.value = true;
 });
 </script>
+
+<template>
+  <h1>IBSheet + Vue</h1>
+  <IBSheetVue v-if="createSheet" :options="sheetOptions" :style="customStyle" />
+</template>
 -->

@@ -2,12 +2,11 @@
 KEY: buttonWidth
 KIND: column-property
 PATH: props/col/button-width
-ALIAS: 이고, 속성의, 값이, 경우, 셀에
-ALIAS_EN: button, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/button-width
+ALIAS_EN: type, docs, appx, button, property, value, width, object
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/button-width
 ---
 # ButtonWidth ***(col)***
-> [Type](/docs/appx/type)이 `Button`이고, [Button](./button)속성의 값이 `Button`인 경우, 셀에 생성되는 버튼 객체의 너비를 설정합니다.
+> When [Type](/docs/appx/type) is `Button` and the [Button](./button) property value is `Button`, sets the width of the button object created in the cell.
 
 
 
@@ -17,11 +16,11 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/button-wi
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|버튼 객체의 너비|
+|`number`|Width of the button object|
 
 ### Example
 ```javascript
-//버튼의 너비를 80px로 설정
+// Set button width to 80px
 options.Cols = [
     ...
     {Type: "Button", Button: "Button", Name: "btn1", ButtonWidth: 80 ...},
@@ -38,4 +37,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: hoverScope
 KIND: config-property
 PATH: props/cfg/hover-scope
-ALIAS: 시트내의, 또는, 셀에, 마우스, 커서가
-ALIAS_EN: hover, scope
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/hover-scope
+ALIAS_EN: limits, area, hover, action, performed, mouse, cursor, positioned
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/hover-scope
 ---
 # HoverScope ***(cfg)***
 
-> 시트내의 행 또는 셀에 마우스 커서가 위치 했을때 `Hover` 동작이 수행되는 영역을 제한합니다.
+> Limits the area where the `Hover` action is performed when the mouse cursor is positioned on a row or cell in the sheet.
 
 
 
@@ -18,14 +17,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/hover-sco
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|헤더/데이터 영역에 `Hover` 동작 (`default`)|
-|`1`|헤더 영역에 `Hover` 동작하지 않음|
+|`0`|`Hover` action in header/data area (`default`)|
+|`1`|`Hover` action does not occur in the header area|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    HoverScope: 1,       // 헤더 영역에 Hover 동작하지 않음  
+    HoverScope: 1,       // Hover action does not occur in the header area
 };
 ```
 
@@ -36,4 +35,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.9|기능 추가|
+|core|8.0.0.9|Feature added|

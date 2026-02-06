@@ -2,22 +2,22 @@
 KEY: index
 KIND: index
 PATH: events/index
-ALIAS_EN: index
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/index
+ALIAS_EN: docs, events
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/index
 ---
 <!-- 주의: 이 문서는 인덱스 페이지입니다. 상세 정보는 개별 문서를 참조하세요. -->
 <!-- INDEX_ONLY: This is an index page listing available items. Refer to individual documents for detailed information. -->
 
 # docs/events
 
-1. [event 사용법 기초](/docs/events/event)
-2. [비공개: onAfterCalculate](/docs/events/on-after-calculate)
+1. [Event Usage Basics](/docs/events/event)
+2. [Private: onAfterCalculate](/docs/events/on-after-calculate)
 3. [onAfterChange](/docs/events/on-after-change)
 4. [onAfterClick](/docs/events/on-after-click)
 5. [onAfterColAdd](/docs/events/on-after-col-add)
 6. [onAfterColMove](/docs/events/on-after-col-move)
 7. [onAfterColResize](/docs/events/on-after-col-resize)
-8. [비공개: onAfterColsAdd](/docs/events/on-after-cols-add)
+8. [Private: onAfterColsAdd](/docs/events/on-after-cols-add)
 9. [onAfterEdit](/docs/events/on-after-edit)
 10. [onAfterExpand](/docs/events/on-after-expand)
 11. [onAfterFilter](/docs/events/on-after-filter)
@@ -34,7 +34,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/index
 22. [onAfterSave](/docs/events/on-after-save)
 23. [onAfterSectionResize](/docs/events/on-after-section-resize)
 24. [onAfterSort](/docs/events/on-after-sort)
-25. [비공개: onBeforeCalculate](/docs/events/on-before-calculate)
+25. [Private: onBeforeCalculate](/docs/events/on-before-calculate)
 26. [onBeforeChange](/docs/events/on-before-change)
 27. [onBeforeCheckAll](/docs/events/on-before-check-all)
 28. [onBeforeColMove](/docs/events/on-before-col-move)
@@ -49,14 +49,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/index
 37. [onBeforePaste](/docs/events/on-before-paste)
 38. [onBeforeRowDelete](/docs/events/on-before-row-delete)
 39. [onBeforeSave](/docs/events/on-before-save)
-40. [비공개: onBeforeSelect](/docs/events/on-before-select)
-41. [비공개: onBeforeSelectAll](/docs/events/on-before-select-all-todo)
-42. [비공개: onBeforeSend](/docs/events/on-before-send)
+40. [Private: onBeforeSelect](/docs/events/on-before-select)
+41. [Private: onBeforeSelectAll](/docs/events/on-before-select-all-todo)
+42. [Private: onBeforeSend](/docs/events/on-before-send)
 43. [onBeforeSort](/docs/events/on-before-sort)
 44. [onBlur](/docs/events/on-blur)
 45. [onButtonClick](/docs/events/on-button-click)
-46. [비공개: onCalculateCell](/docs/events/on-calculate-cell)
-47. [비공개: onCanDrop](/docs/events/on-can-drop)
+46. [Private: onCalculateCell](/docs/events/on-calculate-cell)
+47. [Private: onCanDrop](/docs/events/on-can-drop)
 48. [onCancelFile](/docs/events/on-cancle-file)
 49. [onCheckAllFinish](/docs/events/on-check-all-finish)
 50. [onClick](/docs/events/on-click)
@@ -85,16 +85,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/index
 73. [onReadCanEditDate](/docs/events/on-read-can-edit-date)
 74. [onReadDate](/docs/events/on-read-date)
 75. [onReadDefaults](/docs/events/on-read-defaults)
-76. [비공개: onReadEnum](/docs/events/on-read-enum)
-77. [비공개: onReadEnumKeys](/docs/events/on-read-enum-keys)
+76. [Private: onReadEnum](/docs/events/on-read-enum)
+77. [Private: onReadEnumKeys](/docs/events/on-read-enum-keys)
 78. [onReadFilteringValue](/docs/events/on-read-filtering-value)
 79. [onReadMenu](/docs/events/on-read-menu)
 80. [onReadSuggest](/docs/events/on-read-suggest)
 81. [onReceiveData](/docs/events/on-receive-data)
 82. [onRenderFinish](/docs/events/on-render-finish)
 83. [onRenderFirstFinish](/docs/events/on-render-first-finish)
-84. [비공개: onRenderPageFinish](/docs/events/on-render-page-finish)
-85. [비공개: onRenderPageStart](/docs/events/on-render-page-start)
+84. [Private: onRenderPageFinish](/docs/events/on-render-page-finish)
+85. [Private: onRenderPageStart](/docs/events/on-render-page-start)
 86. [onRenderStart](/docs/events/on-render-start)
 87. [onResize](/docs/events/on-resize)
 88. [onResultMask](/docs/events/on-result-mask)
@@ -105,7 +105,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/index
 93. [onRowLoad](/docs/events/on-row-load)
 94. [onSave](/docs/events/on-save)
 95. [onScroll](/docs/events/on-scroll)
-96. [비공개: onSearchCallback](/docs/events/on-search-callback)
+96. [Private: onSearchCallback](/docs/events/on-search-callback)
 97. [onSearchFinish](/docs/events/on-search-finish)
 98. [onSearchStart](/docs/events/on-search-start)
 99. [onSectionResize](/docs/events/on-section-resize)

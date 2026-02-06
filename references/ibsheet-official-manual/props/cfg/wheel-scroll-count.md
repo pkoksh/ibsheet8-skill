@@ -2,15 +2,14 @@
 KEY: wheelScrollCount
 KIND: config-property
 PATH: props/cfg/wheel-scroll-count
-ALIAS: 상관없이, 스크롤, 이동할, 행의, 개수를
-ALIAS_EN: wheel, scroll, count
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/wheel-scroll-count
+ALIAS_EN: feature, number, rows, move, wheel, scroll, regardless, searchmode
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/wheel-scroll-count
 ---
 # WheelScrollCount ***(cfg)***
 
-> `SearchMode` 와 상관없이, 휠 스크롤 시 이동할 행의 개수를 설정하는 기능 입니다. 
+> A feature that sets the number of rows to move during wheel scroll, regardless of `SearchMode`. 
 
-> 설정 하지 않으면, `SearchMode: 0` 은 3개, `SearchMode: 2` 은 `window.wheel.event` 의 `deltaY` 만큼 움직입니다.
+> If not set, `SearchMode: 0` moves 3 rows, and `SearchMode: 2` moves by the `deltaY` amount of `window.wheel.event`.
 
 ### Type
 `number`
@@ -18,13 +17,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/wheel-scr
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|휠 스크롤 시 이동할 행의 개수|
+|`number`|Number of rows to move during wheel scroll|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-   WheelScrollCount: 1 // 스크롤 시 행의 개수가 1개씩 움직입니다.
+   WheelScrollCount: 1 // Moves 1 row at a time during scroll.
 };
 ```
 
@@ -35,4 +34,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.20|기능 추가|
+|core|8.0.0.20|Feature added|

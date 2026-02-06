@@ -2,15 +2,14 @@
 KEY: selected
 KIND: column-property
 PATH: props/col/selected
-ALIAS: 열을, 선택하거나, 선택여부를, 확인
-ALIAS_EN: selected, confirm, ok
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/selected
+ALIAS_EN: selects, column, checks, whether, selected, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/selected
 ---
 # Selected ***(col)***
 
-> 열을 선택하거나 선택여부를 확인 합니다.
+> Selects a column or checks whether a column is selected.
 
-> [SelectingCells](/docs/props/cfg/selecting-cells)의 속성값이 0인 경우 사용하실 수 있습니다.
+> Can be used when the [SelectingCells](/docs/props/cfg/selecting-cells) property value is 0.
 
 
 ### Type
@@ -19,12 +18,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/selected
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|열 선택 해제 (`default`)|
-|`1(true)`|열 선택|
+|`0(false)`|Deselect column (`default`)|
+|`1(true)`|Select column|
 
 ### Example
 ```javascript
-//XMT 열 전체를 선택
+// Select the entire XMT column
 sheet.setAttribute({col: "XMT", attr: "Selected", val: 1, render: 1});
 ```
 
@@ -35,4 +34,4 @@ sheet.setAttribute({col: "XMT", attr: "Selected", val: 1, render: 1});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,14 +2,14 @@
 KEY: setRowValue
 KIND: method
 PATH: funcs/core/set-row-value
-ALIAS: sheet.setRowValue, setRowValue(), 단위별, 데이터를, 설정
-ALIAS_EN: set, row, value, config, setting, option
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-row-value
+ALIAS: sheet.setRowValue, setRowValue()
+ALIAS_EN: data, per, row, basis, setrowvalue, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-row-value
 ---
 # setRowValue ***(method)***
-> 행 단위별 데이터를 설정 합니다.
+> Sets data on a per-row basis.
 
-> [getRowValue](/docs/funcs/core/get-row-value) 로 추출한 데이터를 행 단위별로 set 할 수 있습니다.
+> Data extracted with [getRowValue](/docs/funcs/core/get-row-value) can be set on a per-row basis.
 
 
 ### Syntax
@@ -20,14 +20,16 @@ object setRowValue( row, data, render, noCalc );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|필수|데이터를 설정할 대상 행(row)|
-|data|`object`|필수|json 형식의 object 데이터|
-|render|`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
-|calc|`boolean`|선택|포뮬러 계산 여부 
- 해당 기능을 `0(false)`로 설정할 경우 `setValue`시 포뮬러 계산이 이뤄지지 않습니다. 포뮬러를 반영하려면 이후 반드시 `calculate()`를 호출해줘야 됩니다.(`default:1`) |
+|row|`object`|Required|Target row to set data on|
+|data|`object`|Required|Data in JSON format|
+|render|`boolean`|Optional|Whether to immediately reflect on screen (`default : true`)
+If this feature is set to `0(false)`, you must execute `rerender()` for screen reflection.
+`0(false)` : Not reflected
+`1(true)` : Immediately reflected |
+|calc|`boolean`|Optional|Whether to calculate formulas (`default : true`)
+ If this feature is set to `0(false)`, you must execute `calculate()` for formula calculation.
+`0(false)` : Not reflected
+`1(true)` : Immediately reflected |
 
 
 ### Return Value
@@ -36,22 +38,69 @@ object setRowValue( row, data, render, noCalc );
 
 ### Example
 ```javascript
+// ================================
+// Example: Overwriting row data
+// ================================
 
-var row = sheet.getRowById("AR5"); // ID가 AR5인 행
-var data = sheet.getRowValue(row); // ID가 AR5인 행의 json 데이터 추출
-var targetRow = sheet.getRowById("AR1"); // ID가 AR1인 행
-sheet.setRowValue(targetRow, data); // AR5 행의 데이터를 AR1 행에 set
+// Retrieve the 5th row (row object ID is AR5.)
+var row = sheet.getRowById("AR5");
 
+// Extract AR5 row's data in JSON format
+var data = sheet.getRowValue(row);
+
+// Retrieve the 1st row (row object ID is AR1.)
+var targetRow = sheet.getRowById("AR1");
+
+// Overwrite AR1 row's data with AR5 row's values
+sheet.setRowValue(targetRow, data);
+
+// ================================
+// Example: Updating specific row data with JSON
+// ================================
+
+const data = {
+  name: "John Doe",
+  dept: "General Affairs Dept.",
+  salary: 3500000,
+  bonus: 500000
+};
+
+// Partially update ID "AR1" row data in JSON format
+// Column values not included in the JSON object are maintained as-is without being changed.
+var targetRow = sheet.getRowById("AR1");
+sheet.setRowValue(targetRow, data);
+
+// ================================
+// Example: Batch changing multiple header column values
+// ================================
+
+//Retrieve the top row
+const hr = sheet.getRowById("Header");
+
+sheet.setRowValue({
+  row: hr,
+  data: {
+    SalesToday: "Sales",
+    SalesSum: "Sales",
+    CostToday: "Cost",
+    CostSum: "Cost"
+  },
+  calc: false
+});
+
+// Re-apply merge according to header text changes
+sheet.setAutoMerge( {headerMerge:2});
 ```
 
 ### Read More
 
 - [getRowValue](/docs/funcs/core/get-row-value)
+- [setValue](/docs/funcs/core/set-value)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.25|기능 추가|
-|core|8.3.0.45|render인자 추가|
-|core|8.3.0.46|calc 인자 추가|
+|core|8.1.0.25|Feature added|
+|core|8.3.0.45|`render` argument added|
+|core|8.3.0.46|`calc` argument added|

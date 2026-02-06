@@ -2,15 +2,14 @@
 KEY: acceptPivotData
 KIND: config-property
 PATH: props/cfg/accept-pivot-data
-ALIAS: 피벗, 시트에서, 데이터의, 값으로, 사용될
-ALIAS_EN: accept, pivot, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/accept-pivot-data
+ALIAS_EN: columns, data, values, pivot, sheet, acceptpivotdata, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/accept-pivot-data
 ---
 # AcceptPivotData ***(cfg)***
 
-> 피벗 시트에서 데이터의 값으로 사용될 수 있는 열을 설정합니다.
+> Sets the columns that can be used as data values in the pivot sheet.
 
-> `","`로 연결하여 복수 개의 열 이름을 지정할 수 있습니다.
+> Multiple column names can be specified by connecting with `","`.
 
 ### Type
 `string`
@@ -19,7 +18,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/accept-pi
 ### Example
 ```javascript
 options.Cfg = {
-    UsePivot: true, // 피벗 사용 여부
+    UsePivot: true, // Whether to use pivot
     AcceptPivotData: "sAge,sPeriod,sSalary,sBonus"
 };
 ```
@@ -34,4 +33,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

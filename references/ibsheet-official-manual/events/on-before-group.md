@@ -2,14 +2,13 @@
 KEY: onBeforeGroup
 KIND: event
 PATH: events/on-before-group
-ALIAS: 시트를, 특정, 기준으로, 그룹, 실행
-ALIAS_EN: on, before, group
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-before-group
+ALIAS_EN: event, called, grouping, applied, released, based, specific, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-before-group
 ---
 # onBeforeGroup ***(event)***
-> 시트를 특정 열(들)을 기준으로 그룹 실행/해제전에 호출되는 이벤트입니다.
+> Event called before grouping is applied/released based on specific column(s) in the sheet.
 
-> `1(true)`를 리턴 시 그룹을 실행/해제하지 않습니다.
+> Returning `1(true)` prevents the group from being applied/released.
 
 ### Syntax
 
@@ -24,8 +23,8 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|그룹 실행/해제 동작이 발생된 시트 객체|
-|group|`string`|시트에서 그룹의 기준이 되는 열이름들|
+|sheet|`object`|Sheet object where the group apply/release action occurred|
+|group|`string`|Column names that serve as the basis for grouping in the sheet|
 
 
 ### Return
@@ -35,13 +34,13 @@ or
 ```javascript
 options.Events = {
     onBeforeGroup:function(evtParam){
-        // 지원 부서 열로 그룹할 수 없습니다.
+        // Cannot group by the support department column.
         if(evtParam.group.indexOf("deptNm") > -1){
-            alert("지원 부서 열로 그룹이 불가능합니다.");
-            return true; // 그룹 취소
-        } // 4개 이상의 열로 그룹할 수 없습니다.
+            alert("Grouping by the support department column is not allowed.");
+            return true; // Cancel grouping
+        } // Cannot group by more than 4 columns.
         else if (evtParam.group.split(",").length > 3) {
-            alert("4개 이상의 열로 그룹할 수 없습니다.");
+            alert("Cannot group by more than 4 columns.");
             return true;
         }
     }
@@ -55,4 +54,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

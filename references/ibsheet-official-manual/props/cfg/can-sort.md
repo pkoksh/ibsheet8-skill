@@ -2,15 +2,14 @@
 KEY: canSort
 KIND: config-property
 PATH: props/cfg/can-sort
-ALIAS: 헤더, 클릭을, 통한, 정렬, 기능의
-ALIAS_EN: can, sort, header, align, alignment
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-sort
+ALIAS_EN: whether, column, sorting, sort, via, header, click, allowed
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/can-sort
 ---
 # CanSort ***(cfg)***
 
-> 헤더 클릭을 통한 열 정렬(`Sort`) 기능의 허용 여부를 설정합니다. 
+> Sets whether column sorting (`Sort`) via header click is allowed. 
 
-> [SortIcons cfg](./sort-icons) 설정에 따라 헤더 정렬 아이콘을 숨길 수 있습니다. 
+> Header sort icons can be hidden according to the [SortIcons cfg](./sort-icons) setting. 
 
 
 
@@ -20,14 +19,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-sort
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|정렬 기능 사용 안함|
-|`1(true)`|정렬 기능 사용 (`default`)|
+|`0(false)`|Sorting feature disabled|
+|`1(true)`|Sorting feature enabled (`default`)|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    CanSort: false,   // 정렬 기능 사용 안함
+    CanSort: false,   // Disable sorting feature
 };
 ```
 
@@ -44,4 +43,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

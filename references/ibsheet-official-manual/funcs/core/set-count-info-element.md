@@ -2,13 +2,13 @@
 KEY: setCountInfoElement
 KIND: method
 PATH: funcs/core/set-count-info-element
-ALIAS: sheet.setCountInfoElement, setCountInfoElement(), 기능, 사용시, 표시되는, 데이터, 행수
-ALIAS_EN: set, count, info, element, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-count-info-element
+ALIAS: sheet.setCountInfoElement, setCountInfoElement()
+ALIAS_EN: inforowconfig, cfg, docs, props, info, row, config, feature
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-count-info-element
 ---
 # setCountInfoElement ***(method)***
 
-> [InfoRowConfig cfg](/docs/props/cfg/info-row-config) 기능 사용시 표시되는 데이터 행수 정보를 시트 외부의 Dom Element 에 표시합니다.
+> When using the [InfoRowConfig cfg](/docs/props/cfg/info-row-config) feature, displays the data row count information in a Dom Element outside the sheet.
 
 
 ### Syntax
@@ -19,14 +19,14 @@ boolean setCountInfoElement ( element );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|element |`object` \| `string`|필수| 데이터 행수 정보를 표시할 Dom Element 또는 해당 id|
+|element |`object` \| `string`|Required| Dom Element or its id to display the data row count information|
 
 ### Return Value
-***boolean*** : `true`: 외부의 Dom Element 표시 성공 `false`: 실패
+***boolean*** : `true`: Successfully displayed in the external Dom Element, `false`: Failed
 
 ### Example
 ```javascript
-// id가 'countElem'인 div 에 데이터 행수 정보 출력 설정
+// Set the div with id 'countElem' to output data row count information
 sheet.setCountInfoElement ( 'countElem' );
 sheet.setCountInfoElement ( docuemnt.getElementById('countElem') );
 ```
@@ -40,4 +40,4 @@ sheet.setCountInfoElement ( docuemnt.getElementById('countElem') );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

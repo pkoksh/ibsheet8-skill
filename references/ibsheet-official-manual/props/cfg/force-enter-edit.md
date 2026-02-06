@@ -2,13 +2,12 @@
 KEY: forceEnterEdit
 KIND: config-property
 PATH: props/cfg/force-enter-edit
-ALIAS: 값이, 아닌, 경우, 포커스, 상태에서
-ALIAS_EN: force, enter, edit, focus
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/force-enter-edit
+ALIAS_EN: option, sheet, enter, edit, mode, focus, state, performing
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/force-enter-edit
 ---
 # ForceEnterEdit ***(cfg)***
 
-> [EnterMode](/docs/props/cfg/enter-mode)의 `mode`값이 `0`이 아닌 경우 포커스 상태에서 편집 상태가 되고 이후의 동작이 되도록 설정하는 옵션입니다.
+> An option that sets the sheet to enter edit mode from focus state before performing the subsequent action when [EnterMode](/docs/props/cfg/enter-mode)'s `mode` value is not `0`.
 
 
 ### Type
@@ -18,14 +17,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/force-ent
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|`EnterMode`의 기본 동작 수행|
-|`1(true)`|포커스 상태에서는 편집 상태로 바뀐 후 `EnterMode`의 기본 동작 수행 (`default`)|
+|`0(false)`|Perform the default `EnterMode` action|
+|`1(true)`|In focus state, switch to edit mode first and then perform the default `EnterMode` action (`default`)|
 
 
 ### Example
 ```javascript
 options.Cfg{
-   // enter 키 이동시 편집 상태일때는 편집을 종료하고 우측 셀로 이동 (포커스 상태일 때는 우측 셀로 바로 이동)
+   // When moving with Enter key, if in edit state, end editing and move to the right cell (in focus state, move directly to the right cell)
    EnterMode: 3,
    ForceEnterEdit: false
    ...
@@ -40,4 +39,4 @@ options.Cfg{
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

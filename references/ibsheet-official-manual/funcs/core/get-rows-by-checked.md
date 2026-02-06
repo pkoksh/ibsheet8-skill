@@ -2,12 +2,12 @@
 KEY: getRowsByChecked
 KIND: method
 PATH: funcs/core/get-rows-by-checked
-ALIAS: sheet.getRowsByChecked, getRowsByChecked(), 인자, 열의, 경우, 해당, 열에
-ALIAS_EN: get, rows, by, checked
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-rows-by-checked
+ALIAS: sheet.getRowsByChecked, getRowsByChecked()
+ALIAS_EN: argument, column, type, docs, appx, bool, returns, checked
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-rows-by-checked
 ---
 # getRowsByChecked ***(method)***
-> 인자 열의 [Type](/docs/appx/type)이 Bool인 경우 해당 열에 체크된 모든 [데이터 로우 객체](/docs/appx/row-object)를 배열로 리턴합니다.
+> When the argument column's [Type](/docs/appx/type) is Bool, returns all checked [data row object](/docs/appx/row-object)s in that column as an array.
 
 ### Syntax
 ```javascript
@@ -17,16 +17,16 @@ object getRowsByChecked( col );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|col|`string`|필수|열이름|
+|col|`string`|Required|column name|
 
 
 
 ### Return Value
-***mixed ( `array` \| `boolean` )*** : 열이 Bool 타입이 아닌 경우 false를 리턴하고, 그 외는 [데이터 로우 객체](/docs/appx/row-object)의 배열을 리턴합니다.
+***mixed ( `array` \| `boolean` )*** : Returns false if the column is not Bool type, otherwise returns an array of [data row object](/docs/appx/row-object)s.
 
 ### Example
 ```javascript
-// sCheck 열이 체크된 데이터 로우 객체들을 가져옵니다.
+// Retrieve data row objects checked in the sCheck column.
 var rows = sheet.getRowsByChecked( "sCheck" );
 if (rows && rows.length == 0) {
     ...
@@ -44,5 +44,5 @@ if (rows && rows.length == 0) {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.3|name 인자명 변경 -> col, 다른 API와 통일|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.3|name argument name changed -> col, unified with other APIs|

@@ -2,14 +2,13 @@
 KEY: onReadFilteringValue
 KIND: event
 PATH: events/on-read-filtering-value
-ALIAS: 필터링, 진행, 대상이, 되는, 셀마다
-ALIAS_EN: on, read, filtering, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-read-filtering-value
+ALIAS_EN: event, called, cell, target, column, filtering, onreadfilteringvalue
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-read-filtering-value
 ---
 # onReadFilteringValue ***(event)***
-> 필터링 진행 시 필터링 대상이 되는 열(들)의 각 셀마다 호출되는 이벤트.
+> Event called for each cell in the target column(s) during filtering.
 
-> 리턴된 값으로 필터링을 진행합니다(실제 셀 값은 유지).
+> Filtering proceeds using the returned value (the actual cell value is maintained).
 
 ### Syntax
 
@@ -24,10 +23,10 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|필터링 진행중인 시트 객체|
-|row|`object`|필터링 대상이 되는 셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|필터링 대상이 되는 셀이 위치한 열이름|
-|val|`boolean` \| `number` \| `string`|셀 값|
+|sheet|`object`|Sheet object where filtering is in progress|
+|row|`object`|[Data row object](/docs/appx/row-object) where the filtering target cell is located|
+|col|`string`|Column name where the filtering target cell is located|
+|val|`boolean` \| `number` \| `string`|Cell value|
 
 ### Return
 ***mixed( `boolean` \| `number` \| `string` )***
@@ -36,8 +35,8 @@ or
 ```javascript
 options.Events = {
     onReadFilteringValue:function(evtParam){
-        // 셀값이 비어있거나 "미정"인 경우 "미입력"이라는 단어로 대신 필터링을 진행합니다(필터 행에 있는 값과 "미입력"이라는 값을 비교하여 필터링). 실제 셀값에 영향을 주진 않습니다.
-        if (evtParam.val == "" || evtParam.val == "미정") return "미입력";
+        // When the cell value is empty or "Undecided", filtering proceeds with the word "Not Entered" instead (compares the value in the filter row with "Not Entered"). This does not affect the actual cell value.
+        if (evtParam.val == "" || evtParam.val == "Undecided") return "Not Entered";
     }
 }
 ```
@@ -51,4 +50,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

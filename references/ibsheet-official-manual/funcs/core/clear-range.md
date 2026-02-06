@@ -2,15 +2,15 @@
 KEY: clearRange
 KIND: method
 PATH: funcs/core/clear-range
-ALIAS: sheet.clearRange, clearRange(), 시트, 내에, 특정, 영역의, 값을
-ALIAS_EN: clear, range, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/clear-range
+ALIAS: sheet.clearRange, clearRange()
+ALIAS_EN: clears, values, specific, area, within, sheet, clearrange, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/clear-range
 ---
 # clearRange ***(method)***
 
-> 시트 내에 특정 영역의 값을 지웁니다.
+> Clears the values of a specific area within the sheet.
 
-> `range` 인자에 설정된 row1, col1 셀부터 row2, col2 셀까지 영역의 값을 지웁니다.
+> Clears the values from the cell at row1, col1 to the cell at row2, col2 as set in the `range` argument.
 
 ### Syntax
 ```javascript
@@ -20,12 +20,12 @@ void clearRange( range );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|range|`array`|필수|시트 내에서 값을 지울 영역을 지정하는 배열
+|range|`array`|Required|Array specifying the area to clear values within the sheet
  [ row1, col1, row2, col2 ]
- row1 : 영역의 시작되는 부분에 위치한 셀의 [데이터 로우 객체](/docs/appx/row-object)
- col1 : 영역의 시작되는 부분에 위치한 셀의 열이름
- row2 : 영역의 끝나는 부분에 위치한 셀의 [데이터 로우 객체](/docs/appx/row-object)
- col2 : 영역의 끝나는 부분에 위치한 셀의 열이름|
+ row1 : [Data row object](/docs/appx/row-object) of the cell at the start of the area
+ col1 : Column name of the cell at the start of the area
+ row2 : [Data row object](/docs/appx/row-object) of the cell at the end of the area
+ col2 : Column name of the cell at the end of the area|
 
 
 ### Return Value
@@ -33,7 +33,7 @@ void clearRange( range );
 
 ### Example
 ```javascript
-//첫번째 행부터, 포커스된 행까지 CUST_CD 열부터 ORDER_DATE열까지 값을 모두 지웁니다.
+//Clears all values from the first row to the focused row, from the CUST_CD column to the ORDER_DATE column.
 sheet.clearRange([sheet.getFirstVisibleRow(), "CUST_CD", sheet.getFocusedRow(), "ORDER_DATE"])
 ```
 
@@ -46,4 +46,4 @@ sheet.clearRange([sheet.getFirstVisibleRow(), "CUST_CD", sheet.getFocusedRow(), 
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

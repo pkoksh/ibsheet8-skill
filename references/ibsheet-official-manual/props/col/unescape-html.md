@@ -2,27 +2,27 @@
 KEY: unescapeHtml
 KIND: column-property
 PATH: props/col/unescape-html
-ALIAS: 타입, 컬럼, 데이터, 조회에서, 등의
-ALIAS_EN: unescape, html, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/unescape-html
+ALIAS_EN: feature, converts, html, escape, characters, amp, retrieved, data
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/unescape-html
 ---
 # UnescapeHTML ***(col)***
 
-> `Text`, `Lines` 타입 컬럼 데이터 조회에서 `&gt;`, `&amp;`, `&lt;` 등의 문자를 unescape 처리하여 `<`, `&`, `>` 문자로 변경하는 기능
+> A feature that converts HTML escape characters (`&gt;`, `&amp;`, `&lt;`) in retrieved data back to their original characters (<, &, >).
 
+> Applicable column types: `Text`, `Lines`
 ### Type
 `boolean`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|문자 그대로 조회 (`default`)|
-|`1(true)`|문자 unescape 처리하여 조회|
+|`0(false)`|Retrieves characters as-is (`default`)|
+|`1(true)`|Retrieves characters with unescape processing|
 
 
 ### Example
 ```javascript
-// 조회에 들어오는 문자 HTML unescape 처리
+// Process HTML unescape on characters coming in during retrieval
 options.Cols = [
   ...
   {
@@ -44,4 +44,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.24|기능 추가|
+|core|8.0.0.24|Feature added|

@@ -2,28 +2,27 @@
 KEY: useButton
 KIND: config-property
 PATH: props/cfg/use-button
-ALIAS: 이고, 속성값이, 경우, 안에, 버튼이
-ALIAS_EN: use, button
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/use-button
+ALIAS_EN: type, docs, appx, button, props, col, property, value
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/use-button
 ---
 # UseButton ***(cfg)***
 
-> [Type](/docs/appx/type)이 `Button`이고, [Button](/docs/props/col/button)의 속성값이 `Button`인 경우, 셀 안에 버튼이 생성됩니다.
+> When [Type](/docs/appx/type) is `Button` and [Button](/docs/props/col/button) property value is `Button`, a button is created inside the cell.
 
-> 그런데 이 생성되는 버튼은 \<u\>태그를 이용하게 되는데 이를 \<button\>를 사용할지 여부를 선택합니다.
+> The generated button uses the \<u\> tag, and this setting selects whether to use \<button\> instead.
 
 
 ###
-![u태그 버튼](/assets/imgs/useButton0.png "u태그")
-<!-- IMAGE: 버튼 이미지 - u태그 버튼 -->
+![u tag button](/assets/imgs/useButton0.png "u tag")
+<!-- IMAGE: Button Image - u tag button -->
 
-[`u태그`를 사용한 버튼]
+[Button using `u tag`]
 
 
-![button태그 버튼](/assets/imgs/useButton1.png "button태그")
-<!-- IMAGE: 버튼 이미지 - button태그 버튼 -->
+![button tag button](/assets/imgs/useButton1.png "button tag")
+<!-- IMAGE: Button Image - button tag button -->
 
-[`button태그`를 사용한 버튼]
+[Button using `button tag`]
 
 
 ### Type
@@ -32,14 +31,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/use-butto
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|\<u\>태그를 통해 버튼 생성 (`default`)|
-|`1`|\<button\>태그를 통해 버튼 생성|
+|`0`|Create button using \<u\> tag (`default`)|
+|`1`|Create button using \<button\> tag|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-   "UseButton": 1       // <button>태그를 사용하여 버튼 생성
+   "UseButton": 1       // Create button using <button> tag
 };
 ```
 
@@ -51,4 +50,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

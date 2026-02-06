@@ -2,19 +2,18 @@
 KEY: sheetPaste
 KIND: config-property
 PATH: props/cfg/sheet-paste
-ALIAS: 전용, 기능입니다, 설정시, 복사기능, 이용시
-ALIAS_EN: sheet, paste
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/sheet-paste
+ALIAS_EN: feature, permission, prompt, appear, copy, sheetpaste, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/sheet-paste
 ---
 # SheetPaste ***(cfg)***
 
-> `IE` 전용 기능입니다. 설정시 복사기능 이용시 권한프롬프트가 나오지 않습니다.
+> This is an `IE`-only feature. When set, the permission prompt does not appear when using the copy feature.
 
-> 기본값은 `0(false)`이고 IE에서는 복사기능 사용시 `execCommand('copy')` 기능을 사용하고 있습니다.
+> The default value is `0(false)`, and in IE, the copy feature uses `execCommand('copy')`.
 
-> `1(true)` 값을 사용할시 시트내부복사 기능을 사용합니다. 
+> When using the value `1(true)`, the sheet's internal copy feature is used. 
 
-> 단, `execCommand('copy')` 를 사용하면서 권한프롬프트를 끄고 싶다면 인터넷 옵션에서 보안에 들어가 권한을 허용하시면 됩니다.
+> However, if you want to turn off the permission prompt while using `execCommand('copy')`, you can allow permissions in the security settings of Internet Options.
 
 ### Type
 `boolean`
@@ -22,14 +21,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/sheet-pas
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|execCommand('copy') 를 사용합니다. (권한 프롬프트) (`default`)|
-|`1(true)`|시트 내부 복사 기능을 이용합니다. (권한 프롬프트x)|
+|`0(false)`|Uses execCommand('copy'). (permission prompt) (`default`)|
+|`1(true)`|Uses the sheet's internal copy feature. (no permission prompt)|
 
 ### Example
 
 ```
 options.Cfg = {
-    SheetPaste: true              // 시트 내부복사 기능을 사용합니다.
+    SheetPaste: true              // Uses the sheet's internal copy feature.
 };
 ```
 
@@ -41,4 +40,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

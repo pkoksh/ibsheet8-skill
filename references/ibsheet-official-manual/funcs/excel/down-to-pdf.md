@@ -2,43 +2,43 @@
 KEY: downToPdf
 KIND: method
 PATH: funcs/excel/down-to-pdf
-ALIAS: sheet.downToPdf, downToPdf(), 시트의, 내용을, 파일로, 다운로드
-ALIAS_EN: down, to, pdf
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/excel/down-to-pdf
+ALIAS: sheet.downToPdf, downToPdf()
+ALIAS_EN: downloads, sheet, contents, pdf, file, down, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/excel/down-to-pdf
 ---
 # down2Pdf ***(method)***
 
-> 시트의 내용을 PDF 파일로 다운로드 합니다.
+> Downloads the sheet's contents as a PDF file.
 
-> 이 함수는 시트의 내용을 제품과 같이 배포되는 `Down2Pdf.jsp` 파일로 전달하고, 이 파일에서 PDF 파일을 생성하여 클라이언트 측으로 전송하게 됩니다.
+> This function sends the sheet's contents to the `Down2Pdf.jsp` file included with the product, and the file creates the PDF file and sends it back to the client.
 
-> 따라서 해당 함수를 사용하시려면 `Down2Pdf.jsp`와 더불어 `ibsheet8-x.x.x.jar` 파일과 `ib-itext 라이브러리`가 필요로 합니다.
-
-
-> **<mark>주의</mark>: 멀티레코드([MultiRecord](/docs/props/cfg/multi-record)) 기능을 사용하는 시트에서는 제약이 있습니다**
-
-> **<mark>주의</mark>: 이 기능을 사용하시려면, 배포시 같이 제공되는 `/plugins/ibsheet-excel.js` 파일을 include 하셔야 합니다.**
+> Therefore, to use this function, `Down2Pdf.jsp` along with the `ibsheet8-x.x.x.jar` file and `ib-itext library` are required.
 
 
-> `Down2Pdf.jsp` 파일에 대한 경로는 `Cfg`에 `Export` 속성을 통해 설정됩니다.
+> **<mark>Note</mark>: MultiRecord([MultiRecord](/docs/props/cfg/multi-record)) is limited in sheets using this feature**
 
-> 매 시트 생성시 마다 `Export`속성을 설정하기 번거로운 경우에는 [IBSheet.CommonOptions](/docs/static/common-options) 속성을 통해 모든 시트에 공통으로 설정할 수도 있습니다.
+> **<mark>Note</mark>: To use this feature, the `/plugins/ibsheet-excel.js` file provided with the distribution must be included.**
 
-> 다시 정리해 보자면 다음과 같은 작업이 필요 합니다.
 
-**자바 서버모듈**
+> The path for the `Down2Pdf.jsp` file is set through the `Cfg` `Export` property.
 
-1. `ibsheet8-1.0.x.jar` 파일과 `공통 라이브러리(ib-itext.jar)`을 WEB-INF/lib에 추가.
-2. `/plugins/ibsheet-excel.js` 파일을 해당 페이지에 include.
-3. 시트 생성시 `Cfg`에 `Export` 속성을 통해 `Down2Pdf.jsp` 파일에 대한 경로 설정
-4. `Down2Pdf.jsp` 파일에서 폰트 경로 설정
+> Instead of setting the `Export` attribute every time a sheet is created, you can set it commonly for all sheets using the [IBSheet.CommonOptions](/docs/static/common-options) attribute.
 
-**닷넷 서버모듈**
+> To summarize, the following steps are required.
 
-1. `IBSheet8-4.0.dll` 파일을 bin 또는 참조에 추가.
-2. `/plugins/ibsheet-excel.js` 파일을 해당 페이지에 include.
-3. 시트 생성시 `Cfg`에 `Export` 속성을 통해 `Down2Pdf.aspx` 파일에 대한 경로 설정
-4. `Down2Pdf.aspx` 파일에서 `wkhtmltopdf.exe` 및 폰트가 위치한 경로 설정
+**Java Server Module**
+
+1. Add the `ibsheet8-1.0.x.jar` file and `Common library(ib-itext.jar)` to WEB-INF/lib.
+2. The `/plugins/ibsheet-excel.js` file must be included in the page.
+3. Set the path for the `Down2Pdf.jsp` file through the `Cfg` `Export` property when creating a sheet.
+4. Set the font path in the `Down2Pdf.jsp` file.
+
+**.NET Server Module**
+
+1. Add the `IBSheet8-4.0.dll` file to bin or reference.
+2. The `/plugins/ibsheet-excel.js` file must be included in the page.
+3. Set the path for the `Down2Pdf.aspx` file through the `Cfg` `Export` property when creating a sheet.
+4. Set the path where `wkhtmltopdf.exe` and fonts are located in the `Down2Pdf.aspx` file.
 
 ### Syntax
 ```javascript
@@ -49,34 +49,34 @@ void down2Pdf( param );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|fileName|`string`|선택|생성할 PDF 파일명. 파일 확장자는 반드시 `.pdf`여야 합니다.
-확장자를 생략할 경우 자동으로 `.pdf`를 붙여 다운로드 합니다. (`default: "ibsheet.pdf"`) |
-|downCols|`string`|선택|지정한 열만 다운로드 합니다.
-별도의 설정이 없을시 모든 열이 다운로드 됩니다.
- 보여지는 열만 다운로드하고 싶을 경우 `"Visible"`로 설정하면 됩니다.
-(ex: "Price\|AMT\|TOTAL" 식의 문자열)|
-|dpi|`number`|선택|축소/확대 비율로 값이 작을 수록 크게 출력됩니다.
-50~32840 사이 값으로 설정 가능합니다. (`defalut: 2000`)|
-|fontTo|`string`|선택|PDF에 사용할 한글 폰트를 설정.
-"Gothic", "Gulim" 중 선택 (`default: "Gulim"`)
+|fileName|`string`|Optional|PDF filename to create. The file extension must be `.pdf`.
+If the extension is omitted, `.pdf` is automatically appended for download. (`default: "ibsheet.pdf"`) |
+|downCols|`string`|Optional|Downloads only the specified columns.
+Without separate settings, all columns are downloaded.
+ If you want to download only visible columns, set it to `"Visible"`.
+(ex: "Price\|AMT\|TOTAL" format string column)|
+|dpi|`number`|Optional|Zoom ratio; smaller values result in larger output.
+Can be set to a value between 50~32840. (`default: 2000`)|
+|fontTo|`string`|Optional|Sets the Korean font to use in the PDF.
+Select from "Gothic" or "Gulim" (`default: "Gulim"`)
 
-**<mark>주의</mark> : `Gothic` 폰트는 서버모듈 제품에 포함되어 있지 않습니다.**|
-|paper|`string`|선택|용지의 방향을 설정합니다.
-가로: `landscape` 또는 세로: `portrait` (`default: "portrait"`)|
-|title|`string`|선택|PDF 파일에 출력할 제목 설정 (`default: ""`)
+**<mark>Note</mark> : The `Gothic` font is not included in the server module product.**|
+|paper|`string`|Optional|Sets the paper orientation.
+Landscape: `landscape` or Portrait: `portrait` (`default: "portrait"`)|
+|title|`string`|Optional|Sets the title to output in the PDF file (`default: ""`)
 
-**<mark>주의</mark> : 해당 기능은 닷넷 서버모듈에서 지원하지 않습니다.** |
-|titleStyle|`string`|선택|PDF 파일에 출력할 제목에 적용할 css style (`default: ""`)|
-|url|`string`|선택|`down2Pdf`와 더불어 서버에서 처리해야 하는 내용이 있는 경우 로직을 처리할 URL을 넣어주면 `Down2Pdf.jsp` 페이지를 호출하기 전에 먼저 URL인자에서 설정한 페이지를 호출한다.
- 따라서 설정 페이지에서는 작업이 끝난 후, request를 `Down2Pdf.jsp` 페이지로 전달해야 한다. (`default: ""`)|
-|extendParam|`string`|선택|서버로 전달해야 하는 내용이 있는 경우 `GET` 방식의 QueryString으로 연결하여 설정 (`default: ""`)|
-|extendParamMethod|`string`|선택|extendParam을 전달하는 방식을 설정 (`default: "POST"`)|
-|reqHeader|`object`|선택|서버 전송 헤더에 사용자가 지정한 헤더 정보를 설정합니다.|
-|useXhr|`boolean`|선택| xhr 통신을 이용해 파일을 다운로드받습니다.
-`0(false)`:xhr 통신 사용 안함 (`default`)
-`1(true)`:xhr 통신 사용|
+**<mark>Note</mark> : This feature is not supported in the .NET Server Module.** |
+|titleStyle|`string`|Optional|CSS style to apply to the title output in the PDF file (`default: ""`)|
+|url|`string`|Optional|When there is additional content that the server needs to process besides `down2Pdf`, if a URL is provided, the page set in the URL argument is called first before `Down2Pdf.jsp` is called.
+ Therefore, after processing is completed on the set page, the request must be sent to the `Down2Pdf.jsp` page. (`default: ""`)|
+|extendParam|`string`|Optional|When there is content that must be sent to the server, set it by connecting as a `GET` method QueryString (`default: ""`)|
+|extendParamMethod|`string`|Optional|Sets the method for sending extendParam (`default: "POST"`)|
+|reqHeader|`object`|Optional|Sets user-specified header information in the server transmission header.|
+|useXhr|`boolean`|Optional| Download file using xhr communication.
+`0(false)`:xhr communication not used (`default`)
+`1(true)`:xhr communication used|
 <!--!
-|`[동작안됨 비공개]` wordWrap|`boolean`|선택|(`default: 0`)|
+|`[Private]` wordWrap|`boolean`|Optional|(`default: 0`)|
 !-->
 
 ### Return Value
@@ -85,8 +85,8 @@ void down2Pdf( param );
 ### Example
 ```javascript
   var param = {
-    fileName: "홍길동 교통비 내역.pdf",
-    title: "홍길동 교통비 내역",
+    fileName: "John Doe Transportation details.pdf",
+    title: "John Doe Transportation details",
     titleStyle: "color:red; font-size:100px;"
   };
 
@@ -105,5 +105,5 @@ void down2Pdf( param );
 
 |product|version|desc|
 |---|---|---|
-|excel|0.0.0|기능 추가|
-|excel|0.0.8|`reqHeader` 기능 추가|
+|excel|0.0.0|Feature added|
+|excel|0.0.8|`reqHeader` Feature added|

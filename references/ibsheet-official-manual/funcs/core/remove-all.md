@@ -2,12 +2,12 @@
 KEY: removeAll
 KIND: method
 PATH: funcs/core/remove-all
-ALIAS: sheet.removeAll, removeAll(), 시트의, 전체, 데이터를, 제거합니다
-ALIAS_EN: remove, all, total
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/remove-all
+ALIAS: sheet.removeAll, removeAll()
+ALIAS_EN: removes, data, sheet, removeall, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/remove-all
 ---
 # removeAll ***(method)***
-> 시트의 전체 데이터를 제거합니다.
+> Removes all data from the sheet.
 
 
 ### Syntax
@@ -21,7 +21,7 @@ void removeAll();
 
 ### Example
 ```javascript
-//전체 데이터 제거
+//Remove all data
 sheet.removeAll();
 ```
 
@@ -34,4 +34,4 @@ sheet.removeAll();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

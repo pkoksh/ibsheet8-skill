@@ -2,16 +2,15 @@
 KEY: onSuggest
 KIND: event
 PATH: events/on-suggest
-ALIAS: 편집, 도중, 호출되는, 이벤트로, 사용자에게
-ALIAS_EN: on, suggest, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-suggest
+ALIAS_EN: event, called, cell, editing, you, check, value, suggest
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-suggest
 ---
 # onSuggest ***(event)***
-> 셀 편집 도중 호출되는 이벤트로, 사용자에게 셀 값을 제안하는 기능인 [Suggest](/docs/props/col/suggest)의 값을 확인할 수 있습니다.
+> Event called during cell editing, where you can check the value of [Suggest](/docs/props/col/suggest), a feature that suggests cell values to the user.
 
-> 사용자는 Suggest의 형식을 지닌 새로운 값을 리턴하여 Suggest에 설정된 값이 아닌 다른 값을 사용자에게 셀 값이 변경될 때마다 추천할 수 있습니다.
+> You can return a new value in the Suggest format to suggest different values to the user instead of the ones set in Suggest every time the cell value changes.
 
-> 편집 시 셀 값이 변경될 때마다 호출됩니다.
+> Called every time the cell value changes during editing.
 
 ### Syntax
 
@@ -28,32 +27,32 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|셀의 열이름|
-|val|`string`|셀의 데이터 값|
-|suggest|`string`|기존에 설정된 Suggest의 값|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell|
+|col|`string`|Column name of the cell|
+|val|`string`|Data value of the cell|
+|suggest|`string`|Previously configured Suggest value|
 
 ### Return
 ***mixed***
 
 ### Example
 ```javascript
-// assessment 열에 설정된 Suggest 값이 |불만족|보통|만족|매우만족
+// Suggest value set for the assessment column is |Dissatisfied|Average|Satisfied|Very Satisfied
 options.Cols = [
     {
-        Header:"평가",
+        Header:"Assessment",
         Name:"assessment",
         Type:"Text",
-        Suggest:"|불만족|보통|만족|매우만족"
+        Suggest:"|Dissatisfied|Average|Satisfied|Very Satisfied"
     } ...
 ]
 
 options.Events = {
     onSuggest:function(evtParam){
-        // assessment 열의 셀에 입력한 값이 "바로"를 포함하는 경우 동적으로 Suggest의 값이 |바로가기1|바로가기2|바로가기3|바로가기4|바로가기5로 바뀝니다. 그 외의 경우 기존 suggest 기능이 그대로 적용됩니다.
-        if (evtParam.col == "assessment" && evtParam.val.indexOf("바로") > -1 ) {
-            return "|바로가기1|바로가기2|바로가기3|바로가기4|바로가기5";
+        // If the value entered in the assessment column cell contains "short", the Suggest value dynamically changes to |Shortcut1|Shortcut2|Shortcut3|Shortcut4|Shortcut5. Otherwise, the existing suggest feature is applied as-is.
+        if (evtParam.col == "assessment" && evtParam.val.indexOf("short") > -1 ) {
+            return "|Shortcut1|Shortcut2|Shortcut3|Shortcut4|Shortcut5";
         }
         else {
             return evtParam.suggest;
@@ -71,4 +70,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

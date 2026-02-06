@@ -2,16 +2,16 @@
 KEY: getSubTotalRows
 KIND: method
 PATH: funcs/core/get-sub-total-rows
-ALIAS: sheet.getSubTotalRows, getSubTotalRows(), 생성된, 소계, 누계, 행들을, 반환합니다
-ALIAS_EN: get, sub, total, rows, subtotal
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-sub-total-rows
+ALIAS: sheet.getSubTotalRows, getSubTotalRows()
+ALIAS_EN: creationapplied, subtotal, cumulative, total, rows, returns, getsubtotalrows, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-sub-total-rows
 ---
 # getSubTotalRows ***(method)***
 
-> 생성된 소계/누계 행들을 반환합니다.
+> creationapplied subtotal/cumulative total rows returns.
 
-> 리턴 값은 다음과 같습니다
-> {subTotal:[[첫번 째 기준 열 관련 소계행들], [두번 째 기준 열 관련 소계행들] ... ], Total:[[첫번 째 기준 열 관련 누계 행들], [두번 째 기준 열 관련 누계 행들] ... ]}
+> return value as follows
+> {subTotal:[[subtotal rows for the 1st base column], [subtotal rows for the 2nd base column] ... ], Total:[[cumulative total rows for the 1st base column], [cumulative total rows for the 2nd base column] ... ]}
 
 ### Syntax
 ```javascript
@@ -23,7 +23,7 @@ object getSubTotalRows();
 
 ### Example
 ```javascript
-//소계 누계 행을 얻습니다.
+//Gets the subtotal/cumulative total rows.
 var totalRows = sheet.getSubTotalRows();
 ```
 
@@ -35,4 +35,4 @@ var totalRows = sheet.getSubTotalRows();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

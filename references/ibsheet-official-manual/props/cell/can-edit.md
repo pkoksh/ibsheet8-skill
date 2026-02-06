@@ -2,23 +2,22 @@
 KEY: canEdit
 KIND: cell-property
 PATH: props/cell/can-edit
-ALIAS: 셀에, 편집, 가능, 여부를, 설정합니다
-ALIAS_EN: can, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/can-edit
+ALIAS_EN: whether, cell, editable, canedit
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/can-edit
 ---
 # CanEdit ***(cell)***
 
-> 셀에 대한 편집 가능 여부를 설정합니다.
+> Sets whether the cell is editable.
 
-> 이 속성은 기본값은 `1`인데, `0`설정시 `Cell, Row, Col`순으로 우선 순위를 갖습니다.
+> The default value of this property is `1`. When set to `0`, the priority order is `Cell, Row, Col`.
 
-> 가령 `Cell`에서 `0`으로 설정시 `Row`나 `Col`에서 `1`을 설정해도 해당 셀은 편집이 불가능해 집니다. 
+> For example, if set to `0` at the `Cell` level, the cell will remain non-editable even if `Row` or `Col` is set to `1`. 
 
-> `CanEdit: 4`를 제외하고는 편집불가 모드 사용시 `Enum` 컬럼의 아이콘과 `Date` 타입 컬럼의 달력 아이콘을 표현하지 않습니다. 
+> Except for `CanEdit: 4`, when using non-editable mode, the icon for `Enum` columns and the calendar icon for `Date` type columns are not displayed. 
 
-> `Cfg`를 이용하여 편집불가 사용시에는 우선순위가 가장 높아짐으로, `Cell, Row, Col`에 `CanEdit: 0`은 먹히지 않습니다. 
+> When using non-editable mode via `Cfg`, it has the highest priority, so `CanEdit: 0` at the `Cell, Row, Col` level will not take effect. 
 
-> `Button` 타입의 버튼 클릭 시 동작, `File` 타입의 아이콘 표시 여부에 대해서는 해당 속성의 영향을 **`받지 않습니다`**. ([Disabled col](/docs/props/cell/disabled) 통하여 제어 가능.) 
+> The click behavior of `Button` type buttons and the icon display for `File` type are **`not affected`** by this property. (Can be controlled through [Disabled col](/docs/props/cell/disabled).)
 
 ### Type
 `number`
@@ -26,34 +25,34 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/can-edit
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|셀을 편집 불가(읽기 전용)으로 설정합니다.
+|`0`|Sets the cell to non-editable (read-only).
 ![CanEdit](/assets/imgs/canEdit0.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`1`|셀을 편집 가능으로 설정합니다.
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`1`|Sets the cell to editable.
 ![CanEdit](/assets/imgs/canEdit1.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`2`|셀의 내용은 편집 불가하지만, 편집 미리보기를 제공하여 셀의 모든 내용을 확인할 수 있습니다.
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`2`|The cell content is non-editable, but provides an edit preview so all cell content can be viewed.
 ![CanEdit](/assets/imgs/canEdit2.png "CanEdit")
-<!-- IMAGE: 스크린샷/예시 이미지 - CanEdit -->|
-|`3`|셀 편집 불가능(편집 가능 불가능에 대한 배경색을 표시하지 않음)
-[ColorState (cfg)](/docs/props/cfg/color-state)와 관계없이 배경색을 표현하지 않음.|
-|`4`|셀 편집 불가능 + 배경색 표현안함 + 아이콘표시|
+<!-- IMAGE: Screenshot/Example Image - CanEdit -->|
+|`3`|Cell non-editable (does not display background color for editable/non-editable state)
+Does not display background color regardless of [ColorState (cfg)](/docs/props/cfg/color-state).|
+|`4`|Cell non-editable + no background color + icons displayed|
 
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름 :CLS)
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "CanEdit", 0);
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름 :CLS)
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSCanEdit"] = 1;
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성 적용  (열이름 :CLS )
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {..., "CLSCanEdit":0, ...}
@@ -70,5 +69,5 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.12|`CanEdit:3, 4` 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.12|`CanEdit:3, 4` added|

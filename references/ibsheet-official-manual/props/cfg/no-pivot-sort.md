@@ -2,15 +2,14 @@
 KEY: noPivotSort
 KIND: config-property
 PATH: props/cfg/no-pivot-sort
-ALIAS: 피벗, 시트, 생성시, 원본, 데이터
-ALIAS_EN: no, pivot, sort, sheet, grid, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-pivot-sort
+ALIAS_EN: determines, whether, source, sheet, data, sorting, creating, pivot
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-pivot-sort
 ---
 # NoPivotSort ***(cfg)***
 
-> 피벗 시트 생성시 원본 시트 데이터 정렬을 사용할지 여부를 결정합니다.
+> Determines whether to use source sheet data sorting when creating a pivot sheet.
 
-> 정렬을 사용하는 경우 계산 대상의 행 정보 순서대로 정렬됩니다.
+> When sorting is used, data is sorted in the order of the row information being calculated.
 
 
 
@@ -20,15 +19,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-pivot-
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|피벗 시트 생성을 위한 원본 데이터 정렬 사용 (`default`)|
-|`1(true)`|피벗 시트 생성을 위한 원본 데이터 정렬 사용 안함|
+|`0(false)`|Use source data sorting for pivot sheet creation (`default`)|
+|`1(true)`|Do not use source data sorting for pivot sheet creation|
 
 
 ### Example
 ```javascript
 options = {
   "Cfg":{
-    "NoPivotSort": 1,  // 원본 시트 정렬 안함
+    "NoPivotSort": 1,  // Do not sort source sheet
   }
 };
 ```
@@ -44,4 +43,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.12|기능 추가|
+|core|8.1.0.12|Feature added|

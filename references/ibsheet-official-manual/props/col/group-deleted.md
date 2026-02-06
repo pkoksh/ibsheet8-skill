@@ -2,12 +2,11 @@
 KEY: groupDeleted
 KIND: column-property
 PATH: props/col/group-deleted
-ALIAS: 삭제예정인, 그룹핑에, 포함시킬지, 여부를, 설정합니다
-ALIAS_EN: group, deleted
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-deleted
+ALIAS_EN: whether, include, rows, pending, deletion, deleted, docs, props
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/group-deleted
 ---
 # GroupDeleted ***(col)***
-> 삭제예정인 행([Deleted](/docs/props/row/deleted))을 그룹핑에 포함시킬지 여부를 설정합니다.
+> Sets whether to include rows pending deletion ([Deleted](/docs/props/row/deleted)) in grouping.
 
 
 ### Type
@@ -16,12 +15,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/group-del
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|삭제 예정인 행은 그룹핑 제외|
-|`1(true)`|삭제 예정인 행도 그룹핑에 포함 (`default`)|
+|`0(false)`|Rows pending deletion are excluded from grouping|
+|`1(true)`|Rows pending deletion are included in grouping (`default`)|
 
 ### Example
 ```javascript
-//삭제 예정 행에 대해 그룹핑에서 제외합니다.
+// Exclude rows pending deletion from grouping
 options.Def.Col = {GroupDeleted: 0};
 ```
 
@@ -39,4 +38,4 @@ options.Def.Col = {GroupDeleted: 0};
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

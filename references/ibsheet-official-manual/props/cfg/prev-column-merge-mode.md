@@ -2,16 +2,15 @@
 KEY: prevColumnMergeMode
 KIND: config-property
 PATH: props/cfg/prev-column-merge-mode
-ALIAS: 에서, 셀을, 머지하는, 기준을, 설정하는
-ALIAS_EN: prev, column, merge, mode
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/prev-column-merge-mode
+ALIAS_EN: option, criteria, merging, cells, searchmode, docs, props, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/prev-column-merge-mode
 ---
 # PrevColumnMergeMode ***(cfg)***
-> [SearchMode:2](/docs/props/cfg/search-mode)에서 셀을 머지하는 기준을 설정하는 옵션입니다. 
+> An option that sets the criteria for merging cells in [SearchMode:2](/docs/props/cfg/search-mode). 
 
-> [SearchMode:2](/docs/props/cfg/search-mode)는 머지된 모든 `Row`가 한 Table안에 그려지기 때문에 머지된 셀이 많은 경우 성능 문제가 발생할 수 있습니다. 
+> In [SearchMode:2](/docs/props/cfg/search-mode), all merged `Rows` are drawn in one Table, so performance issues may occur when there are many merged cells. 
 
-> `PrevColumnMergeMode:1`설정 시 [PageLength](/docs/props/cfg/page-length) 만큼 페이지 단위로 나누어 그려지기 때문에 시트 성능이 향상됩니다. 
+> When `PrevColumnMergeMode:1` is set, rendering is divided into page units based on [PageLength](/docs/props/cfg/page-length), improving sheet performance. 
 
 
 
@@ -19,12 +18,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/prev-colu
 **`PrevColumnMergeMode:0(default)`** 
 
 ![prevColumnMergeMode:0](/assets/imgs/prevColumnMergemode0.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - prevColumnMergeMode:0 --> 
+<!-- IMAGE: Screenshot/Example Image - prevColumnMergeMode:0 --> 
 
 **`PrevColumnMergeMode:1, PageLength:10`** 
 
 ![prevColumnMergeMode:1](/assets/imgs/prevColumnMergemode1.png)
-<!-- IMAGE: 스크린샷/예시 이미지 - prevColumnMergeMode:1 --> 
+<!-- IMAGE: Screenshot/Example Image - prevColumnMergeMode:1 --> 
 
 
 ### Type
@@ -33,14 +32,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/prev-colu
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`| 같은 값을 가지는 모든 셀을 머지함 (`default`)|
-|`1(true)`| 페이지 단위로 나누어 셀을 머지함 |
+|`0(false)`| Merge all cells with the same value (`default`)|
+|`1(true)`| Merge cells divided by page units |
 
 ### Example
 ```javascript
 options = {
     Cfg: {
-      PrevColumnMergeMode: 1,  // 페이지 단위로 나누어 셀을 머지합니다.
+      PrevColumnMergeMode: 1,  // Merge cells divided by page units.
       ...
     }
 };
@@ -56,5 +55,5 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.11|기능 추가|
-|core|8.0.0.12|default 변경 (1 -> 0)|
+|core|8.0.0.11|Feature added|
+|core|8.0.0.12|Default changed (1 -> 0)|

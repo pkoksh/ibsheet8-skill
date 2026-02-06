@@ -2,17 +2,16 @@
 KEY: storageKeyPrefix
 KIND: config-property
 PATH: props/cfg/storage-key-prefix
-ALIAS: 로컬, 스토리지, 혹은, 세션, 스토리지에
-ALIAS_EN: storage, key, prefix
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/storage-key-prefix
+ALIAS_EN: option, prefix, key, value, saving, current, sheet, information
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/storage-key-prefix
 ---
 # StorageKeyPrefix ***(cfg)***
 
-> 로컬 스토리지 혹은 세션 스토리지에 현재 시트의 정보가 저장될 때 사용되는 Key값의 `prefix`를 설정하는 옵션입니다.
+> Option to set the `prefix` of the Key value used when saving current sheet information to local storage or session storage.
 > 
- 기본적으로 Key값은 `StorageKeyPrefix+"^시트id"` 로 설정되고 `StorageKeyPrefix` 옵션에 값이 없을 때 는 현재 페이지의 경로를 `StorageKeyPrefix`의 기본값으로 설정합니다.
+ By default, the Key value is set as `StorageKeyPrefix+"^sheetId"`, and when the `StorageKeyPrefix` option has no value, the current page path is set as the default value for `StorageKeyPrefix`.
 > 
- [StorageSession](./storage-session) 값이 없으면 동작하지 않습니다.
+ Does not operate if there is no [StorageSession](./storage-session) value.
 
 
 ### Type
@@ -22,12 +21,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/storage-k
 ### Example
 ```javascript
 options.Cfg = {
-    StorageSession: 1,       // 로컬 스토리지에 현재 시트 정보를 저장할 수 있고 가져올 수 있도록 설정
-    StorageKeyPrefix: "IBSheet/product/intro"       // 스토리지에 저장할 내용의 Key 값의 prefix를 설정 IBSheet/product/intro^sheet 로 설정됨
+    StorageSession: 1,       // Set to allow saving and retrieving current sheet information in local storage
+    StorageKeyPrefix: "IBSheet/product/intro"       // Set the prefix of the Key value for content stored in storage, resulting in IBSheet/product/intro^sheet
 };
 
-sheet.saveCurrentInfo();      // 로컬 스토리지에 현재 시트 정보를 저장
-sheet.clearCurrentInfo();     // 로컬 스토리지에 현재 시트 정보를 제거
+sheet.saveCurrentInfo();      // Save current sheet information to local storage
+sheet.clearCurrentInfo();     // Remove current sheet information from local storage
 ```
 
 ### Read More
@@ -41,4 +40,4 @@ sheet.clearCurrentInfo();     // 로컬 스토리지에 현재 시트 정보를 
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

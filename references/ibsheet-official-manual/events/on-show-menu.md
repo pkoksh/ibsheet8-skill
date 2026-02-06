@@ -2,16 +2,15 @@
 KEY: onShowMenu
 KIND: event
 PATH: events/on-show-menu
-ALIAS: 셀에서, 마우스, 오른쪽, 클릭, 시트에
-ALIAS_EN: on, show, menu, right, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-show-menu
+ALIAS_EN: event, called, menu, configured, sheet, displayed, screen, upon
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-show-menu
 ---
 # onShowMenu ***(event)***
-> 셀에서 마우스 오른쪽 클릭 시 시트에 설정된 메뉴가 화면에 보여질 때 호출되는 이벤트 입니다.
+> Event called when the menu configured in the sheet is about to be displayed on screen upon right-clicking a cell.
 
-> **[showMenu](/docs/funcs/core/show-menu) 메소드에 의해 호출되지 않습니다.**
+> **Not called by the [showMenu](/docs/funcs/core/show-menu) method.**
 
-> `1(true)`를 리턴 시 설정된 메뉴를 화면에 보여주지 않습니다.
+> Returning `1(true)` prevents the configured menu from being displayed on screen.
 
 ### Syntax
 
@@ -28,10 +27,10 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|메뉴가 보여질 시트 객체|
-|row|`object`|메뉴가 보여질 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|메뉴가 보여질 셀의 열이름|
-|menu|`object`|화면에 보여질 메뉴에 대한 설정을 담고 있는 객체|
+|sheet|`object`|Sheet object where the menu will be displayed|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the menu will be displayed|
+|col|`string`|Column name of the cell where the menu will be displayed|
+|menu|`object`|Object containing the configuration for the menu to be displayed on screen|
 
 ### Return
 ***boolean***
@@ -40,7 +39,7 @@ or
 ```javascript
 options.Events = {
     onShowMenu:function(evtParam){
-        // 열이름이 preTaskId인 경우 메뉴를 화면에 보여주지 않습니다.
+        // Do not display the menu on screen when the column name is preTaskId.
         if (evtParam.col === "preTaskId") return true;
     }
 }
@@ -54,4 +53,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,14 +2,13 @@
 KEY: iconWidth
 KIND: cell-property
 PATH: props/cell/icon-width
-ALIAS: 좌측에, 버튼을, 표시하는, 속성, 사용시
-ALIAS_EN: icon, width, property, attribute
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/icon-width
+ALIAS_EN: icon, property, display, button, left, side, cell, width
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/icon-width
 ---
 # IconWidth ***(cell)***
-> 셀 좌측에 버튼을 표시하는 [Icon](./icon)속성 사용시, 버튼의 너비를 설정합니다. 
+> When using the [Icon](./icon) property to display a button on the left side of the cell, sets the width of the button. 
 
-> 너비는 pixel단위로 설정됩니다.
+> The width is set in pixel units.
 
 
 
@@ -20,12 +19,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/icon-wid
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|셀 좌측 버튼의 너비|
+|`number`|Width of the button on the left side of the cell|
 
 
 ### Example
 ```javascript
-//조회 데이터 내에서 속성 적용  (열이름: CLS )
+// Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSIcon":"/images/popIcon.gif", "CLSIconWidth":22 , ...}
@@ -42,4 +41,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/icon-wid
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

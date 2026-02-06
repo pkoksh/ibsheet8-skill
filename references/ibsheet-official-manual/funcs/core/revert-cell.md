@@ -2,12 +2,12 @@
 KEY: revertCell
 KIND: method
 PATH: funcs/core/revert-cell
-ALIAS: sheet.revertCell, revertCell(), 특정, 셀의, 변경된, 내용을, 처음
-ALIAS_EN: revert, cell
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/revert-cell
+ALIAS: sheet.revertCell, revertCell()
+ALIAS_EN: reverts, changed, content, specific, cell, initially, loaded, value
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/revert-cell
 ---
 # revertCell ***(method)***
-> 특정 셀의 변경된 내용을 처음 조회된 값으로 변경합니다.
+> Reverts the changed content of a specific cell to the initially loaded value.
 
 ### Syntax
 ```javascript
@@ -17,19 +17,19 @@ void revertCell( row, col, render );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
-|render |`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함 (`default`)
-`1(true)`:즉시 반영|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
+|render |`boolean`|Optional|whether immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+`0(false)`:Not reflected (`default`)
+`1(true)`:Immediately reflected|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-// 특정 셀에 내용(값)을 처음 조회된 값으로 변경한다.
+// Reverts the content (value) of a specific cell to the initially loaded value.
 sheet.revertCell( sheet.getFirstVisibleRow(), "EMT_DESC", true );
 ```
 
@@ -44,4 +44,4 @@ sheet.revertCell( sheet.getFirstVisibleRow(), "EMT_DESC", true );
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: editAutoMerge
 KIND: config-property
 PATH: props/cfg/edit-auto-merge
-ALIAS: 또는, 설정하여, 기준, 병합, 옵션을
-ALIAS_EN: edit, auto, merge, combine
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/edit-auto-merge
+ALIAS_EN: whether, automatically, merge, cells, editing, changing, cell, values
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/edit-auto-merge
 ---
 # EditAutoMerge ***(cfg)***
 
-> (cfg)[DataMerge](./data-merge) 또는 (cfg)[HeaderMerge](./header-merge) 설정하여 값 기준 병합 옵션을 사용 시 편집(셀 값 변경, 행 추가 등)할 때 자동으로 셀 병합할지 여부를 설정합니다.
+> Sets whether to automatically merge cells when editing (changing cell values, adding rows, etc.) while using value-based merge options configured with (cfg)[DataMerge](./data-merge) or (cfg)[HeaderMerge](./header-merge).
 
-> 이 속성을 true로 설정시, 각 셀의 편집 시 매번 병합로직이 수행됨으로 시트가 느려질 수 있습니다.
+> When this property is set to true, the merge logic is executed every time a cell is edited, which may slow down the sheet.
 
-> <mark>이 기능은 SearchMode:0(FastLoad)에서는 동작하지 않습니다.</mark>
+> <mark>This feature does not work in SearchMode:0(FastLoad).</mark>
 
 
 ### Type
@@ -21,15 +20,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/edit-auto
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|병합을 하지 않습니다. (`default`)|
-|`1(true)`|병합을 실행합니다.|
+|`0(false)`|Does not perform merging. (`default`)|
+|`1(true)`|Performs merging.|
 
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-      EditAutoMerge: false,  // 값 편집시 병합하지 않음.
+      EditAutoMerge: false,  // Do not merge when editing values.
     }
 };
 ```
@@ -44,5 +43,5 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.5|행 추가 시 셀 병합이 되도록 수정|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.5|Modified to apply cell merge when adding rows|

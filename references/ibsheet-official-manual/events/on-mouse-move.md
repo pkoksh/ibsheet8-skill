@@ -2,18 +2,17 @@
 KEY: onMouseMove
 KIND: event
 PATH: events/on-mouse-move
-ALIAS: 시트에서, 마우스를, 움직일, 호출되는, 이벤트입니다
-ALIAS_EN: on, mouse, move
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-mouse-move
+ALIAS_EN: event, called, mouse, moves, sheet, onmousemove
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-mouse-move
 ---
 # onMouseMove ***(event)***
-> 시트에서 마우스를 움직일 때 호출되는 이벤트입니다.
+> Event called when the mouse moves on the sheet.
 
-> `1(true)`를 리턴 시 `onMouseMove`의 기본 동작을 막습니다.
+> Returning `1(true)` prevents the default action of `onMouseMove`.
 
-> 시트 위에서 마우스를 움직일 시 계속 발생하므로 이 이벤트에 많은 설정을 넣으면 **느려질 수 있습니다**.
+> Since this event fires continuously while the mouse moves over the sheet, adding too many operations in this event may **cause slowdowns**.
 
-> 인자 `row, col, x, y`는 `undefined` 또는 `null`이 될 수 있습니다(ex 셀 테두리).
+> The parameters `row, col, x, y` can be `undefined` or `null` (e.g., cell border).
 
 ### Syntax
 
@@ -28,24 +27,24 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|마우스 커서가 위치한 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|마우스 커서가 위치한 열이름|
-|x|`number`|셀 내에서 마우스로 누른 위치의 x좌표|
-|y|`number`|셀 내에서 마우스로 누른 위치의 y좌표|
-|event|`object`|javascript 마우스 이벤트 객체|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the mouse cursor is located|
+|col|`string`|Column name where the mouse cursor is located|
+|x|`number`|X coordinate of the mouse position within the cell|
+|y|`number`|Y coordinate of the mouse position within the cell|
+|event|`object`|JavaScript mouse event object|
 <!--!
-|`[비공개]` canState|`string`|마우스 이벤트가 발생한 곳의 편집, 포커스 가능 상태 정보
-(`"Editable"(편집가능)`, `"ReadOnly"(편집불가능)`, `"NoFocus"(포커스불가능)`)|
-|`[비공개]` cellType|`string`|마우스 이벤트가 발생한 곳의 타입 정보
-(`"Text"`, `"Int"`, `"Float"` 등)|
-|`[비공개]` part|`string`|마우스 이벤트가 발생한 곳의 셀영역 정보
-(`"Tree"(트리아이콘 영역)`, `"Content"(셀데이터 영역)`, `"Caption"(헤더데이터(제목) 영역)`, `"Side"(셀아이콘 왼쪽 영역)`, `"Button"(셀버튼 영역)`)|
-|`[비공개]` partType|`string`|마우스 이벤트가 발생한 곳의 셀영역 타입 정보
-(`"Expand"(트리아이콘 확장버튼)`, `"SideClear"(삭제아이콘)`, `"SideFile"(파일선택아이콘)`, `"SideCheck"(체크박스아이콘)`, `"SideButton"(버튼아이콘)`, `"SideDate"(달력아이콘)`, `"SideSort"(정렬아이콘)`, `"SideDefaults"(Defaults아이콘)`, `"SideIcon"(아이콘)`, `"SideFilter"(필터아이콘)`, `"EditEnum"(Enum데이터)`, `"EditText"(Text테이터)`, `"EditDate"(Date데이터)`, `"EditInt"(Int데이터)` 등)|
-|`[비공개]` section|`string`|마우스 이벤트가 발생한 곳의 컬럼영역 정보
-(`"Left"(LeftCols 영역)`, `"Mid"(Cols 영역)`, `"Right"(RightCols 영역)`)|
-|`[비공개]` kind|`string`|마우스 이벤트가 발생한 곳의 행의 종류 정보
+|`[Private]` canState|`string`|Edit and focus availability state information of the location where the mouse event occurred
+(`"Editable"(editable)`, `"ReadOnly"(not editable)`, `"NoFocus"(not focusable)`)|
+|`[Private]` cellType|`string`|Type information of the location where the mouse event occurred
+(`"Text"`, `"Int"`, `"Float"`, etc.)|
+|`[Private]` part|`string`|Cell area information of the location where the mouse event occurred
+(`"Tree"(tree icon area)`, `"Content"(cell data area)`, `"Caption"(header data (title) area)`, `"Side"(left side of cell icon area)`, `"Button"(cell button area)`)|
+|`[Private]` partType|`string`|Cell area type information of the location where the mouse event occurred
+(`"Expand"(tree icon expand button)`, `"SideClear"(delete icon)`, `"SideFile"(file select icon)`, `"SideCheck"(checkbox icon)`, `"SideButton"(button icon)`, `"SideDate"(calendar icon)`, `"SideSort"(sort icon)`, `"SideDefaults"(Defaults icon)`, `"SideIcon"(icon)`, `"SideFilter"(filter icon)`, `"EditEnum"(Enum data)`, `"EditText"(Text data)`, `"EditDate"(Date data)`, `"EditInt"(Int data)`, etc.)|
+|`[Private]` section|`string`|Column area information of the location where the mouse event occurred
+(`"Left"(LeftCols area)`, `"Mid"(Cols area)`, `"Right"(RightCols area)`)|
+|`[Private]` kind|`string`|Row type information of the location where the mouse event occurred
 (`"Header"`, `"Data"`, `"Foot"`, `"Solid"`, `"Group"`, `"Filter"`)|
 !-->
 
@@ -57,7 +56,7 @@ or
 options.Events = {
     onMouseMove:function(evtParam){
         if (evtParam.row && evtParam.col) {
-            console.log("현재 셀 값은 "+ sheet.getValue({row:evtParam.row, col:evtParam.col}));
+            console.log("Current cell value is "+ sheet.getValue({row:evtParam.row, col:evtParam.col}));
         }
     }
 }
@@ -71,7 +70,7 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|
 <!--!
-|`[비공개]` core|8.0.0.6|`canState`, `cellType`, `part`, `partType`, `section`, `kind` 인자 추가|
+|`[Private]` core|8.0.0.6|`canState`, `cellType`, `part`, `partType`, `section`, `kind` parameters added|
 !-->

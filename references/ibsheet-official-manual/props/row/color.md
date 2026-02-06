@@ -2,17 +2,16 @@
 KEY: color
 KIND: row-property
 PATH: props/row/color
-ALIAS: 행의, 배경색상을, 설정합니다
-ALIAS_EN: color
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/color
+ALIAS_EN: background, color, row
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/color
 ---
 # Color ***(row)***
 
-> 행의 배경색상을 설정합니다.
+> Sets the background color of a row.
 
-> 행의 색상은 상태에 따른 배경색상의 영향을 받습니다.
+> The row color is affected by background colors based on the row state.
 
-> rgb(255,255,255)는 투명색이 됩니다.
+> rgb(255,255,255) becomes transparent.
 
 ### Type
 `string`
@@ -20,19 +19,19 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/color
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|HEX형식 (ex:#FF00F0)
-rgb형식 (ex:rgb(244,200,40)|
+|`string`|HEX format (ex:#FF00F0)
+rgb format (ex:rgb(244,200,40)|
 
 ### Example
 
 ```javascript
-//특정행의 배경색상을 회색으로 설정한다.
+//Set the background color of a specific row to gray.
 var row = sheet.getRowById("AR11");
 row["Color"] = "#ADADAD";
 sheet.refreshRow(row);
 
 
-//조회 데이터 중에 특정행의 배경색을 노란색으로 설정한다.
+//Set the background color of a specific row to yellow in the loaded data.
 {"data":[
     ...
     {"Color":"#FFFF00","ColName1":"Value1","ColName2":"Value2", ...},
@@ -48,4 +47,4 @@ sheet.refreshRow(row);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

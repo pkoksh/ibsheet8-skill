@@ -2,16 +2,16 @@
 KEY: getGroupRows
 KIND: method
 PATH: funcs/core/get-group-rows
-ALIAS: sheet.getGroupRows, getGroupRows(), 그룹으로, 생성된, 그룹행들을, 반환합니다
-ALIAS_EN: get, group, rows
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-group-rows
+ALIAS: sheet.getGroupRows, getGroupRows()
+ALIAS_EN: groupas, creationapplied, grouprows, returns, getgrouprows, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-group-rows
 ---
 # getGroupRows ***(method)***
 
-> 그룹으로 생성된 그룹행들을 반환합니다.
+> groupas creationapplied grouprows returns.
 
-> 리턴 값은 다음과 같습니다
-> {그룹 컬럼명1: [컬럼명1로 생성된 그룹 행들], 그룹 컬럼명2 : [컬럼명2로 생성된 그룹 행들], ...}
+> return value as follows
+> {group columnname1: [columnname1as creationapplied group rows], group columnname2 : [columnname2as creationapplied group rows], ...}
 
 ### Syntax
 ```javascript
@@ -23,7 +23,7 @@ object getGroupRows();
 
 ### Example
 ```javascript
-//그룹 행을 얻습니다.
+//group row gets.
 var groupRows = sheet.getGroupRows();
 ```
 
@@ -34,4 +34,4 @@ var groupRows = sheet.getGroupRows();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

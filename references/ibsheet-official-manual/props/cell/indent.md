@@ -2,27 +2,26 @@
 KEY: indent
 KIND: cell-property
 PATH: props/cell/indent
-ALIAS: 문자열, 정렬, 따라, 좌측, 또는
-ALIAS_EN: indent, align, alignment
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/indent
+ALIAS_EN: indentation, left, right, side, cell, depending, text, alignment
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/indent
 ---
 # Indent ***(cell)***
 
-> 문자열 정렬([Align](./align))에 따라 셀 좌측 또는 우측에 들여쓰기를 설정합니다.
+> Sets the indentation on the left or right side of the cell depending on the text alignment ([Align](./align)).
 
-> 숫자로 입력시 입력값*10px로 padding이 생성됩니다.
+> When entering a number, padding is created as input value * 10px.
 ### Type
 `number`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|패딩 정도 (입력값 * 10px)|
+|`number`|Padding amount (input value * 10px)|
 
 
 ### Example
 ```javascript
-//특정 셀에 20px 정도 패딩을 생성
+// Create approximately 20px padding on a specific cell
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Indent", 2);
 ```
 
@@ -34,4 +33,4 @@ sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Indent", 2);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

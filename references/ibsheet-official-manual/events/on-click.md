@@ -2,22 +2,21 @@
 KEY: onClick
 KIND: event
 PATH: events/on-click
-ALIAS: 마우스로, 내부를, 클릭했을, 호출되는, 이벤트입니다
-ALIAS_EN: on, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-click
+ALIAS_EN: event, called, clicking, inside, cell, mouse, onclick
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-click
 ---
 # onClick ***(event)***
-> 마우스로 셀 내부를 클릭했을 때 호출되는 이벤트입니다.
+> Event called when clicking inside a cell with the mouse.
 
-> 마우스 클릭시 호출되는 [onMouseDown](./on-mouse-down), [onMouseUp](./on-mouse-up) 이벤트 뒤에 발생합니다.
+> Fires after the [onMouseDown](./on-mouse-down), [onMouseUp](./on-mouse-up) events that occur on mouse click.
 
-> `1(true)`를 리턴 시 클릭에 의한 기본 동작을 막습니다.
+> Returning `1(true)` prevents the default action caused by the click.
 
-> 열 단위로 클릭 이벤트를 사용하려면 [OnClick](/docs/events/on-click) 이벤트를 사용해야합니다.
+> To use click events on a per-column basis, use the [OnClick](/docs/events/on-click) event.
 
-> <mark>`Bool, Radio`와 같이 클릭과 동시에 값이 수정되는 열에서 사용시에는 주의가 필요로 합니다.</mark> 
+> <mark>`Caution is needed when using this with columns where the value is modified simultaneously with the click, such as Bool, Radio.`</mark> 
 
-> 해당 이벤트가 호출되는 시점에서는 아직 값이 수정되기 이전의 값이 얻어짐으로, 위와 같은 타입의 열에서는 가급적 [onAfterChange](./on-after-change) 나 [onAfterClick](./on-after-click) 이벤트에서 처리 클릭에 대한 결과를 처리하실 것을 권합니다.
+> At the point when this event is called, the value before modification is still obtained, so for columns of the above types, it is recommended to handle click results in the [onAfterChange](./on-after-change) or [onAfterClick](./on-after-click) events.
 
 ### Syntax
 
@@ -34,24 +33,24 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|마우스 클릭 이벤트가 발생된 시트 객체|
-|row|`object`|클릭된 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|클릭된 셀의 열이름|
-|x|`number`|셀 내에서 마우스 클릭이 발생한 x좌표|
-|y|`number`|셀 내에서 마우스 클릭이 발생한 y좌표|
-|event|`object`|javascript 마우스 이벤트 객체|
+|sheet|`object`|Sheet object where the mouse click event occurred|
+|row|`object`|[Data row object](/docs/appx/row-object) of the clicked cell|
+|col|`string`|Column name of the clicked cell|
+|x|`number`|x-coordinate where the mouse click occurred within the cell|
+|y|`number`|y-coordinate where the mouse click occurred within the cell|
+|event|`object`|JavaScript mouse event object|
 <!--!
-|`[비공개]` canState|`string`|마우스 이벤트가 발생한 곳의 편집, 포커스 가능 상태 정보
-(`"Editable"(편집가능)`, `"ReadOnly"(편집불가능)`, `"NoFocus"(포커스불가능)`)|
-|`[비공개]` cellType|`string`|마우스 이벤트가 발생한 곳의 타입 정보
-(`"Text"`, `"Int"`, `"Float"` 등)|
-|`[비공개]` part|`string`|마우스 이벤트가 발생한 곳의 셀영역 정보
-(`"Tree"(트리아이콘 영역)`, `"Content"(셀데이터 영역)`, `"Caption"(헤더데이터(제목) 영역)`, `"Side"(셀아이콘 왼쪽 영역)`, `"Button"(셀버튼 영역)`)|
-|`[비공개]` partType|`string`|마우스 이벤트가 발생한 곳의 셀영역 타입 정보
-(`"Expand"(트리아이콘 확장버튼)`, `"SideClear"(삭제아이콘)`, `"SideFile"(파일선택아이콘)`, `"SideCheck"(체크박스아이콘)`, `"SideButton"(버튼아이콘)`, `"SideDate"(달력아이콘)`, `"SideSort"(정렬아이콘)`, `"SideDefaults"(Defaults아이콘)`, `"SideIcon"(아이콘)`, `"SideFilter"(필터아이콘)`, `"EditEnum"(Enum데이터)`, `"EditText"(Text테이터)`, `"EditDate"(Date데이터)`, `"EditInt"(Int데이터)` 등)|
-|`[비공개]` section|`string`|마우스 이벤트가 발생한 곳의 컬럼영역 정보
-(`"Left"(LeftCols 영역)`, `"Mid"(Cols 영역)`, `"Right"(RightCols 영역)`)|
-|`[비공개]` kind|`string`|마우스 이벤트가 발생한 곳의 행의 종류 정보
+|`[Private]` canState|`string`|Edit/focus capability status information of the area where the mouse event occurred
+(`"Editable"`, `"ReadOnly"`, `"NoFocus"`)|
+|`[Private]` cellType|`string`|Type information of the area where the mouse event occurred
+(`"Text"`, `"Int"`, `"Float"`, etc.)|
+|`[Private]` part|`string`|Cell area information of the area where the mouse event occurred
+(`"Tree"(tree icon area)`, `"Content"(cell data area)`, `"Caption"(header data(title) area)`, `"Side"(cell icon left area)`, `"Button"(cell button area)`)|
+|`[Private]` partType|`string`|Cell area type information of the area where the mouse event occurred
+(`"Expand"(tree icon expand button)`, `"SideClear"(delete icon)`, `"SideFile"(file select icon)`, `"SideCheck"(checkbox icon)`, `"SideButton"(button icon)`, `"SideDate"(calendar icon)`, `"SideSort"(sort icon)`, `"SideDefaults"(Defaults icon)`, `"SideIcon"(icon)`, `"SideFilter"(filter icon)`, `"EditEnum"(Enum data)`, `"EditText"(Text data)`, `"EditDate"(Date data)`, `"EditInt"(Int data)`, etc.)|
+|`[Private]` section|`string`|Column area information of the area where the mouse event occurred
+(`"Left"(LeftCols area)`, `"Mid"(Cols area)`, `"Right"(RightCols area)`)|
+|`[Private]` kind|`string`|Row type information of the area where the mouse event occurred
 (`"Header"`, `"Data"`, `"Foot"`, `"Solid"`, `"Group"`, `"Filter"`)|
 !-->
 
@@ -62,10 +61,10 @@ or
 ```javascript
 options.Events = {
     onClick:function(evtParam){
-        // 다음과 같은 조건 중 하나라도 만족하는 경우 클릭에 의한 시트 동작을 실행하지 않습니다.
-        // 1) 열의 열이름이 'sName' 경우
-        // 2) 행들 중 sProgress 열이름에 해당하는 셀의 값이 "완료"인 경우
-        if (evtParam.col == "sName" || evtParam.row["sProgress"] == "완료") return true;
+        // If any of the following conditions are met, the sheet action by click will not be executed.
+        // 1) If the column name is 'sName'
+        // 2) If the cell value in the sProgress column of the row is "Completed"
+        if (evtParam.col == "sName" || evtParam.row["sProgress"] == "Completed") return true;
     }
 }
 ```
@@ -82,7 +81,7 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|
 <!--!
-|`[비공개]` core|8.0.0.6|`canState`, `cellType`, `part`, `partType`, `section`, `kind` 인자 추가|
+|`[Private]` core|8.0.0.6|`canState`, `cellType`, `part`, `partType`, `section`, `kind` parameters added|
 !-->

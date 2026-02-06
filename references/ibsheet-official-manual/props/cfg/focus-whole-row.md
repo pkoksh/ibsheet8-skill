@@ -2,15 +2,14 @@
 KEY: focusWholeRow
 KIND: config-property
 PATH: props/cfg/focus-whole-row
-ALIAS: 시트, 선택시, 포커스를, 해당, 셀에만
-ALIAS_EN: focus, whole, row, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/focus-whole-row
+ALIAS_EN: whether, apply, focus, selected, cell, entire, row, selecting
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/focus-whole-row
 ---
 # FocusWholeRow ***(cfg)***
 
-> 시트 셀 선택시 포커스를 해당 셀에만 처리할지 해당 행 전체에 처리할지를 설정합니다.
+> Sets whether to apply focus only to the selected cell or to the entire row when selecting a cell in the sheet.
 
-> `제약사항` 해당 기능 사용시 `Lines` 타입 컬럼은 편집 불가 `(CanEdit:0)` 로 설정됩니다.
+> `Limitation` When using this feature, `Lines` type columns are set to non-editable `(CanEdit:0)`.
 
 
 ### Type
@@ -19,14 +18,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/focus-who
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|시트 셀 단위로 포커스 처리 (`default`)|
-|`1(true)`|시트 행 단위로 포커스 처리|
+|`0(false)`|Focus applied at the cell level (`default`)|
+|`1(true)`|Focus applied at the row level|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    FocusWholeRow: true     // 행단위로 포커스 처리
+    FocusWholeRow: true     // Apply focus at the row level
 };
 ```
 
@@ -36,4 +35,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

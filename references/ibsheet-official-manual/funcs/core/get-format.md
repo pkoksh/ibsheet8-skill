@@ -2,13 +2,13 @@
 KEY: getFormat
 KIND: method
 PATH: funcs/core/get-format
-ALIAS: sheet.getFormat, getFormat(), 특정, 셀의, 확인합니다
-ALIAS_EN: get, format
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-format
+ALIAS: sheet.getFormat, getFormat()
+ALIAS_EN: checks, format, specific, cell, getformat, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-format
 ---
 # getFormat ***(method)***
 
-> 특정 셀의 Format을 확인합니다.
+> Checks the Format of a specific cell.
 
 ### Syntax
 ```javascript
@@ -19,22 +19,22 @@ string getFormat( row, col, edit );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
-|edit|`boolean`|선택|EditFormat 확인
-`0(false)`:`Format` 값을 리턴 (`default`)
-`1(true)`:`EditFormat` 값을 리턴|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
+|edit|`boolean`|Optional|Check EditFormat
+`0(false)`:`Format` value return (`default`)
+`1(true)`:`EditFormat` value return|
 
 ### Return Value
-***string*** : 셀에 설정한 Format 문자열 (Format이 설정되지 않은 셀은 공백("")을 리턴)
+***string*** : Format string set for the cell (returns empty string ("") for cells without Format settings)
 
 ### Example
 ```javascript
-//날짜 셀에서 포맷 확인
+// Check the format of a date cell
 var f = sheet.getFormat( sheet.getFocusedRow(), "EnterDate" );
 var ef = sheet.getFormat( sheet.getFocusedRow(), "EnterDate", 1);
 if(f=="yyyy/MM/dd" && ef == "yyyyMMdd"){
-    alert("'년/월/일' 순서 포맷입니다. ");
+  alert("'year/month/day' order format. ");
 }
 ```
 
@@ -45,4 +45,4 @@ if(f=="yyyy/MM/dd" && ef == "yyyyMMdd"){
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

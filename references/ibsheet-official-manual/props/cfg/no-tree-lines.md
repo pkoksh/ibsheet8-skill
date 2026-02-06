@@ -2,28 +2,27 @@
 KEY: noTreeLines
 KIND: config-property
 PATH: props/cfg/no-tree-lines
-ALIAS: 트리를, 사용하는, 시트, 생성시, 노드와
-ALIAS_EN: no, tree, lines, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-tree-lines
+ALIAS_EN: whether, display, connection, lines, nodes, creating, sheet, uses
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-tree-lines
 ---
 # NoTreeLines ***(cfg)***
 
-> 트리를 사용하는 시트 생성시 노드와 노드 사이의 연결선을 표시할 지 여부를 설정합니다.
+> Sets whether to display connection lines between nodes when creating a sheet that uses a tree.
 
-> 1 로 설정시 단순한 접기/펼침 버튼 형태로 트리의 노드가 표현됩니다. 
+> When set to 1, tree nodes are displayed as simple collapse/expand button forms. 
 
 
 ###
-![NoTreeLines](/assets/imgs/noTreeLines.png "NoTreeLines 사용")
-<!-- IMAGE: 스크린샷/예시 이미지 - NoTreeLines -->
+![NoTreeLines](/assets/imgs/noTreeLines.png "Using NoTreeLines")
+<!-- IMAGE: Screenshot/Example Image - NoTreeLines -->
 
 [NoTreeLines: true]
 
 
-![일반트리](/assets/imgs/tree.png "일반 트리")
-<!-- IMAGE: 스크린샷/예시 이미지 - 일반트리 -->
+![Normal Tree](/assets/imgs/tree.png "Normal Tree")
+<!-- IMAGE: Screenshot/Example Image - Normal Tree -->
 
-[일반트리]
+[Normal Tree]
 
 
 ### Type
@@ -32,14 +31,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-tree-l
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|노드 연결 선을 표시 (`default`)|
-|`1(true)`|노드 연결 선을 표시하지 않음|
+|`0(false)`|Display node connection lines (`default`)|
+|`1(true)`|Do not display node connection lines|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    NoTreeLines: true,        //노드 연결선을 표시하지 않음.
+    NoTreeLines: true,        // Do not display node connection lines.
     ...
 };
 ```
@@ -52,4 +51,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

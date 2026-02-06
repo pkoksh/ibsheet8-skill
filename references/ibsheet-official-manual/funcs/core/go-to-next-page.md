@@ -2,12 +2,12 @@
 KEY: goToNextPage
 KIND: method
 PATH: funcs/core/go-to-next-page
-ALIAS: sheet.goToNextPage, goToNextPage(), 현재, 페이지의, 다음, 페이지로, 이동합니다
-ALIAS_EN: go, to, next, page
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/go-to-next-page
+ALIAS: sheet.goToNextPage, goToNextPage()
+ALIAS_EN: navigates, next, page, current, gotonextpage, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/go-to-next-page
 ---
 # goToNextPage ***(method)***
-> 현재 페이지의 다음 페이지로 이동합니다.
+> Navigates to the next page of the current page.
 
 
 
@@ -17,15 +17,15 @@ boolean goToNextPage();
 ```
 
 ### Return Value
-***boolean*** : 페이지 이동 성공여부(이미 마지막 페이지인 경우 false가 리턴)
+***boolean*** : Whether page navigation was successful (returns false if already on the last page)
 
 ### Example
 ```javascript
-//다음페이지로 이동
+// Navigate to the next page
 function NextPage(){
     var rtn = sheet.goToNextPage();
     if(!rtn) {
-        alert("마지막 페이지 입니다.");
+        alert("This is the last page.");
     }
 }
 ```
@@ -38,4 +38,4 @@ function NextPage(){
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: decimalAdjust
 KIND: config-property
 PATH: props/cfg/decimal-adjust
-ALIAS: 타입, 컬럼, 데이터의, 근사값, 처리방식을
-ALIAS_EN: decimal, adjust
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/decimal-adjust
+ALIAS_EN: rounding, method, approximate, values, int, float, type, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/decimal-adjust
 ---
 # DecimalAdjust ***(cfg)***
 
-> Int, Float 타입 컬럼 데이터의 근사값 처리방식을 설정합니다. 
+> Sets the rounding method for approximate values in Int and Float type column data. 
 
 
 ### Type
@@ -17,15 +16,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/decimal-a
 ### Options
 |Value|Description|
 |-----|-----|
-|`round`|근사값을 반올림으로 처리합니다. (`default`)|
-|`floor`|근사값을 내림으로 처리합니다.|
-|`ceil`|근사값을 올림으로 처리합니다.|
+|`round`|Rounds approximate values. (`default`)|
+|`floor`|Floors (rounds down) approximate values.|
+|`ceil`|Ceils (rounds up) approximate values.|
 
 ### Example
 ```javascript
 options.Cols = [
     ...
-    {Type: "Int", Name: "Pvt_TSum", DecimalAdjust: "floor", ...}, // 근사값 처리 방식을 내림으로 설정
+    {Type: "Int", Name: "Pvt_TSum", DecimalAdjust: "floor", ...}, // Set rounding method to floor
     ...
 ];
 ```
@@ -37,4 +36,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.11|기능 추가|
+|core|8.0.0.11|Feature added|

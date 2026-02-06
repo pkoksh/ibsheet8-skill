@@ -2,17 +2,16 @@
 KEY: uncheck
 KIND: cell-property
 PATH: props/cell/uncheck
-ALIAS: 셀이, 여러, 있을때, 내에서, 하나의
-ALIAS_EN: uncheck
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/uncheck
+ALIAS_EN: there, multiple, cells, bool, type, features, allow, one
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/uncheck
 ---
 # Uncheck ***(cell)***
-> [Type](./type)이 `Bool` 인 셀이 여러 개 있을때, 한 행 내에서 하나의 셀만 체크 가능하게([Radio속성](./radio))하거나, 한 열 내에서 하나의 셀만 체크하게([BoolGroup속성](./bool-group))하는 기능이 있는데, 이러한 기능을 사용시 체크된 상태에서 다시 클릭시 체크 해제를 허용할지 여부를 설정합니다.
+> When there are multiple cells with `Bool` [Type](./type), there are features that allow only one cell to be checked within a row ([Radio property](./radio)) or only one cell to be checked within a column ([BoolGroup property](./bool-group)). This property sets whether to allow unchecking by clicking again on a checked cell when using these features.
 
 
 ###
-![Radio](/assets/imgs/radio.png "같은 행에서 하나만 선택 가능")
-<!-- IMAGE: 스크린샷/예시 이미지 - Radio -->
+![Radio](/assets/imgs/radio.png "Only one can be selected in the same row")
+<!-- IMAGE: Screenshot/Example Image - Radio -->
 
 ### Type
 `boolean`
@@ -20,15 +19,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/uncheck
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|체크 해제를 허용 안함|
-|`1(true)`|체크 해제를 허용 (`default`)|
+|`0(false)`|Do not allow unchecking|
+|`1(true)`|Allow unchecking (`default`)|
 
 
 
 
 ### Example
 ```javascript
-//한번 체크하고 나면 그룹내에서 체크 해제가 불가능하게 설정
+// Once checked, make it impossible to uncheck within the group
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Uncheck", 0);
 ```
 
@@ -43,4 +42,4 @@ sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Uncheck", 0);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

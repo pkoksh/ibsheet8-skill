@@ -2,17 +2,17 @@
 KEY: setSheetSize
 KIND: method
 PATH: funcs/common/set-sheet-size
-ALIAS: sheet.setSheetSize, setSheetSize(), 시트의, 태그, 사이즈를, 조정합니다, 해당
-ALIAS_EN: set, sheet, size
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/set-sheet-size
+ALIAS: sheet.setSheetSize, setSheetSize()
+ALIAS_EN: adjusts, tag, size, sheet, feature, changes, div, wrapping
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/set-sheet-size
 ---
 # setSheetSize ***(method)***
 
-> 시트의 태그 사이즈를 조정합니다. 해당 기능은 시트를 감싸고 있는 div 크기를 변화시킵니다. 
+> Adjusts the tag size of the sheet. This feature changes the size of the div wrapping the sheet. 
 
-> number 입력시 px 로 자동으로 치환합니다. 
+> When a number is entered, it is automatically converted to px. 
 
-> 단위를 붙여서 입력시 그대로 입력됩니다. 
+> When entered with a unit, it is applied as-is. 
 
 
 ### Syntax
@@ -24,15 +24,15 @@ void setSheetSize( width, height );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|width|`number`|선택|설정할 시트 태그 너비|
-|height|`number`|선택|설정할 시트 태그 높이|
+|width|`number`|Optional|Sheet tag width to set|
+|height|`number`|Optional|Sheet tag height to set|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-// 시트의 태그 사이즈를 너비 500 px, 높이 800px로 설정합니다.
+// Sets the sheet tag size to width 500px, height 800px.
 sheet.setSheetSize(500, 800);
 ```
 
@@ -42,4 +42,4 @@ sheet.setSheetSize(500, 800);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

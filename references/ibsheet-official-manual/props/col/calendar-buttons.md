@@ -2,29 +2,28 @@
 KEY: calendarButtons
 KIND: column-property
 PATH: props/col/calendar-buttons
-ALIAS: 달력이, 표시될때, 달력, 하단에, 보여질
-ALIAS_EN: calendar, buttons
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/calendar-buttons
+ALIAS_EN: buttons, displayed, bottom, calendar, shown, calendarbuttons, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/calendar-buttons
 ---
 # CalendarButtons ***(col)***
 
-> 달력이 표시될때 달력 하단에 보여질 버튼을 설정합니다.
+> Sets the buttons displayed at the bottom of the calendar when it is shown.
 
-> 설정값의 합을 통해 여러 개 버튼을 표시할 수도 있습니다.
+> Multiple buttons can be displayed by using the sum of the setting values.
 
-> 년월 달력의 경우 [AutoSelectYm](/docs/props/cfg/auto-select-Ym) 값에 따라 `"확인"` 버튼 보여짐 여부가 달라집니다. 
+> For the year-month calendar, the visibility of the `"OK"` button varies depending on the [AutoSelectYm](/docs/props/cfg/auto-select-Ym) value. 
 
 
 ###
-1. 년월일 달력
+1. Year-Month-Day calendar
 
 ![CalendarButtons](/assets/imgs/calendarButtons.png "CalendarButtons")
-<!-- IMAGE: 버튼 이미지 - CalendarButtons -->
+<!-- IMAGE: Button Image - CalendarButtons -->
 
-2. 년월 달력
+2. Year-Month calendar
 
 ![MonthCalendarButtons](/assets/imgs/monthCalendar.png "MonthCalendarButtons")
-<!-- IMAGE: 스크린샷/예시 이미지 - MonthCalendarButtons -->
+<!-- IMAGE: Screenshot/Example Image - MonthCalendarButtons -->
 
 
 ### Type
@@ -32,31 +31,31 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/calendar-
 
 ### Options
 
-* 년월일 달력 (`default: 0`)
+* Year-Month-Day calendar (`default: 0`)
 
 |Value|Description|
 |-----|-----|
-|`1`|"오늘" 버튼|
-|`2`|"취소" 버튼|
-|`4`|"확인" 버튼|
-|`8`|"어제" 버튼|
+|`1`|"Today" button|
+|`2`|"Cancel" button|
+|`4`|"OK" button|
+|`8`|"Yesterday" button|
 
-* 년월 달력  (`default: 4`)
-
-|Value|Description|
-|-----|-----|
-|`1`|"이번달" 버튼|
-|`2`|"취소" 버튼|
-|`4`|"확인" 버튼|
-
-
-
-* 년 달력  (`default: 4`)
+* Year-Month calendar  (`default: 4`)
 
 |Value|Description|
 |-----|-----|
-|`2`|"취소" 버튼|
-|`4`|"확인" 버튼|
+|`1`|"This Month" button|
+|`2`|"Cancel" button|
+|`4`|"OK" button|
+
+
+
+* Year calendar  (`default: 4`)
+
+|Value|Description|
+|-----|-----|
+|`2`|"Cancel" button|
+|`4`|"OK" button|
 
 
 
@@ -64,10 +63,10 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/calendar-
 ```javascript
 options.Cols = [
     ...
-    // 년월일 달력에 어제, 오늘 버튼을 표시한다.
+    // Display Yesterday and Today buttons on the Year-Month-Day calendar
     {Type: "Date", Name: "sa_enterDate", CalendarButtons: 9 ...},
     ...
-    // 년월 달력에 이번달, 취소, 확인 버튼을 표시한다.
+    // Display This Month, Cancel, and OK buttons on the Year-Month calendar
     {Type: "Date", Name: "sa_monthDate", CalendarButtons: 7, Format: "yyyy/MM" ...}
 ];
 ```
@@ -81,4 +80,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

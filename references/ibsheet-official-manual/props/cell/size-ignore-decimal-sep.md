@@ -2,16 +2,15 @@
 KEY: sizeIgnoreDecimalSep
 KIND: cell-property
 PATH: props/cell/size-ignore-decimal-sep
-ALIAS: 입력된, 문자열이, 숫자형인, 경우, 설정된
-ALIAS_EN: size, ignore, decimal, sep
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/size-ignore-decimal-sep
+ALIAS_EN: entered, string, numeric, feature, excludes, group, separator, decimal
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/size-ignore-decimal-sep
 ---
 # SizeIgnoreDecimalSep ***(cell)***
-> 입력된 문자열이 숫자형인 경우, 설정된 열에 입력 가능한 글자 수에서 자릿수 구분자와 소수점 구분자의 값들을 글자 수에서 제외하는 기능입니다.
+> When the entered string is numeric, this feature excludes the group separator and decimal separator characters from the character count limit set for the column.
 
-> Locale메세지 파일(ko.js,en.js등)에서 자릿수 구분자는 `Format.GroupSeparator`, 소수점 구분자는 `Format.DecimalSeparator`로 설정되어 있습니다.
+> In the Locale message files (ko.js, en.js, etc.), the group separator is configured as `Format.GroupSeparator` and the decimal separator as `Format.DecimalSeparator`.
 
-> **<mark>주의</mark> : Col 혹은 Cell에 `Size` 속성이 설정되어 있어야 해당 기능이 동작합니다.**
+> **<mark>Note</mark> : The `Size` property must be set on the Col or Cell for this feature to work.**
 
 
 
@@ -21,24 +20,24 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/size-ign
 ### Options
 |Value|Description|
 |-----|-----|
-|`boolean`|입력된 데이터에서 자릿수 구분자와 소수점 구분자를 이용하여 숫자형인지 판단하고, 숫자형 데이터일 경우 구분자 문자들을 입력가능한 글자수에서 제외 여부
-(`Int`, `Float` type: `default:1(true)`, 그 외의 type: `default:0(false)`)
-전 세계에서 사용되는 자릿수 구분자(`Format.GroupSeparator`) 문자: `,`, `.`, ` `, `'`
-전 세계에서 사용되는 소수점 구분자(`Format.DecimalSeparator`) 문자: `,`, `.`|
+|`boolean`|Determines whether the entered data is numeric using the group separator and decimal separator, and if so, whether to exclude separator characters from the maximum character count
+(`Int`, `Float` type: `default:1(true)`, other types: `default:0(false)`)
+Group separator (`Format.GroupSeparator`) characters used worldwide: `,`, `.`, ` `, `'`
+Decimal separator (`Format.DecimalSeparator`) characters used worldwide: `,`, `.`|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀에 속성 적용 (열이름: CLS)
+//1. Apply property to a specific cell via method (column name: CLS)
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "SizeIgnoreDecimalSep", true);
 
 
-//2. 객체에 직접 접근해서 속성 적용 (열이름: CLS)
+//2. Apply property by directly accessing the object (column name: CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSSizeIgnoreDecimalSep"] = true;
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
-//3. 조회 데이터 내에서 속성 적용  (열이름: CLS)
+//3. Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSSizeIgnoreDecimalSep": true ...}
@@ -56,4 +55,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.15|기능 추가|
+|core|8.3.0.15|Feature added|

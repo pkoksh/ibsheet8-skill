@@ -2,14 +2,13 @@
 KEY: onShowDefaults
 KIND: event
 PATH: events/on-show-defaults
-ALIAS: 설정된, 메뉴가, 화면에, 보여질, 호출되는
-ALIAS_EN: on, show, defaults
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-show-defaults
+ALIAS_EN: event, called, menu, configured, defaults, docs, props, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-show-defaults
 ---
 # onShowDefaults ***(event)***
-> [Defaults](/docs/props/col/defaults)에 설정된 메뉴가 화면에 보여질 때 호출되는 이벤트입니다.([onReadDefaults](/docs/events/on-read-defaults) 이벤트 발생 후 발생합니다.)
+> Event called when the menu configured in [Defaults](/docs/props/col/defaults) is displayed on screen. (Fires after the [onReadDefaults](/docs/events/on-read-defaults) event.)
 
-> 표시될 메뉴의 순서나 내용을 수정할 수 있습니다.
+> You can modify the order or content of the menu to be displayed.
 
 
 ### Syntax
@@ -27,11 +26,11 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|메뉴가 보여질 시트 객체|
-|row|`object`|메뉴가 보여질 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|메뉴가 보여질 셀의 열이름|
-|menu|`object`|화면에 보여질 메뉴 객체|
-|pos|`object`|메뉴에 대한 `Position` 객체|
+|sheet|`object`|Sheet object where the menu will be displayed|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the menu will be displayed|
+|col|`string`|Column name of the cell where the menu will be displayed|
+|menu|`object`|Menu object to be displayed on screen|
+|pos|`object`|`Position` object for the menu|
 
 
 ### Return
@@ -43,8 +42,8 @@ or
 
 options.Events = {
     onShowDefaults:function(evtParam){
-        // Defaults를 통해 보여지는 menu의 일부 아이템을 제거한 후 보여준다.
-        evtParam.menu.Items.splice(0,3); //앞에 3개 아이템을 제거
+        // Remove some items from the menu shown through Defaults before displaying.
+        evtParam.menu.Items.splice(0,3); // Remove the first 3 items
     }
 }
 ```
@@ -58,4 +57,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.6|기능 추가|
+|core|8.0.0.6|Feature added|

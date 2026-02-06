@@ -2,13 +2,12 @@
 KEY: tipClass
 KIND: row-property
 PATH: props/row/tip-class
-ALIAS: 풍선도움말, 객체에, 원하는, 클래스, 적용하여
-ALIAS_EN: tip, class
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/tip-class
+ALIAS_EN: design, tooltip, object, applying, desired, css, class, tipclass
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/tip-class
 ---
 # TipClass ***(row)***
 
-> 풍선도움말 객체에 원하는 `css클래스`를 적용하여 디자인을 설정 합니다.
+> Sets the design of the tooltip object by applying a desired `CSS class`.
 
 
 ### Type
@@ -17,7 +16,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/tip-class
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|풍선도움말 객체에 적용할 css클래스 명|
+|`string`|CSS class name to apply to the tooltip object|
 
 ### Example
 ```css
@@ -28,12 +27,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/tip-class
 ```
 ```javascript
 
-//특정 행에 풍선도움말 표시시 사용될 클레스를 설정.
+//Set the class to use when displaying a tooltip for a specific row.
 var row = sheet.getRowById("AR55");
 row["TipClass"] = "RedBold";
 
 
-//조회 데이터에서 일부 행에 대해 풍선도움말 클레스를 설정.
+//Set the tooltip class for some rows in the loaded data.
 {"data":[
     {"TipClass":"deepblue","ColName1":"Value1","ColName2":"Value2", ...},
     ...
@@ -49,4 +48,4 @@ row["TipClass"] = "RedBold";
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

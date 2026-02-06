@@ -2,14 +2,14 @@
 KEY: showTip
 KIND: method
 PATH: funcs/core/show-tip
-ALIAS: sheet.showTip, showTip(), 현재, 마우스커서가, 위치한, 곳에, 원하는
-ALIAS_EN: show, tip
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/show-tip
+ALIAS: sheet.showTip, showTip()
+ALIAS_EN: displays, balloon, tooltip, desired, content, current, mouse, cursor
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/show-tip
 ---
 # showTip ***(method)***
-> 현재 마우스커서가 위치한 곳에 원하는 내용의 풍선도움말을 띄웁니다.
+> Displays a balloon tooltip with the desired content at the current mouse cursor position.
 
-> `tip` 인자에 html태그를 넣으면 더 다양한 표현도 가능합니다.
+> Including HTML tags in the `tip` argument allows for more diverse expressions.
 
 ### Syntax
 ```javascript
@@ -20,14 +20,14 @@ void showTip( tip );
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|tip |`string`|필수|풍선 도움말에 보여질 내용|
+|tip |`string`|Required|Content to display in the balloon tooltip|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-//현재 마우스 커서 위치에 다음 내용을 풍선도움말 형식으로 띄운다.
+// Display content as a balloon tooltip at the current mouse cursor position.
 sheet.showTip("You are so beautiful");
 ```
 
@@ -41,4 +41,4 @@ sheet.showTip("You are so beautiful");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

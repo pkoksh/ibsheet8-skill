@@ -2,13 +2,12 @@
 KEY: removeHtmlTag
 KIND: static-member
 PATH: static/remove-html-tag
-ALIAS: 인자로, 들어온, 문자열에서, 형식의, 문자열을
-ALIAS_EN: remove, html, tag
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/remove-html-tag
+ALIAS_EN: removes, html, tag, format, strings, input, string, returns
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/remove-html-tag
 ---
 # removeHTMLTag ***(static)***
 
-> 인자로 들어온 문자열에서 HTML Tag형식의 문자열을 제거해서 문자열을 리턴합니다.
+> Removes HTML Tag format strings from the input string and returns the result.
 
 ### Syntax
 ```javascript
@@ -18,17 +17,17 @@ string IBSheet.removeHTMLTag(html);
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|html|`string`|필수|대상 문자열|
+|html|`string`|Required|Target string|
 
 
 ### Return Value
-***string*** : HTML Tag가 제거된 문자열
+***string*** : String with HTML Tags removed
 
 ### Example
 ```javascript
-  var string = IBSheet.removeHTMLTag("<div><p>안녕하세요.
+  var string = IBSheet.removeHTMLTag("<div><p>Hello.
 Hello, World~!</p></div>");
-  // "안녕하세요.Hello, World~!"
+  // "Hello.Hello, World~!"
 ```
 ### Read More
 
@@ -36,4 +35,4 @@ Hello, World~!</p></div>");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,19 +2,18 @@
 KEY: type
 KIND: column-property
 PATH: props/col/type
-ALIAS: 셀이, 갖고있는, 데이터, 유형을, 의미합니다
-ALIAS_EN: type, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/type
+ALIAS_EN: represents, data, type, held, cell, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/type
 ---
 # Type ***(col)***
 
-> 셀이 갖고있는 데이터 유형을 의미합니다.
+> Represents the data type held by a cell.
 
-> 열을 생성시에는 반드시 선언되어야 합니다.
+> Must be declared when creating a column.
 
-> 일반적인 텍스트나 숫자(정수, 실수) 체크박스, 드랍다운리스트 와 같은 타입이 존재합니다.
+> Types such as general text, numbers (integer, float), checkbox, and dropdown list exist.
 
-> 자세한 내용은 [Type appendix](/docs/appx/type)를 참고하세요.
+> For details, refer to [Type appendix](/docs/appx/type).
 
 ### Type
 `string`
@@ -22,12 +21,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/type
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|`Text, Int, Float, Date, Bool, Enum` 등 정해진 문자열|
+|`string`|Predefined strings such as `Text, Int, Float, Date, Bool, Enum`, etc.|
 
 
 ### Example
 ```javascript
-//특정 열의 타입을 설정합니다.
+// Set the type of specific columns.
 options.Cols = [
     {Type: "Int", Name: "Seq", Width: 70, ...},
     {Type: "Date", Name: "enterDate", Width: 120, ...},
@@ -46,4 +45,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,14 +2,13 @@
 KEY: canPaste
 KIND: cell-property
 PATH: props/cell/can-paste
-ALIAS: 행에서, 특정, 열에, 붙여넣기를, 제한합니다
-ALIAS_EN: can, paste
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/can-paste
+ALIAS_EN: restricts, pasting, specific, column, row, canpaste, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/can-paste
 ---
 # CanPaste ***(cell)***
-> 행에서 특정 열에 대한 붙여넣기를 제한합니다.
+> Restricts pasting for a specific column in a row.
 
-> `ctrl+c` 를 통해 복사시 클립보드에 저장되지만 `ctrl+v` 를 통해 붙여넣기는 되지 않습니다.
+> When copying with `ctrl+c`, the data is stored in the clipboard, but pasting with `ctrl+v` is not allowed.
 
 ### Type
 `boolean`
@@ -17,25 +16,25 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/can-past
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|붙여넣기 불가|
-|`1(true)`|붙여넣기 가능 (`default`)|
+|`0(false)`|Pasting not allowed|
+|`1(true)`|Pasting allowed (`default`)|
 
 
 ### Example
 ```javascript
-// 적용 방법 1.
+// Method 1.
 var ROW = sheet.getRowById("AR1");
 ROW["sMoneyCanPaste"] = 0;
 
-// 적용 방법 2.
+// Method 2.
 var OPT = {
   "Def": {
     "Row": {
-      "컬럼이름": {
+      "ColumnName": {
         CanPaste: 0
       }
       // or
-      "컬럼이름CanPaste": 0
+      "ColumnNameCanPaste": 0
     }
   }
 }
@@ -49,5 +48,5 @@ var OPT = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.2.0.0|기능 추가|
-<!-- |`[비공개]` core|8.2.0.0|기능 공개| -->
+|core|8.2.0.0|Feature added|
+<!-- |`[Private]` core|8.2.0.0|Feature published| -->

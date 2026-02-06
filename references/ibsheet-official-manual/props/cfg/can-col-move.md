@@ -2,15 +2,14 @@
 KEY: canColMove
 KIND: config-property
 PATH: props/cfg/can-col-move
-ALIAS: 사용자가, 시트의, 헤더셀을, 드래그하여, 열의
-ALIAS_EN: can, col, move
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-col-move
+ALIAS_EN: whether, allow, users, change, column, positions, dragging, header
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/can-col-move
 ---
 # CanColMove ***(cfg)***
 
-> 사용자가 시트의 헤더셀을 드래그하여 열의 위치를 변경하는 기능을 허용할지 여부를 설정합니다.
+> Sets whether to allow users to change column positions by dragging header cells.
 
-> 열 이동시 헤더 열과 데이터 열이 같이 이동됩니다.
+> When moving columns, both header and data columns move together.
 
 ### Type
 `number`
@@ -18,14 +17,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-col-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|열 이동 불가능|
-|`1`|열 이동 가능 (`default`)|
-|`2`|헤더가 2줄 이상일 때 부모 헤더가 열병합 되어있는 경우 병합된 영역 안에서만 이동 가능|
+|`0`|Column move not allowed|
+|`1`|Column move allowed (`default`)|
+|`2`|When the header has 2 or more rows and parent headers are column-merged, movement is only allowed within the merged area|
 
 ### Example
 ```javascript
 options.Cfg = {
-    "CanColMove":0        // 사용자 열 순서 변경 불가
+    "CanColMove":0        // User cannot change column order
 };
 ```
 
@@ -39,5 +38,5 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.2.0.12|`CanColMove: 2` 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.2.0.12|`CanColMove: 2` feature added|

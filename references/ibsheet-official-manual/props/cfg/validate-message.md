@@ -2,13 +2,12 @@
 KEY: validateMessage
 KIND: config-property
 PATH: props/cfg/validate-message
-ALIAS: 설정했을, 유효성, 검사, 실패시, 띄울
-ALIAS_EN: validate, message, validation, valid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/validate-message
+ALIAS_EN: validcheck, configures, message, display, validation, fails, validatemessage, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/validate-message
 ---
 # ValidateMessage ***(cfg)***
 
-> `ValidCheck`를 설정했을 때, 유효성 검사 실패시 띄울 메시지를 설정합니다.
+> When `ValidCheck` is set, configures the message to display when validation fails.
 
 
 ### Type
@@ -17,12 +16,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/validate-
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|`ValidCheck`를 설정했을 때, 유효성 검사 실패시 띄울 메시지를 설정합니다. |
+|`string`|Sets the message to display when validation fails with `ValidCheck` configured. |
 
 ### Example
 ```javascript
 options.Cfg = {
-    ValidateMessage: "유효성 검사에 실패했습니다.",  // 유효성 검사 실패시 띄울 메시지를 설정합니다.
+    ValidateMessage: "Validation failed.",  // Sets the message to display when validation fails.
 };
 ```
 
@@ -33,4 +32,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.2.0.3|기능 추가|
+|core|8.2.0.3|Feature added|

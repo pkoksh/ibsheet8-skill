@@ -2,15 +2,14 @@
 KEY: canSort
 KIND: column-property
 PATH: props/col/can-sort
-ALIAS: 열의, 소팅, 가능, 여부를, 설정합니다
-ALIAS_EN: can, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-sort
+ALIAS_EN: whether, column, sorted, cansort, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/can-sort
 ---
 # CanSort ***(col)***
 
-> 열의 소팅 가능 여부를 설정합니다.
+> Sets whether the column can be sorted.
 
-> 사용자가 헤더 영역의 셀을 클릭시 소팅이 이루어지는데, 이를 허용할지 여부를 설정합니다.
+> Sorting occurs when the user clicks a cell in the header area. This sets whether to allow it.
 
 ### Type
 `boolean`
@@ -18,13 +17,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-sort
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|사용자 소팅 불가|
-|`1(true)`|사용자 소팅 가능 (`default`)|
+|`0(false)`|User sorting disabled|
+|`1(true)`|User sorting enabled (`default`)|
 
 
 ### Example
 ```javascript
-//특정 열에 대해 소팅하지 못하게 막음
+// Block sorting for a specific column
 options.Cols = [
     ...
     {Type: "Int", Name: "Rank_Sales", CanSort: 0 ...},
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

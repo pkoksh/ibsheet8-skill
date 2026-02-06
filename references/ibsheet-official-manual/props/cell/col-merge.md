@@ -2,15 +2,14 @@
 KEY: colMerge
 KIND: cell-property
 PATH: props/cell/col-merge
-ALIAS: 헤더, 영역에서, 기준, 병합, 실행
-ALIAS_EN: col, merge, header, combine
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/col-merge
+ALIAS_EN: whether, include, column, executing, value, based, merging, datamerge
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/col-merge
 ---
 # ColMerge ***(Cell)***
 
-> 헤더 영역에서 값 기준 병합 실행([DataMerge](/docs/props/cfg/DataMerge), [HeaderMerge](/docs/props/cfg/HeaderMerge))시 열을 포함할지 여부를 설정합니다.
+> Sets whether to include the column when executing value-based merging ([DataMerge](/docs/props/cfg/DataMerge), [HeaderMerge](/docs/props/cfg/HeaderMerge)) in the header area.
 
-> 병합 대상에서 제외/포함할 열에 해당하는 헤더 영역의 <b>모든 셀</b>에 설정해야 합니다.
+> Must be set on <b>all cells</b> in the header area corresponding to the column to be excluded from/included in merging.
 
 ### Type
 `boolean`
@@ -18,18 +17,18 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/col-merg
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|병합 할 때 열을 포함하지 않습니다. |
-|`1(true)`|병합 할 때 열을 포함합니다. |
+|`0(false)`|Does not include the column when merging. |
+|`1(true)`|Includes the column when merging. |
 
 ### Example
 ```javascript
 options.Cfg = {
-    IgnoreHeaderColMerge: false, // ColMerge 속성을 헤더 영역에도 적용합니다.
+    IgnoreHeaderColMerge: false, // Apply ColMerge property to the header area as well.
 };
 
 options.Cols = [
     ...
-    { Header: [{ Value: "부서1", ColMerge:0 }, { Value: "부서2", ColMerge:0 }, { Value: "부서3", ColMerge:0 },{ Value: "부서4", ColMerge:0 }],
+    { Header: [{ Value: "Dept1", ColMerge:0 }, { Value: "Dept2", ColMerge:0 }, { Value: "Dept3", ColMerge:0 },{ Value: "Dept4", ColMerge:0 }],
     Type:"Text", Name:"Dept", ColMerge:false, Width:100 ...},
     ...
 ];
@@ -46,4 +45,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

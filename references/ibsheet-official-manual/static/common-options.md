@@ -2,44 +2,43 @@
 KEY: commonOptions
 KIND: static-member
 PATH: static/common-options
-ALIAS: 모든, 시트에, 공통으로, 설정할, 초기
-ALIAS_EN: common, options
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/common-options
+ALIAS_EN: initial, property, values, commonly, applied, sheets, commonoptions, static
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/common-options
 ---
 # CommonOptions ***(static)***
 
-> 모든 시트에 공통으로 설정할 초기 속성값을 설정합니다.
+> Sets initial property values to be commonly applied to all sheets.
 
-> 여기서 설정한 값이 각 화면에서 설정한 시트 초기값과 머지되어 시트가 생성됩니다.
+> The values set here are merged with the sheet initial values set on each screen to create the sheet.
 
-> `CommonOptions`에서 설정한 값과 각 화면에서 정의한 시트 초기 값이 서로 다른 경우에는, 화면에서 설정한 시트 초기값이 최종 적용됩니다.
+> If the values set in `CommonOptions` differ from the sheet initial values defined on each screen, the sheet initial values set on the screen will be applied as the final values.
 
 
 ### Type
 `object`
 
 ### Options
-모든 시트에 동일하게 반영하고 싶은 `Cfg, Def, Event` 설정 값
+`Cfg, Def, Event` setting values that you want to apply uniformly to all sheets
 
-(일반적으로 이 속성은 `/plugins/ibsheet-common.js` 파일에서 설정)
+(Typically this property is set in the `/plugins/ibsheet-common.js` file)
 
 
 ### Example
 ```javascript
-//ibsheet.js 파일이 로드된 이후에 설정해야 함.
+// Must be set after the ibsheet.js file is loaded.
 IBSheet.CommonOptions = {
   Cfg:{
-    Export: {Url: "./jsp/Down2Excel.jsp"}, //엑셀다운 URL
-    Alternate: 2,   //홀짝 행에 대한 배경색 설정
-    InfoRowConfig: {Visible: 1, Layout: ["Count"], Space: "Top"} //건수 정보 표시
+    Export: {Url: "./jsp/Down2Excel.jsp"}, // Excel download URL
+    Alternate: 2,   // Background color setting for odd/even rows
+    InfoRowConfig: {Visible: 1, Layout: ["Count"], Space: "Top"} // Row count information display
   },
   Def:{
-    Row:{ //공통 행 설정
+    Row:{ // Common row settings
       Menu:{
         "Items": [
-          {"Name": "Excel다운로드", "Value": "xls"},
-          {"Name": "text다운로드", "Value": "txt"},
-          {"Name": "pdf다운로드", "Value": "pdf"},
+          {"Name": "Excel Download", "Value": "xls"},
+          {"Name": "Text Download", "Value": "txt"},
+          {"Name": "PDF Download", "Value": "pdf"},
         ],
         "OnSave":function (item,data) {
           switch (item.Value) {
@@ -68,4 +67,4 @@ IBSheet.CommonOptions = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

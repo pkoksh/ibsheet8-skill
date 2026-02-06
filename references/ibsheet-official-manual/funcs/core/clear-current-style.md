@@ -2,16 +2,16 @@
 KEY: clearCurrentStyle
 KIND: method
 PATH: funcs/core/clear-current-style
-ALIAS: sheet.clearCurrentStyle, clearCurrentStyle(), 스타일, 행으로, 저장된, 현재, 시트의
-ALIAS_EN: clear, current, style, css
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/clear-current-style
+ALIAS: sheet.clearCurrentStyle, clearCurrentStyle()
+ALIAS_EN: method, removes, style, related, information, current, sheet, saved
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/clear-current-style
 ---
 # clearCurrentStyle ***(method)***
-> 스타일 행으로 저장된 현재 시트의 스타일 관련 정보를 제거하는 메소드입니다. 
+> A method that removes style-related information of the current sheet saved as style rows. 
 
-> [StyleRowConfig](/docs/props/cfg/style-row-config)의 `StorageType`이 1인 경우, 로컬 스토리지에 저장된 스타일 정보를 제거합니다. ([StorageSession](/docs/props/cfg/storage-session) 값이 0인 경우에는 제거 동작을 하지 않습니다.)
+> If `StorageType` of [StyleRowConfig](/docs/props/cfg/style-row-config) is 1, it removes the style information saved in local storage. (If [StorageSession](/docs/props/cfg/storage-session) value is 0, the removal operation is not performed.)
 
-> `StorageType`이 2인 경우, 스타일 행의 `ServerUrl`의 경로로 저장된 스타일 정보를 제거하는 요청을 전송합니다.
+> If `StorageType` is 2, it sends a request to remove the style information saved at the path of the style row's `ServerUrl`.
 
 ### Syntax
 ```javascript
@@ -19,17 +19,17 @@ boolean clearCurrentStyle();
 ```
 
 ### Return Value
-***boolean*** : 함수 정상 동작 여부
+***boolean*** : Whether the function operated normally
 
 ### Example
 ```javascript
 options.Cfg = {
-    StorageSession: 1        // 로컬 스토리지에 현재 시트 정보를 저장할 수 있고 가져올 수 있도록 설정
+    StorageSession: 1        // Configure to allow saving and retrieving current sheet information in local storage
 };
 
         ...
 
-// 저장된 스타일 정보를 제거한다.
+// Remove saved style information.
 sheet.clearCurrentStyle();
 ```
 
@@ -41,5 +41,5 @@ sheet.clearCurrentStyle();
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.18|기능 추가|
-|core|8.3.0.33|서버 삭제 요청 기능 개선|
+|core|8.3.0.18|Feature added|
+|core|8.3.0.33|Server deletion request feature improved|

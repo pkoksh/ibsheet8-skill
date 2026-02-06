@@ -2,14 +2,13 @@
 KEY: iconWidth
 KIND: column-property
 PATH: props/col/icon-width
-ALIAS: 좌측에, 버튼을, 표시하는, 속성, 사용
-ALIAS_EN: icon, width, property, attribute
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/icon-width
+ALIAS_EN: icon, property, displays, button, left, side, cell, width
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/icon-width
 ---
 # IconWidth ***(col)***
-> 셀 좌측에 버튼을 표시하는 [Icon](./icon) 속성 사용 시, 커스텀 이미지를 사용하는 경우 버튼의 영역 너비를 설정합니다. 
+> When using the [Icon](./icon) property that displays a button on the left side of a cell, sets the width of the button area when using a custom image. 
 
-> 너비는 pixel 단위로 설정됩니다.
+> The width is set in pixel units.
 
 
 
@@ -19,14 +18,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/icon-widt
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|셀 좌측 버튼의 너비.|
+|`number`|Width of the button on the left side of the cell.|
 
 
 ### Example
 ```javascript
 options.Cols = [
     ...
-    //셀의 좌측에 이미지로 버튼을 추가합니다.
+    // Add an image button on the left side of the cell
     {Type: "Text", Name: "brnSaleAmt", Icon: "Icon", IconSrc: "/pcd/img/popIcon.png", IconWidth: 15, Width: 120 ...},
     ...
 ];
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

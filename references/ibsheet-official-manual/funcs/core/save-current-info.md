@@ -2,20 +2,20 @@
 KEY: saveCurrentInfo
 KIND: method
 PATH: funcs/core/save-current-info
-ALIAS: sheet.saveCurrentInfo, saveCurrentInfo(), 현재, 시트의, 정보를, 로컬, 스토리지
-ALIAS_EN: save, current, info
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/save-current-info
+ALIAS: sheet.saveCurrentInfo, saveCurrentInfo()
+ALIAS_EN: method, save, current, sheet, information, local, storage, session
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/save-current-info
 ---
 # saveCurrentInfo ***(method)***
-> 현재 시트의 정보를 로컬 스토리지 혹은 세션 스토리지에 저장하는 메소드입니다.
+> Method to save the current sheet's information to local storage or session storage.
 > 
- 기본적으로 Key값은 [StorageKeyPrefix](/docs/props/cfg/storage-key-prefix)+"^시트id" 로 설정됩니다.
+ By default, the key value is set as [StorageKeyPrefix](/docs/props/cfg/storage-key-prefix)+"^sheetid".
 > 
- 저장되는 값은 [StorageCompressMode](/docs/props/cfg/storage-compress-mode)에 따라 압축되어서 저장됩니다.
+ The saved value is compressed according to [StorageCompressMode](/docs/props/cfg/storage-compress-mode) before being saved.
 > 
- [StorageSession](/docs/props/cfg/storage-session) 값이 없으면 동작하지 않습니다.
+ Does not work if there is no [StorageSession](/docs/props/cfg/storage-session) value.
 > 
- **`주의`** : 시트 초기화 시점 컬럼 정보와 저장하는 시트 컬럼 정보가 다를 경우 로컬 스토리지 혹은 세션 스토리지에 저장된 정보가 지워집니다.
+ **`Note`** : When the column information at sheet initialization differs from the saved sheet column information, the information saved in local storage or session storage is overwritten.
 
 ### Syntax
 ```javascript
@@ -27,17 +27,17 @@ boolean saveCurrentInfo();
 
 ```javascript
 options.Cfg = {
-    StorageSession: 1        // 로컬 스토리지에 현재 시트 정보를 저장할 수 있고 가져올 수 있도록 설정
+  StorageSession: 1    // Setting to enable saving and loading current sheet information from local storage
 };
 ```
 
 ### Example
 ```javascript
-// 현재 시트의 정보를 로컬 스토리지 혹은 세션 스토리지에 저장한다.
+// Save the current sheet's information to local storage or session storage.
 if (sheet.saveCurrentInfo()) {
-    alert("현재 시트 정보를 저장했습니다.");
+    alert("Current sheet information has been saved.");
 } else {
-    alert("현재 시트 정보를 저장하는데 실패했습니다.");
+  alert("Failed to save current sheet information.");
 }
 ```
 
@@ -51,4 +51,4 @@ if (sheet.saveCurrentInfo()) {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

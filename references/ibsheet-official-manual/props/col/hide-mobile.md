@@ -2,14 +2,13 @@
 KEY: hideMobile
 KIND: column-property
 PATH: props/col/hide-mobile
-ALIAS: 모바일, 환경에서, 열의, 보임, 감춤
-ALIAS_EN: hide, mobile
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/hide-mobile
+ALIAS_EN: whether, show, hide, column, mobile, environment, hidemobile, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/hide-mobile
 ---
 # HideMobile ***(col)***
-> 모바일 환경에서 열의 보임 감춤/여부를 설정합니다.
+> Sets whether to show or hide the column in a mobile environment.
 
-> **※ iPad Pro나 Surface Pro는 모바일로 분류되지 않습니다.**
+> **Note: iPad Pro and Surface Pro are not classified as mobile.**
 
 ### Type
 `boolean`
@@ -17,12 +16,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/hide-mobi
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|열 보임 (`default`)|
-|`1(true)`|열 감춤|
+|`0(false)`|Column visible (`default`)|
+|`1(true)`|Column hidden|
 
 ### Example
 ```javascript
-// 특정 열을 모바일에서 감춤
+// Hide a specific column on mobile
 options.Cols = [
     ...
     {Type: "Int", Name: "Product_Sales", HideMobile: true, ...},
@@ -39,4 +38,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

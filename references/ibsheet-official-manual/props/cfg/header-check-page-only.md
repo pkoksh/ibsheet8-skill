@@ -2,13 +2,12 @@
 KEY: headerCheckPageOnly
 KIND: config-property
 PATH: props/cfg/header-check-page-only
-ALIAS: 에서, 옵션을, 사용하여, 전체, 체크를
-ALIAS_EN: header, check, page, only, all, total
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/header-check-page-only
+ALIAS_EN: cfg, headercheck, option, check, searchmode, checks, currently, visible
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/header-check-page-only
 ---
 # HeaderCheckPageOnly ***(cfg)***
 
-> `(Cfg) SearchMode: 1`에서 `(Cfg) HeaderCheck` 옵션을 사용하여 전체 체크를 할 때, 전체 페이지를 체크하지 않고 현재 보여지는 페이지만 체크합니다. 
+> When using the `(Cfg) HeaderCheck` option to check all in `(Cfg) SearchMode: 1`, checks only the currently visible page instead of all pages. 
 
 
 ### Type
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/header-ch
 ### Options
 |Value|Description|
 |-----|-----|
-| `0` | 전체 체크 버튼 클릭시 전체 페이지를 체크 (`default`)|
-| `1` | 전체 체크 버튼 클릭시 현재 보여지는 페이지만 체크 |
+| `0` | Check all pages when clicking the check all button (`default`)|
+| `1` | Check only the currently visible page when clicking the check all button |
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-        HeaderCheckPageOnly: 1, // `(Cfg) SearchMode: 1`에서 `(Cfg) HeaderCheck` 옵션을 사용하여 전체 체크를 할 때, 전체 페이지를 체크하지 않고 현재 보여지는 페이지만 체크합니다.
+        HeaderCheckPageOnly: 1, // When using the `(Cfg) HeaderCheck` option to check all in `(Cfg) SearchMode: 1`, checks only the currently visible page instead of all pages.
         ...
     }
 };
@@ -38,4 +37,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.26|기능 추가|
+|core|8.3.0.26|Feature added|

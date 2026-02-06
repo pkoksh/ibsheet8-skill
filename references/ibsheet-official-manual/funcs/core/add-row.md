@@ -2,17 +2,17 @@
 KEY: addRow
 KIND: method
 PATH: funcs/core/add-row
-ALIAS: sheet.addRow, addRow(), 신규, 행을, 추가합니다
-ALIAS_EN: add, row
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/add-row
+ALIAS: sheet.addRow, addRow()
+ALIAS_EN: adds, new, row, addrow, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/add-row
 ---
 # addRow ***(method)***
 
-> 신규 행을 추가합니다.
+> Adds a new row.
 
-> 트리 기능을 사용시에는 `parent`인자를 지정해 줘야 원하는 레벨로 행을 추가할 수 있습니다.
+> When using the tree feature, you must specify the `parent` argument to add a row at the desired level.
 
-> `render:0` 을 사용하여 화면에 바로 반영하지 않고 `rerender` 호출을 통해 화면에 반영할 때, `Formula` 적용 계산이 필요하다면 `calculate` 함수를 호출해 주어야 `Formula`가 반영 됩니다.
+> When using `render:0` to not immediately reflect on screen and reflecting via `rerender` call, if `Formula` calculation is needed, you must call the `calculate` function for the `Formula` to be applied.
 
 ### Syntax
 ```javascript
@@ -22,49 +22,49 @@ object addRow( next, visible, focus, parent, init, render );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|next|`object`|선택|[데이터 로우 객체](/docs/appx/row-object)
-(지정한 행의 위에 신규 행이 생성됨. 값이 없으면 맨 마지막행에 생성)|
-|visible|`boolean`|선택|생성 즉시 화면에 반영 여부
-**생성된 행의 [Visible](/docs/props/row/visible) 값 설정**
-`0(false)`:감춤
-`1(true)`:보임 (`default`)|
-|focus|`boolean`|선택|생성 후 생성된 행으로 포커스 이동 여부
-`0(false)`:포커스 이동 안함
-`1(true)`:포커스 이동 (`default`)|
-|parent|`object`|선택|[데이터 로우 객체](/docs/appx/row-object) (트리 사용시 부모에 해당하는 행 지정)|
-|init|`object`|선택|신규 행에 값/옵션 설정 객체|
-|render|`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-**생성된 행의 [Visible](/docs/props/row/visible) 여부와는 관련 없음**
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
+|next|`object`|Optional|[Data row object](/docs/appx/row-object)
+(A new row is created above the specified row. If no value is given, it is created at the last row)|
+|visible|`boolean`|Optional|Whether to reflect on screen immediately after creation
+**Sets the [Visible](/docs/props/row/visible) value of the created row**
+`0(false)`:Hidden
+`1(true)`:Visible (`default`)|
+|focus|`boolean`|Optional|Whether to move focus to the created row after creation
+`0(false)`:Do not move focus
+`1(true)`:Move focus (`default`)|
+|parent|`object`|Optional|[Data row object](/docs/appx/row-object) (Specifies the parent row when using tree)|
+|init|`object`|Optional|Value/option setting object for the new row|
+|render|`boolean`|Optional|Whether to immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+**Not related to the [Visible](/docs/props/row/visible) status of the created row**
+`0(false)`:Not reflected
+`1(true)`:Immediately reflected (`default`)|
 
 ### Return Value
-***object*** : 생성된 [데이터 로우 객체](/docs/appx/row-object)
+***object*** : Created [data row object](/docs/appx/row-object)
 
 ### Example
 ```javascript
-// 맨 위에 신규 행을 생성합니다.
+// Creates a new row at the top.
 sheet.addRow( {"next":sheet.getFirstRow()} )
 
-// 현재 포커스가 위치한 행의 위에 신규 행을 생성합니다.
+// Creates a new row above the currently focused row.
 sheet.addRow( {"next":sheet.getFocusedRow()} );
 
-// 현재 포커스가 위치한 행의 아래에 신규 행을 생성합니다.(focus 이동)
+// Creates a new row below the currently focused row. (focus moves)
 sheet.addRow( {"next":sheet.getNextRow(sheet.getFocusedRow())});
 
-// 트리 사용시 현재 포커스가 위치한 행의 아래에 같은 레벨의 신규 행을 생성합니다.
+// When using tree, creates a new row at the same level below the currently focused row.
 var nextRow = sheet.getNextSiblingRow(sheet.getFocusedRow());
 var parentRow = sheet.getFocusedRow().parentNode;
 sheet.addRow( {"next":nextRow, "parent":parentRow} );
 
-// 현재 포커스가 된 행의 자식 노드로 신규 행을 추가합니다.
-// next 로 기준 행을 주지 않으면, 자식 노드 맨 마지막에 행이 추가됩니다.
+// Adds a new row as a child node of the currently focused row.
+// If no reference row is given via next, the row is added at the end of the child nodes.
 sheet.addRow({"parent":sheet.getFocusedRow()});
 
-// 현재 포커스가 위치한 행의 위에 신규 행을 생성합니다.
-// 신규 행의 CONTRACTNO과 CARNO 열에 값을 설정합니다.
-// 신규 행의 배경 색상을 빨간색으로 설정합니다.
+// Creates a new row above the currently focused row.
+// Sets values for the CONTRACTNO and CARNO columns of the new row.
+// Sets the background color of the new row to red.
 sheet.addRow({"next":sheet.getFocusedRow(), "init":{"CONTRACTNO":"S155", "CARNO":"1234123", Color:"red"}});
 ```
 ### Demo
@@ -81,7 +81,6 @@ sheet.addRow({"next":sheet.getFocusedRow(), "init":{"CONTRACTNO":"S155", "CARNO"
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.3|`init` 인자 추가|
-|core|8.0.0.20|`render` 인자 추가|
-  
+|core|8.0.0.0|Feature added|
+|core|8.0.0.3|`init` argument added|
+|core|8.0.0.20|`render` argument added|

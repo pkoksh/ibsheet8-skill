@@ -2,12 +2,12 @@
 KEY: selectAllRows
 KIND: method
 PATH: funcs/core/select-all-rows
-ALIAS: sheet.selectAllRows, selectAllRows(), 전체, 행을, 선택, 혹은, 선택해제
-ALIAS_EN: select, all, rows, total, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/select-all-rows
+ALIAS: sheet.selectAllRows, selectAllRows()
+ALIAS_EN: selects, deselects, rows, selectallrows, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/select-all-rows
 ---
 # selectAllRows ***(method)***
-> 전체 행을 선택 혹은 선택해제 합니다.
+> Selects or deselects all rows.
 
 
 ### Syntax
@@ -18,22 +18,22 @@ boolean selectAllRows( select, ignoreEvent );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|select|`boolean`|선택| 선택 / 선택해제  여부 
-`0(false)`:선택해제
-`1(true)`:선택
-`null`:Toogle (`default`)|
-|ignoreEvent|`boolean`|선택| [onSelectEnd](/docs/events/on-select-end) 이벤트 발생 여부 
-`0(false)`:발생
-`1(true)`:발생하지 않음 (`default`)|
+|select|`boolean`|Optional| Select / Deselect 
+`0(false)`:Deselect
+`1(true)`:Select
+`null`:Toggle (`default`)|
+|ignoreEvent|`boolean`|Optional| Whether to trigger [onSelectEnd](/docs/events/on-select-end) event 
+`0(false)`:Triggered
+`1(true)`:Not triggered (`default`)|
 
 ### Return Value
-***boolean*** : 선택/선택해제 변경 여부
+***boolean*** : Whether select/deselect state changed
 
-이미 전체 선택되어 있는 상태에서 다시 선택하려 하거나, 해제된 상태에서 다시 해제하려 하면 `false`를 리턴
+Returns `false` if attempting to select when all rows are already selected, or attempting to deselect when already deselected.
 
 ### Example
 ```javascript
-//전체 행을 선택합니다.
+// Select all rows.
 sheet.selectAllRows(1);
 ```
 
@@ -49,5 +49,5 @@ sheet.selectAllRows(1);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.3.0.14|`ignoreEvent` 인자 추가|
+|core|8.0.0.0|Feature added|
+|core|8.3.0.14|`ignoreEvent` argument added|

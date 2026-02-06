@@ -2,14 +2,13 @@
 KEY: canDrag
 KIND: column-property
 PATH: props/col/can-drag
-ALIAS: 열의, 가능여부를, 설정합니다
-ALIAS_EN: can, drag
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-drag
+ALIAS_EN: whether, column, dragged, candrag, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/can-drag
 ---
 # CanDrag ***(col)***
-> 열의 Drag 가능여부를 설정합니다.
+> Sets whether the column can be dragged.
 
-> [CanDrag cfg](/docs/props/cfg/can-drag) 속성이 `1(true)`인 경우 사용 가능합니다
+> Available when the [CanDrag cfg](/docs/props/cfg/can-drag) property is `1(true)`
 
 
 ### Type
@@ -18,12 +17,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-drag
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|드래그 불가|
-|`1(true)`|드래그 가능 (`default`)|
+|`0(false)`|Drag disabled|
+|`1(true)`|Drag enabled (`default`)|
 
 ### Example
 ```javascript
-//특정 열에 대해서 드래그를 막습니다.
+// Disable drag for a specific column
 options.Cols = [
     ...
     {Type: "Text", Name: "sName", CanDrag: 0 ...},
@@ -39,4 +38,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: indent
 KIND: row-property
 PATH: props/row/indent
-ALIAS: 전체의, 문자열, 들여쓰기를, 설정합니다
-ALIAS_EN: indent
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/indent
+ALIAS_EN: text, indentation, entire, row, indent
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/indent
 ---
 # Indent ***(row)***
 
-> 행 전체의 문자열 들여쓰기를 설정합니다.
+> Sets the text indentation for the entire row.
 
-> 좌측정렬을 하는 셀은 좌측 끝부터, 우측정렬을 하는 셀은 우측 끝부터 들여쓰기가 적용됩니다.
+> For left-aligned cells, indentation is applied from the left edge; for right-aligned cells, from the right edge.
 
-> 들여쓰기 1칸은 `10px` 입니다.
+> One indentation unit is `10px`.
 
 ### Type
 `number`
@@ -20,16 +19,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/indent
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|들여쓰기 정도 (10px 단위)|
+|`number`|Indentation level (in 10px units)|
 
 ### Example
 ```javascript
-//특정행의 들여쓰기 정도를 2로 설정
+//Set the indentation level of a specific row to 2.
 var row = sheet.getRowById("AR11");
 row["Indent"] = 2;
 sheet.refreshRow(row);
 
-//전체 데이터 행의 들여쓰기를 1로 설정
+//Set the indentation of all data rows to 1.
 options.Def.Row = {"Indent": 1};
 ```
 
@@ -42,4 +41,4 @@ options.Def.Row = {"Indent": 1};
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

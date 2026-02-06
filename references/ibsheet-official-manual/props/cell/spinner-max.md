@@ -2,16 +2,15 @@
 KEY: spinnerMax
 KIND: cell-property
 PATH: props/cell/spinner-max
-ALIAS: 사용하는, 셀에서, 화살표를, 통한, 입력
-ALIAS_EN: spinner, max, input, import
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/spinner-max
+ALIAS_EN: maximum, value, input, via, arrows, cells, spinnervisible, spinner
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/spinner-max
 ---
 # SpinnerMax ***(cell)***
-> [SpinnerVisible](./spinner-visible)을 사용하는 셀에서 화살표를 통한 입력 시 최댓값을 설정할 수 있습니다.
+> Sets the maximum value for input via arrows in cells using [SpinnerVisible](./spinner-visible).
 
 > 
 
-> 추가적으로 [SpinnerStep](./spinner-step), [SpinnerMin](./spinner-min)을 통해 input의 step, min를 설정 할 수 있습니다. 
+> Additionally, you can set the input step and min values through [SpinnerStep](./spinner-step) and [SpinnerMin](./spinner-min).
 
 ### Type
 `number`
@@ -19,7 +18,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/spinner-
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|편집 시 입력 값의 최댓값|
+|`number`|Maximum value for input during editing|
 
 
 ### Example
@@ -46,4 +45,4 @@ var data = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.42|기능 추가|
+|core|8.3.0.42|Feature added|

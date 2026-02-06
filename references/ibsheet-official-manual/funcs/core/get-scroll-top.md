@@ -2,12 +2,12 @@
 KEY: getScrollTop
 KIND: method
 PATH: funcs/core/get-scroll-top
-ALIAS: sheet.getScrollTop, getScrollTop(), 세로스크롤바의, 위치를, 확인합니다
-ALIAS_EN: get, scroll, top
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-scroll-top
+ALIAS: sheet.getScrollTop, getScrollTop()
+ALIAS_EN: checks, position, vertical, scrollbar, getscrolltop, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-scroll-top
 ---
 # getScrollTop ***(method)***
-> 세로스크롤바의 위치를 확인합니다.
+> Checks the position of the vertical scrollbar.
 
 ### Syntax
 ```javascript
@@ -16,15 +16,15 @@ number getScrollTop();
 
 
 ### Return Value
-***number*** : 세로 스크롤바에 대해 y축으로 이동한 거리(pixel단위)
+***number*** : Distance moved along the y-axis for the vertical scrollbar (pixel unit)
 
 ### Example
 ```javascript
-//현재 세로스크롤 바의 위치를 얻는다.
+// Get the current vertical scrollbar position.
 var offset = sheet.getScrollTop();
-//다시 렌더링
+//Re-render
 sheet.rerender();
-//원래 위치로 이동시킴
+//Move to original position
 sheet.setScrollTop(offset);
 ```
 
@@ -38,4 +38,4 @@ sheet.setScrollTop(offset);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,15 +2,14 @@
 KEY: tabStop
 KIND: config-property
 PATH: props/cfg/tab-stop
-ALIAS: 페이지, 안의, 요소들을, 키로, 이동하는
-ALIAS_EN: tab, stop
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/tab-stop
+ALIAS_EN: whether, include, sheet, tab, key, navigation, order, among
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/tab-stop
 ---
 # TabStop ***(cfg)***
 
-> 페이지 안의 요소들을 탭 키로 이동하는 순서에 시트를 포함할지 여부를 설정합니다. 
+> Sets whether to include the sheet in the tab key navigation order among elements on the page. 
 
-> 시트를 포함하는 경우 `TabIndex` 로 `Tab` 순서를 설정 할 수 있습니다.
+> When the sheet is included, the `Tab` order can be set with `TabIndex`.
 
 >
 
@@ -21,14 +20,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/tab-stop
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|페이지 내에서 `Tab` 키로 시트 접근 안됨 |
-|`1`|페이지 내에서 `Tab` 키로 시트 접근 가능 (`default`)|
+|`0`|Sheet is not accessible via `Tab` key within the page|
+|`1`|Sheet is accessible via `Tab` key within the page (`default`)|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-  TabStop: 0,          // 탭키로 시트 접근 허용 안함
+  TabStop: 0,          // Do not allow sheet access via tab key
   ...
 };
 ```
@@ -40,4 +39,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

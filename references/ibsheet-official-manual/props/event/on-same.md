@@ -2,17 +2,16 @@
 KEY: onSame
 KIND: event-property
 PATH: props/event/on-same
-ALIAS: 값을, 변경했을, 값과, 편집된, 셀값이
-ALIAS_EN: on, same
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/event/on-same
+ALIAS_EN: json, event, called, cell, value, edited, editing, onsame
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/event/on-same
 ---
 # OnSame ***(json event)***
 
-> 셀 값을 변경했을 때 셀 값과 편집된 셀값이 같을 경우 호출되는 `Json` 이벤트입니다.
+> A `Json` event that is called when the cell value and the edited cell value are the same after editing.
 
-> `Json` 이벤트는 셀, 행, 열에서 선언될 수 있으며 적용되는 우선 순위는 **셀 > 행 > 열**입니다. 
+> `Json` events can be declared on cells, rows, and columns, and the priority order is **cell > row > column**. 
 
-> 예를 들어, 셀과 행 둘 다 선언했다면, 우선순위로 인해 행에 선언한 이벤트는 발생하지 않습니다.
+> For example, if declared on both a cell and a row, the event declared on the row will not fire due to priority.
 
 ### Syntax
 
@@ -21,18 +20,18 @@ function Handler(evtParam) {
     ...
 }
 
-// 행에 넣는 경우
+// When adding to a row
 var options = {
     ...
     Def: {
         Row: {
             ...
-            OnSame: Handler,  // 함수 호출이 아닌 문자열을 통한 간단한 로직 설정 가능
-                                // ** 아래와 같은 예약어 사용 가능
-                                // Sheet(현재 시트 객체),
-                                // Row(현재 이벤트가 호출된 셀의 데이터 로우 객체),
-                                // Value(현재 이벤트가 호출된 셀의 값),
-                                // Col(현재 이벤트가 호출된 열이름),
+            OnSame: Handler,  // Simple logic can be set through a string instead of a function call
+                                // ** The following reserved words can be used
+                                // Sheet (current sheet object),
+                                // Row (data row object of the cell where the event was called),
+                                // Value (value of the cell where the event was called),
+                                // Col (column name where the event was called),
                                 // ex) "Value && alert('Same')"
             ...
         }
@@ -40,7 +39,7 @@ var options = {
     ...
 };
 
-// 열에 넣는 경우
+// When adding to a column
 var options = {
     ...
     Cols: [
@@ -54,18 +53,18 @@ var options = {
     ...
 };
 
-// 특정 셀에 넣는 경우
+// When adding to a specific cell
 var data = [
     {
         ...
-        열이름: "",
-        열이름OnSame: Handler,
+        columnName: "",
+        columnNameOnSame: Handler,
         ...
     },
     ...
 ];
 
-// 특정 행에 넣는 경우
+// When adding to a specific row
 var data = [
     {
         ...
@@ -75,7 +74,7 @@ var data = [
     ...
 ];
 
-// 위에서 설정한 options 또는 data 객체를 시트 생성자의 인자로 넣습니다.
+// Pass the options or data object configured above as arguments to the sheet constructor.
 IBSheet.create({
     id: "sheet",
     el: "Main",
@@ -89,20 +88,20 @@ IBSheet.create({
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|편집 후에도 값이 이전과 같은 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|편집 후에도 값이 이전과 같은 셀의 열이름|
-|event|`object`|이벤트에 대한 정보를 담고 있는 객체|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell whose value is the same as before editing|
+|col|`string`|Column name of the cell whose value is the same as before editing|
+|event|`object`|Object containing information about the event|
 
 ### Example
 ```javascript
 /*
-  예시 1 열에 OnSame이벤트를 선언하는 경우
+  Example 1: Declaring OnSame event on a column
 */
 
-// 값이 편집전과 같은 경우 alert를 띄우고 셀 배경을 빨간색으로 변경합니다.
+// If the value is the same as before editing, show an alert and change the cell background to red.
 function Handler(evtParam) {
-    alert("기존의 값과 결과가 같습니다.");
+    alert("The value is the same as the original.");
     evtParam.sheet.setCellStyle({row: evtParam.row, col: evtParam.col, attr: {Color:'red'}, render:1});
 
 }
@@ -119,12 +118,12 @@ var options = {
 
 
 /*
-  예시 2 셀에 OnSame이벤트 선언하는 경우(시트에 사용될 데이터에 선언)
+  Example 2: Declaring OnSame event on a cell (declared in data used by the sheet)
 */
 var data = [
     {
-        "sCountry": "한국",
-        sCountryOnSame:"alert('기존의 값과 결과가 같습니다.') || Sheet.setCellStyle({row: Row, col: Col, attr: {Color:'red'}, render:1});",
+        "sCountry": "Korea",
+        sCountryOnSame:"alert('The value is the same as the original.') || Sheet.setCellStyle({row: Row, col: Col, attr: {Color:'red'}, render:1});",
     },
     ...
 ];
@@ -137,4 +136,4 @@ var data = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

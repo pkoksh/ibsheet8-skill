@@ -2,51 +2,59 @@
 KEY: defaultValue
 KIND: column-property
 PATH: props/col/default-value
-ALIAS: 컬럼에, 기본, 값을, 설정합니다
-ALIAS_EN: default, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/default-value
+ALIAS_EN: default, value, column, defaultvalue, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/default-value
 ---
 # DefaultValue ***(col)***
-> 컬럼에 기본 값을 설정합니다.
+> Sets a default value for the column.
 
-> 신규행을 추가하거나 조회데이터 안에 해당 열에 대한 데이터가 없는 경우, 지정한 값이 자동으로 표시됩니다.
+> When adding a new row or when there is no data for the column in the retrieved data, the specified value is automatically displayed.
 
-> 특히 `Button` 타입 사용시 버튼에 기본적으로 표시될 내용을 설정하면, 별도로 버튼 컬럼에 대한 조회가 없어도 해당 값이 표시됩니다. 
+> Especially when using `Button` type, if you set the default content to display on the button, the value is displayed even without separate data retrieval for the button column. 
 
-> 값을 읽거나(getValue) 저장하거나 엑셀로 다운로드할 때는 DefaultValue 값으로 처리됩니다. 
+> When reading values (getValue), saving, or downloading to Excel, the DefaultValue is used. 
 
-> `EmptyValue` 속성과 같이 설정 하였을 경우 DefaultValue가 우선 순위가 높습니다. 
+> The data affected by this property is as follows:
 
-> 해당 속성에 영향을 받는 데이터는 아래와 같습니다.
 ```javascript
-{Type: "Text", Name: "sText", DefaultValue : "홍길동"}
+{Type: "Text", Name: "sText", DefaultValue : "John Doe"}
 
 data: [
-    {"e": null},      //null 데이터
-    {"e": undefined}, //undefined 데이터
-    {}                //데이터 없음 
+    {"e": null},      //null data
+    {"e": undefined}, //undefined data
+    {}                //no data
 ]
 ```
+When `DefaultValue` and `EmptyValue` are set simultaneously on a column without `CanEmpty` set, 
+
+- For `null`, `undefined`, or `no data`, `DefaultValue` takes priority.
+
+- For empty string (""), `EmptyValue` is applied.
+
+
+On columns with `CanEmpty:1` set, the `DefaultValue` setting is ignored.
+
+
 ### Type
 `mixed`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`mixed`|신규 행이나 조회시 값이 없을때 기본값으로 표시할 내용|
+|`mixed`|Content to display as default value when there is no value in a new row or during data retrieval|
 
 ### Example
 ```javascript
-//버튼 컬럼에 기본 타이틀 지정
+// Set default title for a button column
 options.Cols = [
-    {Header: "상세정보", Type: "Button", Name: "DetailBnt", Button: "Button", DefaultValue: "확인"},
+    {Header: "Details", Type: "Button", Name: "DetailBnt", Button: "Button", DefaultValue: "Confirm"},
     ...
 ];
 ```
 ![Default](/assets/imgs/button5.png)
-<!-- IMAGE: 버튼 이미지 - Default -->
+<!-- IMAGE: Button Image - Default -->
 
-상세보기 컬럼에 조회 데이터가 없어도 "확인"이 표시됩니다.
+"Confirm" is displayed in the detail view column even without retrieved data.
 
 ### Read More
 - [EmptyValue col](./empty-value)
@@ -56,4 +64,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

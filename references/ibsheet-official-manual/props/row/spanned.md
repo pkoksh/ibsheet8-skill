@@ -2,17 +2,16 @@
 KEY: spanned
 KIND: row-property
 PATH: props/row/spanned
-ALIAS: 내에서, 좌우, 열간에, 병합을, 허용할지
-ALIAS_EN: spanned
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/spanned
+ALIAS_EN: whether, allow, horizontal, merging, columns, within, row, merge
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/spanned
 ---
 # Spanned ***(row)***
 
-> 행 내에서 좌우 열간에 병합을 허용할지 여부를 설정합니다.(좌우로 머지)
+> Sets whether to allow horizontal merging between columns within a row (merge left and right).
 
-> `Def.Row` 나 `Def.Header`에서 설정하시면 헤더 영역이나 데이터 영역에서 Span 속성을 통해 좌우의 셀을 병합하실 수 있습니다. 
+> When set in `Def.Row` or `Def.Header`, you can merge left and right cells through the Span property in the header area or data area. 
 
-> 셀머지 기능 사용시 자동머지 기능과는 별도로 움직임으로 자동머지 기능을 꺼주셔야합니다. 
+> When using cell merge, it operates separately from the auto-merge feature, so the auto-merge feature should be turned off. 
 
 
 ### Type
@@ -21,24 +20,24 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/spanned
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|Span(좌우병합) 허용하지 않음 (`default`)|
-|`1(true)`|Span(좌우병합) 허용|
+|`0(false)`|Span (horizontal merge) not allowed (`default`)|
+|`1(true)`|Span (horizontal merge) allowed|
 
 
 ### Example
 ![Spanned](/assets/imgs/headerMerge.png "Spanned")
-<!-- IMAGE: 스크린샷/예시 이미지 - Spanned -->
+<!-- IMAGE: Screenshot/Example Image - Spanned -->
 ```javascript
-//헤더 행에 대해 좌우로 병합
+//Merge header rows horizontally.
 options.Def.Header = {Spanned:true};
 opiotns.Cfg = {
-    HeaderMerge: 0 // 자동머지 끔
+    HeaderMerge: 0 // Turn off auto-merge
 };
 options.Cols = [
-    {Header:[{Value:"(행사)매출실적",Span:4,Align:"Center"},{Value:"1월"}],Name:"Col1"},
-    {Header:[{},{Value:"2월"}],Name:"Col2"},
-    {Header:[{},{Value:"3월"}],Name:"Col3"},
-    {Header:[{},{Value:"4월"}],Name:"Col4"},
+    {Header:[{Value:"(Event) Sales Performance",Span:4,Align:"Center"},{Value:"January"}],Name:"Col1"},
+    {Header:[{},{Value:"February"}],Name:"Col2"},
+    {Header:[{},{Value:"March"}],Name:"Col3"},
+    {Header:[{},{Value:"April"}],Name:"Col4"},
 ];
 ```
 
@@ -51,4 +50,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

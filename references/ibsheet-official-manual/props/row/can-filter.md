@@ -2,14 +2,13 @@
 KEY: canFilter
 KIND: row-property
 PATH: props/row/can-filter
-ALIAS: 특정행에, 필터, 적용, 여부를, 설정합니다
-ALIAS_EN: can, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-filter
+ALIAS_EN: whether, filtering, applied, specific, row, canfilter
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/can-filter
 ---
 # CanFilter ***(row)***
-> 특정행에 대한 필터 적용 여부를 설정합니다.
+> Sets whether filtering is applied to a specific row.
 
-> `0(false)`로 설정시 해당 행은 필터설정과 무관한게 보여지게 됩니다.
+> When set to `0(false)`, the row will always be visible regardless of filter settings.
 
 ### Type
 `boolean`
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-filte
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|필터 적용 제외|
-|`1(true)`|필터 적용|
+|`0(false)`|Excluded from filtering|
+|`1(true)`|Filtering applied|
 
 
 ### Example
 ```javascript
-// 특정행들은 필터와 무관하게 항상 보여지게 한다
+// Make specific rows always visible regardless of filters.
 {"data":[
     ...
     {"CanFilter":0,"ColName1":"Value1","ColName2":"Value2", ...},
@@ -38,4 +37,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-filte
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

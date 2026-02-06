@@ -2,14 +2,13 @@
 KEY: enumNoMatchText
 KIND: column-property
 PATH: props/col/enum-no-match-text
-ALIAS: 설정했을, 셀에, 적용할, 대체, 텍스트를
-ALIAS_EN: enum, no, match, text
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/enum-no-match-text
+ALIAS_EN: replacement, text, apply, cell, enumstrictmode, enumnomatchtext, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/enum-no-match-text
 ---
 # EnumNoMatchText ***(col)***
-> `EnumStrictMode` 를 1 로 설정했을 때 셀에 적용할 대체 텍스트를 설정합니다.
+> Sets the replacement text to apply to the cell when `EnumStrictMode` is set to 1.
 
-> 해당 옵션은 `EnumStrictMode` : 1 에서만 사용할 수 있습니다.
+> This option can only be used with `EnumStrictMode` : 1.
 
 
 ### Type
@@ -18,12 +17,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/enum-no-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|`EnumStrictMode`: 1 을 사용할 때 셀에 표시할 대체 텍스트 설정|
+|`string`|Sets the replacement text to display in the cell when using `EnumStrictMode`: 1|
 
 ### Example
 ```javascript
 options.Cols = [
-    // EnumStrictMode 설정
+    // EnumStrictMode setting
     {
         "Header": "Enum1",
         "Type": "Enum",
@@ -31,16 +30,16 @@ options.Cols = [
         "Name": "sEnum",
         "ColMerge": 0,
         "Align": "Center",
-        "Enum": "|한국|중국|일본",
+        "Enum": "|Korea|China|Japan",
         "EnumKeys": "|KOR|CHA|JAP",
         "EnumStrictMode" : 1,
-        "EnumNoMatchText" : "대체 텍스트",
+        "EnumNoMatchText" : "Replacement text",
         "RelWidth": 1
      }
 ];
 
 var data = [
-    // Enum, EnumKeys 에 아래 데이터가 없으므로 셀에는 "대체 텍스트" 라는 문구가 표시 됩니다.
+    // Since the data below does not exist in Enum or EnumKeys, "Replacement text" will be displayed in the cell.
     {sEnum: "USA"},
     ...
 ];
@@ -53,4 +52,4 @@ var data = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.2.0.26|기능 추가|
+|core|8.2.0.26|Feature added|

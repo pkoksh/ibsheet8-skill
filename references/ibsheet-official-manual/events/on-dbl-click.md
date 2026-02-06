@@ -2,19 +2,18 @@
 KEY: onDblClick
 KIND: event
 PATH: events/on-dbl-click
-ALIAS: 사용자가, 마우스로, 더블클릭했을, 호출되는, 이벤트입니다
-ALIAS_EN: on, dbl, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-dbl-click
+ALIAS_EN: event, called, user, double, clicks, mouse, ondblclick
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-dbl-click
 ---
 # onDblClick ***(event)***
-> 사용자가 마우스로 더블클릭했을 때 호출되는 이벤트입니다.
+> Event called when the user double-clicks with the mouse.
 
-> 웹의 특성상 [onClick](./on-click)이벤트가 먼저 발생하고, 해당 이벤트가 발생합니다.
+> Due to the nature of the web, the [onClick](./on-click) event fires first, then this event fires.
 
-> 인자 row, col, x, y는 셀이 아닌 곳을 누를 경우 `undefined` 또는 `null`이 될 수 있습니다(ex 셀 테두리).
+> The arguments row, col, x, y may be `undefined` or `null` when clicking on a non-cell area (e.g., cell border).
 
 <!--!
-> `[비공개 설명]` ***true를 리턴 시 더블클릭에 의한 기본 동작을 막습니다.***
+> `[Private note]` ***Returning true prevents the default action caused by double-click.***
 !-->
 
 ### Syntax
@@ -32,37 +31,37 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|마우스 더블클릭 이벤트가 발생된 시트 객체|
-|row|`object`|더블클릭된 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|더블클릭된 셀의 열이름|
-|x|`number`|셀 내에서 마우스 더블클릭이 발생한 x좌표|
-|y|`number`|셀 내에서 마우스 더블클릭이 발생한 y좌표|
-|event|`object`|javascript 마우스 이벤트 객체|
+|sheet|`object`|Sheet object where the mouse double-click event occurred|
+|row|`object`|[Data row object](/docs/appx/row-object) of the double-clicked cell|
+|col|`string`|Column name of the double-clicked cell|
+|x|`number`|x-coordinate where the mouse double-click occurred within the cell|
+|y|`number`|y-coordinate where the mouse double-click occurred within the cell|
+|event|`object`|JavaScript mouse event object|
 <!--!
-|`[비공개]` canState|`string`|마우스 이벤트가 발생한 곳의 편집, 포커스 가능 상태 정보
-(`"Editable"(편집가능)`, `"ReadOnly"(편집불가능)`, `"NoFocus"(포커스불가능)`)|
-|`[비공개]` cellType|`string`|마우스 이벤트가 발생한 곳의 타입 정보
-(`"Text"`, `"Int"`, `"Float"` 등)|
-|`[비공개]` part|`string`|마우스 이벤트가 발생한 곳의 셀영역 정보
-(`"Tree"(트리아이콘 영역)`, `"Content"(셀데이터 영역)`, `"Caption"(헤더데이터(제목) 영역)`, `"Side"(셀아이콘 왼쪽 영역)`, `"Button"(셀버튼 영역)`)|
-|`[비공개]` partType|`string`|마우스 이벤트가 발생한 곳의 셀영역 타입 정보
-(`"Expand"(트리아이콘 확장버튼)`, `"SideClear"(삭제아이콘)`, `"SideFile"(파일선택아이콘)`, `"SideCheck"(체크박스아이콘)`, `"SideButton"(버튼아이콘)`, `"SideDate"(달력아이콘)`, `"SideSort"(정렬아이콘)`, `"SideDefaults"(Defaults아이콘)`, `"SideIcon"(아이콘)`, `"SideFilter"(필터아이콘)`, `"EditEnum"(Enum데이터)`, `"EditText"(Text테이터)`, `"EditDate"(Date데이터)`, `"EditInt"(Int데이터)` 등)|
-|`[비공개]` section|`string`|마우스 이벤트가 발생한 곳의 컬럼영역 정보
-(`"Left"(LeftCols 영역)`, `"Mid"(Cols 영역)`, `"Right"(RightCols 영역)`)|
-|`[비공개]` kind|`string`|마우스 이벤트가 발생한 곳의 행의 종류 정보
+|`[Private]` canState|`string`|Edit/focus capability status information of the area where the mouse event occurred
+(`"Editable"`, `"ReadOnly"`, `"NoFocus"`)|
+|`[Private]` cellType|`string`|Type information of the area where the mouse event occurred
+(`"Text"`, `"Int"`, `"Float"`, etc.)|
+|`[Private]` part|`string`|Cell area information of the area where the mouse event occurred
+(`"Tree"(tree icon area)`, `"Content"(cell data area)`, `"Caption"(header data(title) area)`, `"Side"(cell icon left area)`, `"Button"(cell button area)`)|
+|`[Private]` partType|`string`|Cell area type information of the area where the mouse event occurred
+(`"Expand"(tree icon expand button)`, `"SideClear"(delete icon)`, `"SideFile"(file select icon)`, `"SideCheck"(checkbox icon)`, `"SideButton"(button icon)`, `"SideDate"(calendar icon)`, `"SideSort"(sort icon)`, `"SideDefaults"(Defaults icon)`, `"SideIcon"(icon)`, `"SideFilter"(filter icon)`, `"EditEnum"(Enum data)`, `"EditText"(Text data)`, `"EditDate"(Date data)`, `"EditInt"(Int data)`, etc.)|
+|`[Private]` section|`string`|Column area information of the area where the mouse event occurred
+(`"Left"(LeftCols area)`, `"Mid"(Cols area)`, `"Right"(RightCols area)`)|
+|`[Private]` kind|`string`|Row type information of the area where the mouse event occurred
 (`"Header"`, `"Data"`, `"Foot"`, `"Solid"`, `"Group"`, `"Filter"`)|
 !-->
 
 <!--!
 ### Return
-`[비공개]` ***boolean***
+`[Private]` ***boolean***
 !-->
 
 ### Example
 ```javascript
 options.Events = {
     onDblClick:function(evtParam){
-        alert("더블클릭 시 편집모드로 들어갑니다.");
+        alert("Entering edit mode on double-click.");
     }
 }
 ```
@@ -74,7 +73,7 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|
 <!--!
-|`[비공개]` core|8.0.0.6|`canState`, `cellType`, `part`, `partType`, `section`, `kind` 인자 추가|
+|`[Private]` core|8.0.0.6|`canState`, `cellType`, `part`, `partType`, `section`, `kind` parameters added|
 !-->

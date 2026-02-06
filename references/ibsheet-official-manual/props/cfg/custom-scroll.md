@@ -2,19 +2,18 @@
 KEY: customScroll
 KIND: config-property
 PATH: props/cfg/custom-scroll
-ALIAS: 시트에서, 사용될, 스크롤바의, 타입을, 설정합니다
-ALIAS_EN: custom, scroll
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/custom-scroll
+ALIAS_EN: type, scrollbar, sheet, customscroll, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/custom-scroll
 ---
 # CustomScroll ***(cfg)***
 
-> 시트에서 사용될 스크롤바의 타입을 설정합니다. 
+> Sets the type of scrollbar to be used in the sheet. 
 
-> 시트 섹션별 생성되는 가로 스크롤이나 전체 시트에 생성되는 가로/세로 스크롤바에 해당합니다.
+> This applies to horizontal scrollbars created per sheet section or horizontal/vertical scrollbars created for the entire sheet.
 
-> 행과 열 수가 많은 시트에서는 `CustomScroll` 설정시 속도저하를 일으킬 수 있습니다.
+> For sheets with many rows and columns, setting `CustomScroll` may cause performance degradation.
 
->  `SearchMode:2 (LazyLoad)`의 경우 조회데이터수가 5만건 이상일때 IE 브라우저에서의 스크롤 설정 한계로 인하여 반드시 커스텀 스크롤을 0 이외의 값으로 설정해야 합니다.
+> In the case of `SearchMode:2 (LazyLoad)`, when the number of retrieved data exceeds 50,000, you must set custom scroll to a value other than 0 due to scroll setting limitations in the IE browser.
 
 
 
@@ -25,24 +24,24 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/custom-sc
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|브라우저 스크롤바 사용 (`default`)
+|`0`|Use browser scrollbar (`default`)
 ![CustomScroll0](/assets/imgs/customScroll0.png "CustomScroll0")
-<!-- IMAGE: 스크린샷/예시 이미지 - CustomScroll0 --> (by Chrome)|
-|`1`|평범한 스타일의 스크롤바 사용
+<!-- IMAGE: Screenshot/Example Image - CustomScroll0 --> (by Chrome)|
+|`1`|Use plain style scrollbar
 ![CustomScroll1](/assets/imgs/customScroll1.png "CustomScroll1")
-<!-- IMAGE: 스크린샷/예시 이미지 - CustomScroll1 --> (by Chrome)|
-|`2`|큰 스타일의 스크롤바 사용
+<!-- IMAGE: Screenshot/Example Image - CustomScroll1 --> (by Chrome)|
+|`2`|Use large style scrollbar
 ![CustomScroll2](/assets/imgs/customScroll2.png "CustomScroll2")
-<!-- IMAGE: 스크린샷/예시 이미지 - CustomScroll2 --> (by Chrome)|
-|`3`|작은 스타일의 스크롤바 사용
+<!-- IMAGE: Screenshot/Example Image - CustomScroll2 --> (by Chrome)|
+|`3`|Use small style scrollbar
 ![CustomScroll3](/assets/imgs/customScroll3.png "CustomScroll3")
-<!-- IMAGE: 스크린샷/예시 이미지 - CustomScroll3 --> (by Chrome)|
+<!-- IMAGE: Screenshot/Example Image - CustomScroll3 --> (by Chrome)|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    CustomScroll: 3      // 작은 스타일의 스크롤바 설정
+    CustomScroll: 3      // Set small style scrollbar
 };
 ```
 
@@ -58,4 +57,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

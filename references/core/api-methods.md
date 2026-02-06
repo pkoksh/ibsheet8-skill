@@ -1,7 +1,7 @@
 # API 메서드 레퍼런스
 
 ## 기본 규칙
-1. 모든 메서드의 parameter는 object로 사용할 수도 있음
+1. 모든 메서드의 arguments는 object로 사용할 수도 있음
 ```javascript
 const row = mySheet.copyRow( mySheet.getFocusedRow(), mySheet.getFirstRow() );
 const row = mySheet.copyRow({row: mySheet.getFocusedRow(), next: mySheet.getFirstRow() });
@@ -9,7 +9,7 @@ const row = mySheet.copyRow({row: mySheet.getFocusedRow(), next: mySheet.getFirs
 2. IBSheet8의 생성시 sync 옵션을 설정하지 않으면 기본적으로 비동기로 생성되며, 생성 후에 onRenderFirstFinish event가 발생함
 3. IBSheet8의 api에서 boolean 값은 true/false 대신 1/0 으로 설정
 4. setValue, setAttribute 에는 render 속성을 통해 수정값을 즉시 반영할지 여부를 선택할 수 있음
-
+5. [전체 api 리스트](../ibsheet-official-manual/funcs/index.md)
 ---
 ## 시트 생성/제거
 
@@ -22,19 +22,19 @@ const sheet = IBSheet.create({
   sync: 1 // 생략가능(default: 0)
 });
 
-IBSheet.dispose("sheet");
+IBSheet.dispose("sheet"); //dom 영역과 공통 변수등 javascript객체도 제거
 ```
 ## 시트 접근
 
 ```javascript
-const sheet = window["sheetId"];
+const sheet = window["sheetId"]; // IBSheet.create로 생성시 window객체 안에 지정한 id값으로 담김
 ```
 ---
 
 ## 데이터 로드
 
 ### 로컬 데이터 로드
-[loadSearchData](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/load-search-data)
+[loadSearchData](../ibsheet-official-manual/funcs/core/load-search-data)
 ```javascript
 // 로컬 데이터
 sheet.loadSearchData({ 
@@ -45,7 +45,7 @@ sheet.loadSearchData({
 ```
 
 ### 서버 데이터 로드 
-[doSearch](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/do-search)
+[doSearch](../ibsheet-official-manual/funcs/core/do-search)
 ```javascript
 // 서버 데이터
 sheet.doSearch({
@@ -67,9 +67,9 @@ sheet.removeAll();
 ## 데이터 추출
 
 ### 데이터를 object 로 추출({"data": jsonArray} 구조)
-[getSaveJson](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-save-json)
+[getSaveJson](../ibsheet-official-manual/funcs/core/get-save-json)
 ```javascript
-const changedData = sheet.getSaveJson(); // 상태가 변한(입력,수정,삭제)데이터를 행단위로 추출
+const changedData = sheet.getSaveJson(); // 상태가 변한(Added,Changed,Deleted) 행들만 추출
 const checkedData = sheet.getSaveJson({ col: "checkColName" }); // checkColName 열에 값이 true 인 데이터만 추출
 const allRows = sheet.getSaveJson({ saveMode: 0 }); // 모든 데이터 추출 (0:전체, 1:전체(Deleted만 제외), 2:Added,Changed,Deleted(default))
 ```
@@ -82,7 +82,7 @@ const allRows = sheet.getSaveJson({ saveMode: 0 }); // 모든 데이터 추출 (
 ### 데이터를 querystring 으로 추출
 
 ```javascript
-const changedData = sheet.getSaveString(); // 상태가 변한(입력,수정,삭제)데이터를 행단위로 추출
+const changedData = sheet.getSaveString(); // 상태가 변한(Added,Changed,Deleted) 행들을 querystring 형태로 추출
 ```
 
 **반환 형식:**
@@ -93,7 +93,7 @@ const changedData = sheet.getSaveString(); // 상태가 변한(입력,수정,삭
 ### 행 데이터 추출
 
 ```javascript
-const rowData = sheet.getRowValue(row);
+const rowData = sheet.getRowValue(row); // object 형식으로 추출 {"EMPNO":1234,"EMPNAME":'chris'...}
 ```
 
 ---
@@ -101,7 +101,9 @@ const rowData = sheet.getRowValue(row);
 ## 데이터 저장
 
 ### ibsheet8를 통한 ajax 통신 및 저장
-[doSave](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/do-save)
+- doSave는 데이터 수집:getSaveJson(또는 getSaveString) -> 전송:ajax -> 결과반영:applySaveResult(내부에 acceptChangedData) 가 순차적으로 동작하기 때문에 개별적으로 데이터를 수집하거나 결과를 반영하는 함수를 호출할 필요가 없음.
+
+[doSave](../ibsheet-official-manual/funcs/core/do-save)
 ```javascript
 sheet.doSave({
   url: "/api/save",
@@ -129,7 +131,25 @@ $.ajax({
   }
 });
 ```
+---
 
+## 행 객체 얻기
+
+```javascript
+const allRows = sheet.getDataRows(); // 전체 데이터행 배열을 얻음. clone된게 아니기 때문에 배열에 내용을 추가하거나 삭제하면 안됨.
+const count = sheet.getDataRows().length; 
+const headRow = sheet.getRowById("Header"); // 해더행 객체 (헤더행이 2개 이상인 경우에는 Header, HR1, HR2, HR3 ... )
+const sumRow = sheet.getRowById("FormulaRow"); // 합계행(FormulaRow) 객체
+const row10th = sheet.getRowByIndex(10); // 10번째 데이터 행 객체
+const row11th = sheet.getNextRow(row10th); 
+const row9th = sheet.getPrevRow(row10th); 
+const firstRow = sheet.getFirstRow(); 
+const lastRow = sheet.getLastRow();
+const focusedRow = sheet.getFocusedRow();
+const addedRows = sheet.getRowsByStatus("Added"); // 추가된 행들을  얻음(배열)
+const checkedRows = sheet.getRowsByChecked("CHK"); // 'CHK'열에 체크된 행들을 얻음(배열)
+const focusedRowIndex = sheet.getRowIndex( row10th ); // 10 
+```
 ---
 
 ## 행 조작
@@ -144,44 +164,24 @@ const newRow = sheet.addRow({next: row, init: { colName1: "한국", colName3: "A
 ### 행 삭제
 
 ```javascript
-sheet.removeRow(row)
-sheet.removeRow(sheet.getFocusedRow())
+sheet.removeRow(row); // 행객체에서 해당 행이 제거되고, DOM도 제거됨
 ```
 
 ### 행 상태를 Deleted로 변경(실제 삭제되진 않음)
 
 ```javascript
-sheet.deleteRow(row)
-sheet.deleteRow(sheet.getFocusedRow())
+sheet.deleteRow(row, 1); // 두번째 인자(0:삭제취소, 1:삭제). 행에 Deleted:1 이 추가됨.
 ```
 
 ### 행 이동/복사
 ```javascript
-sheet.moveRow(row, targetRow)
+sheet.moveRow(row, targetRow) // targetRow 행 위로 row 행 이동
 
-sheet.copyRow(row, targetRow)
+sheet.copyRow(row, targetRow) // targetRow 행 위로 row 와 동일한 값을 갖는 행 추가
 ```
 
 
----
 
-## 행 조회
-
-```javascript
-const allRows = sheet.getDataRows();
-const count = sheet.getDataRows().length;
-const headRow = sheet.getRowById("Header");
-const sumRow = sheet.getRowById("FormulaRow");
-const row10th = sheet.getRowByIndex(10);
-const row11th = sheet.getNextRow(row10th);
-const row9th = sheet.getPrevRow(row10th);
-const firstRow = sheet.getFirstRow();
-const lastRow = sheet.getLastRow();
-const focusedRow = sheet.getFocusedRow();
-const addedRows = sheet.getRowsByStatus("Added");
-const checkedRows = sheet.getRowsByChecked("checkColName");
-const focusedRowIndex = sheet.getRowIndex( sheet.getFocusedRow() );
-```
 
 ---
 
@@ -199,16 +199,16 @@ const text = sheet.getString(row, "colName");  // 포맷팅된 값
 ## 포커스/선택
 
 ```javascript
-const frow = sheet.getFocusedRow()
+const frow = sheet.getFocusedRow(); 
 const fcol = sheet.getFocusedCol()
 sheet.focus(row, "colName") // 포커스 이동
 sheet.blur() // 포커스 해제
 
-const selRangeArr = sheet.getSelectedRanges();
+const selRangeArr = sheet.getSelectedRanges(); 
 const selRows = sheet.getSelectedRows();
-sheet.selectAllRows();
+sheet.selectAllRows(); // 전체 행 선택
 sheet.clearSelection();
-sheet.selectRange(startRow, startCol, endRow, endCol, 1);
+sheet.selectRange(startRow, startCol, endRow, endCol, 1); // 특정 영역 선택
 ```
 
 ---
@@ -219,7 +219,7 @@ sheet.selectRange(startRow, startCol, endRow, endCol, 1);
 sheet.setCheck(row, "checkColName", 1); //check
 sheet.setCheck(row, "checkColName", 0); //uncheck
 sheet.setCheck(row, "checkColName", null);// toggle check
-const checkedRows = sheet.getRowsByChecked();
+const checkedRows = sheet.getRowsByChecked("checkColName");
 sheet.setAllCheck("checkColName");
 ```
 
@@ -228,7 +228,7 @@ sheet.setAllCheck("checkColName");
 ## 컬럼 조작
 
 ```javascript
-const colNames = sheet.getCols();
+const colNames = sheet.getCols(); // 전체 컬럼명 배열 ["SEQ", "EMPNO", "EMPNAME"... ]
 const firstCol = sheet.getFirstCol();
 const lastCol = sheet.getLastCol();
 sheet.showCol("colName");
@@ -242,7 +242,7 @@ const colType = sheet.getAttribute(null, "colName", "Type");
 ---
 
 ## 정렬/필터
-[doFilter](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/do-filter)
+[doFilter](../ibsheet-official-manual/funcs/core/do-filter)
 ```javascript
 sheet.doSort("colName1,-colName2"); //colName앞에 -가 있을시 DESC 정렬
 sheet.clearSort();
@@ -291,7 +291,7 @@ sheet.rerender(); //전체 영역 렌더링
 ---
 
 ## 내보내기
-[exportData](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/export-data)
+[exportData](../ibsheet-official-manual/funcs/core/export-data)
 ```javascript
 sheet.exportData({fileName: "데이터목록.xlsx", sheetName: "Sheet1", downRows: "Visible", downCols: "Visible", sheetDesign: 1});
 ```
@@ -299,7 +299,7 @@ sheet.exportData({fileName: "데이터목록.xlsx", sheetName: "Sheet1", downRow
 ---
 
 ## 병합
-[setAutoMerge](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-auto-merge)
+[setAutoMerge](../ibsheet-official-manual/funcs/core/set-auto-merge)
 ```javascript
 sheet.setAutoMerge(0, 3); // 인접한 셀 기준 자동 병합
 sheet.setAutoMergeCancel();

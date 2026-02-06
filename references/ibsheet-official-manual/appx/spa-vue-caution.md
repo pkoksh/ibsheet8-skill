@@ -2,36 +2,35 @@
 KEY: spaVueCaution
 KIND: appendix
 PATH: appx/spa-vue-caution
-ALIAS: 환경에서, 개발, 시, 주의사항, 컴포넌트를
-ALIAS_EN: spa, vue, caution
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/spa-vue-caution
+ALIAS_EN: cautions, developing, ibsheetvue, component, vue, environment, ibsheet, appendix
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/spa-vue-caution
 ---
-# vue 환경에서 IBSheet 개발 시 주의사항 ***(appendix)***
+# Cautions When Developing IBSheet in Vue Environment ***(appendix)***
 
-> Vue 환경에서 IBSheetVue 컴포넌트를 이용한 개발 시 주의사항 입니다.
-
-
-## onMounted 와 IBSheet 객체 생성
-
-- IBSheet 객체는 비동기로 생성되기 때문에 **onMounted** 시점에서 시트의 생성이 완료 되지 않았을 수 있습니다.
-- IBSheet 객체의 생성이 완료 된 이후에 **onRenderFirstFinish** 이벤트 발생합니다.
-- 생성 시점을 명확하게 하시려면 IBSheetVue 컴포넌트에 <mark>v-if</mark>를 추가하여 onMounted 이후에 생성 되게끔 조절하는 것이 좋습니다.
+> These are cautions when developing with the IBSheetVue component in a Vue environment.
 
 
-[App.vue 파일]
+## onMounted and IBSheet Object Creation
+
+- Since the IBSheet object is created asynchronously, the sheet creation may not be completed at the **onMounted** point.
+- The **onRenderFirstFinish** event is triggered after the IBSheet object creation is completed.
+- To make the creation timing clear, it is recommended to add <mark>v-if</mark> to the IBSheetVue component so that it is created after onMounted.
+
+
+[App.vue file]
 ```html
 <script setup>
 import { IBSheetVue, IB_Preset } from '@ibsheet/vue';
 import { ref, shallowRef, onMounted } from 'vue';
 import { sheetData } from './data.js';
 
-// 시트 생성 시점
+// Sheet creation timing
 const createSheet = ref(false);
 
-// 시트 객체를 담을 ref 객체
+// Ref object to hold the sheet object
 const mySheet = shallowRef(null);
 
-// 시트 객체 너비/높이 style
+// Sheet object width/height style
 const customStyle = {
   width: '100%',
   height: '400px',
@@ -50,10 +49,10 @@ const sheetOptions = {
       CanFocus: 0,
     },
   ],
-  //중앙(메인) 컬럼 설정
+  // Center (main) column settings
   Cols: [
     {
-      Header: '선택',
+      Header: 'Select',
       Type: 'Bool',
       Name: 'CHK',
       Width: '50',
@@ -61,7 +60,7 @@ const sheetOptions = {
       CanEdit: 1,
     },
     {
-      Header: '대차계약번호',
+      Header: 'Loan Contract No.',
       Type: 'Text',
       Name: 'CONTRACTNO',
       Width: '120',
@@ -69,7 +68,7 @@ const sheetOptions = {
       CanEdit: 0,
     },
     {
-      Header: '대차지점',
+      Header: 'Loan Branch',
       Type: 'Text',
       Name: 'DELIVERYDEPTNAME',
       Width: '120',
@@ -78,7 +77,7 @@ const sheetOptions = {
       TextColor: 'BLUE',
     },
     {
-      Header: '차량번호',
+      Header: 'Vehicle No.',
       Type: 'Text',
       Name: 'CARNO',
       Width: '120',
@@ -87,7 +86,7 @@ const sheetOptions = {
       Tip: 1,
     },
     {
-      Header: '차명(FULL차명)',
+      Header: 'Car Name (Full Name)',
       Type: 'Text',
       Name: 'CARNAMEMSTNAME',
       Width: '200',
@@ -95,7 +94,7 @@ const sheetOptions = {
       CanEdit: 1,
     },
     {
-      Header: '24시간기본요금',
+      Header: '24-Hour Base Rate',
       Type: 'Float',
       Name: 'RENTFEE',
       Width: '120',
@@ -104,7 +103,7 @@ const sheetOptions = {
       Format: ',#.##',
     },
     {
-      Header: '출고일자',
+      Header: 'Release Date',
       Type: 'Date',
       Name: 'RENTDATE',
       Width: '100',
@@ -114,7 +113,7 @@ const sheetOptions = {
       CanEdit: 0,
     },
     {
-      Header: '입고일자',
+      Header: 'Return Date',
       Type: 'Date',
       Name: 'RETURNDATE',
       Width: '100',
@@ -124,7 +123,7 @@ const sheetOptions = {
       CanEdit: 0,
     },
     {
-      Header: '대차유형',
+      Header: 'Loan Type',
       Type: 'Text',
       Name: 'PROMOCODE',
       Width: '100',
@@ -132,7 +131,7 @@ const sheetOptions = {
       CanEdit: 1,
     },
     {
-      Header: '순서',
+      Header: 'Order',
       Type: 'Text',
       Name: 'NO',
       Width: '50',
@@ -140,7 +139,7 @@ const sheetOptions = {
       DefaultValue: 'defaultValue',
     },
     {
-      Header: '할인율',
+      Header: 'Discount Rate',
       Type: 'Int',
       Name: 'DISCOUNTRATE',
       Width: '50',
@@ -150,24 +149,24 @@ const sheetOptions = {
     },
   ],
   Events: {
-    // 시트 생성 완료 이벤트
+    // Sheet creation complete event
     onRenderFirstFinish: (evt) => {
-      // 시트객체 생성시 1회만 발생합니다.
-      // v-if를 통해 항상 onMounted 이후에 생성됩니다.
-      mySheet.value = evt.sheet; // 생성된 시트 객체를 ref객체에 담음
+      // Triggered only once when the sheet object is created.
+      // Always created after onMounted through v-if.
+      mySheet.value = evt.sheet; // Store the created sheet object in the ref object
       mySheet.value.loadSearchData(sheetData);
     },
   },
 };
 
-// 화면 마운트 시점 (IBSheet객체는 만들어지기 전)
+// Screen mount timing (before the IBSheet object is created)
 onMounted(async () => {
-  // 화면 초기화 로직 수행
+  // Execute screen initialization logic
   // ....
-  // 서버 데이터 가져오기 (시간이 걸리는 작업이 있다고 가정)
+  // Fetch server data (assuming there is a time-consuming task)
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-  // v-if 를 통해 onMounted 함수 마지막 부분에서 시트객체 생성
+  // Create the sheet object at the end of the onMounted function through v-if
   createSheet.value = true;
 });
 </script>
@@ -179,7 +178,7 @@ onMounted(async () => {
 
 ```
 
-[v-if를 통한 시트객체 생성 예제](https://stackblitz.com/edit/vitejs-vite-qljaavkt?file=data.js)
+[Example of sheet object creation through v-if](https://stackblitz.com/edit/vitejs-vite-qljaavkt?file=data.js)
 
 ### Read More
 
@@ -188,4 +187,4 @@ onMounted(async () => {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.0|기능 추가|
+|core|8.3.0.0|Feature added|

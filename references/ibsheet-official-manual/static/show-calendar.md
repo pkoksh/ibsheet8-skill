@@ -2,14 +2,13 @@
 KEY: showCalendar
 KIND: static-member
 PATH: static/show-calendar
-ALIAS: 열의, 타입을, 설정시, 사용할, 있는
-ALIAS_EN: show, calendar
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/show-calendar
+ALIAS_EN: calendar, control, available, setting, column, type, date, outside
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/show-calendar
 ---
 # showCalendar ***(static)***
-> 열의 타입을 `Date`로 설정시 사용할 수 있는 달력 컨트롤을 시트 외부에 input객체 주변에서도 사용하실 수 있습니다.
+> The calendar control available when setting a column type to `Date` can also be used outside the sheet around input elements.
 
-> 달력 컨트롤이 제공하는 `API`와 `event`를 통해 다양한 기능을 사용하실 수 있습니다.
+> Various features are available through the `API` and `events` provided by the calendar control.
 
 
 ### Syntax
@@ -18,97 +17,97 @@ object IBSheet.showCalendar(calOption, position, callback);
 ```
 
 
-## 각 Parameter 기능
+## Parameter Features
 
 ### **1. calOption(object)**
 
-`calOption`을 통해 달력에 최초 날짜나 하단에 보여질 버튼, 여러날짜 선택 여부 등을 설정하실 수 있습니다.
+Through `calOption`, you can set the initial date, buttons to display at the bottom, whether to allow multiple date selection, etc.
 
 |Name|Type|Description|
 |---|---|---|
-|Date|`mixed`( `string` \| `number` \| `date` )|최초 보여질 날짜를 의미. 
-다음 3가지 형식으로 입력가능
-1) 문자형으로 입력 (`Format`과 함께 사용)
-2) 1970년 1월 1일을 기준으로 한 `timestamp` 숫자형 (ex: `new Date().getTime()` 과 동일한 숫자)
-3) javascript `Date 객체` (ex: `new Date(년,월-1,일,시,분,초)` 와 같은 `Date`객체 ) |
-|Format|`string`|문자형으로 `Date` 입력시 `Date`와 함께 사용하며, `Date`의 형식을 정의합니다. 
- `y(년), M(월), d(일), H(시간), m(분), s(초)`등의 예약어와 예약어를 제외한 문자를 조합해서 사용 가능합니다. 
+|Date|`mixed`( `string` \| `number` \| `date` )|The initial date to display. 
+Can be entered in the following 3 formats:
+1) String format (used with `Format`)
+2) `timestamp` number based on January 1, 1970 (ex: same number as `new Date().getTime()`)
+3) javascript `Date object` (ex: a `Date` object like `new Date(year, month-1, day, hour, minute, second)`) |
+|Format|`string`|Used together with `Date` when entering `Date` as a string, defining the format of `Date`. 
+ You can combine reserved words such as `y(year), M(month), d(day), H(hour), m(minute), s(second)` with non-reserved characters. 
  ex: `{Date: "2020-04-10", Format: "yyyy-MM-dd"}` |
-|Range|`boolean`|달력 내에서 드래그를 통해 여러 날짜를 선택하게 할지 여부
-`0(false)`:드래그 불가 (`default`)
-`1(true)`:드래그 허용
-!["드래그선택"](/assets/imgs/showCalendar1.png "드래그선택")
-<!-- IMAGE: 스크린샷/예시 이미지 - "드래그선택" -->|
-|TimeFormat|`string`|달력 하단에 `시, 분, 초` 값을 표시할 지 여부를 설정합니다. 'hh:mm'과 같이 설정해서 시, 분만 표시하거나 'hh:mm:ss'와 같이 설정해서 시, 분, 초를 모두 표시하실 수 있습니다. 
- `Range`를 설정하지 않은 년, 월, 일이 모두 표시되는 달력에서만 적용 가능하며, **'hh:mm', 'hh:mm:ss' 형식(혹은 hh, mm, ss 사이에 '/', '-' 등을 기입한 형식)** 으로만 설정하실 수 있습니다. 
+|Range|`boolean`|Whether to allow selecting multiple dates by dragging within the calendar
+`0(false)`: Dragging not allowed (`default`)
+`1(true)`: Dragging allowed
+!["Drag selection"](/assets/imgs/showCalendar1.png "Drag selection")
+<!-- IMAGE: Screenshot/Example Image - "Drag selection" -->|
+|TimeFormat|`string`|Sets whether to display `hour, minute, second` values at the bottom of the calendar. You can display only hours and minutes by setting it like 'hh:mm', or display hours, minutes, and seconds by setting it like 'hh:mm:ss'. 
+ Only applicable to calendars that display year, month, and day without `Range` set, and can only be set in **'hh:mm', 'hh:mm:ss' format (or formats with '/', '-', etc. between hh, mm, ss)**. 
  ex: `{Date: "2020-04-10", Format: "yyyy-MM-dd", TimeFormat: "hh:mm:ss"}` 
-!["시분초"](/assets/imgs/showCalendar2.png "시분초")
-<!-- IMAGE: 스크린샷/예시 이미지 - "시분초" -->|
-|ReadOnly|`boolean`|달력을 볼 수만 있고 선택이 불가능하게 합니다.
-`0(false)`:선택 불가
-`1(true)`:선택 가능 (`default`)|
-|Buttons|`number`|달력 하단에 보여질 버튼을 숫자로 설정합니다.
-1 : 오늘(Today)
-2 : 지우기(Clear)
-4 : 선택(Ok)
-8 : 어제(Yesterday)
-'오늘' 버튼과 '선택' 버튼을 표시하고자 하는 경우 1+4 로 5를 넣으시면 됩니다.
-!["달력버튼"](/assets/imgs/showCalendar3.png "달력버튼")
-<!-- IMAGE: 버튼 이미지 - "달력버튼" -->
-|Buttons2|`boolean`|년월 달력 형태의 하단에 선택 버튼을 표시할지 여부
-`0(false)`:버튼 표시안함
-`1(true)`:버튼 표시함 (`default`)
-!["년월달력버튼"](/assets/imgs/showCalendar4.png "년월달력버튼")
-<!-- IMAGE: 버튼 이미지 - "년월달력버튼" -->|
-|RowsPrev|`number`|이전 월에 대해 몇 주 더 보기 기능
-!["이전/다음 월보기"](/assets/imgs/showCalendar5.png "이전/다음 월보기")
-<!-- IMAGE: 스크린샷/예시 이미지 - "이전/다음 월보기" -->
-[RowsPrev:2, RowsNext:3 설정시 화면]|
-|RowsNext|`number`|다음 월에 대해 몇 주 더 보기 기능|
-|Texts|`object`|달력 버튼에 보여질 글자를 설정합니다.
-설정을 안하면 영문(Today, Ok 등)으로 보여집니다.
-ex: `{ Ok: "선택", Clear: "지우기", Today: "오늘",Yesterday:"어제"}`|
-|Modal|`boolean`|달력을 모달 형태로 띄움
-`0(false)`:모달로 띄움
-`1(true)`:모달로 띄우지 않음 (`default`)|
-|CloseOut|`boolean`|달력에서 마우스 커서가 빠져나가면 자동으로 닫힘 기능 사용 여부
-`0(false)`:닫지 않음(`default`)
-`1(true)`:닫음 |
-|CloseTimeout|`number`|`CloseOut` 기능을 사용시 마우스 커서가 빠져나간 상태에서 몇초 후에 닫을지 설정.(ms단위, `default: 300ms`)|
-|Weeks|`number`|달력에 주차 표현 여부 설정(`default: 0`)|
-|Class|`string`|달력에 테마설정, `Class: css prefix("IB") + "Pick"`|
-|ScrollUpdate|`boolean`|body 영역의 스크롤이 움직일 때 달력 창이 스크롤을 따라 움직일지 여부를 설정합니다.
-`0(false)`:움직이지 않음(`default`)
-`1(true)`:움직임|
-|IgnoreSize|`boolean`|달력의 Size가 Cfg 설정의 `Size`와 별도로 동작 됩니다.
-`0(false)`:`Size` 설정값과 동일하게 달력 적용(`default`)
-`1(true)`:`Size`와 상관없이 항상 Size:"Normal"로 적용|
-|StyleSize|`string`|달력의 Size를 적용합니다. [Size cfg](/docs/props/cfg/size) 와 동일한 옵션 값을 지정할 수 있습니다.|
-|MsgLocale|`string`|달력에서 사용할 언어(메세지 파일) Language Prefix를 설정합니다. [MsgLocale cfg](/docs/props/cfg/msg-locale)과 동일한 옵션 값을 지정할 수 있습니다.|
+!["Hour Minute Second"](/assets/imgs/showCalendar2.png "Hour Minute Second")
+<!-- IMAGE: Screenshot/Example Image - "Hour Minute Second" -->|
+|ReadOnly|`boolean`|Makes the calendar view-only with selection disabled.
+`0(false)`: Selection disabled
+`1(true)`: Selection enabled (`default`)|
+|Buttons|`number`|Sets the buttons to display at the bottom of the calendar as a number.
+1 : Today
+2 : Clear
+4 : Ok
+8 : Yesterday
+To display the 'Today' button and 'Ok' button, enter 5 (1+4).
+!["Calendar buttons"](/assets/imgs/showCalendar3.png "Calendar buttons")
+<!-- IMAGE: Screenshot/Example Image - "Calendar buttons" -->|
+|Buttons2|`boolean`|Whether to display the select button at the bottom of the year-month calendar format
+`0(false)`: Do not display button
+`1(true)`: Display button (`default`)
+!["Year-month calendar button"](/assets/imgs/showCalendar4.png "Year-month calendar button")
+<!-- IMAGE: Screenshot/Example Image - "Year-month calendar button" -->|
+|RowsPrev|`number`|Feature to show additional weeks from the previous month
+!["Previous/Next month view"](/assets/imgs/showCalendar5.png "Previous/Next month view")
+<!-- IMAGE: Screenshot/Example Image - "Previous/Next month view" -->
+[Screen when RowsPrev:2, RowsNext:3 is set]|
+|RowsNext|`number`|Feature to show additional weeks from the next month|
+|Texts|`object`|Sets the text to display on calendar buttons.
+If not set, they are displayed in English (Today, Ok, etc.).
+ex: `{ Ok: "Select", Clear: "Clear", Today: "Today", Yesterday: "Yesterday"}`|
+|Modal|`boolean`|Display the calendar in modal format
+`0(false)`: Display as modal
+`1(true)`: Do not display as modal (`default`)|
+|CloseOut|`boolean`|Whether to enable auto-close when the mouse cursor leaves the calendar
+`0(false)`: Do not close (`default`)
+`1(true)`: Close |
+|CloseTimeout|`number`|When using the `CloseOut` feature, sets how many seconds after the mouse cursor leaves before closing. (in ms, `default: 300ms`)|
+|Weeks|`number`|Sets whether to display week numbers in the calendar (`default: 0`)|
+|Class|`string`|Theme setting for the calendar, `Class: css prefix("IB") + "Pick"`|
+|ScrollUpdate|`boolean`|Sets whether the calendar window follows when the body area scrolls.
+`0(false)`: Does not follow (`default`)
+`1(true)`: Follows|
+|IgnoreSize|`boolean`|The calendar's Size operates independently from the Cfg `Size` setting.
+`0(false)`: Apply calendar with same `Size` setting value (`default`)
+`1(true)`: Always apply as Size:"Normal" regardless of `Size`|
+|StyleSize|`string`|Applies the Size of the calendar. The same option values as [Size cfg](/docs/props/cfg/size) can be specified.|
+|MsgLocale|`string`|Sets the Language Prefix of the language (message file) to use in the calendar. The same option values as [MsgLocale cfg](/docs/props/cfg/msg-locale) can be specified.|
 
 ### **2. position(object)**
 
-position 속성을 통해 달력이 오픈되는 위치를 설정합니다.
+Sets the position where the calendar opens through the position property.
 
-(자세한 내용은 [Position appendix](/docs/appx/position)을 참고)
+(For details, refer to [Position appendix](/docs/appx/position))
 
 
 ### **3. callback(function)**
 
-달력에서 특정 일자를 클릭하거나 선택 버튼을 눌렀을때 발생하는 콜백함수를 설정합니다.
+Sets the callback function that fires when a specific date is clicked or the select button is pressed in the calendar.
 
-함수의 인자로 선택한 날자에 대한 ms 숫자값이 리턴됩니다.
+The ms numeric value for the selected date is returned as a function argument.
 
-`calOption`에서 `Range`속성을 통해 달력내에 여러 날짜를 선택시에는 "~"를 구분자로 ms숫자값이 리턴됩니다.
+When selecting multiple dates within the calendar through the `Range` property in `calOption`, ms numeric values are returned with "~" as a delimiter.
 
-콜백 사용 예
+Callback usage example
 ```javascript
 function callback(DD) {
     var format = "yyyy/MM/dd";
     var d_str = "";
     if (DD != "") {
         if (isNaN(DD)) {
-            // Range를 통해 여러일자 선택시(1549206000000;1549551600000~1549897200000;1550070000000~1550761200000)
+            // When selecting multiple dates through Range (1549206000000;1549551600000~1549897200000;1550070000000~1550761200000)
             var pd = DD.split(";");
             for (var i = 0; i < pd.length; i++) {
                 if (pd[i].indexOf('~') > -1) {
@@ -119,7 +118,7 @@ function callback(DD) {
             d_str = pd.join(";");
 
         } else {
-            // 단일 일자 선택시 (1550156400000 숫자가 넘어옴)
+            // When selecting a single date (1550156400000 number is passed)
             d_str = IBSheet.dateToString(DD, format);
         }
     }
@@ -130,18 +129,18 @@ IBSheet.showCalendar(null, {
 }, callback);
 ```
 
-## Calendar 이벤트
+## Calendar Events
 
-달력 컨트롤을 생성하거나 생성된 달력에서 날짜를 선택하거나 버튼을 클릭하는 등의 이벤트가 발생했을 때에 대한 로직을 구성합니다.
+Configure logic for events such as creating a calendar control, selecting a date, or clicking a button in the created calendar.
 
-이벤트는 위에 `calOption` 설정시 같이 설정합니다.
+Events are configured together when setting `calOption` above.
 
-이벤트 사용 예
+Event usage example
 ```javascript
 var calOption = {
     Buttons: 1,
     OnCanEditDate: function (date) {
-        //일자가 2019.01.20일 보다 작으면 선택 못하게 막음
+        // Prevent selection if the date is earlier than 2019.01.20
         var sdate = new Date(2019, 0, 20, 0, 0, 0);
         if (date < sdate) {
             return false;
@@ -154,38 +153,38 @@ IBSheet.showCalendar(calOptions, {
     Mouse: 1
 });
 ```
-!["특정일자선택불가"](/assets/imgs/calCantSelect.png "특정일자선택불가")
-<!-- IMAGE: 스크린샷/예시 이미지 - "특정일자선택불가" -->
+!["Specific date selection disabled"](/assets/imgs/calCantSelect.png "Specific date selection disabled")
+<!-- IMAGE: Screenshot/Example Image - "Specific date selection disabled" -->
 
 
-|이벤트 명|호출시점|Parameter|return|
+|Event Name|Trigger Timing|Parameter|return|
 |---|---|---|---|
-|`OnClose`|달력 컨트롤이 닫힐 때 발생|||
-|`OnSave`|달력에서 특정 일자를 선택시 발생
-`callback` 인자를 통해 함수를 연결하는 경우, 이 이벤트 기능을 대신하게 됩니다.|선택한 일자 ms|`0(false)`를 리턴시 선택을 취소|
-|`OnChange`|`Range`속성을 사용하여 드래그로 여러 일자를 선택 시 발생|선택한 일자 ms|
-|`OnCanEditDate`|달력 컨트롤이 오픈될 때 모든 일자에 대해 발생|javascript `Date 객체`|`0(false)`를 리턴시 해당 일자는 선택 불가능하게 표시됨|
-|`OnGetCalendarDate`|달력 컨트롤이 오픈될 때 모든 일자에 대해 발생|1. **date** 일자에 대한 javascript `Date 객체`
-2. **text** 화면에 표시될 일자
-3. **classes** 각 일자별 적용될 css class 배열 [normal, hover, selected, selected+hover]
-4. **range** 달력의 `Range` 속성을 사용하여 여러 일자가 선택되어 있는 경우 시작일과 마지막일 배열 [startdate,enddate], `Range`속성을 사용하지 않는 경우에는 `undefind` |해당 일자에 표시될 문자. 문자가 없는 경우 해당일자부분에 `undefined`가 표시됨.|
-|`OnButtonClick`|달력 하단에 버튼을 클릭 시 발생|버튼의 종류에 따른 숫자값
-`1 : OK, 2 : Cancel, 3 : Today, 4 : Yesterday`|리턴값으로 `Parameter`로 받은 버튼 숫자를 리턴, `0(false)`을 리턴시 클릭을 취소함|
-|`OnClickWeek`|달력 주차 클릭 시 발생|1. **year** 클릭 한 주차의 년도 
- 2. **week** 클릭 한 주차|
+|`OnClose`|Fires when the calendar control is closed|||
+|`OnSave`|Fires when a specific date is selected in the calendar
+When connecting a function through the `callback` argument, it replaces this event functionality.|Selected date ms|Cancels the selection when `0(false)` is returned|
+|`OnChange`|Fires when selecting multiple dates by dragging using the `Range` property|Selected date ms|
+|`OnCanEditDate`|Fires for every date when the calendar control opens|javascript `Date object`|Marks the date as unselectable when `0(false)` is returned|
+|`OnGetCalendarDate`|Fires for every date when the calendar control opens|1. **date** javascript `Date object` for the date
+2. **text** date to be displayed on screen
+3. **classes** css class array to be applied to each date [normal, hover, selected, selected+hover]
+4. **range** array of start date and end date [startdate, enddate] when multiple dates are selected using the calendar's `Range` property, `undefined` when `Range` property is not used |Text to display for the date. If no text is provided, `undefined` is displayed for that date area.|
+|`OnButtonClick`|Fires when a button at the bottom of the calendar is clicked|Number value based on button type
+`1 : OK, 2 : Cancel, 3 : Today, 4 : Yesterday`|Return the button number received as `Parameter`, cancels the click when `0(false)` is returned|
+|`OnClickWeek`|Fires when a week number in the calendar is clicked|1. **year** year of the clicked week 
+ 2. **week** clicked week number|
 
 
-## 달력 컨트롤 닫기
+## Closing the Calendar Control
 
-사용자가 클릭을 통해 닫는 것이 아니라 외부함수를 통해 현재 열려있는 달력 컨트롤을 닫으려면 다음과 같이 합니다.
+To close the currently open calendar control through an external function rather than through user clicking, do the following.
 ```javascript
-var cal = IBSheet.showCalender(); //달력 컨트롤 생성
-cal.Close(); //닫기
+var cal = IBSheet.showCalender(); // Create calendar control
+cal.Close(); // Close
 ```
 
 
 ### Return Value
-***object*** : 달력 객체
+***object*** : Calendar object
 
 
 ### Example
@@ -204,7 +203,7 @@ function showCal(dateInputElement) {
         var d_str = "";
         if (rtnDate != "") {
             if (isNaN(rtnDate)) {
-                // Range를 통해 여러일자 선택시(1549206000000;1549551600000~1549897200000;1550070000000~1550761200000)
+                // When selecting multiple dates through Range (1549206000000;1549551600000~1549897200000;1550070000000~1550761200000)
                 var pd = rtnDate.split(";");
                 for (var i = 0; i < pd.length; i++) {
                     if (pd[i].indexOf('~') > -1) {
@@ -215,13 +214,13 @@ function showCal(dateInputElement) {
                 d_str = pd.join(";");
 
             } else {
-                // 단일 일자 선택시 (1550156400000 숫자가 넘어옴)
+                // When selecting a single date (1550156400000 number is passed)
                 d_str = IBSheet.dateToString(rtnDate, format);
             }
         }
         dateInput.value = d_str;
     }
-    //달력 오픈
+    // Open calendar
     var calObj = IBSheet.showCalendar(calOption, position, callback);
 }
 </script>
@@ -236,7 +235,7 @@ function showCal(dateInputElement) {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.34|ScrollUpdate 옵션 기본값 변경|
-|core|8.1.0.88|`calOption`에 `IgnoreSize`, `StyleSize` 옵션 추가|
-|core|8.1.0.89|`OnClickWeek` 이벤트 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.34|ScrollUpdate option default value changed|
+|core|8.1.0.88|`IgnoreSize`, `StyleSize` options added to `calOption`|
+|core|8.1.0.89|`OnClickWeek` event added|

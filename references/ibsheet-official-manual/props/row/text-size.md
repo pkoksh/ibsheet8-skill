@@ -2,31 +2,30 @@
 KEY: textSize
 KIND: row-property
 PATH: props/row/text-size
-ALIAS: 지정한, 행의, 글자, 크기를, 설정합니다
-ALIAS_EN: text, size
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/text-size
+ALIAS_EN: text, size, specified, row, textsize
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/text-size
 ---
 # TextSize ***(row)***
 
-> 지정한 행의 글자 크기를 설정합니다.
+> Sets the text size of a specified row.
 
-> `px, pt, em` 단위를 사용할 수 있으며, 단위를 지정하지 않으면 px기준으로 설정됩니다.
+> You can use `px, pt, em` units. If no unit is specified, it defaults to px.
 ### Type
 `string`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|크기숫자와 단위로 이루어진 문자열(ex: 25px)|
+|`string`|A string consisting of a size number and unit (ex: 25px)|
 
 ### Example
 ```javascript
-//특정행의 글자를 1.2em 지정합니다.
+//Set the text size of a specific row to 1.2em.
 var row = sheet.getRowById("AR33");
 row["TextSize"] = "1.2em";
 sheet.refreshRow(row);
 
-//조회 데이터에서 특정행에 대해 글자를 27px로 지정합니다.
+//Set the text size to 27px for a specific row in the loaded data.
 {"data":[
     ...
     {"TextSize": "27px", "ColName1": "Value1", "ColName2": "Value2", ...},
@@ -44,4 +43,4 @@ sheet.refreshRow(row);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

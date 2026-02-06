@@ -2,13 +2,12 @@
 KEY: vScrollPadMode
 KIND: config-property
 PATH: props/cfg/v-scroll-pad-mode
-ALIAS: 세로, 스크롤의, 상단에, 여백을, 설정하는
-ALIAS_EN: scroll, pad, mode
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/v-scroll-pad-mode
+ALIAS_EN: option, padding, top, vertical, scrollbar, vscrollpadmode, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/v-scroll-pad-mode
 ---
 # VScrollPadMode ***(cfg)***
 
-> 세로 스크롤의 상단에 여백을 설정하는 옵션입니다.
+> Option to set padding at the top of the vertical scrollbar.
 
 ### Type
 `number`
@@ -16,8 +15,8 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/v-scroll-
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|아무 여백도 설정하지 않음 (`default`)|
-|`1`|[Kind](/docs/appx/kind)가 `Header`인 Head 행만큼 여백을 설정|
+|`0`|No padding is set (`default`)|
+|`1`|Set padding equal to the Head rows whose [Kind](/docs/appx/kind) is `Header`|
 
 ### Example
 ```javascript
@@ -33,4 +32,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

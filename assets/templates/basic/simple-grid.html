@@ -2,23 +2,13 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IBSheet 기본 그리드</title>
-  <script src="ibsheet/ibsheet.js"></script>
-  <link rel="stylesheet" href="ibsheet/css/ibsheet.css">
-  <style>
-    body { font-family: 'Malgun Gothic', sans-serif; margin: 20px; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    h1 { font-size: 1.5rem; margin-bottom: 20px; }
-    #sheetContainer { width: 100%; height: 500px; }
-  </style>
+  <title>기본 그리드</title>
+  <link rel="stylesheet" href="../../../ibsheet/css/default/main.css">
+  <script src="../../../ibsheet/ibsheet.js"></script>
+  <script src="../../../ibsheet/locale/ko.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>기본 그리드</h1>
-    <div id="sheetContainer"></div>
-  </div>
-
+  <div id="sheetContainer" style="width:100%;height:500px;"></div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       IBSheet.create({
@@ -26,26 +16,24 @@
         el: "sheetContainer",
         options: {
           Cfg: {
-            SearchMode: 2,
-            CanEdit: true
+            SearchMode: 0,  // FastLoad (가상 스크롤)
+            CanEdit: 1
           },
           Cols: [
-            { Header: "No", Name: "_rowNum", Type: "RowNum", Width: 50, Align: "Center" },
-            { Header: "ID", Name: "id", Type: "Int", Width: 60, CanEdit: false },
-            { Header: "이름", Name: "name", Type: "Text", Width: 120, Required: true },
+            { Header: "ID", Name: "empId", Type: "Int", Width: 60, CanEdit: 0 },
+            { Header: "이름", Name: "name", Type: "Text", Width: 120, Required: 1 },
             { Header: "이메일", Name: "email", Type: "Text", Width: 180 },
             { Header: "연락처", Name: "phone", Type: "Text", Width: 120 },
             { Header: "금액", Name: "amount", Type: "Int", Width: 100, Align: "Right", Format: "#,##0" },
             { Header: "등록일", Name: "regDate", Type: "Date", Width: 100, Align: "Center", Format: "yyyy-MM-dd" }
           ],
           Events: {
-            onRenderFirstFinish: function() {
-              // 샘플 데이터 로드
-              this.loadSearchData({
+            onRenderFirstFinish: function(evt) {
+              evt.sheet.loadSearchData({
                 data: [
-                  { id: 1, name: "홍길동", email: "hong@example.com", phone: "010-1234-5678", amount: 50000, regDate: "2024-01-15" },
-                  { id: 2, name: "김철수", email: "kim@example.com", phone: "010-2345-6789", amount: 75000, regDate: "2024-01-20" },
-                  { id: 3, name: "이영희", email: "lee@example.com", phone: "010-3456-7890", amount: 30000, regDate: "2024-02-01" }
+                  { empId: 1, name: "홍길동", email: "hong@example.com", phone: "010-1234-5678", amount: 50000, regDate: "2024-01-15" },
+                  { empId: 2, name: "김철수", email: "kim@example.com", phone: "010-2345-6789", amount: 75000, regDate: "2024-01-20" },
+                  { empId: 3, name: "이영희", email: "lee@example.com", phone: "010-3456-7890", amount: 30000, regDate: "2024-02-01" }
                 ]
               });
             }

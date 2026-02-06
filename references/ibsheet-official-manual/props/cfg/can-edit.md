@@ -2,23 +2,22 @@
 KEY: canEdit
 KIND: config-property
 PATH: props/cfg/can-edit
-ALIAS: 전체적인, 시트의, 편집, 가능여부를, 설정합니다
-ALIAS_EN: can, edit, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-edit
+ALIAS_EN: whether, entire, sheet, editable, canedit, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/can-edit
 ---
 # CanEdit ***(cfg)***
 
-> 전체적인 시트의 편집 가능여부를 설정합니다.
+> Sets whether the entire sheet is editable.
 
-> 전체 편집이 가능한 경우에만 셀별 편집 가능여부 설정이 동작합니다. 
+> Cell-level edit permission settings only work when entire sheet editing is enabled. 
 
-> 필터, 그룹행의 경우 해당 속성의 영향을 **받지 않습니다**. 
+> Filter and group rows are **not affected** by this property. 
 
-> `CanEdit: 4`를 제외하고는 편집불가 모드 사용시 `Enum` 컬럼의 아이콘과 `Date` 타입 컬럼의 달력 아이콘을 표현하지 않습니다. 
+> Except for `CanEdit: 4`, when using non-editable mode, the `Enum` column icon and `Date` type column calendar icon are not displayed. 
 
-> `Cfg`를 이용하여 편집불가 사용시에는 우선순위가 가장 높아짐으로, `Cell, Row, Col`에 `CanEdit: 0`은 먹히지 않습니다. 
+> When using non-editable mode through `Cfg`, it has the highest priority, so `CanEdit: 0` on `Cell, Row, Col` will not take effect. 
 
-> `Button` 타입의 버튼 클릭 시 동작, `File` 타입의 아이콘 표시 여부에 대해서는 해당 속성의 영향을 **`받지 않습니다`**. ([Disabled col](/docs/props/col/disabled) 통하여 제어 가능.) 
+> The click behavior of `Button` type buttons and the icon display of `File` type are **`not affected`** by this property. (Can be controlled through [Disabled col](/docs/props/col/disabled).)
 
 ### Type
 `number`
@@ -26,11 +25,11 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-edit
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|전체 편집 불가능|
-|`1`|전체 편집 가능 (`default`)|
-|`3`|전체 편집 불가능(편집 가능 불가능에 대한 배경색을 표시하지 않음)
-[ColorState (cfg)](/docs/props/cfg/color-state)와 관계없이 배경색을 표현하지 않음.
-|`4`|전체 편집 불가능 + 배경색 표현안함 + 아이콘 표시|
+|`0`|Entire sheet not editable|
+|`1`|Entire sheet editable (`default`)|
+|`3`|Entire sheet not editable (does not display background color for editable/non-editable status)
+Does not display background color regardless of [ColorState (cfg)](/docs/props/cfg/color-state).
+|`4`|Entire sheet not editable + no background color + icons displayed|
 
 ### Example
 ```javascript
@@ -49,5 +48,5 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.12|`CanEdit: 4` 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.12|`CanEdit: 4` added|

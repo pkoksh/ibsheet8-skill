@@ -2,14 +2,14 @@
 KEY: getPrevSiblingVisibleRow
 KIND: method
 PATH: funcs/core/get-prev-sibling-visible-row
-ALIAS: sheet.getPrevSiblingVisibleRow, getPrevSiblingVisibleRow(), 트리나, 그룹사용시, 같은, 부모를, 갖는
-ALIAS_EN: get, prev, sibling, visible, row
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-prev-sibling-visible-row
+ALIAS: sheet.getPrevSiblingVisibleRow, getPrevSiblingVisibleRow()
+ALIAS_EN: tree, group, returns, visible, row, level, parent, getprevsiblingvisiblerow
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-prev-sibling-visible-row
 ---
 # getPrevSiblingVisibleRow ***(method)***
-> 트리나 그룹사용시 같은 부모를 갖는 동일 레벨의 보여지는(`Visible:1`) 위에 위치한 행을 리턴합니다.
+> When using tree or group, returns the visible (`Visible:1`) row above at the same level with the same parent.
 
-> 같은 부모 내에서 더 이상 보여지는 동일레벨이 없는 경우 `null`이 리턴됩니다.
+> Returns `null` if there is no visible row at the same level within the same parent.
 
 
 ### Syntax
@@ -20,15 +20,15 @@ object getPrevSiblingVisibleRow( row );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row|`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
+|row|`object`|Required|[data row object](/docs/appx/row-object)|
 
 
 ### Return Value
-***row object*** : [데이터 로우 객체](/docs/appx/row-object)
+***row object*** : [data row object](/docs/appx/row-object)
 
 ### Example
 ```javascript
-//현재 선택된 행과 같은 레벨을 갖는 위의 행을 리턴
+// Return the visible row above at the same level as the currently selected row
 var row = sheet.getFocusedRow();
 var crow = sheet.getPrevSiblingVisibleRow(row);
 ```
@@ -40,4 +40,4 @@ var crow = sheet.getPrevSiblingVisibleRow(row);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

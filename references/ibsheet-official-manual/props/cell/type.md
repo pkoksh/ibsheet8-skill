@@ -2,17 +2,16 @@
 KEY: type
 KIND: cell-property
 PATH: props/cell/type
-ALIAS: 셀이, 갖고있는, 데이터, 유형을, 의미합니다
-ALIAS_EN: type, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/type
+ALIAS_EN: refers, data, type, cell, holds
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/type
 ---
 # Type ***(cell)***
 
-> 셀이 갖고있는 데이터 유형을 의미합니다.
+> Refers to the data type that the cell holds.
 
-> 일반적인 텍스트나 숫자(정수,실수) 체크박스, 드랍다운리스트 와 같은 타입이 존재합니다.
+> Types such as general text, numbers (integer, float), checkbox, and dropdown list exist.
 
-> 자세한 내용은 [Type appendix](/docs/appx/type)를 참고하세요.
+> For details, please refer to the [Type appendix](/docs/appx/type).
 
 ### Type
 `string`
@@ -20,23 +19,23 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/type
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|`Text,Int,Float,Date,Bool,Enum` 등 정해진 문자열|
+|`string`|Predefined strings such as `Text,Int,Float,Date,Bool,Enum`, etc.|
 
 
 ### Example
 ```javascript
-//1. 메소드를 통해 특정 셀의 타입을 변경
+//1. Change the type of a specific cell via method
 sheet.setAttribute(sheet.getRowById("AR99"), "AMT", "Type", "Float");
 
 
-//2. 객체에 직접 접근해서 타입변경 (CLS열의 타입을 "Date"로 변경)
+//2. Change type by directly accessing the object (change type of CLS column to "Date")
 var ROW = sheet.getRowById("AR10");
 ROW["CLSType"] = "Date";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 타입 변경
+//3. Change type within loaded data
 {
     data:[
         {... "CLS":"20171225", "CLSType": "Date", ...}
@@ -54,4 +53,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

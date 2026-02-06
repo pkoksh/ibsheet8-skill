@@ -2,17 +2,16 @@
 KEY: numberSort
 KIND: cell-property
 PATH: props/cell/number-sort
-ALIAS: 셀의, 데이터를, 숫자형식으로, 소팅할지, 여부를
-ALIAS_EN: number, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/number-sort
+ALIAS_EN: whether, sort, cell, data, numeric, format, numbersort
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/number-sort
 ---
 # NumberSort ***(cell)***
 
-> 셀의 데이터를 숫자형식으로 소팅할지 여부를 설정합니다.
+> Sets whether to sort the cell's data in numeric format.
 
-> 일반적으로 `Int, Float, Date Type`은 숫자형식으로, 그 외의 [Type](/docs/appx/type)은 문자형식으로 소팅이 이루어집니다.
+> Generally, `Int, Float, Date Type` are sorted in numeric format, and other [Types](/docs/appx/type) are sorted in string format.
 
-> 여기서 값을 `0(false)`으로 설정하면, Type과 무관하게 문자형식으로 소팅되고, `1(true)`로 설정시 숫자형식으로 소팅이 이루어집니다.
+> If the value is set to `0(false)`, sorting is done in string format regardless of the Type. If set to `1(true)`, sorting is done in numeric format.
 
 ### Type
 `boolean`
@@ -20,14 +19,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/number-s
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|문자형식의 소팅|
-|`1(true)`|숫자형식의 소팅|
+|`0(false)`|String format sorting|
+|`1(true)`|Numeric format sorting|
 
 
 ### Example
 ```javascript
-//조회 데이터 내에서 속성 적용  (열이름: CLS)
-//특정 셀에 대해 숫자형식으로 소팅
+// Apply property within loaded data (column name: CLS)
+// Sort a specific cell in numeric format
 {
     data:[
         {... , "CLSNumberSort":"1" , ...}
@@ -45,4 +44,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/number-s
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,13 +2,12 @@
 KEY: noDataMessage
 KIND: config-property
 PATH: props/cfg/no-data-message
-ALIAS: 데이터로, 시트, 생성, 인자, 조회
-ALIAS_EN: no, data, message, sheet, grid, search, query, fetch
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-data-message
+ALIAS_EN: whether, display, message, data, retrieved, creating, sheet, empty
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-data-message
 ---
 # NoDataMessage ***(cfg)***
 
-> 빈 데이터로 시트 생성(IBSheet.create의 data인자), 조회 함수를 이용한 조회시 **"조회된 데이터가 없습니다."** 라는 메세지 표시여부를 설정합니다. 
+> Sets whether to display the message **"No data retrieved."** when creating a sheet with empty data (data argument of IBSheet.create) or when searching using a search function. 
 
 
 ### Type
@@ -17,16 +16,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-data-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|시트 생성, 조회 시 메세지 표시 안함.|
-|`1`|시트 생성 시에만 메세지 표시|
-|`2`|조회 시에만 메세지 표시 (`default`)|
-|`3`|시트 생성, 조회 시 메세지 표시|
+|`0`|Do not display message on sheet creation or search.|
+|`1`|Display message only on sheet creation|
+|`2`|Display message only on search (`default`)|
+|`3`|Display message on both sheet creation and search|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-  NoDataMessage: 2,  // 조회 함수를 이용한 조회 시에만 메세지 표시
+  NoDataMessage: 2,  // Display message only when searching using a search function
   ...
 };
 ```
@@ -44,4 +43,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.6|기능 추가|
+|core|8.0.0.6|Feature added|

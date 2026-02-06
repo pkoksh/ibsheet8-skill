@@ -2,40 +2,39 @@
 KEY: boolIcon
 KIND: column-property
 PATH: props/col/bool-icon
-ALIAS: 열에서, 체크, 언체크, 아이콘을, 다른
-ALIAS_EN: bool, icon, check, checkbox
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/bool-icon
+ALIAS_EN: check, uncheck, icon, different, image, html, object, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/bool-icon
 ---
 # BoolIcon ***(col)***
-> [Type](/docs/appx/type)이 `Bool`인 열에서 체크/언체크 아이콘을 다른 이미지나 Html 객체로 설정합니다.
+> Sets the check/uncheck icon to a different image or HTML object for a column with [Type](/docs/appx/type) `Bool`.
 
-> 임의의 이미지를 체크박스 아이콘으로 사용하고자 하는 경우에는, 언체크 이미지와 체크 이미지를 첫글자를 구분자로 하여 연결된 문자열로 설정하시면 됩니다.
-(ex:"|Off.gif|On.gif")
+> To use custom images as checkbox icons, set a string connecting the uncheck image and check image with the first character as a separator.
+(ex: "|Off.gif|On.gif")
 >
-> 임의의 이미지를 체크박스 아이콘으로 사용할 때, 해당 열내의 셀이 편집불가([CanEdit](./can-edit))인 경우가 있다면 편집 불가일때의 이미지까지해서 총 4개의 이미지를 설정하시면 됩니다.
-(ex:"|Off.gif|On.gif|OffReadOnly.gif|OnReadOnly.gif")
+> When using custom images as checkbox icons, if there are cells in the column that are not editable ([CanEdit](./can-edit)), you can set a total of 4 images including the images for when editing is disabled.
+(ex: "|Off.gif|On.gif|OffReadOnly.gif|OnReadOnly.gif")
 >
-> 여러개의 라디오 아이콘을 사용하고자 하는 경우에는 언체크 이미지와 체크이미지를 이어서 설정하시면 됩니다.
-(ex:"|Off1.gif|On1.gif|Off2.gif|On2.gif|Off3.gif|On3.gif")
+> To use multiple radio icons, set the uncheck and check images consecutively.
+(ex: "|Off1.gif|On1.gif|Off2.gif|On2.gif|Off3.gif|On3.gif")
 >
-> 그 외에 일반적인 숫자형식으로 아래 `Options`에서와 같이 기능을 설정하실 수 있습니다.
+> Additionally, you can set features using regular number formats as shown in the `Options` below.
 ### Type
-mixed( `string` \| `number`)
+`mixed`( `string` \| `number`)
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|기본적인 내장 체크박스 이미지를 사용 (`default`)
-|`1`|내장 라디오 이미지를 사용|
-|`2`|무조건 middle 정렬되는 체크박스 이미지를 사용(**성능이 0번 옵션보다 느림**)|
-|`3`|무조건 middle 정렬되는 라디오 이미지를 사용(**성능이 1번 옵션보다 느림**)|
-|`4`|\<input type="checkbox">객체를 사용(**IE에서 성능이 좋음**)|
-|`5`|\<input type="radio">객체를 사용(**IE에서 성능이 좋음**)|
-|`6`|div객체를 이용하여 체크박스를 구현(**IE 호환성 보기에서 성능이 좋음**)|
+|`0`|Uses the default built-in checkbox image (`default`)
+|`1`|Uses the built-in radio image|
+|`2`|Uses a checkbox image that is always middle-aligned (**performance is slower than option 0**)|
+|`3`|Uses a radio image that is always middle-aligned (**performance is slower than option 1**)|
+|`4`|Uses \<input type="checkbox"> object (**good performance in IE**)|
+|`5`|Uses \<input type="radio"> object (**good performance in IE**)|
+|`6`|Implements checkbox using div object (**good performance in IE compatibility view**)|
 
 ### Example
 ```javascript
-//html객체로 체크박스 표현
+// Display checkbox as HTML object
 options.Cols = [
     ...
     {Type: "bool", Name: "accept", BoolIcon: 4 ...},
@@ -52,4 +51,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

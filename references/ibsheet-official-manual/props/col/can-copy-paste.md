@@ -2,12 +2,11 @@
 KEY: canCopyPaste
 KIND: column-property
 PATH: props/col/can-copy-paste
-ALIAS: 열에, 통한, 복사와, 붙여넣기를, 제한합니다
-ALIAS_EN: can, copy, paste
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-copy-paste
+ALIAS_EN: restricts, copying, via, ctrl, pasting, column, cancopypaste, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/can-copy-paste
 ---
 # CanCopyPaste ***(col)***
-> 열에 대한 `ctrl+c`, `ctrl+x`를 통한 복사와 `ctrl+v`를 통한 붙여넣기를 제한합니다.
+> Restricts copying via `ctrl+c`, `ctrl+x` and pasting via `ctrl+v` for the column.
 
 
 ### Type
@@ -16,17 +15,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-copy-
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|복사/붙여넣기 불가
-`CanCopyPaste: 0` 이 설정된 열에서는 `ctrl+c`, `ctrl+x` 를 하는 경우 빈셀이 복사되고 `ctrl+v`는 무시됩니다.
- 시트 내에서 드래그를 통해 영역을 복사/붙여넣기 할때는 `CanCopyPaste: 0` 이 설정된 열은 ,마치 없는거 처럼 건너뛰고 클립보드에 복사됩니다.
+|`0(false)`|Copy/paste disabled
+When `ctrl+c` or `ctrl+x` is performed on a column with `CanCopyPaste: 0`, an empty cell is copied and `ctrl+v` is ignored.
+ When copying/pasting a range via drag within the sheet, columns with `CanCopyPaste: 0` are skipped as if they do not exist and copied to the clipboard.
 |
-|`1(true)`|복사/붙여넣기 가능 (`default`)|
+|`1(true)`|Copy/paste enabled (`default`)|
 
 
 
 ### Example
 ```javascript
-//특정 열의 데이터는 복사 불가
+// Disable copying of data in a specific column
 options.Cols = [
     ...
     {Type: "Int", Name: "Rank_Sales", CanCopyPaste: false ...},
@@ -44,4 +43,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

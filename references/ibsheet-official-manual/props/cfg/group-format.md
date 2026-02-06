@@ -2,17 +2,16 @@
 KEY: groupFormat
 KIND: config-property
 PATH: props/cfg/group-format
-ALIAS: 그룹핑, 생성된, 그룹, 트리가, 있는
-ALIAS_EN: group, format
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/group-format
+ALIAS_EN: number, data, rows, belonging, group, display, format, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/group-format
 ---
 # GroupFormat ***(cfg)***
 
-> 그룹핑 시 생성된 그룹 트리가 있는 열에 그룹에 속하는 데이터 행의 개수 와 그 표시 형식을 설정합니다. 
+> Sets the number of data rows belonging to a group and its display format in the column where the group tree is created during grouping. 
 
-> `{%s}` 는 그룹이 되는 기준 값, `{%c}` 는 그룹핑 된 데이터의 개수를 설정합니다. 
+> `{%s}` represents the grouping reference value, `{%c}` represents the count of grouped data. 
 
-> `{%vc}` 는 그룹핑 된 데이터 중 감춰진 행을 제외한 행의 개수
+> `{%vc}` represents the count of rows excluding hidden rows among the grouped data.
 
 
 ### Type
@@ -21,20 +20,20 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/group-for
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|그룹 표시 형식 설정 String
-ex) `{%s} \ ({%c}건)`|
+|`string`|Group display format string
+e.g.) `{%s} \ ({%c} items)`|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    Group: "gender,age",     // 시트 로딩시 colName 이 성별, 나이인 열으로 그룹핑
-    GroupMain: "Name",       // 시트 트리를 colName 이 이름 인 열에 표시
-    GroupFormat:" {%s} ({%c}건)" //그룹핑 열이름은 빨강색, 건수는 파란색으로 표시
+    Group: "gender,age",     // Group by columns with colName gender and age when loading the sheet
+    GroupMain: "Name",       // Display the sheet tree in the column with colName Name
+    GroupFormat:" {%s} ({%c} items)" // Display grouping column name in red, count in blue
 };
 option.Solid = [{
-    Kind: "Group",           // 커스텀 행의 Kind 를 Group 으로 설정
-    Space: -1                // 커스텀 행의 위치를 설정 (-1: 테이블 상단)
+    Kind: "Group",           // Set the custom row Kind to Group
+    Space: -1                // Set the custom row position (-1: top of table)
 }];
 ```
 
@@ -50,5 +49,5 @@ option.Solid = [{
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.27|{%vc} 기능 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.27|Added {%vc} feature|

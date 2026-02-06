@@ -2,13 +2,12 @@
 KEY: debounceRender
 KIND: config-property
 PATH: props/cfg/debounce-render
-ALIAS: 호출시, 걸어, 호출합니다
-ALIAS_EN: debounce, render
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/debounce-render
+ALIAS_EN: applies, debounce, calling, rerender, renderbody, debouncerender, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/debounce-render
 ---
 # DebounceRender ***(cfg)***
 
-> `rerender`, `renderBody` 호출시 debounce를 걸어 호출합니다. 
+> Applies debounce when calling `rerender` or `renderBody`. 
 
 
 ### Type
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/debounce-
 ### Options
 |Value|Description|
 |-----|-----|
-| `0` | `rerender`, `renderBody` 호출시 debounce를 걸지 않습니다. (`default`)|
-| `1` | `rerender`, `renderBody` 호출시 debounce를 걸어 호출합니다. |
+| `0` | Does not apply debounce when calling `rerender` or `renderBody`. (`default`)|
+| `1` | Applies debounce when calling `rerender` or `renderBody`. |
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-        DebounceRender: 1, // `rerender`, `renderBody` 호출시 debounce를 걸어 호출합니다.
+        DebounceRender: 1, // Applies debounce when calling `rerender` or `renderBody`.
         ...
     }
 };
@@ -36,4 +35,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.38|기능 추가|
+|core|8.3.0.38|Feature added|

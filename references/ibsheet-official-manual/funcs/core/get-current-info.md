@@ -2,12 +2,12 @@
 KEY: getCurrentInfo
 KIND: method
 PATH: funcs/core/get-current-info
-ALIAS: sheet.getCurrentInfo, getCurrentInfo(), 현재, 시트의, 컬럼, 정보를, 문자열로
-ALIAS_EN: get, current, info
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-current-info
+ALIAS: sheet.getCurrentInfo, getCurrentInfo()
+ALIAS_EN: returns, column, information, current, sheet, string, getcurrentinfo, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-current-info
 ---
 # getCurrentInfo ***(method)***
-> 현재 시트의 컬럼 정보를 문자열로 가져오는 메소드입니다.
+> Returns column information of the current sheet as a string.
 
 ### Syntax
 ```javascript
@@ -15,11 +15,11 @@ string getCurrentInfo();
 ```
 
 ### Return Value
-***string 현재 컬럼들의 숨김, 너비, 위치 정보 값***
+***string - value containing hide status, width, and position information of current columns***
 
 ### Example
 ```javascript
-// 현재 시트의 컬럼 정보를 담고 있는 문자열을 반환
+// Returns a string containing column information of the current sheet
 sheet.getCurrentInfo();
 ```
 
@@ -30,4 +30,4 @@ sheet.getCurrentInfo();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

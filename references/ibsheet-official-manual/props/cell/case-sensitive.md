@@ -2,12 +2,11 @@
 KEY: caseSensitive
 KIND: cell-property
 PATH: props/cell/case-sensitive
-ALIAS: 소팅시, 혹은, 필터, 기능, 사용시
-ALIAS_EN: case, sensitive, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/case-sensitive
+ALIAS_EN: whether, distinguish, uppercase, lowercase, letters, sorting, filter, feature
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/case-sensitive
 ---
 # CaseSensitive ***(cell)***
-> 소팅시(혹은 필터 기능 사용시) 대소문자 구분 여부를 설정합니다.
+> Sets whether to distinguish between uppercase and lowercase letters during sorting (or when using the filter feature).
 
 
 ### Type
@@ -16,14 +15,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/case-sen
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|대소문자 구분 안함|
-|`1(true)`|대소문자 구분 사용 (`default`)|
+|`0(false)`|Case insensitive|
+|`1(true)`|Case sensitive (`default`)|
 
 
 ### Example
 ```javascript
-//특정 셀 데이터에 대해서 소팅시 대소문자 구분 안함.
-//조회 데이터 내에서 속성 적용  (열이름 :CLS )
+// Disable case sensitivity when sorting data of a specific cell.
+// Apply property within loaded data (column name: CLS)
 {
     data:[
         {... , "CLSCaseSensitive":"0" , ...}
@@ -40,4 +39,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/case-sen
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

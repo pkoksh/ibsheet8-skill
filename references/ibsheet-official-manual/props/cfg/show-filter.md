@@ -2,45 +2,44 @@
 KEY: showFilter
 KIND: config-property
 PATH: props/cfg/show-filter
-ALIAS: 시트, 생성시, 상단, 고정행으로, 필터행을
-ALIAS_EN: show, filter, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/show-filter
+ALIAS_EN: whether, add, filter, row, top, fixed, creating, sheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/show-filter
 ---
 # ShowFilter ***(cfg)***
 
-> 시트 생성시 상단 고정행으로 필터행을 추가할지 여부를 설정합니다
+> Sets whether to add a filter row as a top fixed row when creating the sheet.
 
-> 필터행을 추가하는 경우 열별 데이터에 대한 필터링 기능을 사용할 수 있습니다.
+> When a filter row is added, filtering functionality for column data can be used.
 
-> `(0)false` 으로 설정시 필터행은 생성되지 않으며, 시트 생성 이후에 [showFilterRow](/docs/funcs/core/show-filter-row) 함수를 통해 동적으로 필터행을 생성시킬 수 있습니다. 
+> When set to `(0)false`, the filter row is not created, and after sheet creation, the filter row can be dynamically created through the [showFilterRow](/docs/funcs/core/show-filter-row) function. 
 
-> 아래는 `ShowFilter:true` 를 이용하여 생성한 필터행의 사용 예시 입니다.
+> Below is an example of using a filter row created with `ShowFilter:true`.
 
 
-> 문자열 컬럼에서는 `','(and검색)` 나 `';'(or검색)` 을 사용하실 수 있습니다.
+> In string columns, you can use `','(and search)` or `';'(or search)`.
 
->  - ex1. `사과;복숭아` ==> 사과나 복숭아 글자를 포함한 행만 남기고 감춤
->  - ex2. `사과,복숭아` ==> 사과 복숭아가 함께 있는 행만 남기고 감춤
- 
+>  - ex1. `apple;peach` ==> Hide all rows except those containing apple or peach
+>  - ex2. `apple,peach` ==> Hide all rows except those containing both apple and peach
 
-> 숫자나 날짜 컬럼에 대해서는 `'~'` 를 통해 범위를 설정 할 수 있습니다. 필터행의 기호(연산자) 1(같음), 2(같지않음) 에서만 사용 할 수 있고 다른 기호 에서는 사용 할 수 없습니다.
 
->  - ex1. `20170101~20181231` ==> 2017년 1월 1일 부터 2018년 12월 31일 까지만 남기고 모두 감춤
->  - ex2. `20241022~20241025;20241031` ==> 2024년 10월 22일 부터 2024년 10월 25일 까지의 데이터와 2024년 10월 31일의 데이터만 남기고 모두 감춤
->  - ex3. `199000~488000` ==> 199000 부터 488000 사이의 데이터만 남기고 모두 감춤
->  - ex4. ` 99000;199000~488000` ==> 99000의 데이터와 199000 부터 488000 사이의 데이터만 남기고 모두 감춤
+> For number or date columns, you can set a range using `'~'`. This can only be used with filter row operators 1(equal) and 2(not equal), and cannot be used with other operators.
 
-> 구분자는 메세지 파일에서 변경 가능합니다.
+>  - ex1. `20170101~20181231` ==> Hide all except data from January 1, 2017 to December 31, 2018
+>  - ex2. `20241022~20241025;20241031` ==> Hide all except data from October 22, 2024 to October 25, 2024 and data from October 31, 2024
+>  - ex3. `199000~488000` ==> Hide all except data between 199000 and 488000
+>  - ex4. ` 99000;199000~488000` ==> Hide all except data of 99000 and data between 199000 and 488000
 
-> "`ValueSeparator`": "`;`"     //or 구분자 
+> The separators can be changed in the message file.
 
-> "`ValueSeparatorHtml`": "`;`" //or 구분자 
+> "`ValueSeparator`": "`;`"     //or separator 
 
-> "`ValueAndSeparator`": "`,`"  //and 구분자 
+> "`ValueSeparatorHtml`": "`;`" //or separator 
 
-> "`RangeSeparator`": "`~`"     //범위 연산자 
+> "`ValueAndSeparator`": "`,`"  //and separator 
 
-> "`RangeSeparatorHtml`": "`~`" //범위 연산자 
+> "`RangeSeparator`": "`~`"     //range operator 
+
+> "`RangeSeparatorHtml`": "`~`" //range operator 
 
 
 ### Type
@@ -49,15 +48,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/show-filt
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|필터행을 추가하지 않는다. (`default`)|
-|`1(true)`|필터행을 추가한다.|
+|`0(false)`|Do not add filter row. (`default`)|
+|`1(true)`|Add filter row.|
 
 
 ### Example
 ```javascript
 options = {
     Cfg :{
-      ShowFilter: true,  // 시트 생성시 필터행도 추가해서 같이 생성한다.
+      ShowFilter: true,  // Add filter row when creating the sheet.
     }
 };
 ```
@@ -68,9 +67,10 @@ options = {
 ### Read More
 - [showFilterRow method](/docs/funcs/core/show-filter-row)
 - [hideFilterRow method](/docs/funcs/core/hide-filter-row)
+- [DisableKeyWord](/docs/props/cfg/disable-keyword)
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

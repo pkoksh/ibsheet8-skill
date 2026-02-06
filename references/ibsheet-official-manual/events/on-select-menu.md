@@ -2,14 +2,13 @@
 KEY: onSelectMenu
 KIND: event
 PATH: events/on-select-menu
-ALIAS: 마우스, 오른쪽, 클릭, 시트에, 설정된
-ALIAS_EN: on, select, menu, right, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-select-menu
+ALIAS_EN: event, called, menu, item, sheet, configured, docs, props
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-select-menu
 ---
 # onSelectMenu ***(event)***
-> 마우스 오른쪽 클릭 시 시트에 설정된 메뉴([Menu](/docs/props/col/menu))의 아이템을 클릭했을 때 호출되는 이벤트입니다.
+> Event called when a menu item from the sheet's configured menu ([Menu](/docs/props/col/menu)) is clicked upon right-clicking.
 
-> **[showMenu](/docs/funcs/core/show-menu) 메소드로 생성된 메뉴를 클릭 시 호출되지 않습니다.**
+> **Not called when clicking a menu created by the [showMenu](/docs/funcs/core/show-menu) method.**
 
 
 ### Syntax
@@ -27,10 +26,10 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|메뉴가 보여지고 있는 시트 객체|
-|row|`object`|메뉴가 보여지고 있는 셀의 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|메뉴가 보여지고 있는 셀의 열이름|
-|result|`string`|메뉴에서 선택한 아이템(아이템의 Value, Value가 선언되어있지 않으면 Name)|
+|sheet|`object`|Sheet object where the menu is displayed|
+|row|`object`|[Data row object](/docs/appx/row-object) of the cell where the menu is displayed|
+|col|`string`|Column name of the cell where the menu is displayed|
+|result|`string`|Selected item from the menu (the item's Value, or Name if Value is not declared)|
 
 ### Return
 ***none***
@@ -39,21 +38,21 @@ or
 ### Example
 ```javascript
 options.Cfg = {
-    // 기존에 설정된 메뉴
+    // Previously configured menu
     Menu: {
         Items: [
-            { Name: "title", Text: "바로가기", Value:"0" },
-            { Name: "title1", Text: "바로가기1", Value:"1" },
-            { Name: "title2", Text: "바로가기2", Value:"2" },
-            { Name: "title3", Text: "바로가기3", Value:"3" },
-            { Name: "title4", Text: "바로가기4", Value:"4" }
+            { Name: "title", Text: "Shortcut", Value:"0" },
+            { Name: "title1", Text: "Shortcut1", Value:"1" },
+            { Name: "title2", Text: "Shortcut2", Value:"2" },
+            { Name: "title3", Text: "Shortcut3", Value:"3" },
+            { Name: "title4", Text: "Shortcut4", Value:"4" }
         ] ;
     }
 }
 
 options.Events = {
     onSelectMenu:function(evtParam){
-        // 메뉴에서 선택된 값으로 셀 값을 변경하기
+        // Change the cell value with the selected value from the menu
         evtParam.sheet.setValue({row: evtParam.row, col: evtParam.col, val: evtParam.result, render: 1});
         evtParam.sheet.refreshRow(evtParam.row);
     }
@@ -67,4 +66,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

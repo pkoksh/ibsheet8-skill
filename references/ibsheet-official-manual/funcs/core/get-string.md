@@ -2,12 +2,12 @@
 KEY: getString
 KIND: method
 PATH: funcs/core/get-string
-ALIAS: sheet.getString, getString(), 포맷이, 적용된, 문자열로, 셀의, 값을
-ALIAS_EN: get, string
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-string
+ALIAS: sheet.getString, getString()
+ALIAS_EN: retrieves, cell, value, format, applied, string, getstring, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-string
 ---
 # getString ***(method)***
-> 포맷이 적용된 문자열로 셀의 값을 가져옵니다.
+> Retrieves the cell value as a format-applied string.
 
 ### Syntax
 ```javascript
@@ -19,16 +19,16 @@ string getString( row, col);
 
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|필수|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Required|column name|
 
 ### Return Value
-***string*** : 적용된 포맷형태에 따른 셀값 리턴
+***string*** : Returns the cell value according to the applied format
 
 ### Example
 ```javascript
 var r5 = sheet.getRowById("AR5");
-//format yyyy/MM/dd 인경우 '2015/12/31' 형태로 추출
+//format yyyy/MM/dd case '2015/12/31' formas extract
 var sdata = sheet.getString(r5, "StartDate");
 ```
 
@@ -42,4 +42,4 @@ var sdata = sheet.getString(r5, "StartDate");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

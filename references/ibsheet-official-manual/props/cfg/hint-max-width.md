@@ -2,13 +2,12 @@
 KEY: hintMaxWidth
 KIND: config-property
 PATH: props/cfg/hint-max-width
-ALIAS: 힌트의, 최대, 너비, 설정합니다
-ALIAS_EN: hint, max, width
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/hint-max-width
+ALIAS_EN: maximum, width, maxwidth, hints, hintmaxwidth, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/hint-max-width
 ---
 # HintMaxWidth ***(cfg)***
 
-> 힌트의 최대 너비(`MaxWidth`)을 설정합니다. 
+> Sets the maximum width (`MaxWidth`) of hints. 
 
 
 ### Type
@@ -19,12 +18,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/hint-max-
 
 |Value|Description|
 |-----|-----|
-|`number`|힌트의 최대 너비|
+|`number`|Maximum width of hints|
 
 ### Example
 ```javascript
 options.Cfg = {
-    HintMaxWidth: 500 // 힌트의 최대 너비를 500으로 설정
+    HintMaxWidth: 500 // Set the maximum width of hints to 500
 };
 ```
 
@@ -37,4 +36,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.47|기능 추가|
+|core|8.3.0.47|Feature added|

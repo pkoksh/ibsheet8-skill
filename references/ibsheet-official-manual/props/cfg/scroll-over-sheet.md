@@ -2,12 +2,11 @@
 KEY: scrollOverSheet
 KIND: config-property
 PATH: props/cfg/scroll-over-sheet
-ALIAS: 시트와, 브라우저에서, 세로, 스크롤이, 있을
-ALIAS_EN: scroll, over, sheet
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/scroll-over-sheet
+ALIAS_EN: feature, enables, parent, scroll, work, sheet, vertical, reached
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/scroll-over-sheet
 ---
 # ScrollOverSheet ***(cfg)***
-> 시트와 브라우저에서 세로 스크롤이 있을 때 시트에서 스크롤이 끝난 후, 상위 부모의 스크롤이 동작하도록 하는 기능 
+> A feature that enables the parent's scroll to work after the sheet's vertical scroll has reached its end, when both the sheet and browser have vertical scrolls. 
 
 
 ### Type
@@ -16,13 +15,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/scroll-ov
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|기능 사용 안함 (`default`)|
-|`1(true)`|세로 스크롤이 끝난 후, 상위 부모의 스크롤이 동작합니다.|
+|`0(false)`|Feature disabled (`default`)|
+|`1(true)`|After the vertical scroll reaches its end, the parent's scroll operates.|
 
 
 ### Example
 ```javascript
-// 시트의 스크롤이 끝난 후, 부모의 스크롤이 동작하도록 기능 사용
+// Enable the parent's scroll to work after the sheet's scroll reaches its end
 options.Cfg = {
     ScrollOverSheet: true
 };
@@ -34,4 +33,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.18|기능 추가|
+|core|8.0.0.18|Feature added|

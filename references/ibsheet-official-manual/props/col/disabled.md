@@ -2,16 +2,15 @@
 KEY: disabled
 KIND: column-property
 PATH: props/col/disabled
-ALIAS: 컬럼에, 대해, 버튼, 사용, 가능
-ALIAS_EN: disabled
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/disabled
+ALIAS_EN: whether, button, usable, columns, type, docs, appx, file
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/disabled
 ---
 # Disabled ***(col)***
-> [Type](/docs/appx/type)이 `Button`, `File`인 컬럼에 대해 버튼 사용 가능 여부를 설정합니다.
+> Sets whether the button is usable for columns with [Type](/docs/appx/type) `Button` or `File`.
 
-> `Type:"Button", Disabled:1` : 버튼 컬럼이 비활성화 색으로 변경되며, click 이벤트 발생하지 않는다 
+> `Type:"Button", Disabled:1` : The button column changes to a disabled color, and click events are not triggered 
 
-> `Type:"File", Disabled:1` : 파일 추가, 제거 버튼이 표시되지 않는다.
+> `Type:"File", Disabled:1` : The file add and remove buttons are not displayed.
 
 
 ### Type
@@ -20,12 +19,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/disabled
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|버튼 기능 사용 가능 (`default`)|
-|`1(true)`|버튼 기능 사용 불가|
+|`0(false)`|Button functionality enabled (`default`)|
+|`1(true)`|Button functionality disabled|
 
 ### Example
 ```javascript
-//특정 열의 버튼을 사용불가로 설정
+// Set a specific column's button as disabled
 options.Cols = [
     ...
     {Type: "Button", Button: "Button", Disabled: 1, Name: "btn1" ...},
@@ -41,4 +40,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

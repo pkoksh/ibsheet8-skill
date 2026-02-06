@@ -2,14 +2,13 @@
 KEY: canFocus
 KIND: column-property
 PATH: props/col/can-focus
-ALIAS: 열에, 클릭이나, 키보드를, 통한, 이동시
-ALIAS_EN: can, focus
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-focus
+ALIAS_EN: whether, column, receive, focus, via, click, keyboard, navigation
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/can-focus
 ---
 # CanFocus ***(col)***
-> 열에 클릭이나 키보드를 통한 이동시 포커스 가능 여부를 설정합니다.
+> Sets whether the column can receive focus via click or keyboard navigation.
 
-> `CanFocus: 0`으로 설정된 열에 대해서는 클릭을 통한 포커스 진입이 불가능하고, 키보드의 Tab 키를 이용한 이동시 열을 건너뛰게 됩니다.
+> For columns set with `CanFocus: 0`, focus cannot be entered via click, and the column is skipped when navigating with the Tab key.
 
 ### Type
 `boolean`
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-focus
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|포커스 진입 불가|
-|`1(true)`|포커스 집입 가능 (`default`)|
+|`0(false)`|Focus entry disabled|
+|`1(true)`|Focus entry enabled (`default`)|
 
 
 
 ### Example
 ```javascript
-//특정 열에 대해 포커스가 이루어지지 않게끔 설정
+// Set a specific column to not receive focus
 options.Cols = [
     ...
     {Type: "Text", Name: "EM_DC", CanFocus: 0 ...},
@@ -42,4 +41,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

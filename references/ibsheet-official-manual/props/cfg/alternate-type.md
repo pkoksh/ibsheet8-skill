@@ -2,15 +2,14 @@
 KEY: alternateType
 KIND: config-property
 PATH: props/cfg/alternate-type
-ALIAS: 트리로, 구성된, 시트에서, 자식행들도, 계산에
-ALIAS_EN: alternate, type
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/alternate-type
+ALIAS_EN: whether, child, rows, tree, structured, sheet, included, alternate
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/alternate-type
 ---
 # AlternateType ***(cfg)***
 
-> 트리로 구성된 시트에서 자식행들도 [Alternate](./alternate) 계산에 포함될지 여부를 설정합니다. 
+> Sets whether child rows in a tree-structured sheet are included in the [Alternate](./alternate) calculation. 
 
-> 해당 속성을 `1`로 설정한 경우, 트리를 펼치고 접을 때마다 자식행들에 대한 컬러 계산이 이루어지면서 시트가 느려질 수 있습니다.
+> When this property is set to `1`, the color calculation for child rows is performed each time the tree is expanded or collapsed, which may slow down the sheet.
 
 
 
@@ -20,15 +19,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/alternate
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|트리 시트의 자식행을 포함하지 않고 하이라이트 표시 (`default`)|
-|`1`|트리 시트의 자식행을 포함해 재계산하여 하이라이트 표시 |
+|`0`|Display highlight without including tree sheet child rows (`default`)|
+|`1`|Display highlight by recalculating including tree sheet child rows |
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    "Alternate": 2,        // 짝수행에 하이라이트 표시
-    "AlternateType": 1     // 트리시트에서 자식행도 Alternate 에 포함하여 하이라이트 처리
+    "Alternate": 2,        // Display highlight on even rows
+    "AlternateType": 1     // Include child rows in Alternate calculation for tree sheet highlight
 };
 ```
 
@@ -40,4 +39,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,23 +2,22 @@
 KEY: fastloadConstraints
 KIND: appendix
 PATH: appx/fastload-constraints
-ALIAS: 가상, 스크롤, 조회에, 대한, 제약
-ALIAS_EN: fastload, constraints
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/fastload-constraints
+ALIAS_EN: searchmode, settings, support, virtual, scroll, mode, loading, constraints
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/fastload-constraints
 ---
-# 가상 스크롤 조회에 대한 제약 사항  ***(appendix)***
-> SearchMode 설정이 0, 3일 가상 스크롤 방식을 지원합니다.
+# Virtual Scroll Loading Constraints  ***(appendix)***
+> SearchMode settings of 0 or 3 support virtual scroll mode.
 
-> 이 때, 일부 타입과 기능을 사용하는데 있어 제약이 있습니다. 
+> In this case, there are constraints when using certain types and features.
 
-## 현재 사용할 수 없는 기능
+## Features Currently Unavailable
 
 |Feature|Description|
 |---|---|
-|`피벗`|피벗된 시트가 아닌 일반 데이터 시트는 사용 가능|
-|`Cfg.NoVScroll`|시트의 높이를 데이터의 높이만큼 지정하는 옵션이므로 사용불가|
+|`Pivot`|Non-pivoted regular data sheets can be used|
+|`Cfg.NoVScroll`|This option sets the sheet height to match the data height, so it cannot be used|
 
-## 권장하지 않는 타입(데이터행의 높이에 동적으로 영향을 주어 스크롤 시 문제가 될 수 있음)
+## Types Not Recommended (may cause scroll issues as they dynamically affect data row height)
 
 - Lines
 - Html
@@ -37,5 +36,5 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/fastload-const
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.3|트리 및 그룹 기능 지원|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.3|Tree and group features supported|

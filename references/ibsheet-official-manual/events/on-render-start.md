@@ -2,15 +2,14 @@
 KEY: onRenderStart
 KIND: event
 PATH: events/on-render-start
-ALIAS: 시트를, 렌더링하기, 전에, 호출되는, 이벤트입니다
-ALIAS_EN: on, render, start
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-render-start
+ALIAS_EN: event, called, sheet, rendered, onrenderstart
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-render-start
 ---
-# onRenderStart ***(event)*** 
+# onRenderStart ***(event)***
 
-> 시트를 렌더링하기 전에 호출되는 이벤트입니다.
+> Event called before the sheet is rendered.
 
-> `1(true)` 값을 리턴 시 시트의 렌더링이 취소가 됩니다.
+> Returning `1(true)` cancels the sheet rendering.
 
 ### Syntax
 
@@ -27,22 +26,22 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|렌더링을 진행할 시트 객체|
+|sheet|`object`|Sheet object that will be rendered|
 
 ### Return
 ***boolean***
 
 ### Example
 ```javascript
-user_authority = 3;// 현재 권한을 3이라고 지정
+user_authority = 3;// Set current authority to 3
 options.Events = {
     onRenderStart:function(evtParam){
-        // 권한이 3 이하인 경우 시트의 렌더링을 진행하지 않습니다.
+        // Do not render the sheet if the authority is less than 3.
         if (user_authority < 3) return true;
 
         /*
-         ***** 주의 사항 *****
-          시트 전체 렌더링 시 항상 onRenderStart 이벤트가 호출되므로, 시트 전체에 대해 렌더링을 진행하는 메소드는 여기서 작성하면 안됩니다.
+         ***** Caution *****
+          Since the onRenderStart event is always called during full sheet rendering, methods that perform full sheet rendering should not be written here.
          */
     }
 }
@@ -57,4 +56,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

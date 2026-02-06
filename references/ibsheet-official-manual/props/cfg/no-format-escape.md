@@ -2,17 +2,16 @@
 KEY: noFormatEscape
 KIND: config-property
 PATH: props/cfg/no-format-escape
-ALIAS: 태그로, 사용되는, 문자를, 그대로, 출력할지
-ALIAS_EN: no, format, escape
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-format-escape
+ALIAS_EN: whether, output, characters, html, tags, column, col, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-format-escape
 ---
 # NoFormatEscape ***(cfg)***
 
-> 열 ([Col](/docs/props/col/format), [Cell](/docs/props/cell/format)) [Format](/docs/appx/format) 에 Html 태그로 사용되는 &, < 문자를 그대로 출력할지 여부를 설정합니다. 
+> Sets whether to output the &, < characters used as HTML tags in the column ([Col](/docs/props/col/format), [Cell](/docs/props/cell/format)) [Format](/docs/appx/format) as-is. 
 
-> 해당 속성을 설정하지 않는 경우 text 열은 `0(false)`를, lines / number / date 타입은 `1(true)`를 기본값으로 가지게 됩니다.  
+> When this property is not set, text columns default to `0(false)`, and lines / number / date types default to `1(true)`.  
 
-> `0(false)`를 설정시 &, < 문자는 그대로 출력되고, `1(true)`를 설정시 열 `(Col, Cell) Format` 에 HTML 태그를 넣어 사용할 수 있습니다.
+> When set to `0(false)`, &, < characters are output as-is, and when set to `1(true)`, HTML tags can be used in column `(Col, Cell) Format`.
 
 
 ### Type
@@ -21,14 +20,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-format
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|**&, <** 문자가 그대로 출력 (`default: text 열`)|
-|`1(true)`|`HTML 태그`를 사용 (`default: lines, number, date 열`)|
+|`0(false)`|**&, <** characters are output as-is (`default: text columns`)|
+|`1(true)`|Use `HTML tags` (`default: lines, number, date columns`)|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    NoFormatEscape: true,        // (cell, col)Format 에 html 태그를 넣어 사용
+    NoFormatEscape: true,        // Use HTML tags in (cell, col)Format
     ...
 };
 ```
@@ -42,4 +41,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

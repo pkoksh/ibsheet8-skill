@@ -2,17 +2,17 @@
 KEY: getUserData
 KIND: method
 PATH: funcs/core/get-user-data
-ALIAS: sheet.getUserData, getUserData(), 함수, 호출시, 설정한, 데이터를, 리턴
-ALIAS_EN: get, user, data, function, method
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-user-data
+ALIAS: sheet.getUserData, getUserData()
+ALIAS_EN: returns, data, ibsheet, create, function, called, getuserdata, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-user-data
 ---
 # getUserData ***(method)***
 
-> IBSheet.create 함수 호출시 설정한 데이터를 리턴 합니다.
+> Returns the data set when the IBSheet.create function was called.
 
-> data의 값이 없으면 조회한 데이터를 리턴 합니다.
+> If there is no data value, the searched data is returned.
 
-> 수정한 데이터는 반영되어 추출되지 않습니다.
+> Modified data is not reflected in the extraction.
 
 
 ### Syntax
@@ -21,36 +21,36 @@ object getUserData();
 ```
 
 ### Return Value
-***array*** : 시트 생성시 초기화된 데이터 배열
+***array*** : The data array initialized when creating the sheet
 
 ### Example
 ```javascript
 IBSheet.create({
-    id: 'sheet', // 생성할 시트의 id
-    el: 'sheetDiv', // 시트를 생성할 Dom 객체 및 id
-    options: options, // 생성될 시트의 속성
+  id: 'sheet', // ID of the sheet to create
+  el: 'sheetDiv', // DOM object ID where the sheet will be created
+  options: options, // Properties of the sheet to create
     data: [{
         "ItemNo": 59993940,
-        "Title": "공부머리 독서법",
+    "Title": "Study Skills Reading Method",
         "Price": 14850,
-        "Author": "최승필",
-        "Publisher": "책구루",
+    "Author": "Seungpil Choi",
+    "Publisher": "BookGuru",
         "Category1": "A0",
         "Category2": "AA1",
         "Category3": "AAB0"
         }
-      ] // 생성될 시트의 정적데이터
+   ] // Initial data for the sheet to create
 });
 
-//시트 초기화시 생성된 데이터를 확인합니다.
+//Retrieve the data set during sheet initialization.
 var data = sheet.getUserData();
-//리턴된 data
+//Returned data
 [{
     "ItemNo": 59993940,
-    "Title": "공부머리 독서법",
+  "Title": "Study Skills Reading Method",
     "Price": 14850,
-    "Author": "최승필",
-    "Publisher": "책구루",
+  "Author": "Seungpil Choi",
+  "Publisher": "BookGuru",
     "Category1": "A0",
     "Category2": "AA1",
     "Category3": "AAB0"
@@ -64,4 +64,4 @@ var data = sheet.getUserData();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

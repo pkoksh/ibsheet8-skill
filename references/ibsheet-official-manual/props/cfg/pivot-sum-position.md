@@ -2,13 +2,12 @@
 KEY: pivotSumPosition
 KIND: config-property
 PATH: props/cfg/pivot-sum-position
-ALIAS: 피벗, 합계행의, 위치를, 설정합니다
-ALIAS_EN: pivot, sum, position
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/pivot-sum-position
+ALIAS_EN: position, total, row, pivoting, pivotsumposition, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/pivot-sum-position
 ---
 # PivotSumPosition ***(cfg)***
 
-> 피벗 시 합계행의 위치를 설정합니다.
+> Sets the position of the total row when pivoting.
 
 
 ### Type
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/pivot-sum
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|하단 - 푸터 영역 (`default`)|
-|`1(true)`|상단 - 헤더 영역|
+|`0(false)`|Bottom - Footer area (`default`)|
+|`1(true)`|Top - Header area|
 
 ### Example
 ```javascript
 options.Cfg = {
-    UsePivot: true, // 피벗 사용 여부
+    UsePivot: true, // Whether to use pivot
     PivotSumPosition: true
 };
 ```
@@ -38,4 +37,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

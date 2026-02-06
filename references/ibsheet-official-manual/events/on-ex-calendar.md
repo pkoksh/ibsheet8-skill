@@ -2,15 +2,14 @@
 KEY: onExCalendar
 KIND: event
 PATH: events/on-ex-calendar
-ALIAS: 외부, 달력을, 제어할, 있는, 시트
-ALIAS_EN: on, ex, calendar, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-ex-calendar
+ALIAS_EN: triggers, sheet, event, allows, control, external, calendar, onexcalendar
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-ex-calendar
 ---
 # onExcalendar ***(event)***
 
-> 외부 달력을 제어할 수 있는 시트 이벤트를 발생시키도록 합니다.</br> 
-> 시트의 `onScroll`, `onKeyDown`, `onAfterFilter`, `onClick` 이벤트 발생 시점에 해당 이벤트가 발생됩니다.</br>
-> `onClickSide` 이벤트에서 외부 달력을 시트 셀 영역에 표시하고, 해당 이벤트에서 외부 달력을 제거할 수 있습니다.
+> Triggers a sheet event that allows control of an external calendar.</br>
+> This event fires at the firing point of the sheet's `onScroll`, `onKeyDown`, `onAfterFilter`, `onClick` events.</br>
+> You can display an external calendar in the sheet cell area with the `onClickSide` event, and remove the external calendar in this event.
 
 ### Syntax
 
@@ -26,10 +25,10 @@ or
 
 | Name | Type | Description |
 |------|------|-------------|
-| sheet | `object` | 이벤트가 발생한 시트 객체 |
-| params | `object` | 전달되는 이벤트(`onScroll`, `onKeyDown`, `onAfterFilter`, `onClick`) 가 가지는 param 인자 |
-| evType | `string` | 전달되는 이벤트(`onScroll`, `onKeyDown`, `onAfterFilter`, `onClick`) Name |
-| eventName | `string` | 해당 이벤트 Name(`onExcalendar`) |
+| sheet | `object` | Sheet object where the event occurred |
+| params | `object` | The param argument of the delivered event (`onScroll`, `onKeyDown`, `onAfterFilter`, `onClick`) |
+| evType | `string` | Name of the delivered event (`onScroll`, `onKeyDown`, `onAfterFilter`, `onClick`) |
+| eventName | `string` | Name of this event (`onExcalendar`) |
 
 
 
@@ -40,28 +39,28 @@ or
 ### Example
 
 ```javascript
-// Cols 옵션에서 셀 영역에 외부 달력을 표시하는 예시 (dateRangePicker)
+// Example of displaying an external calendar in the cell area in Cols options (dateRangePicker)
 "Cols": [
   {
-    "Header": "날짜-daterangepicker","Type": "Date","Name": "DateData","Width": 200,"Align": "Center","CanEdit": 1,"Format": "yyyy-MM-dd","EmptyValue": "날짜를 입력해주세요","DataFormat":"yyyyMMdd",
+    "Header": "Date-daterangepicker","Type": "Date","Name": "DateData","Width": 200,"Align": "Center","CanEdit": 1,"Format": "yyyy-MM-dd","EmptyValue": "Please enter a date","DataFormat":"yyyyMMdd",
     "Button": "https://www.ibsheet.com/demo/js/lib/sheet/Main/calendar.png",
     OnClickSide: function (evtParam) {
       var eRow = evtParam.row;
       var eCol = evtParam.col;
       var DateCol = "DateData";
       var cellPos = evtParam.sheet.getCell(eRow, eCol).getBoundingClientRect();
-      sheetPopCalendar(evtParam, cellPos, DateCol,true); //단일 달력
+      sheetPopCalendar(evtParam, cellPos, DateCol,true); //Single calendar
     }
   },
   {
-    "Header": "예약 날짜(From~To)-daterangepicker","Type": "Date",
-    "Name": "FromToData","Width": 250,"Align": "Center","CanEdit": 1,"Format": "yyyy-MM-dd","EmptyValue": "날짜를 입력해주세요","DataFormat":"yyyyMMdd",
-    "Button": "https://www.ibsheet.com/demo/js/lib/sheet/Main/calendar.png", 
-    "Range": 1, /*날짜를 범위나 여러개 선택 가능하게 설정*/
+    "Header": "Reservation Date(From~To)-daterangepicker","Type": "Date",
+    "Name": "FromToData","Width": 250,"Align": "Center","CanEdit": 1,"Format": "yyyy-MM-dd","EmptyValue": "Please enter a date","DataFormat":"yyyyMMdd",
+    "Button": "https://www.ibsheet.com/demo/js/lib/sheet/Main/calendar.png",
+    "Range": 1, /*Enable selecting date range or multiple dates*/
     OnClickSide: function (evtParam) {
       var eRow = evtParam.row;
       var eCol = evtParam.col;
-      var DateCol = "FromToData"; 
+      var DateCol = "FromToData";
       var cellPos = evtParam.sheet.getCell(eRow, eCol).getBoundingClientRect();
       sheetPopCalendar(evtParam, cellPos, DateCol);
     }
@@ -69,7 +68,7 @@ or
 ]
 
 options.Events = {
-  // 외부 달력 이벤트 닫기 (onScroll, onKeyDown, onAfterFilter, onClick)
+  // Close external calendar events (onScroll, onKeyDown, onAfterFilter, onClick)
   onExcalendar : function (evtParam) {
 
     var isCal = false;
@@ -82,13 +81,13 @@ options.Events = {
         if (isCal) $('#CalendarInput').data('daterangepicker').remove();
         break;
       case "onAfterFilter":
-        // 필터행 초기화인 경우
+        // When filter row is reset
         if (evtParam.sheet.FCol == "FromData" && evtParam.sheet.FRow[evtParam.sheet.FCol] == '') {
           evtParam.sheet.doFilter("ToData",'');
           if (isCal) $('#CalendarInput').data('daterangepicker').remove();
         }
         break;
-      case "onKeyDown": //esc키를 누를
+      case "onKeyDown": //When pressing the Esc key
         if (evtParam.params.name == "Esc" && isCal) $('#CalendarInput').data('daterangepicker').remove();
         break;
       case "onClick":
@@ -98,66 +97,66 @@ options.Events = {
   }
 }
 
-// onClickSide 이벤트에서 외부 달력을 표시하는 함수
+// Function to display external calendar from onClickSide event
 function sheetPopCalendar (par, pos, DateCol, singleDatePicker, calHeight) {
 
   if (!par || !pos) return;
 
-  // 달력이 표시될 시트 객체
+  // Sheet object where the calendar will be displayed
   const sheet = par.sheet;
-  
-  //달력을 띄우기 위해서 input 객체를 하나 삽입
+
+  //Insert an input element to display the calendar
   if( $("#CalendarInput").length == 0 ) {
-	
-    // 속성 설정
+
+    // Property settings
     const inputElement = document.createElement("input");
 
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("id", "CalendarInput");
-    inputElement.setAttribute("tabindex", "-1"); //tab키를 눌러서 focus 이동시 숨겨진 달력 input에는 focus를 주지 않도록 설정정
+    inputElement.setAttribute("tabindex", "-1"); //Prevent focus from moving to the hidden calendar input when pressing the tab key
     inputElement.setAttribute("style", "opacity: 0; position: absolute;");
     //inputElement.setAttribute("readonly", "true");
 
-    //body에 달력을 띄우기 위한 input 추가
+    //Add input for calendar display to body
 	  document.body.appendChild(inputElement);
   }
 
-  const datepicker = $('#CalendarInput'); 
-  
-  const sheetDate = sheet.getValue(par.row, DateCol); //시트의 셀에 표시된 날짜값
-  
-  //시트 셀의 데이터를 달력 input에 설정
-  datepicker.val(sheetDate); 
-  
-  //dom의 높이 및 공간 계산 후 달력 위치 결정
+  const datepicker = $('#CalendarInput');
+
+  const sheetDate = sheet.getValue(par.row, DateCol); //Date value displayed in the sheet cell
+
+  //Set the sheet cell data to the calendar input
+  datepicker.val(sheetDate);
+
+  //Calculate DOM height and space, then determine calendar position
   const datepickerHeight = calHeight || 290;
-  const datepickersingleDate = singleDatePicker || false;  // 달력의 높이(크기)
-  const windowHeight = $(document).height();  // document의 height
+  const datepickersingleDate = singleDatePicker || false;  // Calendar height (size)
+  const windowHeight = $(document).height();  // document height
   const spaceBelow = windowHeight - pos.bottom;
 
-  const dropDirection = (spaceBelow > datepickerHeight) ? 'down' : 'up'; // 달력이 위로 펼쳐질지 아래로 펼쳐질지 계싼
+  const dropDirection = (spaceBelow > datepickerHeight) ? 'down' : 'up'; // Calculate whether the calendar expands upward or downward
 
   datepicker.daterangepicker({
     locale: {
-      format: 'YYYY-MM-DD', // 날짜 형식
-      separator: '~',      // 구분자를 ' ~ '로 설정 (From - To 사이)
-      applyLabel: '적용', 
-      cancelLabel: '취소', 
-      fromLabel: '시작일', 
-      toLabel: '종료일', 
-      daysOfWeek: ['일', '월', '화', '수', '목', '금', '토'],
-      monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+      format: 'YYYY-MM-DD', // Date format
+      separator: '~',      // Set separator to '~' (between From - To)
+      applyLabel: 'Apply',
+      cancelLabel: 'Cancel',
+      fromLabel: 'Start Date',
+      toLabel: 'End Date',
+      daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     drops: dropDirection,
-    singleDatePicker: datepickersingleDate, // 범위선택용 달력, 싱글 달력
-    showDropdowns: true,     // 드롭다운 선택 가능
-    autoUpdateInput: false,  // 자동 업데이트 방지 (사용자가 선택한 날짜만 표시)
+    singleDatePicker: datepickersingleDate, // Range selection calendar, single calendar
+    showDropdowns: true,     // Enable dropdown selection
+    autoUpdateInput: false,  // Prevent auto update (only display user-selected date)
 
   });
 
-  //인풋의 위치를 시트의 row, col로 이동하고 input에 focus를 줘서 달력을 열리게 한다.
+  //Move the input position to the sheet's row, col and give focus to the input to open the calendar
   let leftX = pos.x;
-  if (par.row.Kind == "Filter"){ //필터행일경우 인풋의 위치를 좌측으로 이동, 필터연산자(같음, 같지않음등) 선택하기 위해서
+  if (par.row.Kind == "Filter"){ //If it's a filter row, move the input position to the left for filter operator selection (equals, not equals, etc.)
     leftX += 30;
   }
 
@@ -168,27 +167,27 @@ function sheetPopCalendar (par, pos, DateCol, singleDatePicker, calHeight) {
 	  height:`${par.event.Height}px`,
 	  borderTopStyle : "none",
 	  borderBottomStyle : "none",
-    width: '30px' 		// 너비를 적당히 설정
-  }).show().focus(); 	
+    width: '30px' 		// Set appropriate width
+  }).show().focus();
 
-  // 날짜 범위 선택 후 적용 시 호출되는 콜백
+  // Callback called after date range selection and apply
   datepicker.on('apply.daterangepicker', function(ev, picker) {
-    //시트에 값을 넣을때는 포멧 구분자를 제거 하고 넣는다.
+    //Remove format separator when putting values into the sheet
     const startDate = picker.startDate.format('YYYYMMDD');
     const endDate = picker.endDate.format('YYYYMMDD');
     const dateRangeText = `${startDate} ~ ${endDate}`;
     const displayValue = picker.singleDatePicker ? startDate : dateRangeText
 
-    // 인풋박스에 날짜 표시
+    // Display date in input box
     $(this).val(displayValue);
-    
-    // 필터행이면 필터 처리
+
+    // If it's a filter row, perform filter processing
     if (par.row.Kind === "Filter") {
       function filterOptions(data, excludeKey) {
         if (!Array.isArray(data) || data.length === 0) {
           return ["", "", ""];
         }
-      
+
         const filtered = data.filter(item => item[0] !== excludeKey);
         const colNames = filtered.map(item => item[0]).join('|');
         const colValues = filtered.map(item => item[1]).join('|');
@@ -197,39 +196,39 @@ function sheetPopCalendar (par, pos, DateCol, singleDatePicker, calHeight) {
         return [`|${colNames}|`, `|${colValues}|`, `|${colTypes}|`];
 
       }
-      
-      //날짜 컬럼 말고도 필터를 했다면 이어서 필터를 적용해야 한다.
+
+      //If other filters besides the date column have been applied, the filter should be applied consecutively
       const [cols, values, operators]  = filterOptions(sheet.getFilter(0),DateCol);
 
       sheet.doFilter(
-        `|${DateCol}${cols}`, 
-        `|${displayValue}${values}`, 
+        `|${DateCol}${cols}`,
+        `|${displayValue}${values}`,
         `|1${operators}`
       );
     }else{
       sheet.setValue(par.row, DateCol, displayValue);
-    }  
+    }
   });
 
-  //외부 달력을 닫기위해 필요한 이벤트(onScroll, onKeyDown, onAfterFilter, onClick)
+  //Events needed to close the external calendar (onScroll, onKeyDown, onAfterFilter, onClick)
   sheet.bind("onExcalendar" , function(evtParam) {
     let isCal = false;
     const evtName = evtParam.evType;
     const picker = $('#CalendarInput').data('daterangepicker');
 
-    if (picker && picker.isShowing) { //달력이 떠 있는지 체크
+    if (picker && picker.isShowing) { //Check if the calendar is displayed
       isCal = true;
-    } 
+    }
 
     switch (evtName) {
-      case "onScroll": //시트에서 스크롤시 달력을 닫는다.
+      case "onScroll": //Close the calendar when scrolling in the sheet
         if (isCal) $('#CalendarInput').data('daterangepicker').remove();
         break;
-      case "onKeyDown": //esc키를 누를때 달력을 닫는다.
+      case "onKeyDown": //Close the calendar when pressing the Esc key
         if (evtParam.params.name == "Esc" && isCal) $('#CalendarInput').data('daterangepicker').remove();
         break;
       case "onClick":
-        // 시트 특정 영역 클릭시 달력을 닫고 싶을 때 로직 추가
+        // Add logic here if you want to close the calendar when clicking on a specific area of the sheet
         break;
     }
   });
@@ -243,5 +242,5 @@ function sheetPopCalendar (par, pos, DateCol, singleDatePicker, calHeight) {
 
 | product | version | desc |
 |---------|---------|------|
-| core | 8.3.0.5 | 기능 추가 |
+| core | 8.3.0.5 | Feature added |
 

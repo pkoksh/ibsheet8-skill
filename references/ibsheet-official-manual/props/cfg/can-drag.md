@@ -2,13 +2,12 @@
 KEY: canDrag
 KIND: config-property
 PATH: props/cfg/can-drag
-ALIAS: 마우스, 드래그로, 행을, 이동할지, 여부를
-ALIAS_EN: can, drag
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-drag
+ALIAS_EN: whether, rows, moved, mouse, drag, candrag, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/can-drag
 ---
 # CanDrag ***(cfg)***
 
-> 마우스 드래그로 행을 이동할지 여부를 설정합니다.
+> Sets whether rows can be moved by mouse drag.
 
 
 ### Type
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/can-drag
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|마우스 드래그를 통한 행 이동 불가 (`default`)|
-|`1(true)`|마우스 드래그를 통한 행 이동 가능|
+|`0(false)`|Row move by mouse drag not allowed (`default`)|
+|`1(true)`|Row move by mouse drag allowed|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-   "CanDrag": true       //마우스 드래그를 통한 행 이동 설정
+   "CanDrag": true       // Enable row move by mouse drag
 };
 ```
 
@@ -41,4 +40,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

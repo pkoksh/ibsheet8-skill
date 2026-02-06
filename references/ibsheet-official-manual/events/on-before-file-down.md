@@ -2,17 +2,16 @@
 KEY: onBeforeFileDown
 KIND: event
 PATH: events/on-before-file-down
-ALIAS: 설정된, 열에, 위치한, 셀을, 클릭한
-ALIAS_EN: on, before, file, down
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-before-file-down
+ALIAS_EN: event, called, clicking, cell, column, type, docs, props
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-before-file-down
 ---
 # onBeforeFileDown ***(event)***
-> [Type](/docs/props/col/type)이 `File` 설정된 열에 위치한 셀을 클릭한 경우 호출되는 이벤트입니다.
+> Event called when clicking a cell in a column where [Type](/docs/props/col/type) is set to `File`.
 
-> 파일 다운로드 시 발생하는 이벤트로 저장된 셀에 한에서 발생합니다. 파일이 업로드 된 셀이 저장 전인 경우에는 해당 이벤트가 발생하지 않습니다. 
- 
-> 파일 다운로드 전에 발생하며 `true(1)`리턴시 다운로드가 동작하지 않습니다. 
- 
+> This event fires during file download and only for saved cells. It does not fire if the cell with an uploaded file has not been saved yet. 
+
+> Fires before file download, and returning `true(1)` prevents the download from executing. 
+
 
 ### Syntax
 
@@ -27,11 +26,11 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|셀의 열이름|
-|path|`string`|[Path](/docs/props/cell/path) 또는 [FilePath](/docs/props/cfg/export)로 지정된 파일이 저장된 경로|
-|value|`string`|셀 값(파일 이름)|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) where the cell is located|
+|col|`string`|Column name of the cell|
+|path|`string`|Path where the file is stored, specified by [Path](/docs/props/cell/path) or [FilePath](/docs/props/cfg/export)|
+|value|`string`|Cell value (file name)|
 
 ### Return
 ***boolean***
@@ -40,14 +39,14 @@ or
 ### Example
 ```javascript
 options.Events = {
-    // 클릭한 셀의 파일의 호출 경로 변경
+    // Change the file call path of the clicked cell
     onBeforeFileDown: function (evtParam) {
-        location.href = "변경할 url" + evtParam.value;
+        location.href = "URL to change" + evtParam.value;
         return true;
     }
 }
 ```
-**위의 예제에서 `false(0)` 반환 시 클릭한 셀의 경로로 다운로드 됩니다.**
+**In the above example, returning `false(0)` will download from the clicked cell's path.**
 
 ### Read More
 - [Path cell](/docs/props/cell/path) 
@@ -56,11 +55,11 @@ options.Events = {
 
 - [Type appendix](/docs/appx/type) 
 
-- [File Type 업로드 appendix](/docs/appx/file-type-upload) 
+- [File Type upload appendix](/docs/appx/file-type-upload) 
 
 
 ### Since
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
+|core|8.0.0.7|Feature added|

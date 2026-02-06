@@ -2,13 +2,12 @@
 KEY: standardFilter
 KIND: config-property
 PATH: props/cfg/standard-filter
-ALIAS: 트리에서, 필터, 기능, 사용시, 하위
-ALIAS_EN: standard, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/standard-filter
+ALIAS_EN: show, hide, behavior, child, nodes, filter, feature, tree
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/standard-filter
 ---
 # StandardFilter ***(cfg)***
 
-> 트리에서 필터 기능 사용시 하위 노드에 대한 보임 감춤 여부를 설정합니다..
+> Sets the show/hide behavior for child nodes when using the filter feature in a tree.
 
 
 ### Type
@@ -17,21 +16,21 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/standard-
 ### Options
 |Value|Description|
 |-----|-----|
-|0|부모 행부터 자식행 순으로 검색하여 필터링합니다. (찾고자 하는 값을 자식행만 갖고 있는 경우에는 표시되지 않습니다.)|
-|1|사용금지 (depreated)|
-|2|찾고자 하는 값이 자식행에 있는 경우, 해당 행과, 부모 행을 모두 표시 합니다. (`default`)|
-|3|찾고자 하는 값이 자식행에 있는 경우, 해당 행의 부모 행과 자식을 모두 표시 합니다.|
+|0|Searches and filters from parent rows to child rows in order. (If only child rows have the searched value, they are not displayed.)|
+|1|Prohibited (deprecated)|
+|2|If the searched value is in a child row, both the corresponding row and parent rows are displayed. (`default`)|
+|3|If the searched value is in a child row, both the parent rows and all children of that row are displayed.|
 
 
 ### Example
 ```javascript
 options = {
     Cfg:{
-      StandardFilter: 3 // 트리에서 필터기능 사용시 찾은 행의 자식행까지 표시
+      StandardFilter: 3 // When using filter in tree, also display children of found rows
     },
     Cols: [...]
  };
- 
+
 ```
 
 ### Read More
@@ -43,4 +42,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.47|기능 추가|
+|core|8.1.0.47|Feature added|

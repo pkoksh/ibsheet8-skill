@@ -2,15 +2,14 @@
 KEY: touchScrollCount
 KIND: config-property
 PATH: props/cfg/touch-scroll-count
-ALIAS: 에서, 모바일, 터치, 스크롤, 이동할
-ALIAS_EN: touch, scroll, count
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/touch-scroll-count
+ALIAS_EN: feature, number, rows, move, mobile, touch, scroll, searchmode
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/touch-scroll-count
 ---
 # TouchScrollCount ***(cfg)***
 
-> `SearchMode: 0` 에서 모바일 터치 스크롤 시 이동할 행의 개수를 설정하는 기능 입니다. 
+> A feature that sets the number of rows to move during mobile touch scroll in `SearchMode: 0`. 
 
-> 설정 하지 않으면 한번 스크롤 움직임 시 3개의 행만큼 움직입니다.
+> If not set, 3 rows are moved per single scroll movement.
 
 ### Type
 `number`
@@ -18,12 +17,12 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/touch-scr
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|모바일 터치 스크롤 시 이동할 행의 개수|
+|`number`|Number of rows to move during mobile touch scroll|
 
 ### Example
 ```javascript
 options.Cfg = {
-   TouchScrollCount: 1 // 터치 스크롤 시 행의 개수가 1개씩 움직입니다.
+   TouchScrollCount: 1 // Moves 1 row at a time during touch scroll.
 };
 ```
 
@@ -34,4 +33,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.52|기능 추가|
+|core|8.1.0.52|Feature added|

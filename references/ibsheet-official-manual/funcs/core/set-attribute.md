@@ -2,21 +2,21 @@
 KEY: setAttribute
 KIND: method
 PATH: funcs/core/set-attribute
-ALIAS: sheet.setAttribute, setAttribute(), 특정, 셀에, 속성을, 설정합니다
-ALIAS_EN: set, attribute
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-attribute
+ALIAS: sheet.setAttribute, setAttribute()
+ALIAS_EN: property, specific, row, column, cell, setattribute, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-attribute
 ---
 # setAttribute ***(method)***
 
-> 특정 행,열,셀에 속성을 설정합니다.
+> Sets a property for a specific row, column, or cell.
 
-> `row`를 `null`로 설정시 열에 대한 속성으로 설정됩니다.
+> If `row` is `null`, the property is set for the column.
 
-> `col`을 `null`로 설정시 행에 대한 속성으로 설정됩니다.
+> If `col` is `null`, the property is set for the row.
 
-> 모든 속성을 설정할 수 있는 것은 아니기 때문에 해당 속성에 대해 설정하는 함수가 있다면 그 함수를 사용하실 것을 권합니다.
+> Since not all properties can be set this way, if a dedicated function exists for the property, it is recommended to use that function instead.
 
-> `Visible`, `Width`는 setAttribute보다 관련 함수 호출을 권장합니다.
+> For `Visible` and `Width`, it is recommended to call the related functions instead of setAttribute.
 
 >  - `hideCol`, `showCol`, `hideRow`, `setColWidth`
 
@@ -28,25 +28,25 @@ void setAttribute( row, col, attr, val, render );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|row |`object`|선택|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|선택|열이름|
-|attr|`string`|필수|설정하고자 하는 속성명|
-|val|`mixed`|필수|설정하고자 하는 속성 값|
-|render|`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
+|row |`object`|Optional|[data row object](/docs/appx/row-object)|
+|col |`string`|Optional|column name|
+|attr|`string`|Required|Property name to set|
+|val|`mixed`|Required|Property value to set|
+|render|`boolean`|Optional|whether immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+`0(false)`:Not reflected
+`1(true)`:Immediately reflected (`default`)|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-//특정 셀에 배경색을 붉은색으로 변경
+// Change a specific cell's background color to red
 sheet.setAttribute(sheet.getFocusedRow(), sheet.getFocusedCol() ,"Color" ,"#FF0000" ,1);
-//특정 열에 편집을 불가능하게 변경
+// Make a specific column non-editable
 sheet.setAttribute(null, "ColName", "CanEdit", 0, 1);
-//특정행의 글자를 두껍게 변경
+// Make a specific row's text bold
 sheet.setAttribute({row:sheet.getRowById("AR20"), attr:"TextStyle", val:1, render:1});
 ```
 
@@ -58,4 +58,4 @@ sheet.setAttribute({row:sheet.getRowById("AR20"), attr:"TextStyle", val:1, rende
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

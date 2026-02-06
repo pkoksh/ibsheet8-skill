@@ -2,26 +2,26 @@
 KEY: getSelectedRange
 KIND: method
 PATH: funcs/core/get-selected-range
-ALIAS: sheet.getSelectedRange, getSelectedRange(), 현재, 선택된, 영역을, 이중, 배열로
-ALIAS_EN: get, selected, range
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-selected-range
+ALIAS: sheet.getSelectedRange, getSelectedRange()
+ALIAS_EN: returns, currently, selected, areas, array, getselectedranges, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-selected-range
 ---
 # getSelectedRanges ***(method)***
-> 현재 선택된 영역을 이중 배열로 리턴합니다.
+> Returns the currently selected areas as an array.
 
-> 가령 다음과 같이 선택 후 `default` 형태로 값을 얻을시 리턴되는 값은 다음과 같습니다.
+> For example, after selecting as shown below, the return value in `default` form is as follows.
 
 
 ###
-![선택영역얻기](/assets/imgs/getSelectedRanges.png "선택영역얻기")
-<!-- IMAGE: 스크린샷/예시 이미지 - 선택영역얻기 -->
+![Get selected area](/assets/imgs/getSelectedRanges.png "Get selected area")
+<!-- IMAGE: Screenshot/Example Image - Get selected area -->
 
 
 ```
 [
-    [row1객체, "CONTRACTNO", row2객체, "CARNO", 4, 3, 6, 3]
-    ,[row1객체, "RENTFEE", row2객체, "RENTDATE", 5, 7, 4, 2]
-    ,[row1객체, "CARNO", row2객체, "RENTFEE", 11, 5, 4, 3]
+    [row1object, "CONTRACTNO", row2object, "CARNO", 4, 3, 6, 3]
+    ,[row1object, "RENTFEE", row2object, "RENTDATE", 5, 7, 4, 2]
+    ,[row1object, "CARNO", row2object, "RENTFEE", 11, 5, 4, 3]
 ]
 ```
 ### Syntax
@@ -32,27 +32,27 @@ object getSelectedRanges( rowtype, coltype );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|rowtype|`number`|선택|`0`:구분없이 선택영역 모두 추출  (`default`)
-`1`:트리사용시 접힌 자식은 빼고 추출
-`2`:페이지 단위로 구분해서 추출|
-|coltype|`number`|선택|`0`:구분없이 모두 추출 (`default`)
-`1`:영역(Left/Center/Right)별로 구분해서 추출|
+|rowtype|`number`|Optional|`0`:Extract all selected areas without separation (`default`)
+`1`:When using tree, extract excluding collapsed children
+`2`:Separate and extract by page unit|
+|coltype|`number`|Optional|`0`:Extract all without separation (`default`)
+`1`:Separate and extract by area (Left/Center/Right)|
 
 ### Return Value
-***object (array[array])*** : 선택된 영역들에 대한 이중 배열
+***object (array[array])*** : Array of selected areas
 
-[시작[데이터 로우 객체](/docs/appx/row-object) , 시작열이름 , 종료[데이터 로우 객체](/docs/appx/row-object) , 종료열이름 , 시작행인덱스 , 시작열인덱스 , 선택행의개수 , 선택열의 개수]
+[start [data row object](/docs/appx/row-object), start column name, end [data row object](/docs/appx/row-object), end column name, start row index, start column index, number of selected rows, number of selected columns]
 
 
 ### Example
 ```javascript
-//선택된 셀의 개수를 알아봄
+// Check the number of selected cells
 var selectRange = sheet.getSelectedRanges();
 var selectCellCnt = 0;
 for(var i=0;i<selectRange.length;i++){
     selectCellCnt += parseInt(selectRange[i][6]) * parseInt(selectRange[i][7]);
 }
-alert("총 "+selectCellCnt+"개 셀을 선택하셨습니다.");
+alert("Total "+selectCellCnt+" cells selected.");
 ```
 
 ### Read More
@@ -63,4 +63,4 @@ alert("총 "+selectCellCnt+"개 셀을 선택하셨습니다.");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

@@ -2,17 +2,16 @@
 KEY: onShowCol
 KIND: event
 PATH: events/on-show-col
-ALIAS: 열이, 보이거나, 숨겨질, 호출되는, 이벤트입니다
-ALIAS_EN: on, show, col
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-show-col
+ALIAS_EN: event, called, column, shown, hidden, onshowcol
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-show-col
 ---
 # onShowCol ***(event)***
-> 열이 보이거나 숨겨질 때 호출되는 이벤트입니다.
+> Event called when a column is shown or hidden.
 
-> `1(true)`를 리턴 시 열에 대한 숨김/보임 동작을 실행하지 않고 현상 유지합니다.
+> Returning `1(true)` prevents the show/hide action for the column and maintains the current state.
 
 <!--!
-> `[비공개 설명]` 이 이벤트는 showCol, hideCol 메소드를 실행시 호출됩니다.
+> `[Private description]` This event is called when the showCol or hideCol methods are executed.
 !-->
 
 ### Syntax
@@ -30,11 +29,11 @@ or
 
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|col|`string`|화면에서 보이거나 숨겨질 열이름|
-|hide|`boolean`|숨김 여부
-`0(false)`:보임
-`1(true)`:숨김|
+|sheet|`object`|Sheet object|
+|col|`string`|Column name that will be shown or hidden on screen|
+|hide|`boolean`|Hidden status
+`0(false)`:Shown
+`1(true)`:Hidden|
 
 ### Return
 ***boolean***
@@ -43,7 +42,7 @@ or
 ```javascript
 options.Events = {
     onShowCol:function(evtParam){
-        // 도시 열에 있는 셀 값이 서울인 경우와 인천인 경우에 대해 다른 Enum을 보여줍니다.
+        // Prevent the "privacy" column from being shown
         if (evtParam.hide == "0" && evtParam.col == "privacy") {
             return true;
         }
@@ -60,4 +59,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

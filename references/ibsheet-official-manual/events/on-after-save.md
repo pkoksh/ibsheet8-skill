@@ -2,14 +2,13 @@
 KEY: onAfterSave
 KIND: event
 PATH: events/on-after-save
-ALIAS: 시트에서, 변경된, 내용을, 서버에, 전송한
-ALIAS_EN: on, after, save
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-save
+ALIAS_EN: event, fires, server, responds, sending, changed, content, sheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-save
 ---
 # onAfterSave ***(event)***
-> 시트에서 변경된 내용을 서버에 전송한 후 서버에서 응답이 왔을 때 발생하는 이벤트입니다.
+> Event that fires when the server responds after sending changed content from the sheet to the server.
 
-> 해당 이벤트에서 `1(true)`를 리턴하면 저장 실패시(server code 404나 500에러에 의한) 시트에 보여지는 오류 메세지 출력을 막을 수 있습니다. 
+> Returning `1(true)` in this event can suppress the error message displayed in the sheet when save fails (due to server code 404 or 500 errors). 
 
 
 ### Syntax
@@ -24,17 +23,16 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|서버에 변경된 내용을 전송한 시트 객체|
-|result |`number`|**서버 응답 메시지**
-`0`:성공
-`-1`:빈 URL (`예: sheet.doSave("")`)
-`-3`:요청 Url이 잘못된 경우나 네트워크 오류 등으로 결과를 받지 못한 경우
-`-5`:응답 결과가 빈값인 경우
-`-6`:연결 시간 초과((cfg)Timeout 초과)
-`-7`:잘못된 데이터 형식(대부분 데이터 이상)
-`이외`:사용자 정의 코드|
-|message|`string`|서버에서 전달 받은 메시지|
-|response|`object`|서버 응답 객체(XMLHttpRequest 객체)|
+|sheet|`object`|Sheet object that sent the changed content to the server|
+|result |`number`|**Server response message**
+`0`:Success
+`-3`:When the request URL is wrong or the result was not received due to network errors
+`-5`:When the response result is empty
+`-6`:Connection timeout ((cfg)Timeout exceeded)
+`-7`:Invalid data format (mostly data issues)
+`Other`:User-defined code|
+|message|`string`|Message received from the server|
+|response|`object`|Server response object (XMLHttpRequest object)|
 
 ### Return
 ***boolean***
@@ -43,9 +41,9 @@ or
 ```javascript
 options.Events = {
     onAfterSave: function(evtParam) {
-        // 서버 응답이 '성공'인 경우
+        // When the server response is 'success'
         if (evtParam.result == 0) {
-            evtParam.sheet.showMessageTime({message: "성공적으로 저장되었습니다.", time: 1000});
+            evtParam.sheet.showMessageTime({message: "Successfully saved.", time: 1000});
         }
     }
 }
@@ -60,5 +58,5 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.17|`return` 동작 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.17|`return` behavior added|

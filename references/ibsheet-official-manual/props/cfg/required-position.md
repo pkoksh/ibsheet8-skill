@@ -2,12 +2,11 @@
 KEY: requiredPosition
 KIND: config-property
 PATH: props/cfg/required-position
-ALIAS: 보여질, 위치를, 설정합니다
-ALIAS_EN: required, position
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/required-position
+ALIAS_EN: position, required, docs, props, col, displayed, requiredposition, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/required-position
 ---
 # RequiredPosition ***(cfg)***
-> [Required](/docs/props/col/required)가 보여질 위치를 설정합니다.
+> Sets the position where [Required](/docs/props/col/required) is displayed.
 
 ### Type
 String
@@ -15,13 +14,13 @@ String
 ### Options
 |Value|Description|
 |-----|-----|
-|`Left`|헤더의 왼쪽에 `Required` 표시를 합니다. (`default`)
+|`Left`|Display the `Required` indicator on the left side of the header. (`default`)
 ![option1](/assets/imgs/required1.png "option1")
-<!-- IMAGE: 스크린샷/예시 이미지 - option1 -->|
-|`Right`|헤더의 오른쪽에 `Required` 표시를 합니다
+<!-- IMAGE: Screenshot/Example Image - option1 -->|
+|`Right`|Display the `Required` indicator on the right side of the header.
 ![option2](/assets/imgs/required2.png "option2")
-<!-- IMAGE: 스크린샷/예시 이미지 - option2 -->|
-|`None`|헤더에 `Required` 마크를 표시하지 않습니다
+<!-- IMAGE: Screenshot/Example Image - option2 -->|
+|`None`|Do not display the `Required` mark on the header.
 |
 
 
@@ -29,7 +28,7 @@ String
 ```javascript
 options = {
     Cfg:{
-      RequiredPosition: "Right", // 헤더의 오른쪽에 Required를 설정
+      RequiredPosition: "Right", // Set Required on the right side of the header
     },
     Cols : [
       {Type: "Text", Name: "sName", Required: 1 ...},
@@ -47,5 +46,5 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.2.0.13|`None` 옵션 추가|
+|core|8.0.0.0|Feature added|
+|core|8.2.0.13|`None` option added|

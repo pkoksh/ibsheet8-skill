@@ -2,16 +2,13 @@
 KEY: addClass
 KIND: cell-property
 PATH: props/cell/add-class
-ALIAS: 열의, 이고, 속성의, 값이, 경우
-ALIAS_EN: add, class
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/add-class
+ALIAS_EN: css, class, name, apply, button, cell, column, type
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/add-class
 ---
 # AddClass ***(cell)***
-> 열의 [Type](./type)이 `Button`이고 **[Button](./button)속성의 값이 "Button"인 경우**, 셀 버튼에 적용할 css class 명을 설정합니다.
+> Sets the CSS class name to apply to a button cell when the column Type is `Button` and the `Button` property value is `Button`.
 
-> 가령 AddClass에 "MYBTN"으로 값을 설정하면 실제 열에는 "MYBTN"의 css class 가 추가 됩니다.
-
-
+> **<mark>Note</mark>** : CSS applied via Class **will not be reflected in the design when downloading to Excel.**
 
 ### Type
 `string`
@@ -19,31 +16,38 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/add-clas
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|열에 부여할 css class 명|
+|`string`|CSS class name to assign to the column|
 
 ### Example
+```css
+<style>
+/* Use !important for CSS priority */
+.MYBTN{color:#FF0000 !important; font-weight:700 !important;}
+</style>
+```
 ```javascript
-//1. 메소드를 통해 속성 설정
+//1. Set property via method
 sheet.setAttribute(sheet.getRowById("AR99"), "EDate", "AddClass", "MYBTN");
 
 
-//2. 객체에 직접 접근해서 속성 설정(열이름이 CLS 로 가정)
+//2. Set property by directly accessing the object (assuming column name is CLS)
 var ROW = sheet.getRowById("AR10");
-ROW["CLSAddClass"] = "BTN";
-//변경내용 확인
+ROW["CLSAddClass"] = "MYBTN";
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성설정(열이름이 CLS 로 가정)
+//3. Set property within loaded data (assuming column name is CLS)
 {
     data:[
         {... , "CLSAddClass":"MYBTN" , ...}
     ]
 }
 ```
+### Try it
+- [Demo of addClass](https://jsfiddle.net/gh/get/library/pure/ibsheet/ibsheet8-manual-sample/tree/master/samples/properties/Col/AddClassFormula/)
 
 ### Read More
-- [ButtonClass cell](./button-class)
 - [Button col](/docs/props/col/button)
 - [ButtonText col](/docs/props/col/button-text)
 - [UseButton cfg](/docs/props/cfg/use-button)
@@ -53,4 +57,4 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

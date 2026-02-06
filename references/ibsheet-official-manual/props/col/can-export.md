@@ -2,17 +2,16 @@
 KEY: canExport
 KIND: column-property
 PATH: props/col/can-export
-ALIAS: 열의, 다운로드, 가능, 여부
-ALIAS_EN: can, export
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-export
+ALIAS_EN: whether, column, downloaded, canexport, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/can-export
 ---
 # CanExport ***(col)***
 
-> 열의 다운로드 가능 여부.
+> Sets whether the column can be downloaded.
 
-> 사용자가 엑셀/텍스트 다운로드 시 해당 열을 다운로드 할지 여부를 설정할 수 있습니다.
+> You can set whether to include the column when the user downloads to Excel/text.
 
-> Export API([down2Excel](/docs/funcs/excel/down-to-excel), [exportData](/docs/funcs/core/export-data) 등) 호출 시 사용하는 `downCols`와 같이 사용하는 경우 `downCols`의 우선순위가 더 높게 적용됩니다.
+> When used together with `downCols` from Export APIs ([down2Excel](/docs/funcs/excel/down-to-excel), [exportData](/docs/funcs/core/export-data), etc.), `downCols` has higher priority.
 
 ### Type
 `boolean`
@@ -20,13 +19,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/can-expor
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|다운로드 불가|
-|`1(true)`|다운로드 가능 (`default`)|
+|`0(false)`|Download disabled|
+|`1(true)`|Download enabled (`default`)|
 
 
 ### Example
 ```javascript
-//특정 열에 대해 다운로드를 막음
+// Block download for a specific column
 options.Cols = [
     ...
     { Type: "Int", Name: "Rank_Sales", CanExport: 0 ... },
@@ -43,4 +42,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

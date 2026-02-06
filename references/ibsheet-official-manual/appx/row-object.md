@@ -2,51 +2,50 @@
 KEY: rowObject
 KIND: appendix
 PATH: appx/row-object
-ALIAS: 행, 객체, 등의, 함수를, 얻게
-ALIAS_EN: row, object
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/row-object
+ALIAS_EN: data, row, objects, obtained, functions, sheet, getfocusedrow, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/row-object
 ---
-# 행 객체(Row Object)  ***(appendix)***
-> sheet.[getFocusedRow](/docs/funcs/core/get-focused-row)()나 sheet.[getRowById](/docs/funcs/core/get-row-by-id)("AR11") 등의 함수를 통해 얻게 되는 데이터 행 객체는 해당 행의 값과, 각 열 별로 설정한 속성값([CanEdit](/docs/props/row/can-edit)나 [Visible](/docs/props/row/visible) 등) 그리고 주변행이나 부모행에 대한 링크 정보를 갖고 있습니다.
+# Row Object  ***(appendix)***
+> Data row objects obtained through functions such as sheet.[getFocusedRow](/docs/funcs/core/get-focused-row)() or sheet.[getRowById](/docs/funcs/core/get-row-by-id)("AR11") contain the row's values, attribute values set for each column (such as [CanEdit](/docs/props/row/can-edit) or [Visible](/docs/props/row/visible)), and link information to neighboring rows or parent rows.
 
-## Row의 값
-행 객체가 갖고 있는 각 열의 값을 확인하거나 수정하실 수 있습니다.
+## Row Values
+You can check or modify the values of each column in the row object.
 ```javascript
 var row = sheet.getRowById("AR1");
-var AmtColumnValue = row["AMT"]; //AMT 열의 값을 얻습니다.
-row["AMT"] = 2300; //AR1행의 AMT 열의 값을 2300으로 수정합니다.
-//수정된 값은 화면에 즉시 반영되지 않고, refreshCell() 이나 refreshRow()함수를 호출하셔야 반영됩니다.
+var AmtColumnValue = row["AMT"]; //Gets the value of the AMT column.
+row["AMT"] = 2300; //Changes the value of the AMT column in row AR1 to 2300.
+//The modified value is not immediately reflected on the screen; you need to call refreshCell() or refreshRow() to apply it.
 ```
 
-## Row의 속성값
-행 객체의 각 열에 부여한 속성을 확인 하거나 수정하실 수 있습니다.
+## Row Attribute Values
+You can check or modify the attributes assigned to each column of the row object.
 ```javascript
 var row = sheet.getFocusedRow();
-var isEditable = row["AMTCanEdit"]; //AMT 열의 수정가능여부를 확인합니다.
-row["AMTCanEdit"] = 0; //포커스된 행의 AMT열의 수정가능여부를 수정불가로 변경합니다.
-//속성값에 따라 refreshCell() 이나 refreshRow()함수를 호출하셔야 반영될 수 있습니다.
+var isEditable = row["AMTCanEdit"]; //Checks whether the AMT column is editable.
+row["AMTCanEdit"] = 0; //Changes the AMT column of the focused row to non-editable.
+//Depending on the attribute value, you may need to call refreshCell() or refreshRow() to apply the change.
 ```
 
-## Row의 링크정보
-행객체는 각 행의 위의 행,아래 행, 부모행, 자식행에 대한 링크를 갖고 있습니다.
+## Row Link Information
+Row objects have links to the row above, below, parent row, and child rows.
 
 |Name|Description|
 |---|---|
-|nextSibling|아래 행 객체(트리 사용시에는 같은 부모 안에서 아래 형제 행. 없으면 null)|
-|previousSibling|위 행 객체(트리 사용시에는 같은 부모 안에서 위 형제 행. 없으면 null)|
-|firstChild|트리 사용시 현재 행 객체의 첫번째 자식행 객체|
-|lastChild|트리 사용시 현재 행 객체의 마지막 자식행 객체|
-|parentNode|부모행 객체|
+|nextSibling|Next row object (when using tree, the next sibling row under the same parent; null if none)|
+|previousSibling|Previous row object (when using tree, the previous sibling row under the same parent; null if none)|
+|firstChild|First child row object of the current row when using tree|
+|lastChild|Last child row object of the current row when using tree|
+|parentNode|Parent row object|
 
 ```javascript
 var row = sheet.getFocusedRow();
-var nextRow = row.nextSibling; //포커스 된 행의 아래 행 객체
-var parentRow = row.parentNode; //포커스 된 행의 부모행 객체
+var nextRow = row.nextSibling; //Next row object below the focused row
+var parentRow = row.parentNode; //Parent row object of the focused row
 ```
 
 ### Read More
 
-- [행(Row) 구조에 대한 이해 getting started](/docs/start/row)
+- [Understanding Row Structure getting started](/docs/start/row)
 - [getFocusedRow method](/docs/funcs/core/get-focused-row)
 - [getRowById method](/docs/funcs/core/get-row-by-id)
 
@@ -54,4 +53,4 @@ var parentRow = row.parentNode; //포커스 된 행의 부모행 객체
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

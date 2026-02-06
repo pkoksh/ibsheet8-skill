@@ -2,15 +2,14 @@
 KEY: vAlign
 KIND: row-property
 PATH: props/row/v-align
-ALIAS: 전체의, 문자열, 상하, 정렬을, 설정합니다
-ALIAS_EN: align
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/v-align
+ALIAS_EN: vertical, text, alignment, entire, row, valign
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/v-align
 ---
 # VAlign ***(row)***
 
-> 행 전체의 문자열 상하 정렬을 설정합니다.
+> Sets the vertical text alignment for the entire row.
 
-> 좌우 정렬과 관련해서는 [Align](./align)속성을 참고하세요.
+> For horizontal alignment, refer to the [Align](./align) property.
 
 ### Type
 `string`
@@ -18,18 +17,18 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/v-align
 ### Options
 |Value|Description|
 |-----|-----|
-|`Top`|문자열 상단 정렬  (Top, TOP, top 허용)|
-|`Middle`|문자열 중단 정렬 (Middle, MIDDLE, middle 허용)|
-|`Bottom`|문자열 하단 정렬 (Bottom, BOTTOM, bottom 허용)
+|`Top`|Top-align text (Top, TOP, top allowed)|
+|`Middle`|Middle-align text (Middle, MIDDLE, middle allowed)|
+|`Bottom`|Bottom-align text (Bottom, BOTTOM, bottom allowed)
 
 ### Example
 ```javascript
-//특정행의 문자열을 상단 정렬
+//Top-align text for a specific row.
 var row = sheet.getFirstVisibleRow();
 row["VAlign"] = "Top";
 sheet.refreshRow(row);
 
-//합계 행의 문자열을 하단 정렬.
+//Bottom-align text for the footer row.
 options.Def.Footer = {"VAlign": "Bottom"};
 ```
 
@@ -42,4 +41,4 @@ options.Def.Footer = {"VAlign": "Bottom"};
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

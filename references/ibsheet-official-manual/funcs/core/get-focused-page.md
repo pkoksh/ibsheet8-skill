@@ -2,13 +2,13 @@
 KEY: getFocusedPage
 KIND: method
 PATH: funcs/core/get-focused-page
-ALIAS: sheet.getFocusedPage, getFocusedPage(), 현재, 포커스가, 위치한, 데이터, 페이지
-ALIAS_EN: get, focused, page, data
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-focused-page
+ALIAS: sheet.getFocusedPage, getFocusedPage()
+ALIAS_EN: returns, page, object, docs, appx, currently, focused, data
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-focused-page
 ---
 # getFocusedPage ***(method)***
 
-> 현재 포커스가 위치한 데이터 [페이지 객체](/docs/appx/page-object)를 리턴합니다.
+> Returns the [page object](/docs/appx/page-object) of the currently focused data.
 
 
 ### Syntax
@@ -17,11 +17,11 @@ object getFocusedPage();
 ```
 
 ### Return Value
-***page object*** : [페이지 객체](/docs/appx/page-object)
+***page object*** : [page object](/docs/appx/page-object)
 
 ### Example
 ```javascript
-//현재 포커스가 있는 페이지 객체
+//current focus present page object
 var pageObj = sheet.getFocusedPage();
 ```
 
@@ -32,4 +32,4 @@ var pageObj = sheet.getFocusedPage();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

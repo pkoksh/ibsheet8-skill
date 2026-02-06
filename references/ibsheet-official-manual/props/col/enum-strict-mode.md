@@ -2,18 +2,17 @@
 KEY: enumStrictMode
 KIND: column-property
 PATH: props/col/enum-strict-mode
-ALIAS: 설정되지, 않은, 값은, 조회, 무시되고
-ALIAS_EN: enum, strict, mode, search, query, fetch, load, retrieve
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/enum-strict-mode
+ALIAS_EN: values, enum, enumkeys, ignored, data, retrieval, setting, enumstrictmode
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/enum-strict-mode
 ---
 # EnumStrictMode ***(col)***
-> `Enum, EnumKeys`에 설정되지 않은 값은 조회 시 무시되고 `EnumStrictMode`를 `1`로 설정하게 되면 
+> Values not set in `Enum, EnumKeys` are ignored during data retrieval, but setting `EnumStrictMode` to `1` 
 
-> 설정되지 않은 값을 셀에 적용 할 수 있습니다.
+> allows values not set in the configuration to be applied to cells.
 
 ###
 ![EnumStrictMode](/assets/imgs/EnumStrictModes.png "EnumStrictMode")
-<!-- IMAGE: 스크린샷/예시 이미지 - EnumStrictMode -->
+<!-- IMAGE: Screenshot/Example Image - EnumStrictMode -->
 
 ### Type
 `number`
@@ -21,15 +20,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/enum-stri
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|`Enum, EnumKeys` 에 설정되지 않은 값을 셀에 적용하지않음. (`default`)|
-|`1`|`Enum, EnumKeys` 에 설정되지 않은 값을 셀에 적용.|
-|`2`|`Enum, EnumKeys` 에 설정되지 않은 값을 셀에 적용하고, Enum의 List에 해당 값을 추가합니다.|
+|`0`|Values not set in `Enum, EnumKeys` are not applied to cells. (`default`)|
+|`1`|Values not set in `Enum, EnumKeys` are applied to cells.|
+|`2`|Values not set in `Enum, EnumKeys` are applied to cells, and the value is added to the Enum list.|
 
 ### Example
 ```javascript
 options.Cols = [
     ...
-    // EnumStrictMode 설정
+    // EnumStrictMode setting
     {
         "Header": "Enum1",
         "Type": "Enum",
@@ -37,12 +36,12 @@ options.Cols = [
         "Name": "sEnum",
         "ColMerge": 0,
         "Align": "Center",
-        "Enum": "|한국|중국|일본",
+        "Enum": "|Korea|China|Japan",
         "EnumKeys": "|KOR|CHA|JAP",
         "EnumStrictMode" : 1,
         "RelWidth": 1
      },
-    // EnumStrictMode 미설정
+    // EnumStrictMode not set
      {
         "Header": "Enum2",
         "Type": "Enum",
@@ -50,7 +49,7 @@ options.Cols = [
         "Name": "aEnum",
         "ColMerge": 0,
         "Align": "Center",
-        "Enum": "|한국|중국|일본",
+        "Enum": "|Korea|China|Japan",
         "EnumKeys": "|KOR|CHA|JAP",
         "RelWidth": 1
       },
@@ -72,5 +71,5 @@ var data = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.3|기능 추가|
-|core|8.2.0.26|`EnumStrictMode : 2` 추가| 
+|core|8.0.0.3|Feature added|
+|core|8.2.0.26|`EnumStrictMode : 2` added|

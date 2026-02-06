@@ -2,32 +2,31 @@
 KEY: menu
 KIND: config-property
 PATH: props/cfg/menu
-ALIAS: 마우스, 우측, 버튼, 클릭, 보여질
-ALIAS_EN: menu, click
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/menu
+ALIAS_EN: context, menu, displayed, right, clicking, mouse, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/menu
 ---
 # Menu ***(Cfg)***
-> 마우스 우측 버튼 클릭 시 보여질 컨텍스트 메뉴를 설정합니다.
+> Sets the context menu displayed when right-clicking the mouse.
 
-> `InfoRow`를 제외한 시트의 다른행들에서 표시됩니다.
+> Displayed on all rows of the sheet except `InfoRow`.
 
 ### Type
-mixed( `object` \| `string` )
+`mixed`( `object` \| `string` )
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|첫글자를 구분자로 한 컨텍스트 메뉴스트링 지정 (ex: @저장@임시저장@취소 or *상신*취소) |
-|`object`|[Menu Object 설정 링크 참고](/docs/appx/menu)
+|`string`|Specifies a context menu string with the first character as a delimiter (ex: @Save@Temp Save@Cancel or *Submit*Cancel) |
+|`object`|[Refer to Menu Object configuration link](/docs/appx/menu)
 
 ### Example
 ```javascript
-// 문자열로 설정하는 경우
+// When setting as a string
 options.Cfg = {
-  Menu: "|행추가|행숨기기|행삭제"
+  Menu: "|Add Row|Hide Row|Delete Row"
 };
 
-// object로 설정하는 경우
+// When setting as an object
 options.Cfg = {
   Menu: {
     Items: [
@@ -42,7 +41,7 @@ options.Cfg = {
             this.Sheet.down2Excel({FileName:"test.xlsx",SheetDesign:1});
           }catch(e){
             if(e.message.indexOf("down2Excel is not a function")>-1){
-                console.log("%c 경고","color:#FF0000"," : ibsheet-excel.js 파일이 필요합니다.");
+                console.log("%c Warning","color:#FF0000"," : ibsheet-excel.js file is required.");
             }
           }
           break;
@@ -51,7 +50,7 @@ options.Cfg = {
             this.Sheet.down2Text();
           }catch(e){
             if(e.message.indexOf("down2Text is not a function")>-1){
-              console.log("%c 경고","color:#FF0000"," : ibsheet-excel.js 파일이 필요합니다.");
+              console.log("%c Warning","color:#FF0000"," : ibsheet-excel.js file is required.");
             }
           }
           break;
@@ -60,7 +59,7 @@ options.Cfg = {
             this.Sheet.down2Pdf();
           }catch(e){
             if(e.message.indexOf("down2Pdf is not a function")>-1){
-              console.log("%c 경고","color:#FF0000"," : ibsheet-excel.js 파일이 필요합니다.");
+              console.log("%c Warning","color:#FF0000"," : ibsheet-excel.js file is required.");
             }
           }
           break;
@@ -78,4 +77,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

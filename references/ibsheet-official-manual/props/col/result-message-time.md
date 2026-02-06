@@ -2,17 +2,16 @@
 KEY: resultMessageTime
 KIND: column-property
 PATH: props/col/result-message-time
-ALIAS: 보여질, 시간을, 설정합니다, 단위
-ALIAS_EN: result, message, time
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/result-message-time
+ALIAS_EN: duration, resultmessage, result, message, displayed, resultmessagetime, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/result-message-time
 ---
 # ResultMessageTime ***(col)***
 
-> [ResultMessage](./result-message)가 보여질 시간을 설정합니다.(ms단위)
+> Sets the duration for which the [ResultMessage](./result-message) is displayed (in ms).
 
-> 설정한 시간만큼 메세지가 보여지고 자동으로 사라집니다.
+> The message is shown for the set duration and automatically disappears.
 
-> 이 속성을 설정하지 않으면 "확인" 버튼을 누를 때까지 메세지가 보여지게 됩니다.
+> If this property is not set, the message will be shown until the "OK" button is clicked.
 
 
 ### Type
@@ -21,17 +20,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/result-me
 ### Options
 |Value|Description|
 |-----|-----|
-|`number`|메세지가 보여질 시간(ms단위)|
+|`number`|Duration for the message to be displayed (in ms)|
 
 ### Example
 ```javascript
-//이메일 주소 확인
+// Email address validation
 options.Cols = [
     ...
     {
         Type: "Text",
         ResultMask: "^[\\w\\.\\+%-]+@[A-Za-z0-9\\.-]+\\.[A-Za-z]{2,6}$",
-        ResultMessage: "이메일 주소를 확인해 주세요.",
+        ResultMessage: "Please check the email address.",
         ResultMessageTime: 800,
         Name: "sa_email",
         Width: 120,
@@ -49,4 +48,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

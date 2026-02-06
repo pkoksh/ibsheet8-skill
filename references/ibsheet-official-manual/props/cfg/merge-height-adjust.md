@@ -2,15 +2,14 @@
 KEY: mergeHeightAdjust
 KIND: config-property
 PATH: props/cfg/merge-height-adjust
-ALIAS: 같이, 높이에, 영향을, 주는, 기능을
-ALIAS_EN: merge, height, adjust
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/merge-height-adjust
+ALIAS_EN: features, affect, cell, height, htmlprefix, docs, props, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/merge-height-adjust
 ---
 # MergeHeightAdjust ***(cfg)***
 
-> [HtmlPrefix](/docs/props/col/html-prefix)나 [HtmlPostfix](/docs/props/col/html-postfix)와 같이 Cell의 높이에 영향을 주는 기능을 사용할 경우, 병합 영역 또는 시트의 레이아웃 깨짐 현상이 발생 시, 병합 영역의 높이를 조정합니다.
+> When using features that affect cell height such as [HtmlPrefix](/docs/props/col/html-prefix) or [HtmlPostfix](/docs/props/col/html-postfix), adjusts the height of merged areas when layout breakage occurs in merge areas or the sheet.
 
-> 이 속성을 true로 설정 시, 시트 내의 병합 정보를 확인하여 수행됨으로써, 병합 정보 수에 따라 시트가 느려질 수 있습니다.
+> When this property is set to true, it checks the merge information within the sheet, which may slow down the sheet depending on the amount of merge information.
 
 ### Type
 `boolean`
@@ -18,13 +17,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/merge-hei
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|병합된 행의 높이 보정 안함 (`default`)|
-|`1(true)`|병합된 행의 높이 보정|
+|`0(false)`|Do not adjust height of merged rows (`default`)|
+|`1(true)`|Adjust height of merged rows|
 
 ### Example
 ```javascript
 options.Cfg = {
-  MergeHeightAdjust: 1 // 병합된 영역의 높이 보정
+  MergeHeightAdjust: 1 // Adjust the height of merged areas
 };
 ```
 
@@ -40,4 +39,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.3|기능 추가|
+|core|8.3.0.3|Feature added|

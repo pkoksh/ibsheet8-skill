@@ -2,12 +2,11 @@
 KEY: onAfterGroup
 KIND: event
 PATH: events/on-after-group
-ALIAS: 시트를, 특정, 기준으로, 그룹, 실행
-ALIAS_EN: on, after, group
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-group
+ALIAS_EN: event, called, grouping, applied, released, rendering, based, specific
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-group
 ---
 # onAfterGroup ***(event)***
-> 시트를 특정 열(들)을 기준으로 그룹 실행/해제된 후(렌더링 전) 호출되는 이벤트입니다.
+> Event called after grouping has been applied/released (before rendering) based on specific column(s) in the sheet.
 
 ### Syntax
 
@@ -22,7 +21,7 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|그룹 실행/해제 동작이 발생된 시트 객체|
+|sheet|`object`|Sheet object where the group apply/release action occurred|
 
 
 ### Return
@@ -32,8 +31,8 @@ or
 ```javascript
 options.Events = {
     onAfterGroup:function(evtParam){
-        // 그룹 실행/해제에 대한 메시지를 여기서 띄울 수 있습니다.
-        alert("그룹이 설정/해제 되었습니다.");
+        // You can display a message about group apply/release here.
+        alert("Grouping has been applied/released.");
     }
 }
 ```
@@ -46,4 +45,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

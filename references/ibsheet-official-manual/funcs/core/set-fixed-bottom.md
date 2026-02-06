@@ -2,18 +2,18 @@
 KEY: setFixedBottom
 KIND: method
 PATH: funcs/core/set-fixed-bottom
-ALIAS: sheet.setFixedBottom, setFixedBottom(), 데이터행을, 하단, 영역에, 고정시킵니다
-ALIAS_EN: set, fixed, bottom
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/set-fixed-bottom
+ALIAS: sheet.setFixedBottom, setFixedBottom()
+ALIAS_EN: fixes, data, rows, bottom, foot, area, setfixedbottom, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/set-fixed-bottom
 ---
 # setFixedBottom ***(method)***
-> 데이터행을 하단 `Foot` 영역에 고정시킵니다.
+> Fixes data rows to the bottom `Foot` area.
 
-> 맨 아래 행부터 `count`에 해당하는 숫자의 행 만큼 고정시킵니다.
+> Starting from the bottom row, the specified `count` number of rows are fixed.
 
-> **제약: 해당 기능은 `SearchMode: 1,2`에서만 사용하실 수 있습니다.**
+> **Note: This feature can only be used with `SearchMode: 1,2`.**
 
-> **`DataMerge`와 함께 사용할 수 없고, 고정 행의 개수가 많아서 시트의 높이 보다 커지는 경우에는 기능이 제한 됩니다.**
+> **Cannot be used together with `DataMerge`, and the feature is limited if the number of fixed rows is too large for the sheet's height.**
 
 
 ### Syntax
@@ -24,18 +24,18 @@ boolean setFixedBottom( count, render );
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|count |`number`|선택|하단에 고정시킬 데이터행의 갯수|
-|render |`boolean`|선택|즉시 화면 반영 여부
-해당 기능을 `0(false)`로 사용했을 경우, 작업 마무리 시에 `rerender()`를 실행해야 화면에 반영 됩니다.
-`0(false)`:반영 안함
-`1(true)`:즉시 반영 (`default`)|
+|count |`number`|Optional|Number of data rows to fix at the bottom|
+|render |`boolean`|Optional|whether immediately reflect on screen
+If this feature is set to `0(false)`, you must execute `rerender()` at the end of the operation for it to be reflected on screen.
+`0(false)`:Not reflected
+`1(true)`:Immediately reflected (`default`)|
 
 ### Return Value
-***boolean*** : 설정에 대한 결과
+***boolean*** : Result of the setting
 
 ### Example
 ```javascript
-// 맨 아래 데이터 행부터 시작해서 데이터행 4개를 하단에 고정한다.
+// Fix 4 data rows starting from the bottom data row.
 sheet.setFixedBottom(4,1);
 ```
 
@@ -46,4 +46,4 @@ sheet.setFixedBottom(4,1);
 
 |product|version|desc|
 |---|---|---|
-|core|8.1.0.23|기능 추가|
+|core|8.1.0.23|Feature added|

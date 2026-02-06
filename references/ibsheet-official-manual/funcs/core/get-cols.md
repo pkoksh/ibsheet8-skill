@@ -2,26 +2,24 @@
 KEY: getCols
 KIND: method
 PATH: funcs/core/get-cols
-ALIAS: sheet.getCols, getCols(), 시트가, 갖고있는, 열을, 같은, 배열형태로
-ALIAS_EN: get, cols
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-cols
+ALIAS: sheet.getCols, getCols()
+ALIAS_EN: extracts, column, names, array, form, like, colname, sheet
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-cols
 ---
 # getCols ***(method)***
-> 시트가 갖고있는 열을 ['colName1','colName2']와 같은 배열형태로 추출합니다. 
+> Extracts column names in array form like ['colName1','colName2'] from the sheet. 
 
-> 두개의 인자를 통해 특정 속성을 모두 갖고있는 열들을 찾을 수도 있습니다.
+> Through the two arguments, it is also possible to find columns that have specific properties.
 
-> 전체 열의 개수를 알고자 할때도 이 함수를 사용하실 수 있습니다.
-
-
-> **<mark>주의</mark> : getCols()를 통해서 찾을수 있는 속성은 반드시 시트 생성시 Cols를 통해 부여한 값만을 찾을 수 있습니다.**
-
-> 가령 열의 편집가능여부 기본값이 `1(true)`라고 하더라도, Cols를 통해 열 생성시 `CanEdit:1`을 별도로 부여하지 않았으면 찾을 수 없습니다.
+> This function can also be used when you want to know the total number of columns.
 
 
-> **`SEQ`컬럼을 설정하지도 않았더라도 포함하여 리턴 합니다.**
+> **<mark>Note</mark> : Properties that can be found through getCols() can only find values that were assigned through Cols when creating the sheet.**
+
+> For example, even if the default value for a column's editability is `1(true)`, if `CanEdit:1` was not explicitly assigned when creating the column through Cols, it cannot be found.
 
 
+> **The `SEQ` column is included in the return even if it was not explicitly set.**
 
 
 ### Syntax
@@ -32,27 +30,27 @@ array getCols( attr1, attr2, seq );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|attr1|`string`|선택|찾고자 하는 속성명 (`attr1` 속성을 선언하지 않으면 모든 열이 추출됨)|
-|attr2|`string`|선택|찾고자 하는 속성명 (`attr1` 과 `attr2` 를 모두 갖고 있는 열이 리턴)|
-|seq|`boolean`|선택|설정하지 않은 SEQ 컬럼 포함 여부
-`0(false)`:설정하지 않은 SEQ 컬럼 포함 (`default`)
-`1(true)`:설정하지 않은 SEQ 컬럼 미포함|
+|attr1|`string`|Optional|Property name to search for (if `attr1` property is not declared, all columns are extracted)|
+|attr2|`string`|Optional|Property name to search for (returns columns that have both `attr1` and `attr2`)|
+|seq|`boolean`|Optional|Whether to exclude the implicitly set SEQ column
+`0(false)`:Include the implicitly set SEQ column (`default`)
+`1(true)`:Exclude the implicitly set SEQ column|
 
 
 ### Return Value
-***array[string]*** : 열이름 배열
+***array[string]*** : Array of column names
 
 ### Example
 ```javascript
-//현재 보여지는 모든 열을 찾습니다.
+//Find all currently visible columns.
 var vCol = sheet.getCols("Visible");
 
-//현재 보여지면서 편집도 가능한 열을 찾습니다.
+//Find columns that are currently visible and also editable.
 var veCol = sheet.getCols("Visible","CanEdit");
 //return
 //["ColName1","ColName3" ... ]
 
-//설정하지 않은 SEQ는 제외하고 열 추출, 8.1.0.38버전에서 추가된 기능
+//Extract columns excluding the implicitly set SEQ, feature added before version 8.1.0.38
 var veCol = sheet.getCols("","",1);
 var veCol = sheet.getCols({seq:1});
 ```
@@ -63,5 +61,5 @@ var veCol = sheet.getCols({seq:1});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.1.0.38|seq 추가|
+|core|8.0.0.0|Feature added|
+|core|8.1.0.38|`seq` added|

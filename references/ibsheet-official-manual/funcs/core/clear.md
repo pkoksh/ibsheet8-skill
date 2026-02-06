@@ -2,19 +2,19 @@
 KEY: clear
 KIND: method
 PATH: funcs/core/clear
-ALIAS: sheet.clear, clear(), 영역에서, 시트, 부분을, 제거합니다
-ALIAS_EN: clear, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/clear
+ALIAS: sheet.clear, clear()
+ALIAS_EN: removes, sheet, portion, dom, area, clear, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/clear
 ---
 # clear ***(method)***
 
-> DOM 영역에서 시트 부분을 제거합니다.
+> Removes the sheet portion from the DOM area.
 
-> 구형 Internet Explorer 브라우저에서 메모리 누수에 대응하기 위한 기능입니다.
+> This is a feature to address memory leaks in older Internet Explorer browsers.
 
-> 브라우저를 새로고침 하거나, 다른 페이지로 이동시 내부적으로 자동 호출됩니다.
+> It is automatically called internally when the browser is refreshed or when navigating to another page.
 
-> [reload](./reload)()함수를 통해 DOM에서 제거된 시트를 다시 불러올 수 있습니다.
+> You can reload the sheet removed from the DOM using the [reload](./reload)() function.
 
 ### Syntax
 ```javascript
@@ -27,7 +27,7 @@ void clear();
 
 ### Example
 ```javascript
-//시트 DOM 부분 제거
+//Remove the sheet DOM portion
 sheet.clear();
 ```
 
@@ -40,4 +40,4 @@ sheet.clear();
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

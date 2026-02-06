@@ -2,14 +2,14 @@
 KEY: goToPageByIndex
 KIND: method
 PATH: funcs/core/go-to-page-by-index
-ALIAS: sheet.goToPageByIndex, goToPageByIndex(), 특정, 페이지로, 이동합니다
-ALIAS_EN: go, to, page, by, index
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/go-to-page-by-index
+ALIAS: sheet.goToPageByIndex, goToPageByIndex()
+ALIAS_EN: navigates, specific, page, gotopagebyindex, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/go-to-page-by-index
 ---
 # goToPageByIndex ***(method)***
-> 특정 페이지로 이동합니다.
+> Navigates to a specific page.
 
-> 클라이언트/서버 페이징에서 사용 가능합니다.
+> Available in client/server paging.
 
 
 ### Syntax
@@ -20,7 +20,7 @@ void goToPageByIndex(index);
 ### Parameters
 |Name|Type|Required| Description |
 |----------|-----|---|----|
-|index|`number`|필수|조회할 페이지 순서 번호
+|index|`number`|Required|Page sequence number to navigate to
 
 
 ### Return Value
@@ -28,7 +28,7 @@ void goToPageByIndex(index);
 
 ### Example
 ```javascript
-//12번째 페이지로 이동
+// Navigate to the 12th page
 sheet.goToPageByIndex(12);
 ```
 
@@ -40,4 +40,4 @@ sheet.goToPageByIndex(12);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

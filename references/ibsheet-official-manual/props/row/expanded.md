@@ -2,16 +2,15 @@
 KEY: expanded
 KIND: row-property
 PATH: props/row/expanded
-ALIAS: 트리, 기능, 사용시, 행의, 접힘
-ALIAS_EN: expanded, tree, hierarchy
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/expanded
+ALIAS_EN: whether, row, collapsed, expanded, tree, feature
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/expanded
 ---
 # Expanded ***(row)***
 
-> 트리 기능 사용시 행의 접힘/펼침 여부를 설정합니다.
+> Sets whether a row is collapsed or expanded when using the tree feature.
 
 <!--!
-> `[비공개 설명]` (cell) [ExpandedCols](/docs/props/cell/expand-cols), (cell) [ExpandedRows](/docs/props/cell/expand-rows)로 사용하는 접힘/펼침 여부도 설정가능합니다.
+> `[Private description]` Can also set the collapse/expand status using (cell) [ExpandedCols](/docs/props/cell/expand-cols), (cell) [ExpandedRows](/docs/props/cell/expand-rows).
 !-->
 
 ### Type
@@ -20,16 +19,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/expanded
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|접힘|
-|`1(true)`|펼침|
+|`0(false)`|Collapsed|
+|`1(true)`|Expanded|
 
 
 ### Example
 ```javascript
-//특정행의 접힘여부 확인
+//Check whether a specific row is collapsed.
 var ep = sheet.getAttribute(sheet.getFocusedRow(), null, "Expanded");
 
-//특정행을 펼칩니다. setExpandRow api 사용
+//Expand a specific row. Use the setExpandRow API.
 sheet.setExpandRow(sheet.getRowByIndex(4), null, 1);
 ```
 
@@ -43,4 +42,4 @@ sheet.setExpandRow(sheet.getRowByIndex(4), null, 1);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

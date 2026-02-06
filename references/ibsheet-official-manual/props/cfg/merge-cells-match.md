@@ -2,30 +2,29 @@
 KEY: mergeCellsMatch
 KIND: config-property
 PATH: props/cfg/merge-cells-match
-ALIAS: 머지된, 데이터, 수정시, 전체, 머지
-ALIAS_EN: merge, cells, match, data, all, total
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/merge-cells-match
+ALIAS_EN: editing, merged, data, modifies, entire, area, mergecellsmatch, cfg
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/merge-cells-match
 ---
 # MergeCellsMatch ***(cfg)***
 
-> 머지된 데이터 수정시 전체 머지 영역의 데이터를 수정합니다. 
+> When editing merged data, modifies the data of the entire merged area. 
 
-> [setValue](/docs/funcs/core/set-value)를 통한 값 변경 시에도 적용됩니다. 
+> Also applies when changing values through [setValue](/docs/funcs/core/set-value). 
 
-> [onBeforeChange](/docs/events/on-before-change), [onAfterChange](/docs/events/on-after-change)는 값이 변경된 전체 셀 마다 발생합니다.
+> [onBeforeChange](/docs/events/on-before-change) and [onAfterChange](/docs/events/on-after-change) are triggered for each cell whose value has changed.
 
-> 해당 기능은 자동 머지([DataMerge](/docs/props/cfg/data-merge))를 이용한 머지 영역에서만 동작됩니다.
+> This feature only works in merge areas using automatic merge ([DataMerge](/docs/props/cfg/data-merge)).
 
-> `주의` 복사붙여넣기(ctrl+c/ctrl+v) 를 통해 데이터를 수정할 때에는 셀 단위로 사용해야 합니다.
+> `Caution` When modifying data through copy-paste (ctrl+c/ctrl+v), it must be used on a cell-by-cell basis.
 
 ### Type
 `boolean`
 
-### Options 
+### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|머지된 셀 수정시 첫번째 셀의 값만 변경 (`default`)|
-|`1(true)`|머지된 셀 수정시 전체 머지 영역의 값 변경|
+|`0(false)`|When editing a merged cell, only the first cell's value is changed (`default`)|
+|`1(true)`|When editing a merged cell, the values of the entire merged area are changed|
 
 ### Example
 ```javascript
@@ -44,5 +43,5 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.7|기능 추가|
-|core|8.1.0.49|복사붙여넣기를 통한 값 변경에도 기능 적용|
+|core|8.0.0.7|Feature added|
+|core|8.1.0.49|Feature applied to value changes through copy-paste|

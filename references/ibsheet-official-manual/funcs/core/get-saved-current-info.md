@@ -2,12 +2,12 @@
 KEY: getSavedCurrentInfo
 KIND: method
 PATH: funcs/core/get-saved-current-info
-ALIAS: sheet.getSavedCurrentInfo, getSavedCurrentInfo(), 현재, 로컬, 스토리지, 혹은, 세션
-ALIAS_EN: get, saved, current, info
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-saved-current-info
+ALIAS: sheet.getSavedCurrentInfo, getSavedCurrentInfo()
+ALIAS_EN: retrieves, sheet, column, information, saved, current, local, storage
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-saved-current-info
 ---
 # getSavedCurrentInfo ***(method)***
-> 현재 로컬 스토리지 혹은 세션 스토리지에 저장되어 있는 시트의 컬럼 정보를 문자열로 가져옵니다.
+> Retrieves the sheet's column information saved in the current local storage or session storage as a string.
 
 ### Syntax
 ```javascript
@@ -15,11 +15,11 @@ string getSavedCurrentInfo();
 ```
 
 ### Return Value
-***string 현재 로컬 스토리지, 혹은 세션 스토리지에 저장되어 있는 컬럼들의 숨김, 너비, 위치 정보 값***
+***string current local storage or session storage saved column hidden, width, and position information value***
 
 ### Example
 ```javascript
-// 현재 로컬 스토리지 혹은 세션 스토리지에 저장되어 있는 시트의 컬럼 정보를 담고 있는 문자열을 반환
+// Returns a string containing the sheet's column information saved in the current local storage or session storage
 sheet.getSavedCurrentInfo();
 ```
 
@@ -32,4 +32,4 @@ sheet.getSavedCurrentInfo();
 
 |product|version|desc|
 |---|---|---|
-|core|8.3.0.28|기능 추가|
+|core|8.3.0.28|Feature added|

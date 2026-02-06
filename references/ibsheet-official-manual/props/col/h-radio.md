@@ -2,31 +2,30 @@
 KEY: hRadio
 KIND: column-property
 PATH: props/col/h-radio
-ALIAS: 혹은, 열들, 대해서, 단일, 선택
-ALIAS_EN: radio, select, selection
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/h-radio
+ALIAS_EN: whether, single, selection, applied, type, radio, column, hradio
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/h-radio
 ---
 # HRadio ***(col)***
-> `Type`이 `Radio` 열(혹은 열들)에 대해서 단일 선택 여부를 설정합니다.
+> Sets whether single selection is applied for `Type` `Radio` column(s).
 
-> `0(false)`으로 설정시 해당 컬럼 내에서 단일 셀만 선택 가능하게 합니다.
+> When set to `0(false)`, only a single cell can be selected within the column.
 
-> `1(true)`으로 설정시 해당 행 내에서 단일 셀만 선택 가능하게 합니다.
+> When set to `1(true)`, only a single cell can be selected within the row.
 ### Type
 `boolean`
 
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|한 열안에서 하나만 선택|
-|`1(true)`|한 행안에서 하나만 선택|
+|`0(false)`|Select only one within a column|
+|`1(true)`|Select only one within a row|
 
 
 
 ### Example
 ```javascript
-//st1 컬럼 내에서 단일 셀만 선택가능하게 함.
-//st2, st3 열 중에 한개 셀만 선택 가능
+// Allow only a single cell to be selected within the st1 column
+// Allow only one cell to be selected among the st2 and st3 columns
 options.Cols = [
     ...
     {Type: "Radio", Name: "st1", HRadio: 0 ...},
@@ -47,4 +46,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

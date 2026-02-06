@@ -2,12 +2,11 @@
 KEY: onAfterFilter
 KIND: event
 PATH: events/on-after-filter
-ALIAS: 시트에서, 필터링이, 진행된, 호출되는, 이벤트입니다
-ALIAS_EN: on, after, filter
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-after-filter
+ALIAS_EN: event, called, filtering, performed, sheet, onafterfilter
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-after-filter
 ---
 # onAfterFilter ***(event)***
-> 시트에서 필터링이 진행된 후 호출되는 이벤트입니다.
+> Event called after filtering has been performed on the sheet.
 
 ### Syntax
 
@@ -22,12 +21,12 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|------------|
-|sheet|`object`|필터링이 적용된 시트 객체|
-|type|`number`|필터링 동작 정보
-`0`:필터 값이 바뀐경우
-`2`:렌더링 도중 필터링을 실행하거나 그룹의 변경이 필터링과 같이 발생한 경우|
+|sheet|`object`|Sheet object where filtering was applied|
+|type|`number`|Filtering action information
+`0`:When the filter value has changed
+`2`:When filtering is executed during rendering or when grouping change occurs together with filtering|
 <!--!
-`[비공개 설명]` ***1이 있는데 이는 쿠키 관련된 것이므로 제외했고, 2번을 1번으로 바꾸어야할 것으로 보입니다.***
+`[Private note]` ***There is a 1 which is related to cookies so it was excluded, and it seems like 2 should be changed to 1.***
 !-->
 
 ### Return
@@ -37,8 +36,8 @@ or
 ```javascript
 options.Events = {
     onAfterFilter:function(evtParam){
-        // 필터링 완료 여부에 대한 메시지를 띄울수 있습니다.
-        alert("필터링이 완료되었습니다.");
+        // You can display a message about filtering completion.
+        alert("Filtering has been completed.");
     }
 }
 ```
@@ -50,4 +49,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

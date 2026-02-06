@@ -2,20 +2,19 @@
 KEY: exactCheck
 KIND: config-property
 PATH: props/cfg/exact-check
-ALIAS: 타입, 컬럼에서, 정확한, 체크박스나, 라디오
-ALIAS_EN: exact, check, radio
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/exact-check
+ALIAS_EN: whether, clicking, empty, space, cell, exact, checkbox, radio
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/exact-check
 ---
 # ExactCheck ***(cfg)***
 
-> `Bool`, `Radio` 타입 컬럼에서 정확한 체크박스나 라디오 버튼이 아닌 셀의 빈 공간을 클릭할 때 체크/언체크가 되지 않도록 설정합니다. 
+> Sets whether clicking on the empty space of a cell (not the exact checkbox or radio button) in `Bool` or `Radio` type columns does not trigger check/uncheck. 
 
-> [`HeaderCheck`](/docs/props/cfg/header-check) 사용하여 표시되는 헤더 체크박스에도 적용이 됩니다.
+> This also applies to header checkboxes displayed using [`HeaderCheck`](/docs/props/cfg/header-check).
 
 
-> **<mark>주의</mark> : 해당 속성과 관계없이 `Enum`이 설정된 `Radio` 컬럼에서는 라디오 버튼 옆 텍스트를 클릭해도 체크가 됩니다.**
+> **<mark>Caution</mark> : Regardless of this property, in `Radio` columns with `Enum` set, clicking the text next to the radio button will still trigger a check.**
 
-> 헤더 체크박스 사용 시, `"Header": {"Value": "", "IconAlign": "Center"}`과 같이  헤더 체크박스 아이콘이 셀 가운데로 출력 되도록 설정하셔야 합니다.
+> When using header checkboxes, you should set `"Header": {"Value": "", "IconAlign": "Center"}` so that the header checkbox icon is displayed in the center of the cell.
 
 
 ### Type
@@ -24,14 +23,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/exact-che
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|셀 클릭으로 체크박스 클릭 (`default`)|
-|`1(true)`|셀 클릭으로 체크박스 클릭 안됨|
+|`0(false)`|Clicking the cell triggers the checkbox (`default`)|
+|`1(true)`|Clicking the cell does not trigger the checkbox|
 
 
 ### Example
 ```javascript
 options.Cfg = {
-    ExactCheck: true        // 체크박스 클릭에만 체크/언체크가 동작
+    ExactCheck: true        // Check/uncheck only works when clicking the checkbox
 };
 ```
 
@@ -43,5 +42,5 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.19|기능 추가|
-|core|8.1.0.6|헤더 체크 기능 적용|
+|core|8.0.0.19|Feature added|
+|core|8.1.0.6|Applied to header check feature|

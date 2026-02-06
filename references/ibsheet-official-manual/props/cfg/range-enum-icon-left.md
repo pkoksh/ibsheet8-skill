@@ -2,13 +2,12 @@
 KEY: rangeEnumIconLeft
 KIND: config-property
 PATH: props/cfg/range-enum-icon-left
-ALIAS: 타입에, 속성, 사용시, 메뉴의, 체크
-ALIAS_EN: range, enum, icon, left, property, attribute, check, checkbox
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/range-enum-icon-left
+ALIAS_EN: whether, position, checkbox, icon, menu, left, range, docs
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/range-enum-icon-left
 ---
 # RangeEnumIconLeft ***(cfg)***
 
-> `Enum` 타입에 [Range](/docs/props/col/range) 속성 사용시 메뉴의 체크 박스 아이콘을 왼쪽에 위치시킬지 여부를 설정합니다
+> Sets whether to position the checkbox icon of the menu on the left when using the [Range](/docs/props/col/range) property with the `Enum` type.
 
 ### Type
 `boolean`
@@ -18,8 +17,8 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/range-enu
 
 |Value|Description|
 |-----|-----|
-|`0(false)`| `Enum` 타입의 체크 박스를 오른쪽에 위치 (`default`)|
-|`1(true)`| `Enum` 타입의 체크 박스를 왼쪽에 위치|
+|`0(false)`| Position the `Enum` type checkbox on the right (`default`)|
+|`1(true)`| Position the `Enum` type checkbox on the left|
 
 
 ### Example
@@ -35,4 +34,4 @@ options.Cfg = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.8|기능 추가|
+|core|8.0.0.8|Feature added|

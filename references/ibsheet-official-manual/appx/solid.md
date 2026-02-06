@@ -2,67 +2,66 @@
 KEY: solid
 KIND: appendix
 PATH: appx/solid
-ALIAS: 시트, 내에, 헤더, 주변이나, 푸터
-ALIAS_EN: solid, sheet, grid, header, footer, foot
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/solid
+ALIAS_EN: you, create, fixed, rows, near, header, footer, within
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/solid
 ---
 # Solid ***(appendix)***
-> 시트 내에 헤더 주변이나 푸터 주변에 고정된 행을 생성하여 사용하 실 수 있습니다.
-솔리드로 만들어진 행은 시트의 열의 개수나 너비에 영향을 받지 않고 독립적으로 구성됩니다.
+> You can create fixed rows near the header or footer within the sheet.
+Rows created as Solid are configured independently without being affected by the number or width of sheet columns.
 
-![솔리드 행](/assets/imgs/solid1.gif "솔리드 사용 예")
-<!-- IMAGE: 스크린샷/예시 이미지 - 솔리드 행 -->
+![Solid row](/assets/imgs/solid1.gif "Solid usage example")
+<!-- IMAGE: Screenshot/Example Image - Solid row -->
 
-[솔리드로 생성된 행 예]
+[Example of Solid-created rows]
 
 
-## 설정 구문
+## Configuration Syntax
 ```javascript
 options.Solid = [
      {
-        "id": "mySolidRow", //솔리드 행의 ID 부여
-        "Space": 5, //솔리드 행의 위치 (아래에 위치 참고)
-        "Height": 40, //솔리드 행의 높이 설정
-        "Cells": "Today,Spacer1,DESC,BtnRed,Spacer1,BtnYellow,Spacer2,DESC2,DESC3", //커스텀 셀의 순서
+        "id": "mySolidRow", //Assign ID to the Solid row
+        "Space": 5, //Position of the Solid row (see Position below)
+        "Height": 40, //Height of the Solid row
+        "Cells": "Today,Spacer1,DESC,BtnRed,Spacer1,BtnYellow,Spacer2,DESC2,DESC3", //Order of custom cells
         "CanFormula": 1,
         "CalcuOrder": "DESC3",
 
-        //각 셀의 기능 정의
-        "Spacer1": { // 중간 공백 셀
+        //Define features for each cell
+        "Spacer1": { // Middle spacer cell
           Type: "Text",
           Width: 3,
           CanEdit: 0,
           CanFocus: 0
         },
-        "Spacer2": { // 중간 공백 셀 정의
+        "Spacer2": { // Middle spacer cell definition
           Type: "Text",
           Width: 10,
           CanEdit: 0,
           CanFocus: 0
         },
-        "Today": { //오늘 날짜 셀
+        "Today": { //Today's date cell
           Type: "Text",
           CanFocus: 0,
           CanEdit: 0,
           Color: "#334477",
           TextColor: "#EEEEEE",
           Align: "Center",
-          Value: "오늘일자 : " + IBSheet.dateToString(new Date(), "yyyy-MM-dd")
+          Value: "Today's Date : " + IBSheet.dateToString(new Date(), "yyyy-MM-dd")
         },
-        "DESC": { // 레이블 셀
+        "DESC": { // Label cell
           Type: "Text",
           CanFocus: 0,
           CanEdit: 0,
           Align: "Right",
           Width: 120,
-          Value: "위험도 변경 :"
+          Value: "Change Risk Level :"
         },
-        "BtnRed": { //위험 버튼 셀
+        "BtnRed": { //Danger button cell
           Type: "Button",
           Button: "Button",
           Name: "redBtn",
           Class: "RED",
-          Value: "위험",
+          Value: "Danger",
           Width: 40,
           OnClick: function (e) {
             if (e.row) {
@@ -71,12 +70,12 @@ options.Solid = [
             }
           }
         },
-        "BtnYellow": { //주의 버튼 셀
+        "BtnYellow": { //Caution button cell
           Type: "Button",
           Button: "Button",
           Name: "yellowBtn",
           Class: "YELLOW",
-          Value: "주의",
+          Value: "Caution",
           Width: 40,
           OnClick: function (e) {
             if (e.row) {
@@ -85,19 +84,19 @@ options.Solid = [
             }
           }
         },
-        "DESC2": { // 레이블 셀
+        "DESC2": { // Label cell
           Type: "Text",
-          Value: "검수까지 남은 기한:",
+          Value: "Days until inspection:",
           Align: "Right",
           CanFocus: 0,
           CanEdit: 0,
           Width: 120
         },
-        "DESC3": { // Formula를 이용한 남은기한 계산 셀
+        "DESC3": { // Remaining days calculation cell using Formula
           Type: "Text",
           Color: "#DDD",
           Formula: function (f) {
-            return f.Row ? ((f.Row.DTDY31 - new Date(2018, 1, 23)) / 86400000) + " 일" : "";
+            return f.Row ? ((f.Row.DTDY31 - new Date(2018, 1, 23)) / 86400000) + " days" : "";
           },
           Width: 120
         }
@@ -105,73 +104,73 @@ options.Solid = [
 ];
 ```
 
-## 위치
-솔리드 행은 Space 속성 값에 따라 다음과 같이 위치할 수 있습니다.
-|위치|Space값|생성예|
+## Position
+Solid rows can be positioned as follows depending on the Space property value.
+|Position|Space Value|Creation Example|
 |---|---|---|
-|시트 밖 상단|-1|!["시트밖상단"](/assets/imgs/solid-1.png "시트밖상단")
-<!-- IMAGE: 시트/테이블 화면 - "시트밖상단" -->|
-|시트 안 헤더 위|0|!["시트안헤더위"](/assets/imgs/solid0.png "시트안헤더위")
-<!-- IMAGE: 시트/테이블 화면 - "시트안헤더위" -->|
-|시트 안 헤더 아래|1|!["시트안헤더아래"](/assets/imgs/solid1.png "시트안헤더아래")
-<!-- IMAGE: 시트/테이블 화면 - "시트안헤더아래" -->|
-|시트 안 푸터 위|2|!["시트안풋위"](/assets/imgs/solid2.png "시트안풋위")
-<!-- IMAGE: 시트/테이블 화면 - "시트안풋위" -->|
-|시트 안 푸터 아래|3|!["시트안풋아래"](/assets/imgs/solid3.png "시트안풋아래")
-<!-- IMAGE: 시트/테이블 화면 - "시트안풋아래" -->|
-|시트 안 가로스크롤바 아래|4|!["시트 안 가로스크롤바 아래"](/assets/imgs/solid4.png "시트 안 가로스크롤바 아래")
-<!-- IMAGE: 시트/테이블 화면 - "시트 안 가로스크롤바 아래" -->|
-|시트 밖 하단|5|!["시트밖하단"](/assets/imgs/solid5.png "시트밖하단")
-<!-- IMAGE: 시트/테이블 화면 - "시트밖하단" -->|
+|Outside sheet top|-1|!["Outside sheet top"](/assets/imgs/solid-1.png "Outside sheet top")
+<!-- IMAGE: Sheet/Table View - "Outside sheet top" -->|
+|Inside sheet above header|0|!["Inside sheet above header"](/assets/imgs/solid0.png "Inside sheet above header")
+<!-- IMAGE: Sheet/Table View - "Inside sheet above header" -->|
+|Inside sheet below header|1|!["Inside sheet below header"](/assets/imgs/solid1.png "Inside sheet below header")
+<!-- IMAGE: Sheet/Table View - "Inside sheet below header" -->|
+|Inside sheet above footer|2|!["Inside sheet above footer"](/assets/imgs/solid2.png "Inside sheet above footer")
+<!-- IMAGE: Sheet/Table View - "Inside sheet above footer" -->|
+|Inside sheet below footer|3|!["Inside sheet below footer"](/assets/imgs/solid3.png "Inside sheet below footer")
+<!-- IMAGE: Sheet/Table View - "Inside sheet below footer" -->|
+|Inside sheet below horizontal scrollbar|4|!["Inside sheet below horizontal scrollbar"](/assets/imgs/solid4.png "Inside sheet below horizontal scrollbar")
+<!-- IMAGE: Sheet/Table View - "Inside sheet below horizontal scrollbar" -->|
+|Outside sheet bottom|5|!["Outside sheet bottom"](/assets/imgs/solid5.png "Outside sheet bottom")
+<!-- IMAGE: Sheet/Table View - "Outside sheet bottom" -->|
 
 
 ---
 
-## 솔리드를 이용한 예약된 기능
-솔리드 행을 이용하여 **그룹행**이나 **찾기행**을 만들어 사용하실 수 있습니다.
+## Reserved Features Using Solid
+You can use Solid rows to create **group rows** or **search rows**.
 
-1. 그룹행 사용하기
+1. Using Group Rows
 
-다음과 같은 구성을 통해 그룹행을 생성하실 수 있습니다. 
+You can create group rows through the following configuration. 
 
-그룹행 생성시 열의 헤더셀을 드래그하여 그룹행 위로 드롭하면 해당 열을 기준으로 한 그룹핑이 이루어 집니다.
+When a group row is created, dragging a column header cell and dropping it onto the group row will group data by that column.
    ```javascript
 options.Solid = [
     {
-        "id":"myGroupRow",      //솔리드 행의 ID 부여
-        "Space":0,              //솔리드 행의 위치
-        "Kind":"Group"          //솔리드 행의 종류
+        "id":"myGroupRow",      //Assign ID to the Solid row
+        "Space":0,              //Position of the Solid row
+        "Kind":"Group"          //Type of the Solid row
     }
 ];
    ```
-![그룹행사용](/assets/imgs/group.png "그룹행 생성")
-<!-- IMAGE: 스크린샷/예시 이미지 - 그룹행사용 -->
+![Using group row](/assets/imgs/group.png "Group row creation")
+<!-- IMAGE: Screenshot/Example Image - Using group row -->
 
 
 
 
-2. 찾기(Search)행 사용하기
+2. Using Search Rows
 
-찾기 행을 통해 시트 내에 원하는 데이터를 선택하거나 표시할 수 있습니다.
+Through search rows, you can select or highlight desired data within the sheet.
    ```javascript
 options.Solid = [
     {
-        "Kind": "Search",           // 솔리드 행의 종류
-        "Space": 1,                 // 솔리드 행의 위치
-        "id": "searchZone",         // 솔리드 행의 ID 부여
+        "Kind": "Search",           // Type of the Solid row
+        "Space": 1,                 // Position of the Solid row
+        "id": "searchZone",         // Assign ID to the Solid row
 
-        Cells: "Expression,Spacer1,Filter,Select,Mark,Find,Clear,Spacer2", // 솔리드 행 내에 Cell 생성.
-                //Expression, Filter, Select, Mark, Find, FindPrev, Clear는 내장 설정 예약어
+        Cells: "Expression,Spacer1,Filter,Select,Mark,Find,Clear,Spacer2", // Create Cells within the Solid row.
+                //Expression, Filter, Select, Mark, Find, FindPrev, Clear are built-in reserved keywords
 
-        Expression: { // 검색하기 위한 expression 설정
-            Action: "Last", // expression 셀 내용이 변경되었을때 취할 동작에 대한 설정
-                            //Filter,Select,Mark,Find,FindPrev,Last 를 설정할 수 있음(Last는 이전 행동을 계속함.)
-            Left: "5", // 셀 좌측에 지정한 px 만큼의 빈 공간 생성
-            MinWidth: "90", // 최소 너비 px 단위
+        Expression: { // Expression settings for searching
+            Action: "Last", // Setting for the action to take when the expression cell content changes
+                            //Filter, Select, Mark, Find, FindPrev, Last can be set (Last continues the previous action.)
+            Left: "5", // Creates empty space of specified px on the left side of the cell
+            MinWidth: "90", // Minimum width in px
             // MaxWidth: "300",
-            EmptyValue: "<s>검색어를 입력해 주세요</s>"  // input의 placeholder 속성과 동일한 기능
+            EmptyValue: "<s>Please enter a search term</s>"  // Same function as the input placeholder attribute
         },
-        Spacer1: {   // 중간 공백 셀 정의
+        Spacer1: {   // Middle spacer cell definition
             Width: "10",
             Type: "Empty",
             CanFocus:0
@@ -181,28 +180,28 @@ options.Solid = [
             Type: "Empty",
             CanFocus:0
         },
-        Filter: {   //필터 기능 버튼 (Expression 셀에 입력한 글자를 바탕으로 전체 열에 대해 필터링 실시)
-            ButtonText: "필터"
+        Filter: {   //Filter function button (Filters all columns based on text entered in the Expression cell)
+            ButtonText: "Filter"
         },
-        Select: {   //선택 기능 버튼 (Expression 셀에 입력한 글자를 바탕으로 행단위로 선택)
-            ButtonText: "선택"
+        Select: {   //Select function button (Selects rows based on text entered in the Expression cell)
+            ButtonText: "Select"
         },
-        Mark: {     //표시 기능 버튼 (Expression 셀에 입력한 글자를 포함하고 있는 행에 배경색을 변경)
-            ButtonText: "마킹"
+        Mark: {     //Mark function button (Changes the background color of rows containing the text entered in the Expression cell)
+            ButtonText: "Mark"
         },
-        Find: {     //찾기 기능 버튼 (Expression 셀에 입력한 글자를 포함하고 있는 셀을 찾음. 아래로 계속 찾기 가능)
-            ButtonText: "찾기"
+        Find: {     //Find function button (Finds cells containing the text entered in the Expression cell. Can continue finding downward)
+            ButtonText: "Find"
         },
-        Clear: {    //클리어 기능 버튼 (위에서 한 행위(필터,선택,마킹등을 원상복귀))
-            ButtonText: "클리어",
+        Clear: {    //Clear function button (Reverts actions performed above (filter, select, marking, etc.))
+            ButtonText: "Clear",
             Width: "50"
         }
     }
 ];
 
    ```
-![찾기행사용](/assets/imgs/searchRow2.png "찾기행 생성")
-<!-- IMAGE: 스크린샷/예시 이미지 - 찾기행사용 -->
+![Using search row](/assets/imgs/searchRow2.png "Search row creation")
+<!-- IMAGE: Screenshot/Example Image - Using search row -->
 
 
 
@@ -214,4 +213,4 @@ options.Solid = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

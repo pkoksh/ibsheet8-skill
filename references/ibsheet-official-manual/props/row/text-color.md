@@ -2,13 +2,12 @@
 KEY: textColor
 KIND: row-property
 PATH: props/row/text-color
-ALIAS: 지정한, 행의, 글자색을, 설정합니다
-ALIAS_EN: text, color
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/text-color
+ALIAS_EN: text, color, specified, row, textcolor
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/text-color
 ---
 # TextColor ***(row)***
 
-> 지정한 행의 글자색을 설정합니다.
+> Sets the text color of a specified row.
 
 
 ### Type
@@ -17,17 +16,17 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/text-colo
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|HEX형식 (ex:#FF00F0)
-rgb형식 (ex:rgb(244,200,40)|
+|`string`|HEX format (ex:#FF00F0)
+rgb format (ex:rgb(244,200,40)|
 
 ### Example
 ```javascript
-//특정행의 글자를 붉은색으로 지정합니다..
+//Set the text color of a specific row to red.
 var row = sheet.getRowById("AR33");
 row["TextColor"] = "#FF0000";
 sheet.refreshRow(row);
 
-//조회 데이터에서 특정행에 대해 글자를 파란색으로 표시한다.
+//Display text in blue for a specific row in the loaded data.
 {"data":[
     ...
     {"TextColor": "#0000FF", "ColName1": "Value1", "ColName2": "Value2", ...},
@@ -45,4 +44,4 @@ sheet.refreshRow(row);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

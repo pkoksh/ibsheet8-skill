@@ -2,13 +2,12 @@
 KEY: numberToString
 KIND: static-member
 PATH: static/number-to-string
-ALIAS: 숫자를, 주어진, 포맷에, 맞게, 마스킹된
-ALIAS_EN: number, to, string
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/static/number-to-string
+ALIAS_EN: converts, number, masked, string, according, given, format, returns
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/static/number-to-string
 ---
 # numberToString ***(static)***
 
-> 숫자를 주어진 포맷에 맞게 마스킹된 문자로 변경하여 리턴합니다
+> Converts a number to a masked string according to the given format and returns it.
 
 ### Syntax
 ```javascript
@@ -18,12 +17,12 @@ string IBSheet.numberToString(num, format);
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|num|`number`|필수|마스킹 할 숫자|
-|format|`string`|필수|마스킹 적용할 숫자 포맷 ([Format appendix](/docs/appx/format) 참고)|
+|num|`number`|Required|Number to mask|
+|format|`string`|Required|Number format to apply masking (Refer to [Format appendix](/docs/appx/format))|
 
 
 ### Return Value
-***string*** : 마스킹이 적용된 문자열
+***string*** : Masked string
 
 ### Example
 
@@ -40,4 +39,4 @@ string IBSheet.numberToString(num, format);
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

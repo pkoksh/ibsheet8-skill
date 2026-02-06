@@ -2,8 +2,8 @@
 KEY: index
 KIND: index
 PATH: props/row/index
-ALIAS_EN: index
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/index
+ALIAS_EN: docs, props, row
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/index
 ---
 <!-- 주의: 이 문서는 인덱스 페이지입니다. 상세 정보는 개별 문서를 참조하세요. -->
 <!-- INDEX_ONLY: This is an index page listing available items. Refer to individual documents for detailed information. -->
@@ -30,13 +30,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/index
 18. [Class](/docs/props/row/class)
 19. [Color](/docs/props/row/color)
 20. [Deleted](/docs/props/row/deleted)
-21. [비공개: ExpandLevel](/docs/props/row/expand-level)
+21. [Private: ExpandLevel](/docs/props/row/expand-level)
 22. [Expanded](/docs/props/row/expanded)
-23. [비공개: FocusCell](/docs/props/row/focus-cell)
+23. [Private: FocusCell](/docs/props/row/focus-cell)
 24. [FocusRow](/docs/props/row/focus-row)
 25. [HaveChild](/docs/props/row/have-child)
 26. [Height](/docs/props/row/height)
-27. [비공개: Hidden](/docs/props/row/hidden)
+27. [Private: Hidden](/docs/props/row/hidden)
 28. [HintValue](/docs/props/row/hint-value)
 29. [HtmlPostfix](/docs/props/row/html-postfix)
 30. [HtmlPrefix](/docs/props/row/html-prefix)
@@ -44,7 +44,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/index
 32. [Kind](/docs/props/row/kind)
 33. [MaxHeight](/docs/props/row/max-height)
 34. [Menu](/docs/props/row/menu)
-35. [비공개: MinHeight](/docs/props/row/min-height)
+35. [Private: MinHeight](/docs/props/row/min-height)
 36. [NoCalculate](/docs/props/row/no-calculate)
 37. [NoColor](/docs/props/row/no-color)
 38. [NoUpload](/docs/props/row/no-upload)

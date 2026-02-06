@@ -2,16 +2,16 @@
 KEY: doSort
 KIND: method
 PATH: funcs/core/do-sort
-ALIAS: sheet.doSort, doSort(), 지정한, 열들을, 함수를, 소팅
-ALIAS_EN: do, sort
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/do-sort
+ALIAS: sheet.doSort, doSort()
+ALIAS_EN: sorts, specified, columns, function, dosort, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/do-sort
 ---
 # doSort ***(method)***
-> 지정한 열들을 함수를 통해 소팅 합니다. 
+> Sorts the specified columns in a function. 
 
-> `doSort`는 비동기로 동작합니다. 
+> `doSort` operates asynchronously. 
 
-> 소계에서 `doSort` 사용시 `stdCol`은 소팅되지 않습니다.
+> subtotalin `doSort` When using `stdCol` is not sorted.
 ### Syntax
 ```javascript
 void doSort( sortcols );
@@ -20,15 +20,15 @@ void doSort( sortcols );
 ### Parameters
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|sortcols|`string`|필수|소팅할 열이름을 `","`를 구분자로 순서대로 입력
-(열이름만 쓰면 오름차순, 열이름 앞에 `"-"`기호를 붙이면 내림차순이 됨)
+|sortcols|`string`|Required|column names to sort `","`as delimiter in order
+(column nameonly if used ascending, column name before `"-"`sorts descending)
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-//부서를 내림차순으로 이름을 오름차순으로 정렬
+//department descendingas name ascendingas sort
 sheet.doSort("-dempNm,empNm");
 ```
 
@@ -41,4 +41,4 @@ sheet.doSort("-dempNm,empNm");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

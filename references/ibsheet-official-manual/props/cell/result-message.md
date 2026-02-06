@@ -2,12 +2,11 @@
 KEY: resultMessage
 KIND: cell-property
 PATH: props/cell/result-message
-ALIAS: 위배되는, 내용이, 입력시, 레이어, 팝업으로
-ALIAS_EN: result, message
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-message
+ALIAS_EN: content, display, div, layer, popup, input, violating, resultmask
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/result-message
 ---
 # ResultMessage ***(cell)***
-> [ResultMask](./result-mask)에 위배되는 내용이 입력시 DIV 레이어 팝업으로 보여질 내용을 설정합니다.
+> Sets the content to display as a DIV layer popup when input violating the [ResultMask](./result-mask) is entered.
 
 
 
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/result-m
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|잘못된 내용이 입력시 보여질 경고문 내용|
+|`string`|Warning message content to display when invalid input is entered|
 
 ### Example
 ```javascript
-//이메일 주소 확인
+// Email address validation
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "ResultMask", "^[\\w\\.\\+%-]+@[A-Za-z0-9\\.-]+\\.[A-Za-z]{2,6}$");
-sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "ResultMessage", "이메일 주소를 확인해 주세요.")
+sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "ResultMessage", "Please check the email address.")
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS","ResultMessageTime", 800)
 ```
 ### Read More
@@ -35,4 +34,4 @@ sheet.setAttribute(sheet.getRowById("AR99"), "CLS","ResultMessageTime", 800)
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

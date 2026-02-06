@@ -2,13 +2,12 @@
 KEY: copyPasteHidden
 KIND: config-property
 PATH: props/cfg/copy-paste-hidden
-ALIAS: 숨긴, 열에, 붙여넣기, 가능여부를, 설정합니다
-ALIAS_EN: copy, paste, hidden
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/copy-paste-hidden
+ALIAS_EN: whether, pasting, possible, hidden, rows, columns, provided, bitwise
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/copy-paste-hidden
 ---
 # CopyPasteHidden ***(cfg)***
 
-> 숨긴 행/열에 붙여넣기 가능여부를 설정합니다. (비트연산으로 제공합니다)
+> Sets whether pasting is possible for hidden rows/columns. (Provided as bitwise operation)
 
 
 
@@ -18,16 +17,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/copy-past
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|숨김 처리된 행, 열은 붙여넣기가 불가능 (`default`)|
-|`1`|숨김 처리된 열은 붙여넣기가 가능, 숨긴 처리된 행은 불가능|
-|`2`|숨김 처리된 행은 붙여넣기가 가능, 숨긴 처리된 열은 불가능|
+|`0`|Pasting to hidden rows and columns is not possible (`default`)|
+|`1`|Pasting to hidden columns is possible, pasting to hidden rows is not possible|
+|`2`|Pasting to hidden rows is possible, pasting to hidden columns is not possible|
 
 
 ### Example
 ```javascript
 options = {
     "Cfg":{
-      "CopyPasteHidden":3,  // 숨김 처리된 행, 열에 붙여넣기 기능 사용
+      "CopyPasteHidden":3,  // Enable pasting to hidden rows and columns
     }
 };
 ```
@@ -38,4 +37,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

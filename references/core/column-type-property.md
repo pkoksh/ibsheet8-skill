@@ -15,6 +15,7 @@ Text, Int, Float, Date, Enum, Bool, Lines, Button, Html, Link, Img, File, Radio,
 |Html,Drag|정렬불가|
 
 2. 열 생성시 Type 속성은 필수는 아니지만 가급적 설정할 것을 권함
+3. [타입별 데이터 형식 참고](../ibsheet-official-manual/appx/type.md)
 ---
 
 ## Text (텍스트)
@@ -69,20 +70,7 @@ Text, Int, Float, Date, Enum, Bool, Lines, Button, Html, Link, Img, File, Radio,
 
 ### 숫자 형식 패턴
 
-| 패턴 | 실제 값 | 표시 | 설명 |
-|------|--------|------|----|
-| `#,##0` | 0 또는 '' | 0 | 값이 0이거나 ''(공백)인 경우에도 0을 표시 |
-| `#,###` | 0 또는 '' |  | 값이 0이거나 ''(공백)인 경우 ''을 표시 |
-| `#,##0` | 1234567 | 1,234,567 |  |
-| `#,##0` | 1234.567 | 1,235 | 소숫점 첫번째 자리에서 반올림된 값이 표시(실제데이터에는 영향을 미치지 않음)|
-| `#,##0.00` | 1234.5 | 1,234.50 | |
-| `#,###.##` | 1234.5 | 1,234.5 | |
-| `#,##0.00` | 0.1 | 0.10 | |
-| `#,###.##` | 0.1 | .1 | |
-| `#,##0.##` | 0.1 | 0.1 | |
-| `#,##0원` | 1234567 | 1,234,567원 ||
-| `#,##0\\%` | 1234567 | 1,234,567% | 특수문자 '%' 앞에 \\를 붙여야 함 |
-| `0000` | 12 | 0012 | 자리수 만큼 채움 |
+[Int / Float 타입 포맷](./column-format-property.md#3-int--float-타입-포맷)
 ---
 ## Date (날짜)
 
@@ -99,15 +87,7 @@ Text, Int, Float, Date, Enum, Bool, Lines, Button, Html, Link, Img, File, Radio,
 
 ### 날짜 형식 패턴
 
-| 패턴 | 설명 |
-|------|------|
-| yyyy | 4자리 연도 |
-| MM | 2자리 월 |
-| dd | 2자리 일 |
-| HH | 24시간 |
-| hh | 12시간 |
-| mm | 분 |
-| ss | 초 |
+[Date 타입 포맷](./column-format-property.md#2-Date-타입-포맷)
 
 ---
 
@@ -241,102 +221,4 @@ sheet.setValue(row, "colName", "|./img/s0151500.png|300|200" );
 ```
 ### File 타입 참고
 - 파일 타입 사용시에는 getSaveJson,getSaveString 함수의 리턴값이 FormData형식으로 추출됨
-- 파일데이터는 조회/저장시 데이터 규격에 주의가 필요 [파일 데이터 규격 참고](https://docs.ibsheet.com/ibsheet/v8/manual/#docs/dataStructure/filte-type-structure)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Formula (수식)
-
-```javascript
-{
-  Header: "합계",
-  Name: "total",
-  Type: "Formula",
-  Formula: "quantity * price",
-  Format: "#,##0",
-  CanEdit: false
-}
-```
-
-### 수식 함수
-
-```javascript
-Formula: "IF(status=='A', price, 0)"
-Formula: "SUM(price1, price2, price3)"
-Formula: "ROUND(price * 1.1, 2)"
-```
-
----
-
-## Popup (팝업 선택)
-
-```javascript
-{
-  Header: "고객",
-  Name: "customerName",
-  Type: "Popup",
-  RelatedColumn: "customerId",
-  PopupUrl: "/popup/customer.html",
-  OnPopupReturn: function(evt, result) {
-    this.setValue(evt.row, "customerId", result.id);
-    this.setValue(evt.row, "customerName", result.name);
-  }
-}
-```
-
----
-
-## 컬럼 그룹 (병합 헤더)
-
-```javascript
-Cols: [
-  {
-    Header: "고객정보",
-    Cols: [
-      { Header: "이름", Name: "name", Type: "Text" },
-      { Header: "연락처", Name: "phone", Type: "Text" }
-    ]
-  }
-]
-```
-
----
-
-## 특수 컬럼
-
-### 행 번호
-
-```javascript
-{ Header: "No", Name: "_rowNum", Type: "RowNum", Width: 50 }
-```
-
-### 행 상태
-
-```javascript
-{
-  Header: "상태",
-  Name: "_STATUS",
-  Type: "Text",
-  Width: 50,
-  CanEdit: false,
-  OnCellStyle: function(row, col, value) {
-    const styles = {
-      "I": { Background: "#E3F2FD", Color: "#1976D2" },
-      "U": { Background: "#FFF3E0", Color: "#F57C00" },
-      "D": { Background: "#FFEBEE", Color: "#D32F2F" }
-    };
-    return styles[value] || null;
-  }
-}
-```
+- 파일데이터는 조회/저장시 데이터 규격에 주의가 필요 [파일 데이터 규격 참고](../ibsheet-official-manual/dataStructure/filte-type-structure.md)

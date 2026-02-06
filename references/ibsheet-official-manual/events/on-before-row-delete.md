@@ -2,18 +2,17 @@
 KEY: onBeforeRowDelete
 KIND: event
 PATH: events/on-before-row-delete
-ALIAS: 행의, 상태를, 삭제, 처리, 호출되는
-ALIAS_EN: on, before, row, delete, remove
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-before-row-delete
+ALIAS_EN: event, called, row, status, deleted, onbeforerowdelete
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-before-row-delete
 ---
 # onBeforeRowDelete ***(event)***
-> 행의 상태를 삭제 처리 전 호출되는 이벤트입니다.
+> Event called before a row's status is set to deleted.
 
-> 리턴을 통해 삭제를 취소할지 또는 유지할지 여부를 결정할 수 있습니다(type파라미터 결과에 따라 다른 동작).
+> You can determine whether to cancel or proceed with the deletion through the return value (behavior differs based on the type parameter).
 
-> type 파라미터가 `0`일 때, `1(true)`를 리턴시 삭제 처리하고, `0(false)`를 리턴시 삭제를 취소합니다.
+> When type parameter is `0`, returning `1(true)` processes the deletion, and returning `0(false)` cancels the deletion.
 
-> type 파라미터가 `1`일 때, `1(true)`를 리턴시 삭제를 취소하고, `0(false)`를 리턴시 삭제를 진행합니다.
+> When type parameter is `1`, returning `1(true)` cancels the deletion, and returning `0(false)` proceeds with the deletion.
 
 
 ### Syntax
@@ -29,12 +28,12 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|시트 객체|
-|row|`object`|삭제 처리/취소될 행의 [데이터 로우 객체](/docs/appx/row-object)|
-|type|`number`|삭제 여부
-`0`:삭제 처리
-`1`:삭제 취소|
-|rows|`array[object]`|선택된 복수개의 행을 삭제 처리/취소할 때 해당 행들의 [데이터 로우 객체](/docs/appx/row-object) 배열|
+|sheet|`object`|Sheet object|
+|row|`object`|[Data row object](/docs/appx/row-object) of the row to be deleted/cancelled|
+|type|`number`|Deletion status
+`0`:Delete processing
+`1`:Delete cancellation|
+|rows|`array[object]`|Array of [data row objects](/docs/appx/row-object) when deleting/cancelling multiple selected rows|
 
 ### Return
 ***boolean***
@@ -43,7 +42,7 @@ or
 ```javascript
 options.Events = {
     onBeforeRowDelete:function(evtParam){
-        // 삭제 처리할 행의 sProgress 열에 있는 셀 값이 80이상인 경우 삭제 처리를 하지 않습니다.
+        // If the cell value in the sProgress column of the row to be deleted is 80 or more, do not delete.
         if (evtParam.row["sProgress"] >= 80) {
             return false;
         } else {
@@ -61,4 +60,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

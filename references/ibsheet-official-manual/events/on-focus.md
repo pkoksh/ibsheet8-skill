@@ -2,12 +2,11 @@
 KEY: onFocus
 KIND: event
 PATH: events/on-focus
-ALIAS: 시트, 셀이, 포커스, 되었을때, 호출되는
-ALIAS_EN: on, focus, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-focus
+ALIAS_EN: event, called, cell, sheet, focused, onfocus
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-focus
 ---
 # onFocus ***(event)***
-> 시트 내 셀이 포커스 되었을때 호출되는 이벤트입니다.
+> Event called when a cell in the sheet is focused.
 
 
 ### Syntax
@@ -23,13 +22,13 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|포커스가 된 셀이 있는 시트 객체|
-|row|`object`|포커스가 된 셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|col|`string`|포커스가 된 셀이 위치한 열이름|
-|orow|`object`|이전에 포커스가 되어있던 셀이 위치한 [데이터 로우 객체](/docs/appx/row-object)|
-|ocol|`string`|이전에 포커스가 되어있던 셀이 위치한 열이름|
-|rect|`array[object]`|다수의 셀들을 포커스했을 경우 포커스된 영역|
-|orect|`array[object]`|이전에 다수의 셀들을 포커스했을때의 영역|
+|sheet|`object`|Sheet object containing the focused cell|
+|row|`object`|[Data row object](/docs/appx/row-object) where the focused cell is located|
+|col|`string`|Column name where the focused cell is located|
+|orow|`object`|[Data row object](/docs/appx/row-object) where the previously focused cell was located|
+|ocol|`string`|Column name where the previously focused cell was located|
+|rect|`array[object]`|Focused area when multiple cells are focused|
+|orect|`array[object]`|Area when multiple cells were previously focused|
 
 ### Return
 ***none***
@@ -39,7 +38,7 @@ or
 ```javascript
 options.Events = {
     onFocus:function(evtParam){
-        alert("현재 포커스된 셀의 값은 "+evtParam.sheet.getValue({row :evtParam.row, col: evtParam.col})+" 입니다.");
+        alert("The value of the currently focused cell is "+evtParam.sheet.getValue({row :evtParam.row, col: evtParam.col})+".");
     }
 }
 ```
@@ -52,4 +51,4 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

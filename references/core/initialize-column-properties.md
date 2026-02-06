@@ -1,22 +1,56 @@
 # 컬럼 속성 레퍼런스
 
-## Col 속성(../ibsheet-official-manual/props/col/index.md)
+## Col 속성
 
+- [모든 속성 정보](../ibsheet-official-manual/props/col/index.md)
 - SEQ 컬럼은 항상 존재함 (생성하지 않으면 좌측 첫번째열로 안보이게 생성됨)
-- 컬럼생성시 주로 사용되는 속성 list:
+
+
+### Cfg 속성 사용 예
+
+```javascript
+document.addEventListener("DOMContentLoaded", function() {
+    // 시트 생성
+    IBSheet.create({
+      id: "sheet",
+      el: "sheetContainer",
+      options: {
+        Cfg: { ... }, 
+        Cols: [
+          {
+            Header: "사원명",
+            Type: "Text",
+            Name: "EMPNAME",
+            Align: "Center",
+            Width: 120,
+            RelWidth: 1
+            ...
+          },
+          ...
+        ]
+        ...
+      }
+    });
+  });
+```
+---
+
+### 컬럼생성시 주로 사용되는 속성 list:
 
 | 속성 | 유형 | 기본값 | 설명 |
 |------|------|--------|------|
 | Header | String or object or jsonArray | - | 헤더 텍스트 |
 | Name | String | - | 컬럼 식별자 (필수) |
-| Type | String | "Text" | [컬럼 타입](../ibsheet-official-manual/appx/type.md) |
+| Type | String | "Text" | [컬럼 타입](./column-type-property.md) |
 | Width | Number | 헤더셀의 글자수를 기준으로 자동너비가 설정됨 | 컬럼 너비 (px) |
 | MinWidth | Number | - | 최소 너비 |
 | RelWidth | Number | - | 상대 너비(비율로 설정됨) |
 | Align | String | Type에 따라 다름  | 정렬 (Left, Center, Right) |
 | CanEdit | Boolean | true | 편집 가능 여부 (0:편집불가,1:편집가능)|
 | Visible | Boolean | true | 보임/감춤 여부 (0:감춤,1:보임) |
+| Format | String or object | Type에 따라 다름 | [컬럼 포멧](./column-format-property.md) |
 | Formula | String or function | - | 계산에 의한 값 설정 (../features/formula.md 참고)|
+| FormulaRow | String or function | - | Foot 영역 합계행 생성 ("Sum","Avg","Max","Min","Count") ([상세](../features/summary.md)) |
 | Attribute-Formula | String or function | - | 계산에 의한 속성 값 설정 (../features/attribute-formula.md 참고)|
 | Required | Boolean | false | 필수 입력 여부(저장함수 호출시 빈값이 포함되면 오류 발생) |
 | DefaultValue | Any | - | 데이터 로드시 해당 열에 대한 값이 없는 경우 또는 신규 행에 대한 기본값 |

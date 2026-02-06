@@ -2,16 +2,15 @@
 KEY: filterEnumKeys
 KIND: cell-property
 PATH: props/cell/filter-enum-keys
-ALIAS: 타입의, 컬럼에서, 필터링시, 문자열, 아닌
-ALIAS_EN: filter, enum, keys
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/filter-enum-keys
+ALIAS_EN: filtering, enum, type, column, enables, based, enumkeys, code
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/filter-enum-keys
 ---
 # FilterEnumKeys ***(filter cell)***
 
-> Enum 타입의 컬럼에서 필터링시 Enum(문자열)이 아닌 EnumKeys(코드값)를 기준으로 필터링 하게 합니다.
+> When filtering an Enum type column, enables filtering based on EnumKeys (code values) instead of Enum (display text).
 
-> 이 속성은 시트 생성 시점에서 Def.Filter를 통해 설정하실 수 있습니다.
-> 동일한 Enum 값이 있는 경우, 이 속성을 1로 설정해야 EnumKeys를 기준으로 구분지어 필터링 할 수 있습니다.
+> This property can be set through Def.Filter at sheet creation time.
+> When there are duplicate Enum values, this property must be set to 1 to filter based on EnumKeys for distinction.
 
 ### Type
 `boolean`
@@ -19,18 +18,18 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/filter-e
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|Enum(문자열) 기준으로 필터 (`default`)|
-|`1(true)`|EnumKeys(코드값) 기준으로 필터|
+|`0(false)`|Filter based on Enum (display text) (`default`)|
+|`1(true)`|Filter based on EnumKeys (code values)|
 
 
 ### Example
 ```javascript
-//Enum 타입 컬럼명을 "Nation" 이라고 가정합니다
+// Assuming the Enum type column name is "Nation"
 var option = {
     Def: {
         Filter: {
             Nation: {
-                FilterEnumKeys: 1 //Enum컬럼을 Key값을 기준으로 필터링
+                FilterEnumKeys: 1 // Filter Enum column based on Key values
             }
         }
     }
@@ -44,4 +43,4 @@ var option = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

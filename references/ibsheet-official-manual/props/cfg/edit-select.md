@@ -2,12 +2,11 @@
 KEY: editSelect
 KIND: config-property
 PATH: props/cfg/edit-select
-ALIAS: 편집, 값이, 선택될지, 여부를, 설정할
-ALIAS_EN: edit, select, editable
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/edit-select
+ALIAS_EN: whether, input, value, selected, entering, edit, mode, editselect
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/edit-select
 ---
 # EditSelect ***(cfg)***
-> 편집 될 때 `input` 의 값이 선택될지 여부를 설정할 수 있습니다.
+> Sets whether the `input` value is selected when entering edit mode.
 
 ### Type
 `number`
@@ -15,10 +14,10 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/edit-sele
 ### Options
 |Value|Description|
 |-----|-----|
-|`0`|편집 시 선택안 함|
-|`1`|마우스로 편집 모드로 들어갈 시 선택함|
-|`2`|키보드 키로 편집 모드에 들어갈 시 선택함|
-|`7`|편집 모드로 들어갈 시 항상 선택(`default`)|
+|`0`|Do not select when editing|
+|`1`|Select when entering edit mode via mouse|
+|`2`|Select when entering edit mode via keyboard key|
+|`7`|Always select when entering edit mode (`default`)|
 
 ### Example
 ```javascript
@@ -33,4 +32,4 @@ options.Cfg :{
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

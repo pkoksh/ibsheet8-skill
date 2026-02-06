@@ -2,14 +2,13 @@
 KEY: canGroup
 KIND: row-property
 PATH: props/row/can-group
-ALIAS: 특정행에, 그룹핑, 허용, 여부를, 설정합니다
-ALIAS_EN: can, group
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-group
+ALIAS_EN: whether, grouping, allowed, specific, row, cangroup
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/row/can-group
 ---
 # CanGroup ***(row)***
-> 특정행에 대한 그룹핑 허용 여부를 설정합니다.
+> Sets whether grouping is allowed for a specific row.
 
-> `0(false)`로 설정시 해당 행은 그룹에 포함되지 않고 독립적으로 위치하게 됩니다.
+> When set to `0(false)`, the row will not be included in any group and will be positioned independently.
 
 ### Type
 `boolean`
@@ -17,13 +16,13 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-group
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|그룹핑 불가|
-|`1(true)`|그룹핑  가능|
+|`0(false)`|Grouping disabled|
+|`1(true)`|Grouping enabled|
 
 
 ### Example
 ```javascript
-//특정행들은 그룹에서 제외 시킨다.
+//Exclude specific rows from grouping.
 {"data":[
     ...
     {"CanGroup":0,"ColName1":"Value1","ColName2":"Value2", ...},
@@ -39,4 +38,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/row/can-group
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

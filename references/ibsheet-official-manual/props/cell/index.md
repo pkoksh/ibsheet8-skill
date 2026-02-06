@@ -2,8 +2,8 @@
 KEY: index
 KIND: index
 PATH: props/cell/index
-ALIAS_EN: index
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
+ALIAS_EN: docs, props, cell
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/index
 ---
 <!-- 주의: 이 문서는 인덱스 페이지입니다. 상세 정보는 개별 문서를 참조하세요. -->
 <!-- INDEX_ONLY: This is an index page listing available items. Refer to individual documents for detailed information. -->
@@ -19,16 +19,16 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
 7. [AutoCalendar](/docs/props/cell/auto-calendar)
 8. [BoolGroup](/docs/props/cell/bool-group)
 9. [BoolIcon](/docs/props/cell/bool-icon)
-10. [비공개: BoolIconWidth](/docs/props/cell/bool-icon-width)
+10. [Private: BoolIconWidth](/docs/props/cell/bool-icon-width)
 11. [Button](/docs/props/cell/button)
-12. [비공개: ButtonAlias](/docs/props/cell/button-alias)
-13. [비공개: ButtonClass](/docs/props/cell/button-class)
+12. [Private: ButtonAlias](/docs/props/cell/button-alias)
+13. [Private: ButtonClass](/docs/props/cell/button-class)
 14. [ButtonText](/docs/props/cell/button-text)
 15. [ButtonWidth](/docs/props/cell/button-width)
 16. [CanEdit](/docs/props/cell/can-edit)
 17. [CanFocus](/docs/props/cell/can-focus)
 18. [CanPaste](/docs/props/cell/can-paste)
-19. [비공개: CanSelect](/docs/props/cell/can-select)
+19. [Private: CanSelect](/docs/props/cell/can-select)
 20. [CaseSensitive](/docs/props/cell/case-sensitive)
 21. [Changed](/docs/props/cell/changed)
 22. [Checked](/docs/props/cell/checked)
@@ -42,7 +42,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
 30. [DataFormat](/docs/props/cell/data-format)
 31. [DateStrictMode](/docs/props/cell/date-strict-mode)
 32. [DecimalAdjust](/docs/props/cell/decimal-adjust)
-33. [비공개: DefaultFilter](/docs/props/cell/default-filter)
+33. [Private: DefaultFilter](/docs/props/cell/default-filter)
 34. [Disabled](/docs/props/cell/disabled)
 35. [EditEnum](/docs/props/cell/edit-enum)
 36. [EditFormat](/docs/props/cell/edit-format)
@@ -54,9 +54,9 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
 42. [EnumKeys](/docs/props/cell/enum-keys)
 43. [EnumMenu](/docs/props/cell/enum-menu)
 44. [Error](/docs/props/cell/error)
-45. [비공개: ExpandCols](/docs/props/cell/expand-cols)
-46. [비공개: ExpandRows](/docs/props/cell/expand-rows)
-47. [비공개: Expanded](/docs/props/cell/expanded)
+45. [Private: ExpandCols](/docs/props/cell/expand-cols)
+46. [Private: ExpandRows](/docs/props/cell/expand-rows)
+47. [Private: Expanded](/docs/props/cell/expanded)
 48. [ExportValue](/docs/props/cell/export-value)
 49. [FilterEnumKeys](/docs/props/cell/filter-enum-keys)
 50. [FilterValue](/docs/props/cell/filter-value)
@@ -68,14 +68,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
 56. [HtmlPostfix](/docs/props/cell/html-postfix)
 57. [HtmlPrefix](/docs/props/cell/html-prefix)
 58. [Icon](/docs/props/cell/icon)
-59. [비공개: IconAlias](/docs/props/cell/icon-alias)
+59. [Private: IconAlias](/docs/props/cell/icon-alias)
 60. [IconAlign](/docs/props/cell/icon-align)
 61. [IconWidth](/docs/props/cell/icon-width)
 62. [Indent](/docs/props/cell/indent)
 63. [Link](/docs/props/cell/link)
 64. [LinkBase](/docs/props/cell/link-base)
 65. [LinkTarget](/docs/props/cell/link-target)
-66. [비공개: MaskColor](/docs/props/cell/mask-color)
+66. [Private: MaskColor](/docs/props/cell/mask-color)
 67. [Menu](/docs/props/cell/menu)
 68. [MenuItems](/docs/props/cell/menu-items)
 69. [Merge](/docs/props/cell/merge)
@@ -90,7 +90,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
 78. [RadioIconWidth](/docs/props/cell/radio-icon-width)
 79. [RadioUncheck](/docs/props/cell/radio-uncheck)
 80. [RawSort](/docs/props/cell/raw-sort)
-81. [비공개: Refresh](/docs/props/cell/refresh)
+81. [Private: Refresh](/docs/props/cell/refresh)
 82. [Related](/docs/props/cell/related)
 83. [ResultMask](/docs/props/cell/result-mask)
 84. [ResultMessage](/docs/props/cell/result-message)
@@ -99,7 +99,7 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/index
 87. [RowSpan](/docs/props/cell/row-span)
 88. [Selected](/docs/props/cell/selected)
 89. [ShowHint](/docs/props/cell/show-hint)
-90. [비공개: ShrinkToFit](/docs/props/cell/shrink-to-fit)
+90. [Private: ShrinkToFit](/docs/props/cell/shrink-to-fit)
 91. [Size](/docs/props/cell/size)
 92. [SizeIgnoreDecimalSep](/docs/props/cell/size-ignore-decimal-sep)
 93. [SortValue](/docs/props/cell/sort-value)

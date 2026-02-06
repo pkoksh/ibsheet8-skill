@@ -2,15 +2,14 @@
 KEY: noHScroll
 KIND: config-property
 PATH: props/cfg/no-h-scroll
-ALIAS: 시트에, 가로스크롤바를, 표시하지, 않는, 기능으로
-ALIAS_EN: no, scroll
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-h-scroll
+ALIAS_EN: feature, hides, horizontal, scrollbar, sheet, width, determined, number
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cfg/no-h-scroll
 ---
 # NoHScroll ***(cfg)***
 
-> 시트에 가로스크롤바를 표시하지 않는 기능으로 시트 컬럼의 개수 만큼 너비가 결정됩니다.
+> A feature that hides the horizontal scrollbar in the sheet, where the width is determined by the number of columns in the sheet.
 
-> 해당 기능은 `SearchMode: 0 (FastLoad)`에서는 사용할 수 없습니다.
+> This feature cannot be used in `SearchMode: 0 (FastLoad)`.
 
 ### Type
 `boolean`
@@ -18,15 +17,15 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cfg/no-h-scro
 ### Options
 |Value|Description|
 |-----|-----|
-|`0(false)`|시트내 가로 스크롤 사용 (`default`)|
-|`1(true)`|가로 스크롤 사용안함|
+|`0(false)`|Use horizontal scroll in the sheet (`default`)|
+|`1(true)`|Do not use horizontal scroll|
 
 
 ### Example
 ```javascript
 options = {
     Cfg:{
-      NoHScroll: true,  //시트 내에 가로스크롤을 표시하지 않고, 너비를 조절함
+      NoHScroll: true,  // Do not display horizontal scrollbar in the sheet, adjust width
     },
 };
 ```
@@ -38,4 +37,4 @@ options = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

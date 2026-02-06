@@ -2,13 +2,13 @@
 KEY: getCanFocus
 KIND: method
 PATH: funcs/core/get-can-focus
-ALIAS: sheet.getCanFocus, getCanFocus(), 특정, 행이나, 셀이, 포커스, 있는지
-ALIAS_EN: get, can, focus
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/core/get-can-focus
+ALIAS: sheet.getCanFocus, getCanFocus()
+ALIAS_EN: checks, whether, specific, row, cell, focused, getcanfocus, method
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/core/get-can-focus
 ---
 # getCanFocus ***(method)***
 
-> 특정 행이나 셀이 포커스 될 수 있는지 여부를 확인합니다.
+> Checks whether a specific row or cell can be focused.
 
 
 
@@ -22,18 +22,18 @@ boolean getCanFocus( row, col );
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|row |`object`|필수|[데이터 로우 객체](/docs/appx/row-object)|
-|col |`string`|선택|열이름|
+|row |`object`|Required|[data row object](/docs/appx/row-object)|
+|col |`string`|Optional|column name|
 
 ### Return Value
-***boolean*** : 포커스 가능 여부 (`0(false)`: 포커스 불가, `1(true)`: 포커스 가능)
+***boolean*** : focus possible whether (`0(false)`: focus not possible, `1(true)`: focus possible)
 
 ### Example
 ```javascript
-//id가 AR33인 행이 포커스가 들어갈 수 있는지 여부 확인
+//id AR33 row focus enter possible whether check
 var cf = sheet.getCanFocus(sheet.getRowById("AR33"));
 
-//특정 셀에 포커스가 들어갈 수 있는지 여부 확인
+//specific cell focus enter possible whether check
 var cf = sheet.getCanFocus(sheet.getRowById("AR5") , "CA_DSC");
 ```
 
@@ -46,4 +46,4 @@ var cf = sheet.getCanFocus(sheet.getRowById("AR5") , "CA_DSC");
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

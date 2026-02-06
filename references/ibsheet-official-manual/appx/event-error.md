@@ -2,36 +2,35 @@
 KEY: eventError
 KIND: appendix
 PATH: appx/event-error
-ALIAS: 객체, 이벤트, 호출, 에러가, 발생하면
-ALIAS_EN: event, error
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/event-error
+ALIAS_EN: error, object, contains, information, occurs, event, invocation, appendix
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/appx/event-error
 ---
-# event error 객체 ***(appendix)***
-> 이벤트 호출 시 에러가 발생하면 에러에 대한 정보를 담고 있는 error 객체
+# Event Error Object ***(appendix)***
+> An error object that contains error information when an error occurs during event invocation
 
 
-> onBeforeChange, onResultMask 이벤트 호출 시 에러가 발생되면 error 객체에 에러 정보가 설정됩니다.
+> When an error occurs during the onBeforeChange or onResultMask event invocation, the error information is set in the error object.
 
 ### Properties
 |Name| Type | Description |
 |----------|-----|-------|
-|Action |`string`|에러가 발생하게 된 동작|
-|Changes |`object`|셀 값을 변경 시도 시, 사용자의 시도와 다른 값이 반환되는 경우에 대한 정보를 담은 배열(ex [[message1, row1, col1],[message2, row2, col2],...] )|
-|Errors |`object`|셀에 들어갈 수 없는 값을 설정 시도하였을때 해당 셀의 위치 정보와 에러 메시지 정보를 담은 배열(ex [[message1, row1, col1],[message2, row2, col2],...] )|
+|Action |`string`|The action that caused the error|
+|Changes |`object`|An array containing information about cases where a different value is returned from the user's attempt when trying to change a cell value (ex [[message1, row1, col1],[message2, row2, col2],...] )|
+|Errors |`object`|An array containing position information and error message information for cells where an invalid value was attempted to be set (ex [[message1, row1, col1],[message2, row2, col2],...] )|
 
 
-### 설정될 수 있는 Action 값
+### Possible Action Values
 
 
 |Name| Description |
 |-----------------|-----------|
-|Clear|셀 값을 클리어하는 경우|
-|Move|포커스된 영역의 셀들을 이동 시|
-|Copy|포커스된 영역의 셀들을 복사 시|
-|Fill|셀 값에 대한 자동완성 실행하는 경우|
-|Paste|클립보드의 값을 셀에 붙여넣기를 시도하는 경우|
-|Formula|Formula 계산을 시도하는 경우|
-|Validate|설정된 마스킹 옵션에 따라 유효성 검사를 실행하는 경우|
+|Clear|When clearing a cell value|
+|Move|When moving cells in the focused area|
+|Copy|When copying cells in the focused area|
+|Fill|When executing auto-complete for a cell value|
+|Paste|When attempting to paste clipboard values into a cell|
+|Formula|When attempting a Formula calculation|
+|Validate|When executing validation according to configured masking options|
 
 <!--!
 ### Example
@@ -48,4 +47,4 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/appx/event-error
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

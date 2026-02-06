@@ -2,20 +2,19 @@
 KEY: Alias
 KIND: cell-property
 PATH: props/cell/Alias
-ALIAS: 열의, 경우, 실제, 파일명, 대신
-ALIAS_EN: alias
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/Alias
+ALIAS_EN: cell, value, displayed, instead, actual, file, name, column
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/cell/Alias
 ---
 # Alias ***(cell)***
-> 열의 [Type](/docs/props/cell/type)이 `File`인 경우 실제 파일명 대신 보여질 셀 값을 설정합니다.
+> Sets the cell value to be displayed instead of the actual file name when the column [Type](/docs/props/cell/type) is `File`.
 
-> 지정하지 않을 경우 실제 파일명이 셀 값에 보여지게 됩니다.
+> If not specified, the actual file name will be displayed as the cell value.
 >
-> 구분자를 포함하여 해당 셀의 파일들의 가명을 개별 설정할 수 있습니다.
+> You can set aliases for individual files in the cell by including a delimiter.
 <!--!
-> `[비공개 설명]` 배열로도 개별 설정이 가능
+> `[Private description]` Individual settings are also possible using arrays
 
-> `Format`이 설정된 경우 적용되지 않습니다.
+> Not applied when `Format` is set.
 !-->
 
 ### Type
@@ -24,29 +23,29 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/cell/Alias
 ### Options
 |Value|Description|
 |-----|-----|
-|`string`|`File`컬럼 셀에 파일명 대신 보여질 문자열|
+|`string`|String to display instead of the file name in `File` column cells|
 
 ### Example
 ```javascript
-//1. 메소드를 통해 속성 설정
+//1. Set property via method
 sheet.setAttribute(sheet.getRowById("AR99"), "CLS", "Alias", "myFile" );
 
 
-//2. 객체에 직접 접근해서 속성 설정(열이름이 CLS 로 가정)
+//2. Set property by directly accessing the object (assuming column name is CLS)
 var ROW = sheet.getRowById("AR10");
 ROW["CLSAlias"] = "myFile";
-//변경내용 확인
+// Verify changes
 sheet.refreshCell({row:ROW, col:"CLS"});
 
 
-//3. 조회 데이터 내에서 속성설정(열이름이 CLS 로 가정)
+//3. Set property within loaded data (assuming column name is CLS)
 {
     data:[
         {... , "CLSAlias":"myFile" , ...}
     ]
 }
 
-//4. 개별 설정을 하는 경우
+//4. Setting individual aliases
 {
     data: [
         {
@@ -59,7 +58,7 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 ### Read More
 - [Type appendix](/docs/appx/type)
-- [File Type 업로드 appendix](/docs/appx/file-type-upload)
+- [File Type Upload appendix](/docs/appx/file-type-upload)
 - [Path cell](/docs/props/cell/path)
 - [Format]
 
@@ -67,5 +66,5 @@ sheet.refreshCell({row:ROW, col:"CLS"});
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.5|기능 추가|
-|core|8.3.0.21|개별 설정 동작 개선|
+|core|8.0.0.5|Feature added|
+|core|8.3.0.21|Individual setting behavior improved|

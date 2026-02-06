@@ -2,13 +2,13 @@
 KEY: setRangeValue
 KIND: method
 PATH: funcs/common/set-range-value
-ALIAS: sheet.setRangeValue, setRangeValue(), 혹은, 이용하여, 범위, 내의, 값을
-ALIAS_EN: set, range, value
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/funcs/common/set-range-value
+ALIAS: sheet.setRangeValue, setRangeValue()
+ALIAS_EN: uses, setvalue, setstring, change, cell, values, within, range
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/funcs/common/set-range-value
 ---
 # setRangeValue ***(method)***
 
-> setValue, 혹은 setString를 이용하여 범위 내의 셀 값을 일괄적으로 변경합니다. 
+> Uses setValue or setString to change cell values within a range at once. 
 
 
 ### Syntax
@@ -20,22 +20,22 @@ void setRangeValue( val, startRow, startCol, endRow, endCol, colSeparator, rowSe
 
 |Name|Type|Required|Description|
 |----------|-----|---|----|
-|val|`mixed`|선택|설정하고자 하는 값|
-|startRow|`object`|선택|값 일괄 변경 시작 데이터 로우 객체|
-|startCol|`object`|선택|값 일괄 변경 시작 열이름|
-|endRow|`object`|선택|값 일괄 변경 종료 데이터 로우 객체|
-|endCol|`object`|선택|값 일괄 변경 종료 열이름|
-|colSeparator|`object`|선택|컬럼 구분자 사용시 사용할 컬럼 구분자|
-|rowSeparator|`object`|선택|행 구분자 사용시 사용할 행 구분자|
-|type|`object`|선택|setValue를 사용할지, setString을 사용할지 여부 1: setValue 사용 2: setString 사용|
+|val|`mixed`|Optional|Value to set|
+|startRow|`object`|Optional|Starting data row object for batch value change|
+|startCol|`object`|Optional|Starting column name for batch value change|
+|endRow|`object`|Optional|Ending data row object for batch value change|
+|endCol|`object`|Optional|Ending column name for batch value change|
+|colSeparator|`object`|Optional|Column separator to use when using column separators|
+|rowSeparator|`object`|Optional|Row separator to use when using row separators|
+|type|`object`|Optional|Whether to use setValue or setString. 1: use setValue, 2: use setString|
 
 ### Return Value
 ***none***
 
 ### Example
 ```javascript
-// AR1행 ~ AR3행, Col1 ~ Col2 열 범주 셀의 TextColor 값을 '사과'로 일괄 변경합니다.
-sheet.setRangeValue("사과", sheet.getRowById("AR1"), "Col1", sheet.getRowById("AR3"), "Col2",);
+// Changes the values of all cells in the range from AR1 row to AR3 row, Col1 to Col2 columns to 'Apple'.
+sheet.setRangeValue("Apple", sheet.getRowById("AR1"), "Col1", sheet.getRowById("AR3"), "Col2",);
 ```
 
 ### Read More
@@ -44,4 +44,4 @@ sheet.setRangeValue("사과", sheet.getRowById("AR1"), "Col1", sheet.getRowById(
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

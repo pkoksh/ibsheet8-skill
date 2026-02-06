@@ -2,13 +2,12 @@
 KEY: tipPosition
 KIND: column-property
 PATH: props/col/tip-position
-ALIAS: 풍선도움말, 객체의, 위치나, 크기, 정렬을
-ALIAS_EN: tip, position, size
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/tip-position
+ALIAS_EN: position, size, alignment, tooltip, object, tipposition, col
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/props/col/tip-position
 ---
 # TipPosition ***(col)***
 
-> 풍선도움말 객체의 위치나 크기, 정렬을 설정합니다.
+> Sets the position, size, and alignment of the tooltip object.
 
 
 ### Type
@@ -17,14 +16,14 @@ SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/props/col/tip-posit
 ### Options
 |Value|Description|
 |-----|-----|
-|`X`|풍선도움말의 X축 가감 위치|
-|`Y`|풍선도움말의 Y축 가감 위치|
+|`X`|X-axis offset position of the tooltip|
+|`Y`|Y-axis offset position of the tooltip|
 
 
 ### Example
 
 ```javascript
-//풍선도움말의 위치조정
+// Adjust the tooltip position
 options.Cols = [
     ...
     {Type: "Bool", Tip: 1, TipPosition: {X: 20, Y: -10}, Name: "procs", Width: 120 ...},
@@ -39,4 +38,4 @@ options.Cols = [
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
+|core|8.0.0.0|Feature added|

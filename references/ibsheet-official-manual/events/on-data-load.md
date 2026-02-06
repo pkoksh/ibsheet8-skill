@@ -2,14 +2,15 @@
 KEY: onDataLoad
 KIND: event
 PATH: events/on-data-load
-ALIAS: 데이터가, 시트, 내에서, 파싱되어, 로드된
-ALIAS_EN: on, data, load, sheet, grid
-SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/#docs/events/on-data-load
+ALIAS_EN: fires, data, parsed, loaded, within, sheet, ondataload, event
+SOURCE_URL: https://docs.ibsheet.com/ibsheet/v8/manual/en/#docs/events/on-data-load
 ---
 # onDataLoad ***(event)***
-> 데이터가 시트 내에서 파싱되어 로드된 후에 발생합니다.
+> Fires after data has been parsed and loaded within the sheet.
 
-> 내부적인 로딩은 완료되었지만 화면에 반영(렌더링)은 일어나기 전 입니다.
+> Internal loading is complete, but screen rendering has not yet occurred.
+
+> At this point, **row objects have been created**, so functions that use **row objects** as arguments can be used.
 
 ### Syntax
 
@@ -24,35 +25,35 @@ or
 ### Parameters
 | Name | Type | Description |
 |----------|-----|-------|
-|sheet|`object`|데이터가 로드된 시트 객체|
-|result|`number`| 1. 서버를 통한 조회 시([doSearch](/docs/funcs/core/do-search))
-`0`:성공
-`-1`:빈 URL (`예: sheet.doSearch("")`)
-`-3`:요청 Url이 잘못된 경우나 네트워크 오류 등으로 결과를 받지 못한 경우
-`-5`:응답 결과가 빈값인 경우
-`-6`:연결 시간 초과((cfg)Timeout 초과)
-`-7`:잘못된 데이터 형식(대부분 데이터 이상)
-`이외`:사용자 정의 코드
+|sheet|`object`|Sheet object where data was loaded|
+|result|`number`| 1. When searching via server ([doSearch](/docs/funcs/core/do-search))
+`0`:Success
+`-1`:Empty URL (`e.g.: sheet.doSearch("")`)
+`-3`:When the request URL is wrong or the result was not received due to network errors
+`-5`:When the response result is empty
+`-6`:Connection timeout ((cfg)Timeout exceeded)
+`-7`:Invalid data format (mostly data issues)
+`Other`:User-defined code
 
- 2. 일반 데이터 조회 시([loadSearchData](/docs/funcs/core/load-search-data))
-`0`:성공
-`-7`:잘못된 데이터 형식
+ 2. When searching with regular data ([loadSearchData](/docs/funcs/core/load-search-data))
+`0`:Success
+`-7`:Invalid data format
 |
-|message|`string`|조회 결과 `json`에 포함된 `Message` 내용|
-|response|`object`|`response` 객체|
-|type|`string`|조회/엑셀 여부(Search, EXCEL)|
+|message|`string`|`Message` content included in the search result `json`|
+|response|`object`|`response` object|
+|type|`string`|Search/Excel type (Search, EXCEL)|
 
 <!--!
 ### Return
-`[비공개]` ***boolean***
+`[Private]` ***boolean***
 !-->
 
 ### Example
 ```javascript
 options.Events = {
     onDataLoad:function(evtParam){
-        if (res == 0) alert("데이터가 로드되었습니다.");
-        else alert("데이터를 로딩하는데 실패했습니다.");
+        if (res == 0) alert("Data has been loaded.");
+        else alert("Failed to load data.");
     }
 }
 ```
@@ -67,5 +68,5 @@ options.Events = {
 
 |product|version|desc|
 |---|---|---|
-|core|8.0.0.0|기능 추가|
-|core|8.0.0.26|`type` 추가|
+|core|8.0.0.0|Feature added|
+|core|8.0.0.26|`type` added|
