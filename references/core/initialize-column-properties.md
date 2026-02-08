@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 | Visible | Boolean | true | 보임/감춤 여부 (0:감춤,1:보임) |
 | Format | String or object | Type에 따라 다름 | [컬럼 포멧](./column-format-property.md) |
 | Formula | String or function | - | 계산에 의한 값 설정 (../features/formula.md 참고)|
-| FormulaRow | String or function | - | Foot 영역 합계행 생성 ("Sum","Avg","Max","Min","Count") ([상세](../features/summary.md)) |
+| FormulaRow | String or function | - | 데이터 하단에 고정된 합계행 생성 ("Sum","Avg","Max","Min","Count") ([상세](../features/summary.md)) |
 | Attribute-Formula | String or function | - | 계산에 의한 속성 값 설정 (../features/attribute-formula.md 참고)|
 | Required | Boolean | false | 필수 입력 여부(저장함수 호출시 빈값이 포함되면 오류 발생) |
 | DefaultValue | Any | - | 데이터 로드시 해당 열에 대한 값이 없는 경우 또는 신규 행에 대한 기본값 |

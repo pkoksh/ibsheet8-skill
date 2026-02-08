@@ -2,9 +2,9 @@
 
 > **Formula vs FormulaRow 구분**
 > - **Formula** (이 문서): 각 행에서 열 간 값을 계산 (예: `수량 × 단가 = 금액`). `CanFormula: 1` + `CalcOrder` 필수.
-> - **FormulaRow**: Foot 영역에 열 단위 합계행 자동 생성. Col 속성에 `FormulaRow: "Sum"` 설정. → [합계행 가이드](./summary.md)
->
-> 합계행이 필요하면 Foot 배열을 수동으로 만들지 말고 **FormulaRow 속성을 사용**하세요.
+> - **FormulaRow**: 데이터 하단 고정된 영역에 열 단위 합계행 자동 생성. Col 속성에 `FormulaRow: "Sum"` 설정. → [합계행 가이드](./summary.md)
+
+**주의**: 데이터 하단에 합계행이 필요하면 Foot 배열을 수동으로 만들지 말고 **FormulaRow 속성을 사용**하세요.
 
 열 간의 계산 로직을 문자열이나 함수로 설정하여 셀 값을 자동 계산하는 기능입니다.
 

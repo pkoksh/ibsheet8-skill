@@ -74,13 +74,15 @@ sheet.setFixedRight(0);
 IBSheet8의 시트는 가로로 `헤더`, `바디`, `푸터` 영역으로 나뉩니다.
 헤더/푸터 영역에는 커스텀 행(Head/Foot)을 배치할 수 있고, 바디 영역의 데이터 행은 `setFixedTop`, `setFixedBottom`으로 상/하단에 고정할 수 있습니다.
 
+**주의**: 데이터 하단에 합계행이 필요한 경우 반드시 [**FormulaRow:"Sum"**](./formula.md) 을 사용하세요.
+
 ### 커스텀 행을 통한 고정 (Head / Foot)
 
 초기화 시 `Head`, `Foot` 속성으로 스크롤과 무관하게 항상 표시되는 커스텀 행을 생성할 수 있습니다.
 
 ```javascript
 var options = {
-  Head: [  // 헤더 영역 하단에 고정되는 커스텀 행
+  Head: [  // 헤더 영역 하단에 고정되는 커스텀 행 (절대 합계행을 만드는 공간이 아님!!!)
     {
       id: "myHeadRow1",
       Spanned: 1,
@@ -92,7 +94,7 @@ var options = {
       qt2: { Type: "Bool" }
     }
   ],
-  Foot: [  // 푸터 영역에 고정되는 커스텀 행
+  Foot: [  // 푸터 영역에 고정되는 커스텀 행 (절대 합계행을 만드는 공간이 아님!!!)
     {
       id: "myFootRow1",
       Spanned: 1,
