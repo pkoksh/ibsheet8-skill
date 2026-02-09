@@ -1,28 +1,28 @@
-# Attribute Formula (attribute+Formula)
+# 속성 Formula (attribute+Formula)
 
-A feature that dynamically sets column attributes (`CanEdit`, `Color`, `TextColor`, `Format`, etc.) through Formulas.
+열의 속성(`CanEdit`, `Color`, `TextColor`, `Format` 등)을 Formula를 통해 동적으로 설정하는 기능입니다.
 
-## Required Settings
+## 필수 설정
 
-To use attribute Formulas, you must set `CanFormula` and `CalcOrder`.
+속성 Formula를 사용하려면 반드시 `CanFormula`와 `CalcOrder`를 설정해야 합니다.
 
 ```javascript
 Def: {
   Row: {
     CanFormula: 1,
-    // Format: columnName+attributeName, written without spaces
+    // 열이름+속성명 형식, 띄어쓰기 없이 붙여서 작성
     CalcOrder: "yearSumColor,rateCanEdit"
   }
 }
 ```
 
-> **Note**: If there are spaces when writing names in `CalcOrder`, the Formula will not work correctly.
+> **주의**: `CalcOrder`에 이름을 작성할 때 띄어쓰기가 있으면 Formula가 정상 동작하지 않습니다.
 
 ---
 
-## Basic Syntax
+## 기본 문법
 
-Declare it as a column attribute in the format `attributeName + Formula`.
+`속성명 + Formula` 형태로 컬럼 속성에 선언합니다.
 
 ```javascript
 Cols: [
@@ -34,7 +34,7 @@ Cols: [
   },
   {
     Type: "Text", Name: "Total",
-    // Function method (param contents: Row, )
+    // 함수 방식 (param 내용: Row, )
     FormatFormula: function(param) {
       if (param.Row["SaupJuminNo"].length == 10) {
         return "###-##-#####";
@@ -46,22 +46,22 @@ Cols: [
 ]
 ```
 
-### Formula Function Parameter Properties
+### Formula function의 파라미터 속성
 
-| Type | Description |
-|------|-------------|
-| `Row` | The row object currently being calculated |
-| `Col` | The column name currently being calculated |
-| `Value` | The value of Row[Col] |
-| `Attr` | The value set in CalcOrder (columnName+attributeName) |
+| 타입 | 설명 |
+|------|------|
+| `Row` | 현재 계산 중인 행 객체 |
+| `Col` | 현재 계산 중인 열 이름 |
+| `Value` | Row[Col] 의 값 |
+| `Attr` | CalcOrder에 설정한 값 (열이름+속성명)  |
 
-> **Note**: It is recommended to use the function method rather than the string method (CSP issues).
+> **주의**: 문자열 방식보다는 함수 방식을 사용할 것을 권함.(CSP 문제)
 
 ---
 
-## Key Attribute Formulas
+## 주요 속성 Formula
 
-### ColorFormula -- Background Color
+### ColorFormula — 배경색
 
 ```javascript
 {
@@ -74,7 +74,7 @@ Cols: [
 }
 ```
 
-### TextColorFormula -- Text Color
+### TextColorFormula — 글자색
 
 ```javascript
 {
@@ -85,7 +85,7 @@ Cols: [
 }
 ```
 
-### CanEditFormula -- Editable or Not
+### CanEditFormula — 편집 가능 여부
 
 ```javascript
 {
@@ -103,7 +103,7 @@ Cols: [
 }
 ```
 
-### FormatFormula -- Display Format
+### FormatFormula — 표시 형식
 
 ```javascript
 {
@@ -120,7 +120,7 @@ Cols: [
 
 ---
 
-## Full Example
+## 전체 예시
 
 ```javascript
 var options = {};
@@ -128,7 +128,7 @@ var options = {};
 options.Def = {
   Row: {
     CanFormula: 1,
-    // Specify calculation order in columnName+attributeName format (no spaces allowed)
+    // 열이름+속성명 형식으로 계산 순서 지정 (띄어쓰기 금지)
     CalcOrder: "sCountColor,sMoneyTextColor,sResult,yearSumColor,rateCanEdit"
   }
 };
@@ -137,7 +137,7 @@ options.Cols = [
   { Type: "Bool", Name: "CHK" },
   {
     Type: "Int", Name: "sCount",
-    // Change background color based on value
+    // 값에 따라 배경색 변경
     ColorFormula: function(fr) {
       if (fr.Value < 0) return "rgb(245, 226, 24)";
       if (fr.Value == 0) return "";
@@ -146,28 +146,28 @@ options.Cols = [
   },
   {
     Type: "Int", Name: "sMoney",
-    // Change text color based on value
+    // 값에 따라 글자색 변경
     TextColorFormula: function(fr) {
       return fr.Value < 3000 ? '#ff0000' : '#f0694e';
     }
   },
   {
     Type: "Float", Name: "sResult",
-    // Standard Formula (value calculation)
+    // 일반 Formula (값 계산)
     Formula: function(fr) {
       return fr.Row["sCount"] * fr.Row["sPrice"] - (fr.Row["sCount"] * fr.Row["sPrice"] * fr.Row["sDiscount"]) / 100;
     }
   },
   {
     Type: "Int", Name: "yearSum",
-    // Function method background color Formula
+    // 함수 방식 배경색 Formula
     ColorFormula: function(fr) {
       return fr.Value > 100 ? '#FF0000' : '#FFFFAA';
     }
   },
   {
     Type: "Float", Name: "rate",
-    // Function method editable Formula
+    // 함수 방식 편집 가능 여부 Formula
     CanEditFormula: function(fr) {
       return fr.Row["CHK"] == 1 && fr.Row["yearSum"] > 150;
     }
@@ -177,15 +177,15 @@ options.Cols = [
 
 ---
 
-## When Used Together with Standard Formula
+## 일반 Formula와 함께 사용할 때
 
-When using attribute Formulas and standard Formulas together, the **column name** where the standard Formula is declared must also be included in `CalcOrder`.
+속성 Formula와 일반 Formula를 같이 사용하는 경우, 일반 Formula가 선언된 **컬럼명**도 `CalcOrder`에 포함해야 합니다.
 
 ```javascript
 Def: {
   Row: {
     CanFormula: 1,
-    // sResult: standard Formula, sCountColor: attribute Formula
+    // sResult: 일반 Formula, sCountColor: 속성 Formula
     CalcOrder: "sResult,sCountColor,rateCanEdit"
   }
 }
@@ -193,19 +193,19 @@ Def: {
 Cols: [
   {
     Type: "Float", Name: "sResult",
-    Formula: function(fr) {                    // Standard Formula
+    Formula: function(fr) {                    // 일반 Formula
       return fr.Row["sCount"] * fr.Row["sPrice"];
     }
   },
   {
     Type: "Int", Name: "sCount",
-    ColorFormula: function(fr) {               // Attribute Formula
+    ColorFormula: function(fr) {               // 속성 Formula
       return fr.Value < 0 ? '#FF0000' : '';
     }
   },
   {
     Type: "Float", Name: "rate",
-    CanEditFormula: function(fr) {             // Attribute Formula
+    CanEditFormula: function(fr) {             // 속성 Formula
       return fr.Row["CHK"] == 1 ? 1 : 0;
     }
   }
@@ -214,10 +214,10 @@ Cols: [
 
 ---
 
-## Checklist
+## 체크리스트
 
-- Whether `CanFormula: 1` is set
-- Whether registered in `CalcOrder` in `columnName+attributeName` format
-- Whether `CalcOrder` entries are written without spaces
-- Whether the column name is included in `CalcOrder` when used together with standard Formulas
-- Whether a value is always `return`ed when using the function method
+- `CanFormula: 1` 설정 여부
+- `CalcOrder`에 `열이름+속성명` 형식으로 등록 여부
+- `CalcOrder` 항목 간 띄어쓰기 없이 작성 여부
+- 일반 Formula 병용 시 `CalcOrder`에 해당 컬럼명 포함 여부
+- 함수 방식 사용 시 반드시 값을 `return` 하는지 여부

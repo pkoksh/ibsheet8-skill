@@ -1,34 +1,28 @@
-# Formula (수식 계산)
+# Formula (Expression Calculation)
 
-> **Formula vs FormulaRow 구분**
-> - **Formula** (이 문서): 각 행에서 열 간 값을 계산 (예: `수량 × 단가 = 금액`). `CanFormula: 1` + `CalcOrder` 필수.
-> - **FormulaRow**: 데이터 하단 고정된 영역에 열 단위 합계행 자동 생성. Col 속성에 `FormulaRow: "Sum"` 설정. → [합계행 가이드](./summary.md)
+A feature that automatically calculates cell values by setting calculation logic between columns as strings or functions.
 
-**주의**: 데이터 하단에 합계행이 필요하면 Foot 배열을 수동으로 만들지 말고 **FormulaRow 속성을 사용**하세요.
+## Required Settings
 
-열 간의 계산 로직을 문자열이나 함수로 설정하여 셀 값을 자동 계산하는 기능입니다.
-
-## 필수 설정
-
-Formula를 사용하려면 반드시 `CanFormula`와 `CalcOrder`를 설정해야 합니다.
+To use Formula, you must set `CanFormula` and `CalcOrder`.
 
 ```javascript
 Def: {
   Row: {
     CanFormula: 1,
-    // Formula가 선언된 열이름 순서대로 작성 (띄어쓰기 금지)
+    // Write column names where Formula is declared in order (no spaces allowed)
     CalcOrder: "yearSum,total"
   }
 }
 ```
 
-> **주의**: `CalcOrder`는 계산 순서를 결정합니다. `yearSum`이 먼저 계산된 후 `total`이 계산됩니다.
+> **Note**: `CalcOrder` determines the calculation order. `yearSum` is calculated first, then `total` is calculated.
 
 ---
 
-## 문자열 방식
+## String Method
 
-열이름을 직접 사용하여 계산식을 작성합니다.
+Write calculation expressions using column names directly.
 
 ```javascript
 Cols: [
@@ -42,28 +36,28 @@ Cols: [
 ]
 ```
 
-### 외부 함수 호출 (문자열)
+### External Function Call (String)
 
 ```javascript
 {
   Type: "Text", Name: "sComment",
-  // 문자열 내에서 외부 함수 호출 시 Sheet, Row, Col 예약어 전달
+  // When calling an external function within a string, pass Sheet, Row, Col reserved words
   Formula: useFormula1
 }
 
 function useFormula1(fr) {
-  // fr.Sheet, fr.Row, fr.Col 로 접근 가능
+  // Accessible via fr.Sheet, fr.Row, fr.Col
   var rtnValue = (fr.Row['QT1'] + fr.Row['QT2']) / 2;
-  // 반드시 리턴이 있어야 합니다
+  // Must have a return value
   return rtnValue;
 }
 ```
 
 ---
 
-## 함수 방식
+## Function Method
 
-함수 객체를 직접 할당합니다. 파라미터 `fr`을 통해 `Sheet`, `Row`, `Col`에 접근합니다.
+Assign a function object directly. Access `Sheet`, `Row`, and `Col` through the parameter `fr`.
 
 ```javascript
 Cols: [
@@ -87,31 +81,31 @@ Cols: [
 ]
 ```
 
-### 함수 파라미터 (fr) 예약어
+### Function Parameter (fr) Reserved Words
 
-| 예약어 | 설명 |
-|--------|------|
-| `fr.Sheet` | 시트 객체 |
-| `fr.Row` | 현재 행 객체 (`fr.Row["열이름"]`으로 셀 값 접근) |
-| `fr.Col` | 현재 열 이름 |
+| Reserved Word | Description |
+|---------------|-------------|
+| `fr.Sheet` | ibsheet8 object |
+| `fr.Row` | Current row object (access cell values with `fr.Row["columnName"]`) |
+| `fr.Col` | Current column name |
 
 ---
 
-## Formula 셀의 편집
+## Editing Formula Cells
 
-Formula로 계산된 셀은 기본적으로 편집이 불가능합니다. 편집을 허용하려면 `CanEditFormula`를 설정합니다.
+Cells calculated by Formula are not editable by default. To allow editing, set `CanEditFormula`.
 
 ```javascript
 {
   Type: "Float", Name: "sResult",
   Formula: "sCount * sPrice",
-  CanEditFormula: 1  // Formula 셀도 편집 가능
+  CanEditFormula: 1  // Formula cell is also editable
 }
 ```
 
 ---
 
-## 전체 예시
+## Full Example
 
 ```javascript
 var options = {};
@@ -124,36 +118,36 @@ options.Def = {
 };
 
 options.Cols = [
-  { Type: "Int", Name: "qt1", Header: "1분기" },
-  { Type: "Int", Name: "qt2", Header: "2분기" },
-  { Type: "Int", Name: "qt3", Header: "3분기" },
-  { Type: "Int", Name: "qt4", Header: "4분기" },
+  { Type: "Int", Name: "qt1", Header: "Q1" },
+  { Type: "Int", Name: "qt2", Header: "Q2" },
+  { Type: "Int", Name: "qt3", Header: "Q3" },
+  { Type: "Int", Name: "qt4", Header: "Q4" },
   {
-    Type: "Int", Name: "yearSum", Header: "연합계",
+    Type: "Int", Name: "yearSum", Header: "Annual Total",
     Formula: function(fr) {
       return fr.Row["qt1"] + fr.Row["qt2"] + fr.Row["qt3"] + fr.Row["qt4"];
     }
   },
-  { Type: "Float", Name: "rate", Header: "비율" },
+  { Type: "Float", Name: "rate", Header: "Rate" },
   {
-    Type: "Float", Name: "total", Header: "총액",
+    Type: "Float", Name: "total", Header: "Total Amount",
     Formula: function(fr) {
       return fr.Row["yearSum"] * fr.Row["rate"];
     }
   },
   {
-    Type: "Text", Name: "sComment", Header: "비고",
+    Type: "Text", Name: "sComment", Header: "Remarks",
     Formula: "calcComment(Sheet,Row,Col)"
   },
   {
-    Type: "Text", Name: "sGrade", Header: "등급",
+    Type: "Text", Name: "sGrade", Header: "Grade",
     Formula: calcGrade
   }
 ];
 
 function calcComment(fr) {
   var avg = (fr.Row['qt1'] + fr.Row['qt2']) / 2;
-  return avg > 100 ? "우수" : "보통";
+  return avg > 100 ? "Excellent" : "Average";
 }
 
 function calcGrade(obj) {
@@ -167,10 +161,10 @@ function calcGrade(obj) {
 
 ---
 
-## 주의사항
+## Cautions
 
-- Formula에서 **자기 자신의 컬럼 값을 수정하면 무한루프**에 빠질 수 있으므로 권장하지 않습니다.
-- 외부 함수를 단독으로 사용하는 경우 **반드시 값을 return**해야 합니다.
-- 연관된 열의 값이 편집되면 Formula가 자동으로 재계산됩니다.
-- 속성 Formula(`ColorFormula`, `CanEditFormula` 등)와 함께 사용하는 경우, 일반 Formula의 **컬럼명도 `CalcOrder`에 포함**해야 합니다.
-- 열 간의 계산 로직은 문자열보다 함수로 설정할 것(CSP 문제)
+- **Modifying the value of your own column** within a Formula can cause an infinite loop, so it is not recommended.
+- When using an external function standalone, you **must return a value**.
+- When the value of a related column is edited, the Formula is automatically recalculated.
+- When used together with attribute Formulas (`ColorFormula`, `CanEditFormula`, etc.), the **column name of the standard Formula must also be included in `CalcOrder`**.
+- Set calculation logic between columns as functions rather than strings (CSP issues).

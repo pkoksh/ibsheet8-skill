@@ -1,34 +1,34 @@
-# 트리 그리드
+# Tree Grid
 
-## 기본 설정
+## Basic Setup
 
-`MainCol`에 트리를 표시할 열 이름을 지정합니다. 하나의 열만 트리가 될 수 있습니다.
+Specify the column name to display the tree in `MainCol`. Only one column can be a tree.
 
 ```javascript
 Cfg: {
-    MainCol: "sProduct",     // "sProduct" 열에 트리 표시
-    NoTreeLines: true        // 노드 연결선 숨김 (선택)
+    MainCol: "sProduct",     // Display tree in "sProduct" column
+    NoTreeLines: true        // Hide node connection lines (optional)
 }
 ```
 
 ---
 
-## 데이터 규격
+## Data Format
 
-### Items 기반 계층 구조 (권장)
+### Items-based Hierarchical Structure (Recommended)
 
 ```javascript
 var treeData = {
     "Data": [
         {
-            sProduct: "내부 시스템 개발 사업", sCustomer: "B사",
+            sProduct: "Internal System Development Project", sCustomer: "Company B",
             Items: [
-                { sProduct: "글로벌 통합 인사시스템", sKind: "프로젝트", sPrice: "192" },
+                { sProduct: "Global Integrated HR System", sKind: "Project", sPrice: "192" },
                 {
-                    sProduct: "E-HR시스템", sKind: "유지보수",
+                    sProduct: "E-HR System", sKind: "Maintenance",
                     Items: [
-                        { sProduct: "물산 E-HR시스템", sKind: "기타", sPrice: "4" },
-                        { sProduct: "제조 E-HR시스템", sKind: "기타", sPrice: "4" }
+                        { sProduct: "Properties E-HR System", sKind: "Other", sPrice: "4" },
+                        { sProduct: "Manufacturing E-HR System", sKind: "Other", sPrice: "4" }
                     ]
                 }
             ]
@@ -39,19 +39,19 @@ var treeData = {
 sheet.loadSearchData(treeData);
 ```
 
-### Level 기반 평면 구조
+### Level-based Flat Structure
 
-`Level` 값으로 계층을 표현합니다. 최상위는 `0`, 하위는 부모보다 1씩 증가합니다.
-`IBSheet.v7.convertTreeData()`로 Items 기반 구조로 변환하여 사용합니다.
-`IBSheet.v7.convertTreeData()`함수는 `/plugins/ibsheet-common.js`파일에 정의 되어 있습니다.
+Hierarchy is represented by `Level` values. The top level is `0`, and child levels increment by 1 from the parent.
+Use `IBSheet.v7.convertTreeData()` to convert to an Items-based structure.
+The `IBSheet.v7.convertTreeData()` function is defined in the `/plugins/ibsheet-common.js` file.
 
 ```javascript
 var treeData = {
     "Data": [
-        { Level: 0, sProduct: "병원 개발/CDP 구축", sKind: "프로젝트", sPrice: "29" },
-        { Level: 1, sProduct: "성능개량사업", sKind: "프로젝트", sPrice: "15.5" },
-        { Level: 2, sProduct: "SHE시스템 구축", sKind: "프로젝트", sPrice: "79" },
-        { Level: 2, sProduct: "Cost Quotation System", sKind: "프로젝트", sPrice: "3" }
+        { Level: 0, sProduct: "Hospital Development/CDP Construction", sKind: "Project", sPrice: "29" },
+        { Level: 1, sProduct: "Performance Improvement Project", sKind: "Project", sPrice: "15.5" },
+        { Level: 2, sProduct: "SHE System Construction", sKind: "Project", sPrice: "79" },
+        { Level: 2, sProduct: "Cost Quotation System", sKind: "Project", sPrice: "3" }
     ]
 };
 
@@ -61,59 +61,59 @@ sheet.loadSearchData(convertData);
 
 ---
 
-## 펼침/접기
+## Expand/Collapse
 
 ```javascript
-// 레벨 단위 펼침/접기
-sheet.showTreeLevel(3);           // 3레벨까지 펼침
-sheet.showTreeLevel(1);           // 최상위만 표시 (모두 접기)
-sheet.showTreeLevel(3, 1);        // 3레벨까지 펼침, 이벤트 미호출
-sheet.showTreeLevel(3, 0, 1);     // 3레벨까지 펼침, 하위 모두 접음
-sheet.showTreeLevel(3, 0, 2);     // 3레벨까지 펼침, 하위 모두 펼침
+// Expand/Collapse by level
+sheet.showTreeLevel(3);           // Expand up to level 3
+sheet.showTreeLevel(1);           // Show only top level (collapse all)
+sheet.showTreeLevel(3, 1);        // Expand up to level 3, do not fire events
+sheet.showTreeLevel(3, 0, 1);     // Expand up to level 3, collapse all children
+sheet.showTreeLevel(3, 0, 2);     // Expand up to level 3, expand all children
 
-// 특정 행 펼침/접기
-sheet.setExpandRow(row);              // 토글
-sheet.setExpandRow(row, null, 1);     // 펼치기
-sheet.setExpandRow(row, null, 0);     // 접기
+// Expand/Collapse specific row
+sheet.setExpandRow(row);              // Toggle
+sheet.setExpandRow(row, null, 1);     // Expand
+sheet.setExpandRow(row, null, 0);     // Collapse
 
-// 펼침 상태 확인
+// Check expanded state
 var isExpanded = sheet.getAttribute(row, null, "Expanded");
 ```
 
 ---
 
-## 이벤트 활용
+## Event Usage
 
 ```javascript
 Events: {
-    // 펼침 전 제어 (true 리턴 시 중단)
+    // Control before expanding (return true to cancel)
     onBeforeExpand: function(evtParam) {
         if (evtParam.row["Level"] > 4) {
-            return true;  // 펼침 중단
+            return true;  // Cancel expand
         }
     },
-    // 펼침 후 처리
+    // Process after expanding
     onAfterExpand: function(evtParam) {
-        console.log("펼쳐진/접힌 행:", evtParam.row);
+        console.log("Expanded/Collapsed row:", evtParam.row);
     }
 }
 ```
 
 ---
 
-## 동적 로딩 (HaveChild)
+## Dynamic Loading (HaveChild)
 
-자식이 없는 행에 `HaveChild: true`를 설정하면 접힌 트리 아이콘이 표시됩니다.
+Setting `HaveChild: true` on a row without children displays a collapsed tree icon.
 
 ```javascript
-// 데이터에 HaveChild 설정
-Items: [{ sProduct: "카테고리A", HaveChild: true }]
+// Set HaveChild in data
+Items: [{ sProduct: "Category A", HaveChild: true }]
 
-// onBeforeExpand에서 동적 로드
+// Dynamic load in onBeforeExpand
 Events: {
     onBeforeExpand: function(evtParam) {
         var row = evtParam.row;
-        if (row.firstChild) return;  // 이미 자식 있으면 통과
+        if (row.firstChild) return;  // Skip if children already exist
 
         sheet.doSearch({
             url: "/api/tree/children",
@@ -127,20 +127,20 @@ Events: {
 
 ---
 
-## 체크박스 동기화 (TreeCheckSync)
+## Checkbox Synchronization (TreeCheckSync)
 
-`Icon: "Check"` 컬럼에서 부모-자식 간 체크 상태를 자동 동기화합니다.
+Automatically synchronizes check states between parent and child nodes in columns with `Icon: "Check"`.
 
 ```javascript
 Cfg: {
     MainCol: "sProduct",
-    TreeCheckSync: 1   // 0: 개별체크, 1: 자동동기화(?표시), 2: 자동동기화(v표시)
+    TreeCheckSync: 1   // 0: Individual check, 1: Auto sync (? display), 2: Auto sync (v display)
 }
 ```
 
 ---
 
-## 참고
+## References
 
 - [MainCol cfg](/docs/props/cfg/main-col)
 - [NoTreeLines cfg](/docs/props/cfg/no-tree-lines)
@@ -151,4 +151,4 @@ Cfg: {
 - [HaveChild row](/docs/props/row/have-child)
 - [onBeforeExpand event](/docs/events/on-before-expand)
 - [onAfterExpand event](/docs/events/on-after-expand)
-- [트리 데이터 규격](/docs/dataStructure/tree-structure)
+- [Tree Data Format](/docs/dataStructure/tree-structure)

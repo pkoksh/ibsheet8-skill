@@ -1,269 +1,267 @@
-# 틀고정 및 셀 병합
+# Frozen Columns/Rows and Cell Merge
 
-## 열 틀고정 (Frozen Columns)
+## Frozen Columns
 
-IBSheet8의 시트는 세로로 `Left(Section:0)`, `Center(Section:1)`, `Right(Section:2)` 영역으로 나뉩니다.
-초기화 시 `LeftCols`, `Cols`, `RightCols` 배열로 각 영역에 열을 배치하며, 런타임에 `setFixedLeft`, `setFixedRight`, `setFixedCols` 메서드로 동적 변경이 가능합니다.
+The ibsheet8 is divided vertically into `Left(Section:0)`, `Center(Section:1)`, and `Right(Section:2)` areas.
+During initialization, columns are placed in each area using the `LeftCols`, `Cols`, and `RightCols` arrays. At runtime, dynamic changes are possible with the `setFixedLeft`, `setFixedRight`, and `setFixedCols` methods.
 
-> **주의:** `SEQ` 열은 `LeftCols`에 명시하지 않아도 항상 Hidden 상태로 자동 생성됩니다. `setFixedLeft`, `setFixedCols`의 `left` 인자에는 반드시 `SEQ` 열을 포함하여 계산해야 합니다.
+> **Note:** The `SEQ` column is always auto-created in Hidden state even if not specified in `LeftCols`. The `left` argument of `setFixedLeft` and `setFixedCols` must always include the `SEQ` column in the calculation.
 
-> Hidden 열도 고정 열 수에 포함됩니다.
+> Hidden columns are also included in the frozen column count.
 
-### 초기화 시 영역 설정
+### Area Configuration at Initialization
 
 ```javascript
 var options = {
   Cfg: {
-    LeftCanResize: 1,   // 좌측 영역 크기 조절 허용
-    LeftWidth: 200,      // 좌측 영역 너비
-    RightCanResize: 1,  // 우측 영역 크기 조절 허용
-    RightWidth: 150      // 우측 영역 너비
+    LeftCanResize: 1,   // Allow left area resize
+    LeftWidth: 200,      // Left area width
+    RightCanResize: 1,  // Allow right area resize
+    RightWidth: 150      // Right area width
   },
-  LeftCols: [  // 좌측 고정 열
+  LeftCols: [  // Left frozen columns
     { Header: "NO", Type: "Int", Name: "SEQ", Width: 50 },
-    { Header: "선택", Type: "Bool", Name: "chk", Width: 50 }
+    { Header: "Select", Type: "Bool", Name: "chk", Width: 50 }
   ],
-  Cols: [  // 가운데 스크롤 영역
-    { Header: "이름", Name: "name", Type: "Text", Width: 120 },
-    { Header: "매출", Name: "revenue", Type: "Int", Width: 120, Format: "#,### 원" }
+  Cols: [  // Center scroll area
+    { Header: "Name", Name: "name", Type: "Text", Width: 120 },
+    { Header: "Revenue", Name: "revenue", Type: "Int", Width: 120, Format: "#,### Won" }
   ],
-  RightCols: [  // 우측 고정 열
-    { Header: "합계", Name: "total", Type: "Int", Width: 120, Format: "#,### 원" }
+  RightCols: [  // Right frozen columns
+    { Header: "Total", Name: "total", Type: "Int", Width: 120, Format: "#,### Won" }
   ]
 };
 ```
 
-### 동적 틀고정 변경
+### Dynamic Frozen Column Change
 
 ```javascript
-// 좌측에 4개 열 고정 (SEQ 포함), 머지 재적용
+// Fix 4 columns on the left (including SEQ), reapply merge
 sheet.setFixedLeft(4, 1);
 
-// 우측에 2개 열 고정
+// Fix 2 columns on the right
 sheet.setFixedRight(2);
 
-// 좌측 4개, 우측 1개 동시 설정
+// Set 4 left and 1 right simultaneously
 sheet.setFixedCols(4, 1);
 
-// 좌측 틀고정 해제 (모든 열이 Center 영역으로 이동)
+// Release left frozen columns (all columns move to Center area)
 sheet.setFixedLeft(0);
 
-// 우측 틀고정 해제
+// Release right frozen columns
 sheet.setFixedRight(0);
 ```
 
-### setFixedLeft / setFixedRight 파라미터
+### setFixedLeft / setFixedRight Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| count | `number` | 선택 | 고정할 열 개수 (`0` 설정 시 해당 영역의 열이 모두 Center로 이동) |
-| reMerge | `boolean` | 선택 | 열 이동 후 기존 머지 재적용 여부 (`0`: 미적용(default), `1`: 재적용) |
-| sync | `boolean` | 선택 | 렌더링 동기 처리 (`0`: 비동기(default), `1`: 동기) |
+| count | `number` | Optional | Number of columns to freeze (setting `0` moves all columns of that area to Center) |
+| reMerge | `boolean` | Optional | Whether to reapply existing merge after column move (`0`: not applied (default), `1`: reapply) |
+| sync | `boolean` | Optional | Synchronous rendering (`0`: asynchronous (default), `1`: synchronous) |
 
-### setFixedCols 파라미터
+### setFixedCols Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| left | `number` | 선택 | 좌측 영역 열 개수 (SEQ 열 포함하여 계산) |
-| right | `number` | 선택 | 우측 영역 열 개수 |
-| reMerge | `boolean` | 선택 | 열 이동 후 기존 머지 재적용 여부 (`0`: 미적용(default), `1`: 재적용) |
-| sync | `boolean` | 선택 | 렌더링 동기 처리 (`0`: 비동기(default), `1`: 동기) |
+| left | `number` | Optional | Number of left area columns (calculated including SEQ column) |
+| right | `number` | Optional | Number of right area columns |
+| reMerge | `boolean` | Optional | Whether to reapply existing merge after column move (`0`: not applied (default), `1`: reapply) |
+| sync | `boolean` | Optional | Synchronous rendering (`0`: asynchronous (default), `1`: synchronous) |
 
-## 행 틀고정 (Frozen Rows)
+## Frozen Rows
 
-IBSheet8의 시트는 가로로 `헤더`, `바디`, `푸터` 영역으로 나뉩니다.
-헤더/푸터 영역에는 커스텀 행(Head/Foot)을 배치할 수 있고, 바디 영역의 데이터 행은 `setFixedTop`, `setFixedBottom`으로 상/하단에 고정할 수 있습니다.
+The ibsheet8 is divided horizontally into `Header`, `Body`, and `Footer` areas.
+Custom rows (Head/Foot) can be placed in the header/footer areas, and data rows in the body area can be fixed at the top/bottom using `setFixedTop` and `setFixedBottom`.
 
-**주의**: 데이터 하단에 합계행이 필요한 경우 반드시 [**FormulaRow:"Sum"**](./formula.md) 을 사용하세요.
+### Fixed via Custom Rows (Head / Foot)
 
-### 커스텀 행을 통한 고정 (Head / Foot)
-
-초기화 시 `Head`, `Foot` 속성으로 스크롤과 무관하게 항상 표시되는 커스텀 행을 생성할 수 있습니다.
+During initialization, custom rows that are always displayed regardless of scrolling can be created using the `Head` and `Foot` properties.
 
 ```javascript
 var options = {
-  Head: [  // 헤더 영역 하단에 고정되는 커스텀 행 (절대 합계행을 만드는 공간이 아님!!!)
+  Head: [  // Custom rows fixed at bottom of header area
     {
       id: "myHeadRow1",
       Spanned: 1,
       deptName: {
-        Type: "Text", Value: "미수금 포함 여부",
+        Type: "Text", Value: "Include Outstanding Receivables",
         Span: 2, Color: "#EDEDED", Align: "Center", TextStyle: 1
       },
       qt1: { Type: "Bool" },
       qt2: { Type: "Bool" }
     }
   ],
-  Foot: [  // 푸터 영역에 고정되는 커스텀 행 (절대 합계행을 만드는 공간이 아님!!!)
+  Foot: [  // Custom rows fixed in footer area
     {
       id: "myFootRow1",
       Spanned: 1,
       Color: "#666666",
       TextColor: "#FFFFFF",
-      deptName: { Value: "2025년 자료", TextColor: "#FFBBBB", Span: 5 },
+      deptName: { Value: "2025 Data", TextColor: "#FFBBBB", Span: 5 },
       qt4: { Type: "Int", Format: "#,###", Value: 1248423 }
     }
   ]
 };
 ```
 
-#### showFixedRows로 동적 생성
+#### Dynamic Creation with showFixedRows
 
-초기화 이후에도 `showFixedRows` 메서드로 Head/Foot 행을 동적으로 추가할 수 있습니다. 객체의 `Kind` 속성으로 Head 또는 Foot을 지정합니다.
+Even after initialization, Head/Foot rows can be dynamically added using the `showFixedRows` method. The `Kind` property of the object specifies Head or Foot.
 
 ```javascript
-// Foot 행 1개 동적 생성
+// Dynamically create 1 Foot row
 sheet.showFixedRows([{
   Kind: "Foot",
   id: "myFootRow",
   chk: { Type: "Text", Value: "", CanEdit: 0, CanFocus: 0 }
 }]);
 
-// Head 행 1개 + Foot 행 1개 동시 생성
+// Create 1 Head row + 1 Foot row simultaneously
 sheet.showFixedRows([
-  { Kind: "Head", id: "headRow1", name: { Value: "상단 고정 행" } },
-  { Kind: "Foot", id: "footRow1", name: { Value: "하단 고정 행" } }
+  { Kind: "Head", id: "headRow1", name: { Value: "Top fixed row" } },
+  { Kind: "Foot", id: "footRow1", name: { Value: "Bottom fixed row" } }
 ]);
 ```
 
-### 데이터 행 상/하단 고정 (setFixedTop / setFixedBottom)
+### Fix Data Rows at Top/Bottom (setFixedTop / setFixedBottom)
 
-바디 영역의 데이터 행을 상단 또는 하단에 고정하여 스크롤되지 않게 할 수 있습니다.
+Data rows in the body area can be fixed at the top or bottom so they do not scroll.
 
-> **제약:** `setFixedTop`은 `SearchMode: 0, 3`에서는 사용할 수 없습니다. `setFixedBottom`은 `SearchMode: 1, 2`에서만 사용 가능합니다.
+> **Limitation:** `setFixedTop` cannot be used with `SearchMode: 0, 3`. `setFixedBottom` can only be used with `SearchMode: 1, 2`.
 
-> **제약:** `DataMerge`와 함께 사용할 수 없으며, 데이터 행이 최소 4개 이상이어야 합니다.
+> **Limitation:** Cannot be used together with `DataMerge`, and there must be at least 4 data rows.
 
 ```javascript
-// 상단에 데이터 행 4개 고정
+// Fix 4 data rows at the top
 sheet.setFixedTop(4, 1);
 
-// 하단에 데이터 행 2개 고정 (맨 아래 행부터)
+// Fix 2 data rows at the bottom (from the last row)
 sheet.setFixedBottom(2, 1);
 
-// 상단 고정 해제
+// Release top fixed rows
 sheet.setFixedTop(0, 1);
 
-// 하단 고정 해제
+// Release bottom fixed rows
 sheet.setFixedBottom(0, 1);
 ```
 
-### setFixedTop / setFixedBottom 파라미터
+### setFixedTop / setFixedBottom Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| count | `number` | 선택 | 고정할 데이터 행 개수 |
-| render | `boolean` | 선택 | 즉시 화면 반영 여부 (`0`: 미반영 → 이후 `rerender()` 필요, `1`: 즉시 반영(default)) |
+| count | `number` | Optional | Number of data rows to fix |
+| render | `boolean` | Optional | Whether to apply to screen immediately (`0`: not applied -> `rerender()` required later, `1`: apply immediately (default)) |
 
 ---
 
-## 셀 병합 (Merge)
+## Cell Merge
 
-### 자동 병합 (DataMerge / HeaderMerge)
+### Auto Merge (DataMerge / HeaderMerge)
 
-`Cfg`의 `DataMerge`(데이터 영역)와 `HeaderMerge`(헤더 영역) 속성으로 같은 값을 가진 셀을 자동 병합합니다.
-시트 생성 후에는 `setAutoMerge` 메서드로 동적 변경이 가능합니다.
+The `DataMerge` (data area) and `HeaderMerge` (header area) properties in `Cfg` automatically merge cells with the same values.
+After ibsheet8 creation, dynamic changes are possible with the `setAutoMerge` method.
 
-> `Span`, `RowSpan` 셀 속성보다 우선 적용됩니다.
+> Takes priority over `Span` and `RowSpan` cell properties.
 
-#### DataMerge / HeaderMerge 옵션
+#### DataMerge / HeaderMerge Options
 
 | Value | Description |
 |-------|-------------|
-| `0` | 병합 안함 (`default`) |
-| `1` | 열 기준 병합 — 같은 열에서 상하로 같은 값이면 행을 병합 |
-| `2` | 행 기준 병합 — 같은 행에서 좌우로 같은 값이면 열을 병합 |
-| `3` | 열 우선 병합 — 열 기준 병합 후, 병합되지 않은 셀에 행 기준 병합 |
-| `4` | 행 우선 병합 — 행 기준 병합 후, 병합되지 않은 셀에 열 기준 병합 |
-| `5` | 열 우선 사방 병합 — 열 기준 병합하면서 이웃한 열도 같은 값이면 병합 |
-| `6` | 행 우선 사방 병합 — 행 기준 병합하면서 이웃한 행도 같은 값이면 병합 |
+| `0` | No merge (`default`) |
+| `1` | Column-based merge -- merges rows vertically when the same column has equal values |
+| `2` | Row-based merge -- merges columns horizontally when the same row has equal values |
+| `3` | Column-first merge -- applies column-based merge first, then row-based merge on unmerged cells |
+| `4` | Row-first merge -- applies row-based merge first, then column-based merge on unmerged cells |
+| `5` | Column-first omnidirectional merge -- column-based merge that also merges adjacent columns with equal values |
+| `6` | Row-first omnidirectional merge -- row-based merge that also merges adjacent rows with equal values |
 
 ```javascript
 var options = {
   Cfg: {
-    DataMerge: 1,        // 데이터 영역: 열 기준 병합
-    HeaderMerge: 0,      // 헤더 영역: 병합 안함
-    PrevColumnMerge: 1   // 좌측 열의 병합 범위를 기준으로 병합 (아래 참고)
+    DataMerge: 1,        // Data area: column-based merge
+    HeaderMerge: 0,      // Header area: no merge
+    PrevColumnMerge: 1   // Merge based on the left column's merge range (see below)
   }
 };
 ```
 
-#### PrevColumnMerge (앞 열 기준 병합)
+#### PrevColumnMerge (Previous Column-based Merge)
 
-행 병합(위아래 병합) 시 좌측 열의 병합 범위를 기준으로 병합 여부를 결정합니다. `DataMerge` 또는 `HeaderMerge`가 설정되어 있어야 동작합니다.
+During row merge (vertical merge), determines whether to merge based on the left column's merge range. Requires `DataMerge` or `HeaderMerge` to be set.
 
 | Value | Description |
 |-------|-------------|
-| `0` | 앞 열 기준 병합 사용 안함 (`default`) |
-| `1` | 데이터 영역에만 적용 |
-| `2` | 헤더 영역에만 적용 |
-| `3` | 데이터 및 헤더 영역 모두 적용 |
+| `0` | Previous column-based merge disabled (`default`) |
+| `1` | Applied to data area only |
+| `2` | Applied to header area only |
+| `3` | Applied to both data and header areas |
 
-#### 컬럼별 병합 제외 (ColMerge)
+#### Exclude Specific Columns from Merge (ColMerge)
 
-특정 컬럼을 상하 자동 병합 대상에서 제외합니다. `0`으로 설정 시 `PrevColumnMerge`의 탐색 대상에서도 제외됩니다.
+Excludes specific columns from vertical auto merge. When set to `0`, the column is also excluded from `PrevColumnMerge` lookup.
 
 ```javascript
 Cols: [
-  // ColMerge: 0 → 이 컬럼은 상하 병합하지 않음
+  // ColMerge: 0 -> This column will not be merged vertically
   { Type: "Text", Name: "Dept", ColMerge: 0, Width: 100 },
   { Type: "Text", Name: "Team", Width: 100 }
 ]
 ```
 
-#### 행별 병합 제외 (RowMerge)
+#### Exclude Specific Rows from Merge (RowMerge)
 
-특정 행을 자동 병합 대상에서 제외합니다.
+Excludes specific rows from auto merge.
 
 ```javascript
-// 특정 데이터 행을 병합 대상에서 제외
+// Exclude a specific data row from merge
 var row = sheet.getFirstVisibleRow();
 sheet.setAttribute( row, null, "RowMerge", 0);
 sheet.setAutoMerge({ dataMerge: 1, headerMerge: 0, prevColumnMerge: 0 });
 
-// 첫 번째 헤더 행을 병합 대상에서 제외
+// Exclude the first header row from merge
 var header = sheet.getHeaderRows()[0];
 sheet.setAttribute( header, null, "RowMerge", 0);
 ```
 
-#### setAutoMerge로 동적 변경
+#### Dynamic Change with setAutoMerge
 
 ```javascript
-// 시트 생성 후 데이터 영역 열 기준 병합 + 앞 열 기준 병합 적용
+// After ibsheet8 creation, apply column-based merge + previous column-based merge on data area
 sheet.setAutoMerge({ dataMerge: 1, headerMerge: 0, prevColumnMerge: 1 });
 ```
 
-> **주의:** 소계(`makeSubTotal`) 사용 시 `DataMerge`와 `PrevColumnMerge` 설정값은 무시되고 각각 `1`로 동작합니다.
+> **Note:** When using subtotals (`makeSubTotal`), `DataMerge` and `PrevColumnMerge` settings are ignored and both operate as `1`.
 
-### 수동 병합 (setMergeRange / setMergeCancel)
+### Manual Merge (setMergeRange / setMergeCancel)
 
-특정 영역을 직접 지정하여 하나의 셀로 병합하거나 병합을 해제합니다.
+Merges a specific area into a single cell or cancels the merge by directly specifying the range.
 
-> **제약:** `SearchMode: 0`에서는 스크롤 시 병합 상태가 유지되지 않아 정상 지원되지 않습니다.
+> **Limitation:** In `SearchMode: 0`, merge state is not maintained during scrolling, so it is not properly supported.
 
 ```javascript
-// AR2행~AR4행, deptCd열~empNm열을 하나의 셀로 병합
+// Merge rows AR2~AR4, columns deptCd~empNm into a single cell
 sheet.setMergeRange(
   sheet.getRowById("AR2"), "deptCd",
   sheet.getRowById("AR4"), "empNm"
 );
 
-// 병합된 셀을 분리 (병합의 시작 셀을 지정)
+// Unmerge the merged cell (specify the starting cell of the merge)
 sheet.setMergeCancel(sheet.getRowById("AR2"), "deptCd");
 ```
 
-#### setMergeRange 파라미터
+#### setMergeRange Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| row1 | `object` | 필수 | 병합 시작 행 객체 |
-| col1 | `string` | 필수 | 병합 시작 열 이름 |
-| row2 | `object` | 필수 | 병합 종료 행 객체 (`row1`보다 아래 위치) |
-| col2 | `string` | 필수 | 병합 종료 열 이름 (`col1`보다 우측 위치) |
+| row1 | `object` | Required | Merge start row object |
+| col1 | `string` | Required | Merge start column name |
+| row2 | `object` | Required | Merge end row object (positioned below `row1`) |
+| col2 | `string` | Required | Merge end column name (positioned to the right of `col1`) |
 
-#### setMergeCancel 파라미터
+#### setMergeCancel Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| row | `object` | 필수 | 병합된 행 객체 |
-| col | `string` | 필수 | 병합된 열 이름 |
+| row | `object` | Required | Merged row object |
+| col | `string` | Required | Merged column name |

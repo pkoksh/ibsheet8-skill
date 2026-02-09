@@ -1,253 +1,241 @@
-# 자주 발생하는 오류
+# Common Errors
 
-## 초기화 오류
+## Initialization Errors
 
 ### "Container element not found"
-**원인**: DOM이 준비되기 전에 시트 생성 시도
-✗ 스크립트 로드 직후 `IBSheet.create()` 호출
-✓ `DOMContentLoaded` 이후, React `useEffect` / Vue `onMounted` 내에서 호출
-→ 상세: [initialize-basic.md](../core/initialize-basic.md)
+**Cause**: Attempted to create ibsheet8 before the DOM is ready
+✗ Calling `IBSheet.create()` immediately after script load
+✓ Call within `DOMContentLoaded`, React `useEffect`, or Vue `onMounted`
+→ Details: [initialize-basic.md](../core/initialize-basic.md)
 
 ### "Sheet ID already exists"
-**원인**: 같은 ID로 중복 생성
-✗ `IBSheet.create({ id: "sheet" })` 중복 호출
-✓ `window["sheet"]?.dispose()` 후 재생성
-→ 상세: [initialize-basic.md](../core/initialize-basic.md)
+**Cause**: Duplicate creation with the same ID
+✗ Calling `IBSheet.create({ id: "sheet" })` multiple times
+✓ Recreate after `window["sheet"]?.dispose()`
+→ Details: [initialize-basic.md](../core/initialize-basic.md)
 
-### 비동기 생성 후 시트 메서드 호출 실패
-**원인**: `IBSheet.create()`는 기본 비동기(`sync: 0`)이므로 생성 직후 메서드 호출 시 시트 미준비
+### Method call failure after asynchronous ibsheet8 creation
+**Cause**: `IBSheet.create()` is asynchronous by default (`sync: 0`), so the ibsheet8 may not be ready when calling methods immediately after creation
 ✗ `IBSheet.create({...}); window["sheet"].loadSearchData({...});`
-✓ 방법1: `sync: 1` 옵션으로 동기 생성
-✓ 방법2: `onRenderFirstFinish` 이벤트 내에서 호출 (권장)
-→ 상세: [initialize-basic.md](../core/initialize-basic.md)
+✓ Method 1: Synchronous creation with `sync: 1` option
+✓ Method 2: Call within the `onRenderFirstFinish` event (recommended)
+→ Details: [initialize-basic.md](../core/initialize-basic.md)
 
 ---
 
-## 데이터 오류
+## Data Errors
 
 ### "Cannot read property of undefined"
-**원인**: 행 인덱스(숫자)를 직접 전달 — 행 객체가 필요
+**Cause**: Passing a row index (number) directly — a row object is required
 ✗ `sheet.getValue(0, "name")`
-✓ `sheet.getValue(sheet.getRowByIndex(1), "name")` — 인덱스는 1부터 시작
-→ 상세: [api-methods.md](../core/api-methods.md)
+✓ `sheet.getValue(sheet.getRowByIndex(1), "name")` — index starts from 1
+→ Details: [api-methods.md](../core/api-methods.md)
 
-### 데이터가 표시되지 않음
-**원인**: 컬럼 `Name`과 데이터 키 불일치
-✗ 데이터 `{ "userName": "홍길동" }` + 컬럼 `Name: "name"`
-✓ 데이터 키와 컬럼 `Name`을 동일하게: `Name: "userName"`
+### Data is not displayed
+**Cause**: Mismatch between column `Name` and data key
+✗ Data `{ "userName": "Hong Gildong" }` + Column `Name: "name"`
+✓ Make data key and column `Name` identical: `Name: "userName"`
 
-### Int/Float 컬럼에 빈 값이 0으로 표시됨
-**원인**: Int, Float 타입은 기본적으로 빈 값을 0으로 표시
-✓ `EmptyValue: 1` 설정으로 빈 셀 유지
-→ 상세: [column-type-property.md](../core/column-type-property.md)
+### Empty values displayed as 0 in Int/Float columns
+**Cause**: Int and Float types display empty values as 0 by default
+✓ Set `EmptyValue: 1` to keep empty cells
+→ Details: [column-type-property.md](../core/column-type-property.md)
 
-### 저장 시 변경 데이터가 없다고 나옴
-**원인**: `getSaveJson()` / `doSave()`는 기본적으로 변경 행만 추출 (`saveMode: 2`)
-✓ 전체 데이터 필요 시 `sheet.getSaveJson({ saveMode: 0 })`
-→ 상세: [api-methods.md](../core/api-methods.md)
+### No changed data found when saving
+**Cause**: `getSaveJson()` / `doSave()` extracts only changed rows by default (`saveMode: 2`)
+✓ Use `sheet.getSaveJson({ saveMode: 0 })` when all data is needed
+→ Details: [api-methods.md](../core/api-methods.md)
 
 ---
 
-## 이벤트 오류
+## Event Errors
 
-### 이벤트 핸들러에서 시트 접근 실패
-**원인**: 화살표 함수 사용 시 `this`가 시트 객체가 아님
+### Failed to access ibsheet8 in event handler
+**Cause**: When using arrow functions, `this` is not the ibsheet8 object
 ✗ `onClick: (evt) => { this.getValue(...) }`
-✓ `evt.sheet.getValue(...)` 사용 (권장, 항상 안전)
-✓ 또는 일반 함수 `function(evt) { this.getValue(...) }`
-→ 상세: [events.md](../core/events.md)
+✓ Use `evt.sheet.getValue(...)` (recommended, always safe)
+✓ Or use a regular function `function(evt) { this.getValue(...) }`
+→ Details: [events.md](../core/events.md)
 
-### onAfterChange에서 setValue 호출 시 주의
-**원인**: `onAfterChange`는 사용자 입력 시에만 발생, `setValue()` 호출로는 기본적으로 재발생 안 함
-✓ 이벤트 발생을 명시적으로 제어하려면 `ignoreEvent` 파라미터 사용
+### Caution when calling setValue in onAfterChange
+**Cause**: `onAfterChange` fires only on user input; it does not re-fire by default when `setValue()` is called
+✓ Use the `ignoreEvent` parameter to explicitly control event firing
 `sheet.setValue(row, col, val, render, ignoreEvent)`
-→ 상세: [events.md](../core/events.md)
+→ Details: [events.md](../core/events.md)
 
-### onBeforeChange 반환값 처리
-✓ 이전 값으로 되돌리기: `return evt.oldval`
-✓ 값 변환 적용: `return evt.val.toUpperCase()`
-✓ 정상 처리: 반환값 없음
+### onBeforeChange return value handling
+✓ Revert to previous value: `return evt.oldval`
+✓ Apply value transformation: `return evt.val.toUpperCase()`
+✓ Normal processing: no return value
 
-### onEndEdit에서 입력 취소
-✓ `return true` → 변경 취소 (이전 값으로 복원)
-
-### 존재하지 않는 이벤트명 사용 (onSearchEnd 등)
-**원인**: IBSheet8은 "Start↔End" 패턴을 사용하지 않음
-✗ `onSearchEnd` (존재하지 않는 이벤트)
-✓ `onSearchFinish` (올바른 이벤트명)
-→ 상세: [events.md](../core/events.md)
+### Cancel input in onEndEdit
+✓ `return true` → Cancel change (restore to previous value)
 
 ---
 
-## 메모리 누수
+## Memory Leaks
 
-### SPA에서 시트가 계속 쌓임
-**원인**: 컴포넌트 언마운트 시 `dispose()` 미호출
-✗ cleanup 함수 없이 `IBSheet.create()` 호출
-✓ React: `useEffect` return에서 `window["sheet"]?.dispose()`
-✓ Vue: `onUnmounted`에서 `window["sheet"]?.dispose()`
-→ 상세: [react.md](../integration/react.md), [vue.md](../integration/vue.md)
+### ibsheet8 instances keep accumulating in SPA
+**Cause**: `dispose()` not called when component unmounts
+✗ Calling `IBSheet.create()` without a cleanup function
+✓ React: Call `window["sheet"]?.dispose()` in `useEffect` return
+✓ Vue: Call `window["sheet"]?.dispose()` in `onUnmounted`
+→ Details: [react.md](../integration/react.md), [vue.md](../integration/vue.md)
 
 ---
 
-## 스타일 오류
+## Style Errors
 
-### 시트가 너무 작게 표시됨
-**원인**: 컨테이너 크기 미지정
-✗ `<div id="container"></div>` (크기 없음)
+### ibsheet8 displays too small
+**Cause**: Container size not specified
+✗ `<div id="container"></div>` (no size)
 ✓ `<div id="container" style="width:100%; height:500px;"></div>`
 
-### 컨테이너 크기 변경 시 시트 크기 안 맞음
+### ibsheet8 size does not match when container size changes
 ✓ `window.addEventListener("resize", () => sheet.fitSize())`
 
 ---
 
-## 서버 통신 오류
+## Server Communication Errors
 
-### CORS 오류
-**원인**: 서버에서 CORS 미설정
-✓ 서버에서 `Access-Control-Allow-Origin`, `Allow-Methods`, `Allow-Headers` 헤더 추가
+### CORS Error
+**Cause**: CORS not configured on the server
+✓ Add `Access-Control-Allow-Origin`, `Allow-Methods`, `Allow-Headers` headers on the server
 
-### 저장 후 상태가 초기화 안 됨
-**원인**: `acceptChangedData()` 미호출
-✗ `sheet.acceptChanges()` (존재하지 않는 메서드)
-✓ doSave 사용 시: `onAfterSave`에서 `evt.result < 0`(성공) 확인 후 `evt.sheet.acceptChangedData()`
-✓ fetch 등 외부 라이브러리 사용 시: 응답 성공 후 `sheet.acceptChangedData()` 직접 호출
-→ 상세: [api-methods.md](../core/api-methods.md)
-
----
-
-## Enum(콤보) 오류
-
-### Enum 목록이 표시 안 됨
-**원인**: EnumKeys/Enum 형식 오류 — 첫 문자가 구분자 역할
-✗ `EnumKeys: ["A", "B", "C"]` (배열 사용)
-✓ `EnumKeys: "|A|B|C"`, `Enum: "|활성|비활성|대기"` (첫 문자가 구분자인 문자열)
-→ 상세: [column-type-property.md](../core/column-type-property.md)
-
-### Enum 값이 코드가 아닌 텍스트로 저장됨
-**원인**: `EnumKeys` 미설정 시 Enum 텍스트가 그대로 값으로 저장됨
-✓ `EnumKeys`(코드)와 `Enum`(표시 텍스트)을 모두 설정
+### State not reset after saving
+**Cause**: `acceptChangedData()` not called
+✗ `sheet.acceptChanges()` (non-existent method)
+✓ When using doSave: Check `evt.result >= 0` (success) in `onAfterSave`, then call `evt.sheet.acceptChangedData()`
+✓ When using external libraries like fetch: Call `sheet.acceptChangedData()` directly after a successful response
+→ Details: [api-methods.md](../core/api-methods.md)
 
 ---
 
-## Bool(체크박스) 오류
+## Enum (Combo) Errors
 
-### 체크 상태가 저장 안 됨
-**원인**: 기본값 1/0과 서버 기대값(Y/N 등) 불일치
-✗ `Type: "CheckBox"`, `OnValue/OffValue` (IBSheet7 문법)
+### Enum list is not displayed
+**Cause**: EnumKeys/Enum format error — the first character serves as a delimiter
+✗ `EnumKeys: ["A", "B", "C"]` (using array)
+✓ `EnumKeys: "|A|B|C"`, `Enum: "|Active|Inactive|Pending"` (string where the first character is the delimiter)
+→ Details: [column-type-property.md](../core/column-type-property.md)
+
+### Enum value saved as text instead of code
+**Cause**: When `EnumKeys` is not set, the Enum text is saved as the value directly
+✓ Set both `EnumKeys` (code) and `Enum` (display text)
+
+---
+
+## Bool (Checkbox) Errors
+
+### Check state is not saved
+**Cause**: Mismatch between default values 1/0 and server expected values (Y/N, etc.)
+✗ `Type: "CheckBox"`, `OnValue/OffValue` (IBSheet7 syntax)
 ✓ `Type: "Bool"`, `TrueValue: "Y"`, `FalseValue: "N"`
-→ 상세: [column-type-property.md](../core/column-type-property.md)
+→ Details: [column-type-property.md](../core/column-type-property.md)
 
 ---
 
-## 수식(Formula) 오류
+## Formula Errors
 
-### Formula가 동작하지 않음
-**원인**: `CanFormula` 미설정 또는 `CalcOrder` 누락
-✓ `Def.Row`에 `CanFormula: 1`과 `CalcOrder: "컬럼명"` 필수 설정
-→ 상세: [formula.md](../features/formula.md)
+### Formula does not work
+**Cause**: `CanFormula` not set or `CalcOrder` missing
+✓ `CanFormula: 1` and `CalcOrder: "columnName"` must be set in `Def.Row`
+→ Details: [formula.md](../features/formula.md)
 
-### CalcOrder에 공백이 포함되어 계산 오류
-✗ `CalcOrder: "yearSum, total, tax"` (공백 포함)
-✓ `CalcOrder: "yearSum,total,tax"` (공백 없이 쉼표만)
+### Calculation error due to spaces in CalcOrder
+✗ `CalcOrder: "yearSum, total, tax"` (contains spaces)
+✓ `CalcOrder: "yearSum,total,tax"` (commas only, no spaces)
 
-### AttributeFormula가 동작하지 않음
-**원인**: CalcOrder에 `컬럼명+속성명` 형식으로 등록하지 않음
-✓ `CalcOrder: "total,qtyColor,rateCanEdit"` — 일반 Formula와 AttributeFormula 모두 포함
-→ 상세: [attribute-formula.md](../features/attribute-formula.md)
+### AttributeFormula does not work
+**Cause**: Not registered in CalcOrder in the `columnName+attributeName` format
+✓ `CalcOrder: "total,qtyColor,rateCanEdit"` — include both regular Formula and AttributeFormula
+→ Details: [attribute-formula.md](../features/attribute-formula.md)
 
-### CSP 환경에서 Formula 오류
-**원인**: 문자열 형식 Formula는 내부적으로 `eval()` 사용
-✗ `Formula: "qty * price"` (문자열)
-✓ `Formula: function(fr) { return fr.Row["qty"] * fr.Row["price"]; }` (함수)
-
-### 합계행을 Foot 배열로 수동 생성
-**원인**: FormulaRow 속성을 모르고 Foot 행을 직접 만들어 계산 시도
-✗ `Foot: [{ id:"FOOT1", Kind:"Foot", total: ... }]` (수동 구성)
-✓ Col 속성에 `FormulaRow: "Sum"` 추가 (자동 합계행 생성)
-→ 상세: [summary.md](../features/summary.md)
+### Formula error in CSP environment
+**Cause**: String-format Formula internally uses `eval()`
+✗ `Formula: "qty * price"` (string)
+✓ `Formula: function(fr) { return fr.Row["qty"] * fr.Row["price"]; }` (function)
 
 ---
 
-## 트리 그리드 오류
+## Tree Grid Errors
 
-### 트리 구조가 표시되지 않음
-**원인**: `Cfg.MainCol` 미설정
-✓ `Cfg: { MainCol: "컬럼명" }` 필수 지정
-→ 상세: [tree-grid.md](../features/tree-grid.md)
+### Tree structure is not displayed
+**Cause**: `Cfg.MainCol` not set
+✓ `Cfg: { MainCol: "columnName" }` must be specified
+→ Details: [tree-grid.md](../features/tree-grid.md)
 
-### 동적 로딩 시 자식 노드 확장 아이콘이 없음
-**원인**: `HaveChild` 속성 미설정
-✓ 자식이 있을 수 있는 행 데이터에 `HaveChild: true` 포함
-
----
-
-## 그룹/소계 오류
-
-### Group 속성에 공백 포함 시 그룹핑 실패
-✗ `Group: "deptName, teamName"` (공백 포함)
-✓ `Group: "deptName,teamName"` (공백 없이 쉼표만)
-→ 상세: [grouping.md](../features/grouping.md)
-
-### makeSubTotal을 초기화 시점에 호출하면 오류
-**원인**: 데이터 로드 이후에 호출해야 함
-✗ 시트 생성 직후 `sheet.makeSubTotal([...])`
-✓ `onDataLoad` 이벤트 내에서 `evt.sheet.makeSubTotal([...])`
-→ 상세: [summary.md](../features/summary.md)
+### No expand icon for child nodes during dynamic loading
+**Cause**: `HaveChild` property not set
+✓ Include `HaveChild: true` in row data that may have children
 
 ---
 
-## 고정(Frozen)/병합(Merge) 오류
+## Group/SubTotal Errors
 
-### setFixedLeft 호출 시 컬럼 수가 안 맞음
-**원인**: 숨겨진 SEQ 컬럼이 카운트에 포함됨
-✗ 보이는 컬럼 수로 지정 → 의도와 다른 결과
-✓ SEQ 컬럼을 포함하여 카운트 (예: 2개 고정 시 `setFixedLeft(3)`)
-→ 상세: [frozen-merge.md](../features/frozen-merge.md)
+### Grouping fails when Group property contains spaces
+✗ `Group: "deptName, teamName"` (contains spaces)
+✓ `Group: "deptName,teamName"` (commas only, no spaces)
+→ Details: [grouping.md](../features/grouping.md)
 
-### DataMerge와 setFixedTop/setFixedBottom 동시 사용 불가
-**원인**: 두 기능은 호환되지 않음
-✓ `DataMerge` 또는 `setFixedTop/setFixedBottom` 중 하나만 선택
-
----
-
-## 필터 오류
-
-### doFilter 호출 시 필터가 동작하지 않음
-**원인**: 필터 행이 활성화되지 않음
-✓ `Cfg: { ShowFilter: true }` 또는 `sheet.showFilterRow()` 선행 필요
-→ 상세: [api-methods.md](../core/api-methods.md)
-
-### doFilter의 구분자 형식 오류
-**원인**: `cols`, `vals`, `operators`의 첫 문자가 구분자 역할
-✗ `cols: "dept|name"` (구분자 없이 시작)
-✓ `cols: "|dept|name"`, `vals: "|영업부|홍길동"`, `operators: "|1|11"`
+### Error when calling makeSubTotal at initialization time
+**Cause**: Must be called after data is loaded
+✗ Calling `sheet.makeSubTotal([...])` immediately after ibsheet8 creation
+✓ Call `evt.sheet.makeSubTotal([...])` within the `onDataLoad` event
+→ Details: [summary.md](../features/summary.md)
 
 ---
 
-## Export/Import 오류
+## Frozen/Merge Errors
 
-### 엑셀 Import 시 컬럼 매핑이 안 맞음
-**원인**: Import mode 미지정 또는 잘못 설정
-✓ `sheet.loadExcel({ mode: "HeaderMatch" })` — 헤더 이름 기준 매핑 (기본값, 권장)
-기타: `"HeaderSkip"`, `"NoHeader"`, `"FullLoad"`
-→ 상세: [export-import.md](../features/export-import.md)
+### Column count does not match when calling setFixedLeft
+**Cause**: Hidden SEQ column is included in the count
+✗ Specifying by visible column count → unintended result
+✓ Count including the SEQ column (e.g., `setFixedLeft(3)` to fix 2 columns)
+→ Details: [frozen-merge.md](../features/frozen-merge.md)
 
-### CSV Export 시 한글이 깨짐
-**원인**: 인코딩 미설정
+### DataMerge and setFixedTop/setFixedBottom cannot be used simultaneously
+**Cause**: The two features are not compatible
+✓ Choose only one: `DataMerge` or `setFixedTop/setFixedBottom`
+
+---
+
+## Filter Errors
+
+### Filter does not work when calling doFilter
+**Cause**: Filter row is not activated
+✓ `Cfg: { ShowFilter: true }` or `sheet.showFilterRow()` must be called first
+→ Details: [api-methods.md](../core/api-methods.md)
+
+### doFilter delimiter format error
+**Cause**: The first character of `cols`, `vals`, `operators` serves as a delimiter
+✗ `cols: "dept|name"` (does not start with delimiter)
+✓ `cols: "|dept|name"`, `vals: "|Sales|Hong Gildong"`, `operators: "|1|11"`
+
+---
+
+## Export/Import Errors
+
+### Column mapping does not match during Excel Import
+**Cause**: Import mode not specified or incorrectly set
+✓ `sheet.loadExcel({ mode: "HeaderMatch" })` — mapping based on header names (default, recommended)
+Others: `"HeaderSkip"`, `"NoHeader"`, `"FullLoad"`
+→ Details: [export-import.md](../features/export-import.md)
+
+### Korean characters are garbled during CSV Export
+**Cause**: Encoding not set
 ✓ `sheet.down2Text({ fileName: "data.csv", downloadEncoding: "UTF-8(BOM)" })`
 
 ---
 
-## Validation 오류
+## Validation Errors
 
-### ValidCheck 설정했는데 저장 시 검증이 안 됨
-**원인**: `Cfg.ValidCheck: true`만으로는 부족 — 개별 컬럼에 `Required`, `ResultMask` 등 설정 필요
-✓ Cfg와 컬럼 양쪽 모두 설정
-→ 상세: [validation.md](../features/validation.md)
+### Validation does not work during save despite ValidCheck being set
+**Cause**: `Cfg.ValidCheck: true` alone is not sufficient — individual columns need `Required`, `ResultMask`, etc.
+✓ Configure both Cfg and individual columns
+→ Details: [validation.md](../features/validation.md)
 
-### EditMask와 ResultMask의 차이
-- `EditMask`: 입력 중 제한 (타이핑 시 허용 패턴)
-- `ResultMask`: 입력 완료 시 검증 (최종 값 패턴)
-→ 상세: [validation.md](../features/validation.md)
+### Difference between EditMask and ResultMask
+- `EditMask`: Restricts during input (allowed pattern while typing)
+- `ResultMask`: Validates on input completion (final value pattern)
+→ Details: [validation.md](../features/validation.md)

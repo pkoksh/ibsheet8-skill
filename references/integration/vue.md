@@ -1,40 +1,40 @@
-# Vue 연동
+# Vue Integration
 
-Vue 환경에서 IBSheet의 개발 방법을 가이드합니다.
+This guide explains how to develop with IBSheet in a Vue environment.
 
-## 개발 순서
+## Development Steps
 
-1. ibsheet-loader를 이용한 IBSheet js 파일 import
-2. `<IBSheetVue>` 컴포넌트를 통한 IBSheet 객체 생성
-3. TypeScript 사용 시 interface를 통한 개발 편의 확보
+1. Import IBSheet JS files using ibsheet-loader
+2. Create IBSheet object via the `<IBSheetVue>` component
+3. Leverage TypeScript interfaces for development convenience
 
 ---
 
-## 1. ibsheet-loader를 통한 IBSheet js 파일 import
+## 1. IBSheet JS File Import via ibsheet-loader
 
-ibsheet.js 파일은 npmjs를 통해 배포할 수 없는 구조로 되어 있습니다. 따라서 public 폴더에 ibsheet.js와 css 파일을 복사해 두고, ibsheet-loader를 통해 객체를 import하는 방법을 제공합니다.
+The ibsheet.js file is structured in a way that cannot be distributed through npmjs. Therefore, you need to copy the ibsheet.js and css files to the public folder and import the object through ibsheet-loader.
 
-> entry point에 해당하는 html 파일에 직접 ibsheet.js나 css 파일을 include하는 경우에는 ibsheet-loader를 사용할 필요가 없습니다.
+> If you directly include ibsheet.js or css files in the entry point HTML file, there is no need to use ibsheet-loader.
 
-### 1.1 ibsheet-loader 설치
+### 1.1 ibsheet-loader Installation
 
 ```bash
 npm i @ibsheet/loader
 ```
 
-### 1.2 loader를 이용한 ibsheet.js 및 관련 파일 import
+### 1.2 Import ibsheet.js and Related Files Using the Loader
 
-loader 사용 시 `ibsheet.js`와 `plugin`, `locale`, `css` 파일을 직접 import할 필요가 없습니다. (loader가 import합니다.)
+When using the loader, you do not need to directly import `ibsheet.js`, `plugin`, `locale`, or `css` files. (The loader handles the import.)
 
 ```js
 import loader from '@ibsheet/loader'
 
 const loaderOption = {
     name: 'ibsheet',
-    baseUrl: '/ibsheet', // ibsheet.js 파일 위치 (Vue 환경의 경우 /public/ibsheet/ibsheet.js 파일 위치)
-    //theme: "mint",     // css 파일 테마 (설정이 없으면 /css/default/main.css 사용, 생략가능)
-    locales: ["en","ko"], // locale 파일 (설정이 없으면 /locale/ko.js 파일 사용, 생략가능)
-    plugins: [           // plugin 파일
+    baseUrl: '/ibsheet', // ibsheet.js file location (in Vue environment: /public/ibsheet/ibsheet.js file location)
+    //theme: "mint",     // css file theme (uses /css/default/main.css if not set, optional)
+    locales: ["en","ko"], // locale files (uses /locale/ko.js if not set, optional)
+    plugins: [           // plugin files
         "dialog",
         "common",
         "excel"
@@ -42,38 +42,38 @@ const loaderOption = {
     // ibsheet license string
     license: "YOUR_LICENSE_KEY"
 };
-loader.load(loaderOption); // 실제 ibsheet 파일을 import
+loader.load(loaderOption); // Actually import the ibsheet files
 ```
 
-**주의사항:**
-- `loader.load()`를 통한 import는 메인 페이지(entry point)에서 **1회**만 수행합니다.
-- `baseUrl` 속성에서 지정한 위치에 ibsheet.js와 css, locale, plugins 파일이 있어야 합니다.
+**Notes:**
+- The import via `loader.load()` should be performed **only once** on the main page (entry point).
+- The ibsheet.js, css, locale, and plugin files must exist at the location specified by the `baseUrl` property.
 
 ---
 
-## 2. IBSheetVue 컴포넌트를 이용한 시트 객체 생성
+## 2. ibsheet8 Object Creation Using IBSheetVue Component
 
-### 지원 환경
-- Node.js v18 이상
-- Vue 3 이상
+### Supported Environment
+- Node.js v18 or higher
+- Vue 3 or higher
 
-### 2.1 @ibsheet/vue 컴포넌트 설치
+### 2.1 @ibsheet/vue Component Installation
 
 ```bash
 npm i @ibsheet/vue
 ```
 
-### 2.2 IBSheetVue 컴포넌트를 이용한 시트 생성
+### 2.2 ibsheet8 Creation Using IBSheetVue Component
 
-IBSheetVue 컴포넌트를 이용하여 시트를 생성하고, 생성된 객체를 이용한 후속작업을 수행합니다.
+Create an ibsheet8 using the IBSheetVue component, and perform subsequent operations using the created object.
 
-**[App.vue 파일]**
+**[App.vue file]**
 ```html
 <script setup>
 import { IBSheetVue, IB_Preset } from '@ibsheet/vue';
 import { shallowRef } from 'vue';
 
-// 시트 객체를 담을 ref 객체
+// ref object to hold ibsheet8 object
 const mySheet = shallowRef(null);
 
 const sheetOptions = {
@@ -94,25 +94,25 @@ const sheetOptions = {
     { Header: 'Ymd', Name: 'sDate_Ymd', Extend: IB_Preset.YMD, RelWidth: 110 },
   ],
   Events: {
-    // 값 변경 이벤트
+    // Value change event
     onBeforeChange: (evt) => {
-      console.log(`${evt.oldval}값이 ${evt.val}로 변경되었습니다.`);
+      console.log(`Value ${evt.oldval} has been changed to ${evt.val}.`);
     },
-    // 시트 생성 완료 이벤트
+    // ibsheet8 creation complete event
     onRenderFirstFinish: (evt) => {
-      // 시트객체 생성시 1회만 발생합니다.
-      mySheet.value = evt.sheet; // 생성된 시트 객체를 ref객체에 담음
+      // Fires only once when the ibsheet8 object is created.
+      mySheet.value = evt.sheet; // Store created ibsheet8 object in ref
     },
   },
 };
 
-// 조회 데이터
+// Search data
 const sheetData = [
   { name: 'John Doe', age: 30, sDate_Ymd: '20251011' },
   { name: 'Jane Smith', age: 25, sDate_Ymd: '20251205' },
 ];
 
-// 시트 객체 너비/높이 style
+// ibsheet8 object width/height style
 const customStyle = {
   width: '100%',
   height: '400px',
@@ -128,13 +128,13 @@ const handleLoadData = () => {
 const handleGetData = () => {
   const saveData = mySheet.value.getSaveJson();
   if (saveData.data.length) {
-    alert('수정된 행 데이터 \n\n\n' + JSON.stringify(saveData));
+    alert('Modified row data \n\n\n' + JSON.stringify(saveData));
   } else {
     if (saveData.Code == 'IBS000') {
-      alert('수정된 데이터가 없습니다.');
+      alert('No modified data.');
     } else if (saveData.Code == 'IBS010') {
       alert(
-        `${mySheet.value.getRowIndex(saveData.row)} 행의 ${saveData.col} 열은 필수 입력 항목입니다.`
+        `${saveData.col} column of row ${mySheet.value.getRowIndex(saveData.row)} is a required field.`
       );
     }
   }
@@ -144,9 +144,9 @@ const handleGetData = () => {
 <template>
   <h1>IBSheet + Vue</h1>
   <div class="btn">
-    <button @click="handleAddRow">행 추가</button>
-    <button @click="handleGetData">수정된 데이터 확인</button>
-    <button @click="handleLoadData">데이터로드</button>
+    <button @click="handleAddRow">Add Row</button>
+    <button @click="handleGetData">Check Modified Data</button>
+    <button @click="handleLoadData">Load Data</button>
   </div>
   <IBSheetVue :options="sheetOptions" :style="customStyle" />
 </template>
@@ -154,9 +154,9 @@ const handleGetData = () => {
 
 ---
 
-## 3. Vue + TypeScript 사용
+## 3. Vue + TypeScript Usage
 
-@ibsheet/vue 컴포넌트에 포함된 TypeScript interface를 이용할 수 있습니다.
+You can use the TypeScript interfaces included in the @ibsheet/vue component.
 
 ```html
 <script setup lang="ts">
@@ -169,25 +169,25 @@ import {
 } from '@ibsheet/vue';
 import { shallowRef } from 'vue';
 
-// 시트 객체를 담을 ref 객체
+// ref object to hold ibsheet8 object
 const mySheet = shallowRef<IBSheetInstance>(null);
 
-// 시트 클릭 이벤트
+// ibsheet8 click event
 const handleAfterClick: IBSheetEvents['onAfterClick'] = (evt) => {
   console.log(
-    `${evt.sheet.getRowIndex(evt.row)}행, ${evt.sheet.getString(
+    `Row ${evt.sheet.getRowIndex(evt.row)}, column ${evt.sheet.getString(
       evt.sheet.getRowById('Header'),
       evt.col
-    )}열이 클릭되었습니다.`
+    )} was clicked.`
   );
 };
 
-// 시트 객체 생성 이벤트 (객체 생성시 1회 발생)
+// ibsheet8 object creation event (fires once when object is created)
 const handleRenderFinish: IBSheetEvents['onRenderFirstFinish'] = (evt) => {
   mySheet.value = evt.sheet;
 };
 
-// 시트 초기화 구문
+// ibsheet8 initialization statement
 const sheetOptions: IBSheetOptions = {
   Cfg: {
     SearchMode: 0,
@@ -204,10 +204,10 @@ const sheetOptions: IBSheetOptions = {
       CanSort: 0,
       RelWidth: 50,
     },
-    { Header: '이름', Type: 'Text', Name: 'name', RelWidth: 200 },
-    { Header: '나이', Type: 'Int', Name: 'age', RelWidth: 100 },
+    { Header: 'Name', Type: 'Text', Name: 'name', RelWidth: 200 },
+    { Header: 'Age', Type: 'Int', Name: 'age', RelWidth: 100 },
     {
-      Header: '입사일',
+      Header: 'Hire Date',
       Name: 'sDate_Ymd',
       Extend: IB_Preset.YMD,
       RelWidth: 120,
@@ -253,24 +253,24 @@ const handleLoadData = () => {
 
 ---
 
-## 4. 주의사항: onMounted와 IBSheet 객체 생성 시점
+## 4. Note: onMounted and IBSheet Object Creation Timing
 
-IBSheet 객체는 비동기로 생성되기 때문에 **onMounted** 시점에서 시트의 생성이 완료되지 않았을 수 있습니다.
+Since IBSheet objects are created asynchronously, the ibsheet8 creation may not be complete at the **onMounted** timing.
 
-- IBSheet 객체의 생성이 완료된 이후에 **onRenderFirstFinish** 이벤트가 발생합니다.
-- 생성 시점을 명확하게 하려면 IBSheetVue 컴포넌트에 **v-if**를 추가하여 onMounted 이후에 생성되도록 조절하는 것이 좋습니다.
+- The **onRenderFirstFinish** event fires after the IBSheet object creation is complete.
+- To make the creation timing explicit, it is recommended to add **v-if** to the IBSheetVue component so that it is created after onMounted.
 
-### v-if를 이용한 시트 생성 시점 제어
+### Controlling ibsheet8 Creation Timing Using v-if
 
 ```html
 <script setup>
 import { IBSheetVue, IB_Preset } from '@ibsheet/vue';
 import { ref, shallowRef, onMounted } from 'vue';
 
-// 시트 생성 시점 제어
+// ibsheet8 creation timing control
 const createSheet = ref(false);
 
-// 시트 객체를 담을 ref 객체
+// ref object to hold ibsheet8 object
 const mySheet = shallowRef(null);
 
 const customStyle = {
@@ -282,12 +282,12 @@ const customStyle = {
 const sheetOptions = {
   Cols: [
     { Header: 'No', Type: 'Int', Width: 50, Name: 'SEQ' },
-    { Header: '이름', Type: 'Text', Name: 'name', Width: 200 },
-    { Header: '나이', Type: 'Int', Name: 'age', Width: 100 },
+    { Header: 'Name', Type: 'Text', Name: 'name', Width: 200 },
+    { Header: 'Age', Type: 'Int', Name: 'age', Width: 100 },
   ],
   Events: {
     onRenderFirstFinish: (evt) => {
-      // v-if를 통해 항상 onMounted 이후에 생성됩니다.
+      // Always created after onMounted via v-if.
       mySheet.value = evt.sheet;
       mySheet.value.loadSearchData(sheetData);
     },
@@ -299,13 +299,13 @@ const sheetData = [
   { name: 'Jane Smith', age: 25 },
 ];
 
-// 화면 마운트 시점 (IBSheet 객체는 아직 생성되기 전)
+// Screen mount timing (IBSheet object has not been created yet)
 onMounted(async () => {
-  // 화면 초기화 로직 수행
-  // 서버 데이터 가져오기 등 시간이 걸리는 작업
+  // Perform screen initialization logic
+  // Time-consuming tasks like fetching server data
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-  // v-if를 통해 onMounted 함수 마지막 부분에서 시트 객체 생성
+  // Create ibsheet8 object at the end of onMounted function via v-if
   createSheet.value = true;
 });
 </script>
@@ -318,6 +318,6 @@ onMounted(async () => {
 
 ---
 
-## 참고
+## Reference
 
-- IBSheet 8.3.0.0 버전부터 지원
+- Supported from IBSheet 8.3.0.0 version

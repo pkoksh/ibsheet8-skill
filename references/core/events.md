@@ -1,18 +1,14 @@
-# 이벤트 레퍼런스
+# Events Reference
 
-## 이벤트 공통 주의사항
-1. ibsheet8의 모든 이벤트는 object 형태의 파라미터 1개를 갖고 있습니다.
-2. 일부 이벤트에는 return 값을 통해 이벤트 진행을 중단할 수 있는데, 중단이 필요한 경우에는 1(또는 true)를 리턴해야 중단됩니다.
-3. [전체 이벤트 리스트](../ibsheet-official-manual/events/index.md)
-4. IBSheet8의 이벤트 이름은 **"Start↔Finish"** 또는 **"Before↔After"** 쌍을 사용합니다. **"Start↔End" 패턴은 사용하지 않습니다.**
-   - `onSearchStart` ↔ `onSearchFinish` (O) — `onSearchEnd`는 존재하지 않음 (X)
-   - `onRenderStart` ↔ `onRenderFinish` (O)
-   - `onBeforeSort` ↔ `onAfterSort` (O)
+## Event Common Notes
+1. All events in ibsheet8 have a single parameter in object format.
+2. Some events can stop event processing through return values. To stop processing, return 1 (or true).
+3. [Full event list](../ibsheet8-official-manual/events/index.md)
 
-## 이벤트 등록
+## Event Registration
 
 ```javascript
-// 생성 시 등록
+// Register at creation time
 IBSheet.create({
   options: {
     Events: {
@@ -22,20 +18,20 @@ IBSheet.create({
   }
 });
 
-// 동적 등록
+// Dynamic registration
 sheet.bind("onClick", function(evt) { });
 ```
-### bind를 통한 이벤트 등록시 주의 사항
-1. 동일 이벤트에 대한 bind() 재호출은 기존 핸들러를 덮어씁니다.
-2. 시트 생성시 호출되는 onRenderFirstFinish 이벤트는 bind로 등록할 수 없습니다.
-3. 이벤트는 객체 생성 시점에 등록하는 것을 권장하며, 생성 이후 등록은 공통 이벤트 처리에 불리합니다.
+### Notes on Event Registration via bind
+1. Re-calling bind() for the same event overwrites the existing handler.
+2. The onRenderFirstFinish event, which is called during ibsheet8 creation, cannot be registered via bind.
+3. It is recommended to register events at object creation time. Registering after creation is disadvantageous for common event handling.
 ---
 
-## 라이프사이클 이벤트
+## Lifecycle Events
 
-### [onRenderFirstFinish](../ibsheet-official-manual/events/on-render-first-finish.md)
+### [onRenderFirstFinish](../ibsheet8-official-manual/events/on-render-first-finish.md)
 
-시트 최초 렌더링 완료.
+ibsheet8 initial rendering complete.
 
 ```javascript
 onRenderFirstFinish: function(evt) {
@@ -43,46 +39,56 @@ onRenderFirstFinish: function(evt) {
 }
 ```
 
+### [onSearchFinish](../ibsheet8-official-manual/events/on-search-finish.md)
+
+Data load complete. (Also fires after xlsx import)
+
+```javascript
+onSearchFinish: function(evt) {
+  console.log(`${evt.sheet.getDataRows().length} rows loaded`);
+}
+```
+
 ---
 
-## 클릭/선택 이벤트
+## Click/Selection Events
 
-### [onClick](../ibsheet-official-manual/events/on-click.md)
+### [onClick](../ibsheet8-official-manual/events/on-click.md)
 
-- 마우스로 클릭시 발생. (포커스 이동 전에 발생)
-- 클릭한 셀의 값을 얻고자 할때는 `evt.row[evt.col]`로 확인 가능
-- 가급적 onClick 이벤트 보다는 onAfterClick을 사용할 것
+- Fires on mouse click. (Fires before focus moves)
+- To get the clicked cell's value, use `evt.row[evt.col]`
+- Prefer using onAfterClick over onClick when possible
 
 ```javascript
 onClick: function(evt) {
-  console.log(`포커스 된 셀을 다시 클릭했는지 여부 : ${evt.row == evt.sheet.getFocusedRow() }`);
+  console.log(`Whether the focused cell was clicked again: ${evt.row == evt.sheet.getFocusedRow() }`);
 }
 ```
 
-### [onAfterClick](../ibsheet-official-manual/events/on-after-click.md)
-- 마우스 클릭 시 포커스 이동, 체크/언체크(Bool,Radio) 후 발생
+### [onAfterClick](../ibsheet8-official-manual/events/on-after-click.md)
+- Fires after mouse click, focus move, and check/uncheck (Bool, Radio)
 
 ```javascript
 onAfterClick: function(evt) {
-  console.log(`${evt.sheet.getRowIndex(evt.row)}행 클릭!`);
+  console.log(`Row ${evt.sheet.getRowIndex(evt.row)} clicked!`);
 }
 ```
 
-onClick, onAfterClick 이벤트 파라미터 (두 이벤트 동일)
+onClick, onAfterClick Event Parameters (both events are identical)
 
-| 속성 | 설명 |
+| Property | Description |
 |------|------|
-| evt.row | 행 객체 |
-| evt.col | 컬럼명 |
-| evt.x | 마우스 커서 x 좌표 |
-| evt.y | 마우스 커서 y 좌표 |
-| evt.event | javascript 마우스 이벤트 객체 |
+| evt.row | Row object |
+| evt.col | Column name |
+| evt.x | Mouse cursor x coordinate |
+| evt.y | Mouse cursor y coordinate |
+| evt.event | JavaScript mouse event object |
 
 
-### [onIconClick](../ibsheet-official-manual/events/on-icon-click.md)
+### [onIconClick](../ibsheet8-official-manual/events/on-icon-click.md)
 
-- 셀 텍스트 좌측에 [Icon](../ibsheet-official-manual/props/col/icon.md)를 클릭시 onIconClick 이벤트 발생
-- 두 이벤트 모두 CanEdit나 Disable 여부와 무관하게 발생함
+- Fires when clicking the [Icon](../ibsheet8-official-manual/props/col/icon.md) on the left side of cell text
+- Both events fire regardless of CanEdit or Disable status
 
 ```javascript
 onIconClick: function(evt) {
@@ -91,75 +97,75 @@ onIconClick: function(evt) {
 ```
 
 
-### [onButtonClick](../ibsheet-official-manual/events/on-button-click.md)
-- 셀 텍스트 우측의 [Button](../ibsheet-official-manual/props/col/button.md)를 클릭시 onButtonClick 이벤트 발생
+### [onButtonClick](../ibsheet8-official-manual/events/on-button-click.md)
+- Fires when clicking the [Button](../ibsheet8-official-manual/props/col/button.md) on the right side of cell text
 ```javascript
 onButtonClick: function(evt) {
-  console.log(`${evt.sheet.getRowIndex(evt.row)}행의 팝업버튼이 클릭되었습니다.`);
+  console.log(`Popup button on row ${evt.sheet.getRowIndex(evt.row)} was clicked.`);
 }
-``` 
+```
 
 ---
 
-## 편집 이벤트
+## Edit Events
 
-### [onStartEdit](../ibsheet-official-manual/events/on-start-edit.md)
+### [onStartEdit](../ibsheet8-official-manual/events/on-start-edit.md)
 
-- 편집 시작시 발생하는 이벤트로 Bool,Radio 타입에서는 호출되지 않음
+- Event that fires when editing starts. Not called for Bool and Radio types.
 
 ```javascript
 onStartEdit: function(evt) {
-  if (evt.sheet.getValue(evt.row, "status") === "완료") {
-    return true;  // 편집 방지
+  if (evt.sheet.getValue(evt.row, "status") === "Completed") {
+    return true;  // Prevent editing
   }
 }
 ```
 
-### [onEditEnd](../ibsheet-official-manual/events/on-end-edit.md)
+### [onEditEnd](../ibsheet8-official-manual/events/on-end-edit.md)
 
-- 편집 모드 종료시 발생하는 이벤트
+- Event that fires when edit mode ends.
 
 ```javascript
 onEndEdit: function(evt) {
   if (evt.col == 'SCORE' && evt.val > 100) {
-    alert('스코어는 100점을 초과해서 입력할 수 없습니다.');
-    return true;  // 편집 방지
+    alert('Score cannot exceed 100.');
+    return true;  // Prevent editing
   }
 }
 ```
 
 
-### [onBeforeChange](../ibsheet-official-manual/events/on-before-change.md)
+### [onBeforeChange](../ibsheet8-official-manual/events/on-before-change.md)
 
-- 값 변경 전 이벤트. **return '값' 으로 저장될 데이터 변경 가능.**
-- api(setValue)를 통한 변경에는 호출되지 않음
-- 기존과 동일한 값으로 수정했을 때에도 호출됨.
+- Event before value change. **The data to be saved can be changed by returning a value.**
+- Not called for changes made through API (setValue)
+- Also called when modifying to the same value as before.
 
 ```javascript
 onBeforeChange: function(evt) {
   if (evt.col === "quantity" && evt.val < 0) {
-    alert("음수 불가");
-    return evt.oldval; // 이전 값으로 되돌림
+    alert("Negative values not allowed");
+    return evt.oldval; // Revert to previous value
   }
-  // 값 변환
+  // Value conversion
   if (evt.col === "code") {
     return evt.val.toUpperCase();
   }
 }
 ```
 
-| 속성 | 설명 |
+| Property | Description |
 |------|------|
-| evt.row | 행 객체 |
-| evt.col | 열 이름 |
-| evt.val | 수정된 값 |
-| evt.oldval | 변경 전 값 |
+| evt.row | Row object |
+| evt.col | Column name |
+| evt.val | Modified value |
+| evt.oldval | Value before change |
 
-### [onAfterChange](../ibsheet-official-manual/events/on-after-change.md)
+### [onAfterChange](../ibsheet8-official-manual/events/on-after-change.md)
 
-- 값 변경 후. 연관 필드 계산에 사용.
-- api(setValue)를 통한 변경에는 호출되지 않음
-- 기존과 동일한 값으로 수정했을 때에는 호출되지 않음
+- After value change. Used for calculating related fields.
+- Not called for changes made through API (setValue)
+- Not called when modifying to the same value as before
 
 ```javascript
 onAfterChange: function(evt) {
@@ -170,109 +176,108 @@ onAfterChange: function(evt) {
 }
 ```
 
-### [onBeforePaste](../ibsheet-official-manual/events/on-before-paste.md)
+### [onBeforePaste](../ibsheet8-official-manual/events/on-before-paste.md)
 
-- ctrl+v를 통해 붙여넣기 전에 발생
-- 파라미터 값을 수정하면 수정된 값이 붙여넣어짐
-
+- Fires before pasting via ctrl+v
+- Modifying parameter values will paste the modified values
 
 ```javascript
 onBeforePaste:function(evtParam){
   var pasteArr = evtParam.pastedtext;
     for(var i = 0; i < pasteArr.length; i++){
-      //붙여넣어질 내용에 주민등록번호 패턴[######-#######]이 있으면 뒤에 6자리를 '*'로 변경
+      // If the pasted content contains an ID number pattern [######-#######], replace the last 6 digits with '*'
       pasteArr[i] = pasteArr[i].replace(/([0-9]{6}\-[0-9]{1})[0-9]{6}/g, "$1"+"******");
-      // 붙여 넣어질 내용 중에 SN- 로 시작하는 단어가 있는 경우 붙여넣기 중단.
+      // If the pasted content starts with "SN-", cancel the paste.
       if(pasteArr[i].startsWith("SN-")) return true;
     }
-    
+
 }
 ```
-|속성|유형|설명|
+|Property|Type|Description|
 |---|---|---|
-|cols|array[string]|붙여넣기가 이루어질 colName 배열(수정가능)|
-|pastedtext|array[string]|각 행에 붙여넣어질 내용(수정가능)|
+|cols|array[string]|Array of colNames where paste will occur (modifiable)|
+|pastedtext|array[string]|Content to be pasted for each row (modifiable)|
 ---
 
-## 행 조작 이벤트
+## Row Operation Events
 
-### [onAddRow](../ibsheet-official-manual/funcs/core/add-row.md)
+### [onAddRow](../ibsheet8-official-manual/funcs/core/add-row.md)
 
-- addRow 함수를 통해 새로운 행이 추가되어 렌더링 되기 전에 호출
-- 이벤트 내에서 행에 초기값을 설정할 수 있음.
+- Called before a new row added through the addRow function is rendered
+- Initial values can be set for the row within the event.
 
 ```javascript
 onAddRow: function(evt) {
-  // 위 행의 C-CODE 값과 동일한 값을 초기값으로 설정
+  // Set initial value the same as the C-CODE value of the row above
   evt.row["C-CODE"] = evt.sheet.getPrevRow(evt.row)["C-CODE"];
 }
 ```
-### [onBeforeRowDelete](../ibsheet-official-manual/events/on-before-row-delete.md)
+### [onBeforeRowDelete](../ibsheet8-official-manual/events/on-before-row-delete.md)
 
-deleteRow(또는 deleteRows)를 이용해서 행의 상태를 삭제(Deleted:1)로 변경하거나 상태가 삭제인 행을 삭제 취소할 때 호출
+Called when changing a row's status to Deleted (Deleted:1) using deleteRow (or deleteRows), or when canceling deletion of a row with Deleted status
 
 ```javascript
 onBeforeRowDelete: function(evt) {
   if(evt.type === 0){
-    if (evt.sheet.getValue(evt.row, "status") === "승인") {
-      alert("승인된 항목은 삭제 불가");
+    if (evt.sheet.getValue(evt.row, "status") === "Approved") {
+      alert("Approved items cannot be deleted");
       return true;
     }
-    return !confirm("삭제하시겠습니까?");
+    return !confirm("Do you want to delete?");
   }
 }
 ```
-| 속성 | 설명 |
+| Property | Description |
 |------|------|
-| evt.row | 삭제 행 객체 |
-| evt.type | 삭제 여부 (0:삭제,1:삭제취소) |
-| evt.rows | deleteRows 함수로 여러행을 삭제처리시 행 객체 배열 |
+| evt.row | Row object to be deleted |
+| evt.type | Delete status (0: delete, 1: cancel delete) |
+| evt.rows | Array of row objects when deleting multiple rows with deleteRows function |
 
 ---
 
-## 정렬/필터 이벤트
+## Sort/Filter Events
 
-### [onBeforeSort](../ibsheet-official-manual/events/on-before-sort.md)
-사용자가 헤더셀을 클릭하여 소팅시 호출되는 이벤트 
--1 리턴시 소팅 취소, 1 리턴시 헤더 소팅 아이콘만 변경되고 실제 소팅은 이루어지지 않음.
+### [onBeforeSort](../ibsheet8-official-manual/events/on-before-sort.md)
+Event called when the user clicks a header cell to sort.
+Return -1 to cancel sorting, return 1 to only change the header sort icon without actual sorting.
 
 ```javascript
 onBeforeSort: function(evt) {
   if (evt.sheet.hasChangedData()) {
-    alert("변경 데이터를 먼저 저장하세요");
+    alert("Please save changed data first");
     return -1;
   }
 }
 ```
-| 속성 | 설명 |
+| Property | Description |
 |------|------|
-| evt.col | 소팅 열 이름 |
-| evt.sort | 여러개 열에 대한 소팅 내역 (ex: "colName4, -colName2, colName6")<br>(열이름과 열이름 사이에 ","문자로 구분 된 문자열, 내림차순(descending) 소팅인 경우 열이름 앞에 "-" 가 붙음) |
+| evt.col | Sort column name |
+| evt.sort | Sort details for multiple columns (e.g., "colName4, -colName2, colName6")<br>(Columns separated by "," character, "-" prefix indicates descending sort) |
 
-### [onAfterSort](../ibsheet-official-manual/events/on-after-sort.md)
-소팅이 이루어진 후 호출되는 이벤트
+### [onAfterSort](../ibsheet8-official-manual/events/on-after-sort.md)
+Event called after sorting is completed
 
-### [onBeforeFilter](../ibsheet-official-manual/events/on-before-filter.md)
-필터링 전 호출. 1(true) 리턴시 필터링 취소.
+### [onBeforeFilter](../ibsheet8-official-manual/events/on-before-filter.md)
+Called before filtering. Return 1 (true) to cancel filtering.
 
-### [onAfterFilter](../ibsheet-official-manual/events/on-after-filter.md)
-필터링 완료 후 호출되는 이벤트
+### [onAfterFilter](../ibsheet8-official-manual/events/on-after-filter.md)
+Event called after filtering is completed
 
 ---
 
-## 키보드 이벤트
+## Keyboard Events
 
-### [onKeyDown](../ibsheet-official-manual/events/on-key-down.md)
-포커스된 시트에서 키를 눌렀을 때 호출. 1(true) 리턴시 키의 기본 동작 무시.
+### [onKeyDown](../ibsheet8-official-manual/events/on-key-down.md)
+Called when a key is pressed in the focused ibsheet8. Return 1 (true) to ignore the key's default behavior.
 
 ```javascript
 onKeyDown: function(evt) {
-  // Ctrl+S: 저장
+  // Ctrl+S: Save
   if (evt.ctrlKey && evt.keyCode === 83) {
     evt.event.preventDefault();
     saveData();
   }
-  // Ctrl+N: 행 추가
+  // Ctrl+N: Add row
   if (evt.ctrlKey && evt.keyCode === 78) {
     evt.sheet.addRow();
   }
@@ -281,113 +286,91 @@ onKeyDown: function(evt) {
 
 ---
 
-## 서버 통신 이벤트
+## Server Communication Events
 
-### 데이터 조회 이벤트 흐름
-
-`onSearchStart → onReceiveData → onBeforeDataLoad → onDataLoad → onSearchFinish`
-
-| 이벤트 | 시점 | 주요 용도 |
-|--------|------|-----------|
-| onSearchStart | 조회 시작 전 | 로딩 표시, 조회 취소 (return true) |
-| onReceiveData | 서버 응답 수신 직후 | 원본 데이터 가공 |
-| onBeforeDataLoad | 데이터 파싱 후, 시트 로드 전 | 로드될 데이터 수정 (evt.data) |
-| onDataLoad | 시트에 데이터 로드 완료 | 행 객체 접근, makeSubTotal 호출 |
-| onSearchFinish | 화면 렌더링 완료 | 로딩 제거, 건수 표시 |
-
-### [onSearchFinish](../ibsheet-official-manual/events/on-search-finish.md)
-
-데이터 로드 완료. (xlsx import 후에도 발생)
-
-```javascript
-onSearchFinish: function(evt) {
-  console.log(`${evt.sheet.getDataRows().length}건 로드됨`);
-}
-```
-
-### [onBeforeDataLoad](../ibsheet-official-manual/events/on-before-data-load.md)
-loadSearchData, doSearch, doSarchPaging 함수를 통해 데이터가 시트에 로드되기 전 호출. evt.data 파라미터로 로딩 될 데이터 변경 가능.
+### [onBeforeDataLoad](../ibsheet8-official-manual/events/on-before-data-load.md)
+Called before data is loaded into ibsheet8 through loadSearchData, doSearch, or doSearchPaging functions. The data to be loaded can be changed via the evt.data parameter.
 
 ```javascript
 onBeforeDataLoad: function(evt) {
   showLoading();
-  //첫번째 행의 배경색을 파란색으로 변경
+  // Change the background color of the first row to blue
   evt.data[0]["Color"] = "#0000FF";
 }
 ```
 
-### [onBeforeSave](../ibsheet-official-manual/events/on-before-save.md)
-doSave 호출시 데이터 전송 전 호출. 1(true) 리턴시 저장 중단.
+### [onBeforeSave](../ibsheet8-official-manual/events/on-before-save.md)
+Called before data transmission when doSave is invoked. Return 1 (true) to stop saving.
 
 ```javascript
 onBeforeSave: function(evt) {
-  // 서버에 보낼 데이터가 금지어1 또는 금지어2를 포함된 경우 저장 중단
-  if (source.params.indexOf("금지어1") > -1 || source.params.indexOf("금지어2") > -1) {
+  // Stop saving if the data to be sent to the server contains forbidden word 1 or forbidden word 2
+  if (source.params.indexOf("forbidden1") > -1 || source.params.indexOf("forbidden2") > -1) {
       return true;
   }
-  
+
 }
 ```
-|속성|설명|
+|Property|Description|
 |---|---|
-|evt.source.params|서버에 전송할 데이터. querystring 문자열 (doSave 사용시 queryMode: 1, 2 에서 사용가능)|
-|evt.source.data|서버에 전송할 데이터. json 문자열 (doSave 사용시 queryMode: 0 에서 사용가능)|
+|evt.source.params|Data to send to server. querystring format (available when queryMode: 1, 2 in doSave)|
+|evt.source.data|Data to send to server. JSON format (available when queryMode: 0 in doSave)|
 
-### [onAfterSave](../ibsheet-official-manual/events/on-after-save.md)
-서버 저장 응답 수신 후 호출. evt.result로 성공/실패 판별.
+### [onAfterSave](../ibsheet8-official-manual/events/on-after-save.md)
+Called after receiving the server save response. Determine success/failure via evt.result.
 
 ```javascript
 onAfterSave: function(evt) {
   hideLoading();
   if (evt.result< 0 ) {
     evt.sheet.acceptChangedData();
-    alert("저장 완료");
+    alert("Save complete");
   }
 }
 ```
-|속성|설명|
+|Property|Description|
 |---|---|
-|result| 처리결과 (0 이상: 저장 성공, 0 미만: 저장 실패)|
-|message|서버에서 받은 메세지|
-|response|서버 응답 객체|
+|result| Processing result (0 or above: save success, below 0: save failure)|
+|message|Message received from server|
+|response|Server response object|
 ---
 
-## 체크박스 이벤트
+## Checkbox Events
 
-### [onBeforeCheckAll](../ibsheet-official-manual/events/on-before-check-all.md)
-- 사용자가 헤더 체크를 클릭하거나 setAllCheck 함수를 통해 열전체 체크/언체크가 발생할 때 호출.
-- 다른 이벤트와 달리 이 이벤트만 return false일때 중단됨.
+### [onBeforeCheckAll](../ibsheet8-official-manual/events/on-before-check-all.md)
+- Called when the user clicks the header check or when check/uncheck for the entire column occurs through the setAllCheck function.
+- Unlike other events, this event is stopped only when return false.
 
 ```javascript
 onBeforeCheckAll: function(evt) {
   if(document.querySelector("#code").value == "F") {
-    return false;  //체크 중단
+    return false;  // Stop check
   }
 }
 ```
 
-### [onCheckAllFinish](../ibsheet-official-manual/events/on-check-all-finish.md)
-전체 선택/해제 완료 시 호출.
+### [onCheckAllFinish](../ibsheet8-official-manual/events/on-check-all-finish.md)
+Called when select all/deselect all is completed.
 
 ---
 
-## 포커스/스크롤 이벤트
+## Focus/Scroll Events
 
-### [onBeforeFocus](../ibsheet-official-manual/events/on-before-focus.md)
-셀 포커스 이동 전 호출. 1(true) 리턴시 포커스 이동 방지.
+### [onBeforeFocus](../ibsheet8-official-manual/events/on-before-focus.md)
+Called before cell focus moves. Return 1 (true) to prevent focus movement.
 
-### [onFocus](../ibsheet-official-manual/events/on-focus.md)
-셀 포커스 완료 후 호출.
+### [onFocus](../ibsheet8-official-manual/events/on-focus.md)
+Called after cell focus is completed.
 
-### [onScroll](../ibsheet-official-manual/events/on-scroll.md)
-시트 스크롤(가로/세로) 이동 후 호출. 
+### [onScroll](../ibsheet8-official-manual/events/on-scroll.md)
+Called after ibsheet8 scroll (horizontal/vertical) movement.
 
-### [ononVScrollEndPoint](../ibsheet-official-manual/events/on-v-scroll-end-point.md)
-세로 스크롤바가 최상단이나 하단에 도착할때 발생
+### [onVScrollEndPoint](../ibsheet8-official-manual/events/on-v-scroll-end-point.md)
+Fires when the vertical scrollbar reaches the top or bottom.
 
 ```javascript
 onVScrollEndPoint: function(evt) {
-  // 기존 데이터 아래에 append
+  // Append below existing data
   if (evt.vpos > 0) {
     loadMoreData();
   }

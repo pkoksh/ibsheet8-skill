@@ -1,63 +1,63 @@
-# IBSheet8 초기화 가이드
+# IBSheet8 Initialization Guide
 
-IBSheet8 그리드를 페이지에 생성하고 초기화하는 방법을 설명합니다.
+Explains how to create and initialize an IBSheet8 grid on a page.
 
-## 목차
+## Table of Contents
 
-- [개요](#개요)
-- [기본 설정](#기본-설정)
+- [Overview](#overview)
+- [Basic Setup](#basic-setup)
 - [IBSheet.create() API](#ibsheetcreate-api)
-- [options 객체 구성](#options-객체-구성)
-- [초기화 타이밍](#초기화-타이밍)
-- [데이터 로드](#데이터-로드)
-- [시트 정리 (Cleanup)](#시트-정리-cleanup)
-- [예제 코드](#예제-코드)
+- [options Object Structure](#options-object-structure)
+- [Initialization Timing](#initialization-timing)
+- [Data Load](#data-load)
+- [ibsheet8 Cleanup](#ibsheet8-cleanup)
+- [Example Code](#example-code)
 
 ---
 
-## 개요
+## Overview
 
-IBSheet8 초기화는 다음 3단계로 이루어집니다:
+IBSheet8 initialization consists of the following 3 steps:
 
-1. **라이브러리 로드**: IBSheet8 스크립트 및 메세지파일, 스타일시트 포함
-2. **컨테이너 준비**: 그리드가 렌더링될 HTML 요소 정의
-3. **시트 생성**: `IBSheet.create()` API 호출
+1. **Load library**: Include IBSheet8 scripts, message files, and stylesheets
+2. **Prepare container**: Define the HTML element where the grid will be rendered
+3. **Create ibsheet8**: Call the `IBSheet.create()` API
 
 ---
 
-## 기본 설정
+## Basic Setup
 
-### HTML 기본 구조
+### HTML Basic Structure
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>IBSheet8 예제</title>
+  <title>IBSheet8 Example</title>
 
-  <!-- IBSheet8 스타일시트 -->
+  <!-- IBSheet8 Stylesheet -->
   <link rel="stylesheet" href="ibsheet/css/default/ibsheet.css">
 
-  <!-- IBSheet8 스크립트 -->
+  <!-- IBSheet8 Script -->
   <script src="ibsheet/ibsheet.js"></script>
 
-  <!-- IBSheet8 메세지 파일 -->
+  <!-- IBSheet8 Message File -->
   <script src="ibsheet/locale/ko.js"></script>
 </head>
 <body>
-  <!-- 그리드 컨테이너 -->
+  <!-- Grid Container -->
   <div id="sheetContainer" style="width:100%; height:500px;"></div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // 시트 생성
+      // Create ibsheet8
       IBSheet.create({
         id: "sheet",
         el: "sheetContainer",
         options: {
-          Cfg: { /* 설정 */ },
-          Cols: [ /* 컬럼 정의 */ ]
+          Cfg: { /* Settings */ },
+          Cols: [ /* Column definitions */ ]
         }
       });
     });
@@ -66,103 +66,103 @@ IBSheet8 초기화는 다음 3단계로 이루어집니다:
 </html>
 ```
 
-### 컨테이너 요소
+### Container Element
 
-컨테이너는 반드시 **고정된 높이**를 가져야 합니다:
+The container must have a **fixed height**:
 
 ```html
-<!-- 픽셀 단위 -->
+<!-- Pixel units -->
 <div id="sheetContainer" style="width:100%; height:500px;"></div>
 
-<!-- 뷰포트 단위 -->
+<!-- Viewport units -->
 <div id="sheetContainer" style="width:100%; height:80vh;"></div>
 
-<!-- calc 사용 -->
+<!-- Using calc -->
 <div id="sheetContainer" style="width:100%; height:calc(100vh - 100px);"></div>
 ```
 
-> **주의**: `height: 100%`를 사용하려면 부모 요소들도 모두 높이가 지정되어 있어야 합니다.
+> **Note**: To use `height: 100%`, all parent elements must also have their heights specified.
 
 ---
 
 ## IBSheet.create() API
 
-시트를 생성하는 핵심 API입니다.
+The core API for creating an ibsheet8 instance.
 
-### 문법
+### Syntax
 
 ```javascript
 IBSheet.create(config);
 ```
 
-### 파라미터
+### Parameters
 
-| 파라미터 | 타입 | 필수 | 설명 |
+| Parameter | Type | Required | Description |
 |---------|------|------|------|
-| `id` | String | O | 시트 고유 ID. `window[id]`로 접근 가능 |
-| `el` | String \| HTMLElement | O | 컨테이너 요소 ID 또는 DOM 요소 |
-| `options` | Object | O | 시트 옵션 (Cfg, Cols, Events 등) |
-| `data` | Array | X | 초기 로드할 데이터 배열 |
-| `sync` | Number | X | 동기화 옵션 (0: 비동기(default), 1: 동기) |
+| `id` | String | O | ibsheet8 unique ID. Accessible via `window[id]` |
+| `el` | String \| HTMLElement | O | Container element ID or DOM element |
+| `options` | Object | O | ibsheet8 options (Cfg, Cols, Events, etc.) |
+| `data` | Array | X | Data array to load initially |
+| `sync` | Number | X | Synchronization option (0: async (default), 1: sync) |
 
-### 반환값
+### Return Value
 
-생성된 시트 객체를 반환합니다. 비동기 모드(기본값)에서는 완전한 초기화 전에 반환될 수 있으므로 `onRenderFirstFinish` 이벤트 사용을 권장합니다.
+Returns the created ibsheet8 object. In async mode (default), it may be returned before complete initialization, so using the `onRenderFirstFinish` event is recommended.
 
-### 시트 접근 방법
+### How to Access ibsheet8
 
 ```javascript
-// 방법 1: 전역 객체로 접근
+// Method 1: Access via global object
 const sheet = window["sheet"];
 
-// 방법 2: IBSheet API 사용
+// Method 2: Use IBSheet API
 const sheet = IBSheet["sheet"];
 
-// 방법 3: create() 반환값 저장
+// Method 3: Store create() return value
 const sheet = IBSheet.create({ ... });
 ```
 
 ---
 
-## options 객체 구성
+## options Object Structure
 
-### Cfg (시트 전체 설정)
+### Cfg (ibsheet8 Global Settings)
 
-시트의 전역 동작을 설정합니다:
+Sets the global behavior of ibsheet8:
 
 ```javascript
 Cfg: {
-  SearchMode: 2,       // 렌더링 모드
-  CanEdit: 1,          // 편집 가능 여부
-  HeaderMerge: 1,      // 헤더 머지
-  DataMerge: 0,        // 데이터 머지
-  Alternate: 1,        // 홀짝 행 배경색
-  ShowFilter: false    // 필터행 표시
+  SearchMode: 2,       // Rendering mode
+  CanEdit: 1,          // Editable or not
+  HeaderMerge: 1,      // Header merge
+  DataMerge: 0,        // Data merge
+  Alternate: 1,        // Alternating row background color
+  ShowFilter: false    // Show filter row
 }
 ```
 
-주요 Cfg 속성:
+Key Cfg properties:
 
-| 속성 | 타입 | 기본값 | 설명 |
+| Property | Type | Default | Description |
 |-----|------|-------|------|
 | `SearchMode` | Number | 2 | 0: Fastload, 1: ClientPaging, 2: Lazyload, 3: ServerPaging |
-| `CanEdit` | Boolean | 1 | 시트 전체 편집 가능 여부 |
-| `HeaderMerge` | Number | 0 | 헤더 영역 자동 머지 |
-| `DataMerge` | Number | 0 | 데이터 영역 자동 머지 |
-| `ShowFilter` | Boolean | false | 필터행 생성 여부 |
-| `Alternate` | Number | 0 | 홀짝 행 배경색 (0: 미사용, 1: 단일, 2: 구분) |
-| `MainCol` | String | - | 트리 그리드의 트리 표시 컬럼명 |
+| `CanEdit` | Boolean | 1 | ibsheet8 global edit enabled |
+| `HeaderMerge` | Number | 0 | Header area auto merge |
+| `DataMerge` | Number | 0 | Data area auto merge |
+| `ShowFilter` | Boolean | false | Whether to create filter row |
+| `Alternate` | Number | 0 | Alternating row background (0: disabled, 1: single, 2: separate) |
+| `MainCol` | String | - | Column name for tree display in tree grid |
 
-> 상세 속성은 [cfg-properties.md](cfg-properties.md)를 참조하세요.
+> For detailed properties, refer to [cfg-properties.md](cfg-properties.md).
 
-### Cols (컬럼 정의)
+### Cols (Column Definition)
 
-컬럼 배열을 정의합니다:
+Define the column array:
 
 ```javascript
 Cols: [
   {
-    Header: "번호",
+    Header: "No",
     Name: "no",
     Type: "Int",
     Width: 60,
@@ -170,23 +170,23 @@ Cols: [
     CanEdit: false
   },
   {
-    Header: "이름",
+    Header: "Name",
     Name: "name",
     Type: "Text",
     Width: 120,
     Required: true
   },
   {
-    Header: "상태",
+    Header: "Status",
     Name: "status",
     Type: "Enum",
     Width: 100,
     Align: "Center",
     EnumKeys: "A|B|C",
-    Enum: "활성|대기|종료"
+    Enum: "Active|Pending|Closed"
   },
   {
-    Header: "금액",
+    Header: "Amount",
     Name: "amount",
     Type: "Int",
     Width: 100,
@@ -194,7 +194,7 @@ Cols: [
     Format: "#,##0"
   },
   {
-    Header: "등록일",
+    Header: "Registration Date",
     Name: "regDate",
     Type: "Date",
     Width: 100,
@@ -204,73 +204,73 @@ Cols: [
 ]
 ```
 
-주요 컬럼 속성:
+Key column properties:
 
-| 속성 | 타입 | 설명 |
+| Property | Type | Description |
 |-----|------|------|
-| `Header` | String | 헤더 텍스트 (멀티라인: `"1행\n2행"`) |
-| `Name` | String | 컬럼 식별자 (필수, 데이터 키와 매핑) |
-| `Type` | String | 컬럼 타입 (Text, Int, Float, Date, Enum, Bool, Button 등) |
-| `Width` | Number | 컬럼 너비 (픽셀) |
-| `Align` | String | 정렬 (Left, Center, Right) |
-| `CanEdit` | Boolean | 편집 가능 여부 |
-| `Required` | Boolean | 필수 입력 여부 |
-| `DefaultValue` | Any | 신규 행 기본값 |
-| `Format` | String | 표시 포맷 (숫자: `#,##0`, 날짜: `yyyy-MM-dd`) |
+| `Header` | String | Header text (multiline: `"Line1\nLine2"`) |
+| `Name` | String | Column identifier (required, maps to data key) |
+| `Type` | String | Column type (Text, Int, Float, Date, Enum, Bool, Button, etc.) |
+| `Width` | Number | Column width (pixels) |
+| `Align` | String | Alignment (Left, Center, Right) |
+| `CanEdit` | Boolean | Whether editing is enabled |
+| `Required` | Boolean | Whether input is required |
+| `DefaultValue` | Any | Default value for new rows |
+| `Format` | String | Display format (number: `#,##0`, date: `yyyy-MM-dd`) |
 
-> 상세 속성은 [initialize-column-properties.md](./initialize-column-properties.md)를 참조하세요.
+> For detailed properties, refer to [initialize-column-properties.md](./initialize-column-properties.md).
 
-### Events (이벤트 핸들러)
+### Events (Event Handlers)
 
-시트 이벤트를 처리합니다:
+Handle ibsheet8 events:
 
 ```javascript
 Events: {
-  // 시트 렌더링 완료 (비동기 초기화 후 작업에 사용)
+  // ibsheet8 rendering complete (used for post-async initialization work)
   onRenderFirstFinish: function(evt) {
-    console.log("시트 초기화 완료");
+    console.log("ibsheet8 initialization complete");
     this.loadSearchData({ data: initialData });
   },
 
-  // 셀 클릭
+  // Cell click
   onClick: function(evt) {
-    console.log("클릭:", evt.row, evt.col, evt.value);
+    console.log("Click:", evt.row, evt.col, evt.value);
   },
 
-  // 값 변경 전 (return false로 취소)
+  // Before value change (cancel with return false)
   onBeforeChange: function(evt) {
     if (evt.col === "amount" && evt.value < 0) {
-      alert("금액은 0 이상이어야 합니다.");
+      alert("Amount must be 0 or greater.");
       return false;
     }
   },
 
-  // 값 변경 후
+  // After value change
   onAfterChange: function(evt) {
-    console.log("변경됨:", evt.col, evt.oldValue, "->", evt.value);
+    console.log("Changed:", evt.col, evt.oldValue, "->", evt.value);
   },
 
-  // 행 추가 후
+  // After row add
   onAfterRowAdd: function(evt) {
-    console.log("행 추가:", evt.row);
+    console.log("Row added:", evt.row);
   },
 
-  // 행 삭제 전
+  // Before row delete
   onBeforeRowDelete: function(evt) {
-    return confirm("삭제하시겠습니까?");
+    return confirm("Do you want to delete?");
   }
 }
 ```
 
-> 상세 이벤트는 [events.md](events.md)를 참조하세요.
+> For detailed events, refer to [events.md](events.md).
 
 ---
 
-## 초기화 타이밍
+## Initialization Timing
 
-### DOMContentLoaded 사용
+### Using DOMContentLoaded
 
-DOM이 완전히 로드된 후 시트를 생성합니다:
+Create ibsheet8 after the DOM is fully loaded:
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function() {
@@ -278,47 +278,47 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 ```
 
-### 동기/비동기 초기화
+### Sync/Async Initialization
 
 ```javascript
-// 비동기 초기화 (기본값) - 빠른 페이지 로드
+// Async initialization (default) - Fast page load
 IBSheet.create({
   id: "sheet",
   el: "container",
   options: {
     Events: {
       onRenderFirstFinish: function() {
-        // 이 시점에 시트 완전 초기화
+        // ibsheet8 fully initialized at this point
         this.loadSearchData({ data: myData });
       }
     }
   }
 });
 
-// 동기 초기화 - create() 반환 후 바로 사용 가능
+// Sync initialization - Can be used immediately after create() returns
 const sheet = IBSheet.create({
   id: "sheet",
   el: "container",
   options: { ... },
-  sync: 1  // 동기 모드
+  sync: 1  // Sync mode
 });
 sheet.loadSearchData({ data: myData });
 ```
 
-### onRenderFirstFinish 활용
+### Using onRenderFirstFinish
 
-비동기 모드에서 초기화 완료 후 작업을 수행할 때 사용합니다:
+Used to perform work after initialization is complete in async mode:
 
 ```javascript
 Events: {
   onRenderFirstFinish: function(evt) {
-    // 1. 초기 데이터 로드
+    // 1. Load initial data
     this.loadSearchData({ data: initialData });
 
-    // 2. 특정 셀 포커스
+    // 2. Focus specific cell
     this.focus(0, "name");
 
-    // 3. 외부 컴포넌트와 연동
+    // 3. Integration with external components
     updateSummary(this.getRowCount());
   }
 }
@@ -326,11 +326,11 @@ Events: {
 
 ---
 
-## 데이터 로드
+## Data Load
 
-### 초기 데이터 전달
+### Passing Initial Data
 
-`create()` 호출 시 `data` 파라미터로 전달:
+Pass via the `data` parameter when calling `create()`:
 
 ```javascript
 IBSheet.create({
@@ -338,60 +338,60 @@ IBSheet.create({
   el: "container",
   options: { ... },
   data: [
-    { name: "홍길동", amount: 10000, regDate: "2024-01-15" },
-    { name: "김철수", amount: 25000, regDate: "2024-02-20" }
+    { name: "John", amount: 10000, regDate: "2024-01-15" },
+    { name: "Jane", amount: 25000, regDate: "2024-02-20" }
   ]
 });
 ```
 
-### loadSearchData() 메서드
+### loadSearchData() Method
 
-로컬 데이터를 로드합니다:
+Load local data:
 
 ```javascript
 sheet.loadSearchData({
-  data: jsonArray,    // 데이터 배열
-  sync: 1,            // 동기 로드 (선택)
-  append: 0           // 0: 교체, 1: 추가
+  data: jsonArray,    // Data array
+  sync: 1,            // Sync load (optional)
+  append: 0           // 0: replace, 1: append
 });
 ```
 
-### doSearch() 서버 연동
+### doSearch() Server Integration
 
-서버에서 데이터를 조회합니다:
+Retrieve data from the server:
 
 ```javascript
 sheet.doSearch({
   url: "/api/list",
   method: "POST",
-  param: { searchType: "all", keyword: "검색어" },
+  param: { searchType: "all", keyword: "search term" },
   reqHeader: { "Content-Type": "application/json" }
 });
 ```
 
 ---
 
-## 시트 정리 (Cleanup)
+## ibsheet8 Cleanup
 
 ### sheet.dispose()
 
-시트를 제거하고 리소스를 해제합니다:
+Remove ibsheet8 and release resources:
 
 ```javascript
-sheet.removeAll(); // 로드된 데이터 제거
+sheet.removeAll(); // Remove loaded data
 
-sheet.dispose();  // 객체로 제거
+sheet.dispose();  // Remove object
 
-IBSheet.disposeAll();  // 모든 시트 객체 제거
+IBSheet.disposeAll();  // Remove all ibsheet8 objects
 ```
 
-> 프레임워크별 상세 연동은 [react.md](../integration/react.md), [vue.md](../integration/vue.md)를 참조하세요.
+> For framework-specific integration details, refer to [react.md](../integration/react.md), [vue.md](../integration/vue.md).
 
 ---
 
-## 예제 코드
+## Example Code
 
-### 기본 그리드
+### Basic Grid
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function() {
@@ -405,17 +405,17 @@ document.addEventListener("DOMContentLoaded", function() {
       },
       Cols: [
         { Header: "No", Name: "no", Type: "Int", Width: 60, CanEdit: false },
-        { Header: "이름", Name: "name", Type: "Text", Width: 120 },
-        { Header: "이메일", Name: "email", Type: "Text", Width: 180 },
-        { Header: "연락처", Name: "phone", Type: "Text", Width: 120 },
-        { Header: "가입일", Name: "joinDate", Type: "Date", Width: 100, Format: "yyyy-MM-dd" }
+        { Header: "Name", Name: "name", Type: "Text", Width: 120 },
+        { Header: "Email", Name: "email", Type: "Text", Width: 180 },
+        { Header: "Phone", Name: "phone", Type: "Text", Width: 120 },
+        { Header: "Join Date", Name: "joinDate", Type: "Date", Width: 100, Format: "yyyy-MM-dd" }
       ],
       Events: {
         onRenderFirstFinish: function() {
           this.loadSearchData({
             data: [
-              { no: 1, name: "홍길동", email: "hong@test.com", phone: "010-1234-5678", joinDate: "2024-01-15" },
-              { no: 2, name: "김철수", email: "kim@test.com", phone: "010-2345-6789", joinDate: "2024-02-20" }
+              { no: 1, name: "John", email: "john@test.com", phone: "010-1234-5678", joinDate: "2024-01-15" },
+              { no: 2, name: "Jane", email: "jane@test.com", phone: "010-2345-6789", joinDate: "2024-02-20" }
             ]
           });
         }
@@ -425,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 ```
 
-### CRUD 그리드
+### CRUD Grid
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function() {
@@ -434,69 +434,69 @@ document.addEventListener("DOMContentLoaded", function() {
     el: "sheetContainer",
     options: {
       Cfg: {
-        SearchMode: 0,  // Fastload - 전체 데이터 로드
+        SearchMode: 0,  // Fastload - Load all data
       },
       Def: {
         Row: {
-          //Formula 사용시 필수 CanFormula, CalcOrder
+          // Required for Formula usage: CanFormula, CalcOrder
           CanFormula: 1,
           CalcOrder: "total"
         }
       },
       Cols: [
-        { Header: "상태", Name: "_STATUS", Type: "Status", Width: 50 },
-        { Header: "선택", Name: "_CHK", Type: "Bool", Width: 50 },
-        { Header: "상품명", Name: "productName", Type: "Text", Width: 150, Required: true },
-        { Header: "단가", Name: "price", Type: "Int", Width: 100, Format: "#,##0" },
-        { Header: "수량", Name: "quantity", Type: "Int", Width: 80 },
-        { Header: "합계", Name: "total", Type: "Int", Width: 100, Format: "#,##0",
+        { Header: "Status", Name: "_STATUS", Type: "Status", Width: 50 },
+        { Header: "Select", Name: "_CHK", Type: "Bool", Width: 50 },
+        { Header: "Product Name", Name: "productName", Type: "Text", Width: 150, Required: true },
+        { Header: "Unit Price", Name: "price", Type: "Int", Width: 100, Format: "#,##0" },
+        { Header: "Quantity", Name: "quantity", Type: "Int", Width: 80 },
+        { Header: "Total", Name: "total", Type: "Int", Width: 100, Format: "#,##0",
           Formula: "price * quantity", CanEdit: false }
       ],
     }
   });
 });
 
-// 행 추가
+// Add row
 function addRow() {
   const sheet = window["crudSheet"];
-  sheet.addRow({ init: { productName: "신규 상품", price: 0, quantity: 1 } });
+  sheet.addRow({ init: { productName: "New Product", price: 0, quantity: 1 } });
 }
 
-// 선택 행 삭제
+// Delete selected rows
 function deleteRows() {
   const sheet = window["crudSheet"];
-  sheet.deleteRow({ check: 1 });  // 체크된 행 삭제
+  sheet.deleteRow({ check: 1 });  // Delete checked rows
 }
 
-// 변경 데이터 저장
+// Save changed data
 function saveData() {
   const sheet = window["crudSheet"];
 
-  // 변경된 데이터만 추출 (Added: 추가, Changed: 수정, Deleted: 삭제)
+  // Extract only changed data (Added: added, Changed: modified, Deleted: deleted)
   const saveData = sheet.getSaveJson();
 
-// 유효성 검사 (오류 코드가 있는 경우)
+  // Validation (if there is an error code)
   if (saveData.Code && saveData.Code.startsWith("ISB")) {
     alert("error occured!!")
     return;
   }
-  console.log("저장 데이터:", saveData);
+  console.log("Save data:", saveData);
 
-  // ajax를 통한 서버 전송 및 결과 받기
+  // Send to server via ajax and receive result
 
-  // 서버 전송 후 저장 성공시 상태 초기화
+  // Reset status after successful server save
   sheet.acceptChanges();
 }
 ```
 
 ---
 
-## 참고 자료
+## References
 
-- [Cfg 속성 상세](./initialize-cfg-properties.md)
-- [컬럼 속성 상세](./initialize-column-properties.md)
-- [컬럼 타입](./initialize-column-type-property.md)
-- [이벤트](./events.md)
-- [API 메서드](./api-methods.md)
-- [React 연동](../integration/react.md)
-- [Vue 연동](../integration/vue.md)
+- [Cfg Property Details](./initialize-cfg-properties.md)
+- [Column Property Details](./initialize-column-properties.md)
+- [Column Types](./initialize-column-type-property.md)
+- [Events](./events.md)
+- [API Methods](./api-methods.md)
+- [React Integration](../integration/react.md)
+- [Vue Integration](../integration/vue.md)

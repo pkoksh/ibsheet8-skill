@@ -1,24 +1,24 @@
-# 컬럼 속성 레퍼런스
+# Column Properties Reference
 
-## Col 속성
+## Col Properties
 
-- [모든 속성 정보](../ibsheet-official-manual/props/col/index.md)
-- SEQ 컬럼은 항상 존재함 (생성하지 않으면 좌측 첫번째열로 안보이게 생성됨)
+- [All property information](../ibsheet8-official-manual/props/col/index.md)
+- The SEQ column always exists (if not created, it is created as a hidden first column on the left)
 
 
-### Cfg 속성 사용 예
+### Cfg Property Usage Example
 
 ```javascript
 document.addEventListener("DOMContentLoaded", function() {
-    // 시트 생성
+    // Create ibsheet8
     IBSheet.create({
       id: "sheet",
       el: "sheetContainer",
       options: {
-        Cfg: { ... }, 
+        Cfg: { ... },
         Cols: [
           {
-            Header: "사원명",
+            Header: "Employee Name",
             Type: "Text",
             Name: "EMPNAME",
             Align: "Center",
@@ -35,63 +35,62 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 ---
 
-### 컬럼생성시 주로 사용되는 속성 list:
+### Commonly Used Properties When Creating Columns:
 
-| 속성 | 유형 | 기본값 | 설명 |
+| Property | Type | Default | Description |
 |------|------|--------|------|
-| Header | String or object or jsonArray | - | 헤더 텍스트 |
-| Name | String | - | 컬럼 식별자 (필수) |
-| Type | String | "Text" | [컬럼 타입](./column-type-property.md) |
-| Width | Number | 헤더셀의 글자수를 기준으로 자동너비가 설정됨 | 컬럼 너비 (px) |
-| MinWidth | Number | - | 최소 너비 |
-| RelWidth | Number | - | 상대 너비(비율로 설정됨) |
-| Align | String | Type에 따라 다름  | 정렬 (Left, Center, Right) |
-| CanEdit | Boolean | true | 편집 가능 여부 (0:편집불가,1:편집가능)|
-| Visible | Boolean | true | 보임/감춤 여부 (0:감춤,1:보임) |
-| Format | String or object | Type에 따라 다름 | [컬럼 포멧](./column-format-property.md) |
-| Formula | String or function | - | 계산에 의한 값 설정 (../features/formula.md 참고)|
-| FormulaRow | String or function | - | 데이터 하단에 고정된 합계행 생성 ("Sum","Avg","Max","Min","Count") ([상세](../features/summary.md)) |
-| Attribute-Formula | String or function | - | 계산에 의한 속성 값 설정 (../features/attribute-formula.md 참고)|
-| Required | Boolean | false | 필수 입력 여부(저장함수 호출시 빈값이 포함되면 오류 발생) |
-| DefaultValue | Any | - | 데이터 로드시 해당 열에 대한 값이 없는 경우 또는 신규 행에 대한 기본값 |
+| Header | String or object or jsonArray | - | Header text |
+| Name | String | - | Column identifier (required) |
+| Type | String | "Text" | [Column type](./column-type-property.md) |
+| Width | Number | Auto-width based on header cell text length | Column width (px) |
+| MinWidth | Number | - | Minimum width |
+| RelWidth | Number | - | Relative width (set as ratio) |
+| Align | String | Varies by Type | Alignment (Left, Center, Right) |
+| CanEdit | Boolean | true | Whether editing is enabled (0:non-editable, 1:editable)|
+| Visible | Boolean | true | Show/hide (0:hidden, 1:visible) |
+| Format | String or object | Varies by Type | [Column format](./column-format-property.md) |
+| Formula | String or function | - | Set value by calculation (see ../features/formula.md)|
+| Attribute-Formula | String or function | - | Set property value by calculation (see ../features/attribute-formula.md)|
+| Required | Boolean | false | Whether input is required (error occurs if empty value is included when save function is called) |
+| DefaultValue | Any | - | Default value when there is no value for the column during data load or for new rows |
 
 ---
 
-## Header 속성
+## Header Property
 
-1. 단일 헤더
+1. Single header
 ```javascript
 {
-  Header: "사용자명",
+  Header: "Username",
   Name: "userName",
   Type: "Text",
   ...
 }
 ```
-2. 단일 헤더 + 속성 정의
+2. Single header + property definition
 ```javascript
 {
-  Header: {Value:"사용자명", TextStyle: 1, TextColor: "#FF0000"}, // ../ibsheet-official-manual/props/cell/index.md 의 속성들 사용
-  Name: "userName",
-  Type: "Text",
-  ...
-}
-```
-
-3. 다중 헤더
-```javascript
-{
-  Header: ["사용자 정보", "이름"], //두줄 헤더 
+  Header: {Value:"Username", TextStyle: 1, TextColor: "#FF0000"}, // Properties from ../ibsheet8-official-manual/props/cell/index.md can be used
   Name: "userName",
   Type: "Text",
   ...
 }
 ```
 
-4. 다중 헤더 + 속성 정의
+3. Multi-row header
 ```javascript
 {
-  Header: ["사용자 정보", {Value: "이름", Color:"#222222", TextColor:"#FFFFFF"}], //두줄 헤더 
+  Header: ["User Info", "Name"], // Two-line header
+  Name: "userName",
+  Type: "Text",
+  ...
+}
+```
+
+4. Multi-row header + property definition
+```javascript
+{
+  Header: ["User Info", {Value: "Name", Color:"#222222", TextColor:"#FFFFFF"}], // Two-line header
   Name: "userName",
   Type: "Text",
   ...
@@ -100,29 +99,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ----
 
-## Name 속성
+## Name Property
 
-- 모든 컬럼의 Name은 고유해야 함
-- 다음 Name은 사용에 주의가 필요
+- All column Names must be unique
+- The following Names require caution when using
 
-|Name|사유|
+|Name|Reason|
 |---|---|
-|SEQ|순차증가열의 기능으로 사용됨 [변경방법](../ibsheet-official-manual/props/cfg/row-index.md)|
-|id|각 행의 id와 중복되어 사용 불가|
-|STATUS|저장 시 자동으로 추가되는 상태 정보와 동일한 이름 [변경방법](../ibsheet-official-manual/props/cfg/req-status-name.md)|
+|SEQ|Used for sequential increment column functionality [How to change](../ibsheet8-official-manual/props/cfg/row-index.md)|
+|id|Cannot be used as it conflicts with each row's id|
+|STATUS|Same name as status information automatically added during save [How to change](../ibsheet8-official-manual/props/cfg/req-status-name.md)|
 
 ---
-## Width 속성
-- 시트 생성시 컬럼의 너비를 지정
-- 0으로 설정하여 열을 감출수 있으나 이보다는 Visible:0 속성을 쓸 것.
+## Width Property
+- Specifies the column width when creating ibsheet8
+- Can hide a column by setting to 0, but prefer using Visible:0 property instead
+- To stretch or shrink column width to fit ibsheet8 size, it is recommended to use [MinWidth](../ibsheet8-official-manual/props/col/min-width.md) or [RelWidth](../ibsheet8-official-manual/props/col/rel-width.md) together
 
 ---
-
-## RelWidth 속성
-
-- 컬럼의 너비를 상대적으로 늘리거나 줄이는 기능으로 시트의 너비에 비해 열들의 너비가 작은 경우 RelWidth가 설정된 열들이 값의 비율만큼 늘어남
-- 시트의 너비에 비해 열들의 너비가 큰 경우 RelWidth가 설정된 열들의 너비가 줄어듦
-- 너비가 줄어들더라도 MinWidth로 지정한 값 이하로 줄어들지 않음
-
----
-

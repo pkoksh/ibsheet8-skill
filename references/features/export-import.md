@@ -1,166 +1,166 @@
-# 내보내기 및 가져오기
+# Export and Import
 
-IBSheet8은 두 가지 방식의 내보내기/가져오기를 제공합니다.
+IBSheet8 provides two types of export/import.
 
-| 구분 | 서버 기반 | 클라이언트 기반 |
+| Category | Server-based | Client-based |
 |------|----------|---------------|
-| 엑셀 내보내기 | `down2Excel()` | `exportData()` |
-| 엑셀 가져오기 | `loadExcel()` | `importData()` |
-| 텍스트 내보내기 | `down2Text()` | `exportData()` (txt/csv) |
-| 텍스트 가져오기 | `loadText()` | `importData()` (txt/csv) |
-| PDF 내보내기 | `down2Pdf()` | - |
-| 한글(Hwpx) 내보내기 | `down2Hwpx()` | - |
-| 다중 시트 내보내기 | `down2ExcelBuffer()` | `exportDataBuffer()` |
-| 대량 데이터 직접 처리 | `directDown2Excel()` / `directLoadExcel()` | - |
+| Excel Export | `down2Excel()` | `exportData()` |
+| Excel Import | `loadExcel()` | `importData()` |
+| Text Export | `down2Text()` | `exportData()` (txt/csv) |
+| Text Import | `loadText()` | `importData()` (txt/csv) |
+| PDF Export | `down2Pdf()` | - |
+| Hwpx Export | `down2Hwpx()` | - |
+| Multi-sheet Export | `down2ExcelBuffer()` | `exportDataBuffer()` |
+| Direct bulk data processing | `directDown2Excel()` / `directLoadExcel()` | - |
 
 ---
 
-## 사전 준비
+## Prerequisites
 
-### 서버 기반 함수 사용 시
+### When using server-based functions
 
-1. **서버 모듈 설치**
+1. **Server module installation**
 
-   - Java: `ibsheet8-1.x.x.jar` + Apache POI 라이브러리를 `WEB-INF/lib`에 추가
-   - .NET: `IBSheet8-4.0.dll` + Syncfusion 라이브러리를 bin 또는 참조에 추가
+   - Java: Add `ibsheet8-1.x.x.jar` + Apache POI library to `WEB-INF/lib`
+   - .NET: Add `IBSheet8-4.0.dll` + Syncfusion library to bin or references
 
-2. **플러그인 파일 include**
+2. **Include plugin files**
 
    ```html
    <script src="/plugins/ibsheet-excel.js"></script>
    ```
 
-3. **Export 경로 설정**
+3. **Export path configuration**
 
    ```javascript
-   // 시트 생성 시 Cfg에 설정
+   // Set in Cfg when creating ibsheet8
    Cfg: {
      Export: {
-       Url: "/assets/ibsheet/jsp"  // JSP/ASPX 파일이 위치한 경로
+       Url: "/assets/ibsheet/jsp"  // Path where JSP/ASPX files are located
      }
    }
    ```
 
-   모든 시트에 공통으로 설정하려면 `IBSheet.CommonOptions`를 사용합니다.
+   To set commonly for all ibsheet8 instances, use `IBSheet.CommonOptions`.
 
-### 클라이언트 기반 함수 사용 시
+### When using client-based functions
 
-- `plugins/jszip.min.js` 파일이 반드시 존재해야 합니다.
-- 서버 모듈 없이 브라우저에서 직접 처리됩니다.
-- 지원 파일 형식: **xlsx, txt, csv**
+- The `plugins/jszip.min.js` file must be present.
+- Processing is done directly in the browser without a server module.
+- Supported file formats: **xlsx, txt, csv**
 
 ---
 
-## 엑셀 내보내기
+## Excel Export
 
-### 서버 기반: down2Excel
+### Server-based: down2Excel
 
 ```javascript
-// 기본 사용
+// Basic usage
 sheet.down2Excel({
-  fileName: "데이터목록.xlsx",
+  fileName: "DataList.xlsx",
   sheetDesign: 1,
   merge: 1
 });
 
-// 주요 옵션 활용
+// Using key options
 sheet.down2Excel({
-  fileName: "홍길동 교통비 내역.xlsx",
-  sheetName: "교통비",            // 워크시트 이름
-  downCols: "name|dept|amount",   // 특정 열만 다운로드 ("Visible": 보이는 열만)
-  downRows: "1|3|5",              // 특정 행만 다운로드 ("Visible": 보이는 행만)
-  downHeader: 1,                  // 헤더행 포함 (default: 1)
-  downSum: 1,                     // 합계행 포함 (default: 1)
-  sheetDesign: 1,                 // 디자인 반영 (0:미적용, 1:전체적용, 2:외곽선 제외, 3:모두 미적용, 4:헤더만)
-  merge: 1,                       // 머지 반영 (0:미사용, 1:사용(값 유지), 2:사용(값 비움))
-  wordWrap: 1,                    // 텍스트 줄바꿈 (default: 1)
-  excelFontSize: 10,              // 폰트 크기
-  excelRowHeight: 20,             // 행 높이 (-1: 자동 조절)
-  freezePane: 1,                  // 틀 고정 (1:헤더, 2:헤드영역, 4:왼쪽고정열, 비트연산 조합 가능)
-  hiddenColumn: 1,                // 숨은 컬럼을 엑셀 "열 숨기기"로 다운로드
-  downCombo: "TEXT",              // Enum 다운로드 형식 ("TEXT":표시값, "CODE":코드값)
-  workbookPassword: "1234",       // 엑셀 파일 비밀번호 (xlsx만 지원)
-  enableFilter: 1                 // 엑셀 필터 기능 활성화
+  fileName: "TransportExpenses.xlsx",
+  sheetName: "Transport",            // Worksheet name
+  downCols: "name|dept|amount",   // Download specific columns only ("Visible": visible columns only)
+  downRows: "1|3|5",              // Download specific rows only ("Visible": visible rows only)
+  downHeader: 1,                  // Include header row (default: 1)
+  downSum: 1,                     // Include formula row (default: 1)
+  sheetDesign: 1,                 // Apply design (0: not applied, 1: fully applied, 2: exclude borders, 3: none applied, 4: header only)
+  merge: 1,                       // Apply merge (0: disabled, 1: enabled (keep values), 2: enabled (clear values))
+  wordWrap: 1,                    // Text word wrap (default: 1)
+  excelFontSize: 10,              // Font size
+  excelRowHeight: 20,             // Row height (-1: auto adjust)
+  freezePane: 1,                  // Freeze pane (1: header, 2: head area, 4: left frozen columns, bitwise combination possible)
+  hiddenColumn: 1,                // Download hidden columns as Excel "column hide"
+  downCombo: "TEXT",              // Enum download format ("TEXT": display value, "CODE": code value)
+  workbookPassword: "1234",       // Excel file password (xlsx only)
+  enableFilter: 1                 // Enable Excel filter
 });
 ```
 
-**titleText / userMerge로 타이틀 영역 추가:**
+**Adding title area with titleText / userMerge:**
 
 ```javascript
 sheet.down2Excel({
-  fileName: "보고서.xlsx",
-  titleText: "||2024년 3월 교통비\r\n|||||||홍길동",
-  userMerge: "0,2,1,4",   // row,col,아래병합수,우측병합수 (여러 개는 공백으로 구분)
+  fileName: "Report.xlsx",
+  titleText: "||March 2024 Transport Expenses\r\n|||||||John Doe",
+  userMerge: "0,2,1,4",   // row,col,downward merge count,rightward merge count (separate multiple with spaces)
   titleAlign: "center"
 });
 ```
 
-**exHead/exFoot으로 상단/하단 커스텀 영역 추가:**
+**Adding custom top/bottom areas with exHead/exFoot:**
 
 ```javascript
 sheet.down2Excel({
-  fileName: "보고서.xlsx",
+  fileName: "Report.xlsx",
   exHead: [
     {
       Height: 30,
       Cells: [
-        { Value: "부서", Color: "#DEDEDE", TextSize: 12, TextStyle: 1 },
-        { Value: "총무부", ColSpan: 3 }
+        { Value: "Department", Color: "#DEDEDE", TextSize: 12, TextStyle: 1 },
+        { Value: "General Affairs", ColSpan: 3 }
       ]
     }
   ],
   exFoot: [
-    {},  // 빈 행
-    { Height: 30, Cells: [{ Value: "출력: 2024-01-01 홍길동" }] }
+    {},  // Empty row
+    { Height: 30, Cells: [{ Value: "Printed: 2024-01-01 John Doe" }] }
   ]
 });
-// 주의: exHead/exFoot 사용 시 titleText, userMerge는 무시됩니다.
+// Note: When using exHead/exFoot, titleText and userMerge are ignored.
 ```
 
-**템플릿 파일 활용:**
+**Using template files:**
 
 ```javascript
-// 미리 준비된 엑셀 템플릿에 데이터 삽입
+// Insert data into a pre-prepared Excel template
 sheet.down2Excel({
   fileName: "sheet.xlsx",
-  tempFile: "template.xlsx",  // 서버에 미리 준비한 템플릿 파일명
-  startRow: 4,                // 데이터 작성 시작 행 (0부터)
-  startCol: 2,                // 데이터 작성 시작 열 (0부터)
-  sheetNo: 0                  // 템플릿 내 워크시트 번호
+  tempFile: "template.xlsx",  // Template file name prepared on the server
+  startRow: 4,                // Data writing start row (from 0)
+  startCol: 2,                // Data writing start column (from 0)
+  sheetNo: 0                  // Worksheet number within the template
 });
-// 서버 사이드에서 Down2Excel.jsp에 TempRoot 설정 필요
+// TempRoot configuration is required in Down2Excel.jsp on the server side
 ```
 
-### 클라이언트 기반: exportData
+### Client-based: exportData
 
-서버 모듈 없이 브라우저에서 직접 엑셀 파일을 생성합니다. `down2Excel`과 대부분의 옵션이 동일합니다.
+Generates Excel files directly in the browser without a server module. Most options are the same as `down2Excel`.
 
 ```javascript
-// xlsx 다운로드
+// xlsx download
 sheet.exportData({
-  fileName: "재고리스트.xlsx",
+  fileName: "InventoryList.xlsx",
   downRows: "Visible",
   sheetDesign: 1,
   merge: 1
 });
 
-// txt 다운로드
+// txt download
 sheet.exportData({
-  fileName: "데이터.txt",
+  fileName: "Data.txt",
   colDelim: ","
 });
 
-// csv 다운로드
+// csv download
 sheet.exportData({
-  fileName: "데이터.csv",
+  fileName: "Data.csv",
   downSum: 0
 });
 
-// 용지 설정 (xlsx만 지원)
+// Page setup (xlsx only)
 sheet.exportData({
-  fileName: "보고서.xlsx",
+  fileName: "Report.xlsx",
   excelPage: {
-    orientation: "landscape",  // 가로 방향 ("portrait": 세로)
+    orientation: "landscape",  // Landscape orientation ("portrait": portrait)
     paperSize: "A4",
     marginLeft: 1.8,
     marginRight: 1.8,
@@ -174,94 +174,94 @@ sheet.exportData({
 
 ---
 
-## 엑셀 가져오기
+## Excel Import
 
-### 서버 기반: loadExcel
+### Server-based: loadExcel
 
-파일 다이얼로그를 표시하고, 선택된 엑셀 파일을 서버에서 파싱하여 시트에 로드합니다.
+Displays a file dialog, parses the selected Excel file on the server, and loads it into the ibsheet8.
 
 ```javascript
-// 기본 사용 (HeaderMatch 모드)
+// Basic usage (HeaderMatch mode)
 sheet.loadExcel({
   mode: "HeaderMatch",
   startRow: 5,
-  workSheetName: "12월결산"
+  workSheetName: "DecemberSettlement"
 });
 
-// HeaderSkip 모드로 특정 위치부터 읽기
+// Read from a specific position using HeaderSkip mode
 sheet.loadExcel({
   mode: "HeaderSkip",
   startRow: 4,
   startCol: 3
 });
 
-// 기존 데이터에 추가
+// Append to existing data
 sheet.loadExcel({
   append: 1,
   mode: "HeaderMatch"
 });
 
-// 컬럼 매핑 (시트 1번째 컬럼에 엑셀 5번째 컬럼 매핑)
+// Column mapping (map ibsheet8 1st column to Excel 5th column)
 sheet.loadExcel({
   columnMapping: "5|4|3|2|1"
 });
 
-// FullLoad 모드: 모든 워크시트를 다이얼로그에 로드
+// FullLoad mode: load all worksheets into a dialog
 sheet.loadExcel({
   mode: "FullLoad"
 });
 ```
 
-**mode 옵션 설명:**
+**mode option description:**
 
-| mode | 설명 |
+| mode | Description |
 |------|------|
-| `"HeaderMatch"` | 시트 헤더 타이틀과 엑셀 헤더를 비교하여 매칭 (default) |
-| `"NoHeader"` | 헤더 없이 첫 행부터 순서대로 매핑 |
-| `"HeaderSkip"` | 헤더 행 수만큼 건너뛰고 순서대로 매핑 |
-| `"FullLoad"` | 모든 워크시트를 다이얼로그에 로드하여 선택 |
+| `"HeaderMatch"` | Match by comparing ibsheet8 header titles with Excel headers (default) |
+| `"NoHeader"` | Map sequentially from the first row without headers |
+| `"HeaderSkip"` | Skip header row count and map sequentially |
+| `"FullLoad"` | Load all worksheets into a dialog for selection |
 
-**주요 옵션:**
+**Key options:**
 
-| 옵션 | 설명 |
+| Option | Description |
 |------|------|
-| `append` | 기존 데이터 뒤에 추가 여부 (default: 0) |
-| `startRow` | 엑셀에서 시작할 행 번호 (1부터) |
-| `startCol` | 엑셀에서 시작할 열 번호 (1부터) |
-| `endRow` | 읽어들일 마지막 행 (0부터) |
-| `workSheetName` | 워크시트 이름 지정 |
-| `workSheetNo` | 워크시트 순번 지정 |
-| `columnMapping` | 컬럼 매핑 (`"5\|4\|3\|2\|1"`) |
-| `maxFileSize` | 최대 파일 크기 (MB) |
-| `fileExt` | 허용 확장자 (default: `"xls\|xlsx"`) |
-| `skipEmptyRow` | 빈 행 건너뛰기 (default: 1) |
-| `workbookPassword` | 비밀번호가 설정된 파일 열기 (xlsx만) |
-| `activeSheet` | 활성화된 워크시트 업로드 |
+| `append` | Whether to append after existing data (default: 0) |
+| `startRow` | Starting row number in Excel (from 1) |
+| `startCol` | Starting column number in Excel (from 1) |
+| `endRow` | Last row to read (from 0) |
+| `workSheetName` | Specify worksheet name |
+| `workSheetNo` | Specify worksheet number |
+| `columnMapping` | Column mapping (`"5\|4\|3\|2\|1"`) |
+| `maxFileSize` | Maximum file size (MB) |
+| `fileExt` | Allowed extensions (default: `"xls\|xlsx"`) |
+| `skipEmptyRow` | Skip empty rows (default: 1) |
+| `workbookPassword` | Open password-protected files (xlsx only) |
+| `activeSheet` | Upload the active worksheet |
 
-### 클라이언트 기반: importData
+### Client-based: importData
 
-서버 없이 브라우저에서 직접 엑셀 파일을 파싱합니다. `loadExcel`과 유사한 옵션을 제공합니다.
+Parses Excel files directly in the browser without a server. Provides options similar to `loadExcel`.
 
 ```javascript
-// 기본 사용
+// Basic usage
 sheet.importData({
   mode: "HeaderMatch",
   startRow: 3,
   workSheetName: "sheet"
 });
 
-// 컬럼 매핑으로 순서 변경
+// Change order with column mapping
 sheet.importData({
   columnMapping: "3|4|5|2|1"
 });
 
-// file 객체 직접 전달 (파일 다이얼로그 미표시)
+// Pass file object directly (file dialog not displayed)
 sheet.importData({
-  file: fileObject,  // File 객체 또는 Blob 객체
+  file: fileObject,  // File object or Blob object
   mode: "HeaderMatch"
 });
 
-// 텍스트/CSV 파일 가져오기
+// Import text/CSV files
 sheet.importData({
   fileExt: "csv|txt",
   colSeparator: ",",
@@ -271,71 +271,71 @@ sheet.importData({
 
 ---
 
-## 다중 시트 엑셀 내보내기
+## Multi-sheet Excel Export
 
-### 서버 기반: down2ExcelBuffer
+### Server-based: down2ExcelBuffer
 
-여러 개의 IBSheet를 하나의 엑셀 파일에 각각 다른 워크시트로 내보냅니다.
+Exports multiple IBSheets to a single Excel file as separate worksheets.
 
 ```javascript
-// 버퍼링 시작
+// Start buffering
 sheet1.down2ExcelBuffer(true);
 
-// 각 시트 데이터 버퍼링
-sheet1.down2Excel({ fileName: "여행경비.xlsx", sheetName: "교통비" });
-sheet2.down2Excel({ sheetName: "식비" });
-sheet3.down2Excel({ sheetName: "숙박비" });
+// Buffer each ibsheet8 data
+sheet1.down2Excel({ fileName: "TravelExpenses.xlsx", sheetName: "Transport" });
+sheet2.down2Excel({ sheetName: "Meals" });
+sheet3.down2Excel({ sheetName: "Accommodation" });
 
-// 버퍼링 종료 및 다운로드 실행
+// End buffering and execute download
 sheet1.down2ExcelBuffer(false);
 ```
 
-하나의 시트에서 컬럼별로 워크시트를 나눌 수도 있습니다:
+You can also split worksheets by columns from a single ibsheet8:
 
 ```javascript
 sheet.down2ExcelBuffer(true);
-sheet.down2Excel({ sheetName: "1-2분기", downCols: "q1Cost|q1Profit|q2Cost|q2Profit" });
-sheet.down2Excel({ sheetName: "3-4분기", downCols: "q3Cost|q3Profit|q4Cost|q4Profit" });
+sheet.down2Excel({ sheetName: "Q1-Q2", downCols: "q1Cost|q1Profit|q2Cost|q2Profit" });
+sheet.down2Excel({ sheetName: "Q3-Q4", downCols: "q3Cost|q3Profit|q4Cost|q4Profit" });
 sheet.down2ExcelBuffer(false);
 ```
 
-같은 워크시트에 이어붙이려면 `appendPrevSheet: 1` 옵션을 사용합니다.
+To append to the same worksheet, use the `appendPrevSheet: 1` option.
 
-### 클라이언트 기반: exportDataBuffer
+### Client-based: exportDataBuffer
 
-`down2ExcelBuffer`의 클라이언트 버전으로, 사용법이 동일합니다.
+Client version of `down2ExcelBuffer`, with the same usage.
 
 ---
 
-## 텍스트/CSV 내보내기 및 가져오기
+## Text/CSV Export and Import
 
-### 서버 기반: down2Text / loadText
+### Server-based: down2Text / loadText
 
 ```javascript
-// txt 다운로드
-sheet.down2Text({ fileName: "데이터.txt" });
+// txt download
+sheet.down2Text({ fileName: "Data.txt" });
 
-// csv 다운로드
+// csv download
 sheet.down2Text({
-  fileName: "데이터.csv",
+  fileName: "Data.csv",
   colDelim: ",",
-  downloadEncoding: "UTF-8(BOM)"  // 엑셀에서 한글 깨짐 방지
+  downloadEncoding: "UTF-8(BOM)"  // Prevent Korean character corruption in Excel
 });
 
-// 주요 옵션
+// Key options
 sheet.down2Text({
-  fileName: "데이터.csv",
+  fileName: "Data.csv",
   downCols: "name|dept|amount",
   downRows: "Visible",
   downHeader: 1,
   downSum: 0,
-  rowDelim: "\r\n",        // 행 구분자 (default: "\r\n")
-  colDelim: ","             // 열 구분자 (txt: 탭, csv: 콤마)
+  rowDelim: "\r\n",        // Row delimiter (default: "\r\n")
+  colDelim: ","             // Column delimiter (txt: tab, csv: comma)
 });
 ```
 
 ```javascript
-// 텍스트 파일 가져오기
+// Import text file
 sheet.loadText({
   mode: "NoHeader",
   append: 1,
@@ -344,95 +344,95 @@ sheet.loadText({
 });
 ```
 
-### 클라이언트 기반
+### Client-based
 
-`exportData`, `importData` 함수에서 파일 확장자를 `txt` 또는 `csv`로 지정하면 됩니다.
+Use `exportData` and `importData` functions with the file extension set to `txt` or `csv`.
 
 ---
 
-## PDF 내보내기
+## PDF Export
 
-서버 기반으로만 제공됩니다. Java: `ib-itext.jar` 필요, .NET: `wkhtmltopdf.exe` 필요.
+Available only as server-based. Java: requires `ib-itext.jar`, .NET: requires `wkhtmltopdf.exe`.
 
 ```javascript
 sheet.down2Pdf({
-  fileName: "보고서.pdf",
-  title: "홍길동 교통비 내역",
+  fileName: "Report.pdf",
+  title: "Transport Expense Details",
   titleStyle: "color:red; font-size:100px;",
-  paper: "landscape",         // 용지 방향 ("portrait": 세로, "landscape": 가로)
-  fontTo: "Gulim",            // 한글 폰트 ("Gulim" 또는 "Gothic")
-  dpi: 2000,                  // 축소/확대 비율 (작을수록 크게, 50~32840)
-  downCols: "Visible"         // 보이는 열만
+  paper: "landscape",         // Paper orientation ("portrait": portrait, "landscape": landscape)
+  fontTo: "Gulim",            // Korean font ("Gulim" or "Gothic")
+  dpi: 2000,                  // Zoom ratio (smaller value = larger display, 50~32840)
+  downCols: "Visible"         // Visible columns only
 });
 ```
 
-> **주의:** 멀티레코드(`MultiRecord`) 기능을 사용하는 시트에서는 제약이 있습니다.
+> **Note:** There are limitations when using ibsheet8 with the MultiRecord feature.
 
 ---
 
-## 대량 데이터 직접 처리
+## Direct Bulk Data Processing
 
 ### directDown2Excel
 
-시트에 조회된 데이터 대신 서버에서 직접 생성한 데이터로 엑셀을 다운로드합니다. 대량 데이터에 의한 서버 부하를 줄일 수 있습니다.
+Downloads Excel using data generated directly on the server instead of the data queried in the ibsheet8. This can reduce server load caused by large data volumes.
 
 ```javascript
 sheet.directDown2Excel({
-  url: "./apex/yearApexDataList.do",            // 데이터 조회 서버 URL (필수)
-  extendParam: "year=2024&deptNo=0041",         // 서버에 전달할 파라미터
-  fileName: "년단위 결산 정보.xlsx"
+  url: "./apex/yearApexDataList.do",            // Data query server URL (required)
+  extendParam: "year=2024&deptNo=0041",         // Parameters to send to the server
+  fileName: "AnnualSettlementInfo.xlsx"
 });
 ```
 
-서버에서는 `List<Map>` 구조의 데이터를 `SHEETDATA`라는 이름으로 request에 담아 `DirectDown2Excel.jsp`로 forward합니다.
+On the server, data in `List<Map>` structure is placed in the request under the name `SHEETDATA` and forwarded to `DirectDown2Excel.jsp`.
 
 ### directLoadExcel
 
-엑셀 파일을 시트에 로드하지 않고, 서버의 원하는 서블릿으로 직접 전달하여 DB에 저장합니다.
+Sends the Excel file directly to a desired servlet on the server for saving to DB, instead of loading it into the ibsheet8.
 
 ```javascript
 sheet.directLoadExcel({
   startRow: 5,
   workSheetName: "sheet4",
-  // FP 파라미터로 최종 데이터를 받을 서블릿 경로를 지정해야 합니다.
+  // The FP parameter must specify the servlet path to receive the final data.
   extendParam: "year=2024&deptNo=0041&FP=./save/empExcelData.do"
 });
 ```
 
 ---
 
-## 클립보드
+## Clipboard
 
 ```javascript
-sheet.copy();       // 선택 영역 복사
-sheet.copyAll();    // 전체 복사
-sheet.paste();      // 붙여넣기
+sheet.copy();       // Copy selected area
+sheet.copyAll();    // Copy all
+sheet.paste();      // Paste
 
-// 설정
+// Settings
 Cfg: {
   CanPaste: true,
-  PasteMode: 1    // 0: 덮어쓰기, 1: 행 추가
+  PasteMode: 1    // 0: overwrite, 1: add rows
 }
 ```
 
 ---
 
-## 관련 이벤트
+## Related Events
 
-| 이벤트 | 설명 |
+| Event | Description |
 |--------|------|
-| `onBeforeExport` | 내보내기 실행 전 호출 |
-| `onExportFinish` | 내보내기 완료 후 호출 |
-| `onSelectFile` | 파일 선택 시 호출 (가져오기) |
-| `onImportFinish` | 가져오기 완료 후 호출 |
+| `onBeforeExport` | Called before export execution |
+| `onExportFinish` | Called after export completion |
+| `onSelectFile` | Called on file selection (import) |
+| `onImportFinish` | Called after import completion |
 
 ---
 
-## 관련 설정 (Cfg)
+## Related Settings (Cfg)
 
-| 속성 | 설명 |
+| Property | Description |
 |------|------|
-| `Export.Url` | 서버 JSP/ASPX 파일 경로 |
-| `AutoExcelMode` | 자동 엑셀 모드 설정 |
-| `Down2ExcelConfig` | down2Excel 기본 옵션 설정 |
-| `LoadExcelConfig` | loadExcel 기본 옵션 설정 |
+| `Export.Url` | Server JSP/ASPX file path |
+| `AutoExcelMode` | Auto Excel mode setting |
+| `Down2ExcelConfig` | down2Excel default option settings |
+| `LoadExcelConfig` | loadExcel default option settings |

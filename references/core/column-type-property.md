@@ -1,45 +1,45 @@
-# 컬럼 타입 레퍼런스
+# Column Type Reference
 
-## 기본 정보
+## Basic Information
 
-### 타입 리스트 (자주사용되는 순)
-Text, Int, Float, Date, Enum, Bool, Lines, Button, Html, Link, Img, File, Radio,  Pass, Drag
-### 참고 사항
-1. 열의 Align은 Type에 따라 기본값이 달라짐
+### Type List (in order of frequency of use)
+Text, Int, Float, Date, Enum, Bool, Lines, Button, Html, Link, Img, File, Radio, Pass, Drag
+### Notes
+1. Column Align defaults vary depending on the Type
 
-|타입|정렬|
+|Type|Alignment|
 |---|---|
 |Text,Lines,Enum,Img,Link,Pass,File|Left|
 |Button,Date,Bool,Radio|Center|
 |Int,Float|Right|
-|Html,Drag|정렬불가|
+|Html,Drag|Alignment not applicable|
 
-2. 열 생성시 Type 속성은 필수는 아니지만 가급적 설정할 것을 권함
-3. [타입별 데이터 형식 참고](../ibsheet-official-manual/appx/type.md)
+2. The Type property is not required when creating a column, but it is recommended to set it whenever possible
+3. [Data format reference by type](../ibsheet8-official-manual/appx/type.md)
 ---
 
-## Text (텍스트)
+## Text
 
 ```javascript
 {
-  Header: "이름",
+  Header: "Name",
   Name: "username",
   Type: "Text",
   Align: "Center",
-  EditMask: "^\\w*$", //입력허용글자 javascript 정규식
+  EditMask: "^\\w*$", // Allowed input characters (JavaScript regex)
   Width: 150,
-  Size: 50, //maxlength
-  EmptyValue: "이름 입력" //placeholder
+  Size: 50, // maxlength
+  EmptyValue: "Enter name" // placeholder
 }
 ```
 
 ---
 
-## Int (정수)
+## Int (Integer)
 
 ```javascript
 {
-  Header: "수량",
+  Header: "Quantity",
   Name: "quantity",
   Type: "Int",
   Width: 100,
@@ -50,65 +50,65 @@ Text, Int, Float, Date, Enum, Bool, Lines, Button, Html, Link, Img, File, Radio,
 
 ---
 
-## Float (실수)
+## Float (Decimal)
 
 ```javascript
 {
-  Header: "단가",
+  Header: "Unit Price",
   Name: "price",
   Type: "Float",
-  Format: "#,##0.00", //소숫점 세번째 자리에서 반올림된 값이 표시
+  Format: "#,##0.00", // Value rounded at the third decimal place is displayed
 }
 ```
 
 ---
 
-## Int,Float 참고
-- 기본적으로 숫자 유형은 사용자가 값을 지워도 0을 갖음. (Col)EmptyValue:1 을 설정해야 실제 값을 ''(공백)으로 만들수 있음.
-- Int 타입 기본 포맷 "#,##0"
-- Float 타입 기본 포맷 "#,##0.######"
+## Int, Float Notes
+- By default, numeric types retain 0 even when the user clears the value. Set (Col)EmptyValue:1 to allow the actual value to be '' (empty).
+- Int type default format: "#,##0"
+- Float type default format: "#,##0.######"
 
-### 숫자 형식 패턴
+### Numeric Format Patterns
 
-[Int / Float 타입 포맷](./column-format-property.md#3-int--float-타입-포맷)
+[Int / Float Type Format](./column-format-property.md#3-int--float-type-format)
 ---
-## Date (날짜)
+## Date
 
 ```javascript
 {
-  Header: "등록일",
+  Header: "Registration Date",
   Name: "regDate",
   Type: "Date",
-  Format: "yyyy-MM-dd", // 시트에 표시되는 포맷
-  EditFormat: "yyyyMMdd", // 편집시 표시되는 포맷
-  DataFormat: "yyyyMMdd", // 서버에 데이터를 전송하거나 받을때 포맷
+  Format: "yyyy-MM-dd", // Display format in ibsheet8
+  EditFormat: "yyyyMMdd", // Display format when editing
+  DataFormat: "yyyyMMdd", // Format for sending/receiving data to/from server
 }
 ```
 
-### 날짜 형식 패턴
+### Date Format Patterns
 
-[Date 타입 포맷](./column-format-property.md#2-Date-타입-포맷)
+[Date Type Format](./column-format-property.md#2-date-type-format)
 
 ---
 
-## Enum (드롭다운)
+## Enum (Dropdown)
 
 ```javascript
 {
-  Header: "상태",
+  Header: "Status",
   Name: "pstatus",
   Type: "Enum",
-  EnumKeys: "|A|B|C", //select의 value (첫글자가 구분자)
-  Enum: "|대기|진행|완료", //select의 text (첫글자가 구분자)
+  EnumKeys: "|A|B|C", // select value (first character is the delimiter)
+  Enum: "|Pending|In Progress|Completed", // select text (first character is the delimiter)
 }
 ```
-### Enum 타입 참고
-- Enum이나 EnumKeys에 없는 데이터를 load하는 경우 값은 무시됨(버려짐)
-- Enum이나 EnumKeys에 없는 값을 허용하려면 (Col)EnumStrictMode: 1을 설정해야 함
-- Enum만 설정하고 EnumKeys를 설정하지 않는 경우 EnumKeys도 Enum과 동일하게 취급
-- Enum의 item이 많은 경우에는 (Col)EnumFilter:1 을 설정하면 드롭리스트 상단에 필터가 표시됨.
+### Enum Type Notes
+- If data not in Enum or EnumKeys is loaded, the value is ignored (discarded)
+- To allow values not in Enum or EnumKeys, set (Col)EnumStrictMode: 1
+- If only Enum is set without EnumKeys, EnumKeys is treated the same as Enum
+- When Enum has many items, setting (Col)EnumFilter:1 displays a filter at the top of the dropdown list
 
-### 동적 Enum 데이터 변경
+### Dynamic Enum Data Change
 
 ```javascript
 $.ajax({
@@ -117,18 +117,18 @@ $.ajax({
   success: function(data, ...) {
     sheet.setAttribute( null, "colName", "Enum", data.ComboText, 0 );
     sheet.setAttribute( null, "colName", "EnumKeys", data.ComboCode, 0 );
-    sheet.renderBody(); //적용한 내용을 화면에 표시
+    sheet.renderBody(); // Display applied content on screen
   }
 });
 ```
 
 ---
 
-## Bool (체크박스)
+## Bool (Checkbox)
 
 ```javascript
 {
-  Header: "사용",
+  Header: "Active",
   Name: "useYn",
   Type: "Bool",
   TrueValue: "Y", // default : 1
@@ -137,40 +137,40 @@ $.ajax({
 ```
 ---
 
-## Lines (textarea)
+## Lines (Textarea)
 
 ```javascript
 {
-  Header: "기타사항",
+  Header: "Remarks",
   Name: "desc",
   Type: "Lines",
   Width: 250,
-  Wrap: 1,  // Lines 타입은 default가 1
+  Wrap: 1,  // Lines type default is 1
   RelWidth: 1
 }
 ```
 
 ---
 
-## Button (버튼)
+## Button
 
 ```javascript
 {
-  Header: "상세",
+  Header: "Detail",
   Name: "btnDetail",
   Type: "Button",
-  DefaultValue: "보기", // 조회된 값이 없는 경우 표시됨
-  // ButtonText: "보기", // 조회된 값을 무기하고 표시됨
+  DefaultValue: "View", // Displayed when there is no loaded value
+  // ButtonText: "View", // Displayed regardless of loaded value
 }
 ```
-### Button 타입 참고
-- 사용자 클릭시 구현은 Events.onClick 이벤트롤 통해서 구현
-- 버튼을 비활성화 시키고자 하는 경우에는 Disabled:1 을 설정
+### Button Type Notes
+- User click implementation is done through the Events.onClick event
+- To disable a button, set Disabled:1
 
 
 ---
 
-## Link (하이퍼링크)
+## Link (Hyperlink)
 
 ```javascript
 {
@@ -181,44 +181,44 @@ $.ajax({
 }
 ```
 
-### Link 타입 데이터 구조
+### Link Type Data Structure
 ```javascript
-sheet.setValue(row, "colName", "|./pos/acceptCos.do|조건확인|_self" );  //|URL|Text|Target (첫글자를 구분자로 사용)
+sheet.setValue(row, "colName", "|./pos/acceptCos.do|View Details|_self" );  // |URL|Text|Target (first character is used as delimiter)
 ```
 
 ---
 
-## Img (이미지)
+## Img (Image)
 
 ```javascript
 {
-  Header: "사진",
+  Header: "Photo",
   Name: "photo",
-  Type: "Img", //Image가 아니라 Img 임
-  DefaultImage: "./img/noimage.png" // 데이터가 없는 겨우 표시되는 이미지
+  Type: "Img", // Note: "Img" not "Image"
+  DefaultImage: "./img/noimage.png" // Image displayed when there is no data
 }
 ```
 
-### Img 타입 데이터 구조
+### Img Type Data Structure
 ```javascript
-//|URL|Width|Height|Left|Top|LinkUrl|Target|Backgroud-size (첫글자를 구분자로 사용)
-// URL을 제외한 나머지는 생략가능하나 첫글자는 반드시 구분자가 들어가야 함.
-sheet.setValue(row, "colName", "|./img/s0151500.png|300|200" );  
+// |URL|Width|Height|Left|Top|LinkUrl|Target|Background-size (first character is used as delimiter)
+// Everything except URL is optional, but the first character must be a delimiter.
+sheet.setValue(row, "colName", "|./img/s0151500.png|300|200" );
 ```
 
 ---
 
 
-## File (바이너리 파일 업로드/다운로드)
+## File (Binary File Upload/Download)
 ```javascript
 {
-  Header: "첨부이미지",
+  Header: "Attached Image",
   Name: "attachImage",
-  Type: "File", 
+  Type: "File",
   Accept: 'image/*',
   Width: 150
 }
 ```
-### File 타입 참고
-- 파일 타입 사용시에는 getSaveJson,getSaveString 함수의 리턴값이 FormData형식으로 추출됨
-- 파일데이터는 조회/저장시 데이터 규격에 주의가 필요 [파일 데이터 규격 참고](../ibsheet-official-manual/dataStructure/filte-type-structure.md)
+### File Type Notes
+- When using the File type, the return value of getSaveJson and getSaveString functions is extracted in FormData format
+- File data requires attention to data specifications during retrieval/saving [File data specification reference](../ibsheet8-official-manual/dataStructure/filte-type-structure.md)
