@@ -182,8 +182,8 @@ Cols: [
     Type: "Enum",
     Width: 100,
     Align: "Center",
-    EnumKeys: "A|B|C",
-    Enum: "활성|대기|종료"
+    EnumKeys: "|A|B|C",  // 첫 글자가 구분자 — 리딩 "|" 필수
+    Enum: "|활성|대기|종료"
   },
   {
     Header: "금액",

@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 ```
 
-3. 다중 헤더
+3. 다중 헤더 (계층형)
 ```javascript
 {
-  Header: ["사용자 정보", "이름"], //두줄 헤더 
+  Header: ["사용자 정보", "이름"], //두줄 헤더 (상위 그룹 헤더 + 자기 헤더)
   Name: "userName",
   Type: "Text",
   ...
@@ -97,6 +97,18 @@ document.addEventListener("DOMContentLoaded", function() {
   ...
 }
 ```
+
+5. 한 셀 내에서 줄바꿈 (`\n`)
+단순히 좁은 컬럼 폭에 긴 한글 헤더를 두 줄로 표시하고 싶을 때는 **문자열 내부에 `\n`** 을 넣는다. 원본 XFDL `&#13;&#10;` (CRLF) 에 대응되는 관용 패턴. 계층 그룹 헤더(방식 3)와는 다르다.
+
+```javascript
+{ Header: "부속\n코드",      Name: "afilCd",     Width: 40 },
+{ Header: "최저나이\n(이상)", Name: "strtAge",    Width: 60 },
+{ Header: "PANIC\n하한값",   Name: "pancLowVal", Width: 60 }
+```
+
+- JSON / i18n 리소스에서도 리터럴 `\n` 을 그대로 쓰면 된다 (`"afilCd": "부속\n코드"` → IBSheet8 이 개행으로 렌더)
+- 헤더 행 높이가 기본(Body 높이) 보다 커야 두 줄이 보이므로, `Cfg.HeaderRowHeight` 또는 Row 정의 (`Rows: [{size:40, band:"head"}]`) 로 늘릴 수도 있음 — 단, IBSheet8 기본 동작만으로도 대부분 잘 표시됨
 
 ----
 

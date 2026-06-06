@@ -545,7 +545,7 @@ These use `setAttribute(null, col, attrName, value)` (null for row means entire 
 | FindFilterRow() | getRowById("Filter").Visible | Filter row always exists in IBSheet8 |
 | SetFilterValue(col, val, op) | doFilter(cols, vals, ops) | Pipe-separated parameters |
 | SetFilterOption(col, op) | doFilter(cols, vals, ops) | |
-| FilteredRowCount() | getDataRows().filter(r => !r.Filtered).length | |
+| FilteredRowCount() | getDataVisibleRows().length | ⚠️ `r.Filtered` 는 IBRow 에 없는 프로퍼티라 `getDataRows().filter(r=>!r.Filtered)` 는 항상 전체를 센다. 필터 후 보이는 행 수는 `getDataVisibleRows()` (nexacro-to-react/ibsheet.md 참조) |
 
 ### Group & SubTotal
 

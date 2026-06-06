@@ -213,6 +213,28 @@ function App() {
 export default App;
 ```
 
+### 3.3 inline 핸들러 — `satisfies IBSheetEvents`
+
+handler를 별도 const로 hoist하지 않고 `useMemo` 안에서 inline으로 작성할 때는, Events 블록 뒤에 `satisfies IBSheetEvents`를 붙여 타입 검증 + 파라미터 자동 추론을 활용한다.
+
+```tsx
+import type { IBSheetEvents, IBSheetInstance, IBSheetOptions } from '@ibsheet/react'
+
+const options: IBSheetOptions = useMemo(() => ({
+  Cols: [ /* ... */ ],
+  Events: {
+    onClick: (evt) => {                  // evt는 IBSheetEvents['onClick']로 자동 추론
+      console.log(evt.sheet.getRowIndex(evt.row))
+    },
+    onAfterChange: (evt) => {
+      console.log(evt.col, evt.val)
+    },
+  } satisfies IBSheetEvents,
+}), [])
+```
+
+`(evt: any)` / `(evt: unknown)` / inline struct 타입은 사용하지 않는다. `IBSheetEvents`의 contextual typing을 막아 타입 안전성이 사라진다.
+
 ---
 
 ## 지원 버전

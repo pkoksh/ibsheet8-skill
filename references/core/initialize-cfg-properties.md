@@ -56,6 +56,36 @@ document.addEventListener("DOMContentLoaded", function() {
 |InEditMode|Number|편집모드로 진입하는 시점 결정 (1: 클릭즉시 편집모드,2: 더블클릭이나 포커스된 셀을 다시 클릭시 편집모드(default))|
 |MaxSort|Number|소팅 가능한 최대 열 수 (default:3)|
 |NoDataMessage|Number|조회 데이터가 없을때([]빈 배열) 메세지 표시 여부(0:메세지표시 안함, 1:시트생성시 메세지표시, 2:조회시 메세지표시, 3:시트생성,조회시 메세지표시)|
+|NoDataStr|String|조회 데이터가 없을때 표시 메세지 문자열 (default: 라이브러리 locale 의존 — 한국어 환경 "조회된 데이터가 없습니다.")|
 |Undo|Boolean|Undo/Redo기능 사용 여부|
+
+⚠️ **함정 — Nexacro Grid 의 "No data" 와 IBSheet8 한국어 locale 의 "조회된 데이터가 없습니다." 불일치**
+
+원본 Nexacro Grid 의 빈 데이터 메시지는 "No data" (영문) 인 경우가 많은데 (예: SL/CUST/UISL0021T07 — 캡처 기준 "No data" 표시), `@ibsheet/react` 의 IBSheetReact 를 직접 사용하면 한국어 locale 기본값 "조회된 데이터가 없습니다." 가 표시되어 원본과 다르게 보인다. 변환된 화면 캡처와 원본 캡처를 비교하면 빈 데이터 메시지가 한국어로 차이남.
+
+```typescript
+// ❌ Cfg 에 NoDataStr 미지정 — 라이브러리 기본 한국어 "조회된 데이터가 없습니다." 표시 (원본과 차이)
+const sheetOptions: IBSheetOptions = {
+  Cfg: {
+    FitColumns: 1,
+    CanEdit: 0,
+  },
+  Cols: [...]
+}
+
+// ✅ 원본 Nexacro Grid 와 동일한 "No data" 매핑
+const sheetOptions: IBSheetOptions = {
+  Cfg: {
+    FitColumns: 1,
+    CanEdit: 0,
+    NoDataStr: 'No data',  // ← 원본 캡처와 동일 메시지
+  },
+  Cols: [...]
+}
+```
+
+**판정 신호**: 변환 화면 캡처와 원본 캡처를 비교했을 때 빈 데이터 영역의 메시지가 한국어/영문 차이로 두드러지면 → `Cfg.NoDataStr` 명시.
+
+**참고**: `src/components/grid/IBSheet.tsx` (ID 기반 wrapper) 는 `NoDataStr: 'No data'` 가 이미 default 로 들어가 있어 자동 일치. 그러나 `IBSheetReact` (lazy import) 를 직접 사용하는 화면은 wrapper 를 거치지 않아 default 미적용 → 명시 필수.
 
 ---

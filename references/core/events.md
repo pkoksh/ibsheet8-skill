@@ -170,6 +170,61 @@ onAfterChange: function(evt) {
 }
 ```
 
+⚠️ **함정 — Bool 컬럼 단일선택 로직은 `onClick` 이 아니라 `onAfterChange` 로**
+
+원본 Nexacro 의 `oncellclick` 은 **셀 값이 토글된 후** 실행 — `getColumn(row, "cntcMbyYn") === "Y"` 로 토글된 값 검사 가능.
+
+IBSheet8 의 `onClick` 은 **Bool 토글 전 시점** — `getValue(row, "cntcMbyYn")` 가 이전 값(아직 토글 안 됨) 이라 `if (newVal === 'Y')` 분기 보장 X.
+
+```javascript
+// ❌ Bool 단일선택 — onClick 사용 시 newVal 보장 X
+onClick: (evt) => {
+  if (evt.col === "cntcMbyYn") {
+    const v = evt.sheet.getValue(evt.row, "cntcMbyYn")
+    if (v !== "Y") return  // ← 토글 전 값이라 잘못된 분기
+    // ... 다른 행 'N' 셋팅
+  }
+}
+
+// ✅ onAfterChange — 토글 후 값으로 정확 분기
+onAfterChange: (evt) => {
+  if (evt.col === "cntcMbyYn" && evt.row) {
+    const v = evt.sheet.getValue(evt.row, "cntcMbyYn")  // 토글된 값 'Y'
+    if (v === "Y") {
+      // 다른 행 모두 'N' 셋팅 (단일선택)
+      evt.sheet.getDataRows().forEach(r => {
+        if (r !== evt.row && evt.sheet.getValue(r, "cntcMbyYn") === "Y") {
+          evt.sheet.setValue(r, "cntcMbyYn", "N")
+        }
+      })
+    }
+  }
+}
+```
+
+**Why**: Nexacro `oncellclick` ≠ IBSheet `onClick` (시점 차이). 단일선택/Master 행 표시 등 토글 후 값 의존 로직은 `onAfterChange`.
+
+**검증 사례**: UISL0021T02 의 `cntcMbyYn`(주 연락) / `majrTrstInstYn`(메인) 단일선택. 사용자가 첫 클릭 시 동작 안 함 보고 → onClick → onAfterChange 변경 후 정상.
+
+🚨 **함정(CRITICAL) — `Type:'Bool'` 의 이벤트 `evt.val`/`evt.oldval` 은 내부값 `1/0` (TrueValue/FalseValue 아님)**
+
+`TrueValue:'Y'`/`FalseValue:'N'` 의 'Y'/'N' 은 **서버 직렬화(loadSearchData 입력 / getSaveJson·저장 출력) 시에만** 적용되고, 이벤트의 `evt.val`/`evt.oldval` (그리고 `getValue`/`setValue`) 는 **내부값 `1/0`** 으로 동작한다. 위 `=== "Y"` 비교 예시도 환경/버전 의존이라 단정 금지. → `onBeforeChange`/`onAfterChange` 의 checked 분기는 `evt.val === 1 || evt.val === '1' || evt.val === true` 로 (방어적 `'Y'` 포함). `String(evt.val) === 'Y'` 는 `evt.val` 이 `1` 이라 **영원히 false** → veto/분기 무력화.
+
+> `getValue` 의 raw 1/0 반환 + 서버 송신용 **`Y/N 정규화 헬퍼`** 는 `column-type-property.md` 의 "Bool (체크박스)" 섹션이 canonical (중복 정의 금지 — 송신 시 반드시 정규화).
+
+**onBeforeChange veto (Nexacro `cancolumnchange` 등가)** — 체크 시도 차단, 해제만 허용:
+```javascript
+onBeforeChange: (evt) => {
+  if (evt.col !== 'optnYn') return
+  const isChecking = evt.val === 1 || evt.val === '1' || evt.val === true || evt.val === 'Y'
+  if (isChecking) { alert('체크 해제만 가능합니다.'); return String(evt.oldval ?? 0) }  // 이전값 유지=취소
+}
+```
+
+> `onBeforeChange` 는 **사용자 입력에만 발화**(`setValue`/`loadSearchData` 등 프로그램 변경엔 미발화) → 서버 cascade 로 `loadSearchData` 해 체크값이 들어와도 veto 가 오발화하지 않는다. 리턴 타입은 `string | void` (취소 시 `String(oldval)` 리턴 = 이전값 유지).
+
+**검증 사례**: UILM2405M00 그룹등록 — 검사 체크 → 접수 자동체크(서버 LM2405M00-10 재계산) / 접수 직접체크 차단. `String(evt.val)==='Y'` 가 1/0 때문에 무력화돼 "전혀 동작 안 함" → 1/0 판정으로 정상화.
+
 ### [onBeforePaste](../ibsheet-official-manual/events/on-before-paste.md)
 
 - ctrl+v를 통해 붙여넣기 전에 발생

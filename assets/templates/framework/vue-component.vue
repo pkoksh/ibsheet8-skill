@@ -34,11 +34,11 @@ loader.load(loaderOption);
 <!-- 2. 기본 사용법 (JavaScript) - App.vue                         -->
 <!-- ============================================================ -->
 <script setup>
-import { IBSheetVue, IB_Preset } from '@ibsheet/vue';
-import { shallowRef } from 'vue';
+import { IBSheetVue, IB_Preset } from '@ibsheet/vue'
+import { shallowRef } from 'vue'
 
 // 시트 객체를 담을 ref 객체
-const mySheet = shallowRef(null);
+const mySheet = shallowRef(null)
 
 const sheetOptions = {
   Cfg: {
@@ -60,49 +60,49 @@ const sheetOptions = {
   Events: {
     // 값 변경 이벤트
     onBeforeChange: (evt) => {
-      console.log(`${evt.oldval}값이 ${evt.val}로 변경되었습니다.`);
+      console.log(`${evt.oldval}값이 ${evt.val}로 변경되었습니다.`)
     },
     // 시트 생성 완료 이벤트
     onRenderFirstFinish: (evt) => {
       // 시트객체 생성시 1회만 발생합니다.
-      mySheet.value = evt.sheet; // 생성된 시트 객체를 ref객체에 담음
+      mySheet.value = evt.sheet // 생성된 시트 객체를 ref객체에 담음
     },
   },
-};
+}
 
 // 조회 데이터
 const sheetData = [
   { name: 'John Doe', age: 30, sDate_Ymd: '20251011' },
   { name: 'Jane Smith', age: 25, sDate_Ymd: '20251205' },
-];
+]
 
 // 시트 객체 너비/높이 style
 const customStyle = {
   width: '100%',
   height: '400px',
   border: '1px solid #ccc',
-};
+}
 
 const handleAddRow = () => {
-  mySheet.value.addRow();
-};
+  mySheet.value.addRow()
+}
 const handleLoadData = () => {
-  mySheet.value.loadSearchData(sheetData);
-};
+  mySheet.value.loadSearchData(sheetData)
+}
 const handleGetData = () => {
-  const saveData = mySheet.value.getSaveJson();
+  const saveData = mySheet.value.getSaveJson()
   if (saveData.data.length) {
-    alert('수정된 행 데이터 \n\n\n' + JSON.stringify(saveData));
+    alert('수정된 행 데이터 \n\n\n' + JSON.stringify(saveData))
   } else {
     if (saveData.Code == 'IBS000') {
-      alert('수정된 데이터가 없습니다.');
+      alert('수정된 데이터가 없습니다.')
     } else if (saveData.Code == 'IBS010') {
       alert(
-        `${mySheet.value.getRowIndex(saveData.row)} 행의 ${saveData.col} 열은 필수 입력 항목입니다.`
-      );
+        `${mySheet.value.getRowIndex(saveData.row)} 행의 ${saveData.col} 열은 필수 입력 항목입니다.`,
+      )
     }
   }
-};
+}
 </script>
 
 <template>

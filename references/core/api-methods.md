@@ -194,6 +194,26 @@ sheet.setValue({row: row, col: "colName", val: "새 값", render: 0 });// 렌더
 const text = sheet.getString(row, "colName");  // 포맷팅된 값
 ```
 
+⚠️ **함정 — `setValue(row, col, val, 0)` 4번째 인자는 `render` 플래그이지 `suppressEvent` 가 아니다**
+
+positional 4번째 인자를 OnChange 발화 억제(suppressEvent) 의도로 `0` 으로 보내면 **render=0 이라 DOM 갱신이 생략**되어, 일괄적용/체크박스 자동 토글 같은 다건 setValue 가 내부 데이터에는 반영되지만 **화면에는 안 보이는 회귀** 가 발생한다. 콘솔 에러도 없고 `getValue` 로 읽으면 새 값이라 디버깅 어려움.
+
+```javascript
+// ❌ "OnChange 미발화" 의도로 0 — 실제는 render=0 (DOM 미반영, getValue 만 갱신)
+sheet.setValue(row, 'entsRqstDt', '20250420', 0)
+
+// ✅ render=1 — 즉시 DOM 반영 (기본 동작과 동일)
+sheet.setValue(row, 'entsRqstDt', '20250420', 1)
+
+// ✅ 다건 처리 시 매 행 render=0 후 마지막에 rerender()/renderBody() 1회 — 성능 최적
+for (const r of rows) sheet.setValue(r, 'entsRqstDt', val, 0)
+sheet.renderBody()
+```
+
+회귀 사례: UILM5021M00 일괄적용 버튼 — `setValue(r, 'entsRqstDt', bndeAplyDate, 0)` 로 N행 변경했는데 화면에 변경 안 보이는 버그. 4번째 인자를 `1` 로 교체 후 정상 반영.
+
+OnChange 발화 억제가 필요하면 **별도 가드 ref** (`skipOnChangeRef`) 를 OnChange 핸들러 초입에서 체크하는 방식이 정답. 4번째 인자는 OnChange 와 무관.
+
 ---
 
 ## 포커스/선택

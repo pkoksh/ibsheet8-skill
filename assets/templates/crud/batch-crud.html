@@ -52,8 +52,8 @@
             onAfterChange: function(evt) {
               // 금액 자동 계산
               if (evt.col === "quantity" || evt.col === "unitPrice") {
-                var qty = evt.sheet.getValue(evt.row, "quantity") || 0;
-                var price = evt.sheet.getValue(evt.row, "unitPrice") || 0;
+                let qty = evt.sheet.getValue(evt.row, "quantity") || 0;
+                let price = evt.sheet.getValue(evt.row, "unitPrice") || 0;
                 evt.sheet.setValue(evt.row, "amount", qty * price);
               }
             },
@@ -77,40 +77,40 @@
     });
 
     function addNewRow() {
-      var sheet = window["sheet"];
-      var today = new Date().toISOString().slice(0, 10);
+      let sheet = window["sheet"];
+      let today = new Date().toISOString().slice(0, 10);
       sheet.addRow({
         init: { orderDate: today, quantity: 1 }
       });
     }
 
     function addMultipleRows() {
-      for (var i = 0; i < 10; i++) {
+      for (let i = 0; i < 10; i++) {
         addNewRow();
       }
     }
 
     function deleteChecked() {
-      var sheet = window["sheet"];
-      var checkedRows = sheet.getRowsByChecked("chk");
+      let sheet = window["sheet"];
+      let checkedRows = sheet.getRowsByChecked("chk");
       if (checkedRows.length === 0) {
         alert("삭제할 항목을 선택하세요.");
         return;
       }
       if (!confirm(checkedRows.length + "건을 삭제하시겠습니까?")) return;
-      for (var i = 0; i < checkedRows.length; i++) {
+      for (let i = 0; i < checkedRows.length; i++) {
         sheet.deleteRow(checkedRows[i]);
       }
     }
 
     function cancelChanges() {
-      var sheet = window["sheet"];
+      let sheet = window["sheet"];
       if (!confirm("모든 변경사항을 취소하시겠습니까?")) return;
       sheet.revertData();
     }
 
     function saveAll() {
-      var sheet = window["sheet"];
+      let sheet = window["sheet"];
       sheet.doSave({
         url: "/api/orders/save",
         quest: 1

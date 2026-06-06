@@ -36,6 +36,14 @@
 ✗ 데이터 `{ "userName": "홍길동" }` + 컬럼 `Name: "name"`
 ✓ 데이터 키와 컬럼 `Name`을 동일하게: `Name: "userName"`
 
+### Date 컬럼이 비어 표시됨 (Network 응답은 정상)
+**원인**: `DataFormat` 이 서버 문자열 포맷과 정확히 일치하지 않아 파싱 실패 (셀이 빈 칸으로 렌더)
+✗ 서버 `"2024-10-30 23:40:42.000"` + `DataFormat: "yyyy-MM-dd HH:mm:ss"` (뒤의 `.000` 을 못 읽음)
+✓ `DataFormat: "yyyy-MM-dd HH:mm:ss.000"` — 리터럴 `.000` 까지 명시
+- Seegene LIS 백엔드 Timestamp 응답이 `.000` 밀리초를 달고 오므로 주의
+- `Format` 은 표시용이므로 `.000` 없이 둬도 무방
+→ 상세: [column-format-property.md](../core/column-format-property.md)
+
 ### Int/Float 컬럼에 빈 값이 0으로 표시됨
 **원인**: Int, Float 타입은 기본적으로 빈 값을 0으로 표시
 ✓ `EmptyValue: 1` 설정으로 빈 셀 유지
@@ -132,6 +140,20 @@
 ✗ `Type: "CheckBox"`, `OnValue/OffValue` (IBSheet7 문법)
 ✓ `Type: "Bool"`, `TrueValue: "Y"`, `FalseValue: "N"`
 → 상세: [column-type-property.md](../core/column-type-property.md)
+
+### `getValue` 로 Bool 컬럼 읽으면 항상 `1`/`0` 으로 나와 서버에 잘못된 값 전송
+**원인**: `TrueValue`/`FalseValue` 는 **`getSaveJson`/`getSaveString` 등 저장 함수 호출 시에만 적용**된다. `getValue`/`getValues` 는 항상 내부값 `1(true)/0(false)` 을 반환 (공식 매뉴얼 명시).
+
+수동으로 변경 행을 수집해 페이로드 만드는 패턴(`getRowsByStatus('Changed').map(r => sheet.getValue(r, 'useYn'))`) 사용 시, 결과가 `"1"`/`"0"` 으로 직렬화되어 서버 검증 실패.
+
+✗ `getRowsByStatus(...).map(r => ({ useYn: String(sheet.getValue(r, 'useYn')) }))` → `useYn: "1"`
+✓ 정공법: `sheet.getSaveJson({ saveMode: 2 })` 사용 (TrueValue 자동 적용)
+✓ 차선: 수동 페이로드 빌드 시 명시 정규화
+```typescript
+const raw = sheet.getValue(row, 'useYn')
+const useYn = raw === 'Y' || raw === 1 || raw === '1' || raw === true ? 'Y' : 'N'
+```
+→ 공식: [false-value.md](../ibsheet-official-manual/props/col/false-value.md) "이 속성 값은 단지 서버와 데이터를 주고 받을때만 사용될 뿐, 해당 셀의 값을 getValue 함수를 통해 확인시에는 1(true)/0(false)로 리턴됩니다."
 
 ---
 
@@ -239,3 +261,27 @@
 - `EditMask`: 입력 중 제한 (타이핑 시 허용 패턴)
 - `ResultMask`: 입력 완료 시 검증 (최종 값 패턴)
 → 상세: [validation.md](../features/validation.md)
+
+---
+
+## E2E 테스트 (Playwright) 에서 IBSheet 렌더 대기
+
+### `locator('canvas')` 로 대기하면 timeout
+**원인**: IBSheet8 은 `<table>` + `<div>` 기반으로 렌더한다. Canvas 요소를 쓰지 않으므로 `canvas` 를 신호로 기다리면 무한 timeout.
+
+```ts
+// ❌ 잘못 — canvas 는 영원히 안 나타남
+await expect(host.locator('canvas').first()).toBeVisible({ timeout: 15_000 })
+```
+
+권장 대기 신호:
+- `onSearchFinish` / `onRenderFirstFinish` 이벤트에서 외부 state 를 세팅하고 해당 DOM 값으로 대기
+- `onFocus` 가 세팅하는 콜백 데이터(예: 첫 행 PK) 를 `data-testid` 로 노출 후 그 값으로 대기
+- Cell 텍스트 자체로 대기 (`expect(page.getByText('A001')).toBeVisible()`)
+
+```ts
+// ✅ 콜백 결과를 DOM 에 반영해서 신호로 사용
+<span data-testid="txt-current-id">{lastRow?.id ?? '(none)'}</span>
+
+await expect(page.getByTestId('txt-current-id')).toHaveText('A001', { timeout: 15_000 })
+```

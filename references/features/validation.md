@@ -25,6 +25,19 @@ options.Cols = [
 ];
 ```
 
+### ⚠️ Nexacro `editinputtype="digit"` → `EditMask` (`InputCharFilter` 는 IBSheet 미지원)
+
+XFDL `<Cell ... edittype="text" editinputtype="digit"/>` (숫자만 입력) 변환 시 `EditMask: "^\\d*$"` 를 쓴다. **`InputCharFilter` 속성은 IBSheet8 에 존재하지 않음** — 빌드/런타임 에러 없이 **silent 무효**(아무 문자나 입력됨) 가 되니 절대 사용 금지.
+
+```javascript
+// ❌ InputCharFilter — IBSheet 미지원, 무시됨 → 숫자 제한 미동작
+{ Name: 'srchSeq', Type: 'Text', CanEdit: 1, InputCharFilter: '0-9' }
+// ✅ EditMask
+{ Name: 'srchSeq', Type: 'Text', CanEdit: 1, EditMask: '^\\d*$' }
+```
+
+회귀 사례: UIDI0640/0680 균정보 — `editinputtype="digit"` 조회순서 컬럼이 `InputCharFilter:'0-9'` 로 변환돼 숫자 제한 미동작. `EditMask` 로 교체.
+
 ### 셀 레벨 설정
 
 특정 셀에만 EditMask를 적용하거나 조회 데이터에서 셀별로 다르게 지정할 수 있습니다.

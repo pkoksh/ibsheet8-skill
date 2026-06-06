@@ -32,11 +32,11 @@ loader.load(loaderOption);
 // ============================================================
 // 2. 기본 사용법 (JavaScript)
 // ============================================================
-import { IBSheetReact, IB_Preset } from '@ibsheet/react';
-import { useRef } from 'react';
+import { IBSheetReact, IB_Preset } from '@ibsheet/react'
+import { useRef } from 'react'
 
 export function BasicExample() {
-  const mySheet = useRef(null);
+  const mySheet = useRef(null)
 
   const options = {
     Cfg: { SearchMode: 0 },
@@ -44,44 +44,39 @@ export function BasicExample() {
       { Header: 'No', Type: 'Int', Name: 'SEQ' },
       { Header: 'Name', Type: 'Text', Name: 'name' },
       { Header: 'Age', Type: 'Int', Name: 'age' },
-      { Header: 'Date', Name: 'sDate_Ymd', Extend: IB_Preset.YMD, Width: 110 }
+      { Header: 'Date', Name: 'sDate_Ymd', Extend: IB_Preset.YMD, Width: 110 },
     ],
     Events: {
       onBeforeChange: (evt) => {
-        console.log(`${evt.oldval} → ${evt.val}`);
-      }
-    }
-  };
+        console.log(`${evt.oldval} → ${evt.val}`)
+      },
+    },
+  }
 
   const data = [
     { name: 'John Doe', age: 30, sDate_Ymd: '20250922' },
-    { name: 'Jane Smith', age: 25, sDate_Ymd: '20241108' }
-  ];
+    { name: 'Jane Smith', age: 25, sDate_Ymd: '20241108' },
+  ]
 
   const customStyle = {
     width: '700px',
     height: '600px',
-    border: '1px solid #ccc'
-  };
+    border: '1px solid #ccc',
+  }
 
   const handleAddRow = () => {
-    mySheet.current.addRow();
-  };
+    mySheet.current.addRow()
+  }
 
   return (
     <>
       <button onClick={handleAddRow}>행추가</button>
-      <IBSheetReact
-        ref={mySheet}
-        options={options}
-        data={data}
-        style={customStyle}
-      />
+      <IBSheetReact ref={mySheet} options={options} data={data} style={customStyle} />
     </>
-  );
+  )
 }
 
-export default BasicExample;
+export default BasicExample
 
 // ============================================================
 // 3. TypeScript 사용법 (참고용 - .tsx 파일에서 사용)
