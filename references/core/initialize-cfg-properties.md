@@ -86,6 +86,23 @@ const sheetOptions: IBSheetOptions = {
 
 **판정 신호**: 변환 화면 캡처와 원본 캡처를 비교했을 때 빈 데이터 영역의 메시지가 한국어/영문 차이로 두드러지면 → `Cfg.NoDataStr` 명시.
 
-**참고**: `src/components/grid/IBSheet.tsx` (ID 기반 wrapper) 는 `NoDataStr: 'No data'` 가 이미 default 로 들어가 있어 자동 일치. 그러나 `IBSheetReact` (lazy import) 를 직접 사용하는 화면은 wrapper 를 거치지 않아 default 미적용 → 명시 필수.
+**참고**: `src/components/grid/IBSheet.tsx` (ID 기반 wrapper) 는 `NoDataStr: 'No data'` 가 default 로 들어가 있다. `IBSheetReact` (lazy import) 직접 사용 화면도 `registerCommonOptions`(register.ts — window 전역 주입, IBSheet8 가 생성하는 모든 시트에 머지)가 적용돼 **표준 중앙 "No data"(영문) 가 기본 표시**된다(실측 UIDT5014M00). 따라서 per-screen `NoDataStr`/`NoDataMessage` 는 보통 **불필요**하며, 특히 한국어 문자열로 지정하면 전역 "No data" 를 덮어써 **다른 화면과 빈상태가 달라진다**(통일 깨는 흔한 함정 — 사용자 "No data 글씨가 다른 화면과 다르다" 보고). per-screen 지정은 원본 캡처가 전역 기본과 정말로 다를 때만. 단 빈상태 렌더에는 `loadSearchData({data:[]})` 1회 호출이 여전히 필요(아래 함정 참조).
+
+⚠️ **함정 — No-data 가 "아예 안 뜸"(언어 차이 아님) → NoDataStr 의심 전에 `loadSearchData` 호출 여부 먼저 확인**
+
+빈 그리드에 No-data 가 한국어/영문 **차이**가 아니라 **아무것도 안 보이면**, 원인은 NoDataStr 가 아니라 **`loadSearchData` 가 한 번도 호출되지 않은 것**이다. 프로젝트 공통 설정(`registerCommonOptions`)의 No-data 는 **조회(`loadSearchData`) 시 렌더**되므로 시트 생성만으로는 안 뜬다 — `data:[]` 빈 배열이라도 1회 호출돼야 한다. 조회 조건이 없을 때 `fn_search` 를 건너뛰는 화면(조건부 조회 팝업 등)은 검색을 안 해 No-data 가 안 뜬다.
+
+```ts
+// ❌ pending 있을 때만 로드 — 검색 미수행 시 No-data 안 뜸
+onRenderFirstFinish: (evt) => {
+  if (pendingDataRef.current) evt.sheet.loadSearchData({ data: pendingDataRef.current, sync: 1 })
+}
+// ✅ 검색 미수행 시에도 빈 로드 보장 → 공통 No-data 표시
+onRenderFirstFinish: (evt) => {
+  evt.sheet.loadSearchData({ data: pendingDataRef.current ?? [], sync: 1 })
+  pendingDataRef.current = null
+}
+```
+> 참고 화면: UIDT6097P03(조건부 조회 팝업 — recpDt/recpNo 없으면 미조회 → No-data 안 뜨던 사고). 자매 UIDT6097P11 은 onload 에서 항상 fn_search → `loadSearchData([])` 라 정상이었음.
 
 ---

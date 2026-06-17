@@ -189,17 +189,29 @@ await dsRequest(SVC_SAVE, {
 > 표준 SheetInput 저장이 아닌 **커스텀 DTO 직렬화**(예: cascade 호출용 양쪽 그리드 수집) 는 위 `boolCols` 어댑터를 못 쓰므로 동일 규칙의 인라인 헬퍼로 직접 변환: `const boolToYN = (v) => (v===1||v==='1'||v===true||v==='Y'?'Y':'N')`.
 > 이벤트(`onBeforeChange`/`onAfterChange`) 의 `evt.val`/`evt.oldval` 도 같은 내부값 `1/0`. 단방향 체크(Nexacro `cancolumnchange`) veto 등 이벤트 처리는 `events.md` 의 "Bool 이벤트 evt.val 1/0 / onBeforeChange veto" 섹션 참조.
 
-✅ **신규 행 `addRow` 시 Bool 컬럼은 init 으로 매핑 안 됨 → 직후 `setValue` 명시 호출**:
+✅ **신규 행 `addRow` 시 Bool 컬럼은 init 으로 매핑 안 됨 → 두 가지 정공 패턴**:
+
+**패턴 A (권장, 원자적)** — init 에 **IBSheet 내부 표준값 `1`/`0` (number) 직접** 지정:
+```ts
+// ✅ A: init 에 number 1/0 — IBSheet 내부값 직통, render/setValue 후속 호출 불필요
+const newRow = sheet.addRow({
+  init: { useYn: 1, _rowtype: 'I' },  // ← number 1 = checked
+})
+```
+
+매뉴얼 명시 ([props/col/true-value](../ibsheet-official-manual/props/col/true-value.md)): "TrueValue 는 단지 **서버와 데이터를 주고 받을때만 사용** (loadSearchData / getSaveJson), getValue() 는 **항상 1(true)/0(false)** 리턴". `addRow init` 은 매핑 미언급 = string 'Y' 그대로 저장되어 internal value !== 1 → 체크 표시 실패 + getValue 'Y' 반환으로 boolCols 변환 매트릭스 깨짐. **number 1 로 주면 매핑 불필요**.
+
+**패턴 B (대안)** — `addRow` 후 `setValue` 명시 호출:
 ```ts
 // ❌ init 으로 'Y' — IBSheet Bool 컬럼이 못 받음 (raw NaN)
 const newRow = sheet.addRow({ init: { useYn: 'Y', _rowtype: 'I' } })
 
-// ✅ addRow 후 setValue 명시
+// ✅ B: addRow 후 setValue 명시 (TrueValue 매핑 경유)
 const newRow = sheet.addRow({ init: { _rowtype: 'I' } })
 sheet.setValue(newRow, 'useYn', 'Y', 1)  // 4번째 인자 1 = render
 ```
 
-> 사용자 보고 사례: UILM1078P02 신규 행 저장 시 사용여부 체크돼 있어도 저장 후 'N' 으로 들어감. 진단 로그로 `useYn_cur: NaN` 확인 → setValue 명시 호출로 해결.
+> 사용자 보고 사례: UILM1078P02 신규 행 저장 시 사용여부 체크돼 있어도 저장 후 'N' 으로 들어감. 진단 로그로 `useYn_cur: NaN` 확인 → 패턴 B (setValue) 로 해결. UIDT1053M00 (2026-06-08) — 패턴 A (init: `{ useYn: 1 }`) 로 atomic 해결.
 
 ⚠️ **함정 변형 — `init.{boolCol}: 'N'` 셋팅 시 FalseValue 매핑 무시하고 ✓ 로 렌더** (truthy 변환 우선)
 

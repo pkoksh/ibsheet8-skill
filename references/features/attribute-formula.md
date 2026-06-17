@@ -251,3 +251,18 @@ function applyCellStyles(sheet) {
 ```
 
 **핵심 2가지**: ① 색/편집 제어가 안 먹으면 Formula 디버깅보다 `setAttribute(row, col, 'Color'/'CanEdit', v, 0)` + `renderBody()` 로 전환이 빠르고 확실하다. ② 적용 시점은 **`onSearchFinish`** — `loadSearchData` 호출 직후 동기 시점에는 행이 아직 없어 루프가 0회 돈다 (행추가 경로는 `addRow` 직후 호출 OK).
+
+⚠️ **후속 함정 — `Type:'Enum'` 컬럼의 비적용(회색) 셀에 편집 후 드롭다운 버튼이 그려짐 → 셀 단위 `Type` 전환으로 차단**
+
+회색 셀을 `Color`+`CanEdit:0` 으로만 막으면, 편집 커밋 후 재렌더 시 그 행의 Enum 셀에 **드롭다운 버튼이 시각적으로 나타난다** (CanEdit:0 이라 클릭은 안 되지만 "입력 안 되는 칸에 콤보가 생겼다" 사용자 보고). 원본 Nexacro 의 `displaytype="expr:... ? 'combocontrol' : 'none'"` 등가는 **셀 단위 Type 전환** — 공식 cell property `Type` (since 8.0.0.0):
+
+```javascript
+// 적용 셀만 Enum(드롭다운), 비적용(회색) 셀은 Text 로 콤보 렌더 자체를 차단
+sheet.setAttribute(r, 'lowFormula', 'Type', match ? 'Enum' : 'Text', 0)
+```
+
+적용 위치는 Color/CanEdit 와 동일 (onSearchFinish + addRow 직후) **+ `onAfterChange`(편집 커밋 직후) 재적용** — 편집 후 재렌더가 셀 상태를 컬럼 기본값으로 되돌리는 누수 경로까지 막아야 함. 행단위 EnumKeys/Enum 주입(`''→'선택'` 포함)은 match 행에만 — 비적용 행에 주입하면 회색 칸에 '선택' 이 떠버림.
+
+> 참고 화면: UIQC1101M00 (상하한식/문자수식/문자값 Enum 콤보 — method 비적용 행 회색 + Text 전환)
+
+> 참고 화면: UIQC1101M00(회색/편집제어) / UIDT8950M00(월별 통계 당월 강조 — 조회년도==현재년도 월의 검사건수/B#/S# 컬럼 `setAttribute(r, col, 'Color', '#ffe4e1', 0)`, Foot 합계행은 `getDataRows()` 대상 아니라 자동 제외). 검증 함정: Playwright 로 색상 확인 시 반드시 `waitForResponse` 로 조회 응답 대기 후 셀 검사 — 고정 `waitForTimeout` 만으론 `loadSearchData`+`onSearchFinish`+setAttribute 체인 미완료 시점을 캡처해 false-negative(색상 0셀) 발생.

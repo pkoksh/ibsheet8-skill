@@ -84,6 +84,16 @@ sheet.down2Excel({
 });
 ```
 
+⚠️ **함정 — `Visible:0` 숨김 컬럼이 엑셀에 그대로 다운로드됨** 🚨
+화면에서 안 보이는 내부용 컬럼(예: 밴딩 판정용 `css`, 정렬 키, FK id 등)을 `Visible:0` 으로 숨겨도 `exportData`/`down2Excel` 은 **기본적으로 그 컬럼을 엑셀에 포함**한다 (`hiddenColumn:1` 기본 동작 = "열 숨기기"로 들어감). 사용자 보고: "엑셀에 안 보이는 컬럼까지 내려받아짐".
+```javascript
+// ✅ 해당 컬럼에 CanExport:0 — 엑셀/텍스트 다운로드에서 제외 (화면엔 그대로 hidden)
+{ Header: 'css', Name: 'css', Type: 'Text', Visible: 0, CanExport: 0 }
+// 또는 export 시 보이는 열만: down2Excel({ downCols: 'Visible' }) / exportData({ downCols: 'Visible' })
+```
+`downCols` 명시값이 `CanExport` 보다 우선([props/col/can-export](../ibsheet-official-manual/props/col/can-export.md)). 내부 컬럼이 많으면 컬럼별 `CanExport:0` 이 누락 위험 적음.
+> 참고 화면: UIDT8040M00 (검사건수 월별 통계 — hidden `css` 밴딩 컬럼 export 제외)
+
 **titleText / userMerge로 타이틀 영역 추가:**
 
 ```javascript
@@ -115,6 +125,45 @@ sheet.down2Excel({
   ]
 });
 // 주의: exHead/exFoot 사용 시 titleText, userMerge는 무시됩니다.
+```
+
+**★ Nexacro `gfn_excelExportMultiGrid([grd_header, grd_list], ...)` → IBSheet8 `exHead`**
+
+AS-IS 통계 화면은 화면엔 `visible="false"` 인 **제목용 그리드(grd_header)** 를 별도로 두고, 엑셀 출력 시 `gfn_excelExportMultiGrid` 로 [제목그리드 + 데이터그리드]를 한 시트로 합쳐 출력하는 패턴이 흔하다 (예: UIDT8066M00 "혈액학팀 TAT 분석보고서" + 기간/설명 3줄 헤더). React 에선 별도 헤더 그리드를 만들지 말고 **`exportData({ exHead })`** 로 데이터 그리드 헤더 위에 제목 영역을 삽입한다.
+
+```js
+sheet.exportData({
+  fileName, sheetName,
+  exHead,            // 아래 boxRow 들의 배열
+  merge: 1,          // 2단 헤더 머지 + 데이터
+  sheetDesign: 1,    // Total 합계행 등 셀 배경색 반영
+})
+```
+
+- **`titleText` 와 병용 금지** — exHead 가 있으면 titleText/userMerge 는 무시된다. 제목은 전부 exHead Cells 로.
+- **`TextStyle` 는 비트마스크**: Bold=1, Italic=2, **Underline=4**, Strike=8 → 굵게+밑줄 = `5` (원본 `font="bold ... underline"` 대응).
+- **ColSpan 박스 보더는 각 셀에 따로** — 제목을 `ColSpan:N` 으로 병합해도 박스 테두리는 병합 셀에만 주면 끊긴다. 첫 셀에 `Value+ColSpan+상하좌` 보더, 나머지 N-1 셀에 `상하`(+마지막 셀 `우`) 보더를 **각각** 명시해야 박스가 이어진다.
+- 제목 박스 폭은 보통 **좌측 고정(LeftCols) 컬럼 수**에 맞추면 AS-IS 와 정렬이 맞다.
+- ⚠ `exHead`/`exFoot` 는 **xlsx 전용 + core 8.1.0.30 이상**. 구버전이면 제목 없이 나오므로 버전 확인.
+
+```js
+// 제목 1행 = 첫 셀 Value+ColSpan, 나머지 셀엔 보더만 (박스가 안 끊기게)
+const boxRow = (value, { height, textSize, textStyle, color }) => {
+  const cells = [{
+    Value: value, Align: 'Left', Wrap: 0, ColSpan: SPAN,
+    TextSize: textSize, TextStyle: textStyle,
+    BorderTop: `1 solid ${color}`, BorderBottom: `1 solid ${color}`, BorderLeft: `1 solid ${color}`,
+  }]
+  for (let i = 1; i < SPAN; i++)
+    cells.push({ BorderTop: `1 solid ${color}`, BorderBottom: `1 solid ${color}`,
+      ...(i === SPAN - 1 ? { BorderRight: `1 solid ${color}` } : {}) })
+  return { Height: height, Cells: cells }
+}
+const exHead = [
+  boxRow(str1, { height: 44, textSize: 24, textStyle: 5, color: '#4e8a4e' }), // 제목(굵게+밑줄)
+  boxRow(str2, { height: 22, textSize: 11, textStyle: 0, color: '#b4b4b4' }),
+  boxRow(str3, { height: 22, textSize: 11, textStyle: 0, color: '#b4b4b4' }),
+]
 ```
 
 **템플릿 파일 활용:**
