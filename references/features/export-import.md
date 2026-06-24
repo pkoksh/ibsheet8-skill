@@ -142,6 +142,26 @@ sheet.exportData({
 
 - **`titleText` 와 병용 금지** — exHead 가 있으면 titleText/userMerge 는 무시된다. 제목은 전부 exHead Cells 로.
 - **`TextStyle` 는 비트마스크**: Bold=1, Italic=2, **Underline=4**, Strike=8 → 굵게+밑줄 = `5` (원본 `font="bold ... underline"` 대응).
+
+**★ Nexacro `grd_export_excel`(전용 엑셀 그리드) → React 숨김 export 그리드**
+
+AS-IS 가 화면 그리드와 **다른 컬럼셋/헤더/색**의 hidden `grd_export_excel`(예: 통합ID 가공컬럼·노란 헤더·18컬럼 고정)을 따로 두고 `copyData(ds_list)` 후 그걸 출력하는 패턴. 화면 그리드를 그대로 `exportData` 하면 **컬럼집합·결과셀 색·너비가 전부 어긋난다**(메인 그리드의 본문 ColorFormula 색까지 따라감). React: 화면 밖 hidden IBSheet 한 개를 별도 마운트(`position:absolute; left:-100000`) → `getAllRows()` 를 export 컬럼으로 매핑해 `loadSearchData` → 그 그리드를 `exportData`.
+
+⚠️ **export 컬럼 너비는 정의 `Width` 와 1:1 이 아니다 (가장 큰 함정)** — `exportData` 는 컬럼의 **렌더 너비**(= `RelWidth` 가 컨테이너 폭에 비례분배한 값)를 쓴다. preset `onBeforeCreate` 가 전 컬럼 `RelWidth=Width` 를 주입하므로, 숨김 그리드의 **컨테이너 폭 = Σ(컬럼 Width)** 로 맞춰야 scale 1.0 → 각 컬럼이 정의 Width 비율로 렌더돼 export 폭이 예측가능(컨테이너가 합보다 넓으면 전 컬럼 비례 확대, 좁으면 축소·균등붕괴). `setAttribute(...,'RelWidth',null)` 로 해제해도 컨테이너>합이면 stretch 가 다시 채운다.
+- 좁은 컬럼(No/성별)은 preset `MinWidth:30` + export 고정패딩 때문에 **~55–60px 이하로 못 줄임**(실측: `Width:35` → Excel ~60px). `MinWidth` 를 낮추면 IBSheet 가 content-autofit 으로 전환돼 긴 컬럼(LOG 등)을 **~1.8배 과대(1000px+)** 로 늘림 → 역효과. ∴ **preset MinWidth(30) 유지 + 명시 Width + 컨테이너=Σ** 가 정답.
+- 최종 px 는 사용자 Excel 폰트(MDW)에 따라 달라져 **정확 px 매칭 불가** → "내용이 한 줄에 들어가는 wch" 를 목표로(`getColWidth` 는 인스턴스에 없음 — 실측은 다운로드 .xlsx 를 SheetJS `read(buf,{cellStyles:true})` 로 `!cols[i].wch` 파싱).
+
+```js
+// 숨김 export 그리드 — 컨테이너 폭 = Σ Cols.Width (예: 1695)
+<div style={{position:'absolute',left:-100000,top:0,width:1695,height:200,overflow:'hidden'}} aria-hidden>
+  <IBSheetReact options={exportOpts} data={[]} sync /></div>
+// 헤더 노란 배경(원본 background=yellow color=black) — onRenderFirstFinish 에서. sheetDesign:1 이 export 에 반영
+const cur = sx.getCurrentStyle ? JSON.parse(sx.getCurrentStyle()||'{}') : {}
+sx.setCurrentStyle?.(JSON.stringify({ ...cur, HeaderColor:'#FFFF00', HeaderTextColor:'#000000' }))  // setCurrentStyle since 8.3.0.18 — 옵셔널체이닝 가드
+// export — wordWrap default=1(줄바꿈) → 좁은 컬럼 줄바꿈으로 행 cramp. 원본=한 행 한 줄이면 0.
+exportToExcel(exportRef, { fileName, sheetName, wordWrap:0, excelRowHeight:20, excelHeaderRowHeight:22 })
+```
+> 참고 화면: UIDT6101M00 (분자미생물 결과목록 — grd_export_excel 18컬럼·노란 헤더·통합ID). 헤더색/행높이는 .xlsx 파싱으로 검증됨(`A1.s.fgColor=ffff00`, `!rows hpx 22/20`).
 - **ColSpan 박스 보더는 각 셀에 따로** — 제목을 `ColSpan:N` 으로 병합해도 박스 테두리는 병합 셀에만 주면 끊긴다. 첫 셀에 `Value+ColSpan+상하좌` 보더, 나머지 N-1 셀에 `상하`(+마지막 셀 `우`) 보더를 **각각** 명시해야 박스가 이어진다.
 - 제목 박스 폭은 보통 **좌측 고정(LeftCols) 컬럼 수**에 맞추면 AS-IS 와 정렬이 맞다.
 - ⚠ `exHead`/`exFoot` 는 **xlsx 전용 + core 8.1.0.30 이상**. 구버전이면 제목 없이 나오므로 버전 확인.

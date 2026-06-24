@@ -258,6 +258,25 @@ sheet.setValue(newRow, 'cntcMbyYn', 'Y', 1)
 }
 ```
 
+### ⚠ 줄바꿈(자동 wrap)은 `Type:'Lines'` 만 가능 — `Type:'Text'` 는 항상 nowrap
+
+원본 Nexacro 셀에 **`wordWrap="char"`**(또는 `"english"`) 가 있는 **읽기전용 표시 컬럼**(편집 textarea 아님)은
+React 에서 반드시 `Type:'Lines'` 로 변환한다. `Type:'Text'` 는 `WordWrap:1` 을 줘도 IBSheet8 가 셀을
+`white-space:nowrap` 으로 렌더해 **한 줄로 잘려** 절대 줄바꿈되지 않는다(실측: cellH 22px 고정).
+
+```javascript
+// 원본: <Cell text="bind:tstNmAbbr" wordWrap="char" .../>  (검사명 — 폭 초과 시 여러 줄)
+{ Name: 'tstNmAbbr', Type: 'Lines', WordWrap: 1, Width: 80, Align: 'Center',
+  ColorFormula: (fr) => cellBg('tstNmAbbr', fr.Row) }   // ← ColorFormula 정상 발화(아래)
+```
+
+- `Type:'Lines'` + `WordWrap:1` = 길이 기반 자동 줄바꿈. 셀이 `<div style="word-wrap:break-word">` +
+  `white-space:normal` 로 렌더되어 폭 초과분이 다음 줄로 접힌다.
+- **행 높이 자동 확장**은 공통옵션 `Cfg.AutoRowHeight:1` 이 담당(긴 셀 → 행만 키움). 별도 RowHeight 불필요.
+- **ColorFormula/TextColorFormula 는 Lines 셀에서도 그대로 발화**한다(실측: 동일 행 Text 셀과 100% 동일 배경색).
+  형제 화면 주석의 "Lines 에 Formula 부분발화 버그"는 특정 plate 레이아웃 한정 — 일반 worklist 그리드는 무관.
+- 참고 화면: `DT/tst/pthl/cell/UIDT5234M00.tsx`(검사명), `DT/tstbefrprcs/md/mo/UIDT3058M00.tsx`.
+
 ---
 
 ## Button (버튼)

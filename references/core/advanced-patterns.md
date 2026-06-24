@@ -444,6 +444,44 @@ sheet.setAttribute(row, 'colName', 'Class', 'cell_BgYellow', 0)
 
 회귀 사례: UILM5021M00 변환 시 좌측 위탁기관 그리드 첫 행 "전체" 위탁기관명 셀 노란 배경이 안 칠해진 함정 — 비공식 `CellBackColor` 사용해서. `Class` 로 교체 후 정상 표시.
 
+⚠️ **함정 — `renderBody()` / `setAttribute` 를 `onRenderFirstFinish` 전에 호출하면 "`renderBody` 함수에서 오류" throw**
+
+`sheetRef.current` 가 `null` 이 아니어도(인스턴스는 생성됨) **첫 렌더가 끝나기 전**이면 `renderBody()`/`setAttribute` 가 내부 DOM 이 아직 없어 throw 한다 (콘솔: `renderBody` 함수에서 오류). React StrictMode + lazy/Suspense remount 환경에선 마운트가 두 번 일어나 같은 오류가 다회 발생한다. `loadSearchData` 와 동일하게 **`readyRef` 게이트 + `pendingRef` stash** 필요 — 준비 전 값은 stash 했다가 `onRenderFirstFinish` 에서 적용한다.
+
+```javascript
+// ❌ ref 존재만 확인 — 첫 렌더 전이면 renderBody 오류
+if (sheetRef.current) {
+  const s = sheetRef.current
+  s.setAttribute(undefined, 'col', 'Enum', v, 0)
+  s.renderBody()   // ← onRenderFirstFinish 전 호출 시 throw
+}
+
+// ✅ readyRef 게이트 — 준비 전이면 pendingRef 에 stash
+const readyRef = useRef(false)
+const pendingRef = useRef<{ col: string; v: string } | null>(null)
+
+const applyEnum = (col: string, v: string) => {
+  const s = sheetRef.current
+  s?.setAttribute(undefined, col, 'Enum', v, 0)
+  s?.renderBody()
+}
+if (sheetRef.current && readyRef.current) applyEnum('col', v)
+else pendingRef.current = { col: 'col', v }   // 준비 전 — stash
+
+// onRenderFirstFinish 에서 ready 마킹 + pending flush
+Events: {
+  onRenderFirstFinish: () => {
+    readyRef.current = true
+    if (pendingRef.current) {
+      applyEnum(pendingRef.current.col, pendingRef.current.v)
+      pendingRef.current = null
+    }
+  },
+}
+```
+
+> 참고: UIDT5047P01
+
 ### 저장 — `getSaveJson()` + `STATUS` → `_rowtype` 매핑
 
 IBSheet8 의 `getSaveJson()` 은 옵션 없이 호출 시 `saveMode:2` (default) — Added/Changed/Deleted 변경 행만 추출한다. 백엔드가 `_rowtype: 'I'/'U'/'D'` 컨벤션을 쓴다면 결과 행의 `STATUS` ('Added'/'Changed'/'Deleted') 를 매핑해야 한다.
@@ -956,6 +994,50 @@ useEffect(() => {
 ```
 
 주의: 우측 폼 편집 → React state 변경 → `loadSearchData` 재호출 → 첫 행 자동 highlight 회귀 사이클 발생. 편집 흐름에서 자동 첫 행 select 를 막으려면 별도 `skipAutoSelectRef` 가드 추가.
+
+### `focus(row, col)` 만으론 행 강조(주황 선택)가 안 옮겨진다 — `selectRow()` 병행
+
+`sheet.focus(row, col)` 는 **활성 셀(편집 커서)만** 옮긴다. **보이는 행 강조(주황색 선택)는 0행(또는 직전 선택행)에 그대로 남는다.** 행 강조까지 옮기려면 `clearSelection()` + `selectRow(row, 1)` 를 함께 호출한다.
+
+```javascript
+// ❌ focus 만 — 활성 셀은 갔는데 주황 행강조는 0행에 남음
+sheet.focus(target, 'colName')
+
+// ✅ 행 강조까지 이동
+sheet.focus(target, 'colName')
+sheet.clearSelection()
+sheet.selectRow(target, 1)
+```
+
+⚠️ **함정 — 재조회 후 "다음 행" 포커스는 `await` 직후가 아니라 `onSearchFinish` + `setTimeout(0)` 에서**
+
+저장 후 자동 재조회(`loadSearchData`)가 행을 실제 적재하기 전엔 대상 row 가 아직 없다. `await dsRequest(...)` 직후 바로 focus 하면 빈 그리드에 호출돼 무효. **행이 실제 적재된 시점인 `onSearchFinish`** 에서 수행하고, 추가로 `setTimeout(0)` 으로 감싸 `loadSearchData` 의 첫행 자동 포커스 탈취를 회피한다.
+
+```javascript
+// 저장 핸들러 — "다음 행으로 가야 할" 원본 row 를 ref 에 보관 후 재조회
+nextFocusRowRef.current = sheet.getNextRow(savedRow)
+await fnSearch()   // loadSearchData 까지 수행
+
+Events: {
+  onSearchFinish: (evt) => {
+    const target = nextFocusRowRef.current
+    nextFocusRowRef.current = null
+    if (!target) return
+    const sheet = evt.sheet
+    setTimeout(() => {                 // loadSearchData 0행 포커스 탈취 회피
+      sheet.focus(target, 'colName')
+      sheet.clearSelection()
+      sheet.selectRow(target, 1)
+    }, 0)
+  },
+}
+```
+
+⚠️ **함정 — 행 식별은 `getDataRows().indexOf(row)` 인덱스로** (특정 데이터컬럼 `getValue` 매칭 금지)
+
+`getValue(row, col)` 가 빈 그리드(해당 컬럼이 전 행에서 공백)일 수 있어 컬럼값으로 대상 행을 되찾으면 매칭 0건이 된다. 재조회 전에 `getDataRows().indexOf(row)` 로 인덱스를 잡아 두고, 재적재 후 `getDataRows()[idx]` 로 복원한다.
+
+> 참고: UIDT5047T_2
 
 ### Dialog (base-ui/Radix) 안 IBSheet — 키보드 ↑↓/Enter 수동 처리 필수
 
